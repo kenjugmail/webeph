@@ -8,8 +8,9 @@ parallel agents orbit a goal.
 
 ## Structure
 ```
-Ephemerent.html          Research lab page: emergent field, R1–R7 program (world models,
-                         wave compute, compute mesh), work portfolio, Orrery product link
+Ephemerent.html          Research lab page: emergent field, R1–R7 program (LLM agents
+                         today; world models, wave compute, mesh as research to integrate),
+                         work portfolio, Orrery product link
 Orrery.html              Product page (one page): hero orrery, parallel agents,
                          buddy + tutor dial, 3D review, models, capabilities, architecture, CTA
 assets/
