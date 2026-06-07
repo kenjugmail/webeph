@@ -115,6 +115,34 @@
 .auth-msg.ok { color: var(--green); }
 .auth-msg.err { color: var(--red); }
 
+.btn-oauth {
+  width: 100%;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.btn-google {
+  background: #fff;
+  color: #1f1f1f;
+  border-color: #dadce0;
+}
+
+.btn-google:hover {
+  background: #f8f9fa;
+  border-color: #c6c9cc;
+}
+
+.btn-github {
+  background: #24292f;
+  color: #fff;
+  border-color: #24292f;
+}
+
+.btn-github:hover {
+  background: #32383f;
+  border-color: #32383f;
+}
+
 .download-steps {
   margin-top: 28px;
   padding-top: 24px;

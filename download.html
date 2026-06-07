@@ -28,58 +28,55 @@
 <main class="auth-main">
   <div class="auth-card" style="max-width:520px;">
     <h1>Get Orrery</h1>
-    <p class="sub">Runs on your machine. Bring your own models — Ollama locally or cloud API keys.</p>
+    <p class="sub">Download the install bundle. Email sign-in is optional — use it to tag audit logs if you want.</p>
 
-    <div id="auth-download-panel">
-      <p id="download-user-row" class="mono hidden" style="font-size:12px;color:var(--teal);margin-bottom:20px;">Signed in as <span id="download-user-email"></span></p>
-
-      <div id="auth-waitlist-panel" class="hidden waitlist-box" style="margin-bottom:20px;padding:16px 0 0;">
-        <div class="icon">◇</div>
-        <h2 style="font-family:var(--display);font-size:18px;margin-bottom:8px;">You're on the list</h2>
-        <p class="sub" style="margin:0 auto;font-size:14px;">Thanks for signing up. We'll email you when early-access perks are ready.</p>
-      </div>
-
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;">Download install bundle <span aria-hidden="true">↓</span></a>
-      <div class="download-steps">
-        <h3>Quick start</h3>
-        <ol>
-          <li>Unzip the bundle and open <code>INSTALL.md</code>.</li>
-          <li>Install Node 20+, pnpm, and (optional) Ollama for local models.</li>
-          <li>Run <code>start-orrery.ps1</code> (Windows) or <code>start-orrery.sh</code> (macOS/Linux).</li>
-          <li>Open the printed URL — sidecar on <code>ws://127.0.0.1:4575</code>, web UI on port 5173.</li>
-        </ol>
-      </div>
-      <button type="button" class="btn btn-ghost hidden" id="download-sign-out" style="margin-top:20px;width:100%;">Sign out</button>
+    <div id="cloud-signin-cta" class="hidden" style="margin-bottom:20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
+      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want one account across web, editor, and phone? Sign in with Google or GitHub.</p>
+      <a class="btn btn-primary" href="login.html" style="width:100%;justify-content:center;">Sign in</a>
     </div>
 
-    <div id="auth-config-panel" class="hidden auth-optional">
-      <p class="auth-msg" style="color:var(--muted);">Sign-in is not configured yet — downloads work without an account. See <a href="supabase/SETUP.md">supabase/SETUP.md</a> to enable optional accounts.</p>
+    <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download install bundle <span aria-hidden="true">↓</span></a>
+    <div class="download-steps">
+      <h3>Quick start</h3>
+      <ol>
+        <li>Unzip the bundle and open <code>INSTALL.md</code>.</li>
+        <li>Install Node 20+, pnpm, and (optional) Ollama for local models.</li>
+        <li>Run <code>start-orrery.ps1</code> (Windows) or <code>start-orrery.sh</code> (macOS/Linux).</li>
+        <li>Optionally identify with your email when the editor opens.</li>
+        <li>Open the printed URL — sidecar on <code>ws://127.0.0.1:4575</code>, web UI on port 5173.</li>
+      </ol>
     </div>
 
-    <div id="auth-login-panel" class="auth-optional">
+    <div class="auth-optional" id="identity">
       <div class="auth-optional-head">
-        <h2>Sign in for early access updates</h2>
-        <p class="sub">Optional — create an account to get notified about new features and credits. No sign-in required to download.</p>
+        <h2>Identify (optional)</h2>
+        <p class="sub">Email only — stored on this device. Skip if you don't care about named audit logs.</p>
       </div>
-      <div class="auth-stack">
-        <button type="button" class="btn btn-primary" id="auth-google" style="width:100%;">Continue with Google</button>
-        <button type="button" class="btn btn-ghost" id="auth-github" style="width:100%;">Continue with GitHub</button>
+      <div id="identity-form-wrap">
+        <form id="identity-form" class="auth-stack">
+          <input type="email" class="auth-input" name="email" placeholder="you@example.com (optional)" autocomplete="email">
+          <input type="text" class="auth-input" name="name" placeholder="Name (optional)" autocomplete="name">
+          <button type="submit" class="btn btn-primary">Continue with email</button>
+          <button type="button" class="btn btn-ghost" id="identity-skip">Skip</button>
+        </form>
+        <p class="auth-msg" id="identity-msg"></p>
       </div>
-      <div class="auth-divider">or email</div>
-      <div class="auth-email-row">
-        <input type="email" class="auth-input" id="auth-email" placeholder="you@example.com" autocomplete="email">
-        <button type="button" class="btn btn-primary" id="auth-email-btn">Send link</button>
+      <div id="identity-signed-in" class="hidden">
+        <p class="mono" style="font-size:12px;color:var(--teal);margin-bottom:12px;">Signed in as <span id="identity-email"></span></p>
+        <button type="button" class="btn btn-ghost" id="identity-sign-out" style="width:100%;">Sign out</button>
       </div>
-      <p class="auth-msg" id="auth-msg"></p>
     </div>
   </div>
 </main>
 
-<script src="assets/supabase-config.js"></script>
+<script src="assets/site-config.js"></script>
 <script type="module">
-  import { mountDownloadGate, mountNavAuth } from './assets/auth.js';
-  mountDownloadGate();
-  mountNavAuth();
+  import { mountDownloadPage } from './assets/identity.js';
+  import { mountNavAccount } from './assets/account.js';
+  import { cloudConfigured } from './assets/cloud-auth.js';
+  mountDownloadPage();
+  mountNavAccount();
+  if (cloudConfigured()) document.getElementById('cloud-signin-cta')?.classList.remove('hidden');
 </script>
 </body>
 </html>
