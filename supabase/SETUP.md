@@ -35,14 +35,14 @@ http://localhost:8080/**
 http://127.0.0.1:8080/**
 http://localhost:5173/**
 http://127.0.0.1:5173/**
-https://kenjugmail.github.io/webeph/**
-https://YOUR_CUSTOM_DOMAIN/**
+https://ephemerent.com/**
+https://www.ephemerent.com/**
 ```
 
 Site URL (production):
 
 ```
-https://kenjugmail.github.io/webeph/
+https://ephemerent.com
 ```
 
 The editor (`localhost:5173`) uses the same Supabase project so sign-in works in the code editor.

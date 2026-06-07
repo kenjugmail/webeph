@@ -28,6 +28,10 @@ assets/
 docs/CLOUD.md            Architecture: relay, phone, pairing
 ```
 
+## Deploy (Vercel + ephemerent.com)
+
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** — import `kenjugmail/webeph` on Vercel (no build), then point Porkbun DNS at Vercel.
+
 ## Local dev
 
 ```powershell

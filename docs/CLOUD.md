@@ -54,7 +54,7 @@ In Supabase: **Authentication → URL Configuration**
 
 | Field | Value |
 |-------|-------|
-| **Site URL** | `http://localhost:8080` (or your production domain) |
+| **Site URL** | `https://ephemerent.com` (production) or `http://localhost:8080` (dev) |
 | **Redirect URLs** | Add every URL users may land on after OAuth |
 
 Add these redirect URLs (wildcards supported):
@@ -62,12 +62,13 @@ Add these redirect URLs (wildcards supported):
 ```
 http://localhost:8080/**
 http://localhost:5173/**
-https://YOUR_GITHUB_PAGES_DOMAIN/**
+https://ephemerent.com/**
+https://www.ephemerent.com/**
 ```
 
-- `8080` — static site (`python -m http.server 8080` in webeph)
+- `8080` — static site local dev
 - `5173` — buddyide editor dev server
-- Production — your GitHub Pages or custom domain
+- `ephemerent.com` — production (Vercel)
 
 ---
 
