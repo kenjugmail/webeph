@@ -1,13 +1,15 @@
 # Ephemerent + Orrery
 
-Two-page site. **Ephemerent.html** is the minimal, abstract company page (emergent
-particle field) and links to **Orrery.html**, the single-page product site for the
-agentic code editor. Closed source; runs on your machine with local or cloud models.
-Central metaphor: a clockwork solar system where parallel agents orbit a goal.
+Two-page site. **Ephemerent.html** is the independent research lab page (emergent
+particle field, research program, work portfolio) and links to **Orrery.html**, the
+single-page product site for the agentic code editor. Closed source; runs on your
+machine with local or cloud models. Central metaphor: a clockwork solar system where
+parallel agents orbit a goal.
 
 ## Structure
 ```
-Ephemerent.html          Company page: abstract emergent field, statement, Orrery product card
+Ephemerent.html          Research lab page: emergent field, R1–R7 program (world models,
+                         wave compute, compute mesh), work portfolio, Orrery product link
 Orrery.html              Product page (one page): hero orrery, parallel agents,
                          buddy + tutor dial, 3D review, models, capabilities, architecture, CTA
 assets/
