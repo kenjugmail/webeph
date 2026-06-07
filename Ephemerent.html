@@ -38,6 +38,7 @@
       <a href="#research">Research</a>
       <a href="#work">Work</a>
       <a href="#approach">Approach</a>
+      <a href="#pledge">Pledge</a>
       <a class="est-keep" href="Orrery.html">Orrery →</a>
       <span class="est">EST. 2026</span>
     </nav>
@@ -180,6 +181,27 @@
   </div>
 </section>
 
+<!-- ON THE RECORD — PLEDGE -->
+<section class="esec" id="pledge">
+  <div class="ewrap">
+    <div class="esec-head rv">
+      <span class="lbl">On the record</span>
+      <h2>A commitment we're making before we've earned a cent — so you can <em>hold us to it.</em></h2>
+    </div>
+    <div class="epledge rv">
+      <div class="epledge-fig">
+        <div class="fig">10%</div>
+        <div class="figsub">a floor, not a ceiling</div>
+      </div>
+      <div>
+        <p>Plenty of AI companies say beautiful things about "benefiting humanity" while shipping the opposite. We won't add to that pile — so here's a number instead. Eventually, at least 10% of Ephemerent's profits go back: into open research, into the community, and to the people whose livelihoods this technology disrupts.</p>
+        <p>We can't do it yet. We're saying it now so you can hold us to it later.</p>
+        <div class="sig">— Ephemerent · on the record · 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="efoot" id="contact">
   <div class="ewrap">
@@ -194,6 +216,7 @@
         <ul>
           <li><a href="#research">Research</a></li>
           <li><a href="#approach">Approach</a></li>
+          <li><a href="#pledge">Pledge</a></li>
           <li><a href="mailto:hello@ephemerent.com">People</a></li>
           <li><a href="mailto:hello@ephemerent.com">Notes</a></li>
         </ul>
@@ -240,6 +263,15 @@
   .eprin-4 > div { border-right: 0 !important; margin-right: 0 !important; padding-right: 0 !important; }
   .eprin-4 > div:last-child { border-bottom: 0; }
 }
+/* on-the-record pledge */
+.epledge { background: var(--card); border: 1px solid var(--rule); border-top: 2px solid var(--accent); border-radius: 4px; padding: 48px; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: start; }
+.epledge-fig { text-align: center; }
+.epledge .fig { font-family: var(--serif); font-size: clamp(56px, 9vw, 104px); line-height: 0.9; letter-spacing: -0.03em; color: var(--accent); }
+.epledge .figsub { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
+.epledge p { font-size: 18px; color: var(--ink-2); line-height: 1.66; max-width: 62ch; }
+.epledge p + p { margin-top: 16px; }
+.epledge .sig { margin-top: 24px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--faint); }
+@media (max-width: 680px){ .epledge { grid-template-columns: 1fr; gap: 22px; padding: 32px 24px; } .epledge-fig { text-align: left; } }
 </style>
 </body>
 </html>
