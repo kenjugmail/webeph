@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orrery — parallel agents you can see · by Ephemerent</title>
+<link rel="stylesheet" href="assets/orrery.css">
+<link rel="stylesheet" href="assets/components.css">
+</head>
+<body class="space-bg grain">
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="brand-wrap" style="display:flex;align-items:center;gap:10px;">
+      <a class="brand" href="Orrery.html">
+        <svg class="mark" viewBox="0 0 26 26" fill="none">
+          <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+          <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+          <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+          <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+          <circle cx="24" cy="16" r="1.7" fill="var(--violet-lt)"/>
+          <circle cx="4" cy="18" r="1.5" fill="var(--teal-lt)"/>
+        </svg>
+        <span>Orrery</span>
+      </a>
+      <a class="brand-by mono" href="Ephemerent.html" style="font-size:11px;color:var(--faint);letter-spacing:.1em;transition:color .2s;">by Ephemerent</a>
+    </div>
+    <div class="nav-links">
+      <a href="#orchestrator">Orchestrator</a>
+      <a href="#buddy">Buddy</a>
+      <a href="#review">3D Review</a>
+      <a href="#models">Models</a>
+      <a href="#architecture">Architecture</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="btn btn-ghost" href="#start">Request access</a>
+    <a class="btn btn-primary" href="#start">Get started <span aria-hidden="true">→</span></a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <canvas id="orrery" class="hero-canvas"></canvas>
+  <div class="hero-veil"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow reveal in">An agentic code editor by Ephemerent</div>
+      <h1 class="display hero-h1 reveal in d1">Parallel agents,<br><span class="grad-text">in orbit.</span></h1>
+      <p class="lead reveal in d2">Orrery is a code editor you talk to. Give it a goal and it splits the work across several AI agents running at once — each in its own copy of your repo — checks their results, keeps the best, and merges them back. It runs on your machine, with the models you choose, and a 3D buddy talks you through it as it works.</p>
+      <div class="hero-cta reveal in d3">
+        <a class="btn btn-primary" href="#start">Get started <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#orchestrator">See how it works</a>
+      </div>
+      <div class="hero-providers reveal in d4">
+        <span class="mono">works with</span>
+        <span class="prov prov-local">Ollama · local</span><span class="prov">OpenAI</span><span class="prov">Gemini</span><span class="prov">DeepSeek</span><span class="prov">Anthropic</span>
+      </div>
+      <p class="hero-note mono reveal in d4">Local models run entirely on your machine — your code never has to leave it.</p>
+    </div>
+  </div>
+  <div class="hero-scroll mono">scroll ↓</div>
+</header>
+
+<!-- ============ LOOP STRIP ============ -->
+<section class="section-sm loop-section">
+  <div class="wrap">
+    <div class="loop-rail reveal">
+      <div class="loop-step"><span class="loop-num mono">01</span><b>describe</b><span>tell it the goal</span></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step"><span class="loop-num mono">02</span><b>it edits</b><span>across many files</span></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step"><span class="loop-num mono">03</span><b>it tests</b><span>runs your suite</span></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step"><span class="loop-num mono">04</span><b>it fixes</b><span>corrects what breaks</span></div>
+      <div class="loop-loopback mono">Plan or Act mode · you approve every change · roll back to any checkpoint</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ORCHESTRATOR / SWARM ============ -->
+<section class="section" id="orchestrator">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Parallel agents</div>
+      <h2 class="display">Run many agents at once — and keep the best.</h2>
+      <p class="lead">Orrery breaks your goal into separate tasks and gives each one its own agent, working in its own copy of the repo so they never collide. Each task is attempted several times; an automatic reviewer scores the attempts and keeps the winner before merging it back. And when a job doesn't need parallel agents, Orrery won't spin them up.</p>
+    </div>
+    <div class="card card-pad reveal d1 swarm-card">
+      <div id="swarm"></div>
+    </div>
+    <div class="pipe reveal d2">
+      <div class="pipe-step"><span class="pipe-n mono">01</span><b>Plan</b><span>Split the goal into tasks.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Isolate</b><span>One repo copy per task.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Try</b><span>Several attempts each.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">04</span><b>Judge</b><span>Score and pick a winner.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">05</span><b>Merge</b><span>Combine the winners.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">06</span><b>Measure</b><span>Prove it beat one agent.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUDDY ============ -->
+<section class="section buddy-section" id="buddy">
+  <div class="glow-orb" style="width:420px;height:420px;background:rgba(61,127,184,0.16);top:10%;left:-100px;"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Your buddy</div>
+      <h2 class="display">A buddy that watches — and reacts.</h2>
+      <p class="lead">A friendly 3D character sits beside your work, run by its own separate model. It watches what the coding agent does and reacts in real time — focused while it thinks, worried when tests fail, pleased when they pass. It talks out loud and listens back, and it stays completely out of the coding agent's way.</p>
+    </div>
+    <div class="card card-pad reveal d1">
+      <div id="buddyApp"></div>
+    </div>
+    <div class="card card-pad reveal d2 dial-card">
+      <div class="dial-head">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px;">The tutor dial</div>
+          <h3 class="display" style="font-size:24px;">Set how much it explains</h3>
+        </div>
+        <div class="dial-modes" id="dialModes">
+          <button data-p="8" data-r="Patient tutor. It narrates each step and waits for your nod; the buddy explains the why, gently." class="on">walk me through it</button>
+          <button data-p="50" data-r="Balanced. It moves in confident chunks and checks in at the seams; the buddy comments on the big decisions.">guide me</button>
+          <button data-p="92" data-r="Quiet autopilot. It just does the work and reports back; the buddy cheers the wins and flags the problems.">just do it</button>
+        </div>
+      </div>
+      <div class="dial-track"><div class="dial-knob" id="knob" style="left:8%;"></div></div>
+      <div class="dial-ends mono"><span>walk me through it</span><span>just do it</span></div>
+      <div class="dial-readout" id="dialReadout">Patient tutor. It narrates each step and waits for your nod; the buddy explains the why, gently.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3D REVIEW ============ -->
+<section class="section" id="review">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">3D review</div>
+      <h2 class="display">Review for work you can actually see.</h2>
+      <p class="lead">Some work isn't text — a shader, a 3D part, a game scene. Orrery can build these, try several versions, and pick the best one by a real test: does it compile, does it hit the target, does it pass an automated playtest. Then it shows you a clear before-and-after. Drag the slider to compare — no graphics card required.</p>
+    </div>
+    <div class="reveal d1">
+      <div id="reviewApp"></div>
+    </div>
+    <div class="chips reveal d2">
+      <div class="chip"><span class="chip-ic" style="color:var(--violet-lt)">▦</span><b>Shaders</b><span>Write it, check it compiles, score the look.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--teal-lt)">◈</span><b>3D parts</b><span>Inspect, compare, check it's printable.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--brass-lt)">⬡</span><b>Game scenes</b><span>Collision and an automated playtest.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--green)">◐</span><b>Splats</b><span>Preview and inspect point-cloud captures.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODELS / DEVELOP ============ -->
+<section class="section models-section" id="models">
+  <div class="wrap">
+    <div class="models-grid">
+      <div class="reveal">
+        <div class="eyebrow">Your models, your machine</div>
+        <h2 class="display" style="margin:18px 0 22px;">Closed source.<br>Runs on your hardware.</h2>
+        <p class="lead" style="margin-bottom:28px;">Orrery isn't open source — but it's yours to run locally. Point it at a model on your own machine with Ollama and nothing leaves your laptop: no network calls, no API keys, no telemetry. Prefer a hosted model? Bring your own key for OpenAI, Gemini, DeepSeek or Anthropic, and mix local and cloud task by task.</p>
+        <div class="prov-table">
+          <div class="prov-row"><span>On your machine</span><span class="mono">Ollama</span><span class="muted">no key · fully private</span></div>
+          <div class="prov-row"><span>OpenAI</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
+          <div class="prov-row"><span>Gemini</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
+          <div class="prov-row"><span>DeepSeek</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
+          <div class="prov-row"><span>Anthropic</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
+        </div>
+      </div>
+      <div class="reveal d1" id="develop">
+        <div class="terminal">
+          <div class="term-bar"><span class="td td-r"></span><span class="td td-y"></span><span class="td td-g"></span><span class="term-title mono">Orrery</span></div>
+          <div class="term-body mono">
+            <div class="tl"><span class="tc">›</span> open project</div>
+            <div class="tl"><span class="tok-violet">model</span> ollama · qwen2.5-coder <span class="tok-teal">(local)</span></div>
+            <div class="tl tdim"># nothing leaves this machine</div>
+            <div class="tl">&nbsp;</div>
+            <div class="tl"><span class="tc">›</span> “add a splat viewer and make the tests pass”</div>
+            <div class="tl"><span class="tok-violet">plan</span>   4 tasks · running in parallel</div>
+            <div class="tl"><span class="tok-teal">verify</span> tests <span class="tok-ok">✓</span>  typecheck <span class="tok-ok">✓</span>  lint <span class="tok-ok">✓</span></div>
+            <div class="tl"><span class="tok-teal">buddy</span>  “green across the board — shipping it”<span class="term-caret">▍</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITY GRID ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Built for trust</div>
+      <h2 class="display">Everything it does stays in view.</h2>
+      <p class="lead">Orrery keeps a running log of every decision, test result and review as it works — all in one place. You can see why it chose an approach, what each agent tried, and what it cost, instead of digging through hidden traces.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Checked before it ships</h4><p>Every change is run past tests, type-checking, linting, security and code review before it's kept.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h4>Knows your codebase</h4><p>Ask about the whole project — it searches your code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h4>Remembers across sessions</h4><p>It recalls past decisions and your preferences from one session to the next.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h4>Talk and interrupt</h4><p>Speak to it naturally and cut in any time — it stops to listen, then picks back up.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h4>Connects to your tools</h4><p>Plugs into external tools and data through MCP, with code-aware search built in.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h4>Measure it over time</h4><p>Write your own checks for the agent and track how it performs as the models change.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h4>Works with other editors</h4><p>Plugs into other editors and agents through open, standard protocols.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Set the pace</h4><p>Dial how much it explains — from quiet autopilot to step-by-step teaching.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section arch-section" id="architecture">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">How it's built</div>
+      <h2 class="display">A native editor and an agent core.</h2>
+      <p class="lead">Under the hood, a fast native editor pairs with a separate agent engine, joined by one stable contract. Each part is built to run on its own — offline, predictable and testable.</p>
+    </div>
+    <div class="arch-grid">
+      <div class="card card-pad arch-col reveal">
+        <h5 class="arch-h">The editor · native</h5>
+        <div class="pkg"><b>Fast buffer</b><span>Handles huge files without lag.</span></div>
+        <div class="pkg"><b>Syntax &amp; multi-file</b><span>Accurate highlighting; edit many files as one.</span></div>
+        <div class="pkg"><b>3D workspace</b><span>A native model for scenes and parts.</span></div>
+        <div class="pkg"><b>Render proof</b><span>Verifies visuals, with or without a GPU.</span></div>
+        <div class="pkg"><b>Buddy brain</b><span>Drives the 3D buddy inside the app.</span></div>
+        <div class="pkg"><b>Sessions</b><span>Keeps your place and history.</span></div>
+      </div>
+      <div class="card card-pad arch-col reveal d1">
+        <h5 class="arch-h">The agent core</h5>
+        <div class="pkg"><b>The loop</b><span>Plan, edit, test, fix — with your approval.</span></div>
+        <div class="pkg"><b>Orchestrator</b><span>Splits work, runs agents, merges winners.</span></div>
+        <div class="pkg"><b>3D layer</b><span>Builds and checks shaders, parts and scenes.</span></div>
+        <div class="pkg"><b>The buddy</b><span>A separate model that narrates the work.</span></div>
+        <div class="pkg"><b>Model providers</b><span>Local and cloud, behind one interface.</span></div>
+        <div class="pkg"><b>Search &amp; voice</b><span>Codebase search, memory and live voice.</span></div>
+      </div>
+      <div class="card card-pad arch-col reveal d2">
+        <h5 class="arch-h">Ways to run it</h5>
+        <div class="pkg"><b>Desktop app</b><span>The native editor with the live buddy.</span></div>
+        <div class="pkg"><b>Browser client</b><span>Chat, change review and the 3D buddy.</span></div>
+        <div class="pkg"><b>Other editors</b><span>Connect through standard protocols.</span></div>
+        <div class="pkg"><b>PR review</b><span>Reviews pull requests and fixes CI.</span></div>
+        <div class="pkg"><b>Eval harness</b><span>Measures the agent as models change.</span></div>
+        <div class="pkg"><b>Guided demo</b><span>A narrated walk-through of the stack.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section start-section" id="start">
+  <canvas id="orrery2" class="start-canvas"></canvas>
+  <div class="start-veil"></div>
+  <div class="wrap start-inner">
+    <div class="reveal">
+      <div class="eyebrow center" style="justify-content:center;">Runs on your machine · bring your own models</div>
+      <h2 class="display start-h">Bring the whole swarm<br>down to earth.</h2>
+      <p class="lead" style="margin:0 auto 32px;text-align:center;">Get Orrery, point it at a local model, and give it your first goal. Your code stays on your machine — always.</p>
+      <div class="hero-cta center" style="justify-content:center;">
+        <a class="btn btn-primary" href="#">Get started <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#">Request access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="Orrery.html" style="margin-bottom:14px;">
+          <svg class="mark" viewBox="0 0 26 26" fill="none">
+            <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+            <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+            <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+            <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+          </svg>
+          <span>Orrery</span>
+        </a>
+        <p class="muted" style="font-size:14px;max-width:32ch;">Parallel agents you can see — running privately on your own machine. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
+      </div>
+      <div><h5>Product</h5><ul><li><a href="#orchestrator">Orchestrator</a></li><li><a href="#buddy">Buddy</a></li><li><a href="#review">3D Review</a></li><li><a href="#models">Models</a></li></ul></div>
+      <div><h5>Resources</h5><ul><li><a href="#">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Pricing</a></li><li><a href="#">Support</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    </div>
+    <hr class="divider" style="margin:44px 0 24px;">
+    <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <span class="mono" style="font-size:12px;color:var(--faint);">© 2026 Ephemerent · runs locally by default</span>
+      <span class="mono" style="font-size:12px;color:var(--faint);">Private · model-agnostic</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/orrery-bg.js"></script>
+<script src="assets/swarm.js"></script>
+<script src="assets/buddy.js"></script>
+<script src="assets/review.js"></script>
+<script>
+  // nav scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), { passive: true });
+  // reveals
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+  // mounts — wait for load so layout/styles (page <style> below) are applied
+  addEventListener('load', () => {
+    mountOrrery(document.getElementById('orrery'), { cxf: 0.68, cyf: 0.5 });
+    mountOrrery(document.getElementById('orrery2'), { cxf: 0.5, cyf: 0.5, labels: false, parallax: false });
+    mountSwarm(document.getElementById('swarm'));
+    mountBuddy(document.getElementById('buddyApp'), { auto: true });
+    mountReview(document.getElementById('reviewApp'));
+  });
+  // tutor dial
+  const knob = document.getElementById('knob'), readout = document.getElementById('dialReadout');
+  document.querySelectorAll('#dialModes button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#dialModes button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    knob.style.left = b.dataset.p + '%';
+    readout.textContent = b.dataset.r;
+  }));
+</script>
+
+<style>
+/* ===== Page-specific layout (Orrery landing) ===== */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(900px 700px at 18% 50%, var(--bg) 8%, rgba(10,10,20,0.6) 42%, transparent 70%),
+              linear-gradient(0deg, var(--bg), transparent 30%); }
+.hero-inner { position: relative; z-index: 2; padding-top: 90px; }
+.hero-copy { max-width: 640px; }
+.hero-h1 { margin: 20px 0 24px; }
+.hero-cta { display: flex; gap: 14px; margin: 32px 0 0; flex-wrap: wrap; }
+.hero-providers { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 40px; }
+.hero-providers .mono { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-right: 4px; }
+.prov { font-family: var(--mono); font-size: 12px; color: var(--ink-2); padding: 5px 11px; border: 1px solid var(--line); border-radius: var(--r-sm); background: rgba(255,255,255,0.02); }
+.prov-local { color: var(--teal-lt); border-color: rgba(45,212,191,0.35); background: rgba(45,212,191,0.06); }
+.hero-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); letter-spacing: 0.01em; }
+@media (max-width: 1120px){ .brand-by { display: none; } }
+.brand-by:hover { color: var(--teal-lt) !important; }
+@media (max-width: 980px){ .nav .btn-ghost { display: none; } }
+.hero-scroll { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 3; font-size: 11px; letter-spacing: 0.2em; color: var(--faint); text-transform: uppercase; animation: bob 2.4s ease-in-out infinite; }
+
+.loop-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(0,0,0,0.2); }
+.loop-rail { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.loop-step { display: flex; flex-direction: column; gap: 2px; }
+.loop-step .loop-num { font-size: 11px; color: var(--teal-lt); }
+.loop-step b { font-family: var(--display); font-size: 17px; }
+.loop-step span { font-size: 12.5px; color: var(--muted); }
+.loop-arrow { color: var(--faint); font-size: 18px; }
+.loop-loopback { margin-left: auto; font-size: 11.5px; color: var(--faint); }
+@media (max-width: 720px){ .loop-loopback { margin-left: 0; width: 100%; } }
+
+.sec-head { max-width: 760px; margin-bottom: 44px; }
+.sec-head h2 { margin: 16px 0 18px; }
+.sec-foot { margin-top: 28px; }
+.swarm-card { background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
+
+/* folded-in: orchestrator pipeline */
+.pipe { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 26px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.pipe-step { background: var(--bg-2); padding: 18px 16px; display: flex; flex-direction: column; gap: 5px; }
+.pipe-n { font-size: 11px; color: var(--brass-lt); }
+.pipe-step b { font-family: var(--display); font-size: 16px; }
+.pipe-step span { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+@media (max-width: 900px){ .pipe { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 540px){ .pipe { grid-template-columns: repeat(2, 1fr); } }
+
+/* folded-in: review artifact chips */
+.chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
+.chip { border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; background: rgba(255,255,255,0.02); }
+.chip-ic { font-size: 18px; }
+.chip b { font-family: var(--display); font-size: 15px; display: block; margin: 8px 0 4px; }
+.chip span { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+@media (max-width: 760px){ .chips { grid-template-columns: 1fr 1fr; } }
+
+/* folded-in: tutor dial */
+.dial-card { margin-top: 18px; }
+.dial-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-bottom: 26px; }
+.dial-modes { display: flex; gap: 8px; flex-wrap: wrap; }
+.dial-modes button { font-family: var(--mono); font-size: 12px; padding: 8px 14px; border-radius: var(--r-sm); background: rgba(255,255,255,0.03); border: 1px solid var(--line-strong); color: var(--ink-2); cursor: pointer; transition: all 0.2s; }
+.dial-modes button.on { border-color: var(--violet); color: var(--ink); background: rgba(61,127,184,0.12); }
+.dial-track { position: relative; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--teal), var(--violet), var(--brass)); }
+.dial-knob { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; background: #fff; transform: translate(-50%,-50%); box-shadow: 0 2px 10px rgba(0,0,0,0.5); transition: left 0.5s var(--ease); }
+.dial-ends { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); margin-top: 12px; }
+.dial-readout { font-size: 15px; color: var(--ink-2); margin-top: 16px; min-height: 44px; }
+
+.buddy-section { position: relative; overflow: hidden; }
+
+.models-section { border-top: 1px solid var(--line); background: rgba(0,0,0,0.18); }
+.models-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 880px){ .models-grid { grid-template-columns: 1fr; gap: 36px; } }
+.prov-table { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.prov-row { display: grid; grid-template-columns: 1fr 1.1fr 1.3fr; gap: 12px; padding: 13px 18px; border-bottom: 1px solid var(--line); font-size: 14px; align-items: center; }
+.prov-row:last-child { border-bottom: 0; }
+.prov-row span:first-child { color: var(--ink); }
+.prov-row .mono { font-size: 12.5px; color: var(--violet-lt); }
+
+.terminal { border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; background: #08080f; box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+.term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }
+.td { width: 11px; height: 11px; border-radius: 50%; } .td-r { background: #ff5f57; } .td-y { background: #febc2e; } .td-g { background: #28c840; }
+.term-title { margin-left: 8px; font-size: 12px; color: var(--faint); }
+.term-body { padding: 20px; font-size: 13px; line-height: 1.85; }
+.tl { white-space: pre-wrap; }
+.tc { color: var(--teal); margin-right: 8px; }
+.tdim { color: var(--faint); }
+.tok-ok { color: var(--green); } .tok-violet { color: var(--violet-lt); } .tok-teal { color: var(--teal-lt); }
+.term-caret { color: var(--teal); animation: blink 1s infinite; }
+
+.cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 980px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .cap-grid { grid-template-columns: 1fr; } }
+.cap-ic { font-size: 22px; color: var(--brass-lt); margin-bottom: 14px; }
+.cap-grid h4 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.cap-grid p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+
+.arch-section { border-top: 1px solid var(--line); }
+.arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px){ .arch-grid { grid-template-columns: 1fr; } }
+.arch-h { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-lt); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.pkg { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 3px; }
+.pkg:last-child { border-bottom: 0; }
+.pkg b { font-family: var(--mono); font-size: 13.5px; color: var(--ink); font-weight: 500; }
+.pkg span { font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+.start-section { position: relative; overflow: hidden; text-align: center; }
+.start-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.7; }
+.start-veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(700px 500px at 50% 50%, transparent, var(--bg) 75%); pointer-events: none; }
+.start-inner { position: relative; z-index: 2; }
+.start-h { margin: 18px 0 22px; }
+</style>
+</body>
+</html>
