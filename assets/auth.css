@@ -1,0 +1,155 @@
+/* Auth UI — matches orrery.css tokens */
+.hidden { display: none !important; }
+
+.auth-nav-slot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 8px;
+}
+
+.auth-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  padding: 36px 32px;
+  box-shadow: var(--glow-violet);
+}
+
+.auth-card h1 {
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.auth-card .sub {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.auth-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-email-row {
+  display: flex;
+  gap: 8px;
+}
+
+.auth-input {
+  flex: 1;
+  font-family: var(--body);
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-2);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+  border-color: var(--violet-lt);
+}
+
+.auth-msg {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 1.5em;
+}
+
+.auth-msg.ok { color: var(--green); }
+.auth-msg.err { color: var(--red); }
+
+.download-steps {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.download-steps h3 {
+  font-family: var(--display);
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: var(--ink-2);
+}
+
+.download-steps ol {
+  margin-left: 20px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.download-steps li + li {
+  margin-top: 8px;
+}
+
+.waitlist-box {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.waitlist-box .icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+@media (max-width: 720px) {
+  .auth-nav-slot .auth-chip { display: none; }
+}

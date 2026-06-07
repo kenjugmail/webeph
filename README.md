@@ -1,38 +1,59 @@
 # Ephemerent + Orrery
 
-Two-page site. **Ephemerent.html** is the independent research lab page (emergent
-particle field, research program, work portfolio) and links to **Orrery.html**, the
-single-page product site for the agentic code editor. Closed source; runs on your
-machine with local or cloud models. Central metaphor: a clockwork solar system where
-parallel agents orbit a goal.
+Static marketing site for **Ephemerent** (research lab) and **Orrery** (agentic code editor).
+Orrery itself runs locally via [buddyide](https://github.com/kenjugmail/buddyide) — sidecar + web UI on your machine.
 
 ## Structure
+
 ```
-Ephemerent.html          Research lab page: emergent field, R1–R7 program (LLM agents
-                         today; world models, wave compute, mesh as research to integrate),
-                         work portfolio, Orrery product link
-Orrery.html              Product page (one page): hero orrery, parallel agents,
-                         buddy + tutor dial, 3D review, models, capabilities, architecture, CTA
+Ephemerent.html          Research lab page
+Orrery.html              Product landing page
+login.html               Sign in (Google, GitHub, email magic link)
+download.html            Auth-gated download + install steps
 assets/
-  orrery.css             Design system — tokens, type, buttons, nav, footer
-  components.css          Styles for the swarm / buddy / review components
-  ephemerent.js          Abstract emergent particle field (flow-field motes)
-  orrery-bg.js           Hero orrery canvas (sun + orbiting agent-planets)
-  swarm.js               Parallel-agent diagram (split → attempts → pick winner → merge)
-  buddy.js               Buddy avatar with reactive states + narration
-  review.js              WebGL before→after shader review with drag-to-compare
+  auth.js                Supabase auth helpers
+  auth.css               Login / account UI
+  supabase-config.js     Project URL, anon key, download URL
+supabase/
+  schema.sql             Profiles + download_approved
+  SETUP.md               Supabase + OAuth setup guide
+releases/
+  orrery-install.zip     Start scripts + INSTALL.md (upload to GitHub Release)
+.github/workflows/
+  pages.yml              GitHub Pages deploy on push to main
 ```
+
+## Local dev
+
+```powershell
+cd c:\Users\kenju\Documents\webeph
+python -m http.server 8080
+# http://localhost:8080/Orrery.html
+```
+
+## Auth + downloads
+
+1. Follow [supabase/SETUP.md](supabase/SETUP.md) — create project, run `schema.sql`, enable Google/GitHub/email.
+2. Copy `assets/supabase-config.example.js` → `assets/supabase-config.js` and fill in keys.
+3. Create a GitHub Release and attach `releases/orrery-install.zip` as `orrery-install.zip`.
+
+Until Supabase is configured, login pages show setup instructions. Until a Release is published, the download button points at the release URL (404 until uploaded).
+
+## Orrery runtime (buddyide)
+
+```powershell
+cd c:\Users\kenju\Documents\buddyide
+pnpm install
+pnpm harness                    # offline smoke test
+
+$env:ED_PROVIDER = "ollama"
+pnpm --filter @ed/sidecar start # terminal 1
+pnpm --filter @ed/web dev       # terminal 2 → http://localhost:5173
+```
+
+Or unzip `orrery-install.zip` into a buddyide clone and run `start-orrery.ps1`.
 
 ## Design tokens
-Fonts: Space Grotesk (display), Hanken Grotesk (body), IBM Plex Mono (mono).
-Palette: steel-blue #3d7fb8 / teal #2dd4bf / brass #e0a544 on near-black — an
-"instrument" scheme, no purple. Primary buttons are warm cream. See `assets/orrery.css`.
-Corners use a moderate radius (`--r-sm 5 / --r 9 / --r-lg 14`) — crisp but not blocky.
 
-## Notes
-- One page, no build step — open `Orrery.html` directly. Nav links scroll to sections.
-- CTA links (Get started / Request access) are placeholders.
-- Closed source: messaging emphasises local models and privacy (code never leaves the machine).
-- Animations gate on visibility with timeout fallbacks; the buddy's color/shape changes are
-  instant by design so they render correctly in any context.
-```
+Fonts: Space Grotesk (display), Hanken Grotesk (body), IBM Plex Mono (mono).
+Palette: steel-blue / teal / brass on near-black. See `assets/orrery.css`.

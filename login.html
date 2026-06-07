@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — Orrery</title>
+<link rel="stylesheet" href="assets/orrery.css">
+<link rel="stylesheet" href="assets/auth.css">
+</head>
+<body class="space-bg grain auth-page">
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="Orrery.html">
+      <svg class="mark" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+        <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+        <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+        <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+      </svg>
+      <span>Orrery</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <a class="btn btn-ghost" href="Orrery.html">← Back</a>
+  </div>
+</nav>
+
+<main class="auth-main">
+  <div class="auth-card">
+    <h1>Sign in</h1>
+    <p class="sub">Use Google, GitHub, or a magic link to access Orrery downloads. Your code stays on your machine — this only gates access.</p>
+
+    <div id="auth-config-panel" class="hidden">
+      <p class="auth-msg err">Supabase is not configured yet. Copy <code>assets/supabase-config.example.js</code> to <code>assets/supabase-config.js</code> and follow <a href="supabase/SETUP.md">supabase/SETUP.md</a>.</p>
+    </div>
+
+    <div id="auth-login-panel">
+      <div class="auth-stack">
+        <button type="button" class="btn btn-primary" id="auth-google" style="width:100%;">Continue with Google</button>
+        <button type="button" class="btn btn-ghost" id="auth-github" style="width:100%;">Continue with GitHub</button>
+      </div>
+      <div class="auth-divider">or email</div>
+      <div class="auth-email-row">
+        <input type="email" class="auth-input" id="auth-email" placeholder="you@example.com" autocomplete="email">
+        <button type="button" class="btn btn-primary" id="auth-email-btn">Send link</button>
+      </div>
+      <p class="auth-msg" id="auth-msg"></p>
+    </div>
+  </div>
+</main>
+
+<script src="assets/supabase-config.js"></script>
+<script type="module">
+  import { bindAuthForm, getSession } from './assets/auth.js';
+
+  const configured = window.ORRERY_CONFIG?.SUPABASE_URL &&
+    !window.ORRERY_CONFIG.SUPABASE_URL.includes('YOUR_PROJECT');
+  if (!configured) {
+    document.getElementById('auth-login-panel')?.classList.add('hidden');
+    document.getElementById('auth-config-panel')?.classList.remove('hidden');
+  } else {
+    bindAuthForm();
+    getSession().then(s => { if (s) location.replace('download.html'); });
+  }
+</script>
+</body>
+</html>
