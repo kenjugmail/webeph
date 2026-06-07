@@ -30,34 +30,15 @@
     <h1>Get Orrery</h1>
     <p class="sub">Runs on your machine. Bring your own models — Ollama locally or cloud API keys.</p>
 
-    <div id="auth-config-panel" class="hidden">
-      <p class="auth-msg err">Supabase is not configured. See <a href="supabase/SETUP.md">supabase/SETUP.md</a>.</p>
-    </div>
+    <div id="auth-download-panel">
+      <p id="download-user-row" class="mono hidden" style="font-size:12px;color:var(--teal);margin-bottom:20px;">Signed in as <span id="download-user-email"></span></p>
 
-    <div id="auth-login-panel">
-      <p class="sub" style="margin-bottom:20px;">Sign in to download the install bundle.</p>
-      <div class="auth-stack">
-        <button type="button" class="btn btn-primary" id="auth-google" style="width:100%;">Continue with Google</button>
-        <button type="button" class="btn btn-ghost" id="auth-github" style="width:100%;">Continue with GitHub</button>
+      <div id="auth-waitlist-panel" class="hidden waitlist-box" style="margin-bottom:20px;padding:16px 0 0;">
+        <div class="icon">◇</div>
+        <h2 style="font-family:var(--display);font-size:18px;margin-bottom:8px;">You're on the list</h2>
+        <p class="sub" style="margin:0 auto;font-size:14px;">Thanks for signing up. We'll email you when early-access perks are ready.</p>
       </div>
-      <div class="auth-divider">or email</div>
-      <div class="auth-email-row">
-        <input type="email" class="auth-input" id="auth-email" placeholder="you@example.com" autocomplete="email">
-        <button type="button" class="btn btn-primary" id="auth-email-btn">Send link</button>
-      </div>
-      <p class="auth-msg" id="auth-msg"></p>
-      <p style="margin-top:16px;font-size:14px;color:var(--faint);">Already have an account? The magic link will sign you in here.</p>
-    </div>
 
-    <div id="auth-waitlist-panel" class="hidden waitlist-box">
-      <div class="icon">◇</div>
-      <h2 style="font-family:var(--display);font-size:22px;margin-bottom:10px;">You're on the list</h2>
-      <p class="sub" style="margin:0 auto;">Thanks for signing up. We'll email you when your download is approved.</p>
-      <button type="button" class="btn btn-ghost" id="download-sign-out" style="margin-top:24px;">Sign out</button>
-    </div>
-
-    <div id="auth-download-panel" class="hidden">
-      <p class="mono" style="font-size:12px;color:var(--teal);margin-bottom:20px;">Signed in as <span id="download-user-email"></span></p>
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;">Download install bundle <span aria-hidden="true">↓</span></a>
       <div class="download-steps">
         <h3>Quick start</h3>
@@ -68,7 +49,28 @@
           <li>Open the printed URL — sidecar on <code>ws://127.0.0.1:4575</code>, web UI on port 5173.</li>
         </ol>
       </div>
-      <button type="button" class="btn btn-ghost" id="download-sign-out" style="margin-top:20px;width:100%;">Sign out</button>
+      <button type="button" class="btn btn-ghost hidden" id="download-sign-out" style="margin-top:20px;width:100%;">Sign out</button>
+    </div>
+
+    <div id="auth-config-panel" class="hidden auth-optional">
+      <p class="auth-msg" style="color:var(--muted);">Sign-in is not configured yet — downloads work without an account. See <a href="supabase/SETUP.md">supabase/SETUP.md</a> to enable optional accounts.</p>
+    </div>
+
+    <div id="auth-login-panel" class="auth-optional">
+      <div class="auth-optional-head">
+        <h2>Sign in for early access updates</h2>
+        <p class="sub">Optional — create an account to get notified about new features and credits. No sign-in required to download.</p>
+      </div>
+      <div class="auth-stack">
+        <button type="button" class="btn btn-primary" id="auth-google" style="width:100%;">Continue with Google</button>
+        <button type="button" class="btn btn-ghost" id="auth-github" style="width:100%;">Continue with GitHub</button>
+      </div>
+      <div class="auth-divider">or email</div>
+      <div class="auth-email-row">
+        <input type="email" class="auth-input" id="auth-email" placeholder="you@example.com" autocomplete="email">
+        <button type="button" class="btn btn-primary" id="auth-email-btn">Send link</button>
+      </div>
+      <p class="auth-msg" id="auth-msg"></p>
     </div>
   </div>
 </main>

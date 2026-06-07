@@ -125,16 +125,29 @@ export function bindAuthForm(root = document) {
   });
 }
 
-/** Gate download.html content */
+function setupDownloadButton() {
+  const dl = document.getElementById('orrery-download-btn');
+  const url = downloadUrl();
+  if (dl && url !== '#') {
+    dl.href = url;
+    dl.setAttribute('download', '');
+  }
+}
+
+/** Download page: install bundle always available; sign-in optional */
 export async function mountDownloadGate() {
   const loginPanel = document.getElementById('auth-login-panel');
   const downloadPanel = document.getElementById('auth-download-panel');
   const waitlistPanel = document.getElementById('auth-waitlist-panel');
   const configPanel = document.getElementById('auth-config-panel');
+  const userRow = document.getElementById('download-user-row');
+  const signOutBtn = document.getElementById('download-sign-out');
+
+  downloadPanel?.classList.remove('hidden');
+  setupDownloadButton();
 
   if (!configured()) {
     loginPanel?.classList.add('hidden');
-    downloadPanel?.classList.add('hidden');
     waitlistPanel?.classList.add('hidden');
     configPanel?.classList.remove('hidden');
     return;
@@ -146,33 +159,21 @@ export async function mountDownloadGate() {
   const session = await getSession();
   if (!session?.user) {
     loginPanel?.classList.remove('hidden');
-    downloadPanel?.classList.add('hidden');
     waitlistPanel?.classList.add('hidden');
+    userRow?.classList.add('hidden');
+    signOutBtn?.classList.add('hidden');
     return;
   }
 
   loginPanel?.classList.add('hidden');
-  const profile = await getProfile(session.user.id);
-  const approved = profile?.download_approved !== false;
-
-  if (!approved) {
-    waitlistPanel?.classList.remove('hidden');
-    downloadPanel?.classList.add('hidden');
-    return;
-  }
-
-  waitlistPanel?.classList.add('hidden');
-  downloadPanel?.classList.remove('hidden');
-
-  const dl = document.getElementById('orrery-download-btn');
-  const url = downloadUrl();
-  if (dl && url !== '#') {
-    dl.href = url;
-    dl.setAttribute('download', '');
-  }
 
   const emailEl = document.getElementById('download-user-email');
   if (emailEl) emailEl.textContent = session.user.email || '';
+  userRow?.classList.remove('hidden');
+  signOutBtn?.classList.remove('hidden');
+  signOutBtn?.addEventListener('click', () => signOut());
 
-  document.getElementById('download-sign-out')?.addEventListener('click', () => signOut());
+  const profile = await getProfile(session.user.id);
+  const approved = profile?.download_approved !== false;
+  waitlistPanel?.classList.toggle('hidden', approved);
 }

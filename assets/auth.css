@@ -150,6 +150,23 @@
   opacity: 0.7;
 }
 
+.auth-optional {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.auth-optional-head h2 {
+  font-family: var(--display);
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.auth-optional-head .sub {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
 @media (max-width: 720px) {
   .auth-nav-slot .auth-chip { display: none; }
 }

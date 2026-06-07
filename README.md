@@ -8,8 +8,8 @@ Orrery itself runs locally via [buddyide](https://github.com/kenjugmail/buddyide
 ```
 Ephemerent.html          Research lab page
 Orrery.html              Product landing page
-login.html               Sign in (Google, GitHub, email magic link)
-download.html            Auth-gated download + install steps
+login.html               Optional sign in (Google, GitHub, email magic link)
+download.html            Public download + install steps; optional account section
 assets/
   auth.js                Supabase auth helpers
   auth.css               Login / account UI
@@ -31,13 +31,19 @@ python -m http.server 8080
 # http://localhost:8080/Orrery.html
 ```
 
-## Auth + downloads
+## Downloads + optional auth
+
+1. Set `DOWNLOAD_URL` in `assets/supabase-config.js` (copy from `assets/supabase-config.example.js`).
+2. Create a GitHub Release and attach `releases/orrery-install.zip` as `orrery-install.zip`.
+
+The install bundle is available on [download.html](download.html) without signing in. Sign-in is optional — for early-access updates, waitlist state, and future account features.
+
+To enable optional accounts:
 
 1. Follow [supabase/SETUP.md](supabase/SETUP.md) — create project, run `schema.sql`, enable Google/GitHub/email.
-2. Copy `assets/supabase-config.example.js` → `assets/supabase-config.js` and fill in keys.
-3. Create a GitHub Release and attach `releases/orrery-install.zip` as `orrery-install.zip`.
+2. Fill in `SUPABASE_URL` and `SUPABASE_ANON_KEY` in `assets/supabase-config.js`.
 
-Until Supabase is configured, login pages show setup instructions. Until a Release is published, the download button points at the release URL (404 until uploaded).
+Until Supabase is configured, the download page still works; the sign-in section shows setup instructions. Until a Release is published, the download button points at the release URL (404 until uploaded).
 
 ## Orrery runtime (buddyide)
 
