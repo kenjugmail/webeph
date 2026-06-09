@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Ephemerent</title>
+<meta name="description" content="How Ephemerent handles data for Orrery: local-first by default, with an optional cloud account for sign-in and activity logs. Your code stays on your machine.">
+<link rel="canonical" href="https://ephemerent.com/privacy.html">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#f3f0e8">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/ephemerent.css">
+<style>
+  .legal { padding: 70px 0 40px; }
+  .legal-head { max-width: 60ch; margin-bottom: 14px; }
+  .legal-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.12; letter-spacing: -0.02em; }
+  .legal-updated { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--faint); margin-bottom: 40px; }
+  .legal-body { max-width: 68ch; }
+  .legal-body h2 { font-family: var(--serif); font-weight: 500; font-size: 22px; letter-spacing: -0.01em; margin: 38px 0 12px; }
+  .legal-body p, .legal-body li { font-size: 16.5px; color: var(--ink-2); line-height: 1.66; }
+  .legal-body p { margin-bottom: 14px; }
+  .legal-body ul { margin: 0 0 14px 1.1em; }
+  .legal-body li { margin-bottom: 7px; }
+  .legal-body a { color: var(--accent); border-bottom: 1px solid rgba(21,96,84,0.35); }
+  .legal-note { margin-top: 12px; padding: 16px 18px; border: 1px solid var(--rule); border-left: 2px solid var(--accent); border-radius: 4px; background: var(--card); font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="ebar">
+  <div class="ebar-in">
+    <a class="ebrand" href="Ephemerent.html">
+      <span class="brandcol">
+        <span class="nm">Ephemerent</span>
+        <span class="motto">Ephemeral · Emergent</span>
+      </span>
+    </a>
+    <nav class="enav">
+      <a href="Orrery.html">Orrery</a>
+      <a href="terms.html">Terms</a>
+      <a class="est-keep" href="Ephemerent.html">← Home</a>
+    </nav>
+  </div>
+</div>
+
+<main class="ewrap legal">
+  <div class="legal-head">
+    <span class="lbl">Legal</span>
+    <h1>Privacy Policy</h1>
+  </div>
+  <div class="legal-updated">Last updated: June 8, 2026 · Beta</div>
+
+  <div class="legal-body">
+    <p>Ephemerent builds Orrery, a local-first agentic code editor. This policy explains what we collect, why, and the choices you have. Orrery is in beta, so this policy may change as the product does — see “Changes” below.</p>
+
+    <h2>The short version</h2>
+    <p>Orrery runs on your machine. Your source code, repositories, prompts, and the work agents do stay on your device — we don’t receive or store them. The only data we hold is what’s needed to run an optional cloud account: your sign-in identity and a log of high-level actions you take.</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><b>Local mode (default):</b> nothing reaches us. An optional email/name you enter is stored only in your browser’s local storage to label your own activity log on that device.</li>
+      <li><b>Cloud account (optional):</b> if you sign in with Google, GitHub, or an email magic link, our authentication provider (Supabase) stores your account identifier, email address, and basic profile fields (display name, avatar URL) you choose to provide.</li>
+      <li><b>Activity logs (cloud only):</b> when signed in, we record high-level events — for example sign-in, requesting beta access, opening the editor, or starting a task — with a timestamp. These describe <i>that</i> an action happened, not the contents of your code.</li>
+    </ul>
+    <p class="legal-note">We never collect your source code, file contents, repository data, or model prompts/outputs. Those never leave your machine.</p>
+
+    <h2>How we use it</h2>
+    <ul>
+      <li>To sign you in and keep one identity across the website and editor.</li>
+      <li>To operate the closed beta — including a waitlist/approval flag that controls download access.</li>
+      <li>To understand product usage at a high level, debug issues, and prevent abuse.</li>
+    </ul>
+
+    <h2>Cookies and local storage</h2>
+    <p>The site itself sets no advertising or tracking cookies. We use your browser’s local storage for an optional local identity and audit buffer. If you use a cloud account, the authentication provider sets cookies/tokens needed to keep you signed in.</p>
+
+    <h2>Service providers</h2>
+    <p>We rely on a small number of processors to run the service:</p>
+    <ul>
+      <li><b>Supabase</b> — authentication and the database that stores your profile and activity logs.</li>
+      <li><b>Google and GitHub</b> — only if you choose them to sign in (OAuth).</li>
+      <li><b>Vercel</b> — hosting for this website; standard server logs may be generated.</li>
+    </ul>
+
+    <h2>Data retention</h2>
+    <p>We keep account and activity data while your account exists. Ask us to delete it at any time and we’ll remove your profile and associated logs.</p>
+
+    <h2>Your choices</h2>
+    <ul>
+      <li>Use Orrery entirely in local mode — no account, nothing sent to us.</li>
+      <li>Request a copy of, or deletion of, your account data by emailing us.</li>
+      <li>Clear your browser’s local storage to remove the local identity and audit buffer.</li>
+    </ul>
+
+    <h2>Children</h2>
+    <p>Orrery isn’t directed to children under 13 (or the minimum age in your region), and we don’t knowingly collect their data.</p>
+
+    <h2>Changes</h2>
+    <p>We’ll update this page when our practices change and revise the “last updated” date. Significant changes affecting cloud accounts will be communicated where practical.</p>
+
+    <h2>Contact</h2>
+    <p>Questions or requests: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>.</p>
+  </div>
+</main>
+
+<footer class="efoot">
+  <div class="ewrap">
+    <div class="efoot-base" style="border-top:1px solid var(--rule);padding-top:26px;">
+      <span>© 2026 Ephemerent · Independent</span>
+      <span><a href="terms.html" style="color:var(--accent);">Terms</a> · <a href="mailto:hello@ephemerent.com" style="color:var(--accent);">hello@ephemerent.com</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

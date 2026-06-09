@@ -162,8 +162,17 @@ export function mountNavIdentity(slotId = 'auth-nav-slot') {
 }
 
 export function mountDownloadPage() {
-  setupDownloadButton();
+  const released = cfg().RELEASE_AVAILABLE === true;
+  document.getElementById('release-block')?.classList.toggle('hidden', !released);
+  document.getElementById('beta-gate')?.classList.toggle('hidden', released);
+
+  if (released) {
+    setupDownloadButton();
+  } else {
+    void logActivity('beta.request_access_view');
+  }
+
   mountIdentityPanel();
   const identity = getIdentity();
-  if (identity?.email) void logActivity('site.download_page', { signed_in: true });
+  if (identity?.email) void logActivity('site.download_page', { signed_in: true, released });
 }

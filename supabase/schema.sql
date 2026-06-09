@@ -6,7 +6,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   email text,
   created_at timestamptz not null default now(),
-  download_approved boolean not null default true,
+  download_approved boolean not null default false,
   display_name text,
   avatar_url text,
   is_admin boolean not null default false
@@ -58,7 +58,8 @@ create policy "Admins read all activity"
     )
   );
 
--- Auto-create profile on signup (open beta: download_approved = true)
+-- Auto-create profile on signup (closed beta: download_approved = false;
+-- flip a user to true in Table Editor to grant the download)
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -69,7 +70,7 @@ begin
   values (
     new.id,
     new.email,
-    true
+    false
   );
   return new;
 end;

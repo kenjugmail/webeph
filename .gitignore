@@ -2,5 +2,5 @@
 .env.*
 !.env.example
 
-# Local Supabase overrides (optional; default config uses placeholders)
-# assets/supabase-config.js
+# Local Supabase overrides (safety net — never commit secrets)
+assets/supabase-config.js

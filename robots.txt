@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /cloud.html
+
+Sitemap: https://ephemerent.com/sitemap.xml

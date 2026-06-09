@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="'Space Grotesk','Hanken Grotesk',system-ui,sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="68%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#15151f"/>
+      <stop offset="100%" stop-color="#09090f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- orrery rings, right side -->
+  <g transform="translate(880,315)" fill="none" stroke="#33334a" stroke-width="2">
+    <circle r="230"/>
+    <circle r="160"/>
+    <circle r="95"/>
+  </g>
+  <g transform="translate(880,315)">
+    <circle r="16" fill="#e0a544"/>
+    <circle cx="0" cy="-230" r="9" fill="#2dd4bf"/>
+    <circle cx="160" cy="0" r="8" fill="#7c5cff"/>
+    <circle cx="-67" cy="67" r="7" fill="#5eead4"/>
+    <circle cx="0" cy="95" r="6" fill="#e0a544"/>
+  </g>
+
+  <!-- wordmark + tagline, left -->
+  <text x="90" y="250" fill="#f4f4f8" font-size="96" font-weight="700" letter-spacing="-2">Orrery</text>
+  <text x="92" y="320" fill="#cdd0d8" font-size="40" font-weight="500">Parallel agents you can see.</text>
+  <text x="92" y="372" fill="#8b8fa0" font-size="28" font-weight="500">Local-first agentic code editor.</text>
+
+  <line x1="92" y1="470" x2="430" y2="470" stroke="#2a2a3a" stroke-width="2"/>
+  <text x="92" y="512" fill="#8b8fa0" font-size="26" font-weight="500" letter-spacing="2">by EPHEMERENT</text>
+</svg>

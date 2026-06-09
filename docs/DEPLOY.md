@@ -52,11 +52,11 @@ Porkbun → domain → **DNS Records**. Use values from Vercel’s domain screen
 - Save and wait **10–30 minutes** for propagation
 - SSL is automatic on Vercel
 
-## 3. GitHub Pages (optional)
+## 3. GitHub Pages — removed
 
-This repo also has [.github/workflows/pages.yml](../.github/workflows/pages.yml) for `kenjugmail.github.io/webeph`.
-
-For production, use **ephemerent.com on Vercel only**. Disable GitHub Pages (repo **Settings → Pages → Source: None**) to avoid duplicate OAuth callback URLs.
+Production is **ephemerent.com on Vercel only**. The GitHub Pages workflow has been
+removed so there's a single origin (two live origins break Supabase OAuth callbacks).
+If Pages was ever enabled, also set repo **Settings → Pages → Source: None**.
 
 ## 4. OAuth after domain is live
 
@@ -69,6 +69,16 @@ https://www.ephemerent.com/**
 
 `assets/site-config.js` uses `window.location.origin` for redirects — no code change needed on the custom domain.
 
-## 5. Download bundle
+## 5. Download bundle (gated during beta)
 
-Publish a GitHub Release with `orrery-install.zip` so the download button works — see [releases/README.md](../releases/README.md).
+`assets/site-config.js` has `RELEASE_AVAILABLE: false`, so `download.html` shows a
+**"Request beta access"** state (sign in / email) instead of a download link.
+
+When the installer is ready:
+
+1. Build it from `buddyide` and publish a **GitHub Release** with `orrery-install.zip`
+   (see [releases/README.md](../releases/README.md)) — `DOWNLOAD_URL` already points at
+   `releases/latest/download/orrery-install.zip`.
+2. Set `RELEASE_AVAILABLE: true` in `assets/site-config.js` and push.
+3. Grant testers access: in Supabase Table Editor, flip `profiles.download_approved = true`
+   (new sign-ups default to `false` — a closed-beta waitlist).

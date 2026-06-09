@@ -17,16 +17,33 @@ See **[docs/CLOUD.md](docs/CLOUD.md)** for cloud setup and the phone/remote road
 ## Structure
 
 ```
-Orrery.html              Product page
-cloud.html               Cloud dashboard + sign-in
+index.html               Redirect → Ephemerent.html (the "/" landing)
+Ephemerent.html          Lab page (research, work, approach, 10% pledge)
+Orrery.html              Orrery product page
+Vellum.html              Vellum (3D) product page
+download.html            Download / beta-access gate (RELEASE_AVAILABLE flag)
 login.html               Local vs cloud sign-in
-download.html            Download bundle
+cloud.html               Cloud dashboard + sign-in
+privacy.html             Privacy Policy
+terms.html               Terms of Service
+robots.txt · sitemap.xml SEO
 assets/
-  site-config.js         Download URL, optional cloud auth keys
+  site-config.js         Download URL, RELEASE_AVAILABLE, optional cloud auth keys
   identity.js            Local optional email + audit
   cloud-auth.js          Cloud OAuth (when configured)
+  favicon.svg · og.svg   Brand icon + social card
 docs/CLOUD.md            Architecture: relay, phone, pairing
 ```
+
+## Beta status
+
+- **Download is gated.** `RELEASE_AVAILABLE: false` in `assets/site-config.js` →
+  `download.html` shows "request beta access". Flip to `true` once a GitHub Release with
+  `orrery-install.zip` is live (see [docs/DEPLOY.md](docs/DEPLOY.md)).
+- **Closed-beta waitlist.** New cloud sign-ups default to `download_approved = false`; grant
+  access per user in Supabase. Enable cloud by pasting your Supabase URL + anon key into
+  `site-config.js` (anon key only — see [docs/CLOUD.md](docs/CLOUD.md)).
+- **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
 
 ## Deploy (Vercel + ephemerent.com)
 

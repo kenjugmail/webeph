@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download Orrery</title>
+<title>Get Orrery — request beta access</title>
+<meta name="description" content="Request access to the Orrery private beta. Orrery is a local-first agentic code editor that runs on your machine.">
+<link rel="canonical" href="https://ephemerent.com/download.html">
+<meta name="theme-color" content="#0b0b12">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ephemerent">
+<meta property="og:title" content="Get Orrery — request beta access">
+<meta property="og:description" content="Request access to the Orrery private beta — a local-first agentic code editor.">
+<meta property="og:url" content="https://ephemerent.com/download.html">
+<meta property="og:image" content="https://ephemerent.com/assets/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og.svg">
 <link rel="stylesheet" href="assets/orrery.css">
 <link rel="stylesheet" href="assets/auth.css">
 </head>
@@ -28,23 +40,35 @@
 <main class="auth-main">
   <div class="auth-card" style="max-width:520px;">
     <h1>Get Orrery</h1>
-    <p class="sub">Download the install bundle. Email sign-in is optional — use it to tag audit logs if you want.</p>
 
-    <div id="cloud-signin-cta" class="hidden" style="margin-bottom:20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
-      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want one account across web, editor, and phone? Sign in with Google or GitHub.</p>
-      <a class="btn btn-primary" href="login.html" style="width:100%;justify-content:center;">Sign in</a>
+    <!-- Shown until the installer is published (RELEASE_AVAILABLE = false) -->
+    <div id="beta-gate">
+      <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
+      <p class="sub" style="margin-bottom:20px;">The Orrery installer isn’t public yet. Request access and we’ll email you when your build is ready — early testers get in first.</p>
+      <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Sign in with Google or GitHub to join the list, or email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
     </div>
 
-    <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download install bundle <span aria-hidden="true">↓</span></a>
-    <div class="download-steps">
-      <h3>Quick start</h3>
-      <ol>
-        <li>Unzip the bundle and open <code>INSTALL.md</code>.</li>
-        <li>Install Node 20+, pnpm, and (optional) Ollama for local models.</li>
-        <li>Run <code>start-orrery.ps1</code> (Windows) or <code>start-orrery.sh</code> (macOS/Linux).</li>
-        <li>Optionally identify with your email when the editor opens.</li>
-        <li>Open the printed URL — sidecar on <code>ws://127.0.0.1:4575</code>, web UI on port 5173.</li>
-      </ol>
+    <!-- Shown once RELEASE_AVAILABLE = true -->
+    <div id="release-block" class="hidden">
+      <p class="sub">Download the install bundle. Email sign-in is optional — use it to tag audit logs if you want.</p>
+
+      <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
+        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want one account across web, editor, and phone? Sign in with Google or GitHub.</p>
+        <a class="btn btn-primary" href="login.html" style="width:100%;justify-content:center;">Sign in</a>
+      </div>
+
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download install bundle <span aria-hidden="true">↓</span></a>
+      <div class="download-steps">
+        <h3>Quick start</h3>
+        <ol>
+          <li>Unzip the bundle and open <code>INSTALL.md</code>.</li>
+          <li>Install Node 20+, pnpm, and (optional) Ollama for local models.</li>
+          <li>Run <code>start-orrery.ps1</code> (Windows) or <code>start-orrery.sh</code> (macOS/Linux).</li>
+          <li>Optionally identify with your email when the editor opens.</li>
+          <li>Open the printed URL — sidecar on <code>ws://127.0.0.1:4575</code>, web UI on port 5173.</li>
+        </ol>
+      </div>
     </div>
 
     <div class="auth-optional" id="identity">
