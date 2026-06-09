@@ -154,3 +154,8 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 .rv { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease, ease), transform .8s cubic-bezier(.22,1,.36,1); }
 .rv.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce){ .rv { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+
+/* skip link + reduced motion for the decorative hero figure */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
+.skip-link:focus { left: 12px; top: 12px; padding: 10px 16px; background: var(--ink); color: var(--paper); border-radius: 4px; font-family: var(--mono); font-size: 13px; }
+@media (prefers-reduced-motion: reduce){ .ehero-fig canvas { display: none; } }

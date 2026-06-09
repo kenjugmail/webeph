@@ -286,3 +286,12 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
 .gap-8 { gap: 8px; } .gap-12 { gap: 12px; } .gap-16 { gap: 16px; } .gap-24 { gap: 24px; }
 .divider { height: 1px; background: var(--line); border: 0; }
 .glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+
+/* ============================================================
+   A11Y — skip link + reduced motion for decorative canvases
+   ============================================================ */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
+.skip-link:focus { left: 12px; top: 12px; width: auto; height: auto; padding: 10px 16px; background: var(--brass); color: #0b0b12; border-radius: var(--r-sm); font-family: var(--mono); font-size: 13px; outline: 2px solid var(--brass-lt); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-canvas, .start-canvas { display: none !important; }
+}

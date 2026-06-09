@@ -1,0 +1,12 @@
+{
+  "name": "Ephemerent — Orrery",
+  "short_name": "Ephemerent",
+  "description": "Local-first, verifiable multi-agent AI. Maker of Orrery, an agentic code editor where parallel agents work in plain sight.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b12",
+  "theme_color": "#0b0b12",
+  "icons": [
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
