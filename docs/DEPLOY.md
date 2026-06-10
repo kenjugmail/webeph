@@ -19,8 +19,10 @@ Verify:
 
 - `/` → Ephemerent lab page
 - `/Orrery.html` → product
+- `/Orrery.html#pricing` → Free and Pro pricing
 - `/download.html` → download
 - `/login.html` → sign-in
+- `/cloud.html` → cloud account, plan, and billing CTA
 
 ### CLI (optional)
 
@@ -69,7 +71,20 @@ https://www.ephemerent.com/**
 
 `assets/site-config.js` uses `window.location.origin` for redirects — no code change needed on the custom domain.
 
-## 5. Download bundle (gated during beta)
+## 5. Pricing / billing
+
+Free includes local Orrery only. Pro is `$40/month` and includes every cloud surface: Google/GitHub/email cloud sign-in, API cloud credits, Buddy, pairing/remote access, and cloud audit logs.
+
+Before taking payments:
+
+1. Create a Stripe Payment Link, Checkout Session endpoint, or equivalent merchant checkout for the Pro monthly plan.
+2. Paste that public checkout URL into `PRO_CHECKOUT_URL` in `assets/site-config.js`.
+3. Deploy a Stripe webhook or Supabase Edge Function that listens for checkout, renewal, cancellation, and failed-payment events.
+4. Have the webhook update `profiles.plan`, `profiles.subscription_status`, credit counters, `buddy_access`, and `billing_events`. Cloud auth identities should have no cloud entitlements until this happens.
+
+Do not put Stripe secret keys in this repository's static files.
+
+## 6. Download bundle (gated during beta)
 
 `assets/site-config.js` has `RELEASE_AVAILABLE: false`, so `download.html` shows a
 **"Request beta access"** state (sign in / email) instead of a download link.

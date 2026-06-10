@@ -1,29 +1,45 @@
-# Orrery Cloud — login, remote, phone
+# Orrery Pro Cloud — login, remote, phone
 
-Orrery is **local-first** by default. A **cloud account** is optional and unlocks cross-device features (like Cursor or Claude's web/mobile apps).
+Orrery is **local-first** by default. **All cloud features are paid Pro features**: cloud sign-in, hosted API credits, Buddy, pairing, remote access, and centralized logs.
 
 ## Two modes
 
-| | Local | Cloud account |
+| | Local | Pro cloud |
 |---|--------|----------------|
-| **Auth** | Optional email in browser (honor system) | Google / GitHub / email magic link |
+| **Auth** | Optional email in browser (honor system) | Paid Pro: Google / GitHub / email magic link |
 | **Access** | Desktop editor | Desktop + phone/browser (via relay) |
-| **Setup** | None | Free Supabase project (~15 min) |
+| **Pricing** | Free; all local features | Pro; all cloud features + API credits + Buddy, `$40/month` |
+| **Setup** | None | Supabase + billing webhook (~15 min) |
 | **Audit logs** | `localStorage` + optional webhook | Central `activity_logs` table |
 
-Local mode never goes away. Cloud is additive. Google/GitHub buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set.
+Local mode never goes away. Cloud is additive and paid. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant Pro before cloud entitlements are enabled.
 
 ## What cloud account enables
 
 **Today (when you configure auth):**
-- Verified identity across site, editor, and devices
-- Central audit log in Supabase
-- Cloud dashboard at `cloud.html`
+- Paid verified identity across site, editor, and devices
+- Paid central audit log in Supabase
+- Pro cloud dashboard at `cloud.html`
+- Plan state: Free or Pro, cloud credit counters, Buddy entitlement
+
+## Pricing model
+
+Free includes local Orrery features only: the desktop editor, local models, local audit logs, and checkpoints.
+
+Pro is `$40/month` and adds:
+
+- Google, GitHub, and email cloud sign-in
+- Included API cloud credits
+- Buddy system access
+- Cloud identity, pairing, remote access, and centralized audit logs
+- Billing/event records for Stripe or another merchant provider
+
+Payment collection is intentionally outside the static site. Put your Stripe Payment Link or hosted checkout URL in `PRO_CHECKOUT_URL`, and process Stripe webhooks with an Edge Function or server that updates `profiles.plan`, `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
 
 **Next (relay — not live yet):**
 - **Phone / browser remote** — approve tool requests, steer agents, read status from your phone
 - **Pairing** — desktop shows a code; phone links to your running sidecar through an authenticated relay
-- **Hosted sessions** — optional cloud sandboxes (Colony / E2B) for tasks you don't want on your laptop
+- **Hosted sessions** — Pro cloud sandboxes (Colony / E2B) for tasks you don't want on your laptop
 
 Architecture:
 
@@ -35,7 +51,7 @@ buddyide already has `remote-bridge.ts` — a safety allowlist for which command
 
 ## Setup overview
 
-Supabase is the **OAuth broker** — you do not run your own auth server. Google and GitHub talk to Supabase; Orrery talks to Supabase with the anon key.
+Supabase is the **OAuth broker** for Pro cloud — you do not run your own auth server. Google and GitHub talk to Supabase; Orrery talks to Supabase with the anon key. Billing still happens through Stripe or your merchant provider.
 
 1. Create a free project at [supabase.com](https://supabase.com).
 2. Run `supabase/schema.sql` in the SQL editor.
@@ -44,7 +60,7 @@ Supabase is the **OAuth broker** — you do not run your own auth server. Google
 5. Copy API keys into config files.
 6. Copy the same `CLOUD_AUTH_*` values to `buddyide/apps/web/public/orrery-config.js`.
 
-Set `profiles.is_admin = true` on your user to read all `activity_logs`.
+Set `profiles.is_admin = true` on your user to read all profiles, activity logs, and billing events.
 
 ---
 
@@ -126,7 +142,12 @@ Copy `assets/site-config.example.js` → `assets/site-config.js`:
 CLOUD_AUTH_URL: 'https://YOUR_PROJECT_REF.supabase.co',
 CLOUD_AUTH_KEY: 'your-anon-key',  // Project Settings → API → anon public
 AUTH_REDIRECT: window.location.origin + '/cloud.html',
+STRIPE_PUBLISHABLE_KEY: 'pk_test_...',
+STRIPE_PRODUCT_ID: 'prod_...',
+PRO_CHECKOUT_URL: 'https://buy.stripe.com/YOUR_PAYMENT_LINK',
 ```
+
+`STRIPE_PRODUCT_ID` is only a reference. The browser needs `PRO_CHECKOUT_URL` to be a real Stripe Payment Link URL, usually starting with `https://buy.stripe.com/`, before the Upgrade button can send users to checkout.
 
 Copy the same `CLOUD_AUTH_*` values to `buddyide/apps/web/public/orrery-config.js`:
 
@@ -184,7 +205,7 @@ pnpm dev
 
 `CLOUD_RELAY_URL` in config will point at a WebSocket relay (Fly.io / Cloudflare Workers). The desktop connector registers with a pairing code; your phone authenticates with the same cloud account JWT.
 
-Until the relay ships, sign in works and logs are central — remote/phone features show as "coming soon" on `cloud.html`.
+Until the relay ships, Pro sign-in works and logs are central — remote/phone features show as "coming soon" on `cloud.html`.
 
 ## Alternatives to Supabase
 

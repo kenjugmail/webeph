@@ -1,7 +1,7 @@
 # Optional: Supabase setup (not required)
 
-Orrery uses **email sign-in + local audit logs** by default — no Supabase account needed.
-Only follow this if you want managed OAuth (Google/GitHub) and a central Postgres audit table later.
+Orrery uses **local mode + local audit logs** by default — no Supabase account needed.
+Only follow this if you want paid Pro cloud: managed OAuth (Google/GitHub/email), cloud credits, Buddy entitlement, and a central Postgres audit table.
 
 # Supabase setup for Orrery sign-in + activity logs
 
@@ -14,7 +14,7 @@ Only follow this if you want managed OAuth (Google/GitHub) and a central Postgre
 
 SQL Editor → paste and run [`schema.sql`](./schema.sql).
 
-Creates `profiles`, `activity_logs`, and RLS policies. Set `profiles.is_admin = true` for your account to review all logs in the Table Editor.
+Creates `profiles`, `activity_logs`, `billing_events`, plan fields, cloud credit counters, and RLS policies. Set `profiles.is_admin = true` for your account to review profiles, logs, and billing events in the Table Editor.
 
 ## 3. Auth providers
 
@@ -50,14 +50,17 @@ The editor (`localhost:5173`) uses the same Supabase project so sign-in works in
 ## 5. Configure the static site
 
 ```powershell
-copy assets\supabase-config.example.js assets\supabase-config.js
+copy assets\site-config.example.js assets\site-config.js
 ```
 
-Edit `assets/supabase-config.js`:
+Edit `assets\site-config.js`:
 
-- `SUPABASE_URL` — project URL
-- `SUPABASE_ANON_KEY` — anon public key
+- `CLOUD_AUTH_URL` — project URL
+- `CLOUD_AUTH_KEY` — anon public key
 - `DOWNLOAD_URL` — GitHub Release zip URL
+- `STRIPE_PUBLISHABLE_KEY` — Stripe `pk_*` publishable key
+- `STRIPE_PRODUCT_ID` — optional Stripe `prod_*` product id for reference only
+- `PRO_CHECKOUT_URL` — Stripe Payment Link or hosted checkout URL for Pro at `$40/month`
 
 Copy the same values into buddyide `apps/web/public/orrery-config.js` (see INSTALL.md).
 
@@ -82,6 +85,26 @@ Review logs: Table Editor → `activity_logs`, or query as an admin (`is_admin =
 
 Set default in `handle_new_user()` to `download_approved = false`, or flip individual users in Table Editor → `profiles`.
 
-## 8. Service role key
+## 8. Plans / Pro access
+
+Free/local users do not need a Supabase row. Any cloud auth identity starts with `profiles.plan = 'free'`, `cloud_credit_granted_cents = 0`, and `buddy_access = false` until paid Pro billing grants cloud access.
+
+When a user upgrades to Pro, your Stripe webhook or admin process should set:
+
+```sql
+update public.profiles
+set
+  plan = 'pro',
+  subscription_status = 'active',
+  cloud_credit_granted_cents = 4000,
+  cloud_credit_used_cents = 0,
+  buddy_access = true,
+  plan_updated_at = now()
+where email = 'user@example.com';
+```
+
+Use `billing_events` to record checkout, renewal, cancellation, and credit grants.
+
+## 9. Service role key
 
 Keep **service_role** secret. Only use in Edge Functions or local admin scripts — never in `assets/` or `public/`.

@@ -195,6 +195,91 @@
   font-size: 14px;
 }
 
+.account-plan {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(45, 212, 191, 0.06), rgba(255,255,255,0.02));
+}
+
+.account-plan-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.account-plan-kicker {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.account-plan h2 {
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.account-plan p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+
+.plan-badge {
+  flex: none;
+  border: 1px solid rgba(45, 212, 191, 0.36);
+  border-radius: var(--r-sm);
+  color: var(--teal-lt);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  padding: 5px 9px;
+}
+
+.account-plan-meter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.account-plan-meter b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.account-plan-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.plan-note {
+  color: var(--faint);
+  font-size: 13px;
+}
+
 @media (max-width: 720px) {
   .auth-nav-slot .auth-chip { display: none; }
+  .auth-email-row,
+  .account-plan-head,
+  .account-plan-actions {
+    flex-direction: column;
+  }
+  .auth-email-row .btn,
+  .account-plan-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

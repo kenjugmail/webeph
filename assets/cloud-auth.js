@@ -1,4 +1,4 @@
-/** Cloud account — Supabase OAuth when CLOUD_AUTH_* is set in site-config.js. */
+/** Pro cloud account — Supabase OAuth when CLOUD_AUTH_* is set in site-config.js. */
 
 let client = null;
 
@@ -48,6 +48,95 @@ export async function getCloudSession() {
   if (!sb) return null;
   const { data } = await sb.auth.getSession();
   return data.session;
+}
+
+export function getPlanCatalog() {
+  const plans = cfg().PLANS || {};
+  return {
+    free: plans.free || {
+      name: 'Free',
+      price: '$0',
+      cadence: 'forever',
+      summary: 'All local Orrery features on your own machine. No cloud required.',
+      features: ['Local editor and agent workflow', 'Ollama/local models', 'Local audit log and checkpoints'],
+    },
+    pro: plans.pro || {
+      name: 'Pro',
+      price: '$40',
+      cadence: 'per month',
+      summary: 'Every cloud feature: Pro account, API cloud credits, and Buddy.',
+      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'Included API cloud credits', 'Buddy system access'],
+    },
+  };
+}
+
+export async function getCloudProfile() {
+  const sb = await getClient();
+  const session = await getCloudSession();
+  if (!sb || !session?.user) return null;
+
+  const { data, error } = await sb
+    .from('profiles')
+    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents,buddy_access')
+    .eq('id', session.user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.warn('cloud profile', error.message);
+    return {
+      id: session.user.id,
+      email: session.user.email,
+      plan: cfg().DEFAULT_PLAN || 'free',
+      subscription_status: 'inactive',
+      cloud_credit_granted_cents: 0,
+      cloud_credit_used_cents: 0,
+      buddy_access: false,
+    };
+  }
+  return data;
+}
+
+function moneyFromCents(cents) {
+  const amount = Number(cents || 0) / 100;
+  return amount.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+}
+
+function renderPlanSummary(root, profile) {
+  const slot = root.getElementById('cloud-plan-summary');
+  if (!slot) return;
+
+  const catalog = getPlanCatalog();
+  const planKey = profile?.plan === 'pro' ? 'pro' : 'free';
+  const plan = catalog[planKey];
+  const granted = Number(profile?.cloud_credit_granted_cents || 0);
+  const used = Number(profile?.cloud_credit_used_cents || 0);
+  const remaining = Math.max(granted - used, 0);
+  const checkout = cfg().PRO_CHECKOUT_URL;
+  const portal = cfg().BILLING_PORTAL_URL;
+
+  const action = planKey === 'pro'
+    ? (portal ? `<a class="btn btn-ghost" href="${portal}">Manage billing</a>` : '<span class="plan-note">Billing portal not connected yet.</span>')
+    : (checkout ? `<a class="btn btn-primary" href="${checkout}">Upgrade to Pro</a>` : '<a class="btn btn-primary" href="mailto:hello@ephemerent.com?subject=Orrery%20Pro%20access">Request Pro access</a>');
+
+  slot.innerHTML = `
+    <div class="account-plan-head">
+      <div>
+        <span class="mono account-plan-kicker">Current plan</span>
+        <h2>${plan.name}</h2>
+      </div>
+      <span class="plan-badge">${plan.price} ${plan.cadence}</span>
+    </div>
+    <p>${plan.summary}</p>
+    <div class="account-plan-meter">
+      <span>Pro cloud credits</span>
+      <b>${moneyFromCents(remaining)} remaining</b>
+    </div>
+    <div class="account-plan-meter">
+      <span>Buddy system</span>
+      <b>${profile?.buddy_access || planKey === 'pro' ? 'Enabled' : 'Pro'}</b>
+    </div>
+    <div class="account-plan-actions">${action}</div>
+  `;
 }
 
 /** Wait for session after OAuth/magic-link redirect (URL hash or ?code=). */
@@ -187,6 +276,7 @@ export async function mountCloudAccount(root = document) {
   const emailEl = root.getElementById('cloud-user-email');
   if (emailEl) emailEl.textContent = session.user.email || 'Account';
   void logCloudActivity('cloud.open');
+  getCloudProfile().then((profile) => renderPlanSummary(root, profile));
 
   root.getElementById('cloud-sign-out')?.addEventListener('click', () => signOutCloud());
   return session;

@@ -5,11 +5,12 @@ Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide) — sideca
 
 ## Two ways to use Orrery
 
-| | **Local** | **Cloud account** |
+| | **Local** | **Pro cloud** |
 |---|-----------|-------------------|
-| Setup | None | Free Supabase project (~5 min) |
-| Auth | Optional email on device | Google / GitHub / email |
+| Setup | None | Supabase + billing (~15 min) |
+| Auth | Optional email on device | Pro: Google / GitHub / email |
 | Access | Desktop editor | Desktop + phone (relay coming) |
+| Pricing | Free: all local features | Pro: all cloud features, API credits + Buddy, $40/month |
 | Like | Offline editor | Cursor / Claude web + mobile |
 
 See **[docs/CLOUD.md](docs/CLOUD.md)** for cloud setup and the phone/remote roadmap.
@@ -22,15 +23,15 @@ Ephemerent.html          Lab page (research, work, approach, 10% pledge)
 Orrery.html              Orrery product page
 Vellum.html              Vellum (3D) product page
 download.html            Download / beta-access gate (RELEASE_AVAILABLE flag)
-login.html               Local vs cloud sign-in
-cloud.html               Cloud dashboard + sign-in
+login.html               Local vs Pro cloud sign-in
+cloud.html               Pro cloud dashboard + sign-in
 privacy.html             Privacy Policy
 terms.html               Terms of Service
 robots.txt · sitemap.xml SEO
 assets/
-  site-config.js         Download URL, RELEASE_AVAILABLE, optional cloud auth keys
+  site-config.js         Download URL, RELEASE_AVAILABLE, Pro cloud auth keys
   identity.js            Local optional email + audit
-  cloud-auth.js          Cloud OAuth (when configured)
+  cloud-auth.js          Pro cloud OAuth (when configured)
   favicon.svg · og.svg   Brand icon + social card
 docs/CLOUD.md            Architecture: relay, phone, pairing
 ```
@@ -40,9 +41,13 @@ docs/CLOUD.md            Architecture: relay, phone, pairing
 - **Download is gated.** `RELEASE_AVAILABLE: false` in `assets/site-config.js` →
   `download.html` shows "request beta access". Flip to `true` once a GitHub Release with
   `orrery-install.zip` is live (see [docs/DEPLOY.md](docs/DEPLOY.md)).
-- **Closed-beta waitlist.** New cloud sign-ups default to `download_approved = false`; grant
-  access per user in Supabase. Enable cloud by pasting your Supabase URL + anon key into
-  `site-config.js` (anon key only — see [docs/CLOUD.md](docs/CLOUD.md)).
+- **Closed-beta waitlist.** New cloud auth identities default to local/free entitlements until
+  a Pro billing webhook or admin update grants paid cloud access. Enable Pro cloud by pasting
+  your Supabase URL + anon key into `site-config.js` (anon key only — see [docs/CLOUD.md](docs/CLOUD.md)).
+- **Pricing is configured in one public catalog.** `assets/site-config.js` defines Free
+  and Pro. Free includes local Orrery only. Pro is `$40/month` and owns every cloud
+  surface: cloud sign-in, API credits, Buddy, pairing, remote access, and cloud audit logs.
+  Add your Stripe Payment Link to `PRO_CHECKOUT_URL` when payments are live.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
 
 ## Deploy (Vercel + ephemerent.com)

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Ephemerent</title>
-<meta name="description" content="How Ephemerent handles data for Orrery: local-first by default, with an optional cloud account for sign-in and activity logs. Your code stays on your machine.">
+<meta name="description" content="How Ephemerent handles data for Orrery: local-first by default, with paid Pro cloud for sign-in, credits, Buddy, and activity logs. Your code stays on your machine.">
 <link rel="canonical" href="https://ephemerent.com/privacy.html">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f3f0e8">
@@ -48,19 +48,20 @@
     <span class="lbl">Legal</span>
     <h1>Privacy Policy</h1>
   </div>
-  <div class="legal-updated">Last updated: June 8, 2026 · Beta</div>
+  <div class="legal-updated">Last updated: June 10, 2026 · Beta</div>
 
   <div class="legal-body">
     <p>Ephemerent builds Orrery, a local-first agentic code editor. This policy explains what we collect, why, and the choices you have. Orrery is in beta, so this policy may change as the product does — see “Changes” below.</p>
 
     <h2>The short version</h2>
-    <p>Orrery runs on your machine. Your source code, repositories, prompts, and the work agents do stay on your device — we don’t receive or store them. The only data we hold is what’s needed to run an optional cloud account: your sign-in identity and a log of high-level actions you take.</p>
+    <p>Orrery runs on your machine. Your source code, repositories, prompts, and the work agents do stay on your device — we don’t receive or store them. The only data we hold is what’s needed to run paid Pro cloud: your sign-in identity, plan state, credit counters, Buddy entitlement, and high-level activity logs.</p>
 
     <h2>What we collect</h2>
     <ul>
       <li><b>Local mode (default):</b> nothing reaches us. An optional email/name you enter is stored only in your browser’s local storage to label your own activity log on that device.</li>
-      <li><b>Cloud account (optional):</b> if you sign in with Google, GitHub, or an email magic link, our authentication provider (Supabase) stores your account identifier, email address, and basic profile fields (display name, avatar URL) you choose to provide.</li>
+      <li><b>Pro cloud account:</b> if you sign in with Google, GitHub, or an email magic link for Pro cloud, our authentication provider (Supabase) stores your account identifier, email address, and basic profile fields (display name, avatar URL) you choose to provide.</li>
       <li><b>Activity logs (cloud only):</b> when signed in, we record high-level events — for example sign-in, requesting beta access, opening the editor, or starting a task — with a timestamp. These describe <i>that</i> an action happened, not the contents of your code.</li>
+      <li><b>Plan and billing state:</b> if you use Pro, we store your plan, subscription status, cloud credit counters, Buddy entitlement, and payment-provider identifiers needed to operate billing. Full payment details are handled by the payment provider, not by this static site.</li>
     </ul>
     <p class="legal-note">We never collect your source code, file contents, repository data, or model prompts/outputs. Those never leave your machine.</p>
 
@@ -72,13 +73,14 @@
     </ul>
 
     <h2>Cookies and local storage</h2>
-    <p>The site itself sets no advertising or tracking cookies. We use your browser’s local storage for an optional local identity and audit buffer. If you use a cloud account, the authentication provider sets cookies/tokens needed to keep you signed in.</p>
+    <p>The site itself sets no advertising or tracking cookies. We use your browser’s local storage for an optional local identity and audit buffer. If you use Pro cloud, the authentication provider sets cookies/tokens needed to keep you signed in.</p>
 
     <h2>Service providers</h2>
     <p>We rely on a small number of processors to run the service:</p>
     <ul>
       <li><b>Supabase</b> — authentication and the database that stores your profile and activity logs.</li>
       <li><b>Google and GitHub</b> — only if you choose them to sign in (OAuth).</li>
+      <li><b>Stripe or another payment provider</b> — only if you subscribe to Pro.</li>
       <li><b>Vercel</b> — hosting for this website; standard server logs may be generated.</li>
     </ul>
 

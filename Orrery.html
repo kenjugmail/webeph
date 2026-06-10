@@ -52,6 +52,7 @@
       <a href="#buddy">Buddy</a>
       <a href="#review">3D Review</a>
       <a href="#models">Models</a>
+      <a href="#pricing">Pricing</a>
       <a href="#architecture">Architecture</a>
     </div>
     <div class="nav-spacer"></div>
@@ -177,14 +178,14 @@
     <div class="models-grid">
       <div class="reveal">
         <div class="eyebrow">Model-agnostic</div>
-        <h2 class="display" style="margin:18px 0 22px;">Local or cloud.<br>Your pick.</h2>
-        <p class="lead" style="margin-bottom:28px;">Point at Ollama for local inference or bring your own keys for OpenAI, Gemini, DeepSeek, and Anthropic. One interface for the whole swarm — switch providers task by task.</p>
+        <h2 class="display" style="margin:18px 0 22px;">Local is free.<br>Cloud is Pro.</h2>
+        <p class="lead" style="margin-bottom:28px;">Point at Ollama for free local inference. Pro adds hosted cloud model access through the Orrery account, with included API credits and one interface for the whole swarm.</p>
         <div class="prov-table">
           <div class="prov-row"><span>Ollama</span><span class="mono">local</span><span class="muted">no key required</span></div>
-          <div class="prov-row"><span>OpenAI</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
-          <div class="prov-row"><span>Gemini</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
-          <div class="prov-row"><span>DeepSeek</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
-          <div class="prov-row"><span>Anthropic</span><span class="mono">cloud</span><span class="muted">your API key</span></div>
+          <div class="prov-row"><span>OpenAI</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
+          <div class="prov-row"><span>Gemini</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
+          <div class="prov-row"><span>DeepSeek</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
+          <div class="prov-row"><span>Anthropic</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
         </div>
       </div>
       <div class="reveal d1" id="develop">
@@ -227,6 +228,49 @@
   </div>
 </section>
 
+<!-- ============ PRICING ============ -->
+<section class="section pricing-section" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="display">Local is free. Cloud is Pro.</h2>
+      <p class="lead">Orrery stays local-first: the desktop editor, local models, local logs, and core workflow are free. Every cloud feature lives in Pro: sign-in, hosted model credits, Buddy, pairing, and cloud audit logs.</p>
+    </div>
+    <div class="pricing-grid reveal d1">
+      <div class="price-card">
+        <div class="price-top">
+          <span class="mono">Free</span>
+          <b>$0</b>
+          <small>forever</small>
+        </div>
+        <p>Everything you need to run Orrery on your own machine.</p>
+        <ul>
+          <li>All local editor features</li>
+          <li>Ollama and other local models</li>
+          <li>Local audit logs and checkpoints</li>
+        </ul>
+        <a class="btn btn-ghost" href="download.html">Get Free</a>
+      </div>
+      <div class="price-card price-card-pro">
+        <div class="price-top">
+          <span class="mono">Pro</span>
+          <b>$40</b>
+          <small>per month</small>
+        </div>
+        <p>Every cloud capability for heavier, guided work.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Google, GitHub, and email cloud sign-in</li>
+          <li>Included API cloud credits</li>
+          <li>Buddy system access</li>
+          <li>Pairing, remote access, and cloud audit logs</li>
+        </ul>
+        <a class="btn btn-primary" href="cloud.html">Start Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ ARCHITECTURE ============ -->
 <section class="section arch-section" id="architecture">
   <div class="wrap">
@@ -251,7 +295,7 @@
         <div class="pkg"><b>Orchestrator</b><span>Splits work, runs agents, merges winners.</span></div>
         <div class="pkg"><b>3D layer</b><span>Builds and checks shaders, parts and scenes.</span></div>
         <div class="pkg"><b>The buddy</b><span>A separate model that narrates the work.</span></div>
-        <div class="pkg"><b>Model providers</b><span>Local and cloud, behind one interface.</span></div>
+        <div class="pkg"><b>Model providers</b><span>Local free, Pro cloud, behind one interface.</span></div>
         <div class="pkg"><b>Search &amp; voice</b><span>Codebase search, memory and live voice.</span></div>
       </div>
       <div class="card card-pad arch-col reveal d2">
@@ -278,7 +322,7 @@
       <p class="lead" style="margin:0 auto 32px;text-align:center;">Get Orrery, pick a model, and give it your first goal.</p>
       <div class="hero-cta center" style="justify-content:center;">
         <a class="btn btn-primary" href="download.html">Download <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="login.html">Sign in with Google or GitHub</a>
+        <a class="btn btn-ghost" href="cloud.html">Pro cloud sign in</a>
       </div>
     </div>
   </div>
@@ -300,8 +344,8 @@
         </a>
         <p class="muted" style="font-size:14px;max-width:32ch;">Parallel agents you can see. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h5>Product</h5><ul><li><a href="#orchestrator">Orchestrator</a></li><li><a href="#buddy">Buddy</a></li><li><a href="#review">3D Review</a></li><li><a href="#models">Models</a></li></ul></div>
-      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li></ul></div>
+      <div><h5>Product</h5><ul><li><a href="#orchestrator">Orchestrator</a></li><li><a href="#buddy">Buddy</a></li><li><a href="#review">3D Review</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="cloud.html">Pro $40/month</a></li></ul></div>
       <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Vellum.html">Vellum</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
@@ -420,6 +464,29 @@
 .prov-row:last-child { border-bottom: 0; }
 .prov-row span:first-child { color: var(--ink); }
 .prov-row .mono { font-size: 12.5px; color: var(--violet-lt); }
+
+.pricing-section { border-top: 1px solid var(--line); background: rgba(255,255,255,0.015); }
+.pricing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.price-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: linear-gradient(180deg, var(--panel), var(--bg-2));
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+.price-card-pro { border-color: rgba(45,212,191,0.42); box-shadow: 0 0 50px rgba(45,212,191,0.12); }
+.price-top { display: grid; gap: 4px; margin-bottom: 18px; }
+.price-top span { color: var(--teal-lt); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.price-top b { font-family: var(--display); font-size: clamp(42px, 5vw, 62px); line-height: 1; letter-spacing: 0; }
+.price-top small { color: var(--faint); font-family: var(--mono); font-size: 12px; }
+.price-card p { color: var(--ink-2); font-size: 16px; line-height: 1.55; margin-bottom: 22px; }
+.price-card ul { list-style: none; display: grid; gap: 10px; margin-bottom: 28px; color: var(--muted); font-size: 15px; }
+.price-card li { display: flex; gap: 9px; align-items: baseline; }
+.price-card li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 10px rgba(45,212,191,0.6); flex: none; transform: translateY(-1px); }
+.price-card .btn { margin-top: auto; justify-content: center; }
+@media (max-width: 880px){ .pricing-grid { grid-template-columns: 1fr; } }
 
 .terminal { border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; background: #08080f; box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
 .term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }

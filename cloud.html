@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orrery Cloud</title>
-<meta name="description" content="Your Orrery cloud account — synced identity, pairing, and central audit logs.">
+<title>Orrery Pro Cloud</title>
+<meta name="description" content="Orrery Pro cloud account — paid Google, GitHub, email sign-in, cloud credits, pairing, Buddy, and central audit logs.">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -31,23 +31,36 @@
 
 <main class="auth-main">
   <div class="auth-card" style="max-width:560px;">
-    <h1>Orrery Cloud</h1>
-    <p class="sub">Sign in with Google, GitHub, or email for cross-device features — remote sessions, phone approvals, central audit logs. No cloud account required to download or get started.</p>
+    <h1>Orrery Pro Cloud</h1>
+    <p class="sub">All cloud features are Pro. Sign in with Google, GitHub, or email for paid cloud access, API credits, Buddy, pairing, and central audit logs. Free is local-only.</p>
 
     <div class="cloud-features">
-      <div class="cloud-feat"><b>☁ Synced identity</b><span>One account across web, editor, and phone.</span></div>
-      <div class="cloud-feat"><b>📱 Phone access</b><span>Approve tools and steer agents from your phone <em>(relay coming)</em>.</span></div>
-      <div class="cloud-feat"><b>🔗 Pair desktop</b><span>Link your running sidecar with a short code <em>(relay coming)</em>.</span></div>
-      <div class="cloud-feat"><b>📋 Audit log</b><span>Who ran what — central table when auth is configured.</span></div>
+      <div class="cloud-feat"><b>Pro cloud sign-in</b><span>Google, GitHub, and email accounts are part of Pro.</span></div>
+      <div class="cloud-feat"><b>Pro cloud credits</b><span>Use included API credits for hosted model calls.</span></div>
+      <div class="cloud-feat"><b>Buddy system</b><span>Guided, narrated work sessions for Pro accounts.</span></div>
+      <div class="cloud-feat"><b>Cloud audit log</b><span>Central history is included with Pro cloud.</span></div>
+    </div>
+
+    <div class="mini-pricing">
+      <div class="mini-plan">
+        <span class="mono">Free</span>
+        <b>$0</b>
+        <p>Local editor, local models, and local logs only.</p>
+      </div>
+      <div class="mini-plan mini-plan-pro">
+        <span class="mono">Pro</span>
+        <b>$40/month</b>
+        <p>All cloud features: sign-in, API credits, Buddy, and audit logs.</p>
+      </div>
     </div>
 
     <div id="cloud-auth-setup" class="hidden auth-optional">
-      <p class="auth-msg" style="color:var(--muted);">Cloud auth isn't configured yet. Follow <a href="docs/CLOUD.md">docs/CLOUD.md</a> — free Supabase project, ~5 minutes. Local download and editor work without it.</p>
+      <p class="auth-msg" style="color:var(--muted);">Pro cloud auth isn't configured yet. Follow <a href="docs/CLOUD.md">docs/CLOUD.md</a> to connect Supabase and billing. Local download and editor work without it.</p>
       <a class="btn btn-ghost" href="download.html" style="width:100%;justify-content:center;margin-top:12px;">Download for local use</a>
     </div>
 
     <div id="cloud-auth-panel" class="auth-optional">
-      <div class="auth-optional-head"><h2>Sign in</h2></div>
+      <div class="auth-optional-head"><h2>Pro sign in</h2></div>
       <div class="auth-stack">
         <button type="button" class="btn btn-oauth btn-google" id="cloud-google">Continue with Google</button>
         <button type="button" class="btn btn-oauth btn-github" id="cloud-github">Continue with GitHub</button>
@@ -62,6 +75,15 @@
 
     <div id="cloud-signed-in" class="hidden">
       <p class="mono" style="font-size:12px;color:var(--teal);margin-bottom:20px;">Signed in as <span id="cloud-user-email"></span></p>
+
+      <div class="auth-optional account-plan" id="cloud-plan-summary">
+        <div class="account-plan-head">
+          <div>
+            <span class="mono account-plan-kicker">Current plan</span>
+            <h2>Loading</h2>
+          </div>
+        </div>
+      </div>
 
       <div class="auth-optional" id="pairing-section">
         <div class="auth-optional-head">
@@ -80,12 +102,18 @@
 </main>
 
 <style>
-.cloud-features { display: grid; gap: 12px; margin-bottom: 28px; }
+.cloud-features { display: grid; gap: 12px; margin-bottom: 20px; }
 .cloud-feat { padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--bg-2); }
 .cloud-feat b { display: block; font-size: 14px; margin-bottom: 4px; color: var(--ink-2); }
 .cloud-feat span { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .cloud-feat em { color: var(--faint); font-style: normal; }
 .pair-code { font-family: var(--mono); font-size: 28px; letter-spacing: 0.35em; text-align: center; padding: 16px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); color: var(--teal-lt); }
+.mini-pricing { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 26px; }
+.mini-plan { border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(255,255,255,0.02); padding:14px; }
+.mini-plan span { color:var(--faint); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+.mini-plan b { display:block; margin:5px 0 6px; font-size:20px; color:var(--ink); }
+.mini-plan p { margin:0; color:var(--muted); font-size:13px; line-height:1.45; }
+.mini-plan-pro { border-color:rgba(45,212,191,0.35); background:rgba(45,212,191,0.05); }
 </style>
 
 <script src="assets/site-config.js"></script>

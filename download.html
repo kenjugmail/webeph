@@ -50,8 +50,12 @@
     <div id="beta-gate">
       <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
       <p class="sub" style="margin-bottom:20px;">The Orrery installer isn’t public yet. Request access and we’ll email you when your build is ready — early testers get in first.</p>
+      <div class="plan-strip">
+        <div><b>Free</b><span>All local Orrery features.</span></div>
+        <div><b>Pro $40/month</b><span>All cloud features, credits, and Buddy.</span></div>
+      </div>
       <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Sign in with Google or GitHub to join the list, or email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Use local access for Free, or sign in after Pro purchase for cloud. For beta access, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
     </div>
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
@@ -59,11 +63,15 @@
       <p class="sub">Download the install bundle. Email sign-in is optional — use it to tag audit logs if you want.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
-        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want one account across web, editor, and phone? Sign in with Google or GitHub.</p>
-        <a class="btn btn-primary" href="login.html" style="width:100%;justify-content:center;">Sign in</a>
+        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want cloud sign-in, credits, Buddy, and phone access? Use Pro cloud.</p>
+        <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download install bundle <span aria-hidden="true">↓</span></a>
+      <div class="plan-strip">
+        <div><b>Free</b><span>All local Orrery features.</span></div>
+        <div><b>Pro $40/month</b><span>All cloud features, credits, and Buddy.</span></div>
+      </div>
       <div class="download-steps">
         <h3>Quick start</h3>
         <ol>
@@ -97,6 +105,14 @@
     </div>
   </div>
 </main>
+
+<style>
+.plan-strip { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px; }
+.plan-strip div { border:1px solid var(--line); border-radius:var(--r-sm); padding:12px; background:var(--bg-2); }
+.plan-strip b { display:block; font-family:var(--display); font-size:15px; color:var(--ink); margin-bottom:3px; }
+.plan-strip span { display:block; color:var(--muted); font-size:13px; line-height:1.4; }
+@media (max-width:560px){ .plan-strip { grid-template-columns:1fr; } }
+</style>
 
 <script src="assets/site-config.js"></script>
 <script type="module">
