@@ -6,9 +6,9 @@
    ============================================================ */
 (function () {
   const TASKS = [
-    { id: 'T1', name: 'parser: add splat intake', model: 'claude', n: 3 },
+    { id: 'T1', name: 'parser: add splat intake', model: 'anthropic', n: 3 },
     { id: 'T2', name: 'spatial: AABB collision',  model: 'qwen·local', n: 3 },
-    { id: 'T3', name: 'shader: write & validate',  model: 'gpt', n: 3 },
+    { id: 'T3', name: 'shader: write & validate',  model: 'openai', n: 3 },
     { id: 'T4', name: 'tests: regression suite',   model: 'deepseek', n: 2 },
   ];
 

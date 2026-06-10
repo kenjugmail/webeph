@@ -11,7 +11,7 @@ Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide) — sideca
 | Auth | Optional email on device | Pro: Google / GitHub / email |
 | Access | Desktop editor | Desktop + phone (relay coming) |
 | Pricing | Free: all local features | Pro: all cloud features, API credits + Buddy, $40/month |
-| Like | Offline editor | Cursor / Claude web + mobile |
+| Think of it as | An offline desktop editor | An agentic IDE you can reach from desktop + phone |
 
 See **[docs/CLOUD.md](docs/CLOUD.md)** for cloud setup and the phone/remote roadmap.
 
