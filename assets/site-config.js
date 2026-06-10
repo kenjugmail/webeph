@@ -56,6 +56,8 @@ window.ORRERY_CONFIG = {
   STRIPE_PUBLISHABLE_KEY: 'pk_test_51Tgrc7DqjlIgVstfpP5de2QVIEnPAMVv2sFDPIfaenIRKwEbGR4ALJ5juD2Yv1hujvidNj3z2r7u4TG4D7cRBv6f00dfihJF1n',
   STRIPE_PRODUCT_ID: 'prod_UgEDipbYTZzLYb',
   PRO_CHECKOUT_URL: 'https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00',
+  MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
+  ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',
   BILLING_PORTAL_URL: '',
 
   /** Future — WebSocket relay for phone/remote. Leave empty until deployed. */

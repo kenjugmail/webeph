@@ -1,5 +1,16 @@
 /** Pro cloud account — Supabase OAuth when CLOUD_AUTH_* is set in site-config.js. */
 
+import {
+  PLAN_ORDER,
+  PLAN_LABELS,
+  PLAN_PRICES,
+  BUNDLED_QUOTAS,
+  planFromCloudProfile,
+  isPaidPlan,
+  checkoutUrlForTier,
+  formatTokens,
+} from './accountPlan.js';
+
 let client = null;
 
 function cfg() {
@@ -64,8 +75,22 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Every cloud feature: Pro account, API cloud credits, and Buddy.',
-      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'Included API cloud credits', 'Buddy system access'],
+      summary: 'Every cloud feature plus bundled models: 100M DeepSeek Flash + 15M DeepSeek V4 Pro tokens/month, and bring your own API key.',
+      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'DeepSeek Flash — 100M tokens/month', 'DeepSeek V4 Pro — 15M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+    },
+    max: plans.max || {
+      name: 'Max',
+      price: '$100',
+      cadence: 'per month',
+      summary: 'Everything in Pro with bigger bundled quotas: 400M DeepSeek Flash + 50M DeepSeek V4 Pro tokens/month, and bring your own API key.',
+      features: ['Everything in Pro', 'DeepSeek Flash — 400M tokens/month', 'DeepSeek V4 Pro — 50M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+    },
+    ultra: plans.ultra || {
+      name: 'Ultra',
+      price: '$200',
+      cadence: 'per month',
+      summary: 'The biggest bundled quotas: 1B DeepSeek Flash + 150M DeepSeek V4 Pro tokens/month, and bring your own API key.',
+      features: ['Everything in Pro', 'DeepSeek Flash — 1B tokens/month', 'DeepSeek V4 Pro — 150M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
     },
   };
 }
@@ -106,17 +131,39 @@ function renderPlanSummary(root, profile) {
   if (!slot) return;
 
   const catalog = getPlanCatalog();
-  const planKey = profile?.plan === 'pro' ? 'pro' : 'free';
-  const plan = catalog[planKey];
+  const planKey = planFromCloudProfile(profile);
+  const plan = catalog[planKey] || catalog.free;
   const granted = Number(profile?.cloud_credit_granted_cents || 0);
   const used = Number(profile?.cloud_credit_used_cents || 0);
   const remaining = Math.max(granted - used, 0);
-  const checkout = cfg().PRO_CHECKOUT_URL;
   const portal = cfg().BILLING_PORTAL_URL;
+  const paid = isPaidPlan(planKey);
 
-  const action = planKey === 'pro'
-    ? (portal ? `<a class="btn btn-ghost" href="${portal}">Manage billing</a>` : '<span class="plan-note">Billing portal not connected yet.</span>')
-    : (checkout ? `<a class="btn btn-primary" href="${checkout}">Upgrade to Pro</a>` : '<a class="btn btn-primary" href="mailto:hello@ephemerent.com?subject=Orrery%20Pro%20access">Request Pro access</a>');
+  // Static monthly allowances for the bundled models — the live usage meter lives in the IDE.
+  const quotas = BUNDLED_QUOTAS[planKey];
+  const quotaRows = quotas
+    ? Object.entries(quotas).map(([model, tokens]) => `
+    <div class="account-plan-meter">
+      <span>${model}</span>
+      <b>${formatTokens(tokens)} tokens / month</b>
+    </div>`).join('')
+    : '';
+
+  // Upgrade buttons for every tier above the current one; manage billing once paid.
+  const higherTiers = PLAN_ORDER.slice(PLAN_ORDER.indexOf(planKey) + 1);
+  const upgrades = higherTiers.map((tier) => {
+    const url = checkoutUrlForTier(tier, cfg());
+    const label = `Upgrade to ${PLAN_LABELS[tier]} — $${PLAN_PRICES[tier]}/mo`;
+    const cls = tier === higherTiers[0] ? 'btn btn-primary' : 'btn btn-ghost';
+    return url
+      ? `<a class="${cls}" href="${url}">${label}</a>`
+      : `<a class="${cls}" href="mailto:hello@ephemerent.com?subject=Orrery%20${PLAN_LABELS[tier]}%20access">${label}</a>`;
+  });
+  if (paid) {
+    upgrades.push(portal
+      ? `<a class="btn btn-ghost" href="${portal}">Manage billing</a>`
+      : '<span class="plan-note">Billing portal not connected yet.</span>');
+  }
 
   slot.innerHTML = `
     <div class="account-plan-head">
@@ -127,15 +174,20 @@ function renderPlanSummary(root, profile) {
       <span class="plan-badge">${plan.price} ${plan.cadence}</span>
     </div>
     <p>${plan.summary}</p>
+    ${quotaRows}
     <div class="account-plan-meter">
-      <span>Pro cloud credits</span>
+      <span>Cloud credits</span>
       <b>${moneyFromCents(remaining)} remaining</b>
     </div>
     <div class="account-plan-meter">
       <span>Buddy system</span>
-      <b>${profile?.buddy_access || planKey === 'pro' ? 'Enabled' : 'Pro'}</b>
+      <b>${profile?.buddy_access || paid ? 'Enabled' : 'Paid tiers'}</b>
     </div>
-    <div class="account-plan-actions">${action}</div>
+    <div class="account-plan-meter">
+      <span>Bring your own API key</span>
+      <b>${paid ? 'Enabled' : 'Paid tiers'}</b>
+    </div>
+    <div class="account-plan-actions">${upgrades.join('')}</div>
   `;
 }
 

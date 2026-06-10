@@ -85,11 +85,23 @@ Review logs: Table Editor → `activity_logs`, or query as an admin (`is_admin =
 
 Set default in `handle_new_user()` to `download_approved = false`, or flip individual users in Table Editor → `profiles`.
 
-## 8. Plans / Pro access
+## 8. Plans / paid tiers
 
-Free/local users do not need a Supabase row. Any cloud auth identity starts with `profiles.plan = 'free'`, `cloud_credit_granted_cents = 0`, and `buddy_access = false` until paid Pro billing grants cloud access.
+Free/local users do not need a Supabase row. Any cloud auth identity starts with `profiles.plan = 'free'`, `cloud_credit_granted_cents = 0`, and `buddy_access = false` until paid billing grants cloud access.
 
-When a user upgrades to Pro, your Stripe webhook or admin process should set:
+There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, BuddyIDE Pro features, BYOK, and bundled DeepSeek model token quotas (see `docs/CLOUD.md`).
+
+**Migration for existing deployments** — projects created before the max/ultra tiers
+have a check constraint that only allows `'free'`/`'pro'`. Widen it once in the SQL editor
+(re-running the current `schema.sql` does the same thing):
+
+```sql
+alter table public.profiles drop constraint if exists profiles_plan_check;
+alter table public.profiles
+  add constraint profiles_plan_check check (plan in ('free', 'pro', 'max', 'ultra'));
+```
+
+When a user purchases a paid tier, your Stripe webhook or admin process should set (replace `'pro'` with `'max'` or `'ultra'` as appropriate):
 
 ```sql
 update public.profiles

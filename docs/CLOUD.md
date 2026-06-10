@@ -8,7 +8,7 @@ Orrery is **local-first** by default. **All cloud features are paid Pro features
 |---|--------|----------------|
 | **Auth** | Optional email in browser (honor system) | Paid Pro: Google / GitHub / email magic link |
 | **Access** | Desktop editor | Desktop + phone/browser (via relay) |
-| **Pricing** | Free; all local features | Pro; all cloud features + API credits + Buddy, `$40/month` |
+| **Pricing** | Free; all local features | Pro `$40` / Max `$100` / Ultra `$200` per month; all cloud features, bundled model quotas, BYOK, Buddy |
 | **Setup** | None | Supabase + billing webhook (~15 min) |
 | **Audit logs** | `localStorage` + optional webhook | Central `activity_logs` table |
 
@@ -20,21 +20,23 @@ Local mode never goes away. Cloud is additive and paid. Google/GitHub/email butt
 - Paid verified identity across site, editor, and devices
 - Paid central audit log in Supabase
 - Pro cloud dashboard at `cloud.html`
-- Plan state: Free or Pro, cloud credit counters, Buddy entitlement
+- Plan state: Free, Pro, Max, or Ultra — bundled-model quotas, cloud credit counters, Buddy entitlement
 
 ## Pricing model
 
 Free includes local Orrery features only: the desktop editor, local models, local audit logs, and checkpoints.
 
-Pro is `$40/month` and adds:
+There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), the BuddyIDE Pro features (buddy narrator, cloud models, API providers), bring-your-own-key (Anthropic, OpenAI, …), and two bundled models with monthly token quotas:
 
-- Google, GitHub, and email cloud sign-in
-- Included API cloud credits
-- Buddy system access
-- Cloud identity, pairing, remote access, and centralized audit logs
-- Billing/event records for Stripe or another merchant provider
+| Tier | Price | DeepSeek Flash | DeepSeek V4 Pro |
+|------|-------|----------------|-----------------|
+| **Pro** | `$40/month` | 100M tokens/mo | 15M tokens/mo |
+| **Max** | `$100/month` | 400M tokens/mo | 50M tokens/mo |
+| **Ultra** | `$200/month` | 1B tokens/mo | 150M tokens/mo |
 
-Payment collection is intentionally outside the static site. Put your Stripe Payment Link or hosted checkout URL in `PRO_CHECKOUT_URL`, and process Stripe webhooks with an Edge Function or server that updates `profiles.plan`, `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
+All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances — live usage metering lives in the IDE.
+
+Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
 
 **Next (relay — not live yet):**
 - **Phone / browser remote** — approve tool requests, steer agents, read status from your phone

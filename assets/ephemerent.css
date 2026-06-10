@@ -130,6 +130,8 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 .eprin p { font-size: 14.5px; color: var(--muted); line-height: 1.6; }
 @media (max-width: 760px){ .eprin { grid-template-columns: 1fr; } .eprin > div { border-right: 0; margin-right: 0; padding: 24px 0; border-bottom: 1px solid var(--rule); } .eprin > div:last-child { border-bottom: 0; } }
 
+.ework-pricing { margin-top: 22px; font-size: 14.5px; color: var(--muted); line-height: 1.6; }
+
 /* ---------- links ---------- */
 .elink { color: var(--accent); border-bottom: 1px solid rgba(21,96,84,0.35); transition: border-color .2s; }
 .elink:hover { border-color: var(--accent); }

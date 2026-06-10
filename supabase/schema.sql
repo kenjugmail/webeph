@@ -30,17 +30,12 @@ alter table public.profiles add column if not exists cloud_credit_used_cents int
 alter table public.profiles add column if not exists buddy_access boolean not null default false;
 alter table public.profiles add column if not exists plan_updated_at timestamptz not null default now();
 
-do $$
-begin
-  if not exists (
-    select 1 from pg_constraint
-    where conname = 'profiles_plan_check'
-      and conrelid = 'public.profiles'::regclass
-  ) then
-    alter table public.profiles
-      add constraint profiles_plan_check check (plan in ('free', 'pro'));
-  end if;
-end $$;
+-- Plan tiers: free plus the paid pro/max/ultra subscriptions. Existing deployments
+-- created with the old ('free','pro') constraint must run the migration snippet
+-- in supabase/SETUP.md (drop + re-add) — the drop below makes a re-run idempotent.
+alter table public.profiles drop constraint if exists profiles_plan_check;
+alter table public.profiles
+  add constraint profiles_plan_check check (plan in ('free', 'pro', 'max', 'ultra'));
 
 alter table public.profiles enable row level security;
 

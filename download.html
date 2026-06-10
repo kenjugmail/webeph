@@ -51,11 +51,12 @@
       <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
       <p class="sub" style="margin-bottom:20px;">The Orrery installer isn’t public yet. Request access and we’ll email you when your build is ready — early testers get in first.</p>
       <div class="plan-strip">
-        <div><b>Free</b><span>All local Orrery features.</span></div>
-        <div><b>Pro $40/month</b><span>All cloud features, credits, and Buddy.</span></div>
+        <div><b>Free</b><span>All local Orrery features — local mode needs no account.</span></div>
+        <div><b>Pro $40 · Max $100 · Ultra $200 /mo</b><span>Cloud sign-in, bundled DeepSeek quotas, BYOK, and Buddy.</span></div>
       </div>
+      <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
       <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Use local access for Free, or sign in after Pro purchase for cloud. For beta access, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Free users can use local mode without an account, or sign in after purchasing a paid tier for cloud. For beta access, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
     </div>
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
@@ -69,8 +70,8 @@
 
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download install bundle <span aria-hidden="true">↓</span></a>
       <div class="plan-strip">
-        <div><b>Free</b><span>All local Orrery features.</span></div>
-        <div><b>Pro $40/month</b><span>All cloud features, credits, and Buddy.</span></div>
+        <div><b>Free</b><span>All local Orrery features — local mode needs no account.</span></div>
+        <div><b>Pro $40 · Max $100 · Ultra $200 /mo</b><span>Cloud sign-in, bundled DeepSeek quotas, BYOK, and Buddy.</span></div>
       </div>
       <div class="download-steps">
         <h3>Quick start</h3>
@@ -118,10 +119,39 @@
 <script type="module">
   import { mountDownloadPage } from './assets/identity.js';
   import { mountNavAccount } from './assets/account.js';
-  import { cloudConfigured } from './assets/cloud-auth.js';
+  import { cloudConfigured, getCloudProfile } from './assets/cloud-auth.js';
+  import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES } from './assets/accountPlan.js';
   mountDownloadPage();
   mountNavAccount();
-  if (cloudConfigured()) document.getElementById('cloud-signin-cta')?.classList.remove('hidden');
+  if (cloudConfigured()) {
+    document.getElementById('cloud-signin-cta')?.classList.remove('hidden');
+
+    // Paid tiers (cloud-signed-in) see beta/download access as already entitled.
+    // The local/free path above is untouched — local mode needs no account.
+    getCloudProfile().then((profile) => {
+      const plan = planFromCloudProfile(profile);
+      if (!isPaidPlan(plan)) return;
+      const tierLabel = `${PLAN_LABELS[plan]} ($${PLAN_PRICES[plan]}/mo)`;
+
+      const entitled = document.getElementById('beta-entitled');
+      if (entitled) {
+        entitled.textContent = `Beta access is included with your ${tierLabel} plan — no request needed. We'll email your build; manage everything from the cloud dashboard.`;
+        entitled.classList.remove('hidden');
+      }
+      const request = document.getElementById('beta-request');
+      if (request) {
+        request.href = 'cloud.html';
+        request.innerHTML = 'Open your cloud dashboard <span aria-hidden="true">→</span>';
+      }
+      const cta = document.getElementById('cloud-signin-cta');
+      if (cta) {
+        cta.innerHTML = `
+          <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Your ${tierLabel} plan is active — cloud sign-in, bundled model quotas, BYOK, and Buddy are enabled.</p>
+          <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open cloud dashboard</a>
+        `;
+      }
+    }).catch(() => {});
+  }
 </script>
 </body>
 </html>
