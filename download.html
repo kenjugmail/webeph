@@ -61,14 +61,14 @@
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the install bundle. Email sign-in is optional — use it to tag audit logs if you want.</p>
+      <p class="sub">Download the Windows installer. Local mode needs no account; sign in to unlock the paid cloud features.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want cloud sign-in, credits, Buddy, and phone access? Use Pro cloud.</p>
         <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download install bundle <span aria-hidden="true">↓</span></a>
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
       <div class="plan-strip">
         <div><b>Free</b><span>All local Orrery features — local mode needs no account.</span></div>
         <div><b>Pro $40 · Max $100 · Ultra $200 /mo</b><span>Cloud sign-in, bundled DeepSeek quotas, BYOK, and Buddy.</span></div>
@@ -76,11 +76,11 @@
       <div class="download-steps">
         <h3>Quick start</h3>
         <ol>
-          <li>Unzip the bundle and open <code>INSTALL.md</code>.</li>
-          <li>Install Node 20+, pnpm, and (optional) Ollama for local models.</li>
-          <li>Run <code>start-orrery.ps1</code> (Windows) or <code>start-orrery.sh</code> (macOS/Linux).</li>
-          <li>Optionally identify with your email when the editor opens.</li>
-          <li>Open the printed URL — sidecar on <code>ws://127.0.0.1:4575</code>, web UI on port 5173.</li>
+          <li>Run the installer. This beta build is unsigned, so Windows SmartScreen may warn — choose <b>More info → Run anyway</b>.</li>
+          <li>Orrery opens the Agents window with a seeded sandbox workspace — no other installs required.</li>
+          <li>Optional, for free local models: install <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> and pull a model.</li>
+          <li>Or sign in from Settings → Account and subscribe — bundled DeepSeek Flash / V4 Pro work with zero setup.</li>
+          <li>Prefer a portable build? Grab <code>Orrery-0.1.0-win.zip</code> from the <a href="https://github.com/kenjugmail/webeph/releases/latest" target="_blank" rel="noopener">release page</a>.</li>
         </ol>
       </div>
     </div>
