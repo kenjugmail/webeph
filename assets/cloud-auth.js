@@ -31,7 +31,7 @@ function hasAuthCallbackInUrl() {
 /** OAuth/magic-link return URL — current auth page when possible, else config default. */
 export function getAuthRedirect() {
   const path = location.pathname;
-  if (path.endsWith('login.html') || path.endsWith('cloud.html')) {
+  if (path.endsWith('login.html') || path.endsWith('cloud.html') || path.endsWith('vellum-connect.html')) {
     return location.origin + path;
   }
   const explicit = cfg().AUTH_REDIRECT;

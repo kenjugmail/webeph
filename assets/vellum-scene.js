@@ -188,8 +188,6 @@
       stats.textContent = `${Math.min(120, Math.round(fps))} fps · 6 draws · 312 tris`;
       pxEl.textContent = a.x.toFixed(1); pyEl.textContent = '0.0'; pzEl.textContent = a.z.toFixed(1);
       ryEl.textContent = Math.round((a.head * 180 / Math.PI + 360) % 360);
-
-      requestAnimationFrame(frame);
     }
     function seg(p, q, yaw, pitch, col, al) {
       const a = proj(p, yaw, pitch), b = proj(q, yaw, pitch);
@@ -247,7 +245,7 @@
     }
     proveBtn.addEventListener('click', runPlaytest);
 
-    frame(performance.now());
+    window.V3.visLoop(stage, frame);
     runPlaytest();
   }
 

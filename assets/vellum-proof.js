@@ -199,7 +199,7 @@
     function frame(now) {
       const t = (now - t0) / 1000;
       ctx.clearRect(0, 0, W, H);
-      if (!geo) { requestAnimationFrame(frame); return; }
+      if (!geo) { return; }
       const yaw = reduce ? 0.6 : t * 0.4;
       const pitch = -0.5 + Math.sin(t * 0.4) * 0.06;
 
@@ -223,8 +223,6 @@
       ctx.shadowColor = `rgba(${COL.hot},0.8)`; ctx.shadowBlur = 12;
       ctx.beginPath(); ctx.moveTo(cx - R * 1.9, scanY); ctx.lineTo(cx + R * 1.9, scanY); ctx.stroke();
       ctx.restore();
-
-      requestAnimationFrame(frame);
     }
 
     function drawGrid(yaw, pitch) {
@@ -278,7 +276,7 @@
     });
 
     setArtifact('part');
-    frame(performance.now());
+    window.V3.visLoop(stage, frame);
   }
 
   window.mountProofBench = mountProofBench;

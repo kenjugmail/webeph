@@ -137,8 +137,6 @@
       ctx.textAlign = 'left';
       ctx.fillText('verify ·', rx + mx + 8, scanY + 3);
       ctx.restore();
-
-      requestAnimationFrame(frame);
     }
 
     function drawGrid(yaw, pitch) {
@@ -203,7 +201,7 @@
     window.addEventListener('resize', resize);
     if (window.ResizeObserver) { new ResizeObserver(resize).observe(canvas); }
     resize();
-    frame(performance.now());
+    window.V3.visLoop(canvas, frame);
   }
 
   window.mountVellumHero = mountVellumHero;

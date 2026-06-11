@@ -99,6 +99,7 @@
       <a href="#pipeline">Pipeline</a>
       <a href="#renderers">Renderers</a>
       <a href="#architecture">Architecture</a>
+      <a href="#pricing">Pricing</a>
     </div>
     <div class="nav-spacer"></div>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
@@ -327,6 +328,62 @@
   </div>
 </section>
 
+<!-- ============ PRICING ============ -->
+<section class="section pricing-section" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="display">One subscription. Both apps.</h2>
+      <p class="lead">Vellum's editor, engine and proof kernel are free to run locally — no account needed. A single Ephemerent subscription unlocks cloud agents in Vellum <em>and</em> the Orrery IDE together: same sign-in, same bundled DeepSeek models, one shared monthly token quota metered server-side.</p>
+    </div>
+    <p class="auth-msg ok hidden" id="pricing-active-note" style="margin-bottom:18px;"></p>
+    <div class="price-grid reveal d1">
+      <div class="price-card">
+        <h3>Free</h3>
+        <div class="price-amt">$0<span> forever</span></div>
+        <ul>
+          <li>Full local editor, engine and play mode</li>
+          <li>Renderer-neutral proof kernel, CLI and CI gate</li>
+          <li>Local agent runs with deterministic tools</li>
+        </ul>
+        <a class="btn btn-ghost" href="login.html">Get started</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <div class="price-amt">$40<span> /month</span></div>
+        <ul>
+          <li>Cloud agents in Vellum + Orrery</li>
+          <li>DeepSeek Flash — 100M tokens/mo</li>
+          <li>DeepSeek V4 Pro — 15M tokens/mo</li>
+          <li>Bring your own API key (Anthropic, OpenAI, …)</li>
+        </ul>
+        <a class="btn btn-primary" href="https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00">Subscribe</a>
+      </div>
+      <div class="price-card">
+        <h3>Max</h3>
+        <div class="price-amt">$100<span> /month</span></div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>DeepSeek Flash — 400M tokens/mo</li>
+          <li>DeepSeek V4 Pro — 50M tokens/mo</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02">Subscribe</a>
+      </div>
+      <div class="price-card">
+        <h3>Ultra</h3>
+        <div class="price-amt">$200<span> /month</span></div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>DeepSeek Flash — 1B tokens/mo</li>
+          <li>DeepSeek V4 Pro — 150M tokens/mo</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Subscribe</a>
+      </div>
+    </div>
+    <p class="plan-fineprint mono reveal d2">Quotas are shared across Orrery and Vellum and auto-renew monthly via Stripe; cancel anytime. Bundled-model prompts are proxied to DeepSeek. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>. Already subscribed? <a href="vellum-connect.html">Connect Vellum to your account →</a></p>
+  </div>
+</section>
+
 <!-- ============ CTA ============ -->
 <section class="section start-section" id="start">
   <canvas id="ctaCanvas" class="start-canvas" aria-hidden="true"></canvas>
@@ -355,9 +412,9 @@
         </a>
         <p class="muted" style="font-size:14px;max-width:34ch;">3D work that proves itself — renderer-neutral and headless. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h5>Product</h5><ul><li><a href="#proof">Proof bench</a></li><li><a href="#review">Before / after</a></li><li><a href="#pipeline">Pipeline</a></li><li><a href="#renderers">Renderers</a></li></ul></div>
-      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Orrery.html">Orrery</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
+      <div><h5>Product</h5><ul><li><a href="#proof">Proof bench</a></li><li><a href="#review">Before / after</a></li><li><a href="#pipeline">Pipeline</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h5>Get started</h5><ul><li><a href="download.html">Download Orrery</a></li><li><a href="vellum-connect.html">Connect Vellum</a></li><li><a href="login.html">Sign in</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Orrery.html">Orrery</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -370,7 +427,21 @@
 <script src="assets/site-config.js"></script>
 <script type="module">
   import { mountNavAccount } from './assets/account.js';
+  import { cloudConfigured, getCloudProfile } from './assets/cloud-auth.js';
+  import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES } from './assets/accountPlan.js';
   mountNavAccount();
+  // Paid subscribers see their plan acknowledged instead of a cold sell.
+  if (cloudConfigured()) {
+    getCloudProfile().then((profile) => {
+      const plan = planFromCloudProfile(profile);
+      if (!isPaidPlan(plan)) return;
+      const note = document.getElementById('pricing-active-note');
+      if (note) {
+        note.innerHTML = `Your ${PLAN_LABELS[plan]} plan ($${PLAN_PRICES[plan]}/mo) is active — it covers Vellum too. <a href="vellum-connect.html" style="color:var(--teal-lt);">Connect Vellum →</a>`;
+        note.classList.remove('hidden');
+      }
+    }).catch(() => {});
+  }
 </script>
 <script src="assets/vellum-3d.js"></script>
 <script src="assets/vellum-hero.js"></script>
@@ -585,6 +656,23 @@
 .pkg:last-child { border-bottom: 0; }
 .pkg b { font-family: var(--mono); font-size: 13.5px; color: var(--ink); font-weight: 500; }
 .pkg span { font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+/* pricing */
+.pricing-section { border-top: 1px solid var(--line); background: rgba(0,0,0,0.14); }
+.price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
+@media (max-width: 1020px){ .price-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px){ .price-grid { grid-template-columns: 1fr; } }
+.price-card { display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 22px; background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
+.price-card.featured { border-color: color-mix(in srgb, var(--teal) 45%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--teal) 25%, transparent), 0 18px 50px rgba(0,0,0,0.35); }
+.price-card h3 { font-family: var(--display); font-size: 19px; }
+.price-amt { font-family: var(--display); font-size: 34px; font-weight: 700; }
+.price-amt span { font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 400; }
+.price-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.price-card li { font-size: 13.5px; color: var(--ink-2); line-height: 1.45; padding-left: 18px; position: relative; }
+.price-card li::before { content: '✓'; position: absolute; left: 0; color: var(--teal-lt); font-size: 12px; }
+.price-card .btn { justify-content: center; }
+.plan-fineprint { margin-top: 20px; font-size: 11.5px; line-height: 1.6; color: var(--faint); }
+.plan-fineprint a { color: var(--teal-lt); }
 
 .start-section { position: relative; overflow: hidden; text-align: center; }
 .start-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.6; }

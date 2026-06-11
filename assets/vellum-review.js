@@ -29,7 +29,7 @@
       vec2 uv = (gl_FragCoord.xy - 0.5*uRes)/min(uRes.x,uRes.y);
       float t = uTime*0.12;
       bool after = uMode > 0.5;
-      float oct = after ? 6.0 : 2.0;
+      float oct = after ? 4.0 : 2.0;
       // domain warp
       vec2 q = vec2(fbm(uv*2.0 + t, oct), fbm(uv*2.0 - t + 5.2, oct));
       vec2 r = vec2(fbm(uv*2.0 + 1.7*q + t*0.5, oct), fbm(uv*2.0 + 1.7*q + 9.1, oct));
@@ -130,7 +130,9 @@
 
     function size() {
       const r = stage.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // 1.5 DPR cap: the FBM shader's cost scales with pixels and the warped-noise look
+      // hides the difference; this halves fragment work on high-DPI displays.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       [before, after].forEach(c => { c.width = r.width * dpr; c.height = r.height * dpr; });
       if (glB) { glB.gl.viewport(0,0,before.width,before.height); }
       if (glA) { glA.gl.viewport(0,0,after.width,after.height); }
@@ -138,15 +140,14 @@
     size();
     window.addEventListener('resize', size);
 
-    let t0 = performance.now(), raf;
+    let t0 = performance.now();
     function draw(now) {
       const t = (now - t0) / 1000;
       // base = AFTER (good/uMode 1); overlay = BEFORE (banded/uMode 0)
       if (glA) { glA.gl.uniform2f(glA.uRes, after.width, after.height); glA.gl.uniform1f(glA.uTime, t); glA.gl.uniform1f(glA.uMode, 1.0); glA.gl.drawArrays(glA.gl.TRIANGLES, 0, 3); }
       if (glB) { glB.gl.uniform2f(glB.uRes, before.width, before.height); glB.gl.uniform1f(glB.uTime, t); glB.gl.uniform1f(glB.uMode, 0.0); glB.gl.drawArrays(glB.gl.TRIANGLES, 0, 3); }
-      raf = requestAnimationFrame(draw);
     }
-    if (glB || glA) draw(performance.now());
+    if (glB || glA) window.V3.visLoop(stage, draw);
     else stage.classList.add('no-webgl');
 
     // ---- slider / verdict ----

@@ -153,5 +153,38 @@
     return V3.boxEdges((mn[0] + mx[0]) / 2, (mn[1] + mx[1]) / 2, (mn[2] + mx[2]) / 2, mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]);
   };
 
+  // ---- visibility-gated render loop ----
+  // Runs draw(now) via requestAnimationFrame only while `el` is on screen, so a page
+  // full of demo canvases costs nothing once scrolled past (the source of the old lag).
+  // With prefers-reduced-motion the scene is drawn once, static, when it first appears.
+  V3.visLoop = function (el, draw) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let visible = false, raf = 0;
+    function tick(now) {
+      raf = 0;
+      if (!visible) return;
+      draw(now);
+      raf = requestAnimationFrame(tick);
+    }
+    function start() {
+      if (reduce) { draw(performance.now()); return; }
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+    function stop() {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    }
+    if (!('IntersectionObserver' in window)) {
+      visible = true; start();
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        visible = entry.isIntersecting;
+        if (visible) start(); else stop();
+      }
+    }, { rootMargin: '120px' });
+    io.observe(el);
+  };
+
   window.V3 = V3;
 })();
