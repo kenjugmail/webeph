@@ -1,10 +1,51 @@
 <!DOCTYPE html>
+<!--
+  ============================================================================
+  TERMS OF SERVICE — operator notes (internal; not shown to users)
+  ============================================================================
+  This is an honest, plain-language baseline for a beta paid launch. It is NOT
+  legal advice and was not written by a lawyer. Before scaling, have a lawyer
+  review at minimum:
+
+    1. GOVERNING LAW + JURISDICTION/VENUE. Currently a [PLACEHOLDER] — set the
+       state/country whose law governs and where disputes are heard. Consider
+       whether you want an arbitration clause / class-action waiver.
+    2. COMPANY LEGAL ENTITY. "Ephemerent" is used as a trade name. Insert the
+       registered entity at [PLACEHOLDER: LEGAL ENTITY].
+    3. REFUND SPECIFICS. We state a default (no refunds for partial periods;
+       cancel-anytime, access through end of paid period; 14-day "didn't work"
+       discretionary window). Confirm this is what you want and that it meets
+       consumer-protection law in your markets — note the EU/UK distance-selling
+       right of withdrawal can require refunds for digital services unless the
+       customer waives it, which you must surface at checkout. Align this page
+       with what Stripe Checkout actually presents.
+    4. AUTO-RENEWAL DISCLOSURES. Several jurisdictions (e.g. California ARL,
+       EU) mandate specific pre-purchase and renewal-reminder disclosures for
+       recurring subscriptions. Confirm Stripe + your emails satisfy these.
+    5. LIMITATION OF LIABILITY CAP + consumer-law carve-outs. The cap and the
+       "as is" disclaimer may be limited by mandatory consumer rights in some
+       jurisdictions; have counsel confirm enforceability and wording.
+    6. The agentic-tool risk language (the agent runs commands and edits files
+       on the user's machine at their direction). Confirm this is sufficient
+       to allocate that risk to the user in your jurisdiction.
+    7. DPA / data-processing terms with Stripe, Supabase, and DeepSeek for EU
+       customers (see privacy.html notes).
+    8. Exact tier names, prices, and bundled-model token quotas must stay in
+       sync with site-config.js, Orrery.html, and cloud.html. Update all when
+       pricing changes.
+
+  PLACEHOLDERS TO FILL before public launch:
+    [PLACEHOLDER: LEGAL ENTITY]          — registered company name.
+    [PLACEHOLDER: GOVERNING JURISDICTION] — governing law + venue.
+    Contact email: hello@ephemerent.com (site-wide address).
+  ============================================================================
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service — Ephemerent</title>
-<meta name="description" content="The terms for using Orrery and the Ephemerent website during the beta: accounts, acceptable use, intellectual property, and disclaimers.">
+<meta name="description" content="The terms for using Orrery: subscription tiers and billing, cancellation and refunds, acceptable use, the agentic-tool risk you accept, intellectual property, and disclaimers.">
 <link rel="canonical" href="https://ephemerent.com/terms.html">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f3f0e8">
@@ -48,54 +89,69 @@
     <span class="lbl">Legal</span>
     <h1>Terms of Service</h1>
   </div>
-  <div class="legal-updated">Last updated: June 10, 2026 · Beta</div>
+  <div class="legal-updated">Last updated: June 11, 2026 · Beta</div>
 
   <div class="legal-body">
-    <p>These terms govern your use of the Ephemerent website and the Orrery software (“the Service”). By using the Service you agree to them. Orrery is in beta — read the disclaimers below carefully.</p>
+    <p>These terms govern your use of the Ephemerent website and the Orrery software, including its free local mode and the paid subscription tiers (together, “the Service”). The Service is operated by <b>[PLACEHOLDER: LEGAL ENTITY]</b> (trading as “Ephemerent,” “we,” “us”). By installing, using, or subscribing to the Service you agree to these terms. Orrery is in beta — read the disclaimers below carefully.</p>
 
     <h2>Beta software</h2>
-    <p>Orrery is pre-release. It may be incomplete, change without notice, contain bugs, or be unavailable at times. Features described on this site may ship later or change. Don’t rely on the beta for anything critical.</p>
+    <p>Orrery is pre-release. It may be incomplete, change without notice, contain bugs, or be unavailable at times. The current desktop builds may be unsigned, so your operating system may warn before installing. Features described on this site may ship later or change. Don’t rely on the beta for anything critical, and keep your own backups.</p>
 
     <h2>Accounts</h2>
-    <p>Local Orrery use does not require a cloud account. Cloud accounts are part of Orrery Pro. If you create one, keep your sign-in secure and give accurate information. You’re responsible for activity under your account. Beta access may be gated by a waitlist and granted at our discretion.</p>
+    <p>Free local use does not require an account. Signing in (with Google, GitHub, or email) is required for the paid tiers. If you create an account, keep your sign-in secure, give accurate information, and don’t share your account. You’re responsible for all activity under your account.</p>
 
-    <h2>Plans and billing</h2>
-    <p>Orrery's Free plan includes local use of the desktop editor and local-first workflow. Orrery Pro is a paid plan at $40/month that includes all cloud features: cloud sign-in, API cloud credits, Buddy system access, pairing/remote access, and cloud audit logs. Paid features, included credits, and beta limits may change as the product evolves. Payments are processed by a third-party payment provider; do not send payment information directly by email.</p>
+    <h2>Subscriptions, tiers, and what’s included</h2>
+    <p>Orrery’s <b>Free</b> plan includes the local desktop editor, local models (e.g. via Ollama), and the local-first workflow — at no cost, with nothing required from a server. The paid tiers are monthly recurring subscriptions:</p>
+    <ul>
+      <li><b>Pro — $40/month:</b> cloud sign-in, bring-your-own-key for other providers, and bundled models with monthly token quotas (currently DeepSeek Flash 100M tokens/mo and DeepSeek V4 Pro 15M tokens/mo).</li>
+      <li><b>Max — $100/month:</b> everything in Pro with larger bundled quotas (currently DeepSeek Flash 400M tokens/mo and DeepSeek V4 Pro 50M tokens/mo).</li>
+      <li><b>Ultra — $200/month:</b> everything in Pro with the largest bundled quotas (currently DeepSeek Flash 1B tokens/mo and DeepSeek V4 Pro 150M tokens/mo).</li>
+    </ul>
+    <p>Bundled-model usage is metered in tokens and counts against your tier’s monthly quota. <b>Quotas reset at the start of each monthly billing period and do not roll over.</b> Bundled models run through our relay to a third-party inference provider (DeepSeek) — see the <a href="privacy.html">Privacy Policy</a> for how that data is handled. Bringing your own API key for other providers is subject to those providers’ terms and pricing, which you pay directly. Prices are in US dollars and exclude any taxes that may apply. Tiers, prices, and quotas may change as the product evolves; changes won’t affect your current paid period.</p>
+
+    <h2>Billing and auto-renewal</h2>
+    <p>Payments are processed by <b>Stripe</b>; we don’t receive or store your full card details. Paid tiers bill in advance and <b>renew automatically each month</b> at the then-current price for your tier until you cancel. By subscribing you authorize us, through Stripe, to charge your payment method on each renewal. If a charge fails, we may retry and may suspend paid features until payment succeeds. Do not send payment information by email.</p>
+
+    <h2>Cancellation</h2>
+    <p>You can cancel at any time — from your account/billing settings (Stripe customer portal) or by emailing <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>. When you cancel, your subscription stops renewing and you keep access to your paid tier through the <b>end of the period you’ve already paid for</b>; after that you revert to the Free local plan. Canceling does not retroactively refund the current period.</p>
+
+    <h2>Refunds</h2>
+    <p>Paid tiers are billed monthly in advance. <b>We do not provide refunds or credits for partial months, unused token quota, or time remaining after you cancel</b> — cancellation simply stops future renewals. As a goodwill exception during the beta, if the Service was materially unusable for you, you may request a refund within <b>14 days</b> of a charge by emailing <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>; we’ll review these case by case. Nothing here limits any non-waivable refund or withdrawal rights you have under the consumer law of your country.</p>
 
     <h2>Acceptable use</h2>
     <ul>
-      <li>Don’t use the Service to break the law or infringe others’ rights.</li>
-      <li>Don’t attempt to disrupt, overload, reverse-engineer, or gain unauthorized access to the Service or its infrastructure.</li>
-      <li>Don’t use it to generate or distribute malware or content that violates others’ rights.</li>
-      <li>You’re responsible for the code you write and run with Orrery, including anything agents do on your machine at your direction.</li>
+      <li>Don’t use the Service to break the law, infringe others’ rights, or generate or distribute malware or harmful content.</li>
+      <li>Don’t attempt to disrupt, overload, circumvent quotas/billing, reverse-engineer, resell, or gain unauthorized access to the Service or its infrastructure or the bundled-model relay.</li>
+      <li>Don’t use the bundled models in violation of the underlying provider’s (DeepSeek’s) acceptable-use terms.</li>
+      <li>You are responsible for the code you write and run with Orrery — <b>including anything the agent does on your machine at your direction</b>: editing or deleting files, running shell commands, installing dependencies, and calling external tools. Review what the agent proposes, and run it only on systems and data you’re willing to put at risk.</li>
     </ul>
 
     <h2>Your code and content</h2>
-    <p>You keep all rights to your own code, repositories, and content. Orrery runs locally and we don’t take ownership of, or a license to, your work. You’re responsible for reviewing changes that agents propose before you accept them.</p>
+    <p>You keep all rights to your own code, repositories, prompts, and content (“Your Content”). We claim no ownership of Your Content. You grant us only the limited, temporary license needed to operate the Service you request — for example, transmitting a prompt and its context through our relay to the bundled-model provider so a completion can be generated and returned to you. We don’t use Your Content to train our own models. <b>You’re responsible for reviewing and testing any changes the agent proposes before you accept, run, or ship them.</b></p>
 
     <h2>Our intellectual property</h2>
-    <p>Orrery, the Ephemerent name, and the website are owned by Ephemerent. Orrery is not open source; the beta is licensed to you for personal evaluation only, and we grant no other rights except as stated here.</p>
+    <p>Orrery, the Ephemerent and Orrery names, and this website are owned by <b>[PLACEHOLDER: LEGAL ENTITY]</b>. Orrery is not open source; it is licensed to you for your own use under these terms, and we grant no other rights except as stated here. Outputs generated by the models for you are yours to use, subject to the underlying model providers’ terms.</p>
 
     <h2>Third-party services</h2>
-    <p>Orrery can connect to model providers and tools you choose (for example local models via Ollama, or cloud providers with your own API keys). Your use of those is governed by their terms, and any keys you supply are yours to manage.</p>
+    <p>The Service relies on third parties — Stripe (payments), Supabase (auth/data), DeepSeek (bundled-model inference via our relay), and OAuth providers (Google, GitHub) — and Orrery can also connect to providers and tools you choose (local models via Ollama, or cloud providers with your own API keys). Your use of those is governed by their terms, and any API keys you supply are yours to manage. We aren’t responsible for third-party services’ availability, output, or acts.</p>
 
     <h2>Disclaimer of warranties</h2>
-    <p class="legal-note">The Service is provided “as is” and “as available,” without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. AI-generated code may be incorrect — review and test everything before relying on it.</p>
+    <p class="legal-note">The Service is provided “as is” and “as available,” without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. <b>AI-generated code and other agent output may be incorrect, insecure, or harmful, and the agent can modify files and execute commands on your machine — review and test everything before relying on it.</b> We don’t warrant that the Service will be uninterrupted, error-free, or that bundled-model providers will remain available.</p>
 
     <h2>Limitation of liability</h2>
-    <p>To the maximum extent permitted by law, Ephemerent is not liable for indirect, incidental, special, or consequential damages, or for lost data, profits, or business, arising from your use of the Service.</p>
+    <p>To the maximum extent permitted by law, [PLACEHOLDER: LEGAL ENTITY] and its operators are not liable for any indirect, incidental, special, consequential, or punitive damages, or for lost data, profits, business, or for damage to your files, systems, or data caused by code or commands the agent runs at your direction. To the maximum extent permitted by law, our total aggregate liability arising out of or relating to the Service is limited to the amount you paid us for the Service in the three (3) months before the event giving rise to the claim. Some jurisdictions don’t allow certain limitations, so parts of this may not apply to you.</p>
 
     <h2>Termination</h2>
-    <p>You may stop using the Service at any time. We may suspend or end access — particularly during beta — if these terms are breached or to protect the Service.</p>
+    <p>You may stop using the Service at any time and cancel any subscription as described above. We may suspend or end access — particularly during beta — if these terms are breached, to protect the Service or other users, or if required by law. If we terminate your paid account other than for breach, we’ll refund any prepaid, unused period on a pro-rata basis.</p>
 
-    <h2>Changes</h2>
-    <p>We may update these terms as the product evolves and will revise the “last updated” date. Continued use after changes means you accept them.</p>
+    <h2>Changes to these terms</h2>
+    <p>We may update these terms as the product evolves and will revise the “last updated” date. For material changes affecting paid accounts, we’ll give notice where practical. Continued use after changes take effect means you accept them.</p>
 
     <h2>Governing law</h2>
-    <p>These terms are governed by the laws of the jurisdiction in which Ephemerent operates. <i>[Set your governing jurisdiction here before public launch.]</i></p>
+    <p>These terms are governed by the laws of <b>[PLACEHOLDER: GOVERNING JURISDICTION]</b>, without regard to conflict-of-laws rules, and the courts of that jurisdiction will have venue over disputes, except where mandatory local consumer law gives you other rights. <i>(Operator: set the governing law, venue, and any dispute-resolution/arbitration terms with counsel before public launch.)</i></p>
 
     <h2>Contact</h2>
-    <p>Questions: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>.</p>
+    <p>Questions, cancellation, or refund requests: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>.</p>
   </div>
 </main>
 

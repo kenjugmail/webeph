@@ -1,10 +1,46 @@
 <!DOCTYPE html>
+<!--
+  ============================================================================
+  PRIVACY POLICY — operator notes (internal; not shown to users)
+  ============================================================================
+  This is an honest, plain-language baseline for a beta paid launch. It is NOT
+  legal advice and was not written by a lawyer. Before scaling (and ideally
+  before charging EU/UK/California customers), have a lawyer review:
+
+    1. Company legal entity + registered address. Currently "Ephemerent"
+       appears as a trade name only — see [PLACEHOLDER: LEGAL ENTITY] below.
+    2. The exact DeepSeek data-processing terms. This policy states the
+       app's actual relay behavior (prompts/code are proxied to DeepSeek to
+       generate completions, and not retained by us beyond what the proxy
+       needs). CONFIRM what DeepSeek itself retains/trains on under your API
+       agreement and disclose it accurately. DeepSeek's inference may run on
+       infrastructure outside the user's country — confirm and disclose the
+       region if required (relevant to EU/UK transfer rules / SCCs).
+    3. GDPR/UK-GDPR roles: are you a "controller" for account data and to what
+       extent for prompt content proxied to DeepSeek? You likely need a DPA
+       with Supabase, Stripe, and DeepSeek, and may need to be reachable as a
+       controller for data-subject requests within statutory deadlines.
+    4. CCPA/CPRA "do not sell/share" — confirmed not applicable as written
+       (no sale of personal info), but confirm before launch in California.
+    5. International data transfers / hosting regions for Supabase + Vercel.
+    6. Lawful basis + retention periods (currently described qualitatively;
+       set concrete retention windows if your jurisdiction requires them).
+    7. Children's age threshold per target market (13 / 16).
+    8. A dedicated privacy contact / DPO if your volume requires one.
+
+  PLACEHOLDERS TO FILL before public launch:
+    [PLACEHOLDER: LEGAL ENTITY]  — registered company name + jurisdiction +
+                                   address. Replace every occurrence.
+    Privacy contact email: currently hello@ephemerent.com (site-wide address).
+      Consider a dedicated privacy@ alias.
+  ============================================================================
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Ephemerent</title>
-<meta name="description" content="How Ephemerent handles data for Orrery: local-first by default, with paid Pro cloud for sign-in, credits, Buddy, and activity logs. Your code stays on your machine.">
+<meta name="description" content="How Ephemerent handles data for Orrery: local and free mode keeps your code on your machine; paid tiers add cloud sign-in, billing, a usage meter, and bundled-model inference proxied to DeepSeek. What we collect, who processes it, and your rights.">
 <link rel="canonical" href="https://ephemerent.com/privacy.html">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f3f0e8">
@@ -48,60 +84,72 @@
     <span class="lbl">Legal</span>
     <h1>Privacy Policy</h1>
   </div>
-  <div class="legal-updated">Last updated: June 10, 2026 · Beta</div>
+  <div class="legal-updated">Last updated: June 11, 2026 · Beta</div>
 
   <div class="legal-body">
-    <p>Ephemerent builds Orrery, a local-first agentic code editor. This policy explains what we collect, why, and the choices you have. Orrery is in beta, so this policy may change as the product does — see “Changes” below.</p>
+    <p>Ephemerent builds Orrery, a local-first agentic code editor you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers both free local use and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does — see “Changes” below.</p>
 
     <h2>The short version</h2>
-    <p>Orrery runs on your machine. Your source code, repositories, prompts, and the work agents do stay on your device — we don’t receive or store them. The only data we hold is what’s needed to run paid Pro cloud: your sign-in identity, plan state, credit counters, Buddy entitlement, and high-level activity logs.</p>
+    <p>In local and free mode, Orrery runs entirely on your machine. Your source code, repositories, prompts, and the work the agents do stay on your device — we never receive them. If you subscribe to a paid tier and use the <b>bundled DeepSeek models</b>, the prompts and code needed for those completions are sent through our relay to DeepSeek so they can be generated, and we keep a usage meter (token counts). Beyond that, the data we hold is what’s needed to run a paid account: your sign-in identity, subscription status, and usage counters.</p>
 
     <h2>What we collect</h2>
     <ul>
-      <li><b>Local mode (default):</b> nothing reaches us. An optional email/name you enter is stored only in your browser’s local storage to label your own activity log on that device.</li>
-      <li><b>Pro cloud account:</b> if you sign in with Google, GitHub, or an email magic link for Pro cloud, our authentication provider (Supabase) stores your account identifier, email address, and basic profile fields (display name, avatar URL) you choose to provide.</li>
-      <li><b>Activity logs (cloud only):</b> when signed in, we record high-level events — for example sign-in, requesting beta access, opening the editor, or starting a task — with a timestamp. These describe <i>that</i> an action happened, not the contents of your code.</li>
-      <li><b>Plan and billing state:</b> if you use Pro, we store your plan, subscription status, cloud credit counters, Buddy entitlement, and payment-provider identifiers needed to operate billing. Full payment details are handled by the payment provider, not by this static site.</li>
+      <li><b>Account identity.</b> If you sign in (required only for paid tiers), our authentication provider, Supabase, stores your account identifier, email address, and any basic profile fields (display name, avatar URL) your chosen sign-in method provides. You can sign in with Google, GitHub, or an email magic link.</li>
+      <li><b>Subscription &amp; billing status.</b> If you subscribe, we store your plan (Pro / Max / Ultra), subscription status (active, canceled, past-due), renewal date, and the customer/subscription identifiers our payment processor, Stripe, gives us. <b>We do not see or store your full card number</b> — Stripe handles payment details directly.</li>
+      <li><b>Usage meter (token counts).</b> When you use bundled models, we count the tokens consumed so we can enforce your monthly quota and show your usage. These counts are stored on your device and on our servers, and are numbers and timestamps — not the content of your prompts.</li>
+      <li><b>Prompts &amp; code sent for bundled-model inference.</b> When you choose a bundled DeepSeek model, the prompt and the code/context required to answer it are transmitted through our relay to DeepSeek’s API to generate the completion, and the result is returned to you. This is the same data you would send if you called DeepSeek directly — it is necessary to provide the feature you requested.</li>
+      <li><b>High-level activity logs.</b> When signed in, we may record events such as sign-in, opening the editor, or starting a task, with a timestamp. These record <i>that</i> an action happened, not the contents of your code.</li>
+      <li><b>Local-only identity (optional).</b> In local mode you can enter an email/name to label your own on-device audit log. This is stored only in your browser’s/app’s local storage on that device and is not sent to us.</li>
     </ul>
-    <p class="legal-note">We never collect your source code, file contents, repository data, or model prompts/outputs. Those never leave your machine.</p>
 
-    <h2>How we use it</h2>
+    <h2>What we do NOT collect</h2>
+    <p class="legal-note">In local and free mode (including using your own local Ollama models), nothing about your code or prompts leaves your machine — we don’t receive or store it. We do not collect your source code, repositories, or prompt content for any purpose other than proxying a bundled-model request you explicitly make. <b>We do not store prompt or completion content beyond what is needed to relay the request to DeepSeek and return the answer</b>, and we do not use your prompts or code to train our own models. Note that once a bundled-model request reaches DeepSeek, DeepSeek processes it under its own terms (see “Subprocessors”). When you bring your own API key for another provider, that traffic goes to that provider under their terms, not through us.</p>
+
+    <h2>How we use your data</h2>
     <ul>
-      <li>To sign you in and keep one identity across the website and editor.</li>
-      <li>To operate the closed beta — including a waitlist/approval flag that controls download access.</li>
-      <li>To understand product usage at a high level, debug issues, and prevent abuse.</li>
+      <li>To sign you in and keep one identity across the website and the desktop app.</li>
+      <li>To provide and bill your subscription, enforce monthly quotas, and show your usage.</li>
+      <li>To proxy bundled-model requests to DeepSeek and return completions to you.</li>
+      <li>To operate the beta, debug issues, prevent abuse, and keep the service secure.</li>
+    </ul>
+
+    <h2>Subprocessors &amp; service providers</h2>
+    <p>We rely on a small number of third parties to run the service. Each processes only the data needed for its role:</p>
+    <ul>
+      <li><b>Stripe</b> — payment processing, subscriptions, and billing. Stripe receives the data needed to charge you and is the system of record for payment details.</li>
+      <li><b>Supabase</b> — authentication and the database that stores your account profile, subscription state, and usage counters.</li>
+      <li><b>DeepSeek</b> — the inference provider for the bundled models. When you use a bundled model, your prompt and the code/context for that request are sent to DeepSeek’s API to generate the completion. DeepSeek processes that data under its own terms.</li>
+      <li><b>Google and GitHub</b> — OAuth sign-in, only if you choose one of them to log in.</li>
+      <li><b>Vercel</b> — hosting for this website and related endpoints; standard server logs (e.g. IP address, request metadata) may be generated.</li>
     </ul>
 
     <h2>Cookies and local storage</h2>
-    <p>The site itself sets no advertising or tracking cookies. We use your browser’s local storage for an optional local identity and audit buffer. If you use Pro cloud, the authentication provider sets cookies/tokens needed to keep you signed in.</p>
-
-    <h2>Service providers</h2>
-    <p>We rely on a small number of processors to run the service:</p>
-    <ul>
-      <li><b>Supabase</b> — authentication and the database that stores your profile and activity logs.</li>
-      <li><b>Google and GitHub</b> — only if you choose them to sign in (OAuth).</li>
-      <li><b>Stripe or another payment provider</b> — only if you subscribe to Pro.</li>
-      <li><b>Vercel</b> — hosting for this website; standard server logs may be generated.</li>
-    </ul>
+    <p>This website sets no advertising or third-party tracking cookies. The desktop app and the site use local storage (and a Supabase session token/cookie when you are signed in) to keep you logged in and to hold the optional local identity and on-device audit buffer. Clearing your browser’s or app’s local storage removes the local-only data on that device.</p>
 
     <h2>Data retention</h2>
-    <p>We keep account and activity data while your account exists. Ask us to delete it at any time and we’ll remove your profile and associated logs.</p>
+    <p>We keep your account, subscription, and usage data for as long as your account exists and as needed to provide the service and meet legal/accounting obligations (for example, billing records Stripe retains for tax and compliance). Transient prompt/completion content handled by the relay is not retained by us beyond what is needed to fulfil the request. When you ask us to delete your account, we remove your profile and associated logs from our systems; some billing records may be retained where the law requires.</p>
 
-    <h2>Your choices</h2>
+    <h2>Your rights</h2>
+    <p>Depending on where you live, you may have rights under laws such as the EU/UK GDPR and the California CCPA/CPRA — including the right to access, correct, delete, or export your personal data, and to object to or restrict certain processing. We do not sell your personal information. To exercise any of these rights:</p>
     <ul>
-      <li>Use Orrery entirely in local mode — no account, nothing sent to us.</li>
-      <li>Request a copy of, or deletion of, your account data by emailing us.</li>
-      <li>Clear your browser’s local storage to remove the local identity and audit buffer.</li>
+      <li>Use Orrery entirely in local/free mode — no account, and nothing sent to us.</li>
+      <li>Email <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a> to request a copy of, correction of, or deletion of your account data. We may need to verify your identity before acting.</li>
+      <li>Cancel or manage your subscription at any time (see the <a href="terms.html">Terms of Service</a>).</li>
+      <li>Clear your device’s local storage to remove the local identity and audit buffer.</li>
     </ul>
+    <p>If you are in the EU/UK, you also have the right to lodge a complaint with your local data-protection authority.</p>
+
+    <h2>International data transfers</h2>
+    <p>Our providers (including Stripe, Supabase, DeepSeek, and Vercel) may process data on infrastructure located outside your country, including the United States. Where required, we rely on the appropriate safeguards offered by those providers for such transfers.</p>
 
     <h2>Children</h2>
     <p>Orrery isn’t directed to children under 13 (or the minimum age in your region), and we don’t knowingly collect their data.</p>
 
     <h2>Changes</h2>
-    <p>We’ll update this page when our practices change and revise the “last updated” date. Significant changes affecting cloud accounts will be communicated where practical.</p>
+    <p>We’ll update this page when our practices change and revise the “last updated” date. Significant changes affecting paid accounts will be communicated where practical.</p>
 
     <h2>Contact</h2>
-    <p>Questions or requests: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>.</p>
+    <p>Privacy questions or data requests: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>. This service is operated by <b>[PLACEHOLDER: LEGAL ENTITY]</b> (trading as Ephemerent).</p>
   </div>
 </main>
 
