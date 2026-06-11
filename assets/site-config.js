@@ -8,9 +8,10 @@
  * Supabase service_role key, Stripe secret key, or any other secret in this file.
  */
 window.ORRERY_CONFIG = {
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/Orrery-Setup-0.1.0.exe',
+  DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/Orrery-Setup.exe',
 
-  /** Windows installer published as a GitHub Release (v0.1.0). */
+  /** Windows installer published as a GitHub Release; the stable asset name
+   *  survives version bumps and the app self-updates via latest.yml. */
   RELEASE_AVAILABLE: true,
 
   AUDIT_WEBHOOK_URL: '',
