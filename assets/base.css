@@ -1,0 +1,236 @@
+/* ============================================================
+   BASE — shared progressive-enhancement layer for ephemerent.com
+   Loaded AFTER each page's theme CSS (ephemerent.css OR orrery.css).
+   Every rule here is pure enhancement: it is feature-detected and
+   reduced-motion gated, and degrades cleanly to the existing
+   baseline when unsupported. Nothing here is load-bearing.
+   Theme tokens used with fallbacks so it works on both palettes.
+   ============================================================ */
+
+/* ---- Shared fluid modular scale (opt-in via var(), additive) ---- */
+:root {
+  --step--2: clamp(0.69rem, 0.67rem + 0.11vw, 0.75rem);
+  --step--1: clamp(0.83rem, 0.80rem + 0.16vw, 0.94rem);
+  --step-0:  clamp(1.00rem, 0.95rem + 0.25vw, 1.19rem);
+  --step-1:  clamp(1.20rem, 1.12rem + 0.40vw, 1.50rem);
+  --step-2:  clamp(1.44rem, 1.31rem + 0.63vw, 1.90rem);
+  --step-3:  clamp(1.73rem, 1.54rem + 0.95vw, 2.40rem);
+  --step-4:  clamp(2.07rem, 1.80rem + 1.39vw, 3.03rem);
+  --step-5:  clamp(2.49rem, 2.10rem + 1.99vw, 3.82rem);
+  --space-3xs: clamp(0.31rem, 0.30rem + 0.07vw, 0.38rem);
+  --space-2xs: clamp(0.56rem, 0.53rem + 0.16vw, 0.69rem);
+  --space-xs:  clamp(0.88rem, 0.83rem + 0.24vw, 1.06rem);
+  --space-s:   clamp(1.13rem, 1.06rem + 0.33vw, 1.38rem);
+  --space-m:   clamp(1.69rem, 1.59rem + 0.49vw, 2.06rem);
+  --space-l:   clamp(2.25rem, 2.12rem + 0.65vw, 2.75rem);
+  --focus-ring: var(--accent, var(--teal-lt, #4c8bf5));
+}
+
+/* ============================================================
+   1. EDITORIAL TYPOGRAPHY CRAFT — turns "webpage" into "typeset"
+   ============================================================ */
+
+/* Optical sizing: Newsreader (lab) & Bricolage (Vellum) ship a real
+   opsz axis; harmless on faces without one. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body, h1, h2, h3, h4, h5, h6, .display, .serif {
+  font-optical-sizing: auto;
+}
+
+/* Print-grade line breaking: balance headings, prettify prose. */
+h1, h2, h3, h4,
+.display, .hero-h1, .start-h, .ehero h1, .esec-head h2, .epledge-close,
+.sec-head h2, .buddy-bubble {
+  text-wrap: balance;
+}
+p, li, blockquote, figcaption, dd,
+.lead, .ethesis, .epledge p, .erow .de, .eprodrow .de {
+  text-wrap: pretty;
+}
+
+/* Hanging punctuation (Safari) — genuine print feel, zero cost elsewhere. */
+html { hanging-punctuation: first allow-end last; }
+
+/* Drop cap on the lab's lead paragraphs (editorial pages only,
+   gated by the paper theme via the body background var). */
+.ehero-sub > p:first-of-type::first-letter,
+.epledge > div > p:first-of-type::first-letter {
+  -webkit-initial-letter: 2.4 2;
+  initial-letter: 2.4 2;
+  font-family: var(--serif, Georgia, serif);
+  font-weight: 500;
+  color: var(--accent, currentColor);
+  margin-right: 0.08em;
+  padding-right: 0.04em;
+}
+@supports not ((initial-letter: 2 2) or (-webkit-initial-letter: 2 2)) {
+  /* No fake drop cap where unsupported (incl. Safari's -webkit- path) —
+     leave prose unchanged rather than ship a giant un-floated letter. */
+  .ehero-sub > p:first-of-type::first-letter,
+  .epledge > div > p:first-of-type::first-letter {
+    -webkit-initial-letter: normal; initial-letter: normal;
+    font-size: inherit; font-weight: inherit; color: inherit;
+    margin: 0; padding: 0;
+  }
+}
+
+/* ============================================================
+   2. ACCESSIBLE FOCUS — restore a visible, themed keyboard ring
+      (auth.css strips input outlines; this puts a correct one back
+      for keyboard users only, without affecting mouse focus).
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+/* Never trap focus invisibly: if a component killed the outline on
+   :focus, :focus-visible above re-establishes it for keyboard. */
+
+/* ============================================================
+   3. CROSS-DOCUMENT VIEW TRANSITIONS — one continuous experience
+      across the same-origin pages. Pure progressive enhancement:
+      unsupported browsers get a normal, instant navigation.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.32s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Persistent shared elements morph across navigations. Scoped so
+     only ONE element per page carries each name (required by the API). */
+  .nav .brand { view-transition-name: site-brand; }
+  .ebar .ebrand { view-transition-name: site-brand; }
+}
+
+/* ============================================================
+   4. SCROLL-DRIVEN MOTION (off the main thread) — feature-detected.
+      No JS, no conflict with the existing IntersectionObserver
+      reveals. Only animates compositor-friendly properties.
+   ============================================================ */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* a. Hairline reading-progress bar (no extra DOM). */
+    html::before {
+      content: '';
+      position: fixed;
+      inset: 0 auto auto 0;
+      height: 2px;
+      width: 100%;
+      z-index: 200;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      background: linear-gradient(90deg,
+        var(--accent, var(--teal, #2dd4bf)),
+        var(--accent-2, var(--violet-lt, #6aa8de)));
+      animation: read-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+
+    /* b. Variable-weight-on-scroll: hero kickers gain weight as the
+       page advances — a current award-site signature, very subtle. */
+    .ehero .lbl, .hero .eyebrow {
+      animation: kicker-weight linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 60vh;
+      will-change: font-variation-settings;
+    }
+  }
+}
+@keyframes read-progress { to { transform: scaleX(1); } }
+@keyframes kicker-weight {
+  from { font-variation-settings: 'wght' 420; letter-spacing: 0.20em; }
+  to   { font-variation-settings: 'wght' 600; letter-spacing: 0.26em; }
+}
+
+/* ============================================================
+   5. ANIMATED FILM-GRAIN — the 2026 "tactile, human" signal.
+      Gives the existing static grain a slow drift. Reduced-motion
+      freezes it. Extremely subtle by design.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  body::after { animation: grain-drift 16s steps(6) infinite; }
+  .grain::after { animation: star-drift 24s ease-in-out infinite alternate; }
+}
+@keyframes grain-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 8px 12px; }
+}
+@keyframes star-drift {
+  from { opacity: 0.42; transform: translate3d(0, 0, 0); }
+  to   { opacity: 0.58; transform: translate3d(-6px, -4px, 0); }
+}
+
+/* ============================================================
+   6. SMALL SHARED PRIMITIVES for new conversion sections
+      (comparison table / FAQ / security) — theme-token driven so
+      they look correct on both palettes.
+   ============================================================ */
+details.faq {
+  border-bottom: 1px solid var(--line, var(--rule, rgba(128,128,128,0.2)));
+}
+details.faq > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 20px 0;
+  font-family: var(--display, var(--serif, inherit));
+  font-size: clamp(17px, 2.2vw, 21px);
+  color: var(--ink, inherit);
+}
+details.faq > summary::-webkit-details-marker { display: none; }
+details.faq > summary::after {
+  content: '+';
+  font-family: var(--mono, monospace);
+  color: var(--accent, var(--teal-lt, currentColor));
+  transition: transform 0.25s var(--ease, ease);
+  flex: none;
+}
+details.faq[open] > summary::after { transform: rotate(45deg); }
+details.faq > .faq-body {
+  padding: 0 0 22px;
+  max-width: 70ch;
+  color: var(--ink-2, var(--muted, inherit));
+  line-height: 1.62;
+}
+@media (prefers-reduced-motion: no-preference) {
+  details.faq[open] > .faq-body { animation: faq-open 0.3s var(--ease, ease); }
+}
+@keyframes faq-open { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ---- Vellum proof bench: the actual CPU-rendered frame, shown as proof ---- */
+.proof-render-wrap {
+  display: none;
+  align-items: center;
+  gap: 11px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line, rgba(128,128,128,0.2));
+}
+.proof-render-wrap.on { display: flex; }
+.proof-render {
+  width: 96px; height: 64px; flex: none;
+  border: 1px solid var(--line-strong, rgba(128,128,128,0.35));
+  border-radius: 6px;
+  background: #0b0a07;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  image-rendering: auto;
+}
+.proof-render-label {
+  font-size: 10px; letter-spacing: 0.03em; line-height: 1.45;
+  color: var(--teal-lt, var(--accent, currentColor));
+}

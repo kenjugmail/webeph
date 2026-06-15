@@ -14,7 +14,8 @@
 <meta property="og:title" content="Vellum — 3D work that proves itself">
 <meta property="og:description" content="A spatial agent layer that writes and verifies shaders, CAD parts, and game scenes — renderer-neutral, headless, no GPU in the loop.">
 <meta property="og:url" content="https://ephemerent.com/Vellum.html">
-<meta property="og:image" content="https://ephemerent.com/assets/og.svg">
+<meta property="og:image" content="https://ephemerent.com/assets/og-vellum.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Vellum — 3D work that proves itself">
@@ -22,10 +23,25 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vellum — 3D work that proves itself">
 <meta name="twitter:description" content="Agents that write and verify 3D work, with renderer-neutral proof.">
-<meta name="twitter:image" content="https://ephemerent.com/assets/og.svg">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-vellum.png">
 <link rel="stylesheet" href="assets/orrery.css">
 <link rel="stylesheet" href="assets/components.css">
 <link rel="stylesheet" href="assets/auth.css">
+<link rel="stylesheet" href="assets/base.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vellum",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "url": "https://ephemerent.com/Vellum.html",
+  "description": "A spatial agent layer that writes and verifies 3D work — shaders, CAD parts, game scenes — with renderer-neutral proof and no GPU in the loop.",
+  "image": "https://ephemerent.com/assets/og-vellum.png",
+  "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" }
+}
+</script>
+<noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
@@ -34,7 +50,7 @@
   html[data-theme="hybrid"]{
     --void:#100f0d; --bg:#171614; --bg-2:#1c1b18; --panel:#201f1d; --panel-2:#272520;
     --line: rgba(233,227,214,0.12); --line-strong: rgba(233,227,214,0.22);
-    --ink:#f1ece1; --ink-2:#c7c0b2; --muted:#9a9388; --faint:#7d766a;
+    --ink:#f1ece1; --ink-2:#c7c0b2; --muted:#9a9388; --faint:#8a8276; /* faint lightened for WCAG AA (~5:1) */
     --violet:#ff5a1f; --violet-lt:#ff8150; --violet-dk:#b53e12;
     --teal:#ffb627; --teal-lt:#ffd37a; --brass:#e9a23b; --brass-lt:#f0b860;
     --green:#73ba6c; --red:#e5533a; --amber:#e9a23b;

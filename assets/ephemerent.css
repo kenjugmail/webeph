@@ -1,8 +1,9 @@
 /* ============================================================
    EPHEMERENT — research lab. Light, editorial, document-like.
    Deliberately NOT the Orrery product look.
+   Fonts are loaded via <link rel="preconnect"> + <link> in each
+   page <head> (non-render-blocking); no @import here.
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;1,16..72,400;1,16..72,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
   --paper:   #f3f0e8;
@@ -11,7 +12,7 @@
   --ink:     #17160f;
   --ink-2:   #38362c;
   --muted:   #6e6a5c;
-  --faint:   #9c9788;
+  --faint:   #6b6757; /* darkened from #9c9788 to pass WCAG AA on paper (~4.6:1) */
   --rule:    rgba(23, 22, 15, 0.14);
   --rule-2:  rgba(23, 22, 15, 0.07);
   --accent:  #156054;

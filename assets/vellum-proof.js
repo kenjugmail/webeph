@@ -1,14 +1,20 @@
 /* ============================================================
    VELLUM — Proof Bench. A rotating wireframe artifact (CAD part,
    robot rig, game scene) on the left; a renderer-neutral proof
-   report that streams assertions on the right. All on the CPU —
-   no GPU in the loop. mountProofBench(rootEl)
+   report on the right. The report is computed for real: a Web
+   Worker rasterizes the mesh on the CPU (no GPU) and analyses its
+   topology, and the panel shows the measured result — verts/tris,
+   open + non-manifold edges, signed volume, and the actual
+   millisecond cost of the CPU render, with the rendered frame
+   shown as proof. If a Worker is unavailable it degrades to a
+   staged report so the page never breaks. mountProofBench(rootEl)
    ============================================================ */
 (function () {
   const ARTIFACTS = {
     part: {
       label: 'CAD part · bearing.step',
       build: () => window.V3.torus(1.25, 0.42, 28, 14),
+      mesh: () => torusTris(1.25, 0.42, 28, 14),
       metricName: 'geometric fidelity',
       metric: 0.96,
       checks: [
@@ -22,6 +28,11 @@
     rig: {
       label: 'Robot rig · arm.urdf',
       build: () => window.V3.boxStack(),
+      mesh: () => boxesTris([
+        [0, -0.95, 0, 1.7, 0.5, 1.7], [0, -0.3, 0, 0.7, 0.85, 0.7],
+        [0.35, 0.45, 0, 1.5, 0.42, 0.5], [1.0, 0.95, 0, 0.5, 0.65, 0.42],
+        [1.0, 1.45, 0, 0.85, 0.28, 0.7]
+      ]),
       metricName: 'kinematic score',
       metric: 0.93,
       checks: [
@@ -35,6 +46,11 @@
     scene: {
       label: 'Game scene · level_03.gltf',
       build: () => window.V3.cubeField(),
+      mesh: () => boxesTris([
+        [-1.4, 0.9, -1.0], [-0.5, 1.5, -1.1], [0.5, 0.7, -1.2], [1.4, 1.2, -0.9],
+        [-1.5, 0.6, 0.0], [-0.5, 1.1, 0.1], [0.6, 1.7, 0.0], [1.5, 0.8, 0.1],
+        [-1.3, 1.0, 1.1], [-0.3, 0.6, 1.2], [0.7, 1.3, 1.1], [1.4, 0.5, 1.0]
+      ].map(([x, h, z]) => [x * 0.85, -1.2 + h / 2, z * 0.85, 0.62, h, 0.62])),
       metricName: 'scene health',
       metric: 0.91,
       checks: [
@@ -46,6 +62,39 @@
       ]
     }
   };
+
+  // ---- real triangulated meshes (closed, manifold) for the CPU proof ----
+  function torusTris(R, r, seg, ring) {
+    const verts = [], tris = [];
+    for (let i = 0; i < seg; i++) {
+      const u = (i / seg) * Math.PI * 2;
+      for (let j = 0; j < ring; j++) {
+        const v = (j / ring) * Math.PI * 2;
+        const cr = R + r * Math.cos(v);
+        verts.push([cr * Math.cos(u), r * Math.sin(v), cr * Math.sin(u)]);
+      }
+    }
+    const idx = (i, j) => ((i % seg) * ring) + (j % ring);
+    for (let i = 0; i < seg; i++) for (let j = 0; j < ring; j++) {
+      const a = idx(i, j), b = idx(i + 1, j), c = idx(i + 1, j + 1), d = idx(i, j + 1);
+      tris.push([a, b, c], [a, c, d]);
+    }
+    return { verts, tris };
+  }
+  function boxesTris(boxes) {
+    const verts = [], tris = [];
+    const F = [[0, 1, 2], [0, 2, 3], [5, 4, 7], [5, 7, 6], [4, 0, 3], [4, 3, 7],
+      [1, 5, 6], [1, 6, 2], [3, 2, 6], [3, 6, 7], [4, 5, 1], [4, 1, 0]];
+    for (const [cx, cy, cz, w, h, d] of boxes) {
+      const o = verts.length, hw = w / 2, hh = h / 2, hd = d / 2;
+      verts.push(
+        [cx - hw, cy - hh, cz - hd], [cx + hw, cy - hh, cz - hd], [cx + hw, cy + hh, cz - hd], [cx - hw, cy + hh, cz - hd],
+        [cx - hw, cy - hh, cz + hd], [cx + hw, cy - hh, cz + hd], [cx + hw, cy + hh, cz + hd], [cx - hw, cy + hh, cz + hd]
+      );
+      for (const f of F) tris.push([f[0] + o, f[1] + o, f[2] + o]);
+    }
+    return { verts, tris };
+  }
 
   function mountProofBench(root) {
     root.classList.add('proof');
@@ -74,7 +123,11 @@
           <div class="review-metric">
             <div class="metric-row"><span data-metricname>spatial metric</span><b class="mono" data-metric>0.00</b></div>
             <div class="metric-track"><i data-metricbar></i></div>
-            <div class="metric-foot mono">renderer-neutral · same proof in Three · Unreal · Blender</div>
+            <div class="metric-foot mono" data-foot>renderer-neutral · same proof in Three · Unreal · Blender</div>
+            <div class="proof-render-wrap" data-render-wrap>
+              <canvas data-render class="proof-render" aria-label="Frame rendered on the CPU"></canvas>
+              <span class="proof-render-label mono" data-render-label></span>
+            </div>
           </div>
         </div>
       </div>
@@ -90,6 +143,10 @@
     const metricEl = root.querySelector('[data-metric]');
     const metricBar = root.querySelector('[data-metricbar]');
     const metricNameEl = root.querySelector('[data-metricname]');
+    const footEl = root.querySelector('[data-foot]');
+    const renderWrap = root.querySelector('[data-render-wrap]');
+    const renderCanvas = root.querySelector('[data-render]');
+    const renderLabel = root.querySelector('[data-render-label]');
 
     let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
     let cx = 0, cy = 0, R = 1;
@@ -136,12 +193,26 @@
       geo = A.build();
       box = window.V3.bbox(geo.verts);
       nameEl.textContent = A.label;
-      metricNameEl.textContent = A.metricName;
       root.querySelectorAll('[data-tabs] button').forEach(b => b.classList.toggle('on', b.dataset.k === key));
-      runReport(A);
+      runProof(key);
     }
 
-    function runReport(A) {
+    // ---------- REAL proof via the CPU rasterizer worker ----------
+    let worker;
+    function getWorker() {
+      if (worker !== undefined) return worker;
+      try { worker = new Worker('assets/vellum-raster.worker.js'); }
+      catch (e) { worker = null; }
+      return worker;
+    }
+    function paletteRGB() {
+      const parts = (COL.node || '224,165,68').split(',').map(n => parseInt(n.trim(), 10));
+      return (parts.length === 3 && parts.every(n => !isNaN(n))) ? parts : [255, 182, 39];
+    }
+    function hideRender() { renderWrap.classList.remove('on'); }
+
+    function runProof(key) {
+      const A = ARTIFACTS[key];
       const token = ++runToken;
       running = true; progress = 0;
       aspectsEl.innerHTML = '';
@@ -150,6 +221,86 @@
       metricEl.textContent = '0.00';
       metricBar.style.width = '0%';
       metricBar.style.background = 'var(--violet)';
+      metricNameEl.textContent = A.metricName;
+      hideRender();
+
+      const wk = getWorker();
+      let mesh = null;
+      if (wk) { try { mesh = A.mesh(); } catch (e) { mesh = null; } }
+      if (!wk || !mesh) { return runReportSim(A, token); }
+
+      let settled = false;
+      const onMsg = (ev) => { if (settled) return; settled = true; cleanup(); if (token === runToken && ev.data && ev.data.ok) applyReal(token, A, ev.data); };
+      const onErr = () => { if (settled) return; settled = true; cleanup(); worker = undefined; if (token === runToken) runReportSim(A, token); };
+      function cleanup() { wk.removeEventListener('message', onMsg); wk.removeEventListener('error', onErr); }
+      wk.addEventListener('message', onMsg);
+      wk.addEventListener('error', onErr);
+      setTimeout(() => { if (!settled) { settled = true; cleanup(); if (token === runToken) runReportSim(A, token); } }, 2500);
+      try { wk.postMessage({ verts: mesh.verts, tris: mesh.tris, w: 132, h: 88, palette: paletteRGB() }); }
+      catch (e) { settled = true; cleanup(); runReportSim(A, token); }
+    }
+
+    function applyReal(token, A, d) {
+      const checks = [
+        ['tessellated · STEP → mesh', `${d.vertCount} verts · ${d.triCount} tris`, true],
+        ['watertight surface', `${d.boundary} open edges`, d.watertight],
+        ['manifold geometry', `${d.nonmanifold} non-manifold`, d.manifold],
+        ['positive volume', `${d.volume.toFixed(2)} units³`, d.volume > 0],
+        ['rasterized · no GPU', `${d.w}×${d.h} · ${d.rasMs.toFixed(1)} ms`, true],
+      ];
+      metricNameEl.textContent = 'manifold integrity';
+      // draw the actual CPU-rendered frame
+      try {
+        renderCanvas.width = d.w; renderCanvas.height = d.h;
+        renderCanvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(d.rgba), d.w, d.h), 0, 0);
+        renderLabel.textContent = `actual CPU frame · ${d.rasMs.toFixed(0)} ms · no GPU`;
+        renderWrap.classList.add('on');
+      } catch (e) { /* render inset is optional */ }
+
+      aspectsEl.innerHTML = '';
+      const rows = checks.map(([k, w]) => {
+        const row = document.createElement('div');
+        row.className = 'aspect pending';
+        row.innerHTML = `<span class="aspect-k">${k}</span><span class="aspect-w mono">${w}</span><span class="aspect-mark"><i class="proof-spin"></i></span>`;
+        aspectsEl.appendChild(row);
+        return row;
+      });
+
+      let i = 0;
+      const step = () => {
+        if (token !== runToken) return;
+        if (i < rows.length) {
+          const ok = checks[i][2];
+          const mk = rows[i].querySelector('.aspect-mark');
+          mk.className = 'aspect-mark ' + (ok ? 'pass' : 'fail');
+          mk.textContent = ok ? '✓' : '!';
+          rows[i].classList.remove('pending');
+          progress = (i + 1) / rows.length;
+          i++;
+          setTimeout(step, 260);
+        } else {
+          running = false;
+          const allOk = checks.every(c => c[2]);
+          vEl.className = 'review-verdict' + (allOk ? ' ok' : '');
+          vText.textContent = allOk ? 'VERIFIED' : 'ISSUES FOUND';
+          footEl.textContent = `rasterized ${d.w}×${d.h} on the CPU · ${d.rasMs.toFixed(1)} ms · no GPU in the loop`;
+          animateMetric(token, d.manifoldIntegrity);
+        }
+      };
+      setTimeout(step, 200);
+    }
+
+    // ---------- staged fallback (only if Worker is unavailable) ----------
+    function runReportSim(A, token) {
+      running = true; progress = 0;
+      aspectsEl.innerHTML = '';
+      vEl.className = 'review-verdict';
+      vText.textContent = 'VERIFYING…';
+      metricEl.textContent = '0.00';
+      metricBar.style.width = '0%';
+      metricBar.style.background = 'var(--violet)';
+      metricNameEl.textContent = A.metricName;
+      footEl.textContent = 'renderer-neutral · same proof in Three · Unreal · Blender';
 
       const rows = A.checks.map(([k, w]) => {
         const row = document.createElement('div');
@@ -182,19 +333,25 @@
 
     function animateMetric(token, target) {
       let v = 0;
+      const setVal = (x) => {
+        metricEl.textContent = x.toFixed(2);
+        metricBar.style.width = (x * 100) + '%';
+        metricBar.style.background = 'var(--green)';
+      };
+      // Guarantee the true final value lands even if rAF is throttled
+      // (e.g. the bench is scrolled off-screen while the ease plays).
+      const settle = setTimeout(() => { if (token === runToken) setVal(target); }, 1300);
       const tick = () => {
-        if (token !== runToken) return;
+        if (token !== runToken) { clearTimeout(settle); return; }
         v += (target - v) * 0.12;
         if (Math.abs(target - v) < 0.005) v = target;
-        metricEl.textContent = v.toFixed(2);
-        metricBar.style.width = (v * 100) + '%';
-        metricBar.style.background = 'var(--green)';
-        if (v < target) requestAnimationFrame(tick);
+        setVal(v);
+        if (v < target) requestAnimationFrame(tick); else clearTimeout(settle);
       };
       tick();
     }
 
-    // ---- render loop ----
+    // ---- render loop (the left-hand wireframe visual) ----
     let t0 = performance.now();
     function frame(now) {
       const t = (now - t0) / 1000;

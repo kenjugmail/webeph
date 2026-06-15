@@ -14,7 +14,8 @@
 <meta property="og:title" content="Orrery — parallel agents you can see">
 <meta property="og:description" content="A local-first agentic code editor. Parallel agents split your goal, try it many ways, keep the best, and merge it back — all in plain sight, on your machine.">
 <meta property="og:url" content="https://ephemerent.com/Orrery.html">
-<meta property="og:image" content="https://ephemerent.com/assets/og.svg">
+<meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Orrery — parallel agents you can see">
@@ -22,10 +23,34 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Orrery — parallel agents you can see">
 <meta name="twitter:description" content="A local-first agentic code editor where parallel agents work in plain sight.">
-<meta name="twitter:image" content="https://ephemerent.com/assets/og.svg">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/orrery.css">
 <link rel="stylesheet" href="assets/components.css">
 <link rel="stylesheet" href="assets/auth.css">
+<link rel="stylesheet" href="assets/base.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Orrery",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Windows",
+  "url": "https://ephemerent.com/Orrery.html",
+  "description": "A local-first agentic code editor: describe a goal and parallel AI agents work in plain sight — split it, attempt it many ways, keep the best, merge it back. Runs on your machine, with the models you choose.",
+  "image": "https://ephemerent.com/assets/og-orrery.png",
+  "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" },
+  "offers": [
+    { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Pro", "price": "40", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Max", "price": "100", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Ultra", "price": "200", "priceCurrency": "USD" }
+  ]
+}
+</script>
+<noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="space-bg grain">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -228,6 +253,55 @@
   </div>
 </section>
 
+<!-- ============ COMPARE ============ -->
+<section class="section compare-section" id="compare">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">How it compares</div>
+      <h2 class="display">The one column nothing else can fill.</h2>
+      <p class="lead">Legibility, locality, independence, and verification each exist somewhere. Held together, they don't — a cloud-coupled editor can't credibly claim locality or model-independence without unwinding its own business.</p>
+    </div>
+    <div class="compare-wrap reveal d1">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th scope="col">Capability</th>
+            <th scope="col" class="col-us">Orrery</th>
+            <th scope="col">Cloud-coupled agents</th>
+            <th scope="col">Single-agent copilots</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Runs fully on your machine</td><td class="col-us">Local-first</td><td>Cloud only</td><td>Partial</td></tr>
+          <tr><td>Bring any model, local or cloud</td><td class="col-us">5 providers + BYO-key</td><td>One vendor</td><td>One vendor</td></tr>
+          <tr><td>Parallel agents you can watch</td><td class="col-us">In plain sight</td><td>Hidden sandboxes</td><td>Single thread</td></tr>
+          <tr><td>Best-of-N judged by execution</td><td class="col-us">Tests, not vibes</td><td>Varies</td><td>—</td></tr>
+          <tr><td>Free tier, no account required</td><td class="col-us">Local is free</td><td>—</td><td>Limited</td></tr>
+          <tr><td>Every step logged &amp; reversible</td><td class="col-us">Approve / roll back</td><td>Partial</td><td>Partial</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note mono reveal d2">A capability matrix, not a scoreboard — competitor names left out on purpose. The point is the column you can't fill anywhere else.</p>
+  </div>
+</section>
+
+<!-- ============ SECURITY ============ -->
+<section class="section security-section" id="security">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Your code stays yours</div>
+      <h2 class="display">Local-first means nothing leaves unless you send it.</h2>
+      <p class="lead">Run on local models and nothing ever touches the network. Choose a cloud model and only that one request goes out — over your own key or pooled credits — never the whole repo, never to train on.</p>
+    </div>
+    <div class="cap-grid reveal d1">
+      <div class="card card-pad"><div class="cap-ic">⌂</div><h4>Local by default</h4><p>Point at Ollama and the editor, agents, and logs run with zero network calls.</p></div>
+      <div class="card card-pad"><div class="cap-ic">⚷</div><h4>Your keys, your credits</h4><p>Bring your own API key or use pooled credits. Cloud calls are per-request, not bulk uploads.</p></div>
+      <div class="card card-pad"><div class="cap-ic">▤</div><h4>Auditable by design</h4><p>Every outbound call is in the local log. Your code is never used to train Ephemerent.</p></div>
+      <div class="card card-pad"><div class="cap-ic">⟲</div><h4>Reversible always</h4><p>Approve every change and roll back to any checkpoint. The agent can't surprise you.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PRICING ============ -->
 <section class="section pricing-section" id="pricing">
   <div class="wrap">
@@ -251,7 +325,8 @@
         </ul>
         <a class="btn btn-ghost" href="download.html">Get Free</a>
       </div>
-      <div class="price-card price-card-pro">
+      <div class="price-card price-card-pro price-card-featured">
+        <span class="price-badge mono">Most popular</span>
         <div class="price-top">
           <span class="mono">Pro</span>
           <b>$40</b>
@@ -337,6 +412,24 @@
         <div class="pkg"><b>Eval harness</b><span>Measures the agent as models change.</span></div>
         <div class="pkg"><b>Guided demo</b><span>A narrated walk-through of the stack.</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq-section" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Questions</div>
+      <h2 class="display">Before you download.</h2>
+    </div>
+    <div class="faq-list reveal d1">
+      <details class="faq"><summary>Does my code leave my machine?</summary><div class="faq-body">Not with local models — Ollama runs entirely offline. With a cloud model, only the request you make goes to the provider you chose, over your key or pooled credits. The whole repo is never uploaded, and your code is never used to train Ephemerent.</div></details>
+      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">Windows today, with a signed, self-updating installer. macOS and Linux are on the roadmap — join the Discord to follow along.</div></details>
+      <details class="faq"><summary>Is it really free?</summary><div class="faq-body">Yes. The desktop editor, local models, parallel agents, local audit log, and checkpoints are free forever. Paid tiers add hosted cloud model credits and the buddy narrator.</div></details>
+      <details class="faq"><summary>What models can I use?</summary><div class="faq-body">Any mix of Ollama (local, free), OpenAI, Gemini, DeepSeek, and Anthropic — chosen task by task. Bring your own key on any paid tier.</div></details>
+      <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
+      <details class="faq"><summary>Can I cancel anytime?</summary><div class="faq-body">Yes. Paid tiers are monthly via Stripe and cancel anytime — access runs to the end of the paid period. Token quotas reset each billing month and don't roll over.</div></details>
     </div>
   </div>
 </section>
@@ -516,6 +609,9 @@
   min-height: 420px;
 }
 .price-card-pro { border-color: rgba(45,212,191,0.42); box-shadow: 0 0 50px rgba(45,212,191,0.12); }
+.price-card-featured { border-color: var(--teal); box-shadow: 0 0 60px rgba(45,212,191,0.22); }
+.price-card { position: relative; }
+.price-badge { position: absolute; top: -10px; left: 24px; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #06120f; background: var(--teal); padding: 4px 10px; border-radius: 999px; font-weight: 600; }
 .price-top { display: grid; gap: 4px; margin-bottom: 18px; }
 .price-top span { color: var(--teal-lt); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
 .price-top b { font-family: var(--display); font-size: clamp(42px, 5vw, 62px); line-height: 1; letter-spacing: 0; }
@@ -561,6 +657,26 @@
 .start-veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(700px 500px at 50% 50%, transparent, var(--bg) 75%); pointer-events: none; }
 .start-inner { position: relative; z-index: 2; }
 .start-h { margin: 18px 0 22px; }
+
+/* compare */
+.compare-section { border-top: 1px solid var(--line); }
+.compare-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); -webkit-overflow-scrolling: touch; }
+.compare { width: 100%; border-collapse: collapse; min-width: 660px; font-size: 14.5px; }
+.compare th, .compare td { text-align: left; padding: 15px 18px; border-bottom: 1px solid var(--line); }
+.compare thead th { font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
+.compare tbody td:first-child { color: var(--ink-2); }
+.compare td { color: var(--muted); }
+.compare .col-us { color: var(--ink); background: rgba(45,212,191,0.06); font-weight: 500; }
+.compare thead th.col-us { color: var(--teal-lt); }
+.compare tbody tr:last-child td { border-bottom: 0; }
+.compare-note { margin-top: 16px; font-size: 12px; color: var(--faint); }
+
+/* security (reuses .cap-grid) */
+.security-section { border-top: 1px solid var(--line); background: rgba(0,0,0,0.18); }
+
+/* faq */
+.faq-section { border-top: 1px solid var(--line); }
+.faq-list { max-width: 840px; border-top: 1px solid var(--line); }
 </style>
 </body>
 </html>

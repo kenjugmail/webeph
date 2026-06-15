@@ -14,7 +14,8 @@
 <meta property="og:title" content="Ephemerent — independent research lab">
 <meta property="og:description" content="Local-first, verifiable multi-agent AI. Maker of Orrery, an agentic code editor where parallel agents work in plain sight.">
 <meta property="og:url" content="https://ephemerent.com/">
-<meta property="og:image" content="https://ephemerent.com/assets/og.svg">
+<meta property="og:image" content="https://ephemerent.com/assets/og-ephemerent.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Ephemerent — independent research lab">
@@ -22,8 +23,38 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ephemerent — independent research lab">
 <meta name="twitter:description" content="Local-first, verifiable multi-agent AI. Maker of Orrery.">
-<meta name="twitter:image" content="https://ephemerent.com/assets/og.svg">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;1,16..72,400;1,16..72,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/ephemerent.css">
+<link rel="stylesheet" href="assets/base.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ephemerent.com/#org",
+      "name": "Ephemerent",
+      "url": "https://ephemerent.com/",
+      "logo": "https://ephemerent.com/assets/og-ephemerent.png",
+      "description": "An independent research lab building local-first, verifiable multi-agent AI. Maker of Orrery, an agentic code editor where parallel agents work in plain sight.",
+      "foundingDate": "2026",
+      "email": "hello@ephemerent.com",
+      "sameAs": ["https://discord.gg/CPPhk3GNjz"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ephemerent.com/#website",
+      "url": "https://ephemerent.com/",
+      "name": "Ephemerent",
+      "publisher": { "@id": "https://ephemerent.com/#org" }
+    }
+  ]
+}
+</script>
+<noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -73,6 +104,10 @@
     <div class="ehero-sub">
       <p class="rv in">Ephemerent researches systems where capability isn't designed in, but appears — many agents spun up for a moment, cooperating, judged, and gone, leaving only the result. Today that means LLM-powered coding agents made legible and verifiable: <a class="elink" href="Orrery.html">Orrery</a> is the editor. Longer-term research explores integrating multimodal world models and latent reasoning alongside those models — not replacing them. Some work becomes papers. Some becomes products.</p>
       <div class="ehero-fig rv in"><canvas id="fig" aria-hidden="true"></canvas></div>
+    </div>
+    <div class="ehero-cta rv">
+      <a class="ebtn ebtn-fill" href="Orrery.html">Explore Orrery <span aria-hidden="true">→</span></a>
+      <a class="ebtn" href="#research">Read the research</a>
     </div>
   </div>
 </header>
@@ -132,6 +167,7 @@
         <span class="de">A hive-style network where contributors parallelize training and inference across their own GPUs — gradient sync over the wire, fault-tolerant participation, credit-backed rewards. Datacenter-scale ambition without datacenter monopoly.</span>
       </div>
     </div>
+    <p class="ework-pricing rv" style="margin-top:30px;"><a class="elink" href="research.html">Read the full research agenda — R1–R7 expanded into three frontiers →</a></p>
   </div>
 </section>
 
@@ -243,6 +279,7 @@
         <h5>Lab</h5>
         <ul>
           <li><a href="#research">Research</a></li>
+          <li><a href="research.html">Research agenda →</a></li>
           <li><a href="#approach">Approach</a></li>
           <li><a href="#pledge">Pledge</a></li>
           <li><a href="privacy.html">Privacy</a></li>
@@ -277,6 +314,7 @@
 
 <style>
 .ehero h1 { max-width: 28ch; }
+.ehero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
 .esec-head h2 { max-width: 46ch; }
 .efoot .big { max-width: 22ch; }
 .ethesis { font-size: 17px; color: var(--ink-2); line-height: 1.66; max-width: 68ch; margin-bottom: 40px; }
