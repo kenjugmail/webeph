@@ -64,15 +64,15 @@ window.ORRERY_CONFIG = {
   },
   DEFAULT_PLAN: 'free',
   PRO_MONTHLY_PRICE_USD: 40,
-  /** ⚠️ LAUNCH: swap to your LIVE publishable key (pk_live_…) before going live — this is a test key. */
-  STRIPE_PUBLISHABLE_KEY: 'pk_live_YOUR_STRIPE_PUBLISHABLE_KEY',
+  /** Live Stripe publishable (browser) key — safe to commit; only the secret key must stay server-side. */
+  STRIPE_PUBLISHABLE_KEY: 'pk_live_51TgrbyDMKk79cYVGoDrCKtlaY2K1bLm950TZcLM0J2IY4WjelO9AEmbc8jIRbORb2B0b6Yhpe6aNR4miAPzXR2rc002xFV0BHV',
   /** Subscription product (Pro/Max/Ultra monthly). */
   STRIPE_PRODUCT_ID: 'prod_UgEDipbYTZzLYb',
   /** One-time "Lifetime (local access)" product — the primary unlock for the app. */
   LIFETIME_PRODUCT_ID: 'prod_UjzeieCaEBSaDn',
-  /** Lifetime payment link + price. Fill the live Stripe payment link and the one-time USD price. */
-  LIFETIME_CHECKOUT_URL: '',
-  LIFETIME_PRICE_USD: null,
+  /** Lifetime payment link + one-time USD price. */
+  LIFETIME_CHECKOUT_URL: 'https://buy.stripe.com/6oUcN55snfUyeX743A3Je04',
+  LIFETIME_PRICE_USD: 20,
   PRO_CHECKOUT_URL: 'https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00',
   MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
   ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',
