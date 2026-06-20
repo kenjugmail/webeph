@@ -65,11 +65,18 @@ export function getPlanCatalog() {
   const plans = cfg().PLANS || {};
   return {
     free: plans.free || {
-      name: 'Free',
-      price: '$0',
-      cadence: 'forever',
-      summary: 'All local Orrery features on your own machine. No cloud required.',
-      features: ['Local editor and agent workflow', 'Ollama/local models', 'Local audit log and checkpoints'],
+      name: 'Not unlocked',
+      price: '—',
+      cadence: '',
+      summary: 'This account has no entitlement yet. Unlock Orrery with a one-time Lifetime purchase, or subscribe for cloud models.',
+      features: ['Buy Lifetime for permanent local access', 'Or subscribe (Pro / Max / Ultra) for cloud'],
+    },
+    lifetime: plans.lifetime || {
+      name: 'Lifetime',
+      price: 'one-time',
+      cadence: 'local access, forever',
+      summary: 'Own Orrery on your machine, permanently. One payment, no subscription.',
+      features: ['Permanent local Orrery access', 'Local / Ollama models + bring your own API key', 'All future local updates', 'No monthly fee'],
     },
     pro: plans.pro || {
       name: 'Pro',
@@ -102,7 +109,7 @@ export async function getCloudProfile() {
 
   const { data, error } = await sb
     .from('profiles')
-    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents,buddy_access')
+    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents,buddy_access,lifetime_access')
     .eq('id', session.user.id)
     .maybeSingle();
 
@@ -116,6 +123,7 @@ export async function getCloudProfile() {
       cloud_credit_granted_cents: 0,
       cloud_credit_used_cents: 0,
       buddy_access: false,
+      lifetime_access: false,
     };
   }
   return data;
