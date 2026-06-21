@@ -27,14 +27,25 @@ window.ORRERY_CONFIG = {
   /** Pricing + entitlements. Keep checkout URLs empty until Stripe/merchant links are live. */
   PLANS: {
     free: {
-      name: 'Free',
-      price: '$0',
-      cadence: 'forever',
-      summary: 'All local Orrery features on your own machine. No cloud required.',
+      name: 'Not unlocked',
+      price: '—',
+      cadence: '',
+      summary: 'This account has no entitlement yet. Unlock Orrery with a one-time Lifetime purchase, or subscribe for cloud models.',
       features: [
-        'Local editor and agent workflow',
-        'Ollama/local models',
-        'Local audit log and checkpoints',
+        'Buy Lifetime for permanent local access',
+        'Or subscribe (Pro / Max / Ultra) for cloud',
+      ],
+    },
+    lifetime: {
+      name: 'Lifetime',
+      price: 'one-time',
+      cadence: 'local access, forever',
+      summary: 'Own Orrery on your machine, permanently. One payment, no subscription — the local editor and agents are yours for good.',
+      features: [
+        'Permanent local Orrery access',
+        'Local / Ollama models + bring your own API key',
+        'All future local updates',
+        'No monthly fee',
       ],
     },
     pro: {
@@ -53,8 +64,15 @@ window.ORRERY_CONFIG = {
   },
   DEFAULT_PLAN: 'free',
   PRO_MONTHLY_PRICE_USD: 40,
-  STRIPE_PUBLISHABLE_KEY: 'pk_test_51Tgrc7DqjlIgVstfpP5de2QVIEnPAMVv2sFDPIfaenIRKwEbGR4ALJ5juD2Yv1hujvidNj3z2r7u4TG4D7cRBv6f00dfihJF1n',
+  /** Live Stripe publishable (browser) key — safe to commit; only the secret key must stay server-side. */
+  STRIPE_PUBLISHABLE_KEY: 'pk_live_51TgrbyDMKk79cYVGoDrCKtlaY2K1bLm950TZcLM0J2IY4WjelO9AEmbc8jIRbORb2B0b6Yhpe6aNR4miAPzXR2rc002xFV0BHV',
+  /** Subscription product (Pro/Max/Ultra monthly). */
   STRIPE_PRODUCT_ID: 'prod_UgEDipbYTZzLYb',
+  /** One-time "Lifetime (local access)" product — the primary unlock for the app. */
+  LIFETIME_PRODUCT_ID: 'prod_UjzeieCaEBSaDn',
+  /** Lifetime payment link + one-time USD price. */
+  LIFETIME_CHECKOUT_URL: 'https://buy.stripe.com/6oUcN55snfUyeX743A3Je04',
+  LIFETIME_PRICE_USD: 20,
   PRO_CHECKOUT_URL: 'https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00',
   MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
   ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',

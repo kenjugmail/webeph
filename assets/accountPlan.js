@@ -65,6 +65,17 @@ export function checkoutUrlForTier(tier, config = window.ORRERY_CONFIG || {}) {
   return DEFAULT_CHECKOUT_URLS[plan] || null;
 }
 
+/** Whether a profiles row carries the one-time Lifetime (local access) entitlement. */
+export function lifetimeAccessFromProfile(profile) {
+  return !!profile && typeof profile === 'object' && profile.lifetime_access === true;
+}
+
+/** One-time Lifetime checkout link from config; placeholder/empty values mean "not configured yet". */
+export function lifetimeCheckoutUrl(config = window.ORRERY_CONFIG || {}) {
+  const url = config.LIFETIME_CHECKOUT_URL;
+  return url && !url.includes('YOUR_') ? url : null;
+}
+
 /** 100_000_000 → "100M", 1_000_000_000 → "1B". */
 export function formatTokens(n) {
   const value = Number(n) || 0;
