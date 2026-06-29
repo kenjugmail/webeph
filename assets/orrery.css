@@ -1,9 +1,9 @@
 /* ============================================================
    EPHEMERENT · ORRERY — Design System
    Retro-futurist instrument. Deep space, violet + teal, brass.
+   Fonts are loaded via <link rel="preconnect"> + <link> in each
+   page <head> (non-render-blocking); no @import here.
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* ---- Space / surfaces ---- */
@@ -19,7 +19,7 @@
   --ink:        #eef0f4;
   --ink-2:      #c3c8d4;
   --muted:      #969cab;
-  --faint:      #6c7280;
+  --faint:      #7d8390; /* lightened from #6c7280 to pass WCAG AA on dark (~5:1) */
 
   /* ---- Accents ---- */
   --violet:     #3d7fb8;
