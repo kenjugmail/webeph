@@ -30,7 +30,7 @@
        to allocate that risk to the user in your jurisdiction.
     7. DPA / data-processing terms with Stripe, Supabase, and DeepSeek for EU
        customers (see privacy.html notes).
-    8. Exact tier names, prices, and bundled-model token quotas must stay in
+    8. Exact tier names, prices, and hosted-credit quotas must stay in
        sync with site-config.js, Orrery.html, and cloud.html. Update all when
        pricing changes.
 
@@ -92,28 +92,28 @@
   <div class="legal-updated">Last updated: June 11, 2026 · Beta</div>
 
   <div class="legal-body">
-    <p>These terms govern your use of the Ephemerent website and the Orrery software, including its local mode, the one-time Lifetime purchase, and the paid subscription tiers (together, “the Service”). The Service is operated by <b>[PLACEHOLDER: LEGAL ENTITY]</b> (trading as “Ephemerent,” “we,” “us”). By installing, using, or subscribing to the Service you agree to these terms. Orrery is in beta — read the disclaimers below carefully.</p>
+    <p>These terms govern your use of the Ephemerent website and the Orrery software, including preview setup, grandfathered legacy local access, and the paid subscription tiers (together, "the Service"). The Service is operated by <b>[PLACEHOLDER: LEGAL ENTITY]</b> (trading as "Ephemerent," "we," "us"). By installing, using, or subscribing to the Service you agree to these terms. Orrery is in beta - read the disclaimers below carefully.</p>
 
     <h2>Beta software</h2>
     <p>Orrery is pre-release. It may be incomplete, change without notice, contain bugs, or be unavailable at times. The current desktop builds may be unsigned, so your operating system may warn before installing. Features described on this site may ship later or change. Don’t rely on the beta for anything critical, and keep your own backups.</p>
 
     <h2>Accounts</h2>
-    <p>Unlocking Orrery requires a one-time Lifetime purchase or a subscription, both tied to an account. Signing in (with Google, GitHub, or email) is required. If you create an account, keep your sign-in secure, give accurate information, and don’t share your account. You’re responsible for all activity under your account.</p>
+    <p>Running real Orrery agents requires sign-in plus an active trial/subscription or grandfathered legacy local access. Preview setup can be inspected before subscribing, but unpaid local agent work is not offered as a public plan. If you create an account, keep your sign-in secure, give accurate information, and do not share your account.</p>
 
     <h2>Subscriptions, tiers, and what’s included</h2>
-    <p>Orrery’s <b>Lifetime</b> option is a one-time purchase that permanently unlocks the local desktop editor, local models (e.g. via Ollama), and the local-first workflow. The paid tiers are monthly recurring subscriptions:</p>
+    <p>Orrery no longer sells permanent unlocks. Grandfathered legacy local access remains honored for existing buyers and unlocks local/BYOK routes only. Current paid tiers are monthly recurring subscriptions:</p>
     <ul>
-      <li><b>Pro — $40/month:</b> cloud sign-in, bring-your-own-key for other providers, and bundled models with monthly token quotas (currently DeepSeek Flash 100M tokens/mo and DeepSeek V4 Pro 15M tokens/mo).</li>
-      <li><b>Max — $100/month:</b> everything in Pro with larger bundled quotas (currently DeepSeek Flash 400M tokens/mo and DeepSeek V4 Pro 50M tokens/mo).</li>
-      <li><b>Ultra — $200/month:</b> everything in Pro with the largest bundled quotas (currently DeepSeek Flash 1B tokens/mo and DeepSeek V4 Pro 150M tokens/mo).</li>
+      <li><b>Pro - $40/month:</b> hosted DeepSeek API 10M credits/mo, Doubleword 10M credits/mo, BYOK/local routes, Nexus operations, and managed connector features.</li>
+      <li><b>Max - $100/month:</b> everything in Pro with DeepSeek API 25M credits/mo, Doubleword 25M credits/mo, and higher cloud-run capacity.</li>
+      <li><b>Ultra - $200/month:</b> everything in Max with DeepSeek API 50M credits/mo, Doubleword 50M credits/mo, research runs, and proof vault capacity.</li>
     </ul>
-    <p>Bundled-model usage is metered in tokens and counts against your tier’s monthly quota. <b>Quotas reset at the start of each monthly billing period and do not roll over.</b> Bundled models run through our relay to a third-party inference provider (DeepSeek) — see the <a href="privacy.html">Privacy Policy</a> for how that data is handled. Bringing your own API key for other providers is subject to those providers’ terms and pricing, which you pay directly. Prices are in US dollars and exclude any taxes that may apply. Tiers, prices, and quotas may change as the product evolves; changes won’t affect your current paid period.</p>
+    <p>Hosted-credit usage is metered and counts against your tier monthly quota. <b>Credits reset at the start of each monthly billing period and do not roll over.</b> Hosted models run through our relay to third-party inference providers - see the <a href="privacy.html">Privacy Policy</a> for how that data is handled. Bringing your own API key for other providers is subject to those providers terms and pricing, which you pay directly.</p>
 
     <h2>Billing and auto-renewal</h2>
     <p>Payments are processed by <b>Stripe</b>; we don’t receive or store your full card details. Paid tiers bill in advance and <b>renew automatically each month</b> at the then-current price for your tier until you cancel. By subscribing you authorize us, through Stripe, to charge your payment method on each renewal. If a charge fails, we may retry and may suspend paid features until payment succeeds. Do not send payment information by email.</p>
 
     <h2>Cancellation</h2>
-    <p>You can cancel at any time — from your account/billing settings (Stripe customer portal) or by emailing <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>. When you cancel, your subscription stops renewing and you keep access to your paid tier through the <b>end of the period you’ve already paid for</b>; after that your cloud features end, but your local access continues (Lifetime is permanent, and prior subscribers keep local access). Canceling does not retroactively refund the current period.</p>
+    <p>You can cancel at any time - from your account/billing settings (Stripe customer portal) or by emailing <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>. When you cancel, your subscription stops renewing and you keep access to your paid tier through the <b>end of the period you have already paid for</b>; after that hosted/cloud features end. Grandfathered legacy local access remains local/BYOK only. Canceling does not retroactively refund the current period.</p>
 
     <h2>Refunds</h2>
     <p>Paid tiers are billed monthly in advance. <b>We do not provide refunds or credits for partial months, unused token quota, or time remaining after you cancel</b> — cancellation simply stops future renewals. As a goodwill exception during the beta, if the Service was materially unusable for you, you may request a refund within <b>14 days</b> of a charge by emailing <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>; we’ll review these case by case. Nothing here limits any non-waivable refund or withdrawal rights you have under the consumer law of your country.</p>
@@ -121,22 +121,22 @@
     <h2>Acceptable use</h2>
     <ul>
       <li>Don’t use the Service to break the law, infringe others’ rights, or generate or distribute malware or harmful content.</li>
-      <li>Don’t attempt to disrupt, overload, circumvent quotas/billing, reverse-engineer, resell, or gain unauthorized access to the Service or its infrastructure or the bundled-model relay.</li>
-      <li>Don’t use the bundled models in violation of the underlying provider’s (DeepSeek’s) acceptable-use terms.</li>
+      <li>Don’t attempt to disrupt, overload, circumvent quotas/billing, reverse-engineer, resell, or gain unauthorized access to the Service or its infrastructure or the hosted-model relay.</li>
+      <li>Don't use hosted routes in violation of the underlying provider acceptable-use terms.</li>
       <li>You are responsible for the code you write and run with Orrery — <b>including anything the agent does on your machine at your direction</b>: editing or deleting files, running shell commands, installing dependencies, and calling external tools. Review what the agent proposes, and run it only on systems and data you’re willing to put at risk.</li>
     </ul>
 
     <h2>Your code and content</h2>
-    <p>You keep all rights to your own code, repositories, prompts, and content (“Your Content”). We claim no ownership of Your Content. You grant us only the limited, temporary license needed to operate the Service you request — for example, transmitting a prompt and its context through our relay to the bundled-model provider so a completion can be generated and returned to you. We don’t use Your Content to train our own models. <b>You’re responsible for reviewing and testing any changes the agent proposes before you accept, run, or ship them.</b></p>
+    <p>You keep all rights to your own code, repositories, prompts, and content (“Your Content”). We claim no ownership of Your Content. You grant us only the limited, temporary license needed to operate the Service you request — for example, transmitting a prompt and its context through our relay to the hosted-model provider so a completion can be generated and returned to you. We don’t use Your Content to train our own models. <b>You’re responsible for reviewing and testing any changes the agent proposes before you accept, run, or ship them.</b></p>
 
     <h2>Our intellectual property</h2>
     <p>Orrery, the Ephemerent and Orrery names, and this website are owned by <b>[PLACEHOLDER: LEGAL ENTITY]</b>. Orrery is not open source; it is licensed to you for your own use under these terms, and we grant no other rights except as stated here. Outputs generated by the models for you are yours to use, subject to the underlying model providers’ terms.</p>
 
     <h2>Third-party services</h2>
-    <p>The Service relies on third parties — Stripe (payments), Supabase (auth/data), DeepSeek (bundled-model inference via our relay), and OAuth providers (Google, GitHub) — and Orrery can also connect to providers and tools you choose (local models via Ollama, or cloud providers with your own API keys). Your use of those is governed by their terms, and any API keys you supply are yours to manage. We aren’t responsible for third-party services’ availability, output, or acts.</p>
+    <p>The Service relies on third parties — Stripe (payments), Supabase (auth/data), hosted inference providers (DeepSeek API / Doubleword via our relay), and OAuth providers (Google, GitHub) — and Orrery can also connect to providers and tools you choose (local models via Ollama, or cloud providers with your own API keys). Your use of those is governed by their terms, and any API keys you supply are yours to manage. We aren’t responsible for third-party services’ availability, output, or acts.</p>
 
     <h2>Disclaimer of warranties</h2>
-    <p class="legal-note">The Service is provided “as is” and “as available,” without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. <b>AI-generated code and other agent output may be incorrect, insecure, or harmful, and the agent can modify files and execute commands on your machine — review and test everything before relying on it.</b> We don’t warrant that the Service will be uninterrupted, error-free, or that bundled-model providers will remain available.</p>
+    <p class="legal-note">The Service is provided “as is” and “as available,” without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. <b>AI-generated code and other agent output may be incorrect, insecure, or harmful, and the agent can modify files and execute commands on your machine — review and test everything before relying on it.</b> We don’t warrant that the Service will be uninterrupted, error-free, or that hosted-model providers will remain available.</p>
 
     <h2>Limitation of liability</h2>
     <p>To the maximum extent permitted by law, [PLACEHOLDER: LEGAL ENTITY] and its operators are not liable for any indirect, incidental, special, consequential, or punitive damages, or for lost data, profits, business, or for damage to your files, systems, or data caused by code or commands the agent runs at your direction. To the maximum extent permitted by law, our total aggregate liability arising out of or relating to the Service is limited to the amount you paid us for the Service in the three (3) months before the event giving rise to the claim. Some jurisdictions don’t allow certain limitations, so parts of this may not apply to you.</p>

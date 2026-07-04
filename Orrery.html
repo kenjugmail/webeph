@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Orrery — parallel agents you can see">
-<meta name="twitter:description" content="A local-first agentic code editor where parallel agents work in plain sight.">
+<meta name="twitter:description" content="A premium agentic code editor where parallel agents work in plain sight.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og.svg">
 <link rel="stylesheet" href="assets/orrery.css">
 <link rel="stylesheet" href="assets/components.css">
@@ -178,16 +178,16 @@
     <div class="models-grid">
       <div class="reveal">
         <div class="eyebrow">Model-agnostic</div>
-        <h2 class="display" style="margin:18px 0 22px;">One-time unlock.<br>Cloud is a subscription.</h2>
-        <p class="lead" style="margin-bottom:28px;">Point at Ollama for free local inference. Pro adds hosted cloud model access through the Orrery account, with included API credits and one interface for the whole swarm.</p>
+        <h2 class="display" style="margin:18px 0 22px;">Premium from first start.<br>Cloud makes it scale.</h2>
+        <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through local/BYOK routes or Orrery Cloud. Pro, Max, and Ultra add hosted DeepSeek API + Doubleword credits and managed connector automation.</p>
         <div class="prov-table">
-          <div class="prov-row"><span>Ollama</span><span class="mono">local</span><span class="muted">no key required</span></div>
-          <div class="prov-row"><span>OpenAI</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
-          <div class="prov-row"><span>Gemini</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
-          <div class="prov-row"><span>DeepSeek</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
-          <div class="prov-row"><span>Anthropic</span><span class="mono">Pro cloud</span><span class="muted">included credits</span></div>
-          <div class="prov-row"><span>Kimi K2.5</span><span class="mono">Pro cloud</span><span class="muted">AWS Bedrock</span></div>
-          <div class="prov-row"><span>Gemma</span><span class="mono">local · cloud</span><span class="muted">open weights</span></div>
+          <div class="prov-row"><span>Ollama</span><span class="mono">local route</span><span class="muted">subscription or legacy access required to run</span></div>
+          <div class="prov-row"><span>OpenAI-compatible</span><span class="mono">BYOK</span><span class="muted">subscription or legacy access required</span></div>
+          <div class="prov-row"><span>DeepSeek API</span><span class="mono">subscription hosted</span><span class="muted">10M / 25M / 50M credits</span></div>
+          <div class="prov-row"><span>Doubleword</span><span class="mono">subscription hosted</span><span class="muted">10M / 25M / 50M credits</span></div>
+          <div class="prov-row"><span>Anthropic</span><span class="mono">BYOK</span><span class="muted">direct provider route</span></div>
+          <div class="prov-row"><span>Gemini / Kimi / custom</span><span class="mono">BYOK</span><span class="muted">saved workspace routes</span></div>
+          <div class="prov-row"><span>Local open weights</span><span class="mono">local route</span><span class="muted">Ollama / GGUF / OpenAI-compatible</span></div>
         </div>
       </div>
       <div class="reveal d1" id="develop">
@@ -238,37 +238,22 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
-      <h2 class="display">Own it once, or subscribe for cloud.</h2>
-      <p class="lead">Unlock Orrery with a one-time <b>Lifetime</b> purchase — the desktop editor, agents, local models, and all future local updates are yours for good. Add a monthly subscription anytime for bundled cloud models, bring-your-own-key, and the Buddy narrator.</p>
+      <h2 class="display">Subscribe to run Orrery.</h2>
+      <p class="lead">Orrery is premium from first start. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock real agent work, hosted credits, cloud runs, managed connectors, proof vaults, and BYOK/local routes.</p>
     </div>
-    <div class="pricing-grid reveal d1">
-      <div class="price-card price-card-pro">
-        <div class="price-top">
-          <span class="mono">Lifetime</span>
-          <b>$20</b>
-          <small>one-time · local access</small>
-        </div>
-        <p>Own Orrery on your machine, permanently. One payment, no subscription.</p>
-        <ul>
-          <li>Permanent local editor + agents</li>
-          <li>Ollama and other local models</li>
-          <li>Bring your own API key</li>
-          <li>All future local updates</li>
-        </ul>
-        <a class="btn btn-primary" id="pricing-cta-lifetime" href="https://buy.stripe.com/6oUcN55snfUyeX743A3Je04">Buy Lifetime — $20</a>
-      </div>
+    <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro">
         <div class="price-top">
           <span class="mono">Pro</span>
           <b>$40</b>
           <small>per month</small>
         </div>
-        <p>Every cloud capability for heavier, guided work.</p>
+        <p>Premium individual agent work with hosted credits and Nexus operations.</p>
         <ul>
-          <li>DeepSeek Flash — 100M tokens/mo</li>
-          <li>DeepSeek V4 Pro — 15M tokens/mo</li>
-          <li>Bring your own API key (Anthropic, OpenAI, …)</li>
-          <li>Buddy narrator + cloud features</li>
+          <li>DeepSeek API - 10M credits/mo</li>
+          <li>Doubleword - 10M credits/mo</li>
+          <li>Local/BYOK model routes</li>
+          <li>Nexus, Discord/mobile oversight, proof receipts</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-pro" href="login.html">Start Pro</a>
       </div>
@@ -278,12 +263,12 @@
           <b>$100</b>
           <small>per month</small>
         </div>
-        <p>Bigger bundled quotas for daily swarm work.</p>
+        <p>Bigger hosted-credit pools for daily multi-agent work.</p>
         <ul>
-          <li>DeepSeek Flash — 400M tokens/mo</li>
-          <li>DeepSeek V4 Pro — 50M tokens/mo</li>
-          <li>Bring your own API key (Anthropic, OpenAI, …)</li>
-          <li>Buddy narrator + cloud features</li>
+          <li>DeepSeek API - 25M credits/mo</li>
+          <li>Doubleword - 25M credits/mo</li>
+          <li>More cloud/background run capacity</li>
+          <li>Managed connector automation</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-max" href="https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02">Start Max</a>
       </div>
@@ -293,17 +278,17 @@
           <b>$200</b>
           <small>per month</small>
         </div>
-        <p>The biggest quotas, for teams and heavy automation.</p>
+        <p>The largest hosted-credit pools and cloud automation capacity.</p>
         <ul>
-          <li>DeepSeek Flash — 1B tokens/mo</li>
-          <li>DeepSeek V4 Pro — 150M tokens/mo</li>
-          <li>Bring your own API key (Anthropic, OpenAI, …)</li>
-          <li>Buddy narrator + cloud features</li>
+          <li>DeepSeek API - 50M credits/mo</li>
+          <li>Doubleword - 50M credits/mo</li>
+          <li>Research runs and proof vault capacity</li>
+          <li>Priority automation and usage receipts</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-ultra" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Start Ultra</a>
       </div>
     </div>
-    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Token quotas reset each billing month and don’t roll over. Every subscription also includes permanent local access — keep the local editor even if you cancel. Cancel anytime — cloud features run through the end of your paid period, and your local access stays permanent. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
+    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
   </div>
 </section>
 
@@ -331,7 +316,7 @@
         <div class="pkg"><b>Orchestrator</b><span>Splits work, runs agents, merges winners.</span></div>
         <div class="pkg"><b>3D layer</b><span>Builds and checks shaders, parts and scenes.</span></div>
         <div class="pkg"><b>The buddy</b><span>A separate model that narrates the work.</span></div>
-        <div class="pkg"><b>Model providers</b><span>Local free, Pro cloud, behind one interface.</span></div>
+        <div class="pkg"><b>Model providers</b><span>Local/BYOK routes and subscription cloud behind one interface.</span></div>
         <div class="pkg"><b>Search &amp; voice</b><span>Codebase search, memory and live voice.</span></div>
       </div>
       <div class="card card-pad arch-col reveal d2">
@@ -381,7 +366,7 @@
         <p class="muted" style="font-size:14px;max-width:32ch;">Parallel agents you can see. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
       <div><h5>Product</h5><ul><li><a href="#orchestrator">Orchestrator</a></li><li><a href="#buddy">Buddy</a></li><li><a href="#review">3D Review</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
-      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="#pricing">Lifetime $20 + plans from $40/month</a></li></ul></div>
+      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="#pricing">Plans from $40/month</a></li></ul></div>
       <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Vellum.html">Vellum</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
@@ -510,8 +495,8 @@
 .prov-row .mono { font-size: 12.5px; color: var(--violet-lt); }
 
 .pricing-section { border-top: 1px solid var(--line); background: rgba(255,255,255,0.015); }
-.pricing-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-@media (max-width: 1180px){ .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 980px){ .pricing-grid { grid-template-columns: 1fr; } }
 .price-card {
   border: 1px solid var(--line);
   border-radius: var(--r);

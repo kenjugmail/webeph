@@ -3,7 +3,7 @@
 Static marketing site for **Ephemerent** (research lab) and **Orrery** (agentic code editor).
 Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide) — sidecar + web UI.
 
-## Two ways to use Orrery
+## Orrery access model
 
 | | **Local** | **Pro cloud** |
 |---|-----------|-------------------|
@@ -45,7 +45,7 @@ docs/CLOUD.md            Architecture: relay, phone, pairing
   a Pro billing webhook or admin update grants paid cloud access. Enable Pro cloud by pasting
   your Supabase URL + anon key into `site-config.js` (anon key only — see [docs/CLOUD.md](docs/CLOUD.md)).
 - **Pricing is configured in one public catalog.** `assets/site-config.js` defines Free
-  and Pro. Free includes local Orrery only. Pro is `$40/month` and owns every cloud
+  and Pro/Max/Ultra. Preview is not a public no-cost local plan. Pro is `$40/month` and owns cloud
   surface: cloud sign-in, API credits, Buddy, pairing, remote access, and cloud audit logs.
   Add your Stripe Payment Link to `PRO_CHECKOUT_URL` when payments are live.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.

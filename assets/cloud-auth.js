@@ -65,39 +65,32 @@ export function getPlanCatalog() {
   const plans = cfg().PLANS || {};
   return {
     free: plans.free || {
-      name: 'Not unlocked',
-      price: '—',
+      name: 'No active subscription',
+      price: '-',
       cadence: '',
-      summary: 'This account has no entitlement yet. Unlock Orrery with a one-time Lifetime purchase, or subscribe for cloud models.',
-      features: ['Buy Lifetime for permanent local access', 'Or subscribe (Pro / Max / Ultra) for cloud'],
-    },
-    lifetime: plans.lifetime || {
-      name: 'Lifetime',
-      price: 'one-time',
-      cadence: 'local access, forever',
-      summary: 'Own Orrery on your machine, permanently. One payment, no subscription.',
-      features: ['Permanent local Orrery access', 'Local / Ollama models + bring your own API key', 'All future local updates', 'No monthly fee'],
+      summary: 'Preview the app and set up your workspace. Start a trial or subscription to run real agents.',
+      features: ['Preview Nexus and workspace setup', 'Start Pro / Max / Ultra for agent runs and Orrery Cloud'],
     },
     pro: plans.pro || {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Every cloud feature plus bundled models: 100M DeepSeek Flash + 15M DeepSeek V4 Pro tokens/month, and bring your own API key.',
-      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'DeepSeek Flash — 100M tokens/month', 'DeepSeek V4 Pro — 15M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+      summary: 'Premium agent work with hosted DeepSeek API and Doubleword credits, BYOK, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 10M credits/month', 'Doubleword - 10M credits/month', 'Bring your own API key', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
-      summary: 'Everything in Pro with bigger bundled quotas: 400M DeepSeek Flash + 50M DeepSeek V4 Pro tokens/month, and bring your own API key.',
-      features: ['Everything in Pro', 'DeepSeek Flash — 400M tokens/month', 'DeepSeek V4 Pro — 50M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+      summary: 'Bigger hosted-credit pools for daily multi-agent work.',
+      features: ['Everything in Pro', 'DeepSeek API - 25M credits/month', 'Doubleword - 25M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
-      summary: 'The biggest bundled quotas: 1B DeepSeek Flash + 150M DeepSeek V4 Pro tokens/month, and bring your own API key.',
-      features: ['Everything in Pro', 'DeepSeek Flash — 1B tokens/month', 'DeepSeek V4 Pro — 150M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+      summary: 'The largest hosted-credit pools and cloud automation capacity.',
+      features: ['Everything in Max', 'DeepSeek API - 50M credits/month', 'Doubleword - 50M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -140,14 +133,22 @@ function renderPlanSummary(root, profile) {
 
   const catalog = getPlanCatalog();
   const planKey = planFromCloudProfile(profile);
-  const plan = catalog[planKey] || catalog.free;
+  const legacyLocal = profile?.lifetime_access === true;
+  const plan = legacyLocal && planKey === 'free'
+    ? {
+        name: 'Legacy Local Access',
+        price: 'grandfathered',
+        cadence: 'local/BYOK only',
+        summary: 'This grandfathered account can run local and BYOK routes. Hosted credits and Orrery Cloud require Pro, Max, or Ultra.',
+      }
+    : catalog[planKey] || catalog.free;
   const granted = Number(profile?.cloud_credit_granted_cents || 0);
   const used = Number(profile?.cloud_credit_used_cents || 0);
   const remaining = Math.max(granted - used, 0);
   const portal = cfg().BILLING_PORTAL_URL;
   const paid = isPaidPlan(planKey);
 
-  // Static monthly allowances for the bundled models — the live usage meter lives in the IDE.
+  // Static monthly allowances for hosted credits; the live usage meter lives in the IDE.
   const quotas = BUNDLED_QUOTAS[planKey];
   const quotaRows = quotas
     ? Object.entries(quotas).map(([model, tokens]) => `
@@ -188,12 +189,12 @@ function renderPlanSummary(root, profile) {
       <b>${moneyFromCents(remaining)} remaining</b>
     </div>
     <div class="account-plan-meter">
-      <span>Buddy system</span>
-      <b>${profile?.buddy_access || paid ? 'Enabled' : 'Paid tiers'}</b>
+      <span>Nexus cloud features</span>
+      <b>${profile?.buddy_access || paid ? 'Enabled' : 'Subscription required'}</b>
     </div>
     <div class="account-plan-meter">
       <span>Bring your own API key</span>
-      <b>${paid ? 'Enabled' : 'Paid tiers'}</b>
+      <b>${paid || legacyLocal ? 'Enabled' : 'Subscription required'}</b>
     </div>
     <div class="account-plan-actions">${upgrades.join('')}</div>
   `;

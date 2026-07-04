@@ -40,7 +40,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Ephemerent</title>
-<meta name="description" content="How Ephemerent handles data for Orrery: local and free mode keeps your code on your machine; paid tiers add cloud sign-in, billing, a usage meter, and bundled-model inference proxied to DeepSeek. What we collect, who processes it, and your rights.">
+<meta name="description" content="How Ephemerent handles data for Orrery: local/BYOK routes stay on your machine unless exported, while paid tiers add hosted credits, cloud sign-in, billing, and usage meters. What we collect, who processes it, and your rights.">
 <link rel="canonical" href="https://ephemerent.com/privacy.html">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f3f0e8">
@@ -87,29 +87,29 @@
   <div class="legal-updated">Last updated: June 11, 2026 · Beta</div>
 
   <div class="legal-body">
-    <p>Ephemerent builds Orrery, a local-first agentic code editor you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers the one-time Lifetime purchase, local use, and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does — see “Changes” below.</p>
+    <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup, grandfathered legacy local access, and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
 
     <h2>The short version</h2>
-    <p>In local and free mode, Orrery runs entirely on your machine. Your source code, repositories, prompts, and the work the agents do stay on your device — we never receive them. If you subscribe to a paid tier and use the <b>bundled DeepSeek models</b>, the prompts and code needed for those completions are sent through our relay to DeepSeek so they can be generated, and we keep a usage meter (token counts). Beyond that, the data we hold is what’s needed to run a paid account: your sign-in identity, subscription status, and usage counters.</p>
+    <p>In preview/local setup mode, your source code, repositories, prompts, and agent work stay on your device unless you explicitly use a hosted cloud feature. Real agent work requires a trial/subscription or grandfathered legacy local access. If you subscribe and use hosted DeepSeek API or Doubleword routes, the prompt and code context needed for the completion are sent through our relay to the provider, and we keep usage meters for quota enforcement.</p>
 
     <h2>What we collect</h2>
     <ul>
-      <li><b>Account identity.</b> If you sign in (required only for paid tiers), our authentication provider, Supabase, stores your account identifier, email address, and any basic profile fields (display name, avatar URL) your chosen sign-in method provides. You can sign in with Google, GitHub, or an email magic link.</li>
+      <li><b>Account identity.</b> If you sign in, our authentication provider, Supabase, stores your account identifier, email address, and any basic profile fields (display name, avatar URL) your chosen sign-in method provides. You can sign in with Google, GitHub, or an email magic link.</li>
       <li><b>Subscription &amp; billing status.</b> If you subscribe, we store your plan (Pro / Max / Ultra), subscription status (active, canceled, past-due), renewal date, and the customer/subscription identifiers our payment processor, Stripe, gives us. <b>We do not see or store your full card number</b> — Stripe handles payment details directly.</li>
-      <li><b>Usage meter (token counts).</b> When you use bundled models, we count the tokens consumed so we can enforce your monthly quota and show your usage. These counts are stored on your device and on our servers, and are numbers and timestamps — not the content of your prompts.</li>
-      <li><b>Prompts &amp; code sent for bundled-model inference.</b> When you choose a bundled DeepSeek model, the prompt and the code/context required to answer it are transmitted through our relay to DeepSeek’s API to generate the completion, and the result is returned to you. This is the same data you would send if you called DeepSeek directly — it is necessary to provide the feature you requested.</li>
+      <li><b>Usage meter (token counts).</b> When you use hosted models, we count the tokens consumed so we can enforce your monthly quota and show your usage. These counts are stored on your device and on our servers, and are numbers and timestamps — not the content of your prompts.</li>
+      <li><b>Prompts &amp; code sent for hosted-model inference.</b> When you choose a hosted DeepSeek API or Doubleword route, the prompt and code/context required to answer it are transmitted through our relay to the configured provider to generate the completion, and the result is returned to you.</li>
       <li><b>High-level activity logs.</b> When signed in, we may record events such as sign-in, opening the editor, or starting a task, with a timestamp. These record <i>that</i> an action happened, not the contents of your code.</li>
       <li><b>Local-only identity (optional).</b> In local mode you can enter an email/name to label your own on-device audit log. This is stored only in your browser’s/app’s local storage on that device and is not sent to us.</li>
     </ul>
 
     <h2>What we do NOT collect</h2>
-    <p class="legal-note">In local and free mode (including using your own local Ollama models), nothing about your code or prompts leaves your machine — we don’t receive or store it. We do not collect your source code, repositories, or prompt content for any purpose other than proxying a bundled-model request you explicitly make. <b>We do not store prompt or completion content beyond what is needed to relay the request to DeepSeek and return the answer</b>, and we do not use your prompts or code to train our own models. Note that once a bundled-model request reaches DeepSeek, DeepSeek processes it under its own terms (see “Subprocessors”). When you bring your own API key for another provider, that traffic goes to that provider under their terms, not through us.</p>
+    <p class="legal-note">For local/BYOK routes, your code and prompts stay on your machine unless you explicitly export proof/artifacts or choose a hosted route. We do not collect your source code, repositories, or prompt content for any purpose other than proxying a hosted-model request you explicitly make. <b>We do not store prompt or completion content beyond what is needed to relay the request and return the answer</b>, and we do not use your prompts or code to train our own models. When you bring your own API key for another provider, that traffic goes to that provider under its terms, not through us.</p>
 
     <h2>How we use your data</h2>
     <ul>
       <li>To sign you in and keep one identity across the website and the desktop app.</li>
       <li>To provide and bill your subscription, enforce monthly quotas, and show your usage.</li>
-      <li>To proxy bundled-model requests to DeepSeek and return completions to you.</li>
+      <li>To proxy hosted-model requests through configured providers and return completions to you.</li>
       <li>To operate the beta, debug issues, prevent abuse, and keep the service secure.</li>
     </ul>
 
@@ -118,13 +118,13 @@
     <ul>
       <li><b>Stripe</b> — payment processing, subscriptions, and billing. Stripe receives the data needed to charge you and is the system of record for payment details.</li>
       <li><b>Supabase</b> — authentication and the database that stores your account profile, subscription state, and usage counters.</li>
-      <li><b>DeepSeek</b> — the inference provider for the bundled models. When you use a bundled model, your prompt and the code/context for that request are sent to DeepSeek’s API to generate the completion. DeepSeek processes that data under its own terms.</li>
+      <li><b>Hosted inference providers</b> - DeepSeek API, Doubleword, and future configured providers process hosted route requests under their own terms.</li>
       <li><b>Google and GitHub</b> — OAuth sign-in, only if you choose one of them to log in.</li>
       <li><b>Vercel</b> — hosting for this website and related endpoints; standard server logs (e.g. IP address, request metadata) may be generated.</li>
     </ul>
 
     <h2>Cookies and local storage</h2>
-    <p>This website sets no advertising or third-party tracking cookies. The desktop app and the site use local storage (and a Supabase session token/cookie when you are signed in) to keep you logged in and to hold the optional local identity and on-device audit buffer. Clearing your browser’s or app’s local storage removes the local-only data on that device.</p>
+    <p>This website sets no advertising or third-party tracking cookies. The desktop app and the site use local storage (and a Supabase session token/cookie when you are signed in) to keep you logged in and to hold the optional local identity and on-device audit buffer. Clearing your browser’s or app’s local storage removes the on-device data on that device.</p>
 
     <h2>Data retention</h2>
     <p>We keep your account, subscription, and usage data for as long as your account exists and as needed to provide the service and meet legal/accounting obligations (for example, billing records Stripe retains for tax and compliance). Transient prompt/completion content handled by the relay is not retained by us beyond what is needed to fulfil the request. When you ask us to delete your account, we remove your profile and associated logs from our systems; some billing records may be retained where the law requires.</p>

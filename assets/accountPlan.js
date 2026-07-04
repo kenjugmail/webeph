@@ -7,7 +7,7 @@
 export const PLAN_ORDER = ['free', 'pro', 'max', 'ultra'];
 
 export const PLAN_LABELS = {
-  free: 'Free',
+  free: 'No active subscription',
   pro: 'Pro',
   max: 'Max',
   ultra: 'Ultra',
@@ -22,9 +22,9 @@ export const PLAN_PRICES = {
 
 /** Monthly token quotas for the bundled cloud models, per paid tier. */
 export const BUNDLED_QUOTAS = {
-  pro: { 'DeepSeek Flash': 100_000_000, 'DeepSeek V4 Pro': 15_000_000 },
-  max: { 'DeepSeek Flash': 400_000_000, 'DeepSeek V4 Pro': 50_000_000 },
-  ultra: { 'DeepSeek Flash': 1_000_000_000, 'DeepSeek V4 Pro': 150_000_000 },
+  pro: { 'DeepSeek API': 10_000_000, 'Doubleword': 10_000_000 },
+  max: { 'DeepSeek API': 25_000_000, 'Doubleword': 25_000_000 },
+  ultra: { 'DeepSeek API': 50_000_000, 'Doubleword': 50_000_000 },
 };
 
 /** Built-in Stripe Payment Links; site-config.js keys override them. */
@@ -65,15 +65,9 @@ export function checkoutUrlForTier(tier, config = window.ORRERY_CONFIG || {}) {
   return DEFAULT_CHECKOUT_URLS[plan] || null;
 }
 
-/** Whether a profiles row carries the one-time Lifetime (local access) entitlement. */
+/** Whether a profiles row carries a grandfathered legacy local-access entitlement. */
 export function lifetimeAccessFromProfile(profile) {
   return !!profile && typeof profile === 'object' && profile.lifetime_access === true;
-}
-
-/** One-time Lifetime checkout link from config; placeholder/empty values mean "not configured yet". */
-export function lifetimeCheckoutUrl(config = window.ORRERY_CONFIG || {}) {
-  const url = config.LIFETIME_CHECKOUT_URL;
-  return url && !url.includes('YOUR_') ? url : null;
 }
 
 /** 100_000_000 → "100M", 1_000_000_000 → "1B". */

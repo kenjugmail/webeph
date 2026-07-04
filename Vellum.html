@@ -334,29 +334,18 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">One subscription. Both apps.</h2>
-      <p class="lead">Vellum's editor, engine and proof kernel are free to run locally — no account needed. A single Ephemerent subscription unlocks cloud agents in Vellum <em>and</em> the Orrery IDE together: same sign-in, same bundled DeepSeek models, one shared monthly token quota metered server-side.</p>
+      <p class="lead">A single Ephemerent subscription unlocks cloud agents in Vellum and the Orrery IDE together: same sign-in, hosted DeepSeek API + Doubleword credits, BYOK, proof receipts, and one shared account.</p>
     </div>
     <p class="auth-msg ok hidden" id="pricing-active-note" style="margin-bottom:18px;"></p>
-    <div class="price-grid reveal d1">
-      <div class="price-card">
-        <h3>Lifetime</h3>
-        <div class="price-amt">$20<span> one-time</span></div>
-        <ul>
-          <li>Permanent local editor + agents</li>
-          <li>Local / Ollama models</li>
-          <li>Bring your own API key</li>
-          <li>All future local updates</li>
-        </ul>
-        <a class="btn btn-ghost" href="https://buy.stripe.com/6oUcN55snfUyeX743A3Je04">Buy Lifetime — $20</a>
-      </div>
+    <div class="price-grid reveal d1 price-grid-subscriptions">
       <div class="price-card featured">
         <h3>Pro</h3>
         <div class="price-amt">$40<span> /month</span></div>
         <ul>
           <li>Cloud agents in Vellum + Orrery</li>
-          <li>DeepSeek Flash — 100M tokens/mo</li>
-          <li>DeepSeek V4 Pro — 15M tokens/mo</li>
-          <li>Bring your own API key (Anthropic, OpenAI, …)</li>
+          <li>DeepSeek API - 10M credits/mo</li>
+          <li>Doubleword - 10M credits/mo</li>
+          <li>BYOK + Nexus operations</li>
         </ul>
         <a class="btn btn-primary" href="https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00">Subscribe</a>
       </div>
@@ -365,8 +354,9 @@
         <div class="price-amt">$100<span> /month</span></div>
         <ul>
           <li>Everything in Pro</li>
-          <li>DeepSeek Flash — 400M tokens/mo</li>
-          <li>DeepSeek V4 Pro — 50M tokens/mo</li>
+          <li>DeepSeek API - 25M credits/mo</li>
+          <li>Doubleword - 25M credits/mo</li>
+          <li>More cloud-run capacity</li>
         </ul>
         <a class="btn btn-ghost" href="https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02">Subscribe</a>
       </div>
@@ -374,14 +364,15 @@
         <h3>Ultra</h3>
         <div class="price-amt">$200<span> /month</span></div>
         <ul>
-          <li>Everything in Pro</li>
-          <li>DeepSeek Flash — 1B tokens/mo</li>
-          <li>DeepSeek V4 Pro — 150M tokens/mo</li>
+          <li>Everything in Max</li>
+          <li>DeepSeek API - 50M credits/mo</li>
+          <li>Doubleword - 50M credits/mo</li>
+          <li>Research runs and proof vault capacity</li>
         </ul>
         <a class="btn btn-ghost" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Subscribe</a>
       </div>
     </div>
-    <p class="plan-fineprint mono reveal d2">Quotas are shared across Orrery and Vellum and auto-renew monthly via Stripe; cancel anytime. Bundled-model prompts are proxied to DeepSeek. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>. Already subscribed? <a href="vellum-connect.html">Connect Vellum to your account →</a></p>
+    <p class="plan-fineprint mono reveal d2">Credits are shared across Orrery and Vellum and auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>. Already subscribed? <a href="vellum-connect.html">Connect Vellum to your account -></a></p>
   </div>
 </section>
 

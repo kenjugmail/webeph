@@ -7,7 +7,7 @@
  */
 window.ORRERY_CONFIG = {
   DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/orrery-install.zip',
-  /** Optional — POST JSON audit events here. Leave empty for local-only logs. */
+  /** Optional — POST JSON audit events here. Leave empty to keep logs on-device. */
   AUDIT_WEBHOOK_URL: '',
   /**
    * Pro cloud account — from Supabase → Project Settings → API.
@@ -29,8 +29,8 @@ window.ORRERY_CONFIG = {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Every cloud feature: Pro account, API cloud credits, and Buddy.',
-      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'Included API cloud credits', 'Buddy system access', 'Cross-device account and cloud audit log'],
+      summary: 'Hosted DeepSeek API + Doubleword credits, BYOK, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 10M credits/month', 'Doubleword - 10M credits/month', 'BYOK and Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',

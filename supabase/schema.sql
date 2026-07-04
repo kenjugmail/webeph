@@ -29,8 +29,8 @@ alter table public.profiles add column if not exists stripe_subscription_id text
 alter table public.profiles add column if not exists cloud_credit_granted_cents integer not null default 0;
 alter table public.profiles add column if not exists cloud_credit_used_cents integer not null default 0;
 alter table public.profiles add column if not exists buddy_access boolean not null default false;
--- One-time "Lifetime (local access)" entitlement, set permanently by the stripe-webhook on a mode=payment
--- checkout of the Lifetime product (prod_UjzeieCaEBSaDn). Grants local-IDE access only; cloud/bundled
+-- Grandfathered legacy local-access entitlement. This is no longer a public checkout SKU.
+-- Grants local-IDE access only; cloud/bundled
 -- models still require an active pro/max/ultra subscription. Never reset once granted.
 alter table public.profiles add column if not exists lifetime_access boolean not null default false;
 alter table public.profiles add column if not exists plan_updated_at timestamptz not null default now();

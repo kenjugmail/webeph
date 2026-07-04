@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connect Vellum — link your Orrery account</title>
-<meta name="description" content="Sign in once and link the Vellum editor to your Orrery account. One subscription covers both apps with shared bundled-model quotas.">
+<meta name="description" content="Sign in once and link the Vellum editor to your Orrery account. One subscription covers both apps with shared hosted credits.">
 <link rel="canonical" href="https://ephemerent.com/vellum-connect.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -34,7 +34,7 @@
 <main class="auth-main">
   <div class="auth-card" style="max-width:520px;">
     <h1>Connect Vellum</h1>
-    <p class="sub" style="margin-bottom:20px;">Link the Vellum editor to your Orrery account. Own the editor with a one-time Lifetime purchase. One subscription (Pro $40 · Max $100 · Ultra $200 /mo) unlocks cloud agents in both apps, with shared DeepSeek quotas.</p>
+    <p class="sub" style="margin-bottom:20px;">Link the Vellum editor to your Orrery account. One subscription (Pro $40 / Max $100 / Ultra $200 /mo) unlocks cloud agents in both apps, with shared DeepSeek API + Doubleword credits.</p>
 
     <!-- Signed out: same providers as the cloud dashboard. -->
     <div id="cloud-auth-panel" class="hidden">
@@ -124,8 +124,8 @@
           planLine.textContent = `Signed in as ${session.user.email} — Free plan.`;
           const url = checkoutUrlForTier('pro', window.ORRERY_CONFIG || {});
           upgradeNote.innerHTML = url
-            ? `Bundled cloud models need a paid plan: <a href="${url}" style="color:var(--teal-lt);">upgrade to Pro — $40/mo</a> (covers Orrery + Vellum).`
-            : 'Bundled cloud models need a paid plan (Pro $40 · Max $100 · Ultra $200 /mo).';
+            ? `Hosted credits need a paid plan: <a href="${url}" style="color:var(--teal-lt);">upgrade to Pro - $40/mo</a> (covers Orrery + Vellum).`
+            : 'Hosted credits need a paid plan (Pro $40 / Max $100 / Ultra $200 /mo).';
         }
       }).catch(() => {});
 

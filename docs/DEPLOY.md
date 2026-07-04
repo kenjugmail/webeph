@@ -73,7 +73,7 @@ https://www.ephemerent.com/**
 
 ## 5. Pricing / billing
 
-Free includes local Orrery only. Pro is `$40/month` and includes every cloud surface: Google/GitHub/email cloud sign-in, API cloud credits, Buddy, pairing/remote access, and cloud audit logs.
+No public no-cost local tier is advertised. Pro is `$40/month` and includes hosted credits, cloud sign-in, Nexus operations, BYOK/local route entitlement, managed connector automation, and cloud audit/proof features.
 
 Before taking payments:
 
