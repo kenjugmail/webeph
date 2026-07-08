@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Arbiter deployment flow</title>
+  <desc id="desc">A surface-level end-to-end deployment path from Hugging Face to subscribers.</desc>
+  <rect width="1600" height="900" fill="#11100c"/>
+  <g opacity="0.14" stroke="#f3f0e8" stroke-width="1">
+    <path d="M0 225H1600M0 450H1600M0 675H1600"/>
+    <path d="M320 0V900M640 0V900M960 0V900M1280 0V900"/>
+  </g>
+  <g font-family="Hanken Grotesk, Segoe UI, Arial, sans-serif">
+    <text x="100" y="124" fill="#f3f0e8" font-size="58" font-weight="600">End-to-end beta path</text>
+    <text x="104" y="170" fill="#cfc7b7" font-size="25">Private model packet, low-cost RunPod route, hosted relay, subscriber access.</text>
+    <g transform="translate(105 310)">
+      <rect width="265" height="154" rx="18" fill="#f3f0e8"/>
+      <text x="28" y="62" fill="#17160f" font-size="27" font-weight="600">Hugging Face</text>
+      <text x="28" y="98" fill="#6e6a5c" font-size="18">private or gated repo</text>
+    </g>
+    <g transform="translate(430 310)">
+      <rect width="265" height="154" rx="18" fill="#f3f0e8"/>
+      <text x="28" y="62" fill="#17160f" font-size="27" font-weight="600">RunPod</text>
+      <text x="28" y="98" fill="#6e6a5c" font-size="18">llama.cpp + gateway</text>
+    </g>
+    <g transform="translate(755 310)">
+      <rect width="265" height="154" rx="18" fill="#f3f0e8"/>
+      <text x="28" y="62" fill="#17160f" font-size="27" font-weight="600">Relay</text>
+      <text x="28" y="98" fill="#6e6a5c" font-size="18">keys and metering</text>
+    </g>
+    <g transform="translate(1080 310)">
+      <rect width="265" height="154" rx="18" fill="#f3f0e8"/>
+      <text x="28" y="62" fill="#17160f" font-size="27" font-weight="600">Orrery</text>
+      <text x="28" y="98" fill="#6e6a5c" font-size="18">agentic coding UI</text>
+    </g>
+    <path d="M370 388H430M695 388H755M1020 388H1080" stroke="#d7b56d" stroke-width="6" stroke-linecap="round"/>
+    <g transform="translate(285 610)">
+      <rect width="1030" height="118" rx="18" fill="none" stroke="#156054" stroke-width="3"/>
+      <text x="34" y="48" fill="#f3f0e8" font-size="24" font-weight="600">Public model id: arbiter-0.1-beta</text>
+      <text x="34" y="82" fill="#cfc7b7" font-size="19">Subscriber sees a model route. We keep weights, prompts, memory stores, and provider URLs server-side.</text>
+    </g>
+  </g>
+</svg>

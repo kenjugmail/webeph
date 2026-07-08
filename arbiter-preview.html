@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Previewing Arbiter 0.1 Beta - Ephemerent</title>
+<meta name="description" content="Arbiter 0.1 beta is Ephemerent's verifier-grounded coding model route for subscribers: Ornith, latent reasoning, verification, and a low-key RunPod deployment plan.">
+<link rel="canonical" href="https://ephemerent.com/arbiter-preview.html">
+<meta name="theme-color" content="#f3f0e8">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ephemerent">
+<meta property="og:title" content="Previewing Arbiter 0.1 Beta">
+<meta property="og:description" content="A verifier-grounded coding model route with surface-level latent reasoning, subscriber access, and a practical $50 RunPod beta plan.">
+<meta property="og:url" content="https://ephemerent.com/arbiter-preview.html">
+<meta property="og:image" content="https://ephemerent.com/assets/arbiter-preview-hero.svg">
+<meta property="og:image:alt" content="Arbiter 0.1 beta preview">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Previewing Arbiter 0.1 Beta">
+<meta name="twitter:description" content="Ephemerent's verifier-grounded coding model route for subscriber beta access.">
+<meta name="twitter:image" content="https://ephemerent.com/assets/arbiter-preview-hero.svg">
+<link rel="stylesheet" href="assets/ephemerent.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="emk" viewBox="0 0 24 24">
+    <line x1="6" y1="6" x2="18" y2="9" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <line x1="6" y1="6" x2="9" y2="18" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <line x1="18" y1="9" x2="9" y2="18" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <circle cx="6" cy="6" r="2.1" fill="currentColor"/>
+    <circle cx="18" cy="9" r="2.1" fill="currentColor"/>
+    <circle cx="9" cy="18" r="2.1" fill="currentColor"/>
+  </symbol>
+  <symbol id="ring" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    <circle cx="12" cy="12" r="2.4" fill="currentColor"/>
+    <circle cx="12" cy="2" r="1.6" fill="currentColor"/>
+  </symbol>
+</defs></svg>
+
+<div class="ebar">
+  <div class="ebar-in">
+    <a class="ebrand" href="Ephemerent.html">
+      <svg class="mk accent"><use href="#emk"/></svg>
+      <span class="brandcol">
+        <span class="nm">Ephemerent</span>
+        <span class="motto">Ephemeral - Emergent</span>
+      </span>
+    </a>
+    <nav class="enav">
+      <a href="Ephemerent.html#research">Research</a>
+      <a href="Ephemerent.html#work">Work</a>
+      <a href="arbiter-preview.html">Arbiter</a>
+      <a class="est-keep" href="Orrery.html">Orrery -></a>
+      <span class="est">EST. 2026</span>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+  <header class="ap-hero">
+    <div class="ewrap">
+      <span class="lbl rv in">System preview - July 8, 2026</span>
+      <h1 class="rv in">Previewing Arbiter 0.1 beta.</h1>
+      <p class="ap-lede rv in">Arbiter is Ephemerent's closed-source, subscriber-gated coding model route. It pairs a strong coding LLM with verifier-grounded latent reasoning so software agents can propose, check, repair, and keep evidence before returning a final answer.</p>
+      <div class="ap-actions rv in">
+        <a class="ebtn ebtn-fill" href="#deploy">Deployment plan</a>
+        <a class="ebtn" href="#cost">Budget math</a>
+      </div>
+      <figure class="ap-hero-fig rv in">
+        <img src="assets/arbiter-preview-hero.svg" alt="Arbiter preview flow from Ornith to latent workspace to verifier">
+      </figure>
+    </div>
+  </header>
+
+  <section class="esec">
+    <div class="ewrap ap-article">
+      <div class="ap-meta rv">
+        <div><span class="k">Model route</span><span class="v">arbiter-0.1-beta</span></div>
+        <div><span class="k">Backbone</span><span class="v">Ornith 35B for burst demos, 9B for low-key beta</span></div>
+        <div><span class="k">Access</span><span class="v">Subscriber-gated hosted inference</span></div>
+        <div><span class="k">Budget posture</span><span class="v">$50 launch cap, no idle 35B</span></div>
+      </div>
+
+      <article>
+        <p class="ap-drop rv">A normal coding model can write a plausible patch. Arbiter is built around a stricter idea: the model proposes, the verifier decides. In the beta route, a coding LLM generates candidates, Arbiter compares and refines them with compact latent reasoning signals, and external checks decide whether a branch is trusted.</p>
+
+        <h2 class="rv">What is in the beta</h2>
+        <p class="rv">The public subscriber surface is simple: an OpenAI-compatible model route named <code>arbiter-0.1-beta</code>. The route can be used by Orrery/BuddyIDE for agentic coding runs, repair attempts, and benchmark-style evaluation. Internally, Arbiter adds candidate control, repair behavior, memory hints, and verifier-backed selection around the LLM.</p>
+        <p class="rv">The public explanation stays intentionally high level. We can say Arbiter uses latent reasoning as a compact workspace for ranking and refining candidate code paths. We do not disclose training recipes, hidden prompts, traces, memory stores, graph/diffusion internals, or repair heuristics in beta materials.</p>
+
+        <figure class="ap-wide rv">
+          <img src="assets/arbiter-deploy-flow.svg" alt="End-to-end Arbiter beta deployment flow">
+        </figure>
+
+        <h2 class="rv">The LLM used</h2>
+        <p class="rv">The premium beta bundle is built around <code>LordNeel/Ornith-1.0-35B-GGUF-llamacpp-tp1:Q4_K_M</code>. That is the quality path for demos and SWE-style evaluation bursts. For the actual first RunPod rollout, with a $50 budget and no subscribers yet, the recommended live route is a smaller Ornith 9B Q4 model while keeping 35B as a controlled burst route.</p>
+
+        <div class="ap-callout rv">
+          <strong>Recommendation:</strong> launch quiet beta availability on Ornith 9B Q4 first, then turn on Ornith 35B Q4 only for scheduled demos, benchmark runs, and high-signal subscriber trials. Do not keep a 35B pod running 24/7 before revenue.
+        </div>
+
+        <h2 id="cost" class="rv">Cost plan for a $50 budget</h2>
+        <p class="rv">Prices below were checked on July 8, 2026. RunPod bills Pods per hour/per second depending product surface, and Serverless bills workers while they run. Storage and cold starts still matter.</p>
+
+        <figure class="ap-wide rv">
+          <img src="assets/arbiter-cost-map.svg" alt="RunPod cost map for Arbiter beta">
+        </figure>
+
+        <div class="ap-table-wrap rv">
+          <table class="ap-table">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>GPU target</th>
+                <th>Model</th>
+                <th>Approx rate</th>
+                <th>$50 active time</th>
+                <th>Use now?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cheapest quiet beta</td>
+                <td>RTX A5000 Pod</td>
+                <td>Ornith 9B Q4</td>
+                <td>$0.27/hr</td>
+                <td>about 185 hr</td>
+                <td>Yes, if available</td>
+              </tr>
+              <tr>
+                <td>Stable 24GB option</td>
+                <td>L4 Pod</td>
+                <td>Ornith 9B Q4</td>
+                <td>$0.39/hr</td>
+                <td>about 128 hr</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Cheap 48GB burst</td>
+                <td>A40 Pod</td>
+                <td>Ornith 35B Q4</td>
+                <td>$0.44/hr</td>
+                <td>about 113 hr</td>
+                <td>Demos/evals only</td>
+              </tr>
+              <tr>
+                <td>Fast quality burst</td>
+                <td>L40S Pod</td>
+                <td>Ornith 35B Q4</td>
+                <td>$0.99/hr</td>
+                <td>about 50 hr</td>
+                <td>Only if quality matters more than hours</td>
+              </tr>
+              <tr>
+                <td>Serverless 24GB</td>
+                <td>L4/A5000/3090 class</td>
+                <td>Ornith 9B Q4</td>
+                <td>$0.69/hr active</td>
+                <td>about 72 active hr</td>
+                <td>Good once traffic is spiky</td>
+              </tr>
+              <tr>
+                <td>Serverless 48GB</td>
+                <td>A40/A6000 class</td>
+                <td>Ornith 35B Q4</td>
+                <td>$1.22/hr active</td>
+                <td>about 41 active hr</td>
+                <td>Later</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="rv">A 24/7 35B Pod is not the right first move. Even the cheaper A40 path at roughly $0.44/hr is about $321/month before storage. L40S at roughly $0.99/hr is about $723/month before storage. For a no-subscriber beta, stop the pod when demos are done.</p>
+
+        <h2 id="deploy" class="rv">Step-by-step deployment plan</h2>
+        <ol class="ap-steps rv">
+          <li><strong>Create a private or gated HF repo.</strong> Upload the Arbiter HF packet, not public weights. Keep the repo private while the beta is closed source.</li>
+          <li><strong>Start with Ornith 9B Q4 on RunPod.</strong> Use an RTX A5000, L4, RTX 3090, or similar 24GB Pod if you can get it cheaply. This is the low-key model route for first testers.</li>
+          <li><strong>Keep Ornith 35B Q4 as a burst profile.</strong> Use A40, RTX A6000, or L40S 48GB only when you are running a demo, a harness smoke, or a benchmark slice.</li>
+          <li><strong>Serve the model through llama.cpp.</strong> Expose an OpenAI-compatible endpoint, then point the Arbiter gateway at that route.</li>
+          <li><strong>Put the Arbiter gateway behind subscriber auth.</strong> Keep RunPod URLs, HF tokens, provider keys, and relay secrets server-side only.</li>
+          <li><strong>Wire Orrery/BuddyIDE through the hosted relay.</strong> The app should request <code>arbiter-0.1-beta</code>, while Supabase or the gateway owns credentials and metering.</li>
+          <li><strong>Run smoke before announcing.</strong> Check <code>/v1/models</code>, non-stream chat, streaming chat, one coding harness task, and one hidden-test task.</li>
+          <li><strong>Cap spend manually.</strong> Stop Pods after tests. Keep Serverless scale-to-zero for later, when traffic is bursty enough to justify cold-start complexity.</li>
+        </ol>
+
+        <h2 class="rv">Minimal command shape</h2>
+        <pre class="ap-code rv"><code>huggingface-cli repo create your-org/arbiter-0.1-beta --type model --private
+huggingface-cli upload your-org/arbiter-0.1-beta ./hf-upload --repo-type model
+
+# Low-key beta route
+llama serve -hf deepreinforce-ai/Ornith-1.0-9B-GGUF:Q4_K_M \
+  --ctx-size 8192 \
+  --host 0.0.0.0 \
+  --port 8080
+
+# Premium burst route
+llama serve -hf LordNeel/Ornith-1.0-35B-GGUF-llamacpp-tp1:Q4_K_M \
+  --ctx-size 8192 \
+  --host 0.0.0.0 \
+  --port 8080</code></pre>
+
+        <h2 class="rv">Evidence boundary</h2>
+        <p class="rv">Current beta evidence records a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. That is release evidence, not an official leaderboard claim. Public wording should stay precise: Arbiter 0.1 beta is a closed-source subscriber beta for verifier-grounded coding runs.</p>
+
+        <h2 class="rv">Sources for pricing</h2>
+        <ul class="ap-sources rv">
+          <li><a class="elink" href="https://www.runpod.io/pricing" target="_blank" rel="noopener">RunPod GPU pricing</a> for Pod, Serverless, and storage rates.</li>
+          <li><a class="elink" href="https://docs.runpod.io/serverless/pricing" target="_blank" rel="noopener">RunPod Serverless pricing docs</a> for pay-per-second worker behavior.</li>
+          <li><a class="elink" href="https://huggingface.co/docs/hub/en/storage-limits" target="_blank" rel="noopener">Hugging Face storage limits</a> for private repo free tiers and private storage policy.</li>
+          <li><a class="elink" href="https://huggingface.co/pricing" target="_blank" rel="noopener">Hugging Face pricing</a> for private storage pay-as-you-go reference rates.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="efoot" id="contact">
+  <div class="ewrap">
+    <div class="efoot-grid">
+      <div>
+        <div class="lbl" style="margin-bottom:18px;color:var(--accent);">Ephemeral - Emergent</div>
+        <div class="big serif">Building systems that let intelligence emerge, then step back.</div>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="ebtn ebtn-fill" href="Orrery.html">Try Orrery -></a>
+          <a class="ebtn" href="Ephemerent.html">Back to lab</a>
+        </div>
+      </div>
+      <div>
+        <h5>Lab</h5>
+        <ul>
+          <li><a href="Ephemerent.html#research">Research</a></li>
+          <li><a href="Ephemerent.html#approach">Approach</a></li>
+          <li><a href="arbiter-preview.html">Arbiter</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Work</h5>
+        <ul>
+          <li><a href="Orrery.html">Orrery</a></li>
+          <li><a href="Vellum.html">Vellum</a></li>
+          <li><a href="Ephemerent.html#work">Seed</a></li>
+          <li><a href="Ephemerent.html#work">Colony</a></li>
+          <li><a href="mailto:hello@ephemerent.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="efoot-base">
+      <span>(c) 2026 Ephemerent - Independent research lab</span>
+      <span>hello@ephemerent.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  }), { threshold: 0.12 });
+  document.querySelectorAll('.rv:not(.in)').forEach((el) => io.observe(el));
+</script>
+
+<style>
+.ap-hero { padding: 82px 0 58px; border-bottom: 1px solid var(--rule); }
+.ap-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(42px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.025em; max-width: 9ch; margin-top: 26px; }
+.ap-lede { margin-top: 28px; max-width: 66ch; font-size: 20px; color: var(--ink-2); line-height: 1.62; }
+.ap-actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+.ap-hero-fig { margin-top: 52px; border: 1px solid var(--rule); background: var(--ink); overflow: hidden; }
+.ap-hero-fig img, .ap-wide img { display: block; width: 100%; height: auto; }
+.ap-article { max-width: 1120px; }
+.ap-article article { max-width: 820px; margin: 0 auto; }
+.ap-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 62px; }
+.ap-meta div { padding: 18px 18px 18px 0; border-right: 1px solid var(--rule); }
+.ap-meta div:last-child { border-right: 0; }
+.ap-meta .k { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 7px; }
+.ap-meta .v { display: block; font-size: 14.5px; color: var(--ink); line-height: 1.35; }
+.ap-article h2 { font-family: var(--serif); font-size: clamp(27px, 3.5vw, 42px); font-weight: 400; line-height: 1.1; letter-spacing: -0.015em; margin: 58px 0 18px; }
+.ap-article p { font-size: 18px; color: var(--ink-2); line-height: 1.72; margin: 0 0 18px; }
+.ap-drop { font-size: 22px !important; color: var(--ink) !important; }
+.ap-wide { width: min(100%, 1080px); margin: 42px auto; border: 1px solid var(--rule); background: var(--card); overflow: hidden; }
+.ap-callout { border-left: 3px solid var(--accent); background: var(--card); padding: 20px 24px; margin: 28px 0; color: var(--ink-2); font-size: 17px; line-height: 1.65; }
+.ap-table-wrap { overflow-x: auto; border: 1px solid var(--rule); background: var(--card); margin: 30px 0; }
+.ap-table { width: 100%; border-collapse: collapse; min-width: 820px; }
+.ap-table th, .ap-table td { text-align: left; border-bottom: 1px solid var(--rule); padding: 15px 16px; font-size: 14.5px; vertical-align: top; }
+.ap-table th { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: var(--paper-2); }
+.ap-table tr:last-child td { border-bottom: 0; }
+.ap-steps { margin: 24px 0 0; padding-left: 24px; display: flex; flex-direction: column; gap: 14px; }
+.ap-steps li { color: var(--ink-2); font-size: 17px; line-height: 1.65; padding-left: 8px; }
+.ap-code { margin: 24px 0 0; padding: 22px; overflow-x: auto; background: #17160f; color: #f3f0e8; border-radius: 4px; border: 1px solid rgba(23,22,15,0.25); font-family: var(--mono); font-size: 13px; line-height: 1.55; }
+.ap-sources { margin: 20px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+.ap-sources li { color: var(--muted); font-size: 15px; line-height: 1.6; }
+code { font-family: var(--mono); font-size: 0.9em; background: rgba(23,22,15,0.06); padding: 0.12em 0.3em; border-radius: 3px; }
+@media (max-width: 860px) {
+  .ap-meta { grid-template-columns: repeat(2, 1fr); }
+  .ap-meta div:nth-child(2) { border-right: 0; }
+  .ap-meta div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+}
+@media (max-width: 620px) {
+  .ap-hero { padding-top: 62px; }
+  .ap-meta { grid-template-columns: 1fr; }
+  .ap-meta div { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .ap-meta div:last-child { border-bottom: 0; }
+  .ap-article p { font-size: 16.5px; }
+  .ap-drop { font-size: 19px !important; }
+}
+</style>
+</body>
+</html>
