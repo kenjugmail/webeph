@@ -1,36 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
   <title id="title">Arbiter beta cost map</title>
-  <desc id="desc">A budget comparison for small beta deployment options.</desc>
+  <desc id="desc">A public comparison of small and premium beta deployment options.</desc>
   <rect width="1600" height="900" fill="#f3f0e8"/>
   <g font-family="Hanken Grotesk, Segoe UI, Arial, sans-serif">
-    <text x="100" y="120" fill="#17160f" font-size="58" font-weight="600">Run it low-key first</text>
-    <text x="104" y="166" fill="#6e6a5c" font-size="25">With a $50 launch budget, keep 35B as a demo/eval pod and use 9B for quiet availability.</text>
+    <text x="100" y="120" fill="#17160f" font-size="58" font-weight="600">Scale the route with demand</text>
+    <text x="104" y="166" fill="#6e6a5c" font-size="25">Use efficient routes for early access and larger routes when the verified outcome is worth it.</text>
     <g transform="translate(110 275)">
       <rect width="390" height="390" rx="18" fill="#faf8f2" stroke="#d7d0c0" stroke-width="2"/>
-      <text x="34" y="64" fill="#156054" font-size="20" font-weight="700" letter-spacing="2">RECOMMENDED</text>
-      <text x="34" y="116" fill="#17160f" font-size="36" font-weight="600">Ornith 9B</text>
-      <text x="34" y="154" fill="#38362c" font-size="21">Always-ready beta smoke</text>
+      <text x="34" y="64" fill="#156054" font-size="20" font-weight="700" letter-spacing="2">PREVIEW ROUTE</text>
+      <text x="34" y="116" fill="#17160f" font-size="36" font-weight="600">Ornith 9B class</text>
+      <text x="34" y="154" fill="#38362c" font-size="21">Efficient early access</text>
       <text x="34" y="226" fill="#17160f" font-size="64" font-weight="600">$0.27-$0.46/hr</text>
       <text x="34" y="270" fill="#6e6a5c" font-size="20">A5000, L4, or 3090 class GPU.</text>
-      <text x="34" y="312" fill="#6e6a5c" font-size="20">About 108-185 active hours from $50.</text>
+      <text x="34" y="312" fill="#6e6a5c" font-size="20">Good for availability and basic checks.</text>
     </g>
     <g transform="translate(605 275)">
       <rect width="390" height="390" rx="18" fill="#faf8f2" stroke="#d7d0c0" stroke-width="2"/>
-      <text x="34" y="64" fill="#b1542d" font-size="20" font-weight="700" letter-spacing="2">BURST ONLY</text>
-      <text x="34" y="116" fill="#17160f" font-size="36" font-weight="600">Ornith 35B</text>
-      <text x="34" y="154" fill="#38362c" font-size="21">Quality demo and SWE-style evals</text>
+      <text x="34" y="64" fill="#b1542d" font-size="20" font-weight="700" letter-spacing="2">PREMIUM ROUTE</text>
+      <text x="34" y="116" fill="#17160f" font-size="36" font-weight="600">Ornith 35B class</text>
+      <text x="34" y="154" fill="#38362c" font-size="21">Higher-quality coding sessions</text>
       <text x="34" y="226" fill="#17160f" font-size="64" font-weight="600">$0.44-$0.99/hr</text>
       <text x="34" y="270" fill="#6e6a5c" font-size="20">A40/A6000/L40S 48GB class GPU.</text>
-      <text x="34" y="312" fill="#6e6a5c" font-size="20">About 50-113 active hours from $50.</text>
+      <text x="34" y="312" fill="#6e6a5c" font-size="20">Best when the larger model pays off.</text>
     </g>
     <g transform="translate(1100 275)">
       <rect width="390" height="390" rx="18" fill="#17160f" stroke="#156054" stroke-width="2"/>
-      <text x="34" y="64" fill="#d7b56d" font-size="20" font-weight="700" letter-spacing="2">DO NOT DO YET</text>
-      <text x="34" y="116" fill="#f3f0e8" font-size="36" font-weight="600">24/7 35B</text>
-      <text x="34" y="154" fill="#cfc7b7" font-size="21">No subscribers means idle burn</text>
+      <text x="34" y="64" fill="#d7b56d" font-size="20" font-weight="700" letter-spacing="2">ALWAYS-ON PREMIUM</text>
+      <text x="34" y="116" fill="#f3f0e8" font-size="36" font-weight="600">35B all month</text>
+      <text x="34" y="154" fill="#cfc7b7" font-size="21">Use after demand is proven</text>
       <text x="34" y="226" fill="#f3f0e8" font-size="64" font-weight="600">$320-$723/mo</text>
       <text x="34" y="270" fill="#cfc7b7" font-size="20">Before storage, relay, and retries.</text>
-      <text x="34" y="312" fill="#cfc7b7" font-size="20">Turn it on for launches, then stop it.</text>
+      <text x="34" y="312" fill="#cfc7b7" font-size="20">Measure cost per verified result.</text>
     </g>
     <text x="104" y="780" fill="#6e6a5c" font-size="20">Prices checked July 8, 2026. Actual spend depends on uptime, storage, model cache size, cold starts, and traffic.</text>
   </g>
