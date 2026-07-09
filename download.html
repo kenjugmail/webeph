@@ -69,7 +69,13 @@
         <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
+      <div class="release-status" id="release-status">
+        <div><b>Current beta</b><span id="release-version">0.1.0-beta</span></div>
+        <div><b>Update mode</b><span id="release-update-mode">Manual portable update</span></div>
+        <div><b>Verify download</b><span class="mono" id="release-sha">SHA-256 on release page</span></div>
+        <a id="release-page-link" href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">Open release notes and checksums</a>
+      </div>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
         <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, and Orrery Cloud.</span></div>
@@ -118,6 +124,11 @@
 @media (max-width:560px){ .plan-strip { grid-template-columns:1fr; } }
 .plan-fineprint { margin:-12px 0 22px; font-size:11.5px; line-height:1.55; color:var(--faint); }
 .plan-fineprint a { color:var(--teal-lt); }
+.release-status { display:grid; gap:10px; margin:0 0 24px; padding:14px; border:1px solid var(--line); border-radius:var(--r-sm); background:linear-gradient(180deg,var(--bg-2),rgba(255,255,255,.02)); }
+.release-status div { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
+.release-status b { color:var(--ink); font-size:13px; }
+.release-status span { color:var(--muted); font-size:12.5px; text-align:right; overflow-wrap:anywhere; }
+.release-status a { color:var(--teal-lt); font-size:13px; }
 </style>
 
 <script src="assets/site-config.js"></script>
@@ -128,6 +139,19 @@
   import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES } from './assets/accountPlan.js';
   mountDownloadPage();
   mountNavAccount();
+  const releaseConfig = window.ORRERY_CONFIG || {};
+  const releaseVersion = document.getElementById('release-version');
+  if (releaseVersion && releaseConfig.RELEASE_VERSION) releaseVersion.textContent = String(releaseConfig.RELEASE_VERSION);
+  const releaseMode = document.getElementById('release-update-mode');
+  if (releaseMode) {
+    releaseMode.textContent = releaseConfig.UPDATE_MODE === 'manual-portable-beta'
+      ? 'Manual portable update - download the newest beta zip'
+      : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
+  }
+  const releaseSha = document.getElementById('release-sha');
+  if (releaseSha && releaseConfig.RELEASE_SHA256) releaseSha.textContent = `SHA-256 ${String(releaseConfig.RELEASE_SHA256)}`;
+  const releasePage = document.getElementById('release-page-link');
+  if (releasePage && releaseConfig.RELEASE_PAGE_URL) releasePage.href = String(releaseConfig.RELEASE_PAGE_URL);
   if (cloudConfigured()) {
     document.getElementById('cloud-signin-cta')?.classList.remove('hidden');
 

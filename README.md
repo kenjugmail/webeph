@@ -1,59 +1,63 @@
 # Ephemerent + Orrery
 
 Static marketing site for **Ephemerent** (research lab) and **Orrery** (agentic code editor).
-Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide) — sidecar + web UI.
+Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide): sidecar + web UI.
 
 ## Orrery access model
 
-| | **Local** | **Pro cloud** |
-|---|-----------|-------------------|
-| Setup | None | Supabase + billing (~15 min) |
-| Auth | Optional email on device | Pro: Google / GitHub / email |
-| Access | Desktop editor | Desktop + phone (relay coming) |
-| Pricing | Preview setup; legacy local access for existing buyers | Pro/Max/Ultra subscriptions with DeepSeek API, Doubleword, and Arbiter credits |
-| Think of it as | An offline desktop editor | An agentic IDE you can reach from desktop + phone |
+| | **Preview / desktop setup** | **Orrery Cloud** |
+|---|---|---|
+| Setup | Download beta, sign in, open Nexus, prepare workspace/model routes | Supabase auth + Stripe billing |
+| Auth | Required for current beta account flow | Google / GitHub / email |
+| Access | Preview setup; real runs require subscription/trial or legacy local access | Pro/Max/Ultra subscriptions |
+| Pricing | No public permanent free local plan | DeepSeek API, Doubleword, Arbiter, managed connectors, proof vault, cloud runs |
+| Think of it as | Installed Orrery shell and local workspace setup | Hosted agent capacity and account-backed operations |
 
 See **[docs/CLOUD.md](docs/CLOUD.md)** for cloud setup and the phone/remote roadmap.
 
 ## Structure
 
-```
-index.html               Redirect → Ephemerent.html (the "/" landing)
+```text
+index.html               Redirect -> Ephemerent.html (the "/" landing)
 Ephemerent.html          Lab page (research, work, approach, 10% pledge)
 arbiter-preview.html     Arbiter 0.1 beta blog/system preview + RunPod budget plan
 Orrery.html              Orrery product page
 Vellum.html              Vellum (3D) product page
-download.html            Download / beta-access gate (RELEASE_AVAILABLE flag)
-login.html               Local vs Pro cloud sign-in
-cloud.html               Pro cloud dashboard + sign-in
+download.html            Download + current beta update channel
+login.html               Sign-in
+cloud.html               Cloud dashboard + sign-in
 privacy.html             Privacy Policy
 terms.html               Terms of Service
-robots.txt · sitemap.xml SEO
+robots.txt / sitemap.xml SEO
 assets/
-  site-config.js         Download URL, RELEASE_AVAILABLE, Pro cloud auth keys
+  site-config.js         Download URL, release metadata, Supabase anon key, plan catalog
   identity.js            Local optional email + audit
-  cloud-auth.js          Pro cloud OAuth (when configured)
-  favicon.svg · og.svg   Brand icon + social card
+  cloud-auth.js          Cloud OAuth when configured
+  favicon.svg / og.svg   Brand icon + social card
 docs/CLOUD.md            Architecture: relay, phone, pairing
+docs/DEPLOY.md           Vercel/domain/download/update release steps
 ```
 
 ## Beta status
 
-- **Download is gated.** `RELEASE_AVAILABLE: false` in `assets/site-config.js` →
-  `download.html` shows "request beta access". Flip to `true` once a binary-only
-  GitHub Release in `kenjugmail/orrery-releases` is live (see [docs/DEPLOY.md](docs/DEPLOY.md)).
-- **Closed-beta waitlist.** New cloud auth identities default to local/free entitlements until
-  a Pro billing webhook or admin update grants paid cloud access. Enable Pro cloud by pasting
-  your Supabase URL + anon key into `site-config.js` (anon key only — see [docs/CLOUD.md](docs/CLOUD.md)).
-- **Pricing is configured in one public catalog.** `assets/site-config.js` defines preview/no-active-subscription
-  plus Pro/Max/Ultra. Preview is not a public no-cost local plan. Paid plans own cloud
-  surface: cloud sign-in, DeepSeek API, Doubleword, and Arbiter credits, Buddy, pairing, remote access, and cloud audit logs.
-  Add your Stripe Payment Link to `PRO_CHECKOUT_URL` when payments are live.
+- **Download is live.** `RELEASE_AVAILABLE: true` in `assets/site-config.js` makes
+  `download.html` show the Windows beta packet.
+- **Update channel is manual for the portable beta.** Keep `RELEASE_VERSION`,
+  `RELEASE_PAGE_URL`, `RELEASE_SHA256`, and `UPDATE_MODE` synchronized with the
+  binary-only `kenjugmail/orrery-releases` GitHub Release. The desktop app has
+  electron-updater feed wiring for signed installer builds later.
+- **Closed beta accounts.** New cloud auth identities have no cloud entitlement until
+  a billing webhook, trial, invite, or admin grant updates Supabase profile metadata.
+- **Pricing is configured in one public catalog.** `assets/site-config.js` defines
+  preview/no-active-subscription plus Pro/Max/Ultra. Preview is not a public free
+  local plan. Paid plans own cloud sign-in, DeepSeek API, Doubleword, Arbiter credits,
+  Nexus cloud features, managed connectors, and cloud audit/proof.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
 
 ## Deploy (Vercel + ephemerent.com)
 
-See **[docs/DEPLOY.md](docs/DEPLOY.md)** — import `kenjugmail/webeph` on Vercel (no build), then point Porkbun DNS at Vercel.
+See **[docs/DEPLOY.md](docs/DEPLOY.md)**: import `kenjugmail/webeph` on Vercel
+(no build), then point Porkbun DNS at Vercel.
 
 ## Local dev
 
@@ -67,5 +71,5 @@ python -m http.server 8080
 cd c:\Users\kenju\Documents\buddyide
 pnpm install
 pnpm --filter @ed/sidecar start   # terminal 1
-pnpm --filter @ed/web dev         # terminal 2 → http://localhost:5173
+pnpm --filter @ed/web dev         # terminal 2 -> http://localhost:5173
 ```
