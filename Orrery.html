@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orrery — parallel agents you can see · by Ephemerent</title>
-<meta name="description" content="Orrery is a beta agentic code editor: describe a goal, watch agents plan and propose changes, review evidence, and decide what to apply. Results depend on your project, models, and review.">
+<title>Orrery Nexus — agent runs you can supervise · by Ephemerent</title>
+<meta name="description" content="Orrery is a beta agentic code editor built around Nexus: open a workspace, choose a model route, run agents, review progress, usage, and proof before you accept work.">
 <link rel="canonical" href="https://ephemerent.com/Orrery.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Orrery — parallel agents you can see">
-<meta property="og:description" content="A beta agentic code editor where agents plan, propose, test, and show evidence while you stay in control.">
+<meta property="og:title" content="Orrery Nexus — agent runs you can supervise">
+<meta property="og:description" content="A beta agentic code editor where Nexus helps you open a workspace, run agents, and review evidence while you stay in control.">
 <meta property="og:url" content="https://ephemerent.com/Orrery.html">
 <meta property="og:image" content="https://ephemerent.com/assets/og.svg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Orrery — parallel agents you can see">
+<meta property="og:image:alt" content="Orrery Nexus — agent runs you can supervise">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Orrery — parallel agents you can see">
-<meta name="twitter:description" content="A premium agentic code editor where parallel agents work in plain sight.">
+<meta name="twitter:title" content="Orrery Nexus — agent runs you can supervise">
+<meta name="twitter:description" content="A premium agentic code editor where Nexus keeps agent work visible, scoped, and reviewable.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og.svg">
 <link rel="stylesheet" href="assets/orrery.css">
 <link rel="stylesheet" href="assets/components.css">
@@ -48,12 +48,11 @@
       <a class="brand-by mono" href="Ephemerent.html" style="font-size:11px;color:var(--faint);letter-spacing:.1em;transition:color .2s;">by Ephemerent</a>
     </div>
     <div class="nav-links">
-      <a href="#orchestrator">Orchestrator</a>
-      <a href="#buddy">Buddy</a>
-      <a href="#review">3D Review</a>
+      <a href="#nexus">Nexus</a>
+      <a href="#run-loop">Run loop</a>
       <a href="#models">Models</a>
       <a href="#pricing">Pricing</a>
-      <a href="#architecture">Architecture</a>
+      <a href="#safety">Safety</a>
     </div>
     <div class="nav-spacer"></div>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
@@ -66,18 +65,18 @@
   <div class="hero-veil"></div>
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <div class="eyebrow reveal in">An agentic code editor by Ephemerent</div>
-      <h1 class="display hero-h1 reveal in d1">Parallel agents,<br><span class="grad-text">in orbit.</span></h1>
-      <p class="lead reveal in d2">Orrery is a code editor you talk to. Give it a goal and it can split work across agents, propose changes in isolated copies, run checks, and show evidence before you decide what to apply. Pick the models you want and watch the work happen in view.</p>
+      <div class="eyebrow reveal in">Orrery Nexus by Ephemerent</div>
+      <h1 class="display hero-h1 reveal in d1">Agent runs,<br><span class="grad-text">under control.</span></h1>
+      <p class="lead reveal in d2">Orrery is a premium agentic code editor centered on Nexus: open a workspace, pick a model route, send a task, watch the run stream, then review usage, proof, and safety receipts before you accept anything.</p>
       <div class="hero-cta reveal in d3">
         <a class="btn btn-primary" href="download.html">Get started <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#orchestrator">See how it works</a>
+        <a class="btn btn-ghost" href="#nexus">See Nexus</a>
       </div>
       <div class="hero-providers reveal in d4">
         <span class="mono">works with</span>
         <span class="prov prov-local">Ollama · local</span><span class="prov">OpenAI</span><span class="prov">Gemini</span><span class="prov">DeepSeek</span><span class="prov">Anthropic</span><span class="prov">Kimi K2.5</span><span class="prov">Gemma</span>
       </div>
-      <p class="hero-note mono reveal in d4">Ollama, OpenAI, Gemini, DeepSeek, Anthropic — mix providers task by task.</p>
+      <p class="hero-note mono reveal in d4">Ollama, OpenAI, Gemini, DeepSeek, Anthropic, Arbiter — choose routes per workspace and task.</p>
       <p class="hero-note mono reveal in d4">Beta software. Agent output can be wrong or unsafe; keep backups and review changes before running or shipping them.</p>
     </div>
   </div>
@@ -88,87 +87,70 @@
 <section class="section-sm loop-section">
   <div class="wrap">
     <div class="loop-rail reveal">
-      <div class="loop-step"><span class="loop-num mono">01</span><b>describe</b><span>tell it the goal</span></div>
+      <div class="loop-step"><span class="loop-num mono">01</span><b>open</b><span>choose a workspace</span></div>
       <div class="loop-arrow">→</div>
-      <div class="loop-step"><span class="loop-num mono">02</span><b>it edits</b><span>across many files</span></div>
+      <div class="loop-step"><span class="loop-num mono">02</span><b>route</b><span>pick a model</span></div>
       <div class="loop-arrow">→</div>
-      <div class="loop-step"><span class="loop-num mono">03</span><b>it tests</b><span>runs your suite</span></div>
+      <div class="loop-step"><span class="loop-num mono">03</span><b>send</b><span>run the agent</span></div>
       <div class="loop-arrow">→</div>
-      <div class="loop-step"><span class="loop-num mono">04</span><b>it fixes</b><span>corrects what breaks</span></div>
-      <div class="loop-loopback mono">Plan or Act mode · approval gates available · keep your own backups</div>
+      <div class="loop-step"><span class="loop-num mono">04</span><b>review</b><span>proof and usage</span></div>
+      <div class="loop-loopback mono">Beta software · approval gates available · keep your own backups</div>
     </div>
   </div>
 </section>
 
-<!-- ============ ORCHESTRATOR / SWARM ============ -->
-<section class="section" id="orchestrator">
+<!-- ============ NEXUS ============ -->
+<section class="section" id="nexus">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Parallel agents</div>
-      <h2 class="display">Run agent attempts in parallel, then review the evidence.</h2>
-      <p class="lead">Orrery can break a goal into tasks and give each attempt its own workspace copy. Reviewers and tests help rank the attempts, but you stay responsible for deciding what is safe to apply. When a job does not need parallel agents, Orrery can stay with a simpler single-agent path.</p>
+      <div class="eyebrow">Orrery Nexus</div>
+      <h2 class="display">One console for workspaces, agents, routes, and receipts.</h2>
+      <p class="lead">Nexus is the daily control surface: recent workspaces on the left, the active run in the center, and files, model route, agent details, proof, and usage on the right. It is built to make the common path obvious without hiding the review trail.</p>
     </div>
     <div class="card card-pad reveal d1 swarm-card">
       <div id="swarm"></div>
     </div>
     <div class="pipe reveal d2">
-      <div class="pipe-step"><span class="pipe-n mono">01</span><b>Plan</b><span>Split the goal into tasks.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Isolate</b><span>One repo copy per task.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Try</b><span>Several attempts each.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">04</span><b>Judge</b><span>Score the evidence.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">05</span><b>Review</b><span>You choose what to apply.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">06</span><b>Measure</b><span>Track tests, cost, and risk.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">01</span><b>Workspace</b><span>Open a folder and initialize Nexus.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Route</b><span>Pick local, BYOK, or hosted credits.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Agent</b><span>Choose a local or connected agent.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">04</span><b>Safety</b><span>Check scope and permissions.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">05</span><b>Run</b><span>Watch progress and file activity.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">06</span><b>Receipt</b><span>Review proof, boundary, and usage.</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============ BUDDY ============ -->
-<section class="section buddy-section" id="buddy">
-  <div class="glow-orb" style="width:420px;height:420px;background:rgba(61,127,184,0.16);top:10%;left:-100px;"></div>
+<!-- ============ RUN LOOP ============ -->
+<section class="section" id="run-loop">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Your buddy</div>
-      <h2 class="display">A buddy that watches — and reacts.</h2>
-      <p class="lead">A friendly 3D character sits beside your work, run by its own separate model. It watches what the coding agent does and reacts in real time — focused while it thinks, worried when tests fail, pleased when they pass. It talks out loud and listens back, and it stays completely out of the coding agent's way.</p>
+      <div class="eyebrow">Daily run loop</div>
+      <h2 class="display">Send work from one place, then decide what to trust.</h2>
+      <p class="lead">The default flow is deliberately small: open a workspace, choose a route, send a prompt, watch the visible progress stream, then inspect summary, changed-file metadata, usage, and safety receipts. Deeper controls live in Nexus Settings.</p>
     </div>
-    <div class="card card-pad reveal d1">
-      <div id="buddyApp"></div>
-    </div>
-    <div class="card card-pad reveal d2 dial-card">
-      <div class="dial-head">
-        <div>
-          <div class="eyebrow" style="margin-bottom:8px;">The tutor dial</div>
-          <h3 class="display" style="font-size:24px;">Set how much it explains</h3>
-        </div>
-        <div class="dial-modes" id="dialModes">
-          <button data-p="8" data-r="Patient tutor. It narrates each step and waits for your nod; the buddy explains the why, gently." class="on">walk me through it</button>
-          <button data-p="50" data-r="Balanced. It moves in confident chunks and checks in at the seams; the buddy comments on the big decisions.">guide me</button>
-          <button data-p="92" data-r="Quiet autopilot. It just does the work and reports back; the buddy cheers the wins and flags the problems.">just do it</button>
-        </div>
-      </div>
-      <div class="dial-track"><div class="dial-knob" id="knob" style="left:8%;"></div></div>
-      <div class="dial-ends mono"><span>walk me through it</span><span>just do it</span></div>
-      <div class="dial-readout" id="dialReadout">Patient tutor. It narrates each step and waits for your nod; the buddy explains the why, gently.</div>
+    <div class="cap-grid cap-grid-4">
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⌘</div><h4>Open folder</h4><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◉</div><h4>Pick a route</h4><p>Use local, BYOK, or subscription-hosted routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">▷</div><h4>Run an agent</h4><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
+      <div class="card card-pad card-hover reveal d3"><div class="cap-ic">◇</div><h4>Review receipts</h4><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ 3D REVIEW ============ -->
-<section class="section" id="review">
+<!-- ============ SAFETY ============ -->
+<section class="section" id="safety">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">3D review</div>
-      <h2 class="display">Review for work you can actually see.</h2>
-      <p class="lead">Some work is visual: a shader, a 3D part, or a game scene. Orrery can help generate candidates, run available checks, and show before-and-after evidence. Visual and automated checks are aids, not guarantees; review output before relying on it.</p>
-    </div>
-    <div class="reveal d1">
-      <div id="reviewApp"></div>
+      <div class="eyebrow">Safety and beta boundaries</div>
+      <h2 class="display">Helpful automation, not blind trust.</h2>
+      <p class="lead">Orrery can make mistakes, and generated code may be insecure, incomplete, or unsuitable for your project. The product is designed to keep work reviewable: scope checks, permission gates, model-route labels, proof summaries, and usage receipts stay visible where supported.</p>
     </div>
     <div class="chips reveal d2">
-      <div class="chip"><span class="chip-ic" style="color:var(--violet-lt)">▦</span><b>Shaders</b><span>Write it, check it compiles, score the look.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--teal-lt)">◈</span><b>3D parts</b><span>Inspect, compare, check it's printable.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--brass-lt)">⬡</span><b>Game scenes</b><span>Collision and an automated playtest.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--green)">◐</span><b>Splats</b><span>Preview and inspect point-cloud captures.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--violet-lt)">▦</span><b>Review before shipping</b><span>You are responsible for accepting, running, and deploying generated code.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--teal-lt)">◈</span><b>No guaranteed outcome</b><span>Performance depends on task, context, models, tools, and provider availability.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--brass-lt)">⬡</span><b>Keep backups</b><span>Use source control and inspect changes before relying on them.</span></div>
+      <div class="chip"><span class="chip-ic" style="color:var(--green)">◐</span><b>Cloud varies</b><span>Beta routes, quotas, latency, and providers may change or pause.</span></div>
     </div>
   </div>
 </section>
@@ -196,14 +178,14 @@
         <div class="terminal">
           <div class="term-bar"><span class="td td-r"></span><span class="td td-y"></span><span class="td td-g"></span><span class="term-title mono">Orrery</span></div>
           <div class="term-body mono">
-            <div class="tl"><span class="tc">›</span> open project</div>
-            <div class="tl"><span class="tok-violet">model</span> ollama · qwen2.5-coder <span class="tok-teal">(local)</span></div>
+            <div class="tl"><span class="tc">›</span> open workspace</div>
+            <div class="tl"><span class="tok-violet">route</span> ollama · local <span class="tok-teal">(private)</span></div>
             <div class="tl tdim"># ready</div>
             <div class="tl">&nbsp;</div>
-            <div class="tl"><span class="tc">›</span> “add a splat viewer and make the tests pass”</div>
-            <div class="tl"><span class="tok-violet">plan</span>   4 tasks · running in parallel</div>
-            <div class="tl"><span class="tok-teal">verify</span> tests <span class="tok-ok">✓</span>  typecheck <span class="tok-ok">✓</span>  lint <span class="tok-ok">✓</span></div>
-            <div class="tl"><span class="tok-teal">buddy</span>  “checks are green; review before shipping”<span class="term-caret">▍</span></div>
+            <div class="tl"><span class="tc">›</span> “fix the failing form tests”</div>
+            <div class="tl"><span class="tok-violet">nexus</span>  safety check · route ready · agent ready</div>
+            <div class="tl"><span class="tok-teal">tools</span>  read files · patch proposed · tests run</div>
+            <div class="tl"><span class="tok-teal">summary</span> proof ready · review before shipping<span class="term-caret">▍</span></div>
           </div>
         </div>
       </div>
@@ -217,20 +199,20 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Built for trust</div>
       <h2 class="display">Everything it does stays in view.</h2>
-      <p class="lead">Orrery shows plans, tool activity, test output, review receipts, and cost data in one place. The log helps you audit the work, but it is not a substitute for your own review and backups.</p>
+      <p class="lead">Orrery shows plans, tool activity, test output, review receipts, and usage data in one place. The log helps you audit the work, but it is not a substitute for your own review and backups.</p>
     </div>
     <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Checks before apply</h4><p>When configured, runs can include tests, type-checking, linting, security checks, and review receipts before you keep a change.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Safety check first</h4><p>Launches can record workspace scope, route state, permissions, and basic setup risk before work starts.</p></div>
       <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h4>Searches your codebase</h4><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
       <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h4>Scoped memory</h4><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h4>Talk and interrupt</h4><p>Speak to it naturally and cut in any time — it stops to listen, then picks back up.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h4>Connects to your tools</h4><p>Plugs into external tools and data through MCP, with code-aware search built in.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h4>Measure it over time</h4><p>Write your own checks for the agent and track how it performs as the models change.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h4>Connected agents</h4><p>Register local agents and connector-backed agents, then keep daily controls in Nexus and deeper setup in Settings.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h4>Tool-aware runs</h4><p>Use MCP and local tools where configured, while keeping raw source and keys out of cloud metadata by default.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h4>Measure it over time</h4><p>Track proof quality, usage, failures, and route behavior as tasks and models change.</p></div>
       <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h4>Works with other editors</h4><p>Plugs into other editors and agents through open, standard protocols.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Set the pace</h4><p>Dial how much it explains — from quiet autopilot to step-by-step teaching.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Set the pace</h4><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
       <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h4>See usage</h4><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
       <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h4>Cost-aware routing</h4><p>Budget presets and route labels help you choose cheaper local/BYOK or hosted-credit paths where they fit.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h4>Comment, save, done</h4><p>Drop a <span class="mono">// buddy: …</span> note in a file and save — Orrery runs it scoped to that file, then clears the comment when it's finished.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h4>Nexus rooms</h4><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
     </div>
   </div>
 </section>
@@ -297,55 +279,15 @@
   </div>
 </section>
 
-<!-- ============ ARCHITECTURE ============ -->
-<section class="section arch-section" id="architecture">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">How it's built</div>
-      <h2 class="display">A native editor and an agent core.</h2>
-      <p class="lead">Under the hood, a fast native editor pairs with a separate agent engine, joined by one stable contract. Each part is built to run on its own — offline, predictable and testable.</p>
-    </div>
-    <div class="arch-grid">
-      <div class="card card-pad arch-col reveal">
-        <h5 class="arch-h">The editor · native</h5>
-        <div class="pkg"><b>Fast buffer</b><span>Handles huge files without lag.</span></div>
-        <div class="pkg"><b>Syntax &amp; multi-file</b><span>Accurate highlighting; edit many files as one.</span></div>
-        <div class="pkg"><b>3D workspace</b><span>A native model for scenes and parts.</span></div>
-        <div class="pkg"><b>Render proof</b><span>Verifies visuals, with or without a GPU.</span></div>
-        <div class="pkg"><b>Buddy brain</b><span>Drives the 3D buddy inside the app.</span></div>
-        <div class="pkg"><b>Sessions</b><span>Keeps your place and history.</span></div>
-      </div>
-      <div class="card card-pad arch-col reveal d1">
-        <h5 class="arch-h">The agent core</h5>
-        <div class="pkg"><b>The loop</b><span>Plan, edit, test, fix — with your approval.</span></div>
-        <div class="pkg"><b>Orchestrator</b><span>Splits work, runs agents, merges winners.</span></div>
-        <div class="pkg"><b>3D layer</b><span>Builds and checks shaders, parts and scenes.</span></div>
-        <div class="pkg"><b>The buddy</b><span>A separate model that narrates the work.</span></div>
-        <div class="pkg"><b>Model providers</b><span>Local/BYOK routes and subscription cloud behind one interface.</span></div>
-        <div class="pkg"><b>Search &amp; voice</b><span>Codebase search, memory and live voice.</span></div>
-      </div>
-      <div class="card card-pad arch-col reveal d2">
-        <h5 class="arch-h">Ways to run it</h5>
-        <div class="pkg"><b>Desktop app</b><span>The native editor with the live buddy.</span></div>
-        <div class="pkg"><b>Browser client</b><span>Chat, change review and the 3D buddy.</span></div>
-        <div class="pkg"><b>Other editors</b><span>Connect through standard protocols.</span></div>
-        <div class="pkg"><b>PR review</b><span>Reviews pull requests and fixes CI.</span></div>
-        <div class="pkg"><b>Eval harness</b><span>Measures the agent as models change.</span></div>
-        <div class="pkg"><b>Guided demo</b><span>A narrated walk-through of the stack.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ CTA ============ -->
 <section class="section start-section" id="start">
   <canvas id="orrery2" class="start-canvas" aria-hidden="true"></canvas>
   <div class="start-veil"></div>
   <div class="wrap start-inner">
     <div class="reveal">
-      <div class="eyebrow center" style="justify-content:center;">Bring your own models</div>
-      <h2 class="display start-h">Bring the whole swarm<br>down to earth.</h2>
-      <p class="lead" style="margin:0 auto 32px;text-align:center;">Get Orrery, pick a model, and give it your first goal.</p>
+      <div class="eyebrow center" style="justify-content:center;">Start in Nexus</div>
+      <h2 class="display start-h">Open a workspace.<br>Send one task.</h2>
+      <p class="lead" style="margin:0 auto 32px;text-align:center;">Get Orrery, choose a route, and keep the run reviewable from the first prompt.</p>
       <div class="hero-cta center" style="justify-content:center;">
         <a class="btn btn-primary" href="download.html">Download <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="cloud.html">Pro cloud sign in</a>
@@ -368,11 +310,11 @@
           </svg>
           <span>Orrery</span>
         </a>
-        <p class="muted" style="font-size:14px;max-width:32ch;">Parallel agents you can see. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
+        <p class="muted" style="font-size:14px;max-width:32ch;">Agent runs you can supervise. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h5>Product</h5><ul><li><a href="#orchestrator">Orchestrator</a></li><li><a href="#buddy">Buddy</a></li><li><a href="#review">3D Review</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h5>Product</h5><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#safety">Safety</a></li></ul></div>
       <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="#pricing">Plans from $40/month</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Vellum.html">Vellum</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="arbiter-preview.html">Arbiter beta</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -397,8 +339,6 @@
 </script>
 <script src="assets/orrery-bg.js"></script>
 <script src="assets/swarm.js"></script>
-<script src="assets/buddy.js"></script>
-<script src="assets/review.js"></script>
 <script>
   // nav scroll
   const nav = document.getElementById('nav');
@@ -411,17 +351,7 @@
     mountOrrery(document.getElementById('orrery'), { cxf: 0.68, cyf: 0.5 });
     mountOrrery(document.getElementById('orrery2'), { cxf: 0.5, cyf: 0.5, labels: false, parallax: false });
     mountSwarm(document.getElementById('swarm'));
-    mountBuddy(document.getElementById('buddyApp'), { auto: true });
-    mountReview(document.getElementById('reviewApp'));
   });
-  // tutor dial
-  const knob = document.getElementById('knob'), readout = document.getElementById('dialReadout');
-  document.querySelectorAll('#dialModes button').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('#dialModes button').forEach(x => x.classList.remove('on'));
-    b.classList.add('on');
-    knob.style.left = b.dataset.p + '%';
-    readout.textContent = b.dataset.r;
-  }));
 </script>
 
 <style>
@@ -460,7 +390,6 @@
 .sec-foot { margin-top: 28px; }
 .swarm-card { background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
 
-/* folded-in: orchestrator pipeline */
 .pipe { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 26px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
 .pipe-step { background: var(--bg-2); padding: 18px 16px; display: flex; flex-direction: column; gap: 5px; }
 .pipe-n { font-size: 11px; color: var(--brass-lt); }
@@ -469,26 +398,12 @@
 @media (max-width: 900px){ .pipe { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 540px){ .pipe { grid-template-columns: repeat(2, 1fr); } }
 
-/* folded-in: review artifact chips */
 .chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
 .chip { border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; background: rgba(255,255,255,0.02); }
 .chip-ic { font-size: 18px; }
 .chip b { font-family: var(--display); font-size: 15px; display: block; margin: 8px 0 4px; }
 .chip span { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 @media (max-width: 760px){ .chips { grid-template-columns: 1fr 1fr; } }
-
-/* folded-in: tutor dial */
-.dial-card { margin-top: 18px; }
-.dial-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-bottom: 26px; }
-.dial-modes { display: flex; gap: 8px; flex-wrap: wrap; }
-.dial-modes button { font-family: var(--mono); font-size: 12px; padding: 8px 14px; border-radius: var(--r-sm); background: rgba(255,255,255,0.03); border: 1px solid var(--line-strong); color: var(--ink-2); cursor: pointer; transition: all 0.2s; }
-.dial-modes button.on { border-color: var(--violet); color: var(--ink); background: rgba(61,127,184,0.12); }
-.dial-track { position: relative; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--teal), var(--violet), var(--brass)); }
-.dial-knob { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; background: #fff; transform: translate(-50%,-50%); box-shadow: 0 2px 10px rgba(0,0,0,0.5); transition: left 0.5s var(--ease); }
-.dial-ends { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); margin-top: 12px; }
-.dial-readout { font-size: 15px; color: var(--ink-2); margin-top: 16px; min-height: 44px; }
-
-.buddy-section { position: relative; overflow: hidden; }
 
 .models-section { border-top: 1px solid var(--line); background: rgba(0,0,0,0.18); }
 .models-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
@@ -542,15 +457,6 @@
 .cap-ic { font-size: 22px; color: var(--brass-lt); margin-bottom: 14px; }
 .cap-grid h4 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
 .cap-grid p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
-
-.arch-section { border-top: 1px solid var(--line); }
-.arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media (max-width: 900px){ .arch-grid { grid-template-columns: 1fr; } }
-.arch-h { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-lt); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
-.pkg { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 3px; }
-.pkg:last-child { border-bottom: 0; }
-.pkg b { font-family: var(--mono); font-size: 13.5px; color: var(--ink); font-weight: 500; }
-.pkg span { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
 .start-section { position: relative; overflow: hidden; text-align: center; }
 .start-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.7; }

@@ -63,15 +63,15 @@
 <main id="main">
   <header class="ap-hero">
     <div class="ewrap">
-      <span class="lbl rv in">System preview - July 8, 2026</span>
+      <span class="lbl rv in">System preview - July 9, 2026</span>
       <h1 class="rv in">Previewing Arbiter 0.1 beta.</h1>
-      <p class="ap-lede rv in">Arbiter is Ephemerent's experimental verifier-grounded coding route for Orrery. It pairs a coding LLM with additional verification and evidence capture so agents can propose, check, and repair work before returning a final answer. Results vary by task, model, tools, and provider availability.</p>
+      <p class="ap-lede rv in">Arbiter is an experimental hosted coding route for Orrery subscribers. It is meant to help coding agents produce work with clearer evidence, usage receipts, and review boundaries. It is not a public model-weights release, not a benchmark claim, and not a guarantee of correctness.</p>
       <div class="ap-actions rv in">
-        <a class="ebtn ebtn-fill" href="#how">How it works</a>
-        <a class="ebtn" href="#cost">Deployment economics</a>
+        <a class="ebtn ebtn-fill" href="Orrery.html">See Orrery</a>
+        <a class="ebtn" href="download.html">Download Orrery</a>
       </div>
       <figure class="ap-hero-fig rv in">
-          <img src="assets/arbiter-preview-hero.svg" alt="Abstract Arbiter preview visual for latent reasoning and verified code">
+          <img src="assets/arbiter-preview-hero.svg" alt="Abstract Arbiter beta preview graphic">
       </figure>
     </div>
   </header>
@@ -79,122 +79,34 @@
   <section class="esec">
     <div class="ewrap ap-article">
       <div class="ap-meta rv">
-        <div><span class="k">Model route</span><span class="v">arbiter-0.1-beta</span></div>
-        <div><span class="k">Backbone</span><span class="v">Ornith-family coding models</span></div>
-        <div><span class="k">Status</span><span class="v">Beta preview</span></div>
-        <div><span class="k">Principle</span><span class="v">The verifier decides</span></div>
+        <div><span class="k">Route</span><span class="v">arbiter-0.1-beta</span></div>
+        <div><span class="k">Access</span><span class="v">Orrery subscribers</span></div>
+        <div><span class="k">Status</span><span class="v">Closed beta</span></div>
+        <div><span class="k">Use</span><span class="v">Coding agent runs</span></div>
       </div>
 
       <article>
-        <p class="ap-drop rv">A normal coding model can write a plausible patch. Arbiter is built around a stricter idea: the model proposes, then available checks and receipts help evaluate the work. In the beta route, a coding LLM generates candidates, Arbiter compares and refines them with compact reasoning signals, and external checks provide evidence about whether a branch should be trusted.</p>
+        <p class="ap-drop rv">Arbiter is a premium Orrery route for coding tasks where evidence matters. The public promise is intentionally simple: ask Orrery to run work, review what happened, see the usage it consumed, and decide whether to trust the result.</p>
 
-        <h2 id="how" class="rv">What is in the beta</h2>
-        <p class="rv">The public surface is simple: an OpenAI-compatible model route named <code>arbiter-0.1-beta</code>. The route is intended for Orrery coding runs, repair attempts, and evidence-backed agent workflows. Arbiter adds candidate control, repair behavior, and verifier-backed selection around the LLM, but it does not guarantee correctness or availability.</p>
-        <p class="rv">The public explanation stays intentionally high level: Arbiter uses latent reasoning. That means the system can compare the meaning and direction of possible answers before committing everything to final text. Token-by-token generation is still how code is written, but latent reasoning gives Arbiter a quieter place to weigh alternatives, avoid getting trapped by the first fluent answer, and prefer work that survives verification.</p>
-
-        <h2 class="rv">The LLM used</h2>
-        <p class="rv">The premium beta route is planned around Ornith-family coding models served through an OpenAI-compatible runtime. Arbiter can also run lighter Ornith-family routes for lower-cost preview availability. The point is not only the base model: Arbiter adds verification and repair behavior around it.</p>
+        <h2 class="rv">What subscribers see</h2>
+        <p class="rv">Inside Orrery, Arbiter appears as a hosted model route named <code>arbiter-0.1-beta</code>. It can be selected from Nexus alongside DeepSeek API, Doubleword, BYOK, and local routes. Subscribers see usage meters, run receipts, and proof/boundary summaries where the app supports them.</p>
+        <p class="rv">The route is designed for agentic coding workflows: planning, editing, follow-up fixes, and review. It does not replace your own testing, code review, security review, or backups.</p>
 
         <div class="ap-callout rv">
-          <strong>Short version:</strong> Ornith proposes code. Arbiter compares branches, checks evidence, repairs failures, and only treats verified work as the final answer.
+          <strong>Beta boundary:</strong> Arbiter may be slow, unavailable, changed, or paused while the beta is measured. Results vary by task, context, tools, and provider availability.
         </div>
 
-        <h2 class="rv">Why latent reasoning helps</h2>
-        <p class="rv">Tokens are excellent for expression, but they are a narrow surface. Once a model starts writing, every next token is shaped by the text already on the page. That can make a wrong path feel increasingly convincing.</p>
-        <p class="rv">Latent reasoning is useful because it works before that commitment hardens. Arbiter can compare possible directions at a more compressed meaning level, then decode and verify the stronger candidates. The advantage is not magic speed or guaranteed correctness. The advantage is better search: fewer plausible-looking dead ends, more chances to repair from evidence, and a final answer judged by what runs.</p>
-
-        <h2 id="cost" class="rv">Deployment economics</h2>
-        <p class="rv">Arbiter is designed to scale gradually. A lighter model route can handle early preview traffic, while the 35B route can be reserved for premium sessions, demos, and evaluation windows. GPU prices move over time, but the basic shape is stable: smaller routes are cheaper to keep warm, and larger routes should earn their extra spend with better outcomes.</p>
-
-        <figure class="ap-wide rv">
-          <img src="assets/arbiter-cost-map.svg" alt="RunPod cost map for Arbiter beta">
-        </figure>
-
-        <div class="ap-table-wrap rv">
-          <table class="ap-table">
-            <thead>
-              <tr>
-                <th>Route</th>
-                <th>GPU target</th>
-                <th>Model</th>
-                <th>Approx rate</th>
-                <th>Typical use</th>
-                <th>Public posture</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Preview route</td>
-                <td>RTX A5000 Pod</td>
-                <td>Ornith 9B class</td>
-                <td>$0.27/hr</td>
-                <td>Early access and lightweight sessions</td>
-                <td>Keep available when testing demand</td>
-              </tr>
-              <tr>
-                <td>Preview route</td>
-                <td>L4 Pod</td>
-                <td>Ornith 9B class</td>
-                <td>$0.39/hr</td>
-                <td>Stable low-cost serving</td>
-                <td>Good first hosted target</td>
-              </tr>
-              <tr>
-                <td>Premium route</td>
-                <td>A40 Pod</td>
-                <td>Ornith 35B class</td>
-                <td>$0.44/hr</td>
-                <td>Higher-quality coding sessions</td>
-                <td>Use when quality matters</td>
-              </tr>
-              <tr>
-                <td>Premium route</td>
-                <td>L40S Pod</td>
-                <td>Ornith 35B class</td>
-                <td>$0.99/hr</td>
-                <td>Fast premium sessions and demos</td>
-                <td>Use for high-signal runs</td>
-              </tr>
-              <tr>
-                <td>Serverless 24GB</td>
-                <td>L4/A5000/3090 class</td>
-                <td>Ornith 9B class</td>
-                <td>$0.69/hr active</td>
-                <td>Spiky traffic</td>
-                <td>Useful after demand is uneven</td>
-              </tr>
-              <tr>
-                <td>Serverless 48GB</td>
-                <td>A40/A6000 class</td>
-                <td>Ornith 35B class</td>
-                <td>$1.22/hr active</td>
-                <td>Premium spiky traffic</td>
-                <td>Use after the route has traction</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="rv">The table is not a price promise. It is a deployment lens: keep the public route efficient, reserve larger GPUs for work that benefits from the larger model, and measure cost per verified result rather than cost per raw token.</p>
-
-        <h2 id="deploy" class="rv">Availability path</h2>
-        <ol class="ap-steps rv">
-          <li><strong>Hosted route first.</strong> Arbiter appears as <code>arbiter-0.1-beta</code> inside Orrery rather than as a public weights download.</li>
-          <li><strong>Operational details stay server-side.</strong> The public product surface is the model route, not the underlying deployment.</li>
-          <li><strong>Access expands carefully.</strong> The beta widens as reliability, latency, and verified coding outcomes improve.</li>
-          <li><strong>Model tier follows demand.</strong> Efficient routes can serve early traffic; larger routes are promoted when they produce better verified outcomes.</li>
-        </ol>
+        <h2 class="rv">What is not public</h2>
+        <p class="rv">Arbiter is not an open-weights release. Private weights, serving details, internal prompts, routing internals, and operations details are not part of the public beta page. The subscriber-facing product surface is the hosted route inside Orrery.</p>
 
         <h2 class="rv">Evidence boundary</h2>
-        <p class="rv">Arbiter is evaluated by verified outcomes: tests passed, patches reviewed, tool calls completed, and evidence saved. Current internal beta evidence includes a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. That is not an official leaderboard score, not a live-service guarantee, and not a promise about any subscriber result. It is an internal release signal, and benchmarking remains limited by compute capacity: on the same hardware, training, serving, and large benchmark runs compete for time, so public claims stay conservative until larger matched evaluations are complete.</p>
+        <p class="rv">Current internal beta evidence includes a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. That is not an official leaderboard score, not a live-service guarantee, and not a promise about any subscriber result. It is an internal release signal, and public claims stay conservative until larger matched evaluations are complete.</p>
 
-        <h2 class="rv">Sources for pricing</h2>
-        <ul class="ap-sources rv">
-          <li><a class="elink" href="https://www.runpod.io/pricing" target="_blank" rel="noopener">RunPod GPU pricing</a> for Pod, Serverless, and storage rates.</li>
-          <li><a class="elink" href="https://docs.runpod.io/serverless/pricing" target="_blank" rel="noopener">RunPod Serverless pricing docs</a> for pay-per-second worker behavior.</li>
-          <li><a class="elink" href="https://huggingface.co/docs/hub/en/storage-limits" target="_blank" rel="noopener">Hugging Face storage limits</a> for private repo free tiers and private storage policy.</li>
-          <li><a class="elink" href="https://huggingface.co/pricing" target="_blank" rel="noopener">Hugging Face pricing</a> for private storage pay-as-you-go reference rates.</li>
-        </ul>
+        <h2 class="rv">Availability</h2>
+        <p class="rv">Arbiter access is planned for Orrery Pro, Max, and Ultra subscribers through hosted credits. The exact capacity, latency, quotas, model mix, and availability may change during the beta.</p>
+
+        <h2 class="rv">Use safely</h2>
+        <p class="rv">Treat Arbiter output like any other AI-generated code: inspect it, run tests, review security implications, and keep backups. Orrery can help organize evidence, but you remain responsible for what you accept, run, and ship.</p>
       </article>
     </div>
   </section>
@@ -225,7 +137,6 @@
         <h5>Work</h5>
         <ul>
           <li><a href="Orrery.html">Orrery</a></li>
-          <li><a href="Vellum.html">Vellum</a></li>
           <li><a href="Ephemerent.html#work">Seed</a></li>
           <li><a href="Ephemerent.html#work">Colony</a></li>
           <li><a href="mailto:hello@ephemerent.com">Contact</a></li>
