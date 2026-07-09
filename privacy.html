@@ -7,32 +7,22 @@
   legal advice and was not written by a lawyer. Before scaling (and ideally
   before charging EU/UK/California customers), have a lawyer review:
 
-    1. Company legal entity + registered address. Currently "Ephemerent"
-       appears as a trade name only — see [PLACEHOLDER: LEGAL ENTITY] below.
-    2. The exact DeepSeek data-processing terms. This policy states the
-       app's actual relay behavior (prompts/code are proxied to DeepSeek to
-       generate completions, and not retained by us beyond what the proxy
-       needs). CONFIRM what DeepSeek itself retains/trains on under your API
-       agreement and disclose it accurately. DeepSeek's inference may run on
-       infrastructure outside the user's country — confirm and disclose the
-       region if required (relevant to EU/UK transfer rules / SCCs).
-    3. GDPR/UK-GDPR roles: are you a "controller" for account data and to what
-       extent for prompt content proxied to DeepSeek? You likely need a DPA
-       with Supabase, Stripe, and DeepSeek, and may need to be reachable as a
+    1. The exact hosted-provider data-processing terms. This policy states the
+       app's actual relay behavior (prompts/code are proxied to configured
+       hosted providers to generate completions, and not retained by us beyond
+       what the proxy needs). Confirm what providers retain/train on under your
+       API agreements and disclose it accurately.
+    2. GDPR/UK-GDPR roles: are you a "controller" for account data and to what
+       extent for prompt content proxied to hosted providers? You likely need a DPA
+       with Supabase, Stripe, and hosted providers, and may need to be reachable as a
        controller for data-subject requests within statutory deadlines.
-    4. CCPA/CPRA "do not sell/share" — confirmed not applicable as written
+    3. CCPA/CPRA "do not sell/share" — confirmed not applicable as written
        (no sale of personal info), but confirm before launch in California.
-    5. International data transfers / hosting regions for Supabase + Vercel.
-    6. Lawful basis + retention periods (currently described qualitatively;
+    4. International data transfers / hosting regions for Supabase + Vercel.
+    5. Lawful basis + retention periods (currently described qualitatively;
        set concrete retention windows if your jurisdiction requires them).
-    7. Children's age threshold per target market (13 / 16).
-    8. A dedicated privacy contact / DPO if your volume requires one.
-
-  PLACEHOLDERS TO FILL before public launch:
-    [PLACEHOLDER: LEGAL ENTITY]  — registered company name + jurisdiction +
-                                   address. Replace every occurrence.
-    Privacy contact email: currently hello@ephemerent.com (site-wide address).
-      Consider a dedicated privacy@ alias.
+    6. Children's age threshold per target market (13 / 16).
+    7. A dedicated privacy contact / DPO if your volume requires one.
   ============================================================================
 -->
 <html lang="en">
@@ -84,20 +74,20 @@
     <span class="lbl">Legal</span>
     <h1>Privacy Policy</h1>
   </div>
-  <div class="legal-updated">Last updated: June 11, 2026 · Beta</div>
+  <div class="legal-updated">Last updated: July 9, 2026 · Beta</div>
 
   <div class="legal-body">
     <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup, grandfathered legacy local access, and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
 
     <h2>The short version</h2>
-    <p>In preview/local setup mode, your source code, repositories, prompts, and agent work stay on your device unless you explicitly use a hosted cloud feature. Real agent work requires a trial/subscription or grandfathered legacy local access. If you subscribe and use hosted DeepSeek API or Doubleword routes, the prompt and code context needed for the completion are sent through our relay to the provider, and we keep usage meters for quota enforcement.</p>
+    <p>In preview/local setup mode, your source code, repositories, prompts, and agent work stay on your device unless you explicitly use a hosted cloud feature. Real agent work requires a trial/subscription or grandfathered legacy local access. If you subscribe and use hosted DeepSeek API, Doubleword, Arbiter, or other hosted routes, the prompt and code context needed for the completion are sent through our relay to the provider, and we keep usage meters for quota enforcement.</p>
 
     <h2>What we collect</h2>
     <ul>
       <li><b>Account identity.</b> If you sign in, our authentication provider, Supabase, stores your account identifier, email address, and any basic profile fields (display name, avatar URL) your chosen sign-in method provides. You can sign in with Google, GitHub, or an email magic link.</li>
       <li><b>Subscription &amp; billing status.</b> If you subscribe, we store your plan (Pro / Max / Ultra), subscription status (active, canceled, past-due), renewal date, and the customer/subscription identifiers our payment processor, Stripe, gives us. <b>We do not see or store your full card number</b> — Stripe handles payment details directly.</li>
       <li><b>Usage meter (token counts).</b> When you use hosted models, we count the tokens consumed so we can enforce your monthly quota and show your usage. These counts are stored on your device and on our servers, and are numbers and timestamps — not the content of your prompts.</li>
-      <li><b>Prompts &amp; code sent for hosted-model inference.</b> When you choose a hosted DeepSeek API or Doubleword route, the prompt and code/context required to answer it are transmitted through our relay to the configured provider to generate the completion, and the result is returned to you.</li>
+      <li><b>Prompts &amp; code sent for hosted-model inference.</b> When you choose a hosted DeepSeek API, Doubleword, Arbiter, or other hosted route, the prompt and code/context required to answer it are transmitted through our relay to the configured provider to generate the completion, and the result is returned to you.</li>
       <li><b>High-level activity logs.</b> When signed in, we may record events such as sign-in, opening the editor, or starting a task, with a timestamp. These record <i>that</i> an action happened, not the contents of your code.</li>
       <li><b>Local-only identity (optional).</b> In local mode you can enter an email/name to label your own on-device audit log. This is stored only in your browser’s/app’s local storage on that device and is not sent to us.</li>
     </ul>
@@ -149,7 +139,7 @@
     <p>We’ll update this page when our practices change and revise the “last updated” date. Significant changes affecting paid accounts will be communicated where practical.</p>
 
     <h2>Contact</h2>
-    <p>Privacy questions or data requests: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>. This service is operated by <b>[PLACEHOLDER: LEGAL ENTITY]</b> (trading as Ephemerent).</p>
+    <p>Privacy questions or data requests: <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a>. This service is operated by Ephemerent and its operators.</p>
   </div>
 </main>
 

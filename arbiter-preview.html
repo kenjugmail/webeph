@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Previewing Arbiter 0.1 Beta - Ephemerent</title>
-<meta name="description" content="Arbiter 0.1 beta is Ephemerent's verifier-grounded coding model route: Ornith, latent reasoning, repair loops, and evidence-first agentic coding.">
+<meta name="description" content="Arbiter 0.1 beta is an experimental hosted coding route for Orrery. Results vary by task, model, provider availability, and verification setup.">
 <link rel="canonical" href="https://ephemerent.com/arbiter-preview.html">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -12,13 +12,13 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Previewing Arbiter 0.1 Beta">
-<meta property="og:description" content="A verifier-grounded coding model route with surface-level latent reasoning, repair loops, and evidence-first agentic coding.">
+<meta property="og:description" content="An experimental Orrery coding route with verifier-backed evidence. Benchmarks and examples are limited beta signals, not guaranteed results.">
 <meta property="og:url" content="https://ephemerent.com/arbiter-preview.html">
 <meta property="og:image" content="https://ephemerent.com/assets/arbiter-preview-hero.svg">
 <meta property="og:image:alt" content="Arbiter 0.1 beta preview">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Previewing Arbiter 0.1 Beta">
-<meta name="twitter:description" content="Ephemerent's verifier-grounded coding model route for agentic coding.">
+<meta name="twitter:description" content="An experimental Orrery coding route with beta evidence and no guaranteed outcome.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/arbiter-preview-hero.svg">
 <link rel="stylesheet" href="assets/ephemerent.css">
 </head>
@@ -65,7 +65,7 @@
     <div class="ewrap">
       <span class="lbl rv in">System preview - July 8, 2026</span>
       <h1 class="rv in">Previewing Arbiter 0.1 beta.</h1>
-      <p class="ap-lede rv in">Arbiter is Ephemerent's verifier-grounded coding model route. It pairs a strong coding LLM with latent reasoning so software agents can propose, check, repair, and keep evidence before returning a final answer.</p>
+      <p class="ap-lede rv in">Arbiter is Ephemerent's experimental verifier-grounded coding route for Orrery. It pairs a coding LLM with additional verification and evidence capture so agents can propose, check, and repair work before returning a final answer. Results vary by task, model, tools, and provider availability.</p>
       <div class="ap-actions rv in">
         <a class="ebtn ebtn-fill" href="#how">How it works</a>
         <a class="ebtn" href="#cost">Deployment economics</a>
@@ -86,14 +86,14 @@
       </div>
 
       <article>
-        <p class="ap-drop rv">A normal coding model can write a plausible patch. Arbiter is built around a stricter idea: the model proposes, the verifier decides. In the beta route, a coding LLM generates candidates, Arbiter compares and refines them with compact latent reasoning signals, and external checks decide whether a branch is trusted.</p>
+        <p class="ap-drop rv">A normal coding model can write a plausible patch. Arbiter is built around a stricter idea: the model proposes, then available checks and receipts help evaluate the work. In the beta route, a coding LLM generates candidates, Arbiter compares and refines them with compact reasoning signals, and external checks provide evidence about whether a branch should be trusted.</p>
 
         <h2 id="how" class="rv">What is in the beta</h2>
-        <p class="rv">The public surface is simple: an OpenAI-compatible model route named <code>arbiter-0.1-beta</code>. The route is designed for Orrery coding runs, repair attempts, and evidence-backed agent workflows. Arbiter adds candidate control, repair behavior, and verifier-backed selection around the LLM.</p>
+        <p class="rv">The public surface is simple: an OpenAI-compatible model route named <code>arbiter-0.1-beta</code>. The route is intended for Orrery coding runs, repair attempts, and evidence-backed agent workflows. Arbiter adds candidate control, repair behavior, and verifier-backed selection around the LLM, but it does not guarantee correctness or availability.</p>
         <p class="rv">The public explanation stays intentionally high level: Arbiter uses latent reasoning. That means the system can compare the meaning and direction of possible answers before committing everything to final text. Token-by-token generation is still how code is written, but latent reasoning gives Arbiter a quieter place to weigh alternatives, avoid getting trapped by the first fluent answer, and prefer work that survives verification.</p>
 
         <h2 class="rv">The LLM used</h2>
-        <p class="rv">The premium beta route is built around Ornith 35B, a coding-focused LLM served through an OpenAI-compatible runtime. Arbiter can also run lighter Ornith-family routes for lower-cost preview availability. The point is not only the base model: Arbiter adds the verification and repair loop around it.</p>
+        <p class="rv">The premium beta route is planned around Ornith-family coding models served through an OpenAI-compatible runtime. Arbiter can also run lighter Ornith-family routes for lower-cost preview availability. The point is not only the base model: Arbiter adds verification and repair behavior around it.</p>
 
         <div class="ap-callout rv">
           <strong>Short version:</strong> Ornith proposes code. Arbiter compares branches, checks evidence, repairs failures, and only treats verified work as the final answer.
@@ -186,7 +186,7 @@
         </ol>
 
         <h2 class="rv">Evidence boundary</h2>
-        <p class="rv">Arbiter is evaluated by verified outcomes: tests passed, patches reviewed, tool calls completed, and evidence saved. Current internal beta evidence includes a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. That is not an official leaderboard score. It is an internal release signal, and benchmarking remains limited by compute capacity: on the same hardware, training, serving, and large benchmark runs compete for time, so public claims stay conservative until larger matched evaluations are complete.</p>
+        <p class="rv">Arbiter is evaluated by verified outcomes: tests passed, patches reviewed, tool calls completed, and evidence saved. Current internal beta evidence includes a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. That is not an official leaderboard score, not a live-service guarantee, and not a promise about any subscriber result. It is an internal release signal, and benchmarking remains limited by compute capacity: on the same hardware, training, serving, and large benchmark runs compete for time, so public claims stay conservative until larger matched evaluations are complete.</p>
 
         <h2 class="rv">Sources for pricing</h2>
         <ul class="ap-sources rv">

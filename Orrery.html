@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Orrery — parallel agents you can see · by Ephemerent</title>
-<meta name="description" content="Orrery is a local-first agentic code editor: describe a goal and parallel AI agents work in plain sight — split it, attempt it many ways, keep the best, merge it back. Runs on your machine, with the models you choose.">
+<meta name="description" content="Orrery is a beta agentic code editor: describe a goal, watch agents plan and propose changes, review evidence, and decide what to apply. Results depend on your project, models, and review.">
 <link rel="canonical" href="https://ephemerent.com/Orrery.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Orrery — parallel agents you can see">
-<meta property="og:description" content="A local-first agentic code editor. Parallel agents split your goal, try it many ways, keep the best, and merge it back — all in plain sight, on your machine.">
+<meta property="og:description" content="A beta agentic code editor where agents plan, propose, test, and show evidence while you stay in control.">
 <meta property="og:url" content="https://ephemerent.com/Orrery.html">
 <meta property="og:image" content="https://ephemerent.com/assets/og.svg">
 <meta property="og:image:width" content="1200">
@@ -68,7 +68,7 @@
     <div class="hero-copy">
       <div class="eyebrow reveal in">An agentic code editor by Ephemerent</div>
       <h1 class="display hero-h1 reveal in d1">Parallel agents,<br><span class="grad-text">in orbit.</span></h1>
-      <p class="lead reveal in d2">Orrery is a code editor you talk to. Give it a goal and it splits the work across several AI agents running at once — each in its own copy of your repo — checks their results, keeps the best, and merges them back. Pick the models you want, watch every step, and a 3D buddy talks you through it as it works.</p>
+      <p class="lead reveal in d2">Orrery is a code editor you talk to. Give it a goal and it can split work across agents, propose changes in isolated copies, run checks, and show evidence before you decide what to apply. Pick the models you want and watch the work happen in view.</p>
       <div class="hero-cta reveal in d3">
         <a class="btn btn-primary" href="download.html">Get started <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#orchestrator">See how it works</a>
@@ -78,6 +78,7 @@
         <span class="prov prov-local">Ollama · local</span><span class="prov">OpenAI</span><span class="prov">Gemini</span><span class="prov">DeepSeek</span><span class="prov">Anthropic</span><span class="prov">Kimi K2.5</span><span class="prov">Gemma</span>
       </div>
       <p class="hero-note mono reveal in d4">Ollama, OpenAI, Gemini, DeepSeek, Anthropic — mix providers task by task.</p>
+      <p class="hero-note mono reveal in d4">Beta software. Agent output can be wrong or unsafe; keep backups and review changes before running or shipping them.</p>
     </div>
   </div>
   <div class="hero-scroll mono">scroll ↓</div>
@@ -94,7 +95,7 @@
       <div class="loop-step"><span class="loop-num mono">03</span><b>it tests</b><span>runs your suite</span></div>
       <div class="loop-arrow">→</div>
       <div class="loop-step"><span class="loop-num mono">04</span><b>it fixes</b><span>corrects what breaks</span></div>
-      <div class="loop-loopback mono">Plan or Act mode · you approve every change · roll back to any checkpoint</div>
+      <div class="loop-loopback mono">Plan or Act mode · approval gates available · keep your own backups</div>
     </div>
   </div>
 </section>
@@ -104,8 +105,8 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Parallel agents</div>
-      <h2 class="display">Run many agents at once — and keep the best.</h2>
-      <p class="lead">Orrery breaks your goal into separate tasks and gives each one its own agent, working in its own copy of the repo so they never collide. Each task is attempted several times; an automatic reviewer scores the attempts and keeps the winner before merging it back. And when a job doesn't need parallel agents, Orrery won't spin them up.</p>
+      <h2 class="display">Run agent attempts in parallel, then review the evidence.</h2>
+      <p class="lead">Orrery can break a goal into tasks and give each attempt its own workspace copy. Reviewers and tests help rank the attempts, but you stay responsible for deciding what is safe to apply. When a job does not need parallel agents, Orrery can stay with a simpler single-agent path.</p>
     </div>
     <div class="card card-pad reveal d1 swarm-card">
       <div id="swarm"></div>
@@ -114,9 +115,9 @@
       <div class="pipe-step"><span class="pipe-n mono">01</span><b>Plan</b><span>Split the goal into tasks.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">02</span><b>Isolate</b><span>One repo copy per task.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">03</span><b>Try</b><span>Several attempts each.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">04</span><b>Judge</b><span>Score and pick a winner.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">05</span><b>Merge</b><span>Combine the winners.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">06</span><b>Measure</b><span>Prove it beat one agent.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">04</span><b>Judge</b><span>Score the evidence.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">05</span><b>Review</b><span>You choose what to apply.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">06</span><b>Measure</b><span>Track tests, cost, and risk.</span></div>
     </div>
   </div>
 </section>
@@ -158,7 +159,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">3D review</div>
       <h2 class="display">Review for work you can actually see.</h2>
-      <p class="lead">Some work isn't text — a shader, a 3D part, a game scene. Orrery can build these, try several versions, and pick the best one by a real test: does it compile, does it hit the target, does it pass an automated playtest. Then it shows you a clear before-and-after. Drag the slider to compare — no graphics card required.</p>
+      <p class="lead">Some work is visual: a shader, a 3D part, or a game scene. Orrery can help generate candidates, run available checks, and show before-and-after evidence. Visual and automated checks are aids, not guarantees; review output before relying on it.</p>
     </div>
     <div class="reveal d1">
       <div id="reviewApp"></div>
@@ -202,7 +203,7 @@
             <div class="tl"><span class="tc">›</span> “add a splat viewer and make the tests pass”</div>
             <div class="tl"><span class="tok-violet">plan</span>   4 tasks · running in parallel</div>
             <div class="tl"><span class="tok-teal">verify</span> tests <span class="tok-ok">✓</span>  typecheck <span class="tok-ok">✓</span>  lint <span class="tok-ok">✓</span></div>
-            <div class="tl"><span class="tok-teal">buddy</span>  “green across the board — shipping it”<span class="term-caret">▍</span></div>
+            <div class="tl"><span class="tok-teal">buddy</span>  “checks are green; review before shipping”<span class="term-caret">▍</span></div>
           </div>
         </div>
       </div>
@@ -216,19 +217,19 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Built for trust</div>
       <h2 class="display">Everything it does stays in view.</h2>
-      <p class="lead">Orrery keeps a running log of every decision, test result and review as it works — all in one place. You can see why it chose an approach, what each agent tried, and what it cost, instead of digging through hidden traces.</p>
+      <p class="lead">Orrery shows plans, tool activity, test output, review receipts, and cost data in one place. The log helps you audit the work, but it is not a substitute for your own review and backups.</p>
     </div>
     <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Checked before it ships</h4><p>Every change is run past tests, type-checking, linting, security and code review before it's kept.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h4>Knows your codebase</h4><p>Ask about the whole project — it searches your code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h4>Remembers across sessions</h4><p>It recalls past decisions and your preferences from one session to the next.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Checks before apply</h4><p>When configured, runs can include tests, type-checking, linting, security checks, and review receipts before you keep a change.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h4>Searches your codebase</h4><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h4>Scoped memory</h4><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
       <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h4>Talk and interrupt</h4><p>Speak to it naturally and cut in any time — it stops to listen, then picks back up.</p></div>
       <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h4>Connects to your tools</h4><p>Plugs into external tools and data through MCP, with code-aware search built in.</p></div>
       <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h4>Measure it over time</h4><p>Write your own checks for the agent and track how it performs as the models change.</p></div>
       <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h4>Works with other editors</h4><p>Plugs into other editors and agents through open, standard protocols.</p></div>
       <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Set the pace</h4><p>Dial how much it explains — from quiet autopilot to step-by-step teaching.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h4>See what each turn costs</h4><p>Every turn shows the model it used, why it escalated, the tokens and dollar cost — and how much prompt caching saved — with <span class="mono">/why</span>.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h4>Built to cost less</h4><p>Cheap-first model routing, lossless output compression and recoverable truncation keep token bills down — with off-peak nudges for batch work.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h4>See usage</h4><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h4>Cost-aware routing</h4><p>Budget presets and route labels help you choose cheaper local/BYOK or hosted-credit paths where they fit.</p></div>
       <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h4>Comment, save, done</h4><p>Drop a <span class="mono">// buddy: …</span> note in a file and save — Orrery runs it scoped to that file, then clears the comment when it's finished.</p></div>
     </div>
   </div>
@@ -240,7 +241,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">Subscribe to run Orrery.</h2>
-      <p class="lead">Orrery is premium from first start. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock real agent work, hosted credits, cloud runs, managed connectors, proof vaults, and BYOK/local routes.</p>
+      <p class="lead">Orrery is premium from first start. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credits, cloud features, managed connectors, proof vaults, and BYOK/local routes subject to beta availability and provider limits.</p>
     </div>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro">
@@ -292,7 +293,7 @@
         <a class="btn btn-primary" id="pricing-cta-ultra" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Start Ultra</a>
       </div>
     </div>
-    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
+    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Beta features, routes, quotas, and providers may change or be unavailable. Agent output is not guaranteed. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
   </div>
 </section>
 
