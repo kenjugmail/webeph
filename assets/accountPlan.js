@@ -48,7 +48,7 @@ export function planFromCloudProfile(profile) {
   if (plan === 'free') return 'free';
   const status = profile.subscription_status;
   const subscriptionActive = status === 'active' || status === 'trialing';
-  return subscriptionActive || profile.buddy_access === true ? plan : 'free';
+  return subscriptionActive ? plan : 'free';
 }
 
 /**
@@ -63,11 +63,6 @@ export function checkoutUrlForTier(tier, config = window.ORRERY_CONFIG || {}) {
   const url = config[key];
   if (url && !url.includes('YOUR_')) return url;
   return DEFAULT_CHECKOUT_URLS[plan] || null;
-}
-
-/** Whether a profiles row carries a grandfathered legacy local-access entitlement. */
-export function lifetimeAccessFromProfile(profile) {
-  return !!profile && typeof profile === 'object' && profile.lifetime_access === true;
 }
 
 /** 100_000_000 → "100M", 1_000_000_000 → "1B". */

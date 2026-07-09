@@ -73,14 +73,14 @@ https://www.ephemerent.com/**
 
 ## 5. Pricing / billing
 
-No public no-cost local tier is advertised. Pro is `$40/month` and includes hosted credits, cloud sign-in, Nexus operations, BYOK/local route entitlement, managed connector automation, and cloud audit/proof features.
+No public no-cost local tier is advertised. Pro is `$40/month` and includes hosted credits, cloud sign-in, Nexus operations, managed connector automation, and cloud audit/proof features.
 
 Before taking payments:
 
 1. Create Stripe Payment Links, Checkout Sessions, or equivalent merchant checkout for Pro/Max/Ultra monthly plans.
 2. Paste the public checkout URLs into `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` in `assets/site-config.js`.
 3. Deploy a Stripe webhook or Supabase Edge Function that listens for checkout, renewal, cancellation, and failed-payment events.
-4. Have the webhook update `profiles.plan`, `profiles.subscription_status`, credit counters, `buddy_access`, and `billing_events`. Cloud auth identities should have no cloud entitlements until this happens.
+4. Have the webhook update `profiles.plan`, `profiles.subscription_status`, credit counters, and `billing_events`. Cloud auth identities should have no cloud entitlements until this happens.
 
 Do not put Stripe secret keys in this repository's static files.
 

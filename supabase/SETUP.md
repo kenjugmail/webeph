@@ -1,7 +1,7 @@
-# Optional: Supabase setup (not required)
+# Supabase setup for Orrery Cloud
 
-Orrery uses **local mode + local audit logs** by default — no Supabase account needed.
-Only follow this if you want paid Pro cloud: managed OAuth (Google/GitHub/email), cloud credits, Buddy entitlement, and a central Postgres audit table.
+Preview setup can be inspected before subscription; real agent work requires paid cloud entitlement.
+Use this for paid Orrery Cloud: managed OAuth (Google/GitHub/email), hosted credits, subscription entitlements, and a central Postgres audit table.
 
 # Supabase setup for Orrery sign-in + activity logs
 
@@ -87,9 +87,9 @@ Set default in `handle_new_user()` to `download_approved = false`, or flip indiv
 
 ## 8. Plans / paid tiers
 
-Free/local users do not need a Supabase row. Any cloud auth identity starts with `profiles.plan = 'free'`, `cloud_credit_granted_cents = 0`, and `buddy_access = false` until paid billing grants cloud access.
+Any cloud auth identity starts with `profiles.plan = 'free'` and `cloud_credit_granted_cents = 0` until paid billing grants cloud access.
 
-There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, BuddyIDE Pro features, BYOK, and bundled DeepSeek API, Doubleword, and Arbiter credit pools (see `docs/CLOUD.md`).
+There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, Orrery/Nexus paid features, and bundled DeepSeek API, Doubleword, and Arbiter credit pools (see `docs/CLOUD.md`).
 
 **Migration for existing deployments** — projects created before the max/ultra tiers
 have a check constraint that only allows `'free'`/`'pro'`. Widen it once in the SQL editor
@@ -110,7 +110,6 @@ set
   subscription_status = 'active',
   cloud_credit_granted_cents = 4000,
   cloud_credit_used_cents = 0,
-  buddy_access = true,
   plan_updated_at = now()
 where email = 'user@example.com';
 ```

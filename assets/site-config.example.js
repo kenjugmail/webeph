@@ -1,7 +1,7 @@
 /**
  * Copy to site-config.js
  *
- * Local-only use needs no backend. Pro cloud login uses a
+ * Preview setup needs no backend. Pro cloud login uses a
  * free Supabase project as the OAuth broker — no custom auth server required.
  * See docs/CLOUD.md for Google Cloud Console + GitHub OAuth App setup.
  */
@@ -16,7 +16,7 @@ window.ORRERY_CONFIG = {
   AUDIT_WEBHOOK_URL: '',
   /**
    * Pro cloud account — from Supabase → Project Settings → API.
-   * Leave empty to hide Google/GitHub/email cloud login and use local mode only.
+   * Leave empty to hide Google/GitHub/email cloud login.
    */
   CLOUD_AUTH_URL: 'https://YOUR_PROJECT_REF.supabase.co',
   CLOUD_AUTH_KEY: 'YOUR_SUPABASE_ANON_KEY',
@@ -34,8 +34,8 @@ window.ORRERY_CONFIG = {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'BYOK and Nexus operations'],
+      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',

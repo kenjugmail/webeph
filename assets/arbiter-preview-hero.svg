@@ -40,6 +40,6 @@
     <text x="116" y="452" font-size="42" font-weight="600">Less token guesswork.</text>
     <text x="116" y="504" font-size="42" font-weight="600">More checked outcomes.</text>
     <text x="118" y="562" font-size="23" fill="#cfc7b7">A coding model route that reasons before it writes, then lets evidence decide.</text>
-    <text x="116" y="774" font-size="24" fill="#d8d0c0">OpenAI-compatible beta - Ornith-family LLMs - verifier-grounded agentic coding</text>
+    <text x="116" y="774" font-size="24" fill="#d8d0c0">Hosted subscriber beta - Arbiter-family LLMs - verifier-grounded agentic coding</text>
   </g>
 </svg>

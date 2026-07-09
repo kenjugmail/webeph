@@ -75,8 +75,8 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Premium agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Bring your own API key', 'Nexus + managed connector features'],
+      summary: 'Premium agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
@@ -102,7 +102,7 @@ export async function getCloudProfile() {
 
   const { data, error } = await sb
     .from('profiles')
-    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents,buddy_access,lifetime_access')
+    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents')
     .eq('id', session.user.id)
     .maybeSingle();
 
@@ -115,8 +115,6 @@ export async function getCloudProfile() {
       subscription_status: 'inactive',
       cloud_credit_granted_cents: 0,
       cloud_credit_used_cents: 0,
-      buddy_access: false,
-      lifetime_access: false,
     };
   }
   return data;
@@ -133,15 +131,7 @@ function renderPlanSummary(root, profile) {
 
   const catalog = getPlanCatalog();
   const planKey = planFromCloudProfile(profile);
-  const legacyLocal = profile?.lifetime_access === true;
-  const plan = legacyLocal && planKey === 'free'
-    ? {
-        name: 'Legacy Local Access',
-        price: 'grandfathered',
-        cadence: 'local/BYOK only',
-        summary: 'This grandfathered account can run local and BYOK routes. Hosted credits and Orrery Cloud require Pro, Max, or Ultra.',
-      }
-    : catalog[planKey] || catalog.free;
+  const plan = catalog[planKey] || catalog.free;
   const granted = Number(profile?.cloud_credit_granted_cents || 0);
   const used = Number(profile?.cloud_credit_used_cents || 0);
   const remaining = Math.max(granted - used, 0);
@@ -193,11 +183,7 @@ function renderPlanSummary(root, profile) {
     </div>
     <div class="account-plan-meter">
       <span>Nexus cloud features</span>
-      <b>${profile?.buddy_access || paid ? 'Enabled' : 'Subscription required'}</b>
-    </div>
-    <div class="account-plan-meter">
-      <span>Bring your own API key</span>
-      <b>${paid || legacyLocal ? 'Enabled' : 'Subscription required'}</b>
+      <b>${paid ? 'Enabled' : 'Subscription required'}</b>
     </div>
     <div class="account-plan-actions">${upgrades.join('')}</div>
   `;

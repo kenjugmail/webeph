@@ -1,18 +1,18 @@
 # Orrery Pro Cloud — login, remote, phone
 
-Orrery is **local-first** by default. **All cloud features are paid Pro features**: cloud sign-in, hosted API credits, Buddy, pairing, remote access, and centralized logs.
+Orrery is a premium cloud-credit beta. Preview setup is inspectable before subscribing, but real agent work runs through paid hosted credits and cloud features.
 
 ## Two modes
 
 | | Local | Orrery Cloud |
 |---|--------|----------------|
 | **Auth** | Optional email in browser (honor system) | Paid Pro: Google / GitHub / email magic link |
-| **Access** | Desktop editor | Desktop + phone/browser (via relay) |
-| **Pricing** | Preview setup only; legacy local access for existing buyers | Pro `$40` / Max `$100` / Ultra `$200` per month; hosted credits, BYOK/local routes, Nexus, managed connectors |
+| **Access** | Preview setup | Desktop + phone/browser (via relay) |
+| **Pricing** | No active subscription | Pro `$40` / Max `$100` / Ultra `$200` per month; hosted credits, Nexus, managed connectors |
 | **Setup** | None | Supabase + billing webhook (~15 min) |
 | **Audit logs** | `localStorage` + optional webhook | Central `activity_logs` table |
 
-Preview setup is available before subscription, but real agent work requires active trial/subscription or grandfathered legacy local access. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant Pro/Max/Ultra before cloud entitlements are enabled.
+Preview setup is available before subscription, but real agent work requires an active trial/subscription or server-side beta grant. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant Pro/Max/Ultra before cloud entitlements are enabled.
 
 ## What cloud account enables
 
@@ -24,9 +24,9 @@ Preview setup is available before subscription, but real agent work requires act
 
 ## Pricing model
 
-No public no-cost local tier is offered. Preview users can inspect setup; legacy local access is honored for existing buyers and unlocks local/BYOK only.
+No public no-cost local tier is offered. Preview users can inspect setup; active subscribers run through hosted credits and cloud features.
 
-There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, BYOK routes, and hosted credit pools:
+There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
 
 | Tier | Price | DeepSeek API | Doubleword | Arbiter |
 |------|-------|----------------|-----------------|---------|

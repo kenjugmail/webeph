@@ -1,6 +1,6 @@
 /**
  * Public site config. Orrery is premium from first start: visitors can preview setup,
- * while real agent work requires a trial, subscription, or grandfathered legacy local access.
+ * while real agent work requires a trial or subscription.
  *
  * SAFE TO COMMIT: only publishable browser keys belong here:
  * - Supabase publishable / anon key in CLOUD_AUTH_KEY
@@ -42,13 +42,13 @@ window.ORRERY_CONFIG = {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, Nexus, and managed cloud features.',
+      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
       features: [
         'Google, GitHub, and email cloud sign-in',
         'DeepSeek API - 8M credits/month',
         'Doubleword - 8M credits/month',
         'Arbiter - 4M credits/month',
-        'BYOK and Nexus agent operations',
+        'Nexus agent operations',
         'Managed Discord/mobile automation',
       ],
     },

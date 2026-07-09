@@ -16,8 +16,6 @@ create table if not exists public.profiles (
   stripe_subscription_id text,
   cloud_credit_granted_cents integer not null default 0,
   cloud_credit_used_cents integer not null default 0,
-  buddy_access boolean not null default false,
-  lifetime_access boolean not null default false,
   plan_updated_at timestamptz not null default now()
 );
 
@@ -28,11 +26,6 @@ alter table public.profiles add column if not exists stripe_customer_id text;
 alter table public.profiles add column if not exists stripe_subscription_id text;
 alter table public.profiles add column if not exists cloud_credit_granted_cents integer not null default 0;
 alter table public.profiles add column if not exists cloud_credit_used_cents integer not null default 0;
-alter table public.profiles add column if not exists buddy_access boolean not null default false;
--- Grandfathered legacy local-access entitlement. This is no longer a public checkout SKU.
--- Grants local-IDE access only; cloud/bundled
--- models still require an active pro/max/ultra subscription. Never reset once granted.
-alter table public.profiles add column if not exists lifetime_access boolean not null default false;
 alter table public.profiles add column if not exists plan_updated_at timestamptz not null default now();
 
 -- Plan tiers: free plus the paid pro/max/ultra subscriptions. Existing deployments
@@ -163,14 +156,13 @@ language plpgsql
 security definer set search_path = public
 as $$
 begin
-  insert into public.profiles (id, email, download_approved, plan, subscription_status, buddy_access)
+  insert into public.profiles (id, email, download_approved, plan, subscription_status)
   values (
     new.id,
     new.email,
     false,
     'free',
-    'inactive',
-    false
+    'inactive'
   );
   return new;
 end;

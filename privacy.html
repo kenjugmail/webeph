@@ -30,7 +30,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Ephemerent</title>
-<meta name="description" content="How Ephemerent handles data for Orrery: local/BYOK routes stay on your machine unless exported, while paid tiers add hosted credits, cloud sign-in, billing, and usage meters. What we collect, who processes it, and your rights.">
+<meta name="description" content="How Ephemerent handles data for Orrery: paid tiers add hosted credits, cloud sign-in, billing, and usage meters. What we collect, who processes it, and your rights.">
 <link rel="canonical" href="https://ephemerent.com/privacy.html">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f3f0e8">
@@ -77,10 +77,10 @@
   <div class="legal-updated">Last updated: July 9, 2026 · Beta</div>
 
   <div class="legal-body">
-    <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup, grandfathered legacy local access, and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
+    <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
 
     <h2>The short version</h2>
-    <p>In preview/local setup mode, your source code, repositories, prompts, and agent work stay on your device unless you explicitly use a hosted cloud feature. Real agent work requires a trial/subscription or grandfathered legacy local access. If you subscribe and use hosted DeepSeek API, Doubleword, Arbiter, or other hosted routes, the prompt and code context needed for the completion are sent through our relay to the provider, and we keep usage meters for quota enforcement.</p>
+    <p>In preview setup mode, you can inspect the app and configure a workspace before subscribing. Real agent work requires a trial or subscription. If you subscribe and use hosted DeepSeek API, Doubleword, Arbiter, or other hosted routes, the prompt and code context needed for the completion are sent through our relay to the provider, and we keep usage meters for quota enforcement.</p>
 
     <h2>What we collect</h2>
     <ul>
@@ -89,11 +89,11 @@
       <li><b>Usage meter (token counts).</b> When you use hosted models, we count the tokens consumed so we can enforce your monthly quota and show your usage. These counts are stored on your device and on our servers, and are numbers and timestamps — not the content of your prompts.</li>
       <li><b>Prompts &amp; code sent for hosted-model inference.</b> When you choose a hosted DeepSeek API, Doubleword, Arbiter, or other hosted route, the prompt and code/context required to answer it are transmitted through our relay to the configured provider to generate the completion, and the result is returned to you.</li>
       <li><b>High-level activity logs.</b> When signed in, we may record events such as sign-in, opening the editor, or starting a task, with a timestamp. These record <i>that</i> an action happened, not the contents of your code.</li>
-      <li><b>Local-only identity (optional).</b> In local mode you can enter an email/name to label your own on-device audit log. This is stored only in your browser’s/app’s local storage on that device and is not sent to us.</li>
+      <li><b>On-device identity (optional).</b> In preview setup you can enter an email/name to label your own on-device audit log. This is stored only in your browser’s/app’s local storage on that device and is not sent to us.</li>
     </ul>
 
     <h2>What we do NOT collect</h2>
-    <p class="legal-note">For local/BYOK routes, your code and prompts stay on your machine unless you explicitly export proof/artifacts or choose a hosted route. We do not collect your source code, repositories, or prompt content for any purpose other than proxying a hosted-model request you explicitly make. <b>We do not store prompt or completion content beyond what is needed to relay the request and return the answer</b>, and we do not use your prompts or code to train our own models. When you bring your own API key for another provider, that traffic goes to that provider under its terms, not through us.</p>
+    <p class="legal-note">We do not collect your source code, repositories, or prompt content for any purpose other than proxying a hosted-model request you explicitly make or providing a cloud feature you request. <b>We do not store prompt or completion content beyond what is needed to relay the request and return the answer</b>, and we do not use your prompts or code to train our own models.</p>
 
     <h2>How we use your data</h2>
     <ul>
@@ -122,7 +122,7 @@
     <h2>Your rights</h2>
     <p>Depending on where you live, you may have rights under laws such as the EU/UK GDPR and the California CCPA/CPRA — including the right to access, correct, delete, or export your personal data, and to object to or restrict certain processing. We do not sell your personal information. To exercise any of these rights:</p>
     <ul>
-      <li>Use Orrery in local mode — your code and work stay on your machine, nothing sent to us.</li>
+      <li>Use preview setup without starting hosted work.</li>
       <li>Email <a href="mailto:hello@ephemerent.com">hello@ephemerent.com</a> to request a copy of, correction of, or deletion of your account data. We may need to verify your identity before acting.</li>
       <li>Cancel or manage your subscription at any time (see the <a href="terms.html">Terms of Service</a>).</li>
       <li>Clear your device’s local storage to remove the local identity and audit buffer.</li>

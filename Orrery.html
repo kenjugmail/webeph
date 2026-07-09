@@ -74,9 +74,9 @@
       </div>
       <div class="hero-providers reveal in d4">
         <span class="mono">works with</span>
-        <span class="prov prov-local">Ollama · local</span><span class="prov">OpenAI</span><span class="prov">Gemini</span><span class="prov">DeepSeek</span><span class="prov">Anthropic</span><span class="prov">Kimi K2.5</span><span class="prov">Gemma</span>
+        <span class="prov prov-local">Arbiter beta</span><span class="prov">DeepSeek API</span><span class="prov">Doubleword</span><span class="prov">Nexus Cloud</span><span class="prov">Proof Vault</span><span class="prov">Managed Connectors</span>
       </div>
-      <p class="hero-note mono reveal in d4">Ollama, OpenAI, Gemini, DeepSeek, Anthropic, Arbiter — choose routes per workspace and task.</p>
+      <p class="hero-note mono reveal in d4">Arbiter, DeepSeek API, and Doubleword credits — choose hosted routes per workspace and task.</p>
       <p class="hero-note mono reveal in d4">Beta software. Agent output can be wrong or unsafe; keep backups and review changes before running or shipping them.</p>
     </div>
   </div>
@@ -112,7 +112,7 @@
     </div>
     <div class="pipe reveal d2">
       <div class="pipe-step"><span class="pipe-n mono">01</span><b>Workspace</b><span>Open a folder and initialize Nexus.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Route</b><span>Pick local, BYOK, or hosted credits.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Route</b><span>Pick a hosted credit route.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">03</span><b>Agent</b><span>Choose a local or connected agent.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">04</span><b>Safety</b><span>Check scope and permissions.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">05</span><b>Run</b><span>Watch progress and file activity.</span></div>
@@ -131,7 +131,7 @@
     </div>
     <div class="cap-grid cap-grid-4">
       <div class="card card-pad card-hover reveal"><div class="cap-ic">⌘</div><h4>Open folder</h4><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◉</div><h4>Pick a route</h4><p>Use local, BYOK, or subscription-hosted routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◉</div><h4>Pick a route</h4><p>Use subscription-hosted DeepSeek API, Doubleword, or Arbiter routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
       <div class="card card-pad card-hover reveal d2"><div class="cap-ic">▷</div><h4>Run an agent</h4><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
       <div class="card card-pad card-hover reveal d3"><div class="cap-ic">◇</div><h4>Review receipts</h4><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
     </div>
@@ -162,16 +162,13 @@
       <div class="reveal">
         <div class="eyebrow">Model-agnostic</div>
         <h2 class="display" style="margin:18px 0 22px;">Premium from first start.<br>Cloud makes it scale.</h2>
-        <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through local/BYOK routes or Orrery Cloud. Pro, Max, and Ultra add hosted DeepSeek API, Doubleword, and Arbiter credits plus managed connector automation.</p>
+        <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through Orrery Cloud. Pro, Max, and Ultra add hosted DeepSeek API, Doubleword, and Arbiter credits plus managed connector automation.</p>
         <div class="prov-table">
-          <div class="prov-row"><span>Ollama</span><span class="mono">local route</span><span class="muted">subscription or legacy access required to run</span></div>
-          <div class="prov-row"><span>OpenAI-compatible</span><span class="mono">BYOK</span><span class="muted">subscription or legacy access required</span></div>
           <div class="prov-row"><span>DeepSeek API</span><span class="mono">subscription hosted</span><span class="muted">8M / 18M / 35M credits</span></div>
           <div class="prov-row"><span>Doubleword</span><span class="mono">subscription hosted</span><span class="muted">8M / 20M / 35M credits</span></div>
           <div class="prov-row"><span>Arbiter 0.1 Beta</span><span class="mono">subscription hosted</span><span class="muted">4M / 12M / 30M premium coding credits</span></div>
-          <div class="prov-row"><span>Anthropic</span><span class="mono">BYOK</span><span class="muted">direct provider route</span></div>
-          <div class="prov-row"><span>Gemini / Kimi / custom</span><span class="mono">BYOK</span><span class="muted">saved workspace routes</span></div>
-          <div class="prov-row"><span>Local open weights</span><span class="mono">local route</span><span class="muted">Ollama / GGUF / OpenAI-compatible</span></div>
+          <div class="prov-row"><span>Nexus Cloud</span><span class="mono">managed operations</span><span class="muted">connectors, proof vaults, and usage receipts</span></div>
+          <div class="prov-row"><span>Research runs</span><span class="mono">subscription hosted</span><span class="muted">available by plan and beta capacity</span></div>
         </div>
       </div>
       <div class="reveal d1" id="develop">
@@ -179,7 +176,7 @@
           <div class="term-bar"><span class="td td-r"></span><span class="td td-y"></span><span class="td td-g"></span><span class="term-title mono">Orrery</span></div>
           <div class="term-body mono">
             <div class="tl"><span class="tc">›</span> open workspace</div>
-            <div class="tl"><span class="tok-violet">route</span> ollama · local <span class="tok-teal">(private)</span></div>
+            <div class="tl"><span class="tok-violet">route</span> arbiter-0.1-beta · hosted credits</div>
             <div class="tl tdim"># ready</div>
             <div class="tl">&nbsp;</div>
             <div class="tl"><span class="tc">›</span> “fix the failing form tests”</div>
@@ -211,7 +208,7 @@
       <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h4>Works with other editors</h4><p>Plugs into other editors and agents through open, standard protocols.</p></div>
       <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Set the pace</h4><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
       <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h4>See usage</h4><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h4>Cost-aware routing</h4><p>Budget presets and route labels help you choose cheaper local/BYOK or hosted-credit paths where they fit.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h4>Cost-aware routing</h4><p>Budget presets and route labels help you choose the right hosted-credit path for the job.</p></div>
       <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h4>Nexus rooms</h4><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
     </div>
   </div>
@@ -223,7 +220,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">Subscribe to run Orrery.</h2>
-      <p class="lead">Orrery is premium from first start. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credits, cloud features, managed connectors, proof vaults, and BYOK/local routes subject to beta availability and provider limits.</p>
+      <p class="lead">Orrery is premium from first start. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credits, cloud features, managed connectors, proof vaults, and usage receipts subject to beta availability and provider limits.</p>
     </div>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro">
@@ -237,7 +234,7 @@
           <li>DeepSeek API - 8M credits/mo</li>
           <li>Doubleword - 8M credits/mo</li>
           <li>Arbiter - 4M credits/mo</li>
-          <li>Local/BYOK model routes</li>
+          <li>Nexus cloud operations</li>
           <li>Nexus, Discord/mobile oversight, proof receipts</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-pro" href="login.html">Start Pro</a>

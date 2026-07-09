@@ -9,7 +9,7 @@ Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide): sidecar +
 |---|---|---|
 | Setup | Download beta, sign in, open Nexus, prepare workspace/model routes | Supabase auth + Stripe billing |
 | Auth | Required for current beta account flow | Google / GitHub / email |
-| Access | Preview setup; real runs require subscription/trial or legacy local access | Pro/Max/Ultra subscriptions |
+| Access | Preview setup; real runs require subscription/trial or server-side beta grant | Pro/Max/Ultra subscriptions |
 | Pricing | No public permanent free local plan | DeepSeek API, Doubleword, Arbiter, managed connectors, proof vault, cloud runs |
 | Think of it as | Installed Orrery shell and local workspace setup | Hosted agent capacity and account-backed operations |
 
