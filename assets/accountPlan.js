@@ -22,9 +22,9 @@ export const PLAN_PRICES = {
 
 /** Monthly token quotas for the bundled cloud models, per paid tier. */
 export const BUNDLED_QUOTAS = {
-  pro: { 'DeepSeek API': 10_000_000, 'Doubleword': 10_000_000 },
-  max: { 'DeepSeek API': 25_000_000, 'Doubleword': 25_000_000 },
-  ultra: { 'DeepSeek API': 50_000_000, 'Doubleword': 50_000_000 },
+  pro: { 'DeepSeek API': 8_000_000, 'Doubleword': 8_000_000, 'Arbiter': 4_000_000 },
+  max: { 'DeepSeek API': 18_000_000, 'Doubleword': 20_000_000, 'Arbiter': 12_000_000 },
+  ultra: { 'DeepSeek API': 35_000_000, 'Doubleword': 35_000_000, 'Arbiter': 30_000_000 },
 };
 
 /** Built-in Stripe Payment Links; site-config.js keys override them. */

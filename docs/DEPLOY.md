@@ -89,11 +89,11 @@ Do not put Stripe secret keys in this repository's static files.
 `assets/site-config.js` has `RELEASE_AVAILABLE: false`, so `download.html` shows a
 **"Request beta access"** state (sign in / email) instead of a download link.
 
-When the installer is ready:
+When the beta packet is ready:
 
-1. Build it from `buddyide` and publish a **GitHub Release** with `orrery-install.zip`
-   (see [releases/README.md](../releases/README.md)) — `DOWNLOAD_URL` already points at
-   `releases/latest/download/orrery-install.zip`.
+1. Build it from `buddyide` and publish a **GitHub Release** in the binary-only
+   `kenjugmail/orrery-releases` repo with `Orrery-0.1.0-beta-win-x64-portable.zip`.
+   Point `DOWNLOAD_URL` at that release asset.
 2. Set `RELEASE_AVAILABLE: true` in `assets/site-config.js` and push.
 3. Grant testers access: in Supabase Table Editor, flip `profiles.download_approved = true`
    (new sign-ups default to `false` — a closed-beta waitlist).

@@ -46,23 +46,23 @@
   <div class="auth-card" style="max-width:520px;">
     <h1>Get Orrery</h1>
 
-    <!-- Shown until the installer is published (RELEASE_AVAILABLE = false) -->
+    <!-- Shown until a beta packet is published (RELEASE_AVAILABLE = false) -->
     <div id="beta-gate">
       <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
-      <p class="sub" style="margin-bottom:20px;">The Orrery installer isn’t public yet. Request access and we’ll email you when your build is ready — early testers get in first.</p>
+      <p class="sub" style="margin-bottom:20px;">The Orrery beta packet isn’t public yet. Request access and we’ll email you when your build is ready — early testers get in first.</p>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
-        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API + Doubleword credits, BYOK, and Orrery Cloud.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, and Orrery Cloud.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
-      <p class="auth-msg ok hidden" id="beta-entitled"      <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
+      <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
       <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
       <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">No permanent unpaid tier is offered at launch. Preview users can inspect setup; trial/subscription users can run agents. For beta access, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
     </div>
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the Windows installer. Sign in to preview setup; start a trial or subscription to run agents and unlock Orrery Cloud.</p>
+      <p class="sub">Download the Windows beta packet. Sign in to preview setup; start a trial or subscription to run agents and unlock Orrery Cloud.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
@@ -72,17 +72,17 @@
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
-        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API + Doubleword credits, BYOK, and Orrery Cloud.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, and Orrery Cloud.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
       <div class="download-steps">
         <h3>Quick start</h3>
         <ol>
-          <li>Run the installer. This beta build is unsigned, so Windows SmartScreen may warn — choose <b>More info → Run anyway</b>.</li>
-          <li>Orrery opens the Agents window with a seeded sandbox workspace — no other installs required.</li>
+          <li>Unzip the beta packet and run <b>Orrery.exe</b>. Windows SmartScreen may warn on this portable beta — choose <b>More info → Run anyway</b>.</li>
+          <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
           <li>Optional local route: install <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> and pull a model. Running local/BYOK routes requires a subscription or legacy access.</li>
-          <li>Or sign in from Settings -> Account and subscribe - hosted DeepSeek API / Doubleword credits work with zero provider-key setup.</li>
-          <li>Prefer a portable build? Grab the <code>-win.zip</code> from the <a href="https://github.com/kenjugmail/webeph/releases/latest" target="_blank" rel="noopener">release page</a>.</li>
+          <li>Or sign in from Settings -> Account and subscribe - hosted DeepSeek API, Doubleword, and Arbiter credits work with zero provider-key setup.</li>
+          <li>Checksums, manifest, and the package security report live on the <a href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">binary release page</a>.</li>
         </ol>
         <p class="sub" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener" style="color:var(--teal-lt);">Join the Discord</a>.</p>
       </div>

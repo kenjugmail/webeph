@@ -89,7 +89,7 @@ Set default in `handle_new_user()` to `download_approved = false`, or flip indiv
 
 Free/local users do not need a Supabase row. Any cloud auth identity starts with `profiles.plan = 'free'`, `cloud_credit_granted_cents = 0`, and `buddy_access = false` until paid billing grants cloud access.
 
-There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, BuddyIDE Pro features, BYOK, and bundled DeepSeek model token quotas (see `docs/CLOUD.md`).
+There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, BuddyIDE Pro features, BYOK, and bundled DeepSeek API, Doubleword, and Arbiter credit pools (see `docs/CLOUD.md`).
 
 **Migration for existing deployments** — projects created before the max/ultra tiers
 have a check constraint that only allows `'free'`/`'pro'`. Widen it once in the SQL editor

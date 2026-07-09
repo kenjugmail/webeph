@@ -75,22 +75,22 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Premium agent work with hosted DeepSeek API and Doubleword credits, BYOK, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 10M credits/month', 'Doubleword - 10M credits/month', 'Bring your own API key', 'Nexus + managed connector features'],
+      summary: 'Premium agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Bring your own API key', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'DeepSeek API - 25M credits/month', 'Doubleword - 25M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'DeepSeek API - 18M credits/month', 'Doubleword - 20M credits/month', 'Arbiter - 12M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'DeepSeek API - 50M credits/month', 'Doubleword - 50M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'DeepSeek API - 35M credits/month', 'Doubleword - 35M credits/month', 'Arbiter - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -152,9 +152,12 @@ function renderPlanSummary(root, profile) {
   const quotas = BUNDLED_QUOTAS[planKey];
   const quotaRows = quotas
     ? Object.entries(quotas).map(([model, tokens]) => `
-    <div class="account-plan-meter">
-      <span>${model}</span>
-      <b>${formatTokens(tokens)} tokens / month</b>
+    <div class="account-plan-meter account-plan-meter-pool" data-credit-pool="${model.toLowerCase().replaceAll(' ', '-')}">
+      <div>
+        <span>${model}</span>
+        <b>${formatTokens(tokens)} credits / month</b>
+      </div>
+      <div class="account-plan-quota-track" aria-hidden="true"><i style="width:100%"></i></div>
     </div>`).join('')
     : '';
 

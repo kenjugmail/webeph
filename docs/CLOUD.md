@@ -28,13 +28,13 @@ No public no-cost local tier is offered. Preview users can inspect setup; legacy
 
 There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, BYOK routes, and hosted credit pools:
 
-| Tier | Price | DeepSeek API | Doubleword |
-|------|-------|----------------|-----------------|
-| **Pro** | `$40/month` | 10M credits/mo | 10M credits/mo |
-| **Max** | `$100/month` | 25M credits/mo | 25M credits/mo |
-| **Ultra** | `$200/month` | 50M credits/mo | 50M credits/mo |
+| Tier | Price | DeepSeek API | Doubleword | Arbiter |
+|------|-------|----------------|-----------------|---------|
+| **Pro** | `$40/month` | 8M credits/mo | 8M credits/mo | 4M credits/mo |
+| **Max** | `$100/month` | 18M credits/mo | 20M credits/mo | 12M credits/mo |
+| **Ultra** | `$200/month` | 35M credits/mo | 35M credits/mo | 30M credits/mo |
 
-All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances — live usage metering lives in the IDE.
+All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
 
 Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
 

@@ -8,9 +8,9 @@
  * NEVER put the Supabase service_role key, Stripe secret key, provider keys, or any other secret here.
  */
 window.ORRERY_CONFIG = {
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/Orrery-Setup.exe',
+  DOWNLOAD_URL: 'https://github.com/kenjugmail/orrery-releases/releases/download/orrery-0.1.0-beta/Orrery-0.1.0-beta-win-x64-portable.zip',
 
-  /** Windows installer published as a GitHub Release; the stable asset name survives version bumps. */
+  /** Windows beta packet published to the binary-only Orrery release repository. */
   RELEASE_AVAILABLE: true,
 
   AUDIT_WEBHOOK_URL: '',
@@ -37,11 +37,12 @@ window.ORRERY_CONFIG = {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Hosted DeepSeek API + Doubleword credits, BYOK, Nexus, and managed cloud features.',
+      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, Nexus, and managed cloud features.',
       features: [
         'Google, GitHub, and email cloud sign-in',
-        'DeepSeek API - 10M credits/month',
-        'Doubleword - 10M credits/month',
+        'DeepSeek API - 8M credits/month',
+        'Doubleword - 8M credits/month',
+        'Arbiter - 4M credits/month',
         'BYOK and Nexus agent operations',
         'Managed Discord/mobile automation',
       ],

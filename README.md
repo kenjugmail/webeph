@@ -10,7 +10,7 @@ Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide) — sideca
 | Setup | None | Supabase + billing (~15 min) |
 | Auth | Optional email on device | Pro: Google / GitHub / email |
 | Access | Desktop editor | Desktop + phone (relay coming) |
-| Pricing | Free: all local features | Pro: all cloud features, API credits + Buddy, $40/month |
+| Pricing | Preview setup; legacy local access for existing buyers | Pro/Max/Ultra subscriptions with DeepSeek API, Doubleword, and Arbiter credits |
 | Think of it as | An offline desktop editor | An agentic IDE you can reach from desktop + phone |
 
 See **[docs/CLOUD.md](docs/CLOUD.md)** for cloud setup and the phone/remote roadmap.
@@ -40,14 +40,14 @@ docs/CLOUD.md            Architecture: relay, phone, pairing
 ## Beta status
 
 - **Download is gated.** `RELEASE_AVAILABLE: false` in `assets/site-config.js` →
-  `download.html` shows "request beta access". Flip to `true` once a GitHub Release with
-  `orrery-install.zip` is live (see [docs/DEPLOY.md](docs/DEPLOY.md)).
+  `download.html` shows "request beta access". Flip to `true` once a binary-only
+  GitHub Release in `kenjugmail/orrery-releases` is live (see [docs/DEPLOY.md](docs/DEPLOY.md)).
 - **Closed-beta waitlist.** New cloud auth identities default to local/free entitlements until
   a Pro billing webhook or admin update grants paid cloud access. Enable Pro cloud by pasting
   your Supabase URL + anon key into `site-config.js` (anon key only — see [docs/CLOUD.md](docs/CLOUD.md)).
-- **Pricing is configured in one public catalog.** `assets/site-config.js` defines Free
-  and Pro/Max/Ultra. Preview is not a public no-cost local plan. Pro is `$40/month` and owns cloud
-  surface: cloud sign-in, API credits, Buddy, pairing, remote access, and cloud audit logs.
+- **Pricing is configured in one public catalog.** `assets/site-config.js` defines preview/no-active-subscription
+  plus Pro/Max/Ultra. Preview is not a public no-cost local plan. Paid plans own cloud
+  surface: cloud sign-in, DeepSeek API, Doubleword, and Arbiter credits, Buddy, pairing, remote access, and cloud audit logs.
   Add your Stripe Payment Link to `PRO_CHECKOUT_URL` when payments are live.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
 

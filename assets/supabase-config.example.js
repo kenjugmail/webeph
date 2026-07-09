@@ -2,24 +2,24 @@
 window.ORRERY_CONFIG = {
   CLOUD_AUTH_URL: 'https://YOUR_PROJECT.supabase.co',
   CLOUD_AUTH_KEY: 'YOUR_ANON_KEY',
-  /** GitHub Release asset URL for the Orrery install bundle (zip). */
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/orrery-install.zip',
+  /** GitHub Release asset URL for the Orrery beta packet (zip). */
+  DOWNLOAD_URL: 'https://github.com/kenjugmail/orrery-releases/releases/download/orrery-0.1.0-beta/Orrery-0.1.0-beta-win-x64-portable.zip',
   /** Where auth redirects after OAuth (must match Supabase allow list). */
   AUTH_REDIRECT: window.location.origin + '/download.html',
   PLANS: {
     free: {
-      name: 'Free',
-      price: '$0',
-      cadence: 'forever',
-      summary: 'All local Orrery features on your own machine. No cloud required.',
-      features: ['Local editor and agent workflow', 'Ollama/local models', 'Local audit log and checkpoints'],
+      name: 'No active subscription',
+      price: '-',
+      cadence: '',
+      summary: 'Preview Nexus and prepare a workspace. Start a trial or subscription to run real agents.',
+      features: ['Preview workspace and model setup', 'Subscribe to run agents and cloud features'],
     },
     pro: {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Hosted DeepSeek API + Doubleword credits, BYOK, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 10M credits/month', 'Doubleword - 10M credits/month', 'BYOK and Nexus operations'],
+      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, BYOK, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'BYOK and Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',
