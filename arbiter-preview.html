@@ -65,7 +65,7 @@
     <div class="ewrap">
       <span class="lbl rv in">System preview - July 9, 2026</span>
       <h1 class="rv in">Previewing Arbiter 0.1 beta.</h1>
-      <p class="ap-lede rv in">Arbiter is an experimental hosted coding route for Orrery subscribers. It is meant to help coding agents produce work with clearer evidence, usage receipts, and review boundaries. It is not a public model-weights release, not a benchmark claim, and not a guarantee of correctness.</p>
+      <p class="ap-lede rv in">Arbiter is an experimental hosted coding route for Orrery subscribers. It is built for coding agents that need clearer evidence, usage receipts, and review boundaries before a result is trusted.</p>
       <div class="ap-actions rv in">
         <a class="ebtn ebtn-fill" href="Orrery.html">See Orrery</a>
         <a class="ebtn" href="download.html">Download Orrery</a>
@@ -86,25 +86,22 @@
       </div>
 
       <article>
-        <p class="ap-drop rv">Arbiter is a premium Orrery route for coding tasks where evidence matters. The public positioning is intentionally narrow: ask Orrery to run work, review what happened, see the usage it consumed, and decide whether to trust the result.</p>
+        <p class="ap-drop rv">Arbiter is a premium Orrery route for coding tasks where evidence matters. The experience is simple: ask Orrery to run work, review what happened, see the usage it consumed, and decide whether to trust the result.</p>
 
         <h2 class="rv">What subscribers see</h2>
         <p class="rv">Inside Orrery, Arbiter appears as a hosted model route named <code>arbiter-0.1-beta</code>. It can be selected from Nexus alongside DeepSeek API, Doubleword, BYOK, and local routes. Subscribers see usage meters, run receipts, and proof/boundary summaries where the app supports them.</p>
         <p class="rv">The route is designed for agentic coding workflows: planning, editing, follow-up fixes, and review. It does not replace your own testing, code review, security review, or backups.</p>
 
         <h2 class="rv">Latent-style signals vs token-only generation</h2>
-        <p class="rv">Most chat models produce the next token directly from the visible prompt and context. Arbiter is positioned differently in Orrery: it is tested as a coding route that values structured run signals such as task state, review evidence, and verifier-style feedback, then turns those signals into ordinary agent output. Public copy should treat this as a product behavior comparison, not a disclosure of private internals.</p>
+        <p class="rv">Most chat models produce the next token directly from the visible prompt and context. Arbiter is positioned differently in Orrery: it is tested as a coding route that values structured run signals such as task state, review evidence, and verifier-style feedback, then turns those signals into ordinary agent output.</p>
         <p class="rv">The practical difference for subscribers is simple: Arbiter is meant for coding work where a final answer is not enough. Nexus should show the prompt, route, run summary, usage, proof, and boundary receipts so the user can inspect the result instead of trusting a raw completion.</p>
 
         <div class="ap-callout rv">
-          <strong>Beta boundary:</strong> Arbiter may be slow, unavailable, changed, or paused while the beta is measured. Results vary by task, context, tools, and provider availability.
+          <strong>Beta note:</strong> Arbiter may be slow, unavailable, changed, or paused while the beta is measured. Results vary by task, context, tools, and provider availability.
         </div>
 
-        <h2 class="rv">What is not public</h2>
-        <p class="rv">Arbiter is not an open-weights release. Private weights, serving details, internal prompts, routing internals, and operations details are not part of the public beta page. The subscriber-facing product surface is the hosted route inside Orrery.</p>
-
-        <h2 class="rv">Evidence boundary</h2>
-        <p class="rv">Current internal beta evidence includes a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. That is not an official leaderboard score, not a live-service guarantee, and not a promise about any subscriber result. It is an internal release signal, and public claims stay conservative until larger matched evaluations are complete.</p>
+        <h2 class="rv">Beta evidence</h2>
+        <p class="rv">Current internal beta evidence includes a 92/100 frozen local projection on the first 100 SWE-bench Verified tasks. Orrery treats that as a release-readiness signal, not a leaderboard entry or a guarantee about any individual subscriber run. Larger matched evaluations will be published only when they are ready.</p>
 
         <h2 class="rv">Availability</h2>
         <p class="rv">Arbiter access is available for Orrery Pro, Max, and Ultra subscriber testing through hosted credits when the beta route is online. Signed-out users, unsubscribed accounts, canceled or unpaid accounts, and legacy-local-only accounts cannot use hosted Arbiter credits.</p>
