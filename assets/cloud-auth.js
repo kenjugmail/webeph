@@ -68,7 +68,7 @@ export function getPlanCatalog() {
       name: 'No active subscription',
       price: '-',
       cadence: '',
-      summary: 'Preview the app and set up your workspace. Start a trial or subscription to run real agents.',
+      summary: 'Preview the app and set up your workspace. Subscribe to run real agents.',
       features: ['Preview Nexus and workspace setup', 'Start Pro / Max / Ultra for agent runs and Orrery Cloud'],
     },
     pro: plans.pro || {
