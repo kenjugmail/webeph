@@ -27,7 +27,7 @@ window.ORRERY_CONFIG = {
       name: 'No active subscription',
       price: '-',
       cadence: '',
-      summary: 'Preview Nexus and prepare a workspace. Start a trial or subscription to run real agents.',
+      summary: 'Preview Nexus and prepare a workspace. Subscribe to run real agents.',
       features: ['Preview workspace and model setup', 'Subscribe to run agents and cloud features'],
     },
     pro: {

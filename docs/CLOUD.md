@@ -12,7 +12,7 @@ Orrery is a premium cloud-credit beta. Preview setup is inspectable before subsc
 | **Setup** | None | Supabase + billing webhook (~15 min) |
 | **Audit logs** | `localStorage` + optional webhook | Central `activity_logs` table |
 
-Preview setup is available before subscription, but real agent work requires an active trial/subscription or server-side beta grant. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant Pro/Max/Ultra before cloud entitlements are enabled.
+Preview setup is available before subscription, but real agent work requires an active subscription. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant an active Pro/Max/Ultra plan before cloud entitlements are enabled.
 
 ## What cloud account enables
 

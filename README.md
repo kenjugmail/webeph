@@ -9,7 +9,7 @@ Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide): sidecar +
 |---|---|---|
 | Setup | Download beta, sign in, open Nexus, prepare workspace/model routes | Supabase auth + Stripe billing |
 | Auth | Required for current beta account flow | Google / GitHub / email |
-| Access | Preview setup; real runs require subscription/trial or server-side beta grant | Pro/Max/Ultra subscriptions |
+| Access | Preview setup; real runs require an active subscription | Pro/Max/Ultra subscriptions |
 | Pricing | No public permanent free local plan | DeepSeek API, Doubleword, Arbiter, managed connectors, proof vault, cloud runs |
 | Think of it as | Installed Orrery shell and local workspace setup | Hosted agent capacity and account-backed operations |
 
@@ -47,7 +47,7 @@ docs/DEPLOY.md           Vercel/domain/download/update release steps
   binary-only `kenjugmail/orrery-releases` GitHub Release. The desktop app has
   electron-updater feed wiring for signed installer builds later.
 - **Closed beta accounts.** New cloud auth identities have no cloud entitlement until
-  a billing webhook, trial, invite, or admin grant updates Supabase profile metadata.
+  the billing webhook updates active subscription metadata in Supabase.
 - **Pricing is configured in one public catalog.** `assets/site-config.js` defines
   preview/no-active-subscription plus Pro/Max/Ultra. Preview is not a public free
   local plan. Paid plans own cloud sign-in, DeepSeek API, Doubleword, Arbiter credits,
@@ -60,6 +60,12 @@ See **[docs/DEPLOY.md](docs/DEPLOY.md)**: import `kenjugmail/webeph` on Vercel
 (no build), then point Porkbun DNS at Vercel.
 
 ## Local dev
+
+Before publishing access or pricing changes, run:
+
+```powershell
+node scripts/check-subscription-access.mjs
+```
 
 ```powershell
 python -m http.server 8080
