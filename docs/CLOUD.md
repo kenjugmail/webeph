@@ -1,18 +1,18 @@
 # Orrery Pro Cloud — login, remote, phone
 
-Orrery is **local-first** by default. **All cloud features are paid Pro features**: cloud sign-in, hosted API credits, Buddy, pairing, remote access, and centralized logs.
+Orrery is a premium cloud-credit beta. Preview setup is inspectable before subscribing, but real agent work runs through paid hosted credits and cloud features.
 
 ## Two modes
 
-| | Local | Pro cloud |
+| | Local | Orrery Cloud |
 |---|--------|----------------|
 | **Auth** | Optional email in browser (honor system) | Paid Pro: Google / GitHub / email magic link |
-| **Access** | Desktop editor | Desktop + phone/browser (via relay) |
-| **Pricing** | Free; all local features | Pro `$40` / Max `$100` / Ultra `$200` per month; all cloud features, bundled model quotas, BYOK, Buddy |
+| **Access** | Preview setup | Desktop + phone/browser (via relay) |
+| **Pricing** | No active subscription | Pro `$40` / Max `$100` / Ultra `$200` per month; hosted credits, Nexus, managed connectors |
 | **Setup** | None | Supabase + billing webhook (~15 min) |
 | **Audit logs** | `localStorage` + optional webhook | Central `activity_logs` table |
 
-Local mode never goes away. Cloud is additive and paid. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant Pro before cloud entitlements are enabled.
+Preview setup is available before subscription, but real agent work requires an active trial/subscription or server-side beta grant. Google/GitHub/email buttons only appear when `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` are set, and the billing webhook/admin process must grant Pro/Max/Ultra before cloud entitlements are enabled.
 
 ## What cloud account enables
 
@@ -20,28 +20,28 @@ Local mode never goes away. Cloud is additive and paid. Google/GitHub/email butt
 - Paid verified identity across site, editor, and devices
 - Paid central audit log in Supabase
 - Pro cloud dashboard at `cloud.html`
-- Plan state: Free, Pro, Max, or Ultra — bundled-model quotas, cloud credit counters, Buddy entitlement
+- Plan state: unsubscribed/preview, Pro, Max, or Ultra - hosted-credit counters, cloud capability, and Nexus entitlement
 
 ## Pricing model
 
-Free includes local Orrery features only: the desktop editor, local models, local audit logs, and checkpoints.
+No public no-cost local tier is offered. Preview users can inspect setup; active subscribers run through hosted credits and cloud features.
 
-There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), the BuddyIDE Pro features (buddy narrator, cloud models, API providers), bring-your-own-key (Anthropic, OpenAI, …), and two bundled models with monthly token quotas:
+There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
 
-| Tier | Price | DeepSeek Flash | DeepSeek V4 Pro |
-|------|-------|----------------|-----------------|
-| **Pro** | `$40/month` | 100M tokens/mo | 15M tokens/mo |
-| **Max** | `$100/month` | 400M tokens/mo | 50M tokens/mo |
-| **Ultra** | `$200/month` | 1B tokens/mo | 150M tokens/mo |
+| Tier | Price | DeepSeek API | Doubleword | Arbiter |
+|------|-------|----------------|-----------------|---------|
+| **Pro** | `$40/month` | 8M credits/mo | 8M credits/mo | 4M credits/mo |
+| **Max** | `$100/month` | 18M credits/mo | 20M credits/mo | 12M credits/mo |
+| **Ultra** | `$200/month` | 35M credits/mo | 35M credits/mo | 30M credits/mo |
 
-All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances — live usage metering lives in the IDE.
+All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
 
 Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
 
 **Next (relay — not live yet):**
 - **Phone / browser remote** — approve tool requests, steer agents, read status from your phone
 - **Pairing** — desktop shows a code; phone links to your running sidecar through an authenticated relay
-- **Hosted sessions** — Pro cloud sandboxes (Colony / E2B) for tasks you don't want on your laptop
+- **Hosted sessions** — Cloud sandboxes (Colony / E2B) for tasks you don't want on your laptop
 
 Architecture:
 
@@ -159,7 +159,7 @@ CLOUD_AUTH_KEY: 'your-anon-key',
 AUTH_REDIRECT: window.location.origin + '/',  // editor root — gate closes after OAuth
 ```
 
-Leave `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` empty to hide OAuth and use local-only mode.
+Leave `CLOUD_AUTH_URL` and `CLOUD_AUTH_KEY` empty to hide OAuth and use preview-only setup.
 
 ---
 

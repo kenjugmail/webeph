@@ -7,7 +7,7 @@
 export const PLAN_ORDER = ['free', 'pro', 'max', 'ultra'];
 
 export const PLAN_LABELS = {
-  free: 'Free',
+  free: 'No active subscription',
   pro: 'Pro',
   max: 'Max',
   ultra: 'Ultra',
@@ -22,9 +22,9 @@ export const PLAN_PRICES = {
 
 /** Monthly token quotas for the bundled cloud models, per paid tier. */
 export const BUNDLED_QUOTAS = {
-  pro: { 'DeepSeek Flash': 100_000_000, 'DeepSeek V4 Pro': 15_000_000 },
-  max: { 'DeepSeek Flash': 400_000_000, 'DeepSeek V4 Pro': 50_000_000 },
-  ultra: { 'DeepSeek Flash': 1_000_000_000, 'DeepSeek V4 Pro': 150_000_000 },
+  pro: { 'DeepSeek API': 8_000_000, 'Doubleword': 8_000_000, 'Arbiter': 4_000_000 },
+  max: { 'DeepSeek API': 18_000_000, 'Doubleword': 20_000_000, 'Arbiter': 12_000_000 },
+  ultra: { 'DeepSeek API': 35_000_000, 'Doubleword': 35_000_000, 'Arbiter': 30_000_000 },
 };
 
 /** Built-in Stripe Payment Links; site-config.js keys override them. */
@@ -48,7 +48,7 @@ export function planFromCloudProfile(profile) {
   if (plan === 'free') return 'free';
   const status = profile.subscription_status;
   const subscriptionActive = status === 'active' || status === 'trialing';
-  return subscriptionActive || profile.buddy_access === true ? plan : 'free';
+  return subscriptionActive ? plan : 'free';
 }
 
 /**

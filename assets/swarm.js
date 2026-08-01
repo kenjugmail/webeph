@@ -1,6 +1,6 @@
 /* ============================================================
    SWARM — parallel-agent orchestration diagram.
-   goal → task DAG → worktree-per-task → best-of-N → judge → merge
+   goal -> task DAG -> worktree-per-task -> multi-attempt -> judge -> review
    Phased timeline, loops. Streams an event log.
    mountSwarm(rootEl)
    ============================================================ */
@@ -14,7 +14,7 @@
 
   const EVENTS = [
     ['orchestration.decision', 'parallel · earned (fan-out 4)', 'violet'],
-    ['orchestration.search', 'best-of-N · population 11', 'teal'],
+    ['orchestration.search', 'multi-attempt · population 11', 'teal'],
     ['verifier.verdict', 'T1 · compiles ✓ tests ✓ lint ✓', 'green'],
     ['review.spatial', 'T3 · shader compiles · metric 0.94', 'brass'],
     ['verifier.verdict', 'T2 · candidate b selected (surprisal)', 'teal'],
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="swarm-col swarm-tasks-col">
-          <div class="swarm-label">worktree per task · best-of-N</div>
+          <div class="swarm-label">worktree per task · multi-attempt</div>
           <div class="swarm-lanes" data-lanes></div>
         </div>
         <div class="swarm-col swarm-merge-col">
@@ -130,8 +130,8 @@
         await wait(900);
         logLine(...EVENTS[1]);
 
-        // 3. run best-of-N
-        phaseEl.textContent = 'run · best-of-N';
+        // 3. run attempts
+        phaseEl.textContent = 'run · attempts';
         laneEls.forEach(l => l.classList.add('running'));
         await wait(1500);
 

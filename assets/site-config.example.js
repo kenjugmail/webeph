@@ -1,17 +1,22 @@
 /**
  * Copy to site-config.js
  *
- * Local-only use needs no backend. Pro cloud login uses a
+ * Preview setup needs no backend. Pro cloud login uses a
  * free Supabase project as the OAuth broker — no custom auth server required.
  * See docs/CLOUD.md for Google Cloud Console + GitHub OAuth App setup.
  */
 window.ORRERY_CONFIG = {
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/orrery-install.zip',
-  /** Optional — POST JSON audit events here. Leave empty for local-only logs. */
+  DOWNLOAD_URL: 'https://github.com/kenjugmail/orrery-releases/releases/download/orrery-0.1.0-beta/Orrery-0.1.0-beta-win-x64-portable.zip',
+  RELEASE_VERSION: '0.1.0-beta',
+  RELEASE_CHANNEL: 'beta',
+  RELEASE_PAGE_URL: 'https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta',
+  RELEASE_SHA256: '421cb012d7f0f9a390aabc3e108bdc180f5a8851b0b3fa207d348dc1127b8543',
+  UPDATE_MODE: 'manual-portable-beta',
+  /** Optional — POST JSON audit events here. Leave empty to keep logs on-device. */
   AUDIT_WEBHOOK_URL: '',
   /**
    * Pro cloud account — from Supabase → Project Settings → API.
-   * Leave empty to hide Google/GitHub/email cloud login and use local mode only.
+   * Leave empty to hide Google/GitHub/email cloud login.
    */
   CLOUD_AUTH_URL: 'https://YOUR_PROJECT_REF.supabase.co',
   CLOUD_AUTH_KEY: 'YOUR_SUPABASE_ANON_KEY',
@@ -19,18 +24,18 @@ window.ORRERY_CONFIG = {
   AUTH_REDIRECT: window.location.origin + '/cloud.html',
   PLANS: {
     free: {
-      name: 'Free',
-      price: '$0',
-      cadence: 'forever',
-      summary: 'All local Orrery features on your own machine. No cloud required.',
-      features: ['Local editor and agent workflow', 'Ollama/local models', 'Local audit log and checkpoints'],
+      name: 'No active subscription',
+      price: '-',
+      cadence: '',
+      summary: 'Preview Nexus and prepare a workspace. Start a trial or subscription to run real agents.',
+      features: ['Preview workspace and model setup', 'Subscribe to run agents and cloud features'],
     },
     pro: {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Every cloud feature: Pro account, API cloud credits, and Buddy.',
-      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'Included API cloud credits', 'Buddy system access', 'Cross-device account and cloud audit log'],
+      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',

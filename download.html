@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Orrery — request beta access</title>
-<meta name="description" content="Request access to the Orrery private beta. Orrery is a local-first agentic code editor that runs on your machine.">
+<title>Get Orrery beta</title>
+<meta name="description" content="Download the Orrery beta. Beta software may change, fail, or produce incorrect agent output; review changes and keep backups.">
 <link rel="canonical" href="https://ephemerent.com/download.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Get Orrery — request beta access">
-<meta property="og:description" content="Request access to the Orrery private beta — a local-first agentic code editor.">
+<meta property="og:title" content="Get Orrery beta">
+<meta property="og:description" content="Download the Orrery beta. Preview setup is available; real agent runs require a trial, subscription, or invite grant.">
 <meta property="og:url" content="https://ephemerent.com/download.html">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Get Orrery — request beta access">
+<meta property="og:image:alt" content="Get Orrery beta">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
@@ -53,43 +53,49 @@
   <div class="auth-card" style="max-width:520px;">
     <h1>Get Orrery</h1>
 
-    <!-- Shown until the installer is published (RELEASE_AVAILABLE = false) -->
+    <!-- Shown until a beta packet is published (RELEASE_AVAILABLE = false) -->
     <div id="beta-gate">
       <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
-      <p class="sub" style="margin-bottom:20px;">The Orrery installer isn’t public yet. Request access and we’ll email you when your build is ready — early testers get in first.</p>
+      <p class="sub" style="margin-bottom:20px;">Orrery beta access is controlled through sign-in and subscription status. Request access and we may email approved testers when a build is available.</p>
       <div class="plan-strip">
-        <div><b>Free</b><span>All local Orrery features — local mode needs no account.</span></div>
-        <div><b>Pro $40 · Max $100 · Ultra $200 /mo</b><span>Cloud sign-in, bundled DeepSeek quotas, BYOK, and Buddy.</span></div>
+        <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits plus Orrery Cloud.</span></div>
       </div>
-      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Bundled-model prompts are proxied to DeepSeek. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>.</p>
+      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
       <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Free users can use local mode without an account, or sign in after purchasing a paid tier for cloud. For beta access, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">No permanent unpaid tier is offered at launch. Preview users can inspect setup; trial/subscription users can run agents. For beta access, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
     </div>
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the Windows installer. Local mode needs no account; sign in to unlock the paid cloud features.</p>
+      <p class="sub">Download the Windows beta packet. Sign in to preview setup; start a trial or subscription to run agents and unlock Orrery Cloud. Beta software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
-        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want cloud sign-in, credits, Buddy, and phone access? Use Pro cloud.</p>
+        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
         <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:24px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
-      <div class="plan-strip">
-        <div><b>Free</b><span>All local Orrery features — local mode needs no account.</span></div>
-        <div><b>Pro $40 · Max $100 · Ultra $200 /mo</b><span>Cloud sign-in, bundled DeepSeek quotas, BYOK, and Buddy.</span></div>
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
+      <div class="release-status" id="release-status">
+        <div><b>Current beta</b><span id="release-version">0.1.0-beta</span></div>
+        <div><b>Update mode</b><span id="release-update-mode">Manual portable update</span></div>
+        <div><b>Verify download</b><span class="mono" id="release-sha">SHA-256 on release page</span></div>
+        <a id="release-page-link" href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">Open release notes and checksums</a>
       </div>
-      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Bundled-model prompts are proxied to DeepSeek. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>.</p>
+      <div class="plan-strip">
+        <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits plus Orrery Cloud, subject to beta limits and provider availability.</span></div>
+      </div>
+      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
       <div class="download-steps">
         <h3>Quick start</h3>
         <ol>
-          <li>Run the installer. This beta build is unsigned, so Windows SmartScreen may warn — choose <b>More info → Run anyway</b>.</li>
-          <li>Orrery opens the Agents window with a seeded sandbox workspace — no other installs required.</li>
-          <li>Optional, for free local models: install <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> and pull a model.</li>
-          <li>Or sign in from Settings → Account and subscribe — bundled DeepSeek Flash / V4 Pro work with zero setup.</li>
-          <li>Prefer a portable build? Grab the <code>-win.zip</code> from the <a href="https://github.com/kenjugmail/webeph/releases/latest" target="_blank" rel="noopener">release page</a>.</li>
+          <li>Unzip the beta packet and run <b>Orrery.exe</b>. Windows SmartScreen may warn on this portable beta — choose <b>More info → Run anyway</b>.</li>
+          <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
+          <li>Sign in from Settings -> Account and subscribe - hosted DeepSeek API, Doubleword, and Arbiter credits work with zero provider-key setup.</li>
+          <li>Use Nexus to open a workspace, pick a hosted route, send work, and review proof, boundary, and usage receipts.</li>
+          <li>Checksums, manifest, and the package security report live on the <a href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">binary release page</a>.</li>
         </ol>
         <p class="sub" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener" style="color:var(--teal-lt);">Join the Discord</a>.</p>
       </div>
@@ -125,6 +131,11 @@
 @media (max-width:560px){ .plan-strip { grid-template-columns:1fr; } }
 .plan-fineprint { margin:-12px 0 22px; font-size:11.5px; line-height:1.55; color:var(--faint); }
 .plan-fineprint a { color:var(--teal-lt); }
+.release-status { display:grid; gap:10px; margin:0 0 24px; padding:14px; border:1px solid var(--line); border-radius:var(--r-sm); background:linear-gradient(180deg,var(--bg-2),rgba(255,255,255,.02)); }
+.release-status div { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
+.release-status b { color:var(--ink); font-size:13px; }
+.release-status span { color:var(--muted); font-size:12.5px; text-align:right; overflow-wrap:anywhere; }
+.release-status a { color:var(--teal-lt); font-size:13px; }
 </style>
 
 <script src="assets/site-config.js"></script>
@@ -135,11 +146,24 @@
   import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES } from './assets/accountPlan.js';
   mountDownloadPage();
   mountNavAccount();
+  const releaseConfig = window.ORRERY_CONFIG || {};
+  const releaseVersion = document.getElementById('release-version');
+  if (releaseVersion && releaseConfig.RELEASE_VERSION) releaseVersion.textContent = String(releaseConfig.RELEASE_VERSION);
+  const releaseMode = document.getElementById('release-update-mode');
+  if (releaseMode) {
+    releaseMode.textContent = releaseConfig.UPDATE_MODE === 'manual-portable-beta'
+      ? 'Manual portable update - download the newest beta zip'
+      : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
+  }
+  const releaseSha = document.getElementById('release-sha');
+  if (releaseSha && releaseConfig.RELEASE_SHA256) releaseSha.textContent = `SHA-256 ${String(releaseConfig.RELEASE_SHA256)}`;
+  const releasePage = document.getElementById('release-page-link');
+  if (releasePage && releaseConfig.RELEASE_PAGE_URL) releasePage.href = String(releaseConfig.RELEASE_PAGE_URL);
   if (cloudConfigured()) {
     document.getElementById('cloud-signin-cta')?.classList.remove('hidden');
 
     // Paid tiers (cloud-signed-in) see beta/download access as already entitled.
-    // The local/free path above is untouched — local mode needs no account.
+    // Preview access can inspect setup; real agent work requires subscription or trial.
     getCloudProfile().then((profile) => {
       const plan = planFromCloudProfile(profile);
       if (!isPaidPlan(plan)) return;
@@ -158,7 +182,7 @@
       const cta = document.getElementById('cloud-signin-cta');
       if (cta) {
         cta.innerHTML = `
-          <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Your ${tierLabel} plan is active — cloud sign-in, bundled model quotas, BYOK, and Buddy are enabled.</p>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Your ${tierLabel} plan is active - hosted credits, Nexus, and Orrery Cloud are enabled.</p>
           <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open cloud dashboard</a>
         `;
       }

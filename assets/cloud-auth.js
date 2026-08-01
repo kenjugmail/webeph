@@ -65,32 +65,32 @@ export function getPlanCatalog() {
   const plans = cfg().PLANS || {};
   return {
     free: plans.free || {
-      name: 'Free',
-      price: '$0',
-      cadence: 'forever',
-      summary: 'All local Orrery features on your own machine. No cloud required.',
-      features: ['Local editor and agent workflow', 'Ollama/local models', 'Local audit log and checkpoints'],
+      name: 'No active subscription',
+      price: '-',
+      cadence: '',
+      summary: 'Preview the app and set up your workspace. Start a trial or subscription to run real agents.',
+      features: ['Preview Nexus and workspace setup', 'Start Pro / Max / Ultra for agent runs and Orrery Cloud'],
     },
     pro: plans.pro || {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Every cloud feature plus bundled models: 100M DeepSeek Flash + 15M DeepSeek V4 Pro tokens/month, and bring your own API key.',
-      features: ['Everything in Free', 'Google, GitHub, and email cloud sign-in', 'DeepSeek Flash — 100M tokens/month', 'DeepSeek V4 Pro — 15M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+      summary: 'Premium agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
-      summary: 'Everything in Pro with bigger bundled quotas: 400M DeepSeek Flash + 50M DeepSeek V4 Pro tokens/month, and bring your own API key.',
-      features: ['Everything in Pro', 'DeepSeek Flash — 400M tokens/month', 'DeepSeek V4 Pro — 50M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+      summary: 'Bigger hosted-credit pools for daily multi-agent work.',
+      features: ['Everything in Pro', 'DeepSeek API - 18M credits/month', 'Doubleword - 20M credits/month', 'Arbiter - 12M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
-      summary: 'The biggest bundled quotas: 1B DeepSeek Flash + 150M DeepSeek V4 Pro tokens/month, and bring your own API key.',
-      features: ['Everything in Pro', 'DeepSeek Flash — 1B tokens/month', 'DeepSeek V4 Pro — 150M tokens/month', 'Bring your own API key (Anthropic, OpenAI, …)', 'Buddy system access'],
+      summary: 'The largest hosted-credit pools and cloud automation capacity.',
+      features: ['Everything in Max', 'DeepSeek API - 35M credits/month', 'Doubleword - 35M credits/month', 'Arbiter - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -102,7 +102,7 @@ export async function getCloudProfile() {
 
   const { data, error } = await sb
     .from('profiles')
-    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents,buddy_access')
+    .select('id,email,display_name,avatar_url,download_approved,plan,subscription_status,cloud_credit_granted_cents,cloud_credit_used_cents')
     .eq('id', session.user.id)
     .maybeSingle();
 
@@ -115,7 +115,6 @@ export async function getCloudProfile() {
       subscription_status: 'inactive',
       cloud_credit_granted_cents: 0,
       cloud_credit_used_cents: 0,
-      buddy_access: false,
     };
   }
   return data;
@@ -139,13 +138,16 @@ function renderPlanSummary(root, profile) {
   const portal = cfg().BILLING_PORTAL_URL;
   const paid = isPaidPlan(planKey);
 
-  // Static monthly allowances for the bundled models — the live usage meter lives in the IDE.
+  // Static monthly allowances for hosted credits; the live usage meter lives in the IDE.
   const quotas = BUNDLED_QUOTAS[planKey];
   const quotaRows = quotas
     ? Object.entries(quotas).map(([model, tokens]) => `
-    <div class="account-plan-meter">
-      <span>${model}</span>
-      <b>${formatTokens(tokens)} tokens / month</b>
+    <div class="account-plan-meter account-plan-meter-pool" data-credit-pool="${model.toLowerCase().replaceAll(' ', '-')}">
+      <div>
+        <span>${model}</span>
+        <b>${formatTokens(tokens)} credits / month</b>
+      </div>
+      <div class="account-plan-quota-track" aria-hidden="true"><i style="width:100%"></i></div>
     </div>`).join('')
     : '';
 
@@ -180,12 +182,8 @@ function renderPlanSummary(root, profile) {
       <b>${moneyFromCents(remaining)} remaining</b>
     </div>
     <div class="account-plan-meter">
-      <span>Buddy system</span>
-      <b>${profile?.buddy_access || paid ? 'Enabled' : 'Paid tiers'}</b>
-    </div>
-    <div class="account-plan-meter">
-      <span>Bring your own API key</span>
-      <b>${paid ? 'Enabled' : 'Paid tiers'}</b>
+      <span>Nexus cloud features</span>
+      <b>${paid ? 'Enabled' : 'Subscription required'}</b>
     </div>
     <div class="account-plan-actions">${upgrades.join('')}</div>
   `;

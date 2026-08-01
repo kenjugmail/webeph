@@ -44,7 +44,7 @@
           <button data-set="happy">green tests</button>
           <button data-set="talking">talking</button>
         </div>
-        <div class="buddy-meta mono">separate model · out-of-band · never touches the coding context</div>
+        <div class="buddy-meta mono">separate model · out-of-band · kept separate from coding context</div>
       </div>
     `;
 

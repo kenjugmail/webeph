@@ -1,65 +1,69 @@
 /**
- * Public site config — local works with no backend; cloud is a paid Pro surface.
+ * Public site config. Orrery is premium from first start: visitors can preview setup,
+ * while real agent work requires a trial or subscription.
  *
  * SAFE TO COMMIT: only publishable browser keys belong here:
  * - Supabase publishable / anon key in CLOUD_AUTH_KEY
  * - Stripe publishable key in STRIPE_PUBLISHABLE_KEY
- * (access is enforced by Supabase Row Level Security). NEVER put the
- * Supabase service_role key, Stripe secret key, or any other secret in this file.
+ * NEVER put the Supabase service_role key, Stripe secret key, provider keys, or any other secret here.
  */
 window.ORRERY_CONFIG = {
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/webeph/releases/latest/download/Orrery-Setup.exe',
+  DOWNLOAD_URL: 'https://github.com/kenjugmail/orrery-releases/releases/download/orrery-0.1.0-beta/Orrery-0.1.0-beta-win-x64-portable.zip',
+  RELEASE_VERSION: '0.1.0-beta',
+  RELEASE_CHANNEL: 'beta',
+  RELEASE_PAGE_URL: 'https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta',
+  RELEASE_SHA256: '421cb012d7f0f9a390aabc3e108bdc180f5a8851b0b3fa207d348dc1127b8543',
+  UPDATE_MODE: 'manual-portable-beta',
 
-  /** Windows installer published as a GitHub Release; the stable asset name
-   *  survives version bumps and the app self-updates via latest.yml. */
+  /** Windows beta packet published to the binary-only Orrery release repository. */
   RELEASE_AVAILABLE: true,
 
   AUDIT_WEBHOOK_URL: '',
 
-  /** Pro cloud accounts (Google / GitHub / email) — Supabase → Project Settings → API.
-   *  Paste your Project URL + anon (publishable) key to turn Pro cloud on.
-   *  Leave empty to keep local-only mode. */
+  /** Cloud accounts (Google / GitHub / email) - Supabase Project Settings -> API. */
   CLOUD_AUTH_URL: 'https://wjjthkqwcyahamhjkeux.supabase.co',
   CLOUD_AUTH_KEY: 'sb_publishable_fTYErD5rUJfDCj68Siif0Q_CMj0O2gI',
 
   AUTH_REDIRECT: window.location.origin + '/cloud.html',
 
-  /** Pricing + entitlements. Keep checkout URLs empty until Stripe/merchant links are live. */
+  /** Pricing + entitlements. */
   PLANS: {
     free: {
-      name: 'Free',
-      price: '$0',
-      cadence: 'forever',
-      summary: 'All local Orrery features on your own machine. No cloud required.',
+      name: 'No active subscription',
+      price: '-',
+      cadence: '',
+      summary: 'Preview Nexus and prepare a workspace. Start a trial or subscription to run real agents.',
       features: [
-        'Local editor and agent workflow',
-        'Ollama/local models',
-        'Local audit log and checkpoints',
+        'Preview workspace and model setup',
+        'Subscribe to run agents and cloud features',
       ],
     },
     pro: {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Every cloud feature: Pro account, API cloud credits, and Buddy.',
+      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
       features: [
-        'Everything in Free',
         'Google, GitHub, and email cloud sign-in',
-        'Included API cloud credits',
-        'Buddy system access',
-        'Cross-device account and cloud audit log',
+        'DeepSeek API - 8M credits/month',
+        'Doubleword - 8M credits/month',
+        'Arbiter - 4M credits/month',
+        'Nexus agent operations',
+        'Managed Discord/mobile automation',
       ],
     },
   },
   DEFAULT_PLAN: 'free',
   PRO_MONTHLY_PRICE_USD: 40,
-  STRIPE_PUBLISHABLE_KEY: 'pk_test_51Tgrc7DqjlIgVstfpP5de2QVIEnPAMVv2sFDPIfaenIRKwEbGR4ALJ5juD2Yv1hujvidNj3z2r7u4TG4D7cRBv6f00dfihJF1n',
+  /** Live Stripe publishable (browser) key - safe to commit; only the secret key must stay server-side. */
+  STRIPE_PUBLISHABLE_KEY: 'pk_live_51TgrbyDMKk79cYVGoDrCKtlaY2K1bLm950TZcLM0J2IY4WjelO9AEmbc8jIRbORb2B0b6Yhpe6aNR4miAPzXR2rc002xFV0BHV',
+  /** Subscription product (Pro/Max/Ultra monthly). */
   STRIPE_PRODUCT_ID: 'prod_UgEDipbYTZzLYb',
   PRO_CHECKOUT_URL: 'https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00',
   MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
   ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',
   BILLING_PORTAL_URL: '',
 
-  /** Future — WebSocket relay for phone/remote. Leave empty until deployed. */
+  /** Future - WebSocket relay for phone/remote. Leave empty until deployed. */
   CLOUD_RELAY_URL: '',
 };

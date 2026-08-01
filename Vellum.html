@@ -239,7 +239,7 @@
       <div class="flow-conn"></div>
       <div class="flow-step"><span class="flow-n mono">03</span><h4>Prove</h4><p>Each candidate is loaded, asserted, rendered headless and measured against the target.</p></div>
       <div class="flow-conn"></div>
-      <div class="flow-step"><span class="flow-n mono">04</span><h4>Keep</h4><p>The winner is the one that passed — returned with its proof, not a promise.</p></div>
+      <div class="flow-step"><span class="flow-n mono">04</span><h4>Review</h4><p>The selected attempt returns with evidence, so you can decide what to keep.</p></div>
     </div>
     <div class="proof-strip reveal d2">
       <div class="ps-item"><span class="ps-k mono">headless</span><span class="ps-v">Renders on the CPU — runs anywhere, including CI.</span></div>
@@ -350,28 +350,19 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">One subscription. Both apps.</h2>
-      <p class="lead">Vellum's editor, engine and proof kernel are free to run locally — no account needed. A single Ephemerent subscription unlocks cloud agents in Vellum <em>and</em> the Orrery IDE together: same sign-in, same bundled DeepSeek models, one shared monthly token quota metered server-side.</p>
+      <p class="lead">A single Ephemerent subscription unlocks cloud agents in Vellum and the Orrery IDE together: same sign-in, hosted DeepSeek API, Doubleword, and Arbiter credits, proof receipts, and one shared account.</p>
     </div>
     <p class="auth-msg ok hidden" id="pricing-active-note" style="margin-bottom:18px;"></p>
-    <div class="price-grid reveal d1">
-      <div class="price-card">
-        <h3>Free</h3>
-        <div class="price-amt">$0<span> forever</span></div>
-        <ul>
-          <li>Full local editor, engine and play mode</li>
-          <li>Renderer-neutral proof kernel, CLI and CI gate</li>
-          <li>Local agent runs with deterministic tools</li>
-        </ul>
-        <a class="btn btn-ghost" href="login.html">Get started</a>
-      </div>
+    <div class="price-grid reveal d1 price-grid-subscriptions">
       <div class="price-card featured">
         <h3>Pro</h3>
         <div class="price-amt">$40<span> /month</span></div>
         <ul>
           <li>Cloud agents in Vellum + Orrery</li>
-          <li>DeepSeek Flash — 100M tokens/mo</li>
-          <li>DeepSeek V4 Pro — 15M tokens/mo</li>
-          <li>Bring your own API key (Anthropic, OpenAI, …)</li>
+          <li>DeepSeek API - 8M credits/mo</li>
+          <li>Doubleword - 8M credits/mo</li>
+          <li>Arbiter - 4M credits/mo</li>
+          <li>Nexus operations</li>
         </ul>
         <a class="btn btn-primary" href="https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00">Subscribe</a>
       </div>
@@ -380,8 +371,10 @@
         <div class="price-amt">$100<span> /month</span></div>
         <ul>
           <li>Everything in Pro</li>
-          <li>DeepSeek Flash — 400M tokens/mo</li>
-          <li>DeepSeek V4 Pro — 50M tokens/mo</li>
+          <li>DeepSeek API - 18M credits/mo</li>
+          <li>Doubleword - 20M credits/mo</li>
+          <li>Arbiter - 12M credits/mo</li>
+          <li>More cloud-run capacity</li>
         </ul>
         <a class="btn btn-ghost" href="https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02">Subscribe</a>
       </div>
@@ -389,14 +382,16 @@
         <h3>Ultra</h3>
         <div class="price-amt">$200<span> /month</span></div>
         <ul>
-          <li>Everything in Pro</li>
-          <li>DeepSeek Flash — 1B tokens/mo</li>
-          <li>DeepSeek V4 Pro — 150M tokens/mo</li>
+          <li>Everything in Max</li>
+          <li>DeepSeek API - 35M credits/mo</li>
+          <li>Doubleword - 35M credits/mo</li>
+          <li>Arbiter - 30M credits/mo</li>
+          <li>Research runs and proof vault capacity</li>
         </ul>
         <a class="btn btn-ghost" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Subscribe</a>
       </div>
     </div>
-    <p class="plan-fineprint mono reveal d2">Quotas are shared across Orrery and Vellum and auto-renew monthly via Stripe; cancel anytime. Bundled-model prompts are proxied to DeepSeek. <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>. Already subscribed? <a href="vellum-connect.html">Connect Vellum to your account →</a></p>
+    <p class="plan-fineprint mono reveal d2">Credits are shared across Orrery and Vellum and auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>. Already subscribed? <a href="vellum-connect.html">Connect Vellum to your account -></a></p>
   </div>
 </section>
 
