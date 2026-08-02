@@ -8,15 +8,15 @@
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/orrery.css">
-<link rel="stylesheet" href="assets/auth.css">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="assets/auth.css?v=20260801">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<script src="assets/motion.js?v=20260802c" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body class="space-bg grain auth-page">
+<body class="space-bg auth-page utility-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <nav class="nav" id="nav">
@@ -30,17 +30,22 @@
       </svg>
       <span>Orrery</span>
     </a>
+    <div class="nav-links utility-nav-links">
+      <a href="Orrery.html">Orrery</a>
+      <a href="Vellum.html">Vellum</a>
+      <a href="Ephemerent.html">Lab</a>
+    </div>
     <div class="nav-spacer"></div>
     <a class="btn btn-ghost" href="Orrery.html">← Back</a>
   </div>
 </nav>
 
-<main class="auth-main" id="main">
+<main class="auth-main" id="main" data-workflow-label="Account / Sign in">
   <div class="auth-card">
     <h1>Sign in</h1>
     <p class="sub" id="login-sub">Sign in with Google, GitHub, or email. Preview setup is available without a paid plan; running agents requires a trial or subscription.</p>
 
-    <div id="cloud-auth-primary" class="hidden">
+    <div id="cloud-auth-primary">
       <div id="cloud-auth-setup" class="hidden">
         <p class="auth-msg" style="color:var(--muted);">Cloud auth is not configured yet. See <a href="docs/CLOUD.md">docs/CLOUD.md</a>; preview setup remains available below.</p>
       </div>
@@ -51,26 +56,29 @@
         </div>
         <div class="auth-divider">or email</div>
         <div class="auth-email-row">
+          <label class="sr-only" for="cloud-email">Email address</label>
           <input type="email" class="auth-input" id="cloud-email" placeholder="you@example.com" autocomplete="email">
           <button type="button" class="btn btn-primary" id="cloud-email-btn">Send link</button>
         </div>
-        <p class="auth-msg" id="cloud-auth-msg"></p>
+        <p class="auth-msg" id="cloud-auth-msg" role="status" aria-live="polite"></p>
         <a class="btn btn-ghost" href="cloud.html" style="width:100%;justify-content:center;margin-top:8px;">Open Orrery Cloud dashboard →</a>
       </div>
     </div>
 
-    <div id="cloud-local-divider" class="auth-divider hidden">preview setup</div>
+    <div id="cloud-local-divider" class="auth-divider">preview setup</div>
 
     <div id="local-auth-section">
       <p class="sub" style="margin-bottom:16px;font-size:14px;">Preview identity can label setup logs. Real agent runs require a trial, subscription, or invite grant.</p>
       <div id="identity-form-wrap">
         <form id="identity-form" class="auth-stack">
-          <input type="email" class="auth-input" name="email" placeholder="you@example.com (optional)" autocomplete="email">
-          <input type="text" class="auth-input" name="name" placeholder="Name (optional)" autocomplete="name">
+          <label class="sr-only" for="identity-email-input">Email address (optional)</label>
+          <input type="email" class="auth-input" id="identity-email-input" name="email" placeholder="you@example.com (optional)" autocomplete="email">
+          <label class="sr-only" for="identity-name-input">Name (optional)</label>
+          <input type="text" class="auth-input" id="identity-name-input" name="name" placeholder="Name (optional)" autocomplete="name">
           <button type="submit" class="btn btn-primary">Continue with email</button>
           <a class="btn btn-ghost" href="download.html" style="text-align:center;">Skip — download</a>
         </form>
-        <p class="auth-msg" id="identity-msg"></p>
+        <p class="auth-msg" id="identity-msg" role="status" aria-live="polite"></p>
       </div>
       <div id="identity-signed-in" class="hidden">
         <p class="mono" style="font-size:12px;color:var(--teal);margin-bottom:12px;">Signed in as <span id="identity-email"></span></p>
@@ -80,6 +88,13 @@
     </div>
   </div>
 </main>
+
+<footer class="utility-footer">
+  <div class="utility-footer-inner">
+    <span class="mono">Ephemerent · 2026</span>
+    <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
+  </div>
+</footer>
 
 <script src="assets/site-config.js"></script>
 <script type="module">

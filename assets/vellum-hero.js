@@ -1,6 +1,6 @@
 /* ============================================================
-   VELLUM — hero canvas. A geodesic instrument turning in the
-   dark while a verification plane sweeps it: the act of proving
+   VELLUM — hero canvas. A procedural torus assembly turns while
+   a verification plane sweeps it: the act of proving
    3D work headlessly, on the CPU. mountVellumHero(canvas, opts)
    ============================================================ */
 (function () {
@@ -28,14 +28,14 @@
     readPalette();
     window.addEventListener('vellum-palette', readPalette);
 
-    const sphere = window.V3.icosphere(1);
-    const box = window.V3.bbox(sphere.verts);
+    const artifact = window.V3.torus(1.25, 0.42, 28, 14);
+    const box = window.V3.bbox(artifact.verts);
 
-    // small orbiting satellites (different primitives → many kinds of 3D work)
-    const sats = [
-      { geo: window.V3.boxEdges(0, 0, 0, 1, 1, 1), r: 1.95, sp: 0.22, ph: 0.0, sc: 0.26, spin: 0.9 },
-      { geo: tetra(), r: 2.4, sp: -0.16, ph: 2.3, sc: 0.30, spin: -0.7 },
-      { geo: octa(), r: 2.15, sp: 0.19, ph: 4.4, sc: 0.27, spin: 1.1 }
+    // Fixed exploded-view samples: part, scene primitive, and collision proxy.
+    const samples = [
+      { geo: window.V3.boxEdges(0, 0, 0, 1, 1, 1), off: [-2.0, 0.9, 0.25], ph: 0.0, sc: 0.25, spin: 0.18 },
+      { geo: tetra(), off: [2.05, 0.65, -0.15], ph: 0.8, sc: 0.29, spin: -0.16 },
+      { geo: octa(), off: [1.85, -1.0, 0.35], ph: 1.5, sc: 0.26, spin: 0.2 }
     ];
 
     function tetra() {
@@ -49,12 +49,8 @@
 
     let stars = [];
     function seedStars() {
+      // The scene is drawn as a legible engineering instrument.
       stars = [];
-      const n = Math.floor((W * H) / 10000);
-      for (let i = 0; i < n; i++) stars.push({
-        x: Math.random() * W, y: Math.random() * H,
-        r: Math.random() * 1.2 + 0.2, tw: Math.random() * 6.28, tws: Math.random() * 1.4 + 0.3, d: Math.random() * 0.4 + 0.2
-      });
     }
 
     function resize() {
@@ -111,15 +107,14 @@
       // bounding box (faint)
       drawEdges(box.v, box.e, yaw, pitch, 1, null, scanY, band, 0.16, false);
 
-      // main geodesic
-      drawEdges(sphere.verts, sphere.edges, yaw, pitch, 1, null, scanY, band, 0.62, false);
-      drawNodes(sphere.verts, yaw, pitch, 1, null, scanY, band);
+      // main procedural part
+      drawEdges(artifact.verts, artifact.edges, yaw, pitch, 1, null, scanY, band, 0.62, false);
+      drawNodes(artifact.verts, yaw, pitch, 1, null, scanY, band);
 
-      // satellites
-      for (const s of sats) {
-        const a = s.ph + (reduce ? 0 : t * s.sp);
-        const off = [Math.cos(a) * s.r, Math.sin(a * 0.7) * 0.5, Math.sin(a) * s.r];
-        drawEdges(s.geo.v, s.geo.e, reduce ? 0.5 : t * s.spin, 0.4, s.sc, off, scanY, band, 0.5, true);
+      // exploded-view samples rotate in place; they do not orbit the hero.
+      for (const sample of samples) {
+        const sampleYaw = sample.ph + (reduce ? 0 : t * sample.spin);
+        drawEdges(sample.geo.v, sample.geo.e, sampleYaw, 0.4, sample.sc, sample.off, scanY, band, 0.5, true);
       }
 
       // the scan line itself

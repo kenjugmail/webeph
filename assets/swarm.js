@@ -1,186 +1,206 @@
-/* ============================================================
-   SWARM — parallel-agent orchestration diagram.
-   goal -> task DAG -> worktree-per-task -> multi-attempt -> judge -> review
-   Phased timeline, loops. Streams an event log.
-   mountSwarm(rootEl)
-   ============================================================ */
+/* Orrery supervised-run story.
+   A native-scroll lifecycle diagram: goal → worktrees → verification → decision. */
 (function () {
-  const TASKS = [
-    { id: 'T1', name: 'parser: add splat intake', model: 'anthropic', n: 3 },
-    { id: 'T2', name: 'spatial: AABB collision',  model: 'qwen·local', n: 3 },
-    { id: 'T3', name: 'shader: write & validate',  model: 'openai', n: 3 },
-    { id: 'T4', name: 'tests: regression suite',   model: 'deepseek', n: 2 },
+  'use strict';
+
+  const STEPS = [
+    {
+      phase: 'Scope',
+      caption: 'Workspace · route · approval boundary',
+      title: 'Name the goal and its boundary.',
+      copy: 'Nexus makes the workspace, requested route, permissions, and approval boundary visible before work starts.',
+      evidence: 'Goal received · boundary explicit'
+    },
+    {
+      phase: 'Worktrees',
+      caption: 'Three attempts · isolated changes',
+      title: 'Separate the attempts.',
+      copy: 'Bounded work can run in isolated worktrees so proposals remain independent, reviewable, and reversible.',
+      evidence: 'W1 inspect · W2 propose · W3 check'
+    },
+    {
+      phase: 'Verification',
+      caption: 'Tests · diagnostics · review',
+      title: 'Request evidence before selection.',
+      copy: 'Configured checks produce evidence for the result. The receipt records what was requested without pretending that every check passed.',
+      evidence: 'Evidence requested · outcome not assumed'
+    },
+    {
+      phase: 'Decision',
+      caption: 'Keep · revise · discard',
+      title: 'Keep the final decision human.',
+      copy: 'A selected candidate arrives with its available evidence and boundary record. You decide what happens to it.',
+      evidence: 'Candidate selected · acceptance remains yours'
+    }
   ];
 
-  const EVENTS = [
-    ['orchestration.decision', 'parallel · earned (fan-out 4)', 'violet'],
-    ['orchestration.search', 'multi-attempt · population 11', 'teal'],
-    ['verifier.verdict', 'T1 · compiles ✓ tests ✓ lint ✓', 'green'],
-    ['review.spatial', 'T3 · shader compiles · metric 0.94', 'brass'],
-    ['verifier.verdict', 'T2 · candidate b selected (surprisal)', 'teal'],
-    ['budget.audit', 'tokens 41.2k / 60k · within branch cap', 'muted'],
-    ['merge.apply', '4 worktrees → main · 0 conflicts', 'violet'],
-  ];
-
-  function el(tag, cls, html) {
-    const e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (html != null) e.innerHTML = html;
-    return e;
-  }
+  function clamp(value) { return Math.max(0, Math.min(1, value)); }
 
   function mountSwarm(root) {
-    root.classList.add('swarm');
+    if (!root) return;
+
+    root.classList.add('orrery-story');
+    root.setAttribute('data-scene', 'orrery-lifecycle');
     root.innerHTML = `
-      <div class="swarm-stage">
-        <div class="swarm-col swarm-goal-col">
-          <div class="swarm-label">goal</div>
-          <div class="swarm-node goal" data-goal>
-            <span class="mono">build the splat viewer</span>
-          </div>
+      <div class="orrery-story-stage">
+        <div class="orrery-story-head">
+          <span>Supervised run 001</span>
+          <span><b data-orrery-index>01 / 04</b><i data-orrery-phase>Scope</i></span>
         </div>
-        <div class="swarm-col swarm-tasks-col">
-          <div class="swarm-label">worktree per task · multi-attempt</div>
-          <div class="swarm-lanes" data-lanes></div>
+
+        <div class="orrery-story-viewport">
+          <article class="orrery-story-frame orrery-scope-frame" data-orrery-frame="0" data-active="true">
+            <div class="orrery-boundary-sheet">
+              <span class="orrery-frame-kicker">01 / goal</span>
+              <strong>Fix the failing form tests</strong>
+              <small>The request is bounded before execution.</small>
+              <dl>
+                <div><dt>Workspace</dt><dd>named</dd></div>
+                <div><dt>Route</dt><dd>selected</dd></div>
+                <div><dt>Permissions</dt><dd>reviewed</dd></div>
+              </dl>
+            </div>
+            <span class="orrery-boundary-corner" aria-hidden="true"></span>
+          </article>
+
+          <article class="orrery-story-frame orrery-worktree-frame" data-orrery-frame="1" aria-hidden="true">
+            <canvas class="story-branch-field" data-branch-field="orrery" aria-hidden="true"></canvas>
+            <div class="orrery-worktree-origin">
+              <span>Goal</span><strong>Scoped task</strong>
+            </div>
+            <div class="orrery-worktree-branches">
+              <article><span>W1</span><strong>Inspect</strong><small>read project context</small></article>
+              <article><span>W2</span><strong>Propose</strong><small>prepare a bounded patch</small></article>
+              <article><span>W3</span><strong>Check</strong><small>run configured checks</small></article>
+            </div>
+          </article>
+
+          <article class="orrery-story-frame orrery-verify-frame" data-orrery-frame="2" aria-hidden="true">
+            <div class="orrery-verify-title">
+              <span class="orrery-frame-kicker">03 / verification</span>
+              <strong>Evidence requested</strong>
+              <small>Requirements describe the run contract—not a fabricated pass.</small>
+            </div>
+            <ul>
+              <li><span>tests</span><i aria-hidden="true"></i><b>required</b></li>
+              <li><span>diagnostics</span><i aria-hidden="true"></i><b>required</b></li>
+              <li><span>review</span><i aria-hidden="true"></i><b>required</b></li>
+            </ul>
+          </article>
+
+          <article class="orrery-story-frame orrery-decision-frame" data-orrery-frame="3" aria-hidden="true">
+            <div class="orrery-candidates" aria-hidden="true">
+              <span>candidate 01 · compared</span>
+              <span>candidate 02 · compared</span>
+              <span>candidate 03 · compared</span>
+            </div>
+            <div class="orrery-selected-result">
+              <span class="orrery-frame-kicker">04 / selected candidate</span>
+              <strong>Selected merge</strong>
+              <small>Presented with available evidence and boundary receipt.</small>
+            </div>
+            <div class="orrery-human-gate"><span>You decide</span><strong>Keep · revise · discard</strong></div>
+          </article>
         </div>
-        <div class="swarm-col swarm-merge-col">
-          <div class="swarm-label">merge</div>
-          <div class="swarm-node main" data-main>
-            <span class="mono">main</span>
-            <span class="swarm-commits"><b data-commits>128</b> commits</span>
-          </div>
+
+        <div class="orrery-story-foot">
+          <span>System diagram · no simulated output</span>
+          <span data-orrery-caption>Workspace · route · approval boundary</span>
         </div>
       </div>
-      <svg class="swarm-wires" data-wires preserveAspectRatio="none"></svg>
-      <div class="swarm-log">
-        <div class="swarm-log-head"><span class="dot-live"></span> event log<span class="mono swarm-phase" data-phase>idle</span></div>
-        <div class="swarm-log-body" data-log></div>
-      </div>
+
+      <ol class="orrery-story-steps" aria-label="Orrery supervised run lifecycle">
+        ${STEPS.map((step, index) => `
+          <li data-orrery-step="${index}"${index === 0 ? ' data-active="true"' : ''}>
+            <span class="orrery-story-number">0${index + 1}</span>
+            <div>
+              <h3>${step.title}</h3>
+              <p>${step.copy}</p>
+              <span class="orrery-story-evidence">${step.evidence}</span>
+            </div>
+          </li>
+        `).join('')}
+      </ol>
     `;
 
-    const lanesEl = root.querySelector('[data-lanes]');
-    const wires = root.querySelector('[data-wires]');
-    const logEl = root.querySelector('[data-log]');
-    const phaseEl = root.querySelector('[data-phase]');
-    const commitsEl = root.querySelector('[data-commits]');
-    let commits = 128;
+    const stage = root.querySelector('.orrery-story-stage');
+    const steps = Array.from(root.querySelectorAll('[data-orrery-step]'));
+    const frames = Array.from(root.querySelectorAll('[data-orrery-frame]'));
+    const indexLabel = root.querySelector('[data-orrery-index]');
+    const phaseLabel = root.querySelector('[data-orrery-phase]');
+    const caption = root.querySelector('[data-orrery-caption]');
+    const branchCanvas = root.querySelector('[data-branch-field="orrery"]');
+    let activeStep = -1;
 
-    // build lanes
-    const laneEls = TASKS.map((tk, i) => {
-      const lane = el('div', 'swarm-lane');
-      lane.dataset.lane = i;
-      const cands = Array.from({ length: tk.n }, (_, k) =>
-        `<div class="cand" data-cand="${k}"><div class="cand-bar"><i></i></div></div>`).join('');
-      lane.innerHTML = `
-        <div class="lane-head">
-          <span class="lane-id mono">${tk.id}</span>
-          <span class="lane-name">${tk.name}</span>
-          <span class="lane-model mono">${tk.model}</span>
-        </div>
-        <div class="lane-cands">${cands}</div>
-      `;
-      lanesEl.appendChild(lane);
-      return lane;
-    });
+    function storyAnchor() {
+      if (window.innerWidth > 900) return window.innerHeight * .51;
+      const stageBottom = stage?.getBoundingClientRect().bottom || window.innerHeight * .48;
+      return Math.min(window.innerHeight * .82, stageBottom + 138);
+    }
 
-    function drawWires() {
-      const rb = root.getBoundingClientRect();
-      wires.setAttribute('viewBox', `0 0 ${rb.width} ${rb.height}`);
-      const goal = root.querySelector('[data-goal]').getBoundingClientRect();
-      const main = root.querySelector('[data-main]').getBoundingClientRect();
-      let p = '';
-      laneEls.forEach((lane) => {
-        const lb = lane.getBoundingClientRect();
-        const x1 = goal.right - rb.left, y1 = goal.top + goal.height / 2 - rb.top;
-        const x2 = lb.left - rb.left, y2 = lb.top + lb.height / 2 - rb.top;
-        const mid = (x1 + x2) / 2;
-        p += `<path d="M${x1},${y1} C${mid},${y1} ${mid},${y2} ${x2},${y2}" class="wire wire-in"/>`;
-        const x3 = lb.right - rb.left, x4 = main.left - rb.left, y4 = main.top + main.height / 2 - rb.top;
-        const mid2 = (x3 + x4) / 2;
-        p += `<path d="M${x3},${y2} C${mid2},${y2} ${mid2},${y4} ${x4},${y4}" class="wire wire-out"/>`;
+    function storyPosition() {
+      const anchor = storyAnchor();
+      const centers = steps.map((step) => {
+        const rect = step.getBoundingClientRect();
+        return rect.top + rect.height * .5;
       });
-      wires.innerHTML = p;
-    }
-
-    function logLine(name, msg, tone) {
-      const line = el('div', 'log-line');
-      line.innerHTML = `<span class="log-name mono tone-${tone}">${name}</span><span class="log-msg">${msg}</span>`;
-      logEl.appendChild(line);
-      requestAnimationFrame(() => line.classList.add('in'));
-      while (logEl.children.length > 7) logEl.removeChild(logEl.firstChild);
-      logEl.scrollTop = logEl.scrollHeight;
-    }
-
-    const wait = (ms) => new Promise(r => setTimeout(r, ms));
-    let alive = true;
-
-    async function run() {
-      while (alive) {
-        reset();
-        // 1. decompose
-        phaseEl.textContent = 'decompose';
-        root.querySelector('[data-goal]').classList.add('active');
-        wires.classList.add('show-in');
-        logLine(...EVENTS[0]);
-        await wait(900);
-
-        // 2. spawn
-        phaseEl.textContent = 'spawn · worktrees';
-        laneEls.forEach((l, i) => setTimeout(() => l.classList.add('spawned'), i * 130));
-        await wait(900);
-        logLine(...EVENTS[1]);
-
-        // 3. run attempts
-        phaseEl.textContent = 'run · attempts';
-        laneEls.forEach(l => l.classList.add('running'));
-        await wait(1500);
-
-        // 4. judge — pick winners
-        phaseEl.textContent = 'judge · verify';
-        laneEls.forEach((l, i) => {
-          const cands = l.querySelectorAll('.cand');
-          const win = Math.floor(Math.random() * cands.length);
-          cands.forEach((c, k) => c.classList.add(k === win ? 'win' : 'lose'));
-          l.classList.add('judged');
-        });
-        logLine(...EVENTS[2]); await wait(500);
-        logLine(...EVENTS[3]); await wait(500);
-        logLine(...EVENTS[4]); await wait(400);
-        logLine(...EVENTS[5]); await wait(500);
-
-        // 5. merge
-        phaseEl.textContent = 'merge';
-        wires.classList.add('show-out');
-        laneEls.forEach(l => l.classList.add('merging'));
-        root.querySelector('[data-main]').classList.add('active');
-        logLine(...EVENTS[6]);
-        // tick commits
-        for (let k = 0; k < 4; k++) { commits++; commitsEl.textContent = commits; await wait(180); }
-        await wait(1400);
+      let raw = 0;
+      if (centers.length > 1 && anchor >= centers[centers.length - 1]) {
+        raw = centers.length - 1;
+      } else {
+        for (let index = 0; index < centers.length - 1; index += 1) {
+          if (anchor < centers[index] || anchor > centers[index + 1]) continue;
+          raw = index + clamp((anchor - centers[index]) / Math.max(1, centers[index + 1] - centers[index]));
+          break;
+        }
       }
+      const selected = Math.min(steps.length - 1, Math.round(raw));
+      const rect = steps[selected]?.getBoundingClientRect();
+      const local = rect ? clamp((anchor - rect.top) / Math.max(1, rect.height)) : .5;
+      return { raw, selected, local };
     }
 
-    function reset() {
-      root.querySelector('[data-goal]').classList.remove('active');
-      root.querySelector('[data-main]').classList.remove('active');
-      wires.classList.remove('show-in', 'show-out');
-      laneEls.forEach(l => {
-        l.classList.remove('spawned', 'running', 'judged', 'merging');
-        l.querySelectorAll('.cand').forEach(c => c.classList.remove('win', 'lose'));
+    function showStep(index, reduced) {
+      if (index !== activeStep) {
+        activeStep = index;
+        root.dataset.orreryCurrent = String(index);
+        steps.forEach((step, stepIndex) => {
+          if (stepIndex === index) step.setAttribute('data-active', 'true');
+          else step.removeAttribute('data-active');
+        });
+        frames.forEach((frame, frameIndex) => {
+          if (frameIndex === index) frame.setAttribute('data-active', 'true');
+          else frame.removeAttribute('data-active');
+        });
+        const step = STEPS[index] || STEPS[0];
+        if (indexLabel) indexLabel.textContent = `${String(index + 1).padStart(2, '0')} / 04`;
+        if (phaseLabel) phaseLabel.textContent = step.phase;
+        if (caption) caption.textContent = step.caption;
+      }
+
+      frames.forEach((frame, frameIndex) => {
+        if (reduced || frameIndex === index) frame.removeAttribute('aria-hidden');
+        else frame.setAttribute('aria-hidden', 'true');
       });
     }
 
-    // observe to start only when visible — with a fallback so it never stays idle
-    let started = false;
-    function begin() { if (started) return; started = true; drawWires(); run(); }
-    const io = new IntersectionObserver((ents) => {
-      ents.forEach(e => { if (e.isIntersecting) begin(); });
-    }, { threshold: 0.15 });
-    io.observe(root);
-    setTimeout(begin, 1600); // fallback if IO never fires (e.g. headless/background)
+    function update() {
+      const position = storyPosition();
+      const reduced = window.EphemerentMotion?.reduced() || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      showStep(position.selected, reduced);
+      root.style.setProperty('--orrery-progress', clamp(position.raw / Math.max(1, steps.length - 1)).toFixed(4));
+      root.style.setProperty('--orrery-local', position.local.toFixed(4));
+    }
 
-    window.addEventListener('resize', () => { if (started) drawWires(); });
-    setTimeout(() => { if (started) drawWires(); }, 400);
+    window.mountBranchField?.(branchCanvas);
+    showStep(0, window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    update();
+    if (window.EphemerentMotion) {
+      window.EphemerentMotion.register(root, update);
+    } else {
+      root.dataset.motion = 'static';
+      showStep(STEPS.length - 1, true);
+    }
   }
 
   window.mountSwarm = mountSwarm;

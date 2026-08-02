@@ -1,8 +1,7 @@
 /* ============================================================
    EPHEMERENT — research lab. Light, editorial, document-like.
    Deliberately NOT the Orrery product look.
-   Fonts are loaded via <link rel="preconnect"> + <link> in each
-   page <head> (non-render-blocking); no @import here.
+   Fonts are self-hosted through the shared polish stylesheet.
    ============================================================ */
 
 :root {
@@ -41,13 +40,6 @@ a { color: inherit; text-decoration: none; }
 .ewrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
 @media (max-width: 640px){ .ewrap { padding: 0 22px; } }
 
-/* paper grain */
-body::after {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.4;
-  background-image: radial-gradient(rgba(23,22,15,0.025) 1px, transparent 1px);
-  background-size: 4px 4px;
-}
-
 /* ---------- type ---------- */
 .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
 .ital { font-style: italic; }
@@ -81,7 +73,13 @@ body::after {
 .ehero-sub p { font-size: 18px; color: var(--ink-2); line-height: 1.62; max-width: 46ch; }
 .ehero-fig { height: 200px; position: relative; }
 .ehero-fig canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-@media (max-width: 760px){ .ehero-sub { grid-template-columns: 1fr; } .ehero-fig { height: 170px; } }
+@media (max-width: 760px){
+  .ehero .ewrap { display: flex; flex-direction: column; }
+  .ehero-sub { display: contents; }
+  .ehero-sub p { margin-top: 30px; }
+  .ehero-cta { order: 3; }
+  .ehero-fig { order: 4; height: 120px; margin-top: 30px; }
+}
 
 /* meta strip */
 .emeta { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--rule); }
@@ -127,7 +125,7 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 .eprin { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule); }
 .eprin > div { padding: 34px 28px 34px 0; margin-right: 28px; border-right: 1px solid var(--rule); }
 .eprin > div:last-child { border-right: 0; margin-right: 0; }
-.eprin h4 { font-family: var(--serif); font-size: 19px; margin-bottom: 12px; }
+.eprin h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 12px; }
 .eprin p { font-size: 14.5px; color: var(--muted); line-height: 1.6; }
 @media (max-width: 760px){ .eprin { grid-template-columns: 1fr; } .eprin > div { border-right: 0; margin-right: 0; padding: 24px 0; border-bottom: 1px solid var(--rule); } .eprin > div:last-child { border-bottom: 0; } }
 
@@ -145,7 +143,8 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 .efoot { padding: 60px 0 44px; }
 .efoot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 30px; margin-bottom: 44px; }
 .efoot .big { font-family: var(--serif); font-size: clamp(26px, 4vw, 40px); line-height: 1.15; letter-spacing: -0.02em; max-width: 16ch; }
-.efoot h5 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
+.efoot h5,
+.efoot .efoot-heading { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
 .efoot ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 .efoot ul a { font-size: 14.5px; color: var(--ink-2); }
 .efoot ul a:hover { color: var(--accent); }
@@ -158,7 +157,6 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 .rv.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce){ .rv { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
 
-/* skip link + reduced motion for the decorative hero figure */
+/* skip link */
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
 .skip-link:focus { left: 12px; top: 12px; padding: 10px 16px; background: var(--ink); color: var(--paper); border-radius: 4px; font-family: var(--mono); font-size: 13px; }
-@media (prefers-reduced-motion: reduce){ .ehero-fig canvas { display: none; } }

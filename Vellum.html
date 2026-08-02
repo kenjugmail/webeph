@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://ephemerent.com/Vellum.html">
 <meta name="theme-color" content="#171614">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
@@ -24,10 +25,12 @@
 <meta name="twitter:title" content="Vellum — 3D work that proves itself">
 <meta name="twitter:description" content="Agents that write and verify 3D work, with renderer-neutral proof.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-vellum.png">
-<link rel="stylesheet" href="assets/orrery.css">
-<link rel="stylesheet" href="assets/components.css">
-<link rel="stylesheet" href="assets/auth.css">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="assets/components.css?v=20260801">
+<link rel="stylesheet" href="assets/auth.css?v=20260801">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<script src="assets/motion.js?v=20260802c" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -42,48 +45,8 @@
 }
 </script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
-<style id="vellum-theme">
-  /* ===== HYBRID — maquette workshop ground, phosphor amber scopes ===== */
-  html[data-theme="hybrid"]{
-    --void:#100f0d; --bg:#171614; --bg-2:#1c1b18; --panel:#201f1d; --panel-2:#272520;
-    --line: rgba(233,227,214,0.12); --line-strong: rgba(233,227,214,0.22);
-    --ink:#f1ece1; --ink-2:#c7c0b2; --muted:#9a9388; --faint:#8a8276; /* faint lightened for WCAG AA (~5:1) */
-    --violet:#ff5a1f; --violet-lt:#ff8150; --violet-dk:#b53e12;
-    --teal:#ffb627; --teal-lt:#ffd37a; --brass:#e9a23b; --brass-lt:#f0b860;
-    --green:#73ba6c; --red:#e5533a; --amber:#e9a23b;
-    --display:'Bricolage Grotesque', sans-serif;
-    --body:'Archivo', system-ui, sans-serif;
-    --mono:'IBM Plex Mono', ui-monospace, monospace;
-    --wf-edge:255,182,39; --wf-hot:255,240,207; --wf-node:255,210,122; --wf-grid:255,182,39;
-    --glow-violet: 0 0 60px rgba(255,90,31,0.26);
-    --glow-teal: 0 0 50px rgba(255,182,39,0.24);
-  }
-  html[data-theme="hybrid"] .display{ font-weight:700; }
-  html[data-theme="hybrid"] body{
-    background:
-      radial-gradient(1100px 720px at 80% -8%, rgba(255,182,39,0.06), transparent 60%),
-      radial-gradient(900px 700px at 4% 14%, rgba(255,90,31,0.05), transparent 55%),
-      var(--bg);
-  }
-  html[data-theme="hybrid"] ::selection{ background: rgba(255,182,39,0.30); color:#17130c; }
-  html[data-theme="hybrid"] .nav.scrolled{ background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom-color: var(--line); }
-  /* viewports become amber CRT scopes */
-  html[data-theme="hybrid"] .proof-stage{
-    background: radial-gradient(120% 130% at 50% 0%, #0d0a05, #030302 72%) !important;
-    box-shadow: inset 0 0 60px rgba(255,182,39,0.10), inset 0 0 120px rgba(0,0,0,0.7), 0 30px 70px rgba(0,0,0,0.4);
-  }
-  html[data-theme="hybrid"] .proof-stage::after, html[data-theme="hybrid"] .review-stage::after{
-    content:''; position:absolute; inset:0; pointer-events:none; z-index:3;
-    background: repeating-linear-gradient(0deg, rgba(255,182,39,0.05) 0 1px, transparent 1px 3px);
-    mix-blend-mode: screen;
-  }
-  html[data-theme="hybrid"] .review-stage{ box-shadow: inset 0 0 50px rgba(255,182,39,0.08), 0 30px 80px rgba(0,0,0,0.5); }
-</style>
 </head>
-<body>
+<body class="vellum-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- shared glyphs -->
@@ -123,13 +86,12 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<header class="hero" id="main">
-  <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-veil"></div>
+<main id="main">
+<header class="hero" data-scene="vellum-proof" data-scene-steps="4" data-scene-step="0">
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <div class="eyebrow reveal in">A game engine &amp; spatial agent layer</div>
-      <h1 class="display hero-h1 reveal in d1">3D work that<br><span class="grad-text">proves itself.</span></h1>
+      <h1 class="display hero-h1 reveal in d1">3D work that<br><span>proves itself.</span></h1>
       <p class="lead reveal in d2">Vellum is a full game engine — and a spatial agent layer for robotics, engineering and modeling. It builds the 3D work — scenes, shaders, CAD parts, kinematic rigs — then proves each result against real constraints: compiles, watertight, in tolerance, collision-free. The proof is renderer-neutral and runs headless on the CPU. No GPU in the loop.</p>
       <div class="hero-cta reveal in d3">
         <a class="btn btn-primary" href="login.html">Get started <span aria-hidden="true">→</span></a>
@@ -141,8 +103,21 @@
       </div>
       <p class="hero-note mono reveal in d4">The proof runs on the CPU — the same verdict on a laptop, a CI runner, or a render farm.</p>
     </div>
+    <figure class="vellum-hero-stage reveal in" aria-labelledby="vellum-stage-caption">
+      <div class="vellum-stage-head"><span>Vellum scene / CPU proof</span><strong id="vellum-stage-status">CPU worker pending</strong></div>
+      <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+      <img class="vellum-cpu-frame" id="vellum-cpu-frame" alt="Measured frame produced by Vellum's CPU raster worker">
+      <div class="vellum-stage-receipt" aria-live="polite">
+        <b>Proof receipt / measured</b>
+        <span id="vellum-receipt-mesh">Waiting for CPU worker…</span><br>
+        <span id="vellum-receipt-topology">Topology pending</span><br>
+        <span id="vellum-receipt-raster">Raster pending</span>
+      </div>
+      <figcaption class="vellum-state-rail" id="vellum-stage-caption">
+        <span>01 / scene</span><span>02 / wireframe</span><span>03 / CPU verify</span><span>04 / receipt</span>
+      </figcaption>
+    </figure>
   </div>
-  <div class="hero-scroll mono">scroll ↓</div>
 </header>
 
 <!-- ============ DOMAINS RAIL ============ -->
@@ -163,7 +138,6 @@
 
 <!-- ============ PROOF / PROOF BENCH ============ -->
 <section class="section" id="proof">
-  <div class="glow-orb" style="width:480px;height:480px;background:rgba(255,182,39,0.10);top:8%;right:-120px;"></div>
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Renderer-neutral proof</div>
@@ -184,42 +158,39 @@
   </div>
 </section>
 
-<!-- ============ BEFORE / AFTER REVIEW ============ -->
+<!-- ============ EVIDENCE REVIEW ============ -->
 <section class="section review-section" id="review">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Before / after</div>
-      <h2 class="display">See the proof, not a screenshot.</h2>
-      <p class="lead">When the work is a shader or a look, Vellum writes several candidates, compiles each one, and scores them on what they actually output — not a vibe. The winner is the one that passed every assertion. Drag the slider to compare the rejected candidate with the selected one; the panel shows exactly why one won. No graphics card touched this.</p>
+      <div class="eyebrow">Read the receipt</div>
+      <h2 class="display">A frame shows appearance. Evidence answers constraints.</h2>
+      <p class="lead">The live bench above separates what was rendered from what was measured. A CPU frame confirms that the raster worker produced pixels; topology and boundary checks answer different questions. Vellum keeps those claims distinct so a polished image cannot stand in for proof.</p>
     </div>
-    <div class="reveal d1">
-      <div id="reviewApp"></div>
+    <div class="evidence-document reveal d1">
+      <div class="evidence-document-head"><span>Evidence model</span><span>System document · not product UI</span></div>
+      <div class="evidence-row evidence-row-head"><span>Artifact</span><span>Supports</span><span>Does not establish alone</span></div>
+      <div class="evidence-row"><b>CPU frame</b><span>The raster worker returned a view of the supplied mesh.</span><span>Watertightness, manifold topology, or tolerance.</span></div>
+      <div class="evidence-row"><b>Topology result</b><span>Measured open and non-manifold edge counts.</span><span>Visual quality or fitness for a particular use.</span></div>
+      <div class="evidence-row"><b>Volume result</b><span>Signed volume for the triangulated input.</span><span>Material strength, safety, or regulatory compliance.</span></div>
+      <div class="evidence-row"><b>Receipt</b><span>The worker inputs, measured values, and elapsed raster time.</span><span>A guarantee that generated work is correct or safe.</span></div>
     </div>
-    <div class="chips reveal d2">
-      <div class="chip"><span class="chip-ic" style="color:var(--violet-lt)">▦</span><b>Shaders</b><span>Compile, render headless, score the look.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--teal-lt)">◈</span><b>CAD parts</b><span>Watertight, manifold, in tolerance, printable.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--brass-lt)">⬡</span><b>Game scenes</b><span>Collision, navmesh, an automated playtest.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--green)">◐</span><b>Splats &amp; clouds</b><span>Inspect and verify point-cloud captures.</span></div>
-    </div>
+    <p class="artifact-note reveal d2">Measurements on this page come from the in-browser CPU worker. If that worker is unavailable, the proof reports “Not run” instead of substituting sample results.</p>
   </div>
 </section>
 
-<!-- ============ ENGINE EDITOR / PLAY MODE ============ -->
+<!-- ============ ENGINE SYSTEM ============ -->
 <section class="section engine-section" id="engine">
-  <div class="glow-orb" style="width:520px;height:520px;background:rgba(255,90,31,0.07);bottom:0;left:-160px;"></div>
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">A full game engine</div>
-      <h2 class="display">Not just a verifier — the whole engine.</h2>
-      <p class="lead">Vellum is a complete editor: a scene graph, physics, lighting and a play mode, with the agent and the proof built in. Lay out a level, press play, and it runs an automated playtest on the CPU — pathing the navmesh, checking collision, reaching the goal — and reports the same renderer-neutral verdict you get everywhere else. Hit play.</p>
+      <div class="eyebrow">Editor and runtime</div>
+      <h2 class="display">One spatial stack, with explicit boundaries.</h2>
+      <p class="lead">Vellum brings authoring, runtime checks, and proof into one spatial system. The diagram below describes that contract; it is deliberately not a fabricated editor screenshot. The live scene and worker output above are the page's visual and measured artifacts.</p>
     </div>
-    <div class="card reveal d1 engine-card">
-      <div id="engineApp"></div>
-    </div>
-    <div class="proof-strip reveal d2" style="margin-top:18px;">
-      <div class="ps-item"><span class="ps-k mono">authoring</span><span class="ps-v">Scene graph, ECS, prefabs and a real-time viewport.</span></div>
-      <div class="ps-item"><span class="ps-k mono">runtime</span><span class="ps-v">Physics, navmesh and play mode — deterministic on CPU.</span></div>
-      <div class="ps-item"><span class="ps-k mono">shipping</span><span class="ps-v">Export to Three.js, Unreal or Blender when it passes.</span></div>
+    <div class="system-anatomy reveal d1">
+      <div class="system-anatomy-head"><span>System anatomy</span><span>Diagram · not product UI</span></div>
+      <section><span class="mono">01 / author</span><h3>Build the spatial artifact</h3><p>Scene graph, entities, geometry, materials, and the task target share one project boundary.</p><ul><li>Scene and asset structure</li><li>Format-aware editing</li><li>Explicit target constraints</li></ul></section>
+      <section><span class="mono">02 / run</span><h3>Exercise the runtime</h3><p>Configured physics, collision, path, and scene checks run against the artifact rather than a marketing render.</p><ul><li>CPU spatial kernel</li><li>Headless execution</li><li>Interruptible checks</li></ul></section>
+      <section><span class="mono">03 / prove</span><h3>Return a receipt</h3><p>Measured outputs stay attached to their method and input, leaving the acceptance decision with you.</p><ul><li>Assertions and measurements</li><li>Worker-produced frame</li><li>Pass, fail, or not run</li></ul></section>
     </div>
   </div>
 </section>
@@ -233,13 +204,13 @@
       <p class="lead">Every job follows the same path. Vellum can attempt a task several ways in isolation, prove each attempt the same way, and keep only the candidate that clears the bar — then hand you the verdict and the numbers behind it.</p>
     </div>
     <div class="flow reveal d1">
-      <div class="flow-step"><span class="flow-n mono">01</span><h4>Describe</h4><p>“A printable bracket that holds 2 kg, under 60 g.” Plain language in, a spatial task out.</p></div>
+      <div class="flow-step"><span class="flow-n mono">01</span><h3>Describe</h3><p>“A printable bracket that holds 2 kg, under 60 g.” Plain language in, a spatial task out.</p></div>
       <div class="flow-conn"></div>
-      <div class="flow-step"><span class="flow-n mono">02</span><h4>Generate</h4><p>The agent writes the part, the shader or the scene — often several candidates at once.</p></div>
+      <div class="flow-step"><span class="flow-n mono">02</span><h3>Generate</h3><p>The agent writes the part, the shader or the scene — often several candidates at once.</p></div>
       <div class="flow-conn"></div>
-      <div class="flow-step"><span class="flow-n mono">03</span><h4>Prove</h4><p>Each candidate is loaded, asserted, rendered headless and measured against the target.</p></div>
+      <div class="flow-step"><span class="flow-n mono">03</span><h3>Prove</h3><p>Each candidate is loaded, asserted, rendered headless and measured against the target.</p></div>
       <div class="flow-conn"></div>
-      <div class="flow-step"><span class="flow-n mono">04</span><h4>Review</h4><p>The selected attempt returns with evidence, so you can decide what to keep.</p></div>
+      <div class="flow-step"><span class="flow-n mono">04</span><h3>Review</h3><p>The selected attempt returns with evidence, so you can decide what to keep.</p></div>
     </div>
     <div class="proof-strip reveal d2">
       <div class="ps-item"><span class="ps-k mono">headless</span><span class="ps-v">Renders on the CPU — runs anywhere, including CI.</span></div>
@@ -266,17 +237,13 @@
         </div>
       </div>
       <div class="reveal d1" id="develop">
-        <div class="terminal">
-          <div class="term-bar"><span class="td td-r"></span><span class="td td-y"></span><span class="td td-g"></span><span class="term-title mono">vellum · headless</span></div>
-          <div class="term-body mono">
-            <div class="tl"><span class="tc">›</span> vellum prove bracket.step --target hold=2kg,mass&lt;60g</div>
-            <div class="tl"><span class="tok-violet">load</span>   STEP → mesh · 18,402 tris <span class="tok-teal">(cpu)</span></div>
-            <div class="tl"><span class="tok-teal">assert</span> watertight <span class="tok-ok">✓</span>  manifold <span class="tok-ok">✓</span>  tol ±0.05 <span class="tok-ok">✓</span></div>
-            <div class="tl"><span class="tok-teal">fea</span>    max stress 0.62 · yield 1.0 <span class="tok-ok">✓</span></div>
-            <div class="tl"><span class="tok-violet">render</span> headless raster · 6 views <span class="tok-teal">no gpu</span></div>
-            <div class="tl tdim"># nothing left a CPU core</div>
-            <div class="tl"><span class="tok-teal">verdict</span> <span class="tok-ok">VERIFIED</span> · mass 54.1 g · score 0.96<span class="term-caret">▍</span></div>
-          </div>
+        <div class="proof-contract">
+          <div class="proof-contract-head"><span>Receipt fields</span><span>Schema outline</span></div>
+          <div><span>Input</span><b>artifact identity · format · content hash</b></div>
+          <div><span>Method</span><b>loader · assertions · raster configuration</b></div>
+          <div><span>Measurements</span><b>topology · volume · worker timing</b></div>
+          <div><span>Outcome</span><b>pass · fail · not run</b></div>
+          <p>The live proof bench supplies the values. This schema intentionally contains no sample success metrics.</p>
         </div>
       </div>
     </div>
@@ -292,14 +259,14 @@
       <p class="lead">Vellum keeps a running record of every assertion, measurement and render as it works — so you can see why a result was kept, what each candidate scored, and what it would do in your engine, without rerunning anything on a GPU.</p>
     </div>
     <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Proven before it's kept</h4><p>Every result clears geometry, tolerance, collision and a headless render before it counts.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h4>Reads your assets</h4><p>Points it at your scene or part and it understands the geometry — meshes, BREP, point clouds.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h4>Targets, not vibes</h4><p>Give it a number — mass, clearance, frame budget — and it proves the work hits it.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h4>No GPU required</h4><p>The whole verifier runs on CPU, so it works the same on a laptop or a headless CI box.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h4>Fits your pipeline</h4><p>Reads and writes glTF, USD, STEP and URDF — drop it between the tools you already use.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h4>Deterministic proof</h4><p>The same input gives the same verdict — every run, every machine, every time.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h4>Best-of-N, judged</h4><p>Attempts a task several ways in isolation and keeps the one that actually passes.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Headless by default</h4><p>CPU proof runs the same on a laptop, a CI runner, or a render farm.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h3>Proven before it's kept</h3><p>Every result clears geometry, tolerance, collision and a headless render before it counts.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h3>Reads your assets</h3><p>Points it at your scene or part and it understands the geometry — meshes, BREP, point clouds.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h3>Targets, not vibes</h3><p>Give it a number — mass, clearance, frame budget — and it proves the work hits it.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h3>No GPU required</h3><p>The whole verifier runs on CPU, so it works the same on a laptop or a headless CI box.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h3>Fits your pipeline</h3><p>Reads and writes glTF, USD, STEP and URDF — drop it between the tools you already use.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h3>Deterministic proof</h3><p>The same input gives the same verdict — every run, every machine, every time.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h3>Best-of-N, judged</h3><p>Attempts a task several ways in isolation and keeps the one that actually passes.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h3>Headless by default</h3><p>CPU proof runs the same on a laptop, a CI runner, or a render farm.</p></div>
     </div>
   </div>
 </section>
@@ -314,7 +281,7 @@
     </div>
     <div class="arch-grid">
       <div class="card card-pad arch-col reveal">
-        <h5 class="arch-h">The spatial kernel · CPU</h5>
+        <h3 class="arch-h">The spatial kernel · CPU</h3>
         <div class="pkg"><b>Scene graph &amp; ECS</b><span>Entities, components and a live scene tree.</span></div>
         <div class="pkg"><b>Mesh &amp; BREP core</b><span>Loads, tessellates and repairs geometry.</span></div>
         <div class="pkg"><b>Physics &amp; collision</b><span>Rigid bodies, contacts and swept checks.</span></div>
@@ -323,7 +290,7 @@
         <div class="pkg"><b>Format I/O</b><span>glTF, USD, STEP, URDF in one neutral model.</span></div>
       </div>
       <div class="card card-pad arch-col reveal d1">
-        <h5 class="arch-h">The agent core</h5>
+        <h3 class="arch-h">The agent core</h3>
         <div class="pkg"><b>Spatial planner</b><span>Turns a goal into a buildable task.</span></div>
         <div class="pkg"><b>Generators</b><span>Writes shaders, parts, rigs and scenes.</span></div>
         <div class="pkg"><b>Best-of-N</b><span>Several attempts, isolated and judged.</span></div>
@@ -332,7 +299,7 @@
         <div class="pkg"><b>Proof ledger</b><span>Logs every assertion and number.</span></div>
       </div>
       <div class="card card-pad arch-col reveal d2">
-        <h5 class="arch-h">Ways to run it</h5>
+        <h3 class="arch-h">Ways to run it</h3>
         <div class="pkg"><b>Editor + play mode</b><span>Scenes, the viewport, play-test and proofs.</span></div>
         <div class="pkg"><b>CLI · <span class="mono">vellum prove</span></b><span>Prove an asset from the terminal.</span></div>
         <div class="pkg"><b>CI gate</b><span>Block a merge until the 3D passes.</span></div>
@@ -397,8 +364,6 @@
 
 <!-- ============ CTA ============ -->
 <section class="section start-section" id="start">
-  <canvas id="ctaCanvas" class="start-canvas" aria-hidden="true"></canvas>
-  <div class="start-veil"></div>
   <div class="wrap start-inner">
     <div class="reveal">
       <div class="eyebrow center" style="justify-content:center;">Renderer-neutral · headless proof</div>
@@ -413,6 +378,8 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+</main>
+
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -423,9 +390,9 @@
         </a>
         <p class="muted" style="font-size:14px;max-width:34ch;">3D work that proves itself — renderer-neutral and headless. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h5>Product</h5><ul><li><a href="#proof">Proof bench</a></li><li><a href="#review">Before / after</a></li><li><a href="#pipeline">Pipeline</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
-      <div><h5>Get started</h5><ul><li><a href="download.html">Download Orrery</a></li><li><a href="vellum-connect.html">Connect Vellum</a></li><li><a href="login.html">Sign in</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Orrery.html">Orrery</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
+      <div><h3 class="footer-heading">Product</h3><ul><li><a href="#proof">Proof bench</a></li><li><a href="#review">Evidence model</a></li><li><a href="#pipeline">Pipeline</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h3 class="footer-heading">Get started</h3><ul><li><a href="download.html">Download Orrery</a></li><li><a href="vellum-connect.html">Connect Vellum</a></li><li><a href="login.html">Sign in</a></li></ul></div>
+      <div><h3 class="footer-heading">Company</h3><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Orrery.html">Orrery</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -454,25 +421,27 @@
     }).catch(() => {});
   }
 </script>
-<script src="assets/vellum-3d.js"></script>
-<script src="assets/vellum-hero.js"></script>
-<script src="assets/vellum-proof.js"></script>
-<script src="assets/vellum-scene.js"></script>
-<script src="assets/vellum-review.js"></script>
+<script src="assets/vellum-3d.js?v=20260801"></script>
+<script src="assets/vellum-hero.js?v=20260801"></script>
+<script src="assets/vellum-proof.js?v=20260801"></script>
 <script>
-  // nav scroll
-  const nav = document.getElementById('nav');
-  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), { passive: true });
-  // reveals
-  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
-  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+  document.addEventListener('vellum:proof-measured', (event) => {
+    const proof = event.detail || {};
+    const mesh = document.getElementById('vellum-receipt-mesh');
+    const topology = document.getElementById('vellum-receipt-topology');
+    const raster = document.getElementById('vellum-receipt-raster');
+    const status = document.getElementById('vellum-stage-status');
+    const frame = document.getElementById('vellum-cpu-frame');
+    if (mesh) mesh.textContent = `${proof.vertCount} verts · ${proof.triCount} tris`;
+    if (topology) topology.textContent = `${proof.boundary} open edges · ${proof.nonmanifold} non-manifold`;
+    if (raster) raster.textContent = `${proof.width}×${proof.height} raster · ${proof.rasterMs.toFixed(1)} ms · CPU`;
+    if (status) status.textContent = proof.verified ? 'verified on CPU' : 'issues found';
+    if (frame && proof.imageUrl) frame.src = proof.imageUrl;
+  });
   // mounts
   addEventListener('load', () => {
     mountVellumHero(document.getElementById('heroCanvas'), { cxf: 0.73, cyf: 0.5 });
-    mountVellumHero(document.getElementById('ctaCanvas'), { cxf: 0.5, cyf: 0.5, parallax: false });
     mountProofBench(document.getElementById('proofBench'));
-    mountScene(document.getElementById('engineApp'));
-    mountVellumReview(document.getElementById('reviewApp'));
   });
 </script>
 
@@ -480,12 +449,6 @@
 /* ===== Page-specific layout (Vellum landing) ===== */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
 .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-.hero-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(1000px 760px at 14% 50%, var(--bg) 14%, rgba(10,11,14,0.80) 50%, transparent 78%),
-              linear-gradient(0deg, var(--bg), transparent 30%); }
-.hero-veil { background:
-  radial-gradient(1000px 760px at 14% 50%, var(--bg) 14%, color-mix(in srgb, var(--bg) 80%, transparent) 50%, transparent 78%),
-  linear-gradient(0deg, var(--bg), transparent 30%) !important; }
 .hero-inner { position: relative; z-index: 2; padding-top: 90px; }
 .hero-copy { max-width: 640px; }
 .hero-h1 { margin: 20px 0 24px; }
@@ -514,7 +477,7 @@
 .sec-head h2 { margin: 16px 0 18px; }
 
 /* ===== Proof bench ===== */
-.proof-card { background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
+.proof-card { background: var(--panel); }
 .proof { display: flex; flex-direction: column; gap: 20px; }
 .proof-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .proof-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -529,8 +492,7 @@
 .proof-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 22px; align-items: stretch; }
 .proof-stage {
   position: relative; aspect-ratio: 16/11; border-radius: var(--r-lg); overflow: hidden;
-  border: 1px solid var(--line-strong); background: radial-gradient(120% 120% at 50% 0%, #0d1018, #07080c 70%);
-  box-shadow: inset 0 0 70px rgba(0,0,0,0.6), 0 30px 70px rgba(0,0,0,0.4);
+  border: 1px solid var(--line-strong); background: #090806;
 }
 .proof-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .proof-badge {
@@ -548,52 +510,6 @@
 }
 @keyframes pspin { to { transform: rotate(360deg); } }
 @media (max-width: 860px){ .proof-grid { grid-template-columns: 1fr; } }
-
-/* ===== Engine editor / play mode ===== */
-.engine-section { border-top: 1px solid var(--line); position: relative; overflow: hidden; }
-.engine-card { padding: 0; overflow: hidden; background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
-.engine-bar { display: flex; align-items: center; gap: 14px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--panel-2); }
-.engine-bar .grp { display: flex; align-items: center; gap: 6px; }
-.eb-tab { font-family: var(--mono); font-size: 12px; padding: 6px 13px; border-radius: var(--r-sm); background: rgba(255,255,255,0.03); border: 1px solid var(--line-strong); color: var(--ink-2); cursor: pointer; transition: all 0.18s; }
-.eb-tab.on { border-color: var(--teal); color: var(--ink); background: color-mix(in srgb, var(--teal) 14%, transparent); }
-.eb-tools { margin-left: 6px; }
-.eb-tool { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; color: var(--faint); border: 1px solid var(--line); border-radius: var(--r-sm); }
-.eb-spacer { flex: 1; }
-.eb-play, .eb-prove { font-family: var(--mono); font-size: 12.5px; padding: 7px 15px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.18s; border: 1px solid transparent; }
-.eb-play { background: linear-gradient(180deg, var(--violet-lt), var(--violet)); color: #1a0d04; font-weight: 600; }
-.eb-play:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,90,31,0.3); }
-.eb-play.on { background: rgba(255,90,31,0.14); color: var(--violet-lt); border-color: color-mix(in srgb, var(--violet) 45%, transparent); }
-.eb-prove { background: rgba(255,255,255,0.03); border-color: var(--line-strong); color: var(--ink-2); }
-.eb-prove:hover { color: var(--ink); border-color: var(--teal); }
-.engine-body { display: grid; grid-template-columns: 208px 1fr 244px; min-height: 452px; }
-.engine-hier { border-right: 1px solid var(--line); padding: 16px 14px; display: flex; flex-direction: column; gap: 3px; }
-.hier-h, .insp-h { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
-.hier-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); padding: 5px 8px; border-radius: 6px; cursor: default; }
-.hier-row .ic, .hier-row .tw { color: var(--faint); font-size: 11px; width: 14px; text-align: center; }
-.hier-row.root { color: var(--ink); font-weight: 500; }
-.hier-row.l2 { margin-left: 14px; }
-.hier-row.sel { background: color-mix(in srgb, var(--teal) 13%, transparent); color: var(--ink); }
-.hier-row.sel .ic { color: var(--teal-lt); }
-.hier-foot { margin-top: auto; padding-top: 12px; font-family: var(--mono); font-size: 10.5px; color: var(--faint); }
-.engine-view { position: relative; overflow: hidden; background: radial-gradient(120% 130% at 50% 0%, #0d0a05, #030302 72%); }
-.engine-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.engine-section .engine-view::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 3; background: repeating-linear-gradient(0deg, rgba(255,182,39,0.045) 0 1px, transparent 1px 3px); mix-blend-mode: screen; }
-.view-badge { position: absolute; top: 12px; left: 13px; z-index: 4; font-size: 10.5px; color: var(--muted); padding: 4px 9px; border-radius: var(--r-sm); background: rgba(0,0,0,0.5); border: 1px solid var(--line); }
-.view-badge.live { color: var(--teal-lt); border-color: color-mix(in srgb, var(--teal) 35%, transparent); }
-.view-stats { position: absolute; top: 12px; right: 13px; z-index: 4; font-size: 10.5px; color: var(--faint); }
-.view-gizmo { position: absolute; bottom: 11px; left: 13px; z-index: 4; font-size: 10px; color: var(--faint); letter-spacing: 0.28em; }
-.view-toast { position: absolute; bottom: 12px; right: 13px; z-index: 4; font-size: 11px; color: var(--green); padding: 5px 11px; border-radius: var(--r-sm); background: rgba(0,0,0,0.55); border: 1px solid color-mix(in srgb, var(--green) 40%, transparent); opacity: 0; transform: translateY(6px); transition: opacity 0.3s, transform 0.3s; }
-.view-toast.show { opacity: 1; transform: none; }
-.engine-insp { border-left: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 18px; }
-.insp-block { display: flex; flex-direction: column; gap: 10px; }
-.insp-k { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-lt); }
-.insp-xform { display: grid; grid-template-columns: 16px 1fr 1fr 1fr; gap: 7px; align-items: center; font-size: 12px; }
-.insp-xform span { color: var(--faint); font-family: var(--mono); font-size: 11px; }
-.insp-xform b { font-weight: 500; color: var(--ink-2); background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 5px; padding: 4px 0; text-align: center; font-size: 11.5px; }
-.insp-aspects .aspect { font-size: 12.5px; }
-.insp-aspects .aspect-k { font-size: 12.5px; }
-.insp-metric { margin-top: auto; }
-@media (max-width: 920px){ .engine-body { grid-template-columns: 1fr; } .engine-hier { border-right: 0; border-bottom: 1px solid var(--line); } .engine-insp { border-left: 0; border-top: 1px solid var(--line); } .engine-view { min-height: 340px; } }
 
 /* folded-in: proof pipeline strip */
 .pipe { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 26px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
@@ -616,11 +532,11 @@
 /* pipeline flow */
 .pipeline-section { border-top: 1px solid var(--line); }
 .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; gap: 0; }
-.flow-step { background: linear-gradient(180deg, var(--panel), var(--bg-2)); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 22px; display: flex; flex-direction: column; gap: 8px; }
+.flow-step { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 22px; display: flex; flex-direction: column; gap: 8px; }
 .flow-n { font-size: 12px; color: var(--teal-lt); }
-.flow-step h4 { font-family: var(--display); font-size: 19px; font-weight: 600; }
+.flow-step h3 { font-family: var(--display); font-size: 19px; font-weight: 600; }
 .flow-step p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
-.flow-conn { align-self: center; width: 30px; height: 1px; background: linear-gradient(90deg, var(--violet), var(--teal)); position: relative; }
+.flow-conn { align-self: center; width: 30px; height: 1px; background: var(--signal); position: relative; }
 .flow-conn::after { content: '▸'; position: absolute; right: -4px; top: 50%; transform: translateY(-50%); color: var(--teal); font-size: 11px; }
 @media (max-width: 900px){ .flow { grid-template-columns: 1fr 1fr; gap: 14px; } .flow-conn { display: none; } }
 @media (max-width: 540px){ .flow { grid-template-columns: 1fr; } }
@@ -641,22 +557,11 @@
 .prov-row span:first-child { color: var(--ink); }
 .prov-row .mono { font-size: 12.5px; color: var(--violet-lt); }
 
-.terminal { border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; background: var(--void); box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
-.term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }
-.td { width: 11px; height: 11px; border-radius: 50%; } .td-r { background: #ff5f57; } .td-y { background: #febc2e; } .td-g { background: #28c840; }
-.term-title { margin-left: 8px; font-size: 12px; color: var(--faint); }
-.term-body { padding: 20px; font-size: 12.5px; line-height: 1.9; }
-.tl { white-space: pre-wrap; }
-.tc { color: var(--teal); margin-right: 8px; }
-.tdim { color: var(--faint); }
-.tok-ok { color: var(--green); } .tok-violet { color: var(--violet-lt); } .tok-teal { color: var(--teal-lt); }
-.term-caret { color: var(--teal); animation: blink 1s infinite; }
-
 .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 980px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .cap-grid { grid-template-columns: 1fr; } }
 .cap-ic { font-size: 22px; color: var(--brass-lt); margin-bottom: 14px; }
-.cap-grid h4 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.cap-grid h3 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
 .cap-grid p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 
 .arch-section { border-top: 1px solid var(--line); }
@@ -673,8 +578,8 @@
 .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 @media (max-width: 1020px){ .price-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px){ .price-grid { grid-template-columns: 1fr; } }
-.price-card { display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 22px; background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
-.price-card.featured { border-color: color-mix(in srgb, var(--teal) 45%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--teal) 25%, transparent), 0 18px 50px rgba(0,0,0,0.35); }
+.price-card { display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 22px; background: var(--panel); }
+.price-card.featured { border-color: color-mix(in srgb, var(--teal) 45%, transparent); box-shadow: none; }
 .price-card h3 { font-family: var(--display); font-size: 19px; }
 .price-amt { font-family: var(--display); font-size: 34px; font-weight: 700; }
 .price-amt span { font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 400; }
@@ -686,8 +591,6 @@
 .plan-fineprint a { color: var(--teal-lt); }
 
 .start-section { position: relative; overflow: hidden; text-align: center; }
-.start-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.6; }
-.start-veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(720px 520px at 50% 50%, transparent, var(--bg) 76%); pointer-events: none; }
 .start-inner { position: relative; z-index: 2; }
 .start-h { margin: 18px 0 22px; }
 </style>

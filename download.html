@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://ephemerent.com/download.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
@@ -22,15 +23,14 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/orrery.css">
-<link rel="stylesheet" href="assets/auth.css">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="assets/auth.css?v=20260801">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<script src="assets/motion.js?v=20260802c" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body class="space-bg grain auth-page">
+<body class="space-bg auth-page utility-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <nav class="nav" id="nav">
@@ -44,12 +44,17 @@
       </svg>
       <span>Orrery</span>
     </a>
+    <div class="nav-links utility-nav-links">
+      <a href="Orrery.html">Orrery</a>
+      <a href="Vellum.html">Vellum</a>
+      <a href="Ephemerent.html">Lab</a>
+    </div>
     <div class="nav-spacer"></div>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
   </div>
 </nav>
 
-<main class="auth-main" id="main">
+<main class="auth-main" id="main" data-workflow-label="Release / Orrery beta">
   <div class="auth-card" style="max-width:520px;">
     <h1>Get Orrery</h1>
 
@@ -89,7 +94,7 @@
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
       <div class="download-steps">
-        <h3>Quick start</h3>
+        <h2>Quick start</h2>
         <ol>
           <li>Unzip the beta packet and run <b>Orrery.exe</b>. Windows SmartScreen may warn on this portable beta — choose <b>More info → Run anyway</b>.</li>
           <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
@@ -97,7 +102,7 @@
           <li>Use Nexus to open a workspace, pick a hosted route, send work, and review proof, boundary, and usage receipts.</li>
           <li>Checksums, manifest, and the package security report live on the <a href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">binary release page</a>.</li>
         </ol>
-        <p class="sub" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener" style="color:var(--teal-lt);">Join the Discord</a>.</p>
+        <p class="sub download-help" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord</a>.</p>
       </div>
     </div>
 
@@ -108,12 +113,14 @@
       </div>
       <div id="identity-form-wrap">
         <form id="identity-form" class="auth-stack">
-          <input type="email" class="auth-input" name="email" placeholder="you@example.com (optional)" autocomplete="email">
-          <input type="text" class="auth-input" name="name" placeholder="Name (optional)" autocomplete="name">
+          <label class="sr-only" for="identity-email-input">Email address (optional)</label>
+          <input type="email" class="auth-input" id="identity-email-input" name="email" placeholder="you@example.com (optional)" autocomplete="email">
+          <label class="sr-only" for="identity-name-input">Name (optional)</label>
+          <input type="text" class="auth-input" id="identity-name-input" name="name" placeholder="Name (optional)" autocomplete="name">
           <button type="submit" class="btn btn-primary">Continue with email</button>
           <button type="button" class="btn btn-ghost" id="identity-skip">Skip</button>
         </form>
-        <p class="auth-msg" id="identity-msg"></p>
+        <p class="auth-msg" id="identity-msg" role="status" aria-live="polite"></p>
       </div>
       <div id="identity-signed-in" class="hidden">
         <p class="mono" style="font-size:12px;color:var(--teal);margin-bottom:12px;">Signed in as <span id="identity-email"></span></p>
@@ -123,6 +130,13 @@
   </div>
 </main>
 
+<footer class="utility-footer">
+  <div class="utility-footer-inner">
+    <span class="mono">Ephemerent · 2026</span>
+    <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
+  </div>
+</footer>
+
 <style>
 .plan-strip { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px; }
 .plan-strip div { border:1px solid var(--line); border-radius:var(--r-sm); padding:12px; background:var(--bg-2); }
@@ -130,8 +144,9 @@
 .plan-strip span { display:block; color:var(--muted); font-size:13px; line-height:1.4; }
 @media (max-width:560px){ .plan-strip { grid-template-columns:1fr; } }
 .plan-fineprint { margin:-12px 0 22px; font-size:11.5px; line-height:1.55; color:var(--faint); }
-.plan-fineprint a { color:var(--teal-lt); }
-.release-status { display:grid; gap:10px; margin:0 0 24px; padding:14px; border:1px solid var(--line); border-radius:var(--r-sm); background:linear-gradient(180deg,var(--bg-2),rgba(255,255,255,.02)); }
+.plan-fineprint a,
+.download-help a { color:var(--teal-lt); text-decoration:underline; text-underline-offset:3px; }
+.release-status { display:grid; gap:10px; margin:0 0 24px; padding:14px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--bg-2); }
 .release-status div { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
 .release-status b { color:var(--ink); font-size:13px; }
 .release-status span { color:var(--muted); font-size:12.5px; text-align:right; overflow-wrap:anywhere; }

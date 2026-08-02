@@ -159,6 +159,15 @@
   // With prefers-reduced-motion the scene is drawn once, static, when it first appears.
   V3.visLoop = function (el, draw) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (window.EphemerentMotion) {
+      let renderedStatic = false;
+      window.EphemerentMotion.register(el, (now) => {
+        if (reduce && renderedStatic) return;
+        renderedStatic = true;
+        draw(now);
+      });
+      return;
+    }
     let visible = false, raf = 0;
     function tick(now) {
       raf = 0;

@@ -40,7 +40,7 @@
   border: 1px solid var(--line-strong);
   border-radius: var(--r-lg);
   padding: 36px 32px;
-  box-shadow: var(--glow-violet);
+  box-shadow: none;
 }
 
 .auth-card h1 {
@@ -149,6 +149,7 @@
   border-top: 1px solid var(--line);
 }
 
+.download-steps h2,
 .download-steps h3 {
   font-family: var(--display);
   font-size: 16px;
@@ -199,7 +200,7 @@
   border: 1px solid var(--line-strong);
   border-radius: var(--r-sm);
   padding: 18px;
-  background: linear-gradient(180deg, rgba(45, 212, 191, 0.06), rgba(255,255,255,0.02));
+  background: var(--panel);
 }
 
 .account-plan-head {
@@ -275,15 +276,7 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--teal), #8ab4ff);
-}
-
-.account-plan-meter-pool[data-credit-pool="doubleword"] .account-plan-quota-track i {
-  background: linear-gradient(90deg, #8ab4ff, #a78bfa);
-}
-
-.account-plan-meter-pool[data-credit-pool="arbiter"] .account-plan-quota-track i {
-  background: linear-gradient(90deg, #e8b45d, #ff7a90);
+  background: var(--signal, var(--teal));
 }
 
 .account-plan-actions {

@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://ephemerent.com/Orrery.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
@@ -22,15 +23,16 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Orrery Nexus — agent runs you can supervise">
-<meta name="twitter:description" content="A premium agentic code editor where Nexus keeps agent work visible, scoped, and reviewable.">
+<meta name="twitter:description" content="An agentic code editor where Nexus keeps agent work visible, scoped, and reviewable.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/orrery.css">
-<link rel="stylesheet" href="assets/components.css">
-<link rel="stylesheet" href="assets/auth.css">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="assets/components.css?v=20260801">
+<link rel="stylesheet" href="assets/auth.css?v=20260801">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<link rel="stylesheet" href="assets/orrery-story.css?v=20260802d">
+<script src="assets/motion.js?v=20260802c" defer></script>
+<script src="assets/branch-field.js?v=20260802c" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,11 +41,10 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Windows",
   "url": "https://ephemerent.com/Orrery.html",
-  "description": "A local-first agentic code editor: describe a goal and parallel AI agents work in plain sight — split it, attempt it many ways, keep the best, merge it back. Runs on your machine, with the models you choose.",
+      "description": "An agentic code editor centered on Nexus: open a workspace, choose a hosted route, run agents, and review progress, usage, proof, and boundaries before accepting work.",
   "image": "https://ephemerent.com/assets/og-orrery.png",
   "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" },
   "offers": [
-    { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
     { "@type": "Offer", "name": "Pro", "price": "40", "priceCurrency": "USD" },
     { "@type": "Offer", "name": "Max", "price": "100", "priceCurrency": "USD" },
     { "@type": "Offer", "name": "Ultra", "price": "200", "priceCurrency": "USD" }
@@ -52,7 +53,7 @@
 </script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body class="space-bg grain">
+<body class="space-bg orrery-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ============ NAV ============ -->
@@ -85,14 +86,13 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<header class="hero" id="main">
-  <canvas id="orrery" class="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-veil"></div>
+<main id="main">
+<header class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <div class="eyebrow reveal in">Orrery Nexus by Ephemerent</div>
-      <h1 class="display hero-h1 reveal in d1">Agent runs,<br><span class="grad-text">under control.</span></h1>
-      <p class="lead reveal in d2">Orrery is a premium agentic code editor centered on Nexus: open a workspace, pick a model route, send a task, watch the run stream, then review usage, proof, and safety receipts before you accept anything.</p>
+      <h1 class="display hero-h1 reveal in d1">Agent runs,<br><span>under control.</span></h1>
+      <p class="lead reveal in d2">Orrery is an agentic code editor centered on Nexus: open a workspace, pick a model route, send a task, watch the run stream, then review usage, proof, and safety receipts before you accept anything.</p>
       <div class="hero-cta reveal in d3">
         <a class="btn btn-primary" href="download.html">Get started <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#nexus">See Nexus</a>
@@ -104,6 +104,39 @@
       <p class="hero-note mono reveal in d4">Arbiter, DeepSeek API, and Doubleword credits — choose hosted routes per workspace and task.</p>
       <p class="hero-note mono reveal in d4">Beta software. Agent output can be wrong or unsafe; keep backups and review changes before running or shipping them.</p>
     </div>
+
+    <figure class="hero-run-diagram reveal in d2" aria-labelledby="hero-run-title">
+      <figcaption class="hero-run-head">
+        <span id="hero-run-title">A supervised run</span>
+        <span>System diagram · not product UI</span>
+      </figcaption>
+      <div class="hero-run-body">
+        <article class="hero-run-node hero-run-goal">
+          <span class="mono">01 / goal</span>
+          <strong>Bound the request</strong>
+          <small>workspace · route · permissions</small>
+        </article>
+        <section class="hero-run-branches" aria-labelledby="hero-worktrees-title">
+          <span class="mono" id="hero-worktrees-title">02 / isolated worktrees</span>
+          <div>
+            <article><b>W1</b><span>inspect</span></article>
+            <article><b>W2</b><span>propose</span></article>
+            <article><b>W3</b><span>check</span></article>
+          </div>
+        </section>
+        <article class="hero-run-node hero-run-verify">
+          <span class="mono">03 / verify</span>
+          <strong>Request evidence</strong>
+          <small>tests · diagnostics · review</small>
+        </article>
+        <article class="hero-run-node hero-run-decision">
+          <span class="mono">04 / decision</span>
+          <strong>Selected merge</strong>
+          <small>You keep, revise, or discard.</small>
+        </article>
+      </div>
+      <div class="hero-run-foot mono"><span>Visible boundary</span><span>Reversible work</span><span>Human acceptance</span></div>
+    </figure>
   </div>
   <div class="hero-scroll mono">scroll ↓</div>
 </header>
@@ -135,6 +168,7 @@
     <div class="card card-pad reveal d1 swarm-card">
       <div id="swarm"></div>
     </div>
+    <p class="artifact-note">Illustrative lifecycle only. The sequence explains the product contract without presenting a fabricated interface or a simulated successful run.</p>
     <div class="pipe reveal d2">
       <div class="pipe-step"><span class="pipe-n mono">01</span><b>Workspace</b><span>Open a folder and initialize Nexus.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">02</span><b>Route</b><span>Pick a hosted credit route.</span></div>
@@ -155,10 +189,10 @@
       <p class="lead">The default flow is deliberately small: open a workspace, choose a route, send a prompt, watch the visible progress stream, then inspect summary, changed-file metadata, usage, and safety receipts. Deeper controls live in Nexus Settings.</p>
     </div>
     <div class="cap-grid cap-grid-4">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⌘</div><h4>Open folder</h4><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◉</div><h4>Pick a route</h4><p>Use subscription-hosted DeepSeek API, Doubleword, or Arbiter routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">▷</div><h4>Run an agent</h4><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
-      <div class="card card-pad card-hover reveal d3"><div class="cap-ic">◇</div><h4>Review receipts</h4><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⌘</div><h3>Open folder</h3><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◉</div><h3>Pick a route</h3><p>Use subscription-hosted DeepSeek API, Doubleword, or Arbiter routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">▷</div><h3>Run an agent</h3><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
+      <div class="card card-pad card-hover reveal d3"><div class="cap-ic">◇</div><h3>Review receipts</h3><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
     </div>
   </div>
 </section>
@@ -197,18 +231,13 @@
         </div>
       </div>
       <div class="reveal d1" id="develop">
-        <div class="terminal">
-          <div class="term-bar"><span class="td td-r"></span><span class="td td-y"></span><span class="td td-g"></span><span class="term-title mono">Orrery</span></div>
-          <div class="term-body mono">
-            <div class="tl"><span class="tc">›</span> open workspace</div>
-            <div class="tl"><span class="tok-violet">route</span> arbiter-0.1-beta · hosted credits</div>
-            <div class="tl tdim"># ready</div>
-            <div class="tl">&nbsp;</div>
-            <div class="tl"><span class="tc">›</span> “fix the failing form tests”</div>
-            <div class="tl"><span class="tok-violet">nexus</span>  safety check · route ready · agent ready</div>
-            <div class="tl"><span class="tok-teal">tools</span>  read files · patch proposed · tests run</div>
-            <div class="tl"><span class="tok-teal">summary</span> proof ready · review before shipping<span class="term-caret">▍</span></div>
-          </div>
+        <div class="proof-contract">
+          <div class="proof-contract-head"><span>Run contract</span><span>System document · not product UI</span></div>
+          <div><span>Scope</span><b>Workspace, route, permissions, and review boundary are named before work begins.</b></div>
+          <div><span>Activity</span><b>File and tool events remain visible while a connected agent is working.</b></div>
+          <div><span>Evidence</span><b>Tests, diagnostics, usage, and boundary notes stay distinct from generated prose.</b></div>
+          <div><span>Decision</span><b>The run ends at human review: keep, revise, or discard.</b></div>
+          <p>This document describes the product contract. It is not a fabricated terminal session or a claim that a sample run succeeded.</p>
         </div>
       </div>
     </div>
@@ -224,17 +253,17 @@
       <p class="lead">Orrery shows plans, tool activity, test output, review receipts, and usage data in one place. The log helps you audit the work, but it is not a substitute for your own review and backups.</p>
     </div>
     <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h4>Safety check first</h4><p>Launches can record workspace scope, route state, permissions, and basic setup risk before work starts.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h4>Searches your codebase</h4><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h4>Scoped memory</h4><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h4>Connected agents</h4><p>Register local agents and connector-backed agents, then keep daily controls in Nexus and deeper setup in Settings.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h4>Tool-aware runs</h4><p>Use MCP and local tools where configured, while keeping raw source and keys out of cloud metadata by default.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h4>Measure it over time</h4><p>Track proof quality, usage, failures, and route behavior as tasks and models change.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h4>Works with other editors</h4><p>Plugs into other editors and agents through open, standard protocols.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h4>Set the pace</h4><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h4>See usage</h4><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h4>Cost-aware routing</h4><p>Budget presets and route labels help you choose the right hosted-credit path for the job.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h4>Nexus rooms</h4><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h3>Safety check first</h3><p>Launches can record workspace scope, route state, permissions, and basic setup risk before work starts.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h3>Searches your codebase</h3><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h3>Scoped memory</h3><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h3>Connected agents</h3><p>Register local agents and connector-backed agents, then keep daily controls in Nexus and deeper setup in Settings.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h3>Tool-aware runs</h3><p>Use MCP and local tools where configured, while keeping raw source and keys out of cloud metadata by default.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h3>Measure it over time</h3><p>Track proof quality, usage, failures, and route behavior as tasks and models change.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h3>Works with other editors</h3><p>Plugs into other editors and agents through open, standard protocols.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h3>Set the pace</h3><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h3>See usage</h3><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h3>Cost-aware routing</h3><p>Budget presets and route labels help you choose the right hosted-credit path for the job.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h3>Nexus rooms</h3><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
     </div>
   </div>
 </section>
@@ -244,30 +273,29 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">How it compares</div>
-      <h2 class="display">The one column nothing else can fill.</h2>
-      <p class="lead">Legibility, locality, independence, and verification each exist somewhere. Held together, they don't — a cloud-coupled editor can't credibly claim locality or model-independence without unwinding its own business.</p>
+      <h2 class="display">What a supervised run must show.</h2>
+      <p class="lead">Orrery keeps the operating contract concrete: each stage has visible evidence, a bounded action, and a decision that remains with you.</p>
     </div>
     <div class="compare-wrap reveal d1">
       <table class="compare">
         <thead>
           <tr>
-            <th scope="col">Capability</th>
-            <th scope="col" class="col-us">Orrery</th>
-            <th scope="col">Cloud-coupled agents</th>
-            <th scope="col">Single-agent copilots</th>
+            <th scope="col">Run stage</th>
+            <th scope="col" class="col-us">Visible evidence</th>
+            <th scope="col">System action</th>
+            <th scope="col">Your decision</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Runs fully on your machine</td><td class="col-us">Local-first</td><td>Cloud only</td><td>Partial</td></tr>
-          <tr><td>Bring any model, local or cloud</td><td class="col-us">5 providers + BYO-key</td><td>One vendor</td><td>One vendor</td></tr>
-          <tr><td>Parallel agents you can watch</td><td class="col-us">In plain sight</td><td>Hidden sandboxes</td><td>Single thread</td></tr>
-          <tr><td>Best-of-N judged by execution</td><td class="col-us">Tests, not vibes</td><td>Varies</td><td>—</td></tr>
-          <tr><td>Free tier, no account required</td><td class="col-us">Local is free</td><td>—</td><td>Limited</td></tr>
-          <tr><td>Every step logged &amp; reversible</td><td class="col-us">Approve / roll back</td><td>Partial</td><td>Partial</td></tr>
+          <tr><td>Scope</td><td class="col-us">Workspace and permission boundary</td><td>Prepare the run</td><td>Approve or revise</td></tr>
+          <tr><td>Route</td><td class="col-us">Provider label and credit pool</td><td>Select hosted capacity</td><td>Confirm cost posture</td></tr>
+          <tr><td>Work</td><td class="col-us">Progress, tools, and changed-file activity</td><td>Attempt the task</td><td>Observe or interrupt</td></tr>
+          <tr><td>Verification</td><td class="col-us">Tests, diagnostics, and proof summary</td><td>Check the result</td><td>Inspect the evidence</td></tr>
+          <tr><td>Receipt</td><td class="col-us">Usage and boundary record</td><td>Close the run</td><td>Keep, revise, or discard</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="compare-note mono reveal d2">A capability matrix, not a scoreboard — competitor names left out on purpose. The point is the column you can't fill anywhere else.</p>
+    <p class="compare-note mono reveal d2">The interface may evolve during beta; these review boundaries are the stable product intent.</p>
   </div>
 </section>
 
@@ -275,15 +303,15 @@
 <section class="section security-section" id="security">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Your code stays yours</div>
-      <h2 class="display">Local-first means nothing leaves unless you send it.</h2>
-      <p class="lead">Run on local models and nothing ever touches the network. Choose a cloud model and only that one request goes out — over your own key or pooled credits — never the whole repo, never to train on.</p>
+      <div class="eyebrow">Data and account boundaries</div>
+      <h2 class="display">Clear about what crosses the network.</h2>
+      <p class="lead">Hosted routes send the prompt and code context needed for a completion through Orrery Cloud to the configured provider. Ephemerent meters usage, does not retain relay content beyond fulfilling the request, and does not use your code or prompts to train its own models.</p>
     </div>
     <div class="cap-grid reveal d1">
-      <div class="card card-pad"><div class="cap-ic">⌂</div><h4>Local by default</h4><p>Point at Ollama and the editor, agents, and logs run with zero network calls.</p></div>
-      <div class="card card-pad"><div class="cap-ic">⚷</div><h4>Your keys, your credits</h4><p>Bring your own API key or use pooled credits. Cloud calls are per-request, not bulk uploads.</p></div>
-      <div class="card card-pad"><div class="cap-ic">▤</div><h4>Auditable by design</h4><p>Every outbound call is in the local log. Your code is never used to train Ephemerent.</p></div>
-      <div class="card card-pad"><div class="cap-ic">⟲</div><h4>Reversible always</h4><p>Approve every change and roll back to any checkpoint. The agent can't surprise you.</p></div>
+      <div class="card card-pad"><div class="cap-ic">01</div><h3>Explicit hosted route</h3><p>Nexus labels the selected DeepSeek API, Doubleword, or Arbiter route before a run starts.</p></div>
+      <div class="card card-pad"><div class="cap-ic">02</div><h3>Purpose-limited relay</h3><p>Only the prompt and context needed for the completion are relayed to the configured provider.</p></div>
+      <div class="card card-pad"><div class="cap-ic">03</div><h3>Content is not metering</h3><p>Stored usage counters are token totals and timestamps, not copies of prompt content.</p></div>
+      <div class="card card-pad"><div class="cap-ic">04</div><h3>Your review remains final</h3><p>Keep source-control backups and inspect changes before accepting, running, or shipping output.</p></div>
     </div>
   </div>
 </section>
@@ -294,7 +322,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">Subscribe to run Orrery.</h2>
-      <p class="lead">Orrery is premium from first start. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credits, cloud features, managed connectors, proof vaults, and usage receipts subject to beta availability and provider limits.</p>
+      <p class="lead">Orrery is a paid product. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credits, cloud features, managed connectors, proof vaults, and usage receipts subject to beta availability and provider limits.</p>
     </div>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro price-card-featured">
@@ -359,10 +387,10 @@
       <h2 class="display">Before you download.</h2>
     </div>
     <div class="faq-list reveal d1">
-      <details class="faq"><summary>Does my code leave my machine?</summary><div class="faq-body">Not with local models — Ollama runs entirely offline. With a cloud model, only the request you make goes to the provider you chose, over your key or pooled credits. The whole repo is never uploaded, and your code is never used to train Ephemerent.</div></details>
-      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">Windows today, with a signed, self-updating installer. macOS and Linux are on the roadmap — join the Discord to follow along.</div></details>
-      <details class="faq"><summary>Is it really free?</summary><div class="faq-body">Yes. The desktop editor, local models, parallel agents, local audit log, and checkpoints are free forever. Paid tiers add hosted cloud model credits and the buddy narrator.</div></details>
-      <details class="faq"><summary>What models can I use?</summary><div class="faq-body">Any mix of Ollama (local, free), OpenAI, Gemini, DeepSeek, and Anthropic — chosen task by task. Bring your own key on any paid tier.</div></details>
+      <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a hosted route, the prompt and code context needed for that completion pass through Orrery Cloud to the configured provider. Usage counters store totals and timestamps; Ephemerent does not retain relay content beyond fulfilling the request or use it to train its own models. See the privacy policy for the full boundary.</div></details>
+      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">The current beta packet targets Windows. macOS and Linux are on the roadmap; availability and update delivery may change during beta.</div></details>
+      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and configure routes. Real agent runs require a trial, subscription, or invite grant. Legacy local access remains honored for existing buyers but is no longer sold.</div></details>
+      <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly DeepSeek API, Doubleword, and Arbiter credits at the amounts shown above. Routes and capacity remain subject to beta and provider availability.</div></details>
       <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
       <details class="faq"><summary>Can I cancel anytime?</summary><div class="faq-body">Yes. Paid tiers are monthly via Stripe and cancel anytime — access runs to the end of the paid period. Token quotas reset each billing month and don't roll over.</div></details>
     </div>
@@ -371,8 +399,6 @@
 
 <!-- ============ CTA ============ -->
 <section class="section start-section" id="start">
-  <canvas id="orrery2" class="start-canvas" aria-hidden="true"></canvas>
-  <div class="start-veil"></div>
   <div class="wrap start-inner">
     <div class="reveal">
       <div class="eyebrow center" style="justify-content:center;">Start in Nexus</div>
@@ -387,6 +413,8 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+</main>
+
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -402,9 +430,9 @@
         </a>
         <p class="muted" style="font-size:14px;max-width:32ch;">Agent runs you can supervise. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h5>Product</h5><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#safety">Safety</a></li></ul></div>
-      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="#pricing">Plans from $40/month</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="arbiter-preview.html">Arbiter beta</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
+      <div><h3 class="footer-heading">Product</h3><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#safety">Safety</a></li></ul></div>
+      <div><h3 class="footer-heading">Get Orrery</h3><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="#pricing">Plans from $40/month</a></li></ul></div>
+      <div><h3 class="footer-heading">Company</h3><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="arbiter-preview.html">Arbiter beta</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -427,30 +455,14 @@
     if (cta && url) cta.href = url;
   }
 </script>
-<script src="assets/orrery-bg.js"></script>
-<script src="assets/swarm.js"></script>
+<script src="assets/swarm.js?v=20260802d"></script>
 <script>
-  // nav scroll
-  const nav = document.getElementById('nav');
-  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), { passive: true });
-  // reveals
-  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
-  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
-  // mounts — wait for load so layout/styles (page <style> below) are applied
-  addEventListener('load', () => {
-    mountOrrery(document.getElementById('orrery'), { cxf: 0.68, cyf: 0.5 });
-    mountOrrery(document.getElementById('orrery2'), { cxf: 0.5, cyf: 0.5, labels: false, parallax: false });
-    mountSwarm(document.getElementById('swarm'));
-  });
+  addEventListener('load', () => mountSwarm(document.getElementById('swarm')), { once: true });
 </script>
 
 <style>
 /* ===== Page-specific layout (Orrery landing) ===== */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-.hero-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(900px 700px at 18% 50%, var(--bg) 8%, rgba(10,10,20,0.6) 42%, transparent 70%),
-              linear-gradient(0deg, var(--bg), transparent 30%); }
 .hero-inner { position: relative; z-index: 2; padding-top: 90px; }
 .hero-copy { max-width: 640px; }
 .hero-h1 { margin: 20px 0 24px; }
@@ -478,7 +490,7 @@
 .sec-head { max-width: 760px; margin-bottom: 44px; }
 .sec-head h2 { margin: 16px 0 18px; }
 .sec-foot { margin-top: 28px; }
-.swarm-card { background: linear-gradient(180deg, var(--panel), var(--bg-2)); }
+.swarm-card { background: var(--panel); }
 
 .pipe { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 26px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
 .pipe-step { background: var(--bg-2); padding: 18px 16px; display: flex; flex-direction: column; gap: 5px; }
@@ -510,16 +522,16 @@
 .price-card {
   border: 1px solid var(--line);
   border-radius: var(--r);
-  background: linear-gradient(180deg, var(--panel), var(--bg-2));
+  background: var(--panel);
   padding: 30px;
   display: flex;
   flex-direction: column;
   min-height: 420px;
 }
-.price-card-pro { border-color: rgba(45,212,191,0.42); box-shadow: 0 0 50px rgba(45,212,191,0.12); }
-.price-card-featured { border-color: var(--teal); box-shadow: 0 0 60px rgba(45,212,191,0.22); }
+.price-card-pro { border-color: rgba(45,212,191,0.42); box-shadow: none; }
+.price-card-featured { border-color: var(--teal); box-shadow: none; }
 .price-card { position: relative; }
-.price-badge { position: absolute; top: -10px; left: 24px; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #06120f; background: var(--teal); padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+.price-badge { position: static; align-self: flex-start; margin-bottom: 4px; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-lt); background: transparent; border: 1px solid var(--teal); padding: 4px 10px; border-radius: 2px; font-weight: 600; }
 .price-top { display: grid; gap: 4px; margin-bottom: 18px; }
 .price-top span { color: var(--teal-lt); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
 .price-top b { font-family: var(--display); font-size: clamp(42px, 5vw, 62px); line-height: 1; letter-spacing: 0; }
@@ -527,33 +539,20 @@
 .price-card p { color: var(--ink-2); font-size: 16px; line-height: 1.55; margin-bottom: 22px; }
 .price-card ul { list-style: none; display: grid; gap: 10px; margin-bottom: 28px; color: var(--muted); font-size: 15px; }
 .price-card li { display: flex; gap: 9px; align-items: baseline; }
-.price-card li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 10px rgba(45,212,191,0.6); flex: none; transform: translateY(-1px); }
+.price-card li::before { content: ''; width: 6px; height: 6px; background: var(--teal); flex: none; transform: translateY(-1px); }
 .price-card .btn { margin-top: auto; justify-content: center; }
 @media (max-width: 880px){ .pricing-grid { grid-template-columns: 1fr; } }
 .pricing-fineprint { margin-top: 22px; max-width: 80ch; font-size: 12px; line-height: 1.6; color: var(--faint); }
 .pricing-fineprint a { color: var(--teal-lt); border-bottom: 1px solid rgba(45,212,191,0.3); }
 
-.terminal { border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; background: #08080f; box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
-.term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }
-.td { width: 11px; height: 11px; border-radius: 50%; } .td-r { background: #ff5f57; } .td-y { background: #febc2e; } .td-g { background: #28c840; }
-.term-title { margin-left: 8px; font-size: 12px; color: var(--faint); }
-.term-body { padding: 20px; font-size: 13px; line-height: 1.85; }
-.tl { white-space: pre-wrap; }
-.tc { color: var(--teal); margin-right: 8px; }
-.tdim { color: var(--faint); }
-.tok-ok { color: var(--green); } .tok-violet { color: var(--violet-lt); } .tok-teal { color: var(--teal-lt); }
-.term-caret { color: var(--teal); animation: blink 1s infinite; }
-
 .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 980px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .cap-grid { grid-template-columns: 1fr; } }
 .cap-ic { font-size: 22px; color: var(--brass-lt); margin-bottom: 14px; }
-.cap-grid h4 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.cap-grid h3 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
 .cap-grid p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 
 .start-section { position: relative; overflow: hidden; text-align: center; }
-.start-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.7; }
-.start-veil { position: absolute; inset: 0; z-index: 1; background: radial-gradient(700px 500px at 50% 50%, transparent, var(--bg) 75%); pointer-events: none; }
 .start-inner { position: relative; z-index: 2; }
 .start-h { margin: 18px 0 22px; }
 

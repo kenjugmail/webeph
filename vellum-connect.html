@@ -8,12 +8,17 @@
 <link rel="canonical" href="https://ephemerent.com/vellum-connect.html">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="assets/orrery.css">
-<link rel="stylesheet" href="assets/auth.css">
+<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="assets/auth.css?v=20260801">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<script src="assets/motion.js?v=20260802c" defer></script>
 </head>
-<body class="space-bg grain auth-page">
+<body class="space-bg auth-page utility-page">
+<a class="skip-link" href="#main">Skip to content</a>
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
@@ -26,15 +31,21 @@
       </svg>
       <span>Vellum</span>
     </a>
+    <div class="nav-links utility-nav-links">
+      <a href="Orrery.html">Orrery</a>
+      <a href="Vellum.html">Vellum</a>
+      <a href="Ephemerent.html">Lab</a>
+    </div>
     <div class="nav-spacer"></div>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
   </div>
 </nav>
 
-<main class="auth-main">
+<main class="auth-main" id="main" data-workflow-label="Account / Vellum handoff">
   <div class="auth-card" style="max-width:520px;">
     <h1>Connect Vellum</h1>
     <p class="sub" style="margin-bottom:20px;">Link the Vellum editor to your Orrery account. One subscription (Pro $40 / Max $100 / Ultra $200 /mo) unlocks cloud agents in both apps, with shared DeepSeek API, Doubleword, and Arbiter credits.</p>
+    <p class="auth-msg connect-status" id="connect-status" role="status" aria-live="polite">Checking account status…</p>
 
     <!-- Signed out: same providers as the cloud dashboard. -->
     <div id="cloud-auth-panel" class="hidden">
@@ -42,10 +53,11 @@
         <button type="button" class="btn btn-primary" id="cloud-google" style="width:100%;justify-content:center;">Continue with Google</button>
         <button type="button" class="btn btn-primary" id="cloud-github" style="width:100%;justify-content:center;">Continue with GitHub</button>
         <div class="auth-divider" id="cloud-local-divider"><span>or email</span></div>
+        <label class="sr-only" for="cloud-email">Email address</label>
         <input type="email" class="auth-input" id="cloud-email" placeholder="you@example.com" autocomplete="email">
         <button type="button" class="btn btn-ghost" id="cloud-email-btn" style="width:100%;">Email me a sign-in link</button>
       </div>
-      <p class="auth-msg" id="cloud-auth-msg"></p>
+      <p class="auth-msg" id="cloud-auth-msg" role="status" aria-live="polite"></p>
       <p class="sub" style="font-size:13px;color:var(--muted);margin-top:14px;">Already signed in on this browser (e.g. via the <a href="cloud.html" style="color:var(--teal-lt);">cloud dashboard</a>)? Reload this page and your session is picked up automatically.</p>
     </div>
 
@@ -69,6 +81,13 @@
   </div>
 </main>
 
+<footer class="utility-footer">
+  <div class="utility-footer-inner">
+    <span class="mono">Ephemerent · 2026</span>
+    <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
+  </div>
+</footer>
+
 <script src="assets/site-config.js"></script>
 <script type="module">
   import { mountNavAccount } from './assets/account.js';
@@ -82,12 +101,15 @@
   const panel = document.getElementById('cloud-auth-panel');
   const setup = document.getElementById('cloud-auth-setup');
   const ready = document.getElementById('connect-ready');
+  const status = document.getElementById('connect-status');
 
   if (!cloudConfigured()) {
+    status.classList.add('hidden');
     setup.classList.remove('hidden');
   } else {
     bindCloudAuthForm(document);
     const session = await waitForCloudSession();
+    status.classList.add('hidden');
     if (!session?.user) {
       panel.classList.remove('hidden');
     } else {
@@ -121,7 +143,7 @@
         if (isPaidPlan(plan)) {
           planLine.textContent = `Signed in as ${session.user.email} — ${PLAN_LABELS[plan]} ($${PLAN_PRICES[plan]}/mo). Cloud agents are enabled in Orrery and Vellum.`;
         } else {
-          planLine.textContent = `Signed in as ${session.user.email} — Free plan.`;
+          planLine.textContent = `Signed in as ${session.user.email} — Preview access.`;
           const url = checkoutUrlForTier('pro', window.ORRERY_CONFIG || {});
           upgradeNote.innerHTML = url
             ? `Hosted credits need a paid plan: <a href="${url}" style="color:var(--teal-lt);">upgrade to Pro - $40/mo</a> (covers Orrery + Vellum).`

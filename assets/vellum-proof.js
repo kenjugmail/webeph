@@ -1,65 +1,42 @@
 /* ============================================================
    VELLUM — Proof Bench. A rotating wireframe artifact (CAD part,
    robot rig, game scene) on the left; a renderer-neutral proof
-   report on the right. The report is computed for real: a Web
+   report on the right. The sample meshes are generated in this page,
+   then the report is computed for real: a Web
    Worker rasterizes the mesh on the CPU (no GPU) and analyses its
    topology, and the panel shows the measured result — verts/tris,
    open + non-manifold edges, signed volume, and the actual
    millisecond cost of the CPU render, with the rendered frame
-   shown as proof. If a Worker is unavailable it degrades to a
-   staged report so the page never breaks. mountProofBench(rootEl)
+   shown as proof. If a Worker is unavailable it reports “Not run”
+   and never substitutes sample measurements. mountProofBench(rootEl)
    ============================================================ */
 (function () {
   const ARTIFACTS = {
     part: {
-      label: 'CAD part · bearing.step',
+      label: 'Procedural torus · proof sample',
       build: () => window.V3.torus(1.25, 0.42, 28, 14),
       mesh: () => torusTris(1.25, 0.42, 28, 14),
-      metricName: 'geometric fidelity',
-      metric: 0.96,
-      checks: [
-        ['loads · STEP → mesh', 'tessellate'],
-        ['watertight surface', '0 open edges'],
-        ['manifold geometry', '0 non-manifold'],
-        ['within tolerance', '±0.05 mm'],
-        ['printable · positive volume', '14.2 cm³']
-      ]
+      metricName: 'manifold integrity'
     },
     rig: {
-      label: 'Robot rig · arm.urdf',
+      label: 'Procedural box assembly · proof sample',
       build: () => window.V3.boxStack(),
       mesh: () => boxesTris([
         [0, -0.95, 0, 1.7, 0.5, 1.7], [0, -0.3, 0, 0.7, 0.85, 0.7],
         [0.35, 0.45, 0, 1.5, 0.42, 0.5], [1.0, 0.95, 0, 0.5, 0.65, 0.42],
         [1.0, 1.45, 0, 0.85, 0.28, 0.7]
       ]),
-      metricName: 'kinematic score',
-      metric: 0.93,
-      checks: [
-        ['URDF parses · 5 links', 'tree valid'],
-        ['joint limits respected', '4 / 4 joints'],
-        ['self-collision free', 'swept volume'],
-        ['reach envelope', '0.84 m radius'],
-        ['mass properties valid', 'inertia ok']
-      ]
+      metricName: 'manifold integrity'
     },
     scene: {
-      label: 'Game scene · level_03.gltf',
+      label: 'Procedural block field · proof sample',
       build: () => window.V3.cubeField(),
       mesh: () => boxesTris([
         [-1.4, 0.9, -1.0], [-0.5, 1.5, -1.1], [0.5, 0.7, -1.2], [1.4, 1.2, -0.9],
         [-1.5, 0.6, 0.0], [-0.5, 1.1, 0.1], [0.6, 1.7, 0.0], [1.5, 0.8, 0.1],
         [-1.3, 1.0, 1.1], [-0.3, 0.6, 1.2], [0.7, 1.3, 1.1], [1.4, 0.5, 1.0]
       ].map(([x, h, z]) => [x * 0.85, -1.2 + h / 2, z * 0.85, 0.62, h, 0.62])),
-      metricName: 'scene health',
-      metric: 0.91,
-      checks: [
-        ['scene graph valid', '12 nodes'],
-        ['collision mesh closed', 'convex hulls'],
-        ['navmesh connected', '1 island'],
-        ['draw-call budget', '≤ 1.2k calls'],
-        ['automated playtest', 'goal reached']
-      ]
+      metricName: 'manifold integrity'
     }
   };
 
@@ -101,9 +78,9 @@
     root.innerHTML = `
       <div class="proof-toolbar">
         <div class="proof-tabs" data-tabs>
-          <button data-k="part" class="on">CAD part</button>
-          <button data-k="rig">Robot rig</button>
-          <button data-k="scene">Game scene</button>
+          <button data-k="part" class="on">Torus mesh</button>
+          <button data-k="rig">Box assembly</button>
+          <button data-k="scene">Block field</button>
         </div>
         <span class="proof-engine mono">vellum · headless kernel</span>
       </div>
@@ -227,22 +204,22 @@
       const wk = getWorker();
       let mesh = null;
       if (wk) { try { mesh = A.mesh(); } catch (e) { mesh = null; } }
-      if (!wk || !mesh) { return runReportSim(A, token); }
+      if (!wk || !mesh) { return runReportUnavailable(token); }
 
       let settled = false;
       const onMsg = (ev) => { if (settled) return; settled = true; cleanup(); if (token === runToken && ev.data && ev.data.ok) applyReal(token, A, ev.data); };
-      const onErr = () => { if (settled) return; settled = true; cleanup(); worker = undefined; if (token === runToken) runReportSim(A, token); };
+      const onErr = () => { if (settled) return; settled = true; cleanup(); worker = undefined; if (token === runToken) runReportUnavailable(token); };
       function cleanup() { wk.removeEventListener('message', onMsg); wk.removeEventListener('error', onErr); }
       wk.addEventListener('message', onMsg);
       wk.addEventListener('error', onErr);
-      setTimeout(() => { if (!settled) { settled = true; cleanup(); if (token === runToken) runReportSim(A, token); } }, 2500);
-      try { wk.postMessage({ verts: mesh.verts, tris: mesh.tris, w: 132, h: 88, palette: paletteRGB() }); }
-      catch (e) { settled = true; cleanup(); runReportSim(A, token); }
+      setTimeout(() => { if (!settled) { settled = true; cleanup(); if (token === runToken) runReportUnavailable(token); } }, 2500);
+      try { wk.postMessage({ verts: mesh.verts, tris: mesh.tris, w: 240, h: 160, palette: paletteRGB() }); }
+      catch (e) { settled = true; cleanup(); runReportUnavailable(token); }
     }
 
     function applyReal(token, A, d) {
       const checks = [
-        ['tessellated · STEP → mesh', `${d.vertCount} verts · ${d.triCount} tris`, true],
+        ['triangulated input', `${d.vertCount} verts · ${d.triCount} tris`, true],
         ['watertight surface', `${d.boundary} open edges`, d.watertight],
         ['manifold geometry', `${d.nonmanifold} non-manifold`, d.manifold],
         ['positive volume', `${d.volume.toFixed(2)} units³`, d.volume > 0],
@@ -250,12 +227,27 @@
       ];
       metricNameEl.textContent = 'manifold integrity';
       // draw the actual CPU-rendered frame
+      let imageUrl = '';
       try {
         renderCanvas.width = d.w; renderCanvas.height = d.h;
         renderCanvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(d.rgba), d.w, d.h), 0, 0);
+        imageUrl = renderCanvas.toDataURL('image/png');
         renderLabel.textContent = `actual CPU frame · ${d.rasMs.toFixed(0)} ms · no GPU`;
         renderWrap.classList.add('on');
       } catch (e) { /* render inset is optional */ }
+
+      document.dispatchEvent(new CustomEvent('vellum:proof-measured', { detail: {
+        verified: checks.every((check) => check[2]),
+        vertCount: d.vertCount,
+        triCount: d.triCount,
+        boundary: d.boundary,
+        nonmanifold: d.nonmanifold,
+        width: d.w,
+        height: d.h,
+        rasterMs: d.rasMs,
+        manifoldIntegrity: d.manifoldIntegrity,
+        imageUrl
+      } }));
 
       aspectsEl.innerHTML = '';
       const rows = checks.map(([k, w]) => {
@@ -290,45 +282,18 @@
       setTimeout(step, 200);
     }
 
-    // ---------- staged fallback (only if Worker is unavailable) ----------
-    function runReportSim(A, token) {
-      running = true; progress = 0;
-      aspectsEl.innerHTML = '';
+    // Never substitute invented proof when the real worker is unavailable.
+    function runReportUnavailable(token) {
+      if (token !== runToken) return;
+      running = false;
+      progress = 0;
+      aspectsEl.innerHTML = '<div class="aspect"><span class="aspect-k">CPU proof worker</span><span class="aspect-w mono">unavailable</span><span class="aspect-mark fail">!</span></div>';
       vEl.className = 'review-verdict';
-      vText.textContent = 'VERIFYING…';
-      metricEl.textContent = '0.00';
+      vText.textContent = 'NOT RUN';
+      metricEl.textContent = '—';
       metricBar.style.width = '0%';
-      metricBar.style.background = 'var(--violet)';
-      metricNameEl.textContent = A.metricName;
-      footEl.textContent = 'renderer-neutral · same proof in Three · Unreal · Blender';
-
-      const rows = A.checks.map(([k, w]) => {
-        const row = document.createElement('div');
-        row.className = 'aspect pending';
-        row.innerHTML = `<span class="aspect-k">${k}</span><span class="aspect-w mono">${w}</span><span class="aspect-mark"><i class="proof-spin"></i></span>`;
-        aspectsEl.appendChild(row);
-        return row;
-      });
-
-      let i = 0;
-      const step = () => {
-        if (token !== runToken) return;
-        if (i < rows.length) {
-          const mk = rows[i].querySelector('.aspect-mark');
-          mk.className = 'aspect-mark pass';
-          mk.textContent = '✓';
-          rows[i].classList.remove('pending');
-          progress = (i + 1) / rows.length;
-          i++;
-          setTimeout(step, 440);
-        } else {
-          running = false;
-          vEl.className = 'review-verdict ok';
-          vText.textContent = 'VERIFIED';
-          animateMetric(token, A.metric);
-        }
-      };
-      setTimeout(step, 420);
+      metricNameEl.textContent = 'manifold integrity';
+      footEl.textContent = 'No proof is shown without a measured CPU-worker result.';
     }
 
     function animateMetric(token, target) {

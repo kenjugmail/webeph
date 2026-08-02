@@ -8,6 +8,8 @@
 <link rel="canonical" href="https://ephemerent.com/research.html">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
@@ -24,11 +26,10 @@
 <meta name="twitter:title" content="Research — Ephemerent">
 <meta name="twitter:description" content="Seven research directions (R1–R7) across three frontiers. LLMs now, layers later.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;1,16..72,400;1,16..72,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ephemerent.css">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<script src="assets/motion.js?v=20260802c" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,7 +40,7 @@
       "name": "Ephemerent",
       "url": "https://ephemerent.com/",
       "logo": "https://ephemerent.com/assets/og-ephemerent.png",
-      "description": "An independent research lab building local-first, verifiable multi-agent AI. Maker of Orrery, an agentic code editor where parallel agents work in plain sight.",
+      "description": "An independent research lab building verifiable multi-agent systems. Maker of Orrery Nexus, an agentic code editor where runs stay visible, scoped, and reviewable.",
       "foundingDate": "2026",
       "email": "hello@ephemerent.com",
       "sameAs": ["https://discord.gg/CPPhk3GNjz"]
@@ -59,7 +60,7 @@
 </script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body>
+<body class="lab-page research-page" data-scene="research-document">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -99,7 +100,8 @@
 </div>
 
 <!-- HERO -->
-<header class="ehero" id="main">
+<main id="main">
+<header class="ehero">
   <div class="ewrap">
     <span class="lbl rv in">Research agenda &nbsp;—&nbsp; R1–R7, on the record</span>
     <h1 class="rv in">Seven directions, three frontiers, one question.</h1>
@@ -121,6 +123,15 @@
     <div><div class="k">Discipline</div><div class="v">LLMs now, layers later</div></div>
     <div><div class="k">Horizon</div><div class="v">Eight quarters · 2026 — 2028</div></div>
   </div>
+</div>
+
+<div class="ewrap research-index-wrap">
+  <aside class="research-index" aria-label="Research document index">
+    <a href="#frontier-a"><span>A</span>Coordination</a>
+    <a href="#frontier-b"><span>B</span>Verification</a>
+    <a href="#frontier-c"><span>C</span>World models</a>
+    <a href="#bet"><span>04</span>Commitments &amp; bets</a>
+  </aside>
 </div>
 
 <!-- FRONTIER A -->
@@ -153,7 +164,7 @@
       <span class="lbl">Frontier B</span>
       <h2>Verification &amp; evaluation as the hard problem.</h2>
     </div>
-    <p class="ethesis rv">The open gap: capability is saturating. Opus-class models reach ~88% on SWE-bench Verified, so value migrates from <em>generating</em> answers to <em>trusting</em> them. Yet only ~52% of production teams run evals at all; the lab-to-production gap runs ~37%; and there is a documented 50× cost variance for equal accuracy. The weakest-covered cases are exactly ours — multi-agent, long-horizon, self-improving. Over eight quarters Arbiter becomes the through-line: we ship execution-based scoring as Orrery's default judge (winners chosen by tests passed, not by an LLM eyeballing a diff), build a public eval harness with both step-level and outcome-level scoring, and stand up a drift leaderboard that re-measures solve-rate as cloud models change underneath us. Vellum is the spatial expression — replacing theatrical proofs with a real WASM software rasterizer so "prove, don't eyeball" is literally true, with no GPU in the loop. These are commitments, not bets: extensions of work already running in Orrery and Vellum. The credible public output: a public eval harness (step + outcome), a multi-agent verification benchmark anyone can run, and a short paper on execution-based selection vs. LLM-judge.</p>
+    <p class="ethesis rv">The open gap is not another polished completion; it is evidence that a system did the requested work inside the intended boundary. Multi-agent, long-horizon, and self-improving systems make that gap harder because more steps can fail silently. Over eight quarters Arbiter becomes the through-line: we ship execution-based scoring as Orrery's default judge, build a public eval harness with step-level and outcome-level scoring, and stand up a drift record that re-measures solve rate as hosted models change. Vellum is the spatial expression — replacing theatrical proof with a real software rasterizer so “prove, don't eyeball” is literal, with no GPU in the loop. These are commitments, not benchmark claims. The intended public output is a reproducible eval harness, a multi-agent verification benchmark, and a short paper on execution-based selection versus model-judge review.</p>
     <div class="eindex rv">
       <div class="erow">
         <span class="no">R2</span>
@@ -219,6 +230,8 @@
 </section>
 
 <!-- FOOTER -->
+</main>
+
 <footer class="efoot" id="contact">
   <div class="ewrap">
     <div class="efoot-grid">
@@ -232,7 +245,7 @@
         </div>
       </div>
       <div>
-        <h5>Lab</h5>
+        <h2 class="efoot-heading">Lab</h2>
         <ul>
           <li><a href="research.html">Research</a></li>
           <li><a href="Ephemerent.html#approach">Approach</a></li>
@@ -242,7 +255,7 @@
         </ul>
       </div>
       <div>
-        <h5>Work</h5>
+        <h2 class="efoot-heading">Work</h2>
         <ul>
           <li><a href="Orrery.html">Orrery</a></li>
           <li><a href="Ephemerent.html#work">Seed</a></li>
@@ -259,11 +272,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-  const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
-  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
-</script>
 
 <style>
 .ehero h1 { max-width: 28ch; }

@@ -8,11 +8,13 @@
 <link rel="canonical" href="https://ephemerent.com/">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/ephemerent-network-1600.avif" as="image" type="image/avif" imagesrcset="assets/ephemerent-network-900.avif 900w, assets/ephemerent-network-1600.avif 1600w" imagesizes="100vw" media="(min-width: 761px)" fetchpriority="high">
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Ephemerent — independent research lab">
-<meta property="og:description" content="Local-first, verifiable agent systems. Maker of Orrery Nexus, an agentic code editor where runs stay visible, scoped, and reviewable.">
+<meta property="og:description" content="Many temporary minds. One result you can inspect. Maker of Orrery, where agent runs stay visible, scoped, and reviewable.">
 <meta property="og:url" content="https://ephemerent.com/">
 <meta property="og:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <meta property="og:image:type" content="image/png">
@@ -22,13 +24,12 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ephemerent — independent research lab">
-<meta name="twitter:description" content="Verifiable agent systems. Maker of Orrery Nexus.">
+<meta name="twitter:description" content="Many temporary minds. One result you can inspect. Maker of Orrery.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;1,16..72,400;1,16..72,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/ephemerent.css">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
+<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<link rel="stylesheet" href="assets/home.css?v=20260802c">
+<script src="assets/motion.js?v=20260802c" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,7 +40,7 @@
       "name": "Ephemerent",
       "url": "https://ephemerent.com/",
       "logo": "https://ephemerent.com/assets/og-ephemerent.png",
-      "description": "An independent research lab building local-first, verifiable multi-agent AI. Maker of Orrery, an agentic code editor where parallel agents work in plain sight.",
+      "description": "An independent research lab building verifiable multi-agent systems. Maker of Orrery Nexus, an agentic code editor where runs stay visible, scoped, and reviewable.",
       "foundingDate": "2026",
       "email": "hello@ephemerent.com",
       "sameAs": ["https://discord.gg/CPPhk3GNjz"]
@@ -56,7 +57,7 @@
 </script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body>
+<body class="lab-page home-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -98,29 +99,113 @@
 </div>
 
 <!-- HERO -->
-<header class="ehero" id="main">
+<main id="main">
+<header class="ehero">
   <div class="ewrap">
     <span class="lbl rv in">Ephemeral · Emergent &nbsp;—&nbsp; an independent research lab</span>
-    <h1 class="rv in">Studying intelligence that emerges from many small, temporary minds.</h1>
-    <div class="ehero-sub">
-      <p class="rv in">Ephemerent researches systems where capability emerges from short-lived agents, model routes, and evidence loops. Today that means LLM-powered coding agents made legible and reviewable through <a class="elink" href="Orrery.html">Orrery Nexus</a>. Longer-term research explores better evaluation, routing, memory, and compute efficiency around those agents. Some work becomes papers. Some becomes products.</p>
-      <div class="ehero-fig rv in"><canvas id="fig" aria-hidden="true"></canvas></div>
+    <h1 class="rv in">Many temporary minds. One result you can inspect.</h1>
+    <div class="ehero-intro">
+      <p class="rv in">Ephemerent studies agent systems that assemble for a task, work inside explicit boundaries, and dissolve when the work is done. <a class="elink" href="Orrery.html">Orrery</a> is the first application: the goal, branches, evidence, and selected result stay visible from run to review.</p>
+      <div class="ehero-cta rv in">
+        <a class="ebtn ebtn-fill" href="Orrery.html">Explore Orrery <span aria-hidden="true">→</span></a>
+        <a class="ebtn" href="#research">Read the research</a>
+      </div>
     </div>
-    <div class="ehero-cta rv">
-      <a class="ebtn ebtn-fill" href="Orrery.html">Explore Orrery <span aria-hidden="true">→</span></a>
-      <a class="ebtn" href="#research">Read the research</a>
-    </div>
+    <section class="ehero-story rv in" data-emergence-scene data-scene aria-labelledby="field-sequence-title">
+      <h2 class="sr-only" id="field-sequence-title">The temporary-mind field sequence</h2>
+      <div class="ehero-story-pin">
+        <div class="ehero-story-head">
+          <span>Field sequence 001 · temporary minds</span>
+          <span class="ehero-story-state"><b data-story-index>01 / 04</b><span data-story-label>Assemble</span></span>
+        </div>
+
+        <div class="ehero-story-viewport">
+          <figure class="ehero-story-frame" data-story-frame="0" data-active="true">
+            <picture>
+              <source type="image/avif" srcset="assets/ephemerent-network-900.avif 900w, assets/ephemerent-network-1600.avif 1600w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <source type="image/webp" srcset="assets/ephemerent-network-900.webp 900w, assets/ephemerent-network-1600.webp 1600w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <img src="assets/ephemerent-network-1600.webp" width="1600" height="900" fetchpriority="low" decoding="async" alt="A physical paper network assembling around one central goal.">
+            </picture>
+          </figure>
+
+          <figure class="ehero-story-frame" data-story-frame="1" aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="assets/ephemerent-isolation-900.avif 900w, assets/ephemerent-isolation-1536.avif 1536w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <source type="image/webp" srcset="assets/ephemerent-isolation-900.webp 900w, assets/ephemerent-isolation-1536.webp 1536w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <img src="assets/ephemerent-isolation-1536.webp" width="1536" height="864" loading="lazy" decoding="async" alt="One graphite route separating into three isolated paper work areas.">
+            </picture>
+          </figure>
+
+          <figure class="ehero-story-frame" data-story-frame="2" aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="assets/ephemerent-verification-900.avif 900w, assets/ephemerent-verification-1536.avif 1536w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <source type="image/webp" srcset="assets/ephemerent-verification-900.webp 900w, assets/ephemerent-verification-1536.webp 1536w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <img src="assets/ephemerent-verification-1536.webp" width="1536" height="864" loading="lazy" decoding="async" alt="Several attempted graphite paths resolving into one selected evidence strip.">
+            </picture>
+          </figure>
+
+          <div class="ehero-story-frame ehero-release-frame" data-story-frame="3" aria-hidden="true">
+            <picture aria-hidden="true">
+              <source type="image/avif" srcset="assets/ephemerent-verification-900.avif 900w, assets/ephemerent-verification-1536.avif 1536w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <source type="image/webp" srcset="assets/ephemerent-verification-900.webp 900w, assets/ephemerent-verification-1536.webp 1536w" sizes="(max-width: 760px) calc(100vw - 40px), min(860px, 67vw)">
+              <img src="assets/ephemerent-verification-1536.webp" width="1536" height="864" loading="lazy" decoding="async" alt="">
+            </picture>
+            <div class="ehero-release-copy">
+              <span>04 — Release</span>
+              <strong>The result remains.<br>The temporary machinery does not.</strong>
+              <p>Workers released · evidence retained · run closed</p>
+            </div>
+          </div>
+          <canvas class="ehero-story-overlay" id="fig" aria-hidden="true"></canvas>
+        </div>
+
+        <div class="ehero-story-foot">
+          <span>A research metaphor, not product UI</span>
+          <span data-story-caption>Goal received · scope made explicit</span>
+        </div>
+      </div>
+
+      <ol class="ehero-story-steps" aria-label="Temporary-mind sequence">
+        <li data-story-step="0" data-active="true">
+          <span class="ehero-step-no">01</span>
+          <div>
+            <h3>Assemble around one explicit goal.</h3>
+            <p>Only the workers needed for the task appear. The goal and working boundary arrive first.</p>
+            <span class="ehero-step-evidence">Goal received · scope visible</span>
+          </div>
+        </li>
+        <li data-story-step="1">
+          <span class="ehero-step-no">02</span>
+          <div>
+            <h3>Isolate each attempt.</h3>
+            <p>Parallel work stays separated, so one branch cannot quietly overwrite another.</p>
+            <span class="ehero-step-evidence">Three bounded paths · no shared edits</span>
+          </div>
+        </li>
+        <li data-story-step="2">
+          <span class="ehero-step-no">03</span>
+          <div>
+            <h3>Verify before selection.</h3>
+            <p>Attempts are compared by available evidence. A result is chosen because it holds up, not because it sounds complete.</p>
+            <span class="ehero-step-evidence">Evidence compared · result selected</span>
+          </div>
+        </li>
+        <li data-story-step="3">
+          <span class="ehero-step-no">04</span>
+          <div>
+            <h3>Keep the result. Release the workers.</h3>
+            <p>The temporary system dissolves when the run ends. The selected work and its trace remain inspectable.</p>
+            <span class="ehero-step-evidence">Workers released · trace retained</span>
+          </div>
+        </li>
+      </ol>
+    </section>
   </div>
 </header>
 
-<!-- META -->
-<div class="ewrap">
-  <div class="emeta">
-    <div><div class="k">Focus</div><div class="v">Emergent multi-agent systems</div></div>
-    <div><div class="k">Approach</div><div class="v">Local-first · verifiable</div></div>
-    <div><div class="k">Status</div><div class="v">Independent · self-directed</div></div>
-    <div><div class="k">Founded</div><div class="v">2026</div></div>
-  </div>
+<!-- RESEARCH REGISTER -->
+<div class="ewrap home-register">
+  <p><span>Research register 001</span>Emergent agent systems · visible, scoped, and verifiable · independently directed since 2026.</p>
 </div>
 
 <!-- 01 — RESEARCH -->
@@ -128,41 +213,41 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">01 — Research</span>
-      <h2>We study a single question from several directions: how does useful intelligence emerge, briefly, from systems of small agents?</h2>
+      <h2>How can small agents produce useful work without hiding the process?</h2>
     </div>
-    <p class="ethesis rv">Orrery runs on language models today: they plan, edit, test, and summarize. Our research asks what to integrate next: stronger routing, better proof signals, scoped memory, safer shared context, and compute substrates that make agent work cheaper to run at scale.</p>
-    <div class="eindex rv">
-      <div class="erow">
+    <p class="ethesis rv">We test orchestration, proof, routing, memory, and compute. Every line of work faces the same bar: expose the process, state the boundary, and claim only what the evidence supports.</p>
+    <div class="eindex">
+      <div class="erow" data-motion="reveal">
         <span class="no">R1</span>
         <span class="ti">Emergent orchestration</span>
         <span class="de">Decomposing a goal into parallel agents, running each in isolation, and merging only what works.</span>
       </div>
-      <div class="erow">
+      <div class="erow" data-motion="reveal">
         <span class="no">R2</span>
         <span class="ti">Verifiable selection</span>
         <span class="de">Comparing attempts by available evidence, not impression — panels, metrics, and judges instead of guesswork.</span>
       </div>
-      <div class="erow">
+      <div class="erow" data-motion="reveal">
         <span class="no">R3</span>
         <span class="ti">Run evaluation</span>
         <span class="de">Research to integrate: proof quality, usage, failure modes, and recovery signals that help decide when a run is worth trusting.</span>
       </div>
-      <div class="erow">
+      <div class="erow" data-motion="reveal">
         <span class="no">R4</span>
         <span class="ti">Context and memory</span>
         <span class="de">Explicit, editable workspace and room memory that helps agents continue work without turning private projects into hidden transcripts.</span>
       </div>
-      <div class="erow">
+      <div class="erow" data-motion="reveal">
         <span class="no">R5</span>
         <span class="ti">Agent operations</span>
         <span class="de">Nexus-style control surfaces for workspaces, sessions, connected agents, usage, proof, and handoff across desktop, mobile, and team channels.</span>
       </div>
-      <div class="erow">
+      <div class="erow" data-motion="reveal">
         <span class="no">R6</span>
         <span class="ti">Wave compute substrates</span>
         <span class="de">RF and photonic analog accelerators — matrix operations in electromagnetic waves instead of shuttled electrons. Near-sensor RF front-ends without conversion tax; photonic density where it pays. Algorithm–hardware co-design, not bigger GPUs alone.</span>
       </div>
-      <div class="erow">
+      <div class="erow" data-motion="reveal">
         <span class="no">R7</span>
         <span class="ti">Distributed compute mesh</span>
         <span class="de">A hive-style network where contributors parallelize training and inference across their own GPUs — gradient sync over the wire, fault-tolerant participation, credit-backed rewards. Datacenter-scale ambition without datacenter monopoly.</span>
@@ -177,31 +262,31 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">02 — Work</span>
-      <h2>Research turns into things you can use. The LLM-powered editor ships first; deeper layers integrate as they prove out.</h2>
+      <h2>The first result is Orrery. Everything else stays labeled by evidence and stage.</h2>
     </div>
-    <div class="ework rv">
-      <a class="eprodrow" href="Orrery.html">
+    <div class="ework">
+      <a class="eprodrow" href="Orrery.html" data-motion="reveal">
         <span class="nm"><svg class="mk accent"><use href="#ring"/></svg> Orrery</span>
         <span class="de">An agentic code editor centered on Nexus — open a workspace, choose a route, run agents, and review progress, usage, proof, and boundaries.</span>
         <span class="meta"><span class="estatus live">Available</span><span class="arr">→</span></span>
       </a>
-      <a class="eprodrow" href="arbiter-preview.html">
+      <a class="eprodrow" href="arbiter-preview.html" data-motion="reveal">
         <span class="nm">Arbiter</span>
         <span class="de">A subscriber-gated hosted coding route for Orrery, presented with usage and evidence boundaries during the closed beta.</span>
         <span class="meta"><span class="estatus preview">Beta preview</span><span class="arr">→</span></span>
       </a>
-      <div class="eprodrow">
+      <div class="eprodrow" data-motion="reveal">
         <span class="nm">Seed</span>
         <span class="de">Research toward a software world model — predict patch consequences and plan before executing, integrated alongside Orrery's LLM agents. Code first; formal reasoning and multimodal senses later.</span>
         <span class="meta"><span class="estatus research">In research</span></span>
       </div>
-      <div class="eprodrow">
+      <div class="eprodrow" data-motion="reveal">
         <span class="nm">Colony</span>
         <span class="de">A federated compute mesh — volunteers contribute GPU cycles for training and inference on custom models; parallel gradients, async averaging, API credits for participation.</span>
         <span class="meta"><span class="estatus preview">Preview</span></span>
       </div>
     </div>
-    <p class="ework-pricing rv">Orrery is premium from first start. Pro $40, Max $100, and Ultra $200 per month unlock agent runs, hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus operations, and managed cloud features. <a class="elink" href="Orrery.html#pricing">See pricing -></a></p>
+    <p class="ework-pricing rv">Orrery is a paid product. Pro $40, Max $100, and Ultra $200 per month unlock agent runs, hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus operations, and managed cloud features. <a class="elink" href="Orrery.html#pricing">See pricing -></a></p>
   </div>
 </section>
 
@@ -210,23 +295,23 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">03 — Approach</span>
-      <h2>Four commitments that shape everything we build.</h2>
+      <h2>Four commitments. No mythology.</h2>
     </div>
-    <div class="eprin eprin-4 rv">
-      <div>
-        <h4>Temporary by default</h4>
+    <div class="eprin eprin-4">
+      <div data-motion="reveal">
+        <h3>Temporary by default</h3>
         <p>Agents appear for a task and dissolve when it's done. No sprawl, no residue, no machinery left running — the namesake we build toward.</p>
       </div>
-      <div>
-        <h4>LLMs now, layers later</h4>
+      <div data-motion="reveal">
+        <h3>LLMs now, layers later</h3>
         <p>Language models write the code and drive the editor today. Research explores routing, evaluation, and memory layers that sit alongside them — judging runs, reducing waste, and making results easier to review.</p>
       </div>
-      <div>
-        <h4>Local and distributed</h4>
-        <p>Capable on your own hardware by default. When scale is needed, a volunteer mesh spreads the load — many machines acting as one, without surrendering your work to a cloud monopoly.</p>
+      <div data-motion="reveal">
+        <h3>Scoped and distributed</h3>
+        <p>Keep workspace boundaries explicit, send only the context a route needs, and make every handoff reviewable. Longer-term work explores how distributed compute can widen access without obscuring provenance.</p>
       </div>
-      <div>
-        <h4>Earned, not assumed</h4>
+      <div data-motion="reveal">
+        <h3>Earned, not assumed</h3>
         <p>More compute only when it pays off, with evidence captured before work is trusted. Emergence is measured, not promised.</p>
       </div>
     </div>
@@ -239,7 +324,7 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">On the record</span>
-      <h2>A commitment we're making before we've earned a cent — so you can <em>hold us to it.</em></h2>
+      <h2>A number you can hold us to.</h2>
     </div>
     <div class="epledge rv">
       <div class="epledge-fig">
@@ -247,10 +332,10 @@
         <div class="figsub">a floor, not a ceiling</div>
       </div>
       <div>
-        <p>A lot of AI companies say beautiful things about "benefiting humanity." We'd rather put a number on it.</p>
+        <p>Promises are cheap. A public number is easier to audit.</p>
         <p>It won't happen overnight — we're not there yet. But the commitment is clear: over time, at least 10% of Ephemerent's profits go back — toward open research and real problems like disease, poverty, food and water security, and energy access; toward the community; and toward research on policies to prevent large-scale job loss.</p>
         <p>That 10% is a floor, not a ceiling. It'll take time to get there — but we will.</p>
-        <p>The number is just one piece. The real goal: integrate AI so it lifts everyone — not just the people who own it. Amplify the upside. Confront the downsides head-on. Build the version of this future where everyone shares in it.</p>
+        <p>The number is one part. The actual work is to widen access to AI's gains, confront displacement and concentration directly, and publish where our own work falls short.</p>
         <p class="epledge-close">That's the work. That's Ephemerent.</p>
         <div class="sig">— Ephemerent · on the record · 2026</div>
       </div>
@@ -259,6 +344,8 @@
 </section>
 
 <!-- FOOTER -->
+</main>
+
 <footer class="efoot" id="contact">
   <div class="ewrap">
     <div class="efoot-grid">
@@ -272,7 +359,7 @@
         </div>
       </div>
       <div>
-        <h5>Lab</h5>
+        <h2 class="efoot-heading">Lab</h2>
         <ul>
           <li><a href="#research">Research</a></li>
           <li><a href="research.html">Research agenda →</a></li>
@@ -283,7 +370,7 @@
         </ul>
       </div>
       <div>
-        <h5>Work</h5>
+        <h2 class="efoot-heading">Work</h2>
         <ul>
           <li><a href="Orrery.html">Orrery</a></li>
           <li><a href="#work">Seed</a></li>
@@ -300,40 +387,10 @@
   </div>
 </footer>
 
-<script src="assets/ephemerent.js"></script>
+<script src="assets/ephemerent.js?v=20260802i"></script>
 <script>
-  const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
-  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
-  addEventListener('load', () => mountEmergence(document.getElementById('fig'), { density: 6500, link: 88 }));
+  addEventListener('load', () => mountEmergence(document.getElementById('fig')));
 </script>
 
-<style>
-.ehero h1 { max-width: 28ch; }
-.ehero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
-.esec-head h2 { max-width: 46ch; }
-.efoot .big { max-width: 22ch; }
-.ethesis { font-size: 17px; color: var(--ink-2); line-height: 1.66; max-width: 68ch; margin-bottom: 40px; }
-.efunding { margin-top: 36px; font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 58ch; }
-.estatus.preview { color: var(--accent-2); border: 1px solid rgba(177,84,45,0.45); }
-.eprin-4 { grid-template-columns: repeat(2, 1fr); }
-.eprin-4 > div { border-right: 0; margin-right: 0; padding: 34px 28px 34px 0; border-bottom: 1px solid var(--rule); }
-.eprin-4 > div:nth-child(odd) { padding-right: 28px; margin-right: 28px; border-right: 1px solid var(--rule); }
-.eprin-4 > div:nth-last-child(-n+2) { border-bottom: 0; }
-@media (max-width: 760px){
-  .eprin-4 { grid-template-columns: 1fr; }
-  .eprin-4 > div { border-right: 0 !important; margin-right: 0 !important; padding-right: 0 !important; }
-  .eprin-4 > div:last-child { border-bottom: 0; }
-}
-/* on-the-record pledge */
-.epledge { background: var(--card); border: 1px solid var(--rule); border-top: 2px solid var(--accent); border-radius: 4px; padding: 48px; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: start; }
-.epledge-fig { text-align: center; }
-.epledge .fig { font-family: var(--serif); font-size: clamp(56px, 9vw, 104px); line-height: 0.9; letter-spacing: -0.03em; color: var(--accent); }
-.epledge .figsub { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
-.epledge p { font-size: 18px; color: var(--ink-2); line-height: 1.66; max-width: 62ch; }
-.epledge p + p { margin-top: 16px; }
-.epledge-close { font-family: var(--serif); font-size: 20px; color: var(--ink); letter-spacing: -0.01em; margin-top: 22px !important; }
-.epledge .sig { margin-top: 24px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--faint); }
-@media (max-width: 680px){ .epledge { grid-template-columns: 1fr; gap: 22px; padding: 32px 24px; } .epledge-fig { text-align: left; } }
-</style>
 </body>
 </html>

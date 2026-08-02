@@ -271,9 +271,9 @@ export function bindCloudAuthForm(root = document) {
 
   if (!cloudConfigured()) {
     root.getElementById('cloud-auth-panel')?.classList.add('hidden');
-    root.getElementById('cloud-auth-primary')?.classList.add('hidden');
-    root.getElementById('cloud-local-divider')?.classList.add('hidden');
-    root.getElementById('cloud-auth-setup')?.classList.add('hidden');
+    root.getElementById('cloud-auth-primary')?.classList.remove('hidden');
+    root.getElementById('cloud-local-divider')?.classList.remove('hidden');
+    root.getElementById('cloud-auth-setup')?.classList.remove('hidden');
     return;
   }
 
