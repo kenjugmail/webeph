@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="assets/components.css?v=20260801">
 <link rel="stylesheet" href="assets/auth.css?v=20260801">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<link rel="stylesheet" href="assets/polish.css?v=20260802e">
 <script src="assets/motion.js?v=20260802c" defer></script>
 <script type="application/ld+json">
 {
@@ -167,7 +167,7 @@
       <p class="lead">The live bench above separates what was rendered from what was measured. A CPU frame confirms that the raster worker produced pixels; topology and boundary checks answer different questions. Vellum keeps those claims distinct so a polished image cannot stand in for proof.</p>
     </div>
     <div class="evidence-document reveal d1">
-      <div class="evidence-document-head"><span>Evidence model</span><span>System document · not product UI</span></div>
+      <div class="evidence-document-head"><span>Evidence model</span><span>Receipt fields · measured at runtime</span></div>
       <div class="evidence-row evidence-row-head"><span>Artifact</span><span>Supports</span><span>Does not establish alone</span></div>
       <div class="evidence-row"><b>CPU frame</b><span>The raster worker returned a view of the supplied mesh.</span><span>Watertightness, manifold topology, or tolerance.</span></div>
       <div class="evidence-row"><b>Topology result</b><span>Measured open and non-manifold edge counts.</span><span>Visual quality or fitness for a particular use.</span></div>
@@ -187,7 +187,7 @@
       <p class="lead">Vellum brings authoring, runtime checks, and proof into one spatial system. The diagram below describes that contract; it is deliberately not a fabricated editor screenshot. The live scene and worker output above are the page's visual and measured artifacts.</p>
     </div>
     <div class="system-anatomy reveal d1">
-      <div class="system-anatomy-head"><span>System anatomy</span><span>Diagram · not product UI</span></div>
+      <div class="system-anatomy-head"><span>System anatomy</span><span>Three layers · one artifact boundary</span></div>
       <section><span class="mono">01 / author</span><h3>Build the spatial artifact</h3><p>Scene graph, entities, geometry, materials, and the task target share one project boundary.</p><ul><li>Scene and asset structure</li><li>Format-aware editing</li><li>Explicit target constraints</li></ul></section>
       <section><span class="mono">02 / run</span><h3>Exercise the runtime</h3><p>Configured physics, collision, path, and scene checks run against the artifact rather than a marketing render.</p><ul><li>CPU spatial kernel</li><li>Headless execution</li><li>Interruptible checks</li></ul></section>
       <section><span class="mono">03 / prove</span><h3>Return a receipt</h3><p>Measured outputs stay attached to their method and input, leaving the acceptance decision with you.</p><ul><li>Assertions and measurements</li><li>Worker-produced frame</li><li>Pass, fail, or not run</li></ul></section>
@@ -255,18 +255,18 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Built for trust</div>
-      <h2 class="display">Nothing ships on a vibe.</h2>
+      <h2 class="display">Every result has a receipt.</h2>
       <p class="lead">Vellum keeps a running record of every assertion, measurement and render as it works — so you can see why a result was kept, what each candidate scored, and what it would do in your engine, without rerunning anything on a GPU.</p>
     </div>
     <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h3>Proven before it's kept</h3><p>Every result clears geometry, tolerance, collision and a headless render before it counts.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h3>Reads your assets</h3><p>Points it at your scene or part and it understands the geometry — meshes, BREP, point clouds.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h3>Targets, not vibes</h3><p>Give it a number — mass, clearance, frame budget — and it proves the work hits it.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h3>No GPU required</h3><p>The whole verifier runs on CPU, so it works the same on a laptop or a headless CI box.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h3>Fits your pipeline</h3><p>Reads and writes glTF, USD, STEP and URDF — drop it between the tools you already use.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h3>Deterministic proof</h3><p>The same input gives the same verdict — every run, every machine, every time.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h3>Best-of-N, judged</h3><p>Attempts a task several ways in isolation and keeps the one that actually passes.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h3>Headless by default</h3><p>CPU proof runs the same on a laptop, a CI runner, or a render farm.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Proven before it's kept</h3><p>Every result clears geometry, tolerance, collision and a headless render before it counts.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Reads your assets</h3><p>Points it at your scene or part and it understands the geometry — meshes, BREP, point clouds.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Explicit targets</h3><p>Give it a number — mass, clearance, frame budget — and it proves the work hits it.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">04</div><h3>No GPU required</h3><p>The whole verifier runs on CPU, so it works the same on a laptop or a headless CI box.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">05</div><h3>Fits your pipeline</h3><p>Reads and writes glTF, USD, STEP and URDF — drop it between the tools you already use.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">06</div><h3>Deterministic proof</h3><p>The same input gives the same verdict — every run, every machine, every time.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">07</div><h3>Best-of-N, judged</h3><p>Attempts a task several ways in isolation and keeps the one that actually passes.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">08</div><h3>Headless by default</h3><p>CPU proof runs the same on a laptop, a CI runner, or a render farm.</p></div>
     </div>
   </div>
 </section>
@@ -422,8 +422,8 @@
   }
 </script>
 <script src="assets/vellum-3d.js?v=20260801"></script>
-<script src="assets/vellum-hero.js?v=20260801"></script>
-<script src="assets/vellum-proof.js?v=20260801"></script>
+<script src="assets/vellum-hero.js?v=20260802e"></script>
+<script src="assets/vellum-proof.js?v=20260802e"></script>
 <script>
   document.addEventListener('vellum:proof-measured', (event) => {
     const proof = event.detail || {};
@@ -560,7 +560,7 @@
 .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 980px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .cap-grid { grid-template-columns: 1fr; } }
-.cap-ic { font-size: 22px; color: var(--brass-lt); margin-bottom: 14px; }
+.cap-ic { font: 500 11px/1 var(--mono); letter-spacing: .14em; color: var(--signal); margin-bottom: 18px; }
 .cap-grid h3 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
 .cap-grid p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 

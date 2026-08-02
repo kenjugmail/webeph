@@ -1,5 +1,5 @@
 /**
- * Public site config. Orrery is premium from first start: visitors can preview setup,
+ * Public site config. Orrery is paid from first start: visitors can preview setup,
  * while real agent work requires a trial or subscription.
  *
  * SAFE TO COMMIT: only publishable browser keys belong here:

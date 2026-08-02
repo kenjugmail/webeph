@@ -342,7 +342,6 @@
       ctx.save();
       ctx.strokeStyle = `rgba(${COL.hot},${running ? 0.7 : 0.32})`;
       ctx.lineWidth = 1;
-      ctx.shadowColor = `rgba(${COL.hot},0.8)`; ctx.shadowBlur = 12;
       ctx.beginPath(); ctx.moveTo(cx - R * 1.9, scanY); ctx.lineTo(cx + R * 1.9, scanY); ctx.stroke();
       ctx.restore();
     }
@@ -374,9 +373,7 @@
         const col = hot > 0.04 && !faint ? COL.hot : COL.edge;
         ctx.strokeStyle = `rgba(${col},${Math.min(1, baseA * depthA * (1 + hot * 0.7))})`;
         ctx.lineWidth = hot > 0.04 && !faint ? 1.4 : 1;
-        if (hot > 0.3 && !faint) { ctx.shadowColor = `rgba(${COL.hot},0.6)`; ctx.shadowBlur = 7; }
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        ctx.shadowBlur = 0;
       }
     }
 
@@ -387,9 +384,7 @@
         const hot = hotness(p.y, scanY, band);
         const r = (1.3 + dep * 1.6) * (1 + hot * 0.5);
         ctx.fillStyle = hot > 0.04 ? `rgba(${COL.hot},${0.6 + dep * 0.4})` : `rgba(${COL.node},${0.4 + dep * 0.5})`;
-        if (hot > 0.3) { ctx.shadowColor = `rgba(${COL.hot},0.8)`; ctx.shadowBlur = 9; }
         ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.2832); ctx.fill();
-        ctx.shadowBlur = 0;
       }
     }
 

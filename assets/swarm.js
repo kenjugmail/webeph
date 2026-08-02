@@ -104,7 +104,7 @@
         </div>
 
         <div class="orrery-story-foot">
-          <span>System diagram · no simulated output</span>
+          <span>Run sequence · no simulated output</span>
           <span data-orrery-caption>Workspace · route · approval boundary</span>
         </div>
       </div>

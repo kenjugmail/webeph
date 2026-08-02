@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="assets/components.css?v=20260801">
 <link rel="stylesheet" href="assets/auth.css?v=20260801">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260802d">
+<link rel="stylesheet" href="assets/polish.css?v=20260802e">
 <link rel="stylesheet" href="assets/orrery-story.css?v=20260802d">
 <script src="assets/motion.js?v=20260802c" defer></script>
 <script src="assets/branch-field.js?v=20260802c" defer></script>
@@ -108,7 +108,7 @@
     <figure class="hero-run-diagram reveal in d2" aria-labelledby="hero-run-title">
       <figcaption class="hero-run-head">
         <span id="hero-run-title">A supervised run</span>
-        <span>System diagram · not product UI</span>
+        <span>Run sequence · four checkpoints</span>
       </figcaption>
       <div class="hero-run-body">
         <article class="hero-run-node hero-run-goal">
@@ -189,10 +189,10 @@
       <p class="lead">The default flow is deliberately small: open a workspace, choose a route, send a prompt, watch the visible progress stream, then inspect summary, changed-file metadata, usage, and safety receipts. Deeper controls live in Nexus Settings.</p>
     </div>
     <div class="cap-grid cap-grid-4">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⌘</div><h3>Open folder</h3><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◉</div><h3>Pick a route</h3><p>Use subscription-hosted DeepSeek API, Doubleword, or Arbiter routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">▷</div><h3>Run an agent</h3><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
-      <div class="card card-pad card-hover reveal d3"><div class="cap-ic">◇</div><h3>Review receipts</h3><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Open folder</h3><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Pick a route</h3><p>Use subscription-hosted DeepSeek API, Doubleword, or Arbiter routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Run an agent</h3><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
+      <div class="card card-pad card-hover reveal d3"><div class="cap-ic">04</div><h3>Review receipts</h3><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
     </div>
   </div>
 </section>
@@ -202,14 +202,14 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Safety and beta boundaries</div>
-      <h2 class="display">Helpful automation, not blind trust.</h2>
+      <h2 class="display">Automation with a review boundary.</h2>
       <p class="lead">Orrery can make mistakes, and generated code may be insecure, incomplete, or unsuitable for your project. The product is designed to keep work reviewable: scope checks, permission gates, model-route labels, proof summaries, and usage receipts stay visible where supported.</p>
     </div>
     <div class="chips reveal d2">
-      <div class="chip"><span class="chip-ic" style="color:var(--violet-lt)">▦</span><b>Review before shipping</b><span>You are responsible for accepting, running, and deploying generated code.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--teal-lt)">◈</span><b>No guaranteed outcome</b><span>Performance depends on task, context, models, tools, and provider availability.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--brass-lt)">⬡</span><b>Keep backups</b><span>Use source control and inspect changes before relying on them.</span></div>
-      <div class="chip"><span class="chip-ic" style="color:var(--green)">◐</span><b>Cloud varies</b><span>Beta routes, quotas, latency, and providers may change or pause.</span></div>
+      <div class="chip"><span class="chip-ic" aria-hidden="true">01</span><b>Review before shipping</b><span>You are responsible for accepting, running, and deploying generated code.</span></div>
+      <div class="chip"><span class="chip-ic" aria-hidden="true">02</span><b>No guaranteed outcome</b><span>Performance depends on task, context, models, tools, and provider availability.</span></div>
+      <div class="chip"><span class="chip-ic" aria-hidden="true">03</span><b>Keep backups</b><span>Use source control and inspect changes before relying on them.</span></div>
+      <div class="chip"><span class="chip-ic" aria-hidden="true">04</span><b>Cloud varies</b><span>Beta routes, quotas, latency, and providers may change or pause.</span></div>
     </div>
   </div>
 </section>
@@ -220,7 +220,7 @@
     <div class="models-grid">
       <div class="reveal">
         <div class="eyebrow">Model-agnostic</div>
-        <h2 class="display" style="margin:18px 0 22px;">Premium from first start.<br>Cloud makes it scale.</h2>
+        <h2 class="display" style="margin:18px 0 22px;">Preview the setup.<br>Subscribe for hosted runs.</h2>
         <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through Orrery Cloud. Pro, Max, and Ultra add hosted DeepSeek API, Doubleword, and Arbiter credits plus managed connector automation.</p>
         <div class="prov-table">
           <div class="prov-row"><span>DeepSeek API</span><span class="mono">subscription hosted</span><span class="muted">8M / 18M / 35M credits</span></div>
@@ -232,7 +232,7 @@
       </div>
       <div class="reveal d1" id="develop">
         <div class="proof-contract">
-          <div class="proof-contract-head"><span>Run contract</span><span>System document · not product UI</span></div>
+          <div class="proof-contract-head"><span>Run contract</span><span>Receipt fields · stated before execution</span></div>
           <div><span>Scope</span><b>Workspace, route, permissions, and review boundary are named before work begins.</b></div>
           <div><span>Activity</span><b>File and tool events remain visible while a connected agent is working.</b></div>
           <div><span>Evidence</span><b>Tests, diagnostics, usage, and boundary notes stay distinct from generated prose.</b></div>
@@ -253,17 +253,17 @@
       <p class="lead">Orrery shows plans, tool activity, test output, review receipts, and usage data in one place. The log helps you audit the work, but it is not a substitute for your own review and backups.</p>
     </div>
     <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⟁</div><h3>Safety check first</h3><p>Launches can record workspace scope, route state, permissions, and basic setup risk before work starts.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◇</div><h3>Searches your codebase</h3><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">⌖</div><h3>Scoped memory</h3><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">◈</div><h3>Connected agents</h3><p>Register local agents and connector-backed agents, then keep daily controls in Nexus and deeper setup in Settings.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⊞</div><h3>Tool-aware runs</h3><p>Use MCP and local tools where configured, while keeping raw source and keys out of cloud metadata by default.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◷</div><h3>Measure it over time</h3><p>Track proof quality, usage, failures, and route behavior as tasks and models change.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⇆</div><h3>Works with other editors</h3><p>Plugs into other editors and agents through open, standard protocols.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">◐</div><h3>Set the pace</h3><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">◉</div><h3>See usage</h3><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">⊖</div><h3>Cost-aware routing</h3><p>Budget presets and route labels help you choose the right hosted-credit path for the job.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">⌁</div><h3>Nexus rooms</h3><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Safety check first</h3><p>Launches can record workspace scope, route state, permissions, and basic setup risk before work starts.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Searches your codebase</h3><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Scoped memory</h3><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">04</div><h3>Connected agents</h3><p>Register local agents and connector-backed agents, then keep daily controls in Nexus and deeper setup in Settings.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">05</div><h3>Tool-aware runs</h3><p>Use MCP and local tools where configured, while keeping raw source and keys out of cloud metadata by default.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">06</div><h3>Measure it over time</h3><p>Track proof quality, usage, failures, and route behavior as tasks and models change.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">07</div><h3>Works with other editors</h3><p>Plugs into other editors and agents through open, standard protocols.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">08</div><h3>Set the pace</h3><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">09</div><h3>See usage</h3><p>Runs can show model route, usage, and cost receipts so paid credits are easier to track.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">10</div><h3>Cost-aware routing</h3><p>Budget presets and route labels help you choose the right hosted-credit path for the job.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">11</div><h3>Nexus rooms</h3><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
     </div>
   </div>
 </section>
@@ -332,7 +332,7 @@
           <b>$40</b>
           <small>per month</small>
         </div>
-        <p>Premium individual agent work with hosted credits and Nexus operations.</p>
+        <p>Paid individual agent work with hosted credits and Nexus operations.</p>
         <ul>
           <li>DeepSeek API - 8M credits/mo</li>
           <li>Doubleword - 8M credits/mo</li>
@@ -455,7 +455,7 @@
     if (cta && url) cta.href = url;
   }
 </script>
-<script src="assets/swarm.js?v=20260802d"></script>
+<script src="assets/swarm.js?v=20260802e"></script>
 <script>
   addEventListener('load', () => mountSwarm(document.getElementById('swarm')), { once: true });
 </script>
@@ -502,7 +502,7 @@
 
 .chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
 .chip { border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; background: rgba(255,255,255,0.02); }
-.chip-ic { font-size: 18px; }
+.chip-ic { font: 500 10px/1 var(--mono); letter-spacing: .14em; color: var(--signal); }
 .chip b { font-family: var(--display); font-size: 15px; display: block; margin: 8px 0 4px; }
 .chip span { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 @media (max-width: 760px){ .chips { grid-template-columns: 1fr 1fr; } }
@@ -548,7 +548,7 @@
 .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 980px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .cap-grid { grid-template-columns: 1fr; } }
-.cap-ic { font-size: 22px; color: var(--brass-lt); margin-bottom: 14px; }
+.cap-ic { font: 500 11px/1 var(--mono); letter-spacing: .14em; color: var(--signal); margin-bottom: 18px; }
 .cap-grid h3 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
 .cap-grid p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 

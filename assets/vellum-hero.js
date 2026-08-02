@@ -119,14 +119,11 @@
 
       // the scan line itself
       ctx.save();
-      const grad = ctx.createLinearGradient(0, scanY - 1, 0, scanY + 1);
       ctx.strokeStyle = `rgba(${COL.hot},0.55)`;
       ctx.lineWidth = 1;
-      ctx.shadowColor = `rgba(${COL.hot},0.8)`; ctx.shadowBlur = 14;
       const lx = cx - R * 2.7, rx = cx + R * 2.7;
       ctx.beginPath(); ctx.moveTo(lx + mx, scanY); ctx.lineTo(rx + mx, scanY); ctx.stroke();
       // ticks
-      ctx.shadowBlur = 0;
       ctx.fillStyle = `rgba(${COL.hot},0.85)`;
       ctx.font = '500 10px "IBM Plex Mono", monospace';
       ctx.textAlign = 'left';
@@ -167,9 +164,7 @@
         const al = (isSat ? baseA * 0.7 : baseA) * depthA * (1 + hot * 0.6);
         ctx.strokeStyle = `rgba(${col},${Math.min(1, al)})`;
         ctx.lineWidth = hot > 0.04 ? 1.4 : 1;
-        if (hot > 0.3) { ctx.shadowColor = `rgba(${COL.hot},0.6)`; ctx.shadowBlur = 8; }
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        ctx.shadowBlur = 0;
       }
     }
 
@@ -180,9 +175,7 @@
         const hot = hotness(p.y, scanY, band);
         const r = (1.6 + dep * 1.8) * (1 + hot * 0.6);
         ctx.fillStyle = hot > 0.04 ? `rgba(${COL.hot},${0.7 + dep * 0.3})` : `rgba(${COL.node},${0.45 + dep * 0.5})`;
-        if (hot > 0.3) { ctx.shadowColor = `rgba(${COL.hot},0.8)`; ctx.shadowBlur = 10; }
         ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.2832); ctx.fill();
-        ctx.shadowBlur = 0;
       });
     }
 
