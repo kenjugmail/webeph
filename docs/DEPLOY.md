@@ -77,8 +77,8 @@ No public no-cost local tier is advertised. Pro is `$40/month` and includes host
 
 Before taking payments:
 
-1. Create Stripe Payment Links, Checkout Sessions, or equivalent merchant checkout for Pro/Max/Ultra monthly plans.
-2. Paste the public checkout URLs into `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` in `assets/site-config.js`.
+1. Create Stripe Payment Links, Checkout Sessions, or equivalent merchant checkout for Pro/Max/Ultra monthly plans and for organization Business ($500/mo) / Enterprise ($1,000/mo) under the `kt@ephemerent.com` Stripe account.
+2. Paste the public checkout URLs into `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, `ULTRA_CHECKOUT_URL`, `BUSINESS_CHECKOUT_URL`, and `ENTERPRISE_CHECKOUT_URL` in `assets/site-config.js`.
 3. Deploy a Stripe webhook or Supabase Edge Function that listens for checkout, renewal, cancellation, and failed-payment events.
 4. Have the webhook update `profiles.plan`, `profiles.subscription_status`, credit counters, and `billing_events`. Cloud auth identities should have no cloud entitlements until this happens.
 

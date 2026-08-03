@@ -37,6 +37,8 @@ const PRICE_TO_PLAN = {
   // 'price_xxxPro':   'pro',
   // 'price_xxxMax':   'max',
   // 'price_xxxUltra': 'ultra',
+  // 'price_xxxBusiness': 'business',
+  // 'price_xxxEnterprise': 'enterprise',
 };
 
 async function rawBody(req) {

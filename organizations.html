@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Orrery Business and Enterprise provide governed agent operations, shared workspaces, Slack workflows, pooled usage, and audit receipts for engineering organizations.">
+<meta name="description" content="Orrery Business and Enterprise provide governed agent operations, shared workspaces, Slack workflows, pooled credits, and audit receipts for engineering organizations.">
 <title>Orrery for Organizations</title>
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/components.css">
@@ -18,8 +18,8 @@
   <section class="org-hero wrap">
     <div class="eyebrow">Orrery for organizations</div>
     <h1 class="display">Governed agent work your engineering team can inspect.</h1>
-    <p class="lead">Coordinate shared workspaces, Slack requests, approvals, pooled provider usage, and proof receipts from Nexus. Organization controls are additive to personal Orrery plans.</p>
-    <div class="org-trust mono"><span>Hard usage stops</span><span>No automatic overage</span><span>Explicit Slack context</span><span>Metadata audit by default</span></div>
+    <p class="lead">Coordinate shared workspaces, Slack requests, approvals, pooled hosted credits, and proof receipts from Nexus. Organization controls are additive to personal Orrery plans. Hosted routes use prompt caching and token-efficient run context so included credit pools — and estimated API usage value — stay large.</p>
+    <div class="org-trust mono"><span>Hard credit stops</span><span>No automatic overage</span><span>Explicit Slack context</span><span>Metadata audit by default</span></div>
   </section>
 
   <section class="section"><div class="wrap">
@@ -27,20 +27,44 @@
       <article class="price-card org-plan">
         <div class="price-top"><span class="mono">Business</span><b>$500</b><small>per organization / month</small></div>
         <p>For small engineering teams adopting governed agent workflows.</p>
-        <ul><li>10 included seats</li><li>5 shared workspaces</li><li>$300 monthly provider-cost pool</li><li>1 Slack workspace and 10 bound channels</li><li>4 concurrent cloud runs</li><li>90-day metadata audit retention</li></ul>
+        <ul>
+          <li>10 included seats</li>
+          <li>5 shared workspaces</li>
+          <li>5B pooled credits / org / month</li>
+          <li>Est. ~$25,000 API usage value / mo</li>
+          <li>1 Slack workspace and 10 bound channels</li>
+          <li>4 concurrent cloud runs</li>
+          <li>90-day metadata audit retention</li>
+        </ul>
         <label class="org-label" for="organization-name">Organization name</label>
         <input class="auth-input" id="organization-name" maxlength="120" placeholder="Acme Engineering" autocomplete="organization">
-        <button class="btn btn-primary" id="business-checkout" type="button">Sign in to start Business</button>
-        <p class="pricing-fineprint">Business may be purchased online or with onboarding assistance. Availability remains subject to beta capacity and the Terms.</p>
+        <div class="org-cta-row">
+          <button class="btn btn-primary" id="business-checkout" type="button">Sign in to start Business</button>
+          <a class="btn btn-ghost" href="mailto:hello@ephemerent.com?subject=Orrery%20Business%20sales">Contact sales</a>
+        </div>
+        <p class="pricing-fineprint">Need onboarding? Email for setup help — Slack bind, seat invites, and first workspace policy. Availability remains subject to beta capacity and the Terms.</p>
       </article>
-      <article class="price-card org-plan org-plan-enterprise">
+      <article class="price-card org-plan">
         <div class="price-top"><span class="mono">Enterprise</span><b>$1,000</b><small>per organization / month</small></div>
         <p>For teams needing broader controls, onboarding, and identity administration.</p>
-        <ul><li>25 included seats</li><li>25 shared workspaces</li><li>$600 monthly provider-cost pool</li><li>Slack Enterprise Grid or up to 5 workspaces</li><li>100 bound channels and 10 concurrent cloud runs</li><li>365-day metadata audit retention</li><li>SSO/SCIM onboarding subject to provider and contract readiness</li></ul>
-        <a class="btn btn-primary" href="mailto:hello@ephemerent.com?subject=Orrery%20Enterprise%20evaluation">Contact sales</a>
-        <p class="pricing-fineprint">Enterprise is sales-led. Security, support, retention, identity, and regulated-industry terms are agreed in writing; no certification or BAA is implied by this page.</p>
+        <ul>
+          <li>25 included seats</li>
+          <li>25 shared workspaces</li>
+          <li>15B pooled credits / org / month</li>
+          <li>Est. ~$75,000 API usage value / mo</li>
+          <li>Slack Enterprise Grid or up to 5 workspaces</li>
+          <li>100 bound channels and 10 concurrent cloud runs</li>
+          <li>365-day metadata audit retention</li>
+          <li>SSO/SCIM onboarding subject to provider and contract readiness</li>
+        </ul>
+        <div class="org-cta-row">
+          <button class="btn btn-primary" id="enterprise-checkout" type="button">Sign in to start Enterprise</button>
+          <a class="btn btn-ghost" href="mailto:hello@ephemerent.com?subject=Orrery%20Enterprise%20evaluation">Contact sales</a>
+        </div>
+        <p class="pricing-fineprint">Self-serve Stripe or sales-led. Ask for setup help on identity, retention, support, and regulated-industry terms — agreed in writing; no certification or BAA is implied by this page.</p>
       </article>
     </div>
+    <p class="org-efficiency mono">Meters show credits/tokens and estimated list-rate API usage value under prompt caching and token-efficient context — not provider cost or COGS.</p>
   </div></section>
 
   <section class="section org-detail"><div class="wrap org-detail-grid">
@@ -48,21 +72,22 @@
     <div class="org-feature-grid">
       <article><h3>Slack to verified work</h3><p>Explicit slash commands, mentions, shortcuts, approvals, job state, and redacted proof references. Source and raw diffs stay in Nexus.</p></article>
       <article><h3>Scoped agent teams</h3><p>Organization, workspace, room, route, agent, and connector policies can only become stricter at child scopes.</p></article>
-      <article><h3>Pooled usage</h3><p>Worst-case cost is reserved before dispatch, actual use is settled afterward, and failures or cancellations are refunded.</p></article>
+      <article><h3>Pooled credits</h3><p>Worst-case credit spend is reserved before dispatch, actual use is settled afterward, and failures or cancellations are refunded to the pool.</p></article>
       <article><h3>Company Graph</h3><p>Selected repositories, memberships, decisions, runs, artifacts, and proofs become provenance-backed context. No silent company-system scan.</p></article>
     </div>
   </div></section>
 
   <section class="section"><div class="wrap org-billing-note">
     <h2>Predictable compute, stopped at the limit.</h2>
-    <p>Included provider pools do not roll over and are not cash. Automatic overage is disabled. Owners may buy prepaid packs for the current billing period: $150 purchase adds $100 allowance, $375 adds $250, and $750 adds $500. Provider availability, capacity, and beta features may change.</p>
+    <p>Included credit pools do not roll over and are not cash. Automatic overage is disabled. Owners may buy prepaid credit packs for the current billing period: <b>+1B</b>, <b>+3B</b>, or <b>+8B</b> credits. Provider availability, capacity, and beta features may change.</p>
   </div></section>
 
   <section class="section"><div class="wrap auth-card org-auth-card">
     <div id="cloud-auth-setup" class="hidden"><p class="auth-msg">Cloud sign-in is not configured.</p></div>
-    <div id="cloud-auth-panel"><h2>Sign in to create Business</h2><div class="auth-stack"><button class="btn btn-ghost" id="cloud-google" type="button">Continue with Google</button><button class="btn btn-ghost" id="cloud-github" type="button">Continue with GitHub</button></div><div class="auth-divider">or email</div><div class="auth-email-row"><input type="email" class="auth-input" id="cloud-email" placeholder="you@company.com" autocomplete="email"><button class="btn btn-primary" id="cloud-email-btn" type="button">Send link</button></div><p class="auth-msg" id="cloud-auth-msg"></p></div>
+    <div id="cloud-auth-panel"><h2>Sign in to create an organization</h2><div class="auth-stack"><button class="btn btn-ghost" id="cloud-google" type="button">Continue with Google</button><button class="btn btn-ghost" id="cloud-github" type="button">Continue with GitHub</button></div><div class="auth-divider">or email</div><div class="auth-email-row"><input type="email" class="auth-input" id="cloud-email" placeholder="you@company.com" autocomplete="email"><button class="btn btn-primary" id="cloud-email-btn" type="button">Send link</button></div><p class="auth-msg" id="cloud-auth-msg"></p></div>
     <div id="cloud-signed-in" class="hidden"><p>Signed in as <strong id="cloud-user-email">Account</strong>.</p><button class="btn btn-ghost" id="cloud-sign-out" type="button">Sign out</button></div>
     <p class="auth-msg" id="organization-checkout-status" aria-live="polite"></p>
+    <p class="pricing-fineprint">Setup help: <a href="mailto:hello@ephemerent.com?subject=Orrery%20organization%20setup%20help">hello@ephemerent.com</a> — onboarding call, Slack bind, seat invites.</p>
   </div></section>
 </main>
 
@@ -71,7 +96,30 @@
 <script type="module">import { mountNavAccount } from './assets/account.js'; mountNavAccount();</script>
 <script type="module" src="assets/organization.js"></script>
 <style>
-.organization-page{color:var(--ink)} .org-hero{padding-top:150px;padding-bottom:72px;max-width:1100px}.org-hero h1{max-width:900px;margin:18px 0}.org-hero .lead{max-width:780px}.org-trust{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}.org-trust span{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:999px;padding:7px 11px;font-size:11px;color:var(--ink-2)}.org-plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.org-plan{display:flex;flex-direction:column;gap:16px}.org-plan .btn{margin-top:auto}.org-plan-enterprise{border-color:rgba(124,92,255,.38);background:linear-gradient(145deg,rgba(124,92,255,.08),rgba(255,255,255,.025))}.org-label{font:11px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}.org-detail{border-block:1px solid var(--line);background:rgba(255,255,255,.018)}.org-detail-grid{display:grid;grid-template-columns:minmax(250px,.75fr) minmax(0,1.5fr);gap:54px}.org-detail h2{font-size:clamp(28px,4vw,48px);margin-top:12px}.org-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.org-feature-grid article{padding:20px;border:1px solid var(--line);border-radius:var(--r-md);background:rgba(255,255,255,.025)}.org-feature-grid h3{margin:0 0 8px;font-size:16px}.org-feature-grid p,.org-billing-note p{color:var(--muted);line-height:1.65}.org-billing-note{max-width:840px}.org-auth-card{margin-block:20px 90px;max-width:620px}.org-footer{justify-content:space-between;padding-block:24px}.org-footer a{color:var(--muted)}@media(max-width:800px){.org-plan-grid,.org-detail-grid,.org-feature-grid{grid-template-columns:1fr}.org-hero{padding-top:120px}.org-footer{align-items:flex-start;gap:14px;flex-direction:column}}
+.organization-page{color:var(--ink)}
+.org-hero{padding-top:150px;padding-bottom:72px;max-width:1100px}
+.org-hero h1{max-width:900px;margin:18px 0}
+.org-hero .lead{max-width:780px}
+.org-trust{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.org-trust span{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:4px;padding:7px 11px;font-size:11px;color:var(--ink-2)}
+.org-plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.org-plan{display:flex;flex-direction:column;gap:16px}
+.org-cta-row{display:grid;gap:10px;margin-top:auto}
+.org-cta-row .btn{width:100%;justify-content:center}
+.org-label{font:11px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.org-efficiency{margin-top:22px;max-width:72ch;font-size:12px;line-height:1.55;color:var(--faint)}
+.org-detail{border-block:1px solid var(--line);background:rgba(255,255,255,.018)}
+.org-detail-grid{display:grid;grid-template-columns:minmax(250px,.75fr) minmax(0,1.5fr);gap:54px}
+.org-detail h2{font-size:clamp(28px,4vw,48px);margin-top:12px}
+.org-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.org-feature-grid article{padding:20px;border:1px solid var(--line);border-radius:var(--r-md);background:rgba(255,255,255,.025)}
+.org-feature-grid h3{margin:0 0 8px;font-size:16px}
+.org-feature-grid p,.org-billing-note p{color:var(--muted);line-height:1.65}
+.org-billing-note{max-width:840px}
+.org-auth-card{margin-block:20px 90px;max-width:620px}
+.org-footer{justify-content:space-between;padding-block:24px}
+.org-footer a{color:var(--muted)}
+@media(max-width:800px){.org-plan-grid,.org-detail-grid,.org-feature-grid{grid-template-columns:1fr}.org-hero{padding-top:120px}.org-footer{align-items:flex-start;gap:14px;flex-direction:column}}
 </style>
 </body>
 </html>

@@ -1,5 +1,9 @@
 import { getCloudSession, mountCloudAccount } from './cloud-auth.js';
 
+function cfg() {
+  return window.ORRERY_CONFIG || {};
+}
+
 function message(text, ok = false) {
   const node = document.getElementById('organization-checkout-status');
   if (!node) return;
@@ -7,12 +11,21 @@ function message(text, ok = false) {
   node.className = `auth-msg ${ok ? 'ok' : 'err'}`;
 }
 
-async function startBusinessCheckout() {
-  const button = document.getElementById('business-checkout');
+function checkoutUrlForOrg(tier) {
+  const key = tier === 'enterprise' ? 'ENTERPRISE_CHECKOUT_URL' : 'BUSINESS_CHECKOUT_URL';
+  const url = cfg()[key];
+  if (typeof url === 'string' && url && !url.includes('YOUR_')) return url;
+  return null;
+}
+
+async function startOrgCheckout(tier) {
+  const buttonId = tier === 'enterprise' ? 'enterprise-checkout' : 'business-checkout';
+  const button = document.getElementById(buttonId);
   const nameInput = document.getElementById('organization-name');
+  const label = tier === 'enterprise' ? 'Enterprise' : 'Business';
   const session = await getCloudSession();
   if (!session?.access_token) {
-    message('Sign in below before creating an organization.');
+    message('Sign in below before starting organization checkout.');
     document.getElementById('cloud-auth-panel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
@@ -22,43 +35,44 @@ async function startBusinessCheckout() {
     nameInput?.focus();
     return;
   }
-  button.disabled = true;
-  button.textContent = 'Opening secure checkout...';
+  const checkoutUrl = checkoutUrlForOrg(tier);
+  if (!checkoutUrl) {
+    message(`${label} Stripe checkout is not configured yet. Contact sales for setup help.`);
+    return;
+  }
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Opening Stripe…';
+  }
   try {
-    const base = window.ORRERY_CONFIG?.CLOUD_AUTH_URL;
-    if (!base) throw new Error('Organization checkout is not configured.');
-    const response = await fetch(`${base}/functions/v1/organization-checkout`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${session.access_token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        tier: 'business',
-        organizationName,
-        successUrl: `${location.origin}/organizations.html?checkout=success`,
-        cancelUrl: `${location.origin}/organizations.html?checkout=cancelled`,
-      }),
-    });
-    const payload = await response.json();
-    if (!response.ok || typeof payload.checkoutUrl !== 'string') {
-      throw new Error(typeof payload.error === 'string' ? payload.error : 'Checkout could not be started.');
-    }
-    location.assign(payload.checkoutUrl);
+    const url = new URL(checkoutUrl);
+    url.searchParams.set('prefilled_email', session.user?.email || '');
+    url.searchParams.set('client_reference_id', organizationName.slice(0, 120));
+    location.assign(url.toString());
   } catch (error) {
     message(error instanceof Error ? error.message : 'Checkout could not be started.');
-    button.disabled = false;
-    button.textContent = 'Start Business';
+    if (button) {
+      button.disabled = false;
+      button.textContent = `Start ${label} with Stripe`;
+    }
   }
 }
 
 const session = await mountCloudAccount(document);
-const checkoutButton = document.getElementById('business-checkout');
-if (checkoutButton) {
-  checkoutButton.addEventListener('click', startBusinessCheckout);
-  checkoutButton.textContent = session ? 'Start Business' : 'Sign in to start Business';
+const businessBtn = document.getElementById('business-checkout');
+const enterpriseBtn = document.getElementById('enterprise-checkout');
+const signedInLabel = session ? 'Start Business with Stripe' : 'Sign in to start Business';
+const signedInEnterprise = session ? 'Start Enterprise with Stripe' : 'Sign in to start Enterprise';
+
+if (businessBtn) {
+  businessBtn.addEventListener('click', () => startOrgCheckout('business'));
+  businessBtn.textContent = signedInLabel;
+}
+if (enterpriseBtn) {
+  enterpriseBtn.addEventListener('click', () => startOrgCheckout('enterprise'));
+  enterpriseBtn.textContent = signedInEnterprise;
 }
 
 const checkoutState = new URLSearchParams(location.search).get('checkout');
-if (checkoutState === 'success') message('Checkout completed. Open Nexus to finish organization setup.', true);
+if (checkoutState === 'success') message('Checkout completed. Open Nexus to finish organization setup, or email hello@ephemerent.com for onboarding help.', true);
 if (checkoutState === 'cancelled') message('Checkout was cancelled. No organization subscription was started.');

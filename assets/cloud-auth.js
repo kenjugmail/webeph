@@ -5,10 +5,12 @@ import {
   PLAN_LABELS,
   PLAN_PRICES,
   BUNDLED_QUOTAS,
+  ESTIMATED_API_VALUE_USD,
   planFromCloudProfile,
   isPaidPlan,
   checkoutUrlForTier,
   formatTokens,
+  formatEstimatedApiValue,
 } from './accountPlan.js';
 
 let client = null;
@@ -76,21 +78,21 @@ export function getPlanCatalog() {
       price: '$40',
       cadence: 'per month',
       summary: 'Paid agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus + managed connector features'],
+      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 200M credits/month', 'Doubleword - 200M credits/month', 'Arbiter - 100M credits/month', 'Est. ~$2,400 API usage value/mo', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'DeepSeek API - 18M credits/month', 'Doubleword - 20M credits/month', 'Arbiter - 12M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'DeepSeek API - 600M credits/month', 'Doubleword - 650M credits/month', 'Arbiter - 400M credits/month', 'Est. ~$7,500 API usage value/mo', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'DeepSeek API - 35M credits/month', 'Doubleword - 35M credits/month', 'Arbiter - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'DeepSeek API - 1.5B credits/month', 'Doubleword - 1.5B credits/month', 'Arbiter - 1.2B credits/month', 'Est. ~$18,000 API usage value/mo', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -120,11 +122,6 @@ export async function getCloudProfile() {
   return data;
 }
 
-function moneyFromCents(cents) {
-  const amount = Number(cents || 0) / 100;
-  return amount.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-}
-
 function renderPlanSummary(root, profile) {
   const slot = root.getElementById('cloud-plan-summary');
   if (!slot) return;
@@ -132,11 +129,9 @@ function renderPlanSummary(root, profile) {
   const catalog = getPlanCatalog();
   const planKey = planFromCloudProfile(profile);
   const plan = catalog[planKey] || catalog.free;
-  const granted = Number(profile?.cloud_credit_granted_cents || 0);
-  const used = Number(profile?.cloud_credit_used_cents || 0);
-  const remaining = Math.max(granted - used, 0);
   const portal = cfg().BILLING_PORTAL_URL;
   const paid = isPaidPlan(planKey);
+  const estValue = ESTIMATED_API_VALUE_USD[planKey];
 
   // Static monthly allowances for hosted credits; the live usage meter lives in the IDE.
   const quotas = BUNDLED_QUOTAS[planKey];
@@ -167,6 +162,14 @@ function renderPlanSummary(root, profile) {
       : '<span class="plan-note">Billing portal not connected yet.</span>');
   }
 
+  const estRow = estValue
+    ? `<div class="account-plan-meter">
+      <span>Est. API usage value</span>
+      <b>~${formatEstimatedApiValue(estValue)} / mo</b>
+    </div>
+    <p class="plan-note">Estimated list-rate API usage with prompt caching and token-efficient run context. Meters show credits/tokens — not provider cost.</p>`
+    : '';
+
   slot.innerHTML = `
     <div class="account-plan-head">
       <div>
@@ -177,10 +180,7 @@ function renderPlanSummary(root, profile) {
     </div>
     <p>${plan.summary}</p>
     ${quotaRows}
-    <div class="account-plan-meter">
-      <span>Cloud credits</span>
-      <b>${moneyFromCents(remaining)} remaining</b>
-    </div>
+    ${estRow}
     <div class="account-plan-meter">
       <span>Nexus cloud features</span>
       <b>${paid ? 'Enabled' : 'Subscription required'}</b>

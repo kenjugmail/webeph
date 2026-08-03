@@ -45,9 +45,10 @@ window.ORRERY_CONFIG = {
       summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
       features: [
         'Google, GitHub, and email cloud sign-in',
-        'DeepSeek API - 8M credits/month',
-        'Doubleword - 8M credits/month',
-        'Arbiter - 4M credits/month',
+        'DeepSeek API - 200M credits/month',
+        'Doubleword - 200M credits/month',
+        'Arbiter - 100M credits/month',
+        'Est. ~$2,400 API usage value/mo (prompt-cached)',
         'Nexus agent operations',
         'Managed Discord/mobile automation',
       ],
@@ -62,6 +63,13 @@ window.ORRERY_CONFIG = {
   PRO_CHECKOUT_URL: 'https://buy.stripe.com/00w8wPcUPaAeg1bfMi3Je00',
   MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
   ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',
+  /**
+   * Organization Stripe Payment Links (create in Dashboard as kt@ephemerent.com):
+   * Business $500/mo, Enterprise $1000/mo. Paste buy.stripe.com URLs here.
+   * Success/cancel: https://ephemerent.com/organizations.html?checkout=success|cancelled
+   */
+  BUSINESS_CHECKOUT_URL: '',
+  ENTERPRISE_CHECKOUT_URL: '',
   BILLING_PORTAL_URL: '',
 
   /** Future - WebSocket relay for phone/remote. Leave empty until deployed. */

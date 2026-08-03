@@ -28,15 +28,30 @@ No public no-cost local tier is offered. Preview users can inspect setup; active
 
 There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
 
-| Tier | Price | DeepSeek API | Doubleword | Arbiter |
-|------|-------|----------------|-----------------|---------|
-| **Pro** | `$40/month` | 8M credits/mo | 8M credits/mo | 4M credits/mo |
-| **Max** | `$100/month` | 18M credits/mo | 20M credits/mo | 12M credits/mo |
-| **Ultra** | `$200/month` | 35M credits/mo | 35M credits/mo | 30M credits/mo |
+| Tier | Price | DeepSeek API | Doubleword | Arbiter | Est. API usage value |
+|------|-------|----------------|-----------------|---------|----------------------|
+| **Pro** | `$40/month` | 200M credits/mo | 200M credits/mo | 100M credits/mo | ~$2,400/mo |
+| **Max** | `$100/month` | 600M credits/mo | 650M credits/mo | 400M credits/mo | ~$7,500/mo |
+| **Ultra** | `$200/month` | 1.5B credits/mo | 1.5B credits/mo | 1.2B credits/mo | ~$18,000/mo |
 
-All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
+Public allotments assume prompt caching and token-efficient run context. Estimated API usage value is a list-rate marketing figure, not provider COGS. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
 
-Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
+Organization plans (see `organizations.html`):
+
+| Plan | Price | Pooled credits | Est. API usage value |
+|------|-------|----------------|----------------------|
+| **Business** | `$500/mo` | 5B / org / mo | ~$25,000/mo |
+| **Enterprise** | `$1,000/mo` | 15B / org / mo | ~$75,000/mo |
+
+All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`, `ESTIMATED_API_VALUE_USD`, `ORG_POOLS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
+
+Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, `ULTRA_CHECKOUT_URL`, `BUSINESS_CHECKOUT_URL`, and `ENTERPRISE_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
+
+### Organization Payment Links (Dashboard as kt@ephemerent.com)
+
+1. Stripe Dashboard → Products → add **Orrery Business** ($500/mo recurring) and **Orrery Enterprise** ($1,000/mo recurring).
+2. Create a Payment Link for each; collect customer email; set success/cancel to `https://ephemerent.com/organizations.html?checkout=success|cancelled`.
+3. Paste the `buy.stripe.com/...` URLs into `BUSINESS_CHECKOUT_URL` and `ENTERPRISE_CHECKOUT_URL` in `assets/site-config.js`.
 
 **Next (relay — not live yet):**
 - **Phone / browser remote** — approve tool requests, steer agents, read status from your phone

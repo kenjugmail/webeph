@@ -35,7 +35,7 @@ window.ORRERY_CONFIG = {
       price: '$40',
       cadence: 'per month',
       summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus operations'],
+      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 200M credits/month', 'Doubleword - 200M credits/month', 'Arbiter - 100M credits/month', 'Est. ~$2,400 API usage value/mo', 'Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',
@@ -52,6 +52,13 @@ window.ORRERY_CONFIG = {
    *  Ultra ($200/mo): https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03 */
   MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
   ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',
+  /**
+   * Organization Payment Links — Dashboard as kt@ephemerent.com:
+   * Products: Orrery Business $500/mo, Orrery Enterprise $1000/mo (recurring).
+   * After payment redirect: /organizations.html?checkout=success|cancelled
+   */
+  BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/YOUR_BUSINESS_PAYMENT_LINK',
+  ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/YOUR_ENTERPRISE_PAYMENT_LINK',
   /** Optional Stripe customer portal URL once billing is active. */
   BILLING_PORTAL_URL: '',
   /** Future — WebSocket relay for phone/remote. Leave empty until deployed. */

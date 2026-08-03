@@ -24,7 +24,7 @@ window.ORRERY_CONFIG = {
       price: '$40',
       cadence: 'per month',
       summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus operations'],
+      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 200M credits/month', 'Doubleword - 200M credits/month', 'Arbiter - 100M credits/month', 'Est. ~$2,400 API usage value/mo', 'Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',
