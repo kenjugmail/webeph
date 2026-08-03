@@ -1,18 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Vespera by Ephemerent">
-  <rect width="1200" height="630" fill="#f3f0e8"/>
-  <rect x="0" y="0" width="1200" height="8" fill="#243447"/>
+  <rect width="1200" height="630" fill="#0d0e12"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#c9a46a"/>
 
-  <!-- dusk mark -->
-  <g transform="translate(980,200)" fill="none" stroke="#243447" stroke-width="3">
+  <g transform="translate(980,200)" fill="none" stroke="#c9a46a" stroke-width="3">
     <circle r="88"/>
     <path d="M-48 42 C-20 -8 0 -36 0 -48 C0 -36 20 -8 48 42"/>
   </g>
-  <circle cx="980" cy="204" r="12" fill="#243447"/>
+  <circle cx="980" cy="204" r="12" fill="#c9a46a"/>
 
-  <text x="88" y="230" fill="#17160f" font-family="Georgia, 'Times New Roman', serif" font-size="92" letter-spacing="-2">Vespera</text>
-  <text x="92" y="300" fill="#243447" font-family="Georgia, 'Times New Roman', serif" font-size="40">Creative systems for strange ideas.</text>
-  <text x="92" y="360" fill="#6e6a5c" font-family="'Hanken Grotesk', system-ui, sans-serif" font-size="26">Private browser studio · films, ads, essays</text>
+  <text x="88" y="230" fill="#f2ebe1" font-family="Georgia, 'Times New Roman', serif" font-size="92" letter-spacing="-2">Vespera</text>
+  <text x="92" y="300" fill="#c9a46a" font-family="Georgia, 'Times New Roman', serif" font-size="40">Creative systems for strange ideas.</text>
+  <text x="92" y="360" fill="#958c80" font-family="'Hanken Grotesk', system-ui, sans-serif" font-size="26">Private browser studio · films, ads, essays</text>
 
-  <line x1="92" y1="430" x2="420" y2="430" stroke="rgba(23,22,15,0.18)" stroke-width="2"/>
-  <text x="92" y="480" fill="#6b6757" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="22" letter-spacing="3">BY EPHEMERENT</text>
+  <line x1="92" y1="430" x2="420" y2="430" stroke="rgba(232,224,210,0.18)" stroke-width="2"/>
+  <text x="92" y="480" fill="#7a7268" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="22" letter-spacing="3">BY EPHEMERENT</text>
 </svg>

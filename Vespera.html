@@ -6,7 +6,7 @@
 <title>Vespera — creative systems for strange ideas · by Ephemerent</title>
 <meta name="description" content="Vespera is a private browser creative studio from Ephemerent. Research, script beats, narration, scenes, and evidence stay in one project through render.">
 <link rel="canonical" href="https://ephemerent.com/Vespera.html">
-<meta name="theme-color" content="#f3f0e8">
+<meta name="theme-color" content="#0d0e12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,11 +26,11 @@
 <meta name="twitter:title" content="Vespera — creative systems for strange ideas">
 <meta name="twitter:description" content="A private browser creative studio from Ephemerent. One specific image, one rhythm, one honest surprise.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-vespera.png">
-<link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
+<link rel="stylesheet" href="assets/vespera.css?v=20260803j">
+<link rel="stylesheet" href="assets/base.css?v=20260801">
 <link rel="stylesheet" href="assets/polish.css?v=20260803f">
-<link rel="stylesheet" href="assets/vespera.css?v=20260803g">
 <script src="assets/motion.js?v=20260802c" defer></script>
-<script src="assets/vespera.js?v=20260803g" defer></script>
+<script src="assets/vespera.js?v=20260803j" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -46,7 +46,7 @@
 </script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body class="lab-page vespera-page">
+<body class="vespera-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -66,12 +66,12 @@
         <span class="motto">Image · Rhythm · Surprise</span>
       </span>
     </a>
-    <nav class="enav">
+    <nav class="enav" id="lab-navigation">
       <a href="#modes">Modes</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#evidence">Evidence</a>
       <a href="#masters">Masters</a>
-      <a class="est-keep" href="Ephemerent.html">Lab →</a>
+      <a class="est-keep" href="Ephemerent.html">by Ephemerent</a>
       <span class="est">PREVIEW</span>
     </nav>
   </div>
@@ -98,6 +98,7 @@
         </figcaption>
 
         <div class="vespera-story-viewport">
+          <canvas class="vespera-reel" aria-hidden="true"></canvas>
           <article class="vespera-story-frame" data-vespera-frame="0" data-active="true">
             <div class="vespera-frame-sheet">
               <span class="vespera-frame-kicker">01 / brief</span>
