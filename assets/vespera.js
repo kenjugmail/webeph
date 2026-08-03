@@ -99,35 +99,35 @@
           h: height * 0.84
         };
       }
+      /* Canvas is already clipped to the right stage in CSS. */
       return {
-        x: width * 0.52,
-        y: height * 0.14,
-        w: width * 0.42,
-        h: height * 0.72
+        x: width * 0.08,
+        y: height * 0.12,
+        w: width * 0.84,
+        h: height * 0.76
       };
+    }
+
+    function clearFrameMotionStyles() {
+      frames.forEach((frame) => {
+        frame.style.removeProperty('opacity');
+        frame.style.removeProperty('transform');
+        frame.style.removeProperty('z-index');
+        frame.style.removeProperty('visibility');
+        frame.style.removeProperty('pointer-events');
+      });
     }
 
     function updateFrameBlend(raw, reduced) {
       const stacked = window.innerWidth <= 900;
-      if (reduced || stacked) {
-        frames.forEach((frame) => {
-          frame.style.removeProperty('opacity');
-          frame.style.removeProperty('transform');
-          frame.style.removeProperty('z-index');
-        });
+      /* Hard-cut only — crossfading stacked sheets caused ghosted copy. */
+      if (reduced || stacked || Math.abs(raw - lastFramePosition) < 0.0005) {
+        if (reduced || stacked) clearFrameMotionStyles();
         lastFramePosition = raw;
         return;
       }
-      if (Math.abs(raw - lastFramePosition) < 0.0005) return;
       lastFramePosition = raw;
-      frames.forEach((frame, index) => {
-        const distance = Math.min(1, Math.abs(raw - index));
-        const opacity = clamp(1 - distance);
-        const shift = (index - raw) * 10;
-        frame.style.opacity = opacity.toFixed(3);
-        frame.style.transform = `translate3d(0, ${shift.toFixed(2)}px, 0)`;
-        frame.style.zIndex = opacity > 0 ? String(Math.round(opacity * 10) + 1) : '0';
-      });
+      clearFrameMotionStyles();
     }
 
     function updateBeatRail(step, local, reduced) {
