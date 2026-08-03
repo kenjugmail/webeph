@@ -79,13 +79,13 @@
     <span class="lbl">Legal</span>
     <h1>Privacy Policy</h1>
   </div>
-  <div class="legal-updated">Last updated: July 9, 2026 · Beta</div>
+  <div class="legal-updated">Last updated: August 2, 2026 - Beta</div>
 
   <div class="legal-body">
-    <p>Ephemerent builds Orrery, an agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup and the paid subscription tiers (Pro, Max, and Ultra). Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
+    <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup, personal subscriptions, organization plans, and managed connectors such as Slack. Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
 
     <h2>The short version</h2>
-    <p>In preview setup mode, you can inspect the app and configure a workspace before subscribing. Real agent work requires an active subscription. Open-source routes execute on your device, while hosted DeepSeek API, Doubleword, Arbiter, or other hosted routes send the prompt and code context needed for the completion through our relay to the provider. We keep usage meters for hosted quota enforcement.</p>
+    <p>In preview setup mode, you can inspect the app and configure a workspace before subscribing. Real subscriber agent work uses eligible Orrery Cloud routes. Verified development builds may expose developer-only routes. Hosted DeepSeek API, Doubleword, Arbiter, or other hosted routes send the prompt and selected context needed for the completion through our relay to the provider. We keep usage meters for quota and organization-budget enforcement.</p>
 
     <h2>What we collect</h2>
     <ul>
@@ -94,6 +94,8 @@
       <li><b>Usage meter (token counts).</b> When you use hosted models, we count the tokens consumed so we can enforce your monthly quota and show your usage. These counts are stored on your device and on our servers, and are numbers and timestamps — not the content of your prompts.</li>
       <li><b>Prompts &amp; code sent for hosted-model inference.</b> When you choose a hosted DeepSeek API, Doubleword, Arbiter, or other hosted route, the prompt and code/context required to answer it are transmitted through our relay to the configured provider to generate the completion, and the result is returned to you.</li>
       <li><b>High-level activity logs.</b> When signed in, we may record events such as sign-in, opening the editor, or starting a task, with a timestamp. These record <i>that</i> an action happened, not the contents of your code.</li>
+      <li><b>Organization administration.</b> If your organization uses Orrery, we store its name, plan, memberships, roles, invitations, verified domains, workspace and connector bindings, scoped policies, pooled usage, audit metadata, and security settings needed to administer the service.</li>
+      <li><b>Explicit Slack context.</b> When an authorized user invokes Orrery through Slack, we process the command, mention, shortcut, interactive action, or user-selected message/thread context, plus Slack team, user, channel, and event identifiers needed to authenticate, route, deduplicate, and answer the request. We do not ingest broad channel history by default.</li>
       <li><b>On-device identity (optional).</b> In preview setup you can enter an email/name to label your own on-device audit log. This is stored only in your browser’s/app’s local storage on that device and is not sent to us.</li>
     </ul>
 
@@ -106,6 +108,7 @@
       <li>To provide and bill your subscription, enforce monthly quotas, and show your usage.</li>
       <li>To proxy hosted-model requests through configured providers and return completions to you.</li>
       <li>To operate the beta, debug issues, prevent abuse, and keep the service secure.</li>
+      <li>To administer organization membership, policy, pooled usage, audit receipts, Slack bindings, identity integration, and support.</li>
     </ul>
 
     <h2>Subprocessors &amp; service providers</h2>
@@ -115,6 +118,7 @@
       <li><b>Supabase</b> — authentication and the database that stores your account profile, subscription state, and usage counters.</li>
       <li><b>Hosted inference providers</b> - DeepSeek API, Doubleword, and future configured providers process hosted route requests under their own terms.</li>
       <li><b>Google and GitHub</b> — OAuth sign-in, only if you choose one of them to log in.</li>
+      <li><b>Slack</b> - managed organization connector, only when an authorized organization installs and uses it.</li>
       <li><b>Vercel</b> — hosting for this website and related endpoints; standard server logs (e.g. IP address, request metadata) may be generated.</li>
     </ul>
 
@@ -122,7 +126,7 @@
     <p>This website sets no advertising or third-party tracking cookies. The desktop app and the site use local storage (and a Supabase session token/cookie when you are signed in) to keep you logged in and to hold the optional local identity and on-device audit buffer. Clearing your browser’s or app’s local storage removes the on-device data on that device.</p>
 
     <h2>Data retention</h2>
-    <p>We keep your account, subscription, and usage data for as long as your account exists and as needed to provide the service and meet legal/accounting obligations (for example, billing records Stripe retains for tax and compliance). Transient prompt/completion content handled by the relay is not retained by us beyond what is needed to fulfil the request. When you ask us to delete your account, we remove your profile and associated logs from our systems; some billing records may be retained where the law requires.</p>
+    <p>We keep your account, subscription, and usage data for as long as your account exists and as needed to provide the service and meet legal/accounting obligations (for example, billing records Stripe retains for tax and compliance). Business metadata audit records are configured for up to 90 days and Enterprise records for up to 365 days unless a signed agreement or legal obligation requires a different period. Transient prompt/completion content handled by the relay is not retained by us beyond what is needed to fulfill the request unless an authorized organization explicitly enables a documented content-retention feature. When you ask us to delete your account, we remove your profile and associated logs from our systems subject to organization administration, legal holds, security records, and billing records we must retain.</p>
 
     <h2>Your rights</h2>
     <p>Depending on where you live, you may have rights under laws such as the EU/UK GDPR and the California CCPA/CPRA — including the right to access, correct, delete, or export your personal data, and to object to or restrict certain processing. We do not sell your personal information. To exercise any of these rights:</p>
