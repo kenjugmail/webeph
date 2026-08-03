@@ -37,8 +37,10 @@ const PRICE_TO_PLAN = {
   // 'price_xxxPro':   'pro',
   // 'price_xxxMax':   'max',
   // 'price_xxxUltra': 'ultra',
-  // 'price_xxxBusiness': 'business',
-  // 'price_xxxEnterprise': 'enterprise',
+  // Orrery Business $500/mo (prod_V0Q8NfcmtHSYRc)
+  'price_1U0PIVDMKk79cYVGY5RrFE3w': 'business',
+  // Orrery Enterprise $1000/mo (prod_V0Q9jho6jglwRn)
+  'price_1U0PIoDMKk79cYVGZ7y26H2I': 'enterprise',
 };
 
 async function rawBody(req) {

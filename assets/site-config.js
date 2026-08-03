@@ -68,8 +68,8 @@ window.ORRERY_CONFIG = {
    * Business $500/mo, Enterprise $1000/mo. Paste buy.stripe.com URLs here.
    * Success/cancel: https://ephemerent.com/organizations.html?checkout=success|cancelled
    */
-  BUSINESS_CHECKOUT_URL: '',
-  ENTERPRISE_CHECKOUT_URL: '',
+  BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/eVq14n1c77o2dT3gQm3Je06',
+  ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/cNi5kD4ojbEibKVfMi3Je07',
   BILLING_PORTAL_URL: '',
 
   /** Future - WebSocket relay for phone/remote. Leave empty until deployed. */

@@ -57,8 +57,8 @@ window.ORRERY_CONFIG = {
    * Products: Orrery Business $500/mo, Orrery Enterprise $1000/mo (recurring).
    * After payment redirect: /organizations.html?checkout=success|cancelled
    */
-  BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/YOUR_BUSINESS_PAYMENT_LINK',
-  ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/YOUR_ENTERPRISE_PAYMENT_LINK',
+  BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/eVq14n1c77o2dT3gQm3Je06',
+  ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/cNi5kD4ojbEibKVfMi3Je07',
   /** Optional Stripe customer portal URL once billing is active. */
   BILLING_PORTAL_URL: '',
   /** Future — WebSocket relay for phone/remote. Leave empty until deployed. */
