@@ -1,6 +1,6 @@
 /**
- * Public site config. Orrery is paid from first start: visitors can preview setup,
- * while real agent work requires a trial or subscription.
+ * Public site config. Orrery is premium from first start: visitors can preview setup,
+ * while real agent work requires an active subscription.
  *
  * SAFE TO COMMIT: only publishable browser keys belong here:
  * - Supabase publishable / anon key in CLOUD_AUTH_KEY
@@ -32,7 +32,7 @@ window.ORRERY_CONFIG = {
       name: 'No active subscription',
       price: '-',
       cadence: '',
-      summary: 'Preview Nexus and prepare a workspace. Start a trial or subscription to run real agents.',
+      summary: 'Preview Nexus and prepare a workspace. Subscribe to run real agents.',
       features: [
         'Preview workspace and model setup',
         'Subscribe to run agents and cloud features',

@@ -31,7 +31,7 @@ function hasAuthCallbackInUrl() {
 /** OAuth/magic-link return URL — current auth page when possible, else config default. */
 export function getAuthRedirect() {
   const path = location.pathname;
-  if (path.endsWith('login.html') || path.endsWith('cloud.html') || path.endsWith('vellum-connect.html')) {
+  if (path.endsWith('login.html') || path.endsWith('cloud.html') || path.endsWith('vellum-connect.html') || path.endsWith('organizations.html')) {
     return location.origin + path;
   }
   const explicit = cfg().AUTH_REDIRECT;
@@ -68,7 +68,7 @@ export function getPlanCatalog() {
       name: 'No active subscription',
       price: '-',
       cadence: '',
-      summary: 'Preview the app and set up your workspace. Start a trial or subscription to run real agents.',
+      summary: 'Preview the app and set up your workspace. Subscribe to run real agents.',
       features: ['Preview Nexus and workspace setup', 'Start Pro / Max / Ultra for agent runs and Orrery Cloud'],
     },
     pro: plans.pro || {

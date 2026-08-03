@@ -47,7 +47,7 @@ export function planFromCloudProfile(profile) {
   const plan = parsePlan(profile.plan);
   if (plan === 'free') return 'free';
   const status = profile.subscription_status;
-  const subscriptionActive = status === 'active' || status === 'trialing';
+  const subscriptionActive = status === 'active';
   return subscriptionActive ? plan : 'free';
 }
 
