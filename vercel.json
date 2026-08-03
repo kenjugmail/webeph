@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/", "destination": "/Ephemerent.html" },
     { "source": "/arbiter-preview", "destination": "/arbiter-preview.html" },
+    { "source": "/vespera", "destination": "/Vespera.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" }
   ],

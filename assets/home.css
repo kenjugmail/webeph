@@ -38,6 +38,10 @@
   flex-wrap: wrap;
 }
 
+.home-page .ehero-cta {
+  grid-column: 8 / -1;
+}
+
 .ehero-story {
   --story-step: 0;
   --story-progress: 0;

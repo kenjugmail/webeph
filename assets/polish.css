@@ -322,7 +322,8 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 .enav a:focus-visible::after,
 .nav-links a[aria-current="page"]::after,
 .enav a[aria-current="page"]::after { transform: scaleX(1); }
-.enav .est::after { display: none; }
+.enav .est::after,
+.enav .est-keep::after { display: none; }
 .menu-toggle {
   display: none;
   min-width: 74px;

@@ -22,6 +22,7 @@ index.html               Redirect -> Ephemerent.html (the "/" landing)
 Ephemerent.html          Lab page (research, work, approach, 10% pledge)
 arbiter-preview.html     Arbiter 0.1 beta blog/system preview + RunPod budget plan
 Orrery.html              Orrery product page
+Vespera.html             Vespera creative studio (informational preview)
 Vellum.html              Vellum (3D) product page
 download.html            Download + current beta update channel
 login.html               Sign-in
