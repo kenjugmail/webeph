@@ -52,6 +52,7 @@
       <a href="#run-loop">Run loop</a>
       <a href="#models">Models</a>
       <a href="#pricing">Pricing</a>
+      <a href="organizations.html">Organizations</a>
       <a href="#safety">Safety</a>
     </div>
     <div class="nav-spacer"></div>
@@ -113,7 +114,7 @@
     <div class="pipe reveal d2">
       <div class="pipe-step"><span class="pipe-n mono">01</span><b>Workspace</b><span>Open a folder and initialize Nexus.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">02</span><b>Route</b><span>Pick a hosted credit route.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Agent</b><span>Choose a local or connected agent.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Agent</b><span>Choose an eligible cloud or connected agent.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">04</span><b>Safety</b><span>Check scope and permissions.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">05</span><b>Run</b><span>Watch progress and file activity.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">06</span><b>Receipt</b><span>Review proof, boundary, and usage.</span></div>
@@ -272,6 +273,18 @@
         <a class="btn btn-primary" id="pricing-cta-ultra" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Start Ultra</a>
       </div>
     </div>
+    <div class="organization-pricing reveal d2">
+      <div>
+        <div class="eyebrow">Organizations</div>
+        <h3>Governed agent work for engineering teams.</h3>
+        <p>Shared workspaces, pooled provider usage, Slack requests, approval gates, audit receipts, and centralized policy. Organization entitlements sit alongside each member's personal plan.</p>
+      </div>
+      <div class="organization-pricing-actions">
+        <span class="mono">Business from $500/month</span>
+        <span class="mono">Enterprise from $1,000/month</span>
+        <a class="btn btn-primary" href="organizations.html">View organization plans</a>
+      </div>
+    </div>
     <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Beta features, routes, quotas, and providers may change or be unavailable. Agent output is not guaranteed. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
   </div>
 </section>
@@ -309,9 +322,9 @@
         </a>
         <p class="muted" style="font-size:14px;max-width:32ch;">Agent runs you can supervise. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h5>Product</h5><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#safety">Safety</a></li></ul></div>
-      <div><h5>Get Orrery</h5><ul><li><a href="download.html">Download</a></li><li><a href="login.html">Sign in</a></li><li><a href="cloud.html">Cloud</a></li><li><a href="#pricing">Plans from $40/month</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="arbiter-preview.html">Arbiter beta</a></li><li><a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Discord</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
+      <div><h5>Product</h5><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Individual pricing</a></li><li><a href="organizations.html">Organizations</a></li></ul></div>
+      <div><h5>Teams</h5><ul><li><a href="organizations.html">Business &amp; Enterprise</a></li><li><a href="slack.html">Slack</a></li><li><a href="security.html">Security</a></li><li><a href="mailto:hello@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="arbiter-preview.html">Arbiter beta</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -436,6 +449,12 @@
 @media (max-width: 880px){ .pricing-grid { grid-template-columns: 1fr; } }
 .pricing-fineprint { margin-top: 22px; max-width: 80ch; font-size: 12px; line-height: 1.6; color: var(--faint); }
 .pricing-fineprint a { color: var(--teal-lt); border-bottom: 1px solid rgba(45,212,191,0.3); }
+.organization-pricing { margin-top: 24px; padding: 28px; border: 1px solid var(--line); border-radius: var(--r-lg); background: linear-gradient(135deg, rgba(45,212,191,0.07), rgba(124,92,255,0.05)); display: grid; grid-template-columns: minmax(0,1.5fr) minmax(240px,0.7fr); gap: 28px; align-items: center; }
+.organization-pricing h3 { margin: 10px 0; font-size: clamp(24px,3vw,38px); }
+.organization-pricing p { margin: 0; max-width: 65ch; color: var(--muted); line-height: 1.65; }
+.organization-pricing-actions { display: grid; gap: 10px; align-items: start; }
+.organization-pricing-actions .mono { color: var(--ink-2); font-size: 12px; }
+@media (max-width: 760px){ .organization-pricing { grid-template-columns: 1fr; padding: 22px; } }
 
 .terminal { border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; background: #08080f; box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
 .term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }
