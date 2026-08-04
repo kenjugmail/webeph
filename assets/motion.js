@@ -120,17 +120,22 @@
     if (!inner || !links) return;
 
     if (!links.id) links.id = nav.classList.contains('ebar') ? 'lab-navigation' : 'product-navigation';
-    const button = document.createElement('button');
-    button.className = 'menu-toggle';
-    button.type = 'button';
-    button.setAttribute('aria-controls', links.id);
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-label', 'Open menu');
-    button.innerHTML = '<span class="menu-toggle-label">Menu</span><span class="menu-toggle-lines" aria-hidden="true"><i></i><i></i></span>';
-
-    const auth = inner.querySelector('.auth-nav-slot');
-    if (auth) inner.insertBefore(button, auth);
-    else inner.appendChild(button);
+    let button = inner.querySelector('.menu-toggle');
+    if (!button) {
+      button = document.createElement('button');
+      button.className = 'menu-toggle';
+      button.type = 'button';
+      button.setAttribute('aria-controls', links.id);
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-label', 'Open menu');
+      button.innerHTML = '<span class="menu-toggle-label">Menu</span><span class="menu-toggle-lines" aria-hidden="true"><i></i><i></i></span>';
+      const auth = inner.querySelector('.auth-nav-slot');
+      if (auth) inner.insertBefore(button, auth);
+      else inner.appendChild(button);
+    } else {
+      button.setAttribute('aria-controls', links.id);
+      if (!button.getAttribute('aria-expanded')) button.setAttribute('aria-expanded', 'false');
+    }
 
     const buttonLabel = button.querySelector('.menu-toggle-label');
     const pageRegions = Array.from(document.querySelectorAll('main, body > footer'))

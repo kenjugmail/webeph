@@ -1,4 +1,28 @@
-/* Front page: editorial scale, one tactile centerpiece, no decorative spectacle. */
+.home-page .ebar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.home-page .ebar-in {
+  position: relative;
+  gap: 16px;
+}
+
+.home-page .menu-toggle {
+  border-color: var(--rule);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+@media (max-width: 880px) {
+  .home-page.motion-ready .menu-toggle,
+  .motion-ready .home-page .menu-toggle,
+  html.motion-ready .home-page .menu-toggle {
+    display: inline-flex;
+  }
+}
+
 .home-page .ehero {
   padding: clamp(76px, 8vw, 122px) 0 72px;
   border-bottom: 0;
@@ -15,15 +39,15 @@
 }
 
 .ehero-intro {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(16px, 2vw, 28px);
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
   margin-top: 46px;
+  max-width: 58ch;
 }
 
 .ehero-intro > p {
-  grid-column: 1 / span 6;
   max-width: 53ch;
   color: var(--ink-2);
   font-size: clamp(18px, 1.55vw, 21px);
@@ -31,15 +55,13 @@
 }
 
 .ehero-cta {
-  grid-column: 9 / -1;
-  justify-self: end;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
 .home-page .ehero-cta {
-  grid-column: 8 / -1;
+  justify-self: start;
 }
 
 .ehero-story {
@@ -609,7 +631,7 @@
 .home-page .efoot .big { max-width: 22ch; }
 
 @media (max-width: 900px) {
-  .ehero-intro > p { grid-column: 1 / span 8; }
+  .ehero-intro > p { max-width: none; }
   .ehero-cta { grid-column: 9 / -1; }
   .ehero-story { grid-template-columns: 1fr; }
   .ehero-story-pin { top: 76px; }
@@ -626,9 +648,9 @@
   .home-page .ehero { padding: 64px 0 54px; }
   .home-page .ehero .lbl { margin-bottom: 26px; }
   .home-page .ehero h1 { max-width: 12ch; font-size: clamp(51px, 14vw, 72px); }
-  .ehero-intro { grid-template-columns: 1fr; gap: 28px; margin-top: 34px; }
+  .ehero-intro { gap: 22px; margin-top: 34px; max-width: none; }
   .ehero-intro > p,
-  .ehero-cta { grid-column: 1; justify-self: start; }
+  .ehero-cta { width: 100%; justify-self: start; }
   .ehero-story { margin-top: 44px; }
   .ehero-story-pin { top: var(--site-nav); }
   .ehero-story-head,
