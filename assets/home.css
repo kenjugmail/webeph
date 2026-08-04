@@ -7,19 +7,35 @@
 .home-page .ebar-in {
   position: relative;
   gap: 16px;
+  width: 100%;
 }
 
 .home-page .menu-toggle {
+  flex: none;
+  margin-left: auto;
   border-color: var(--rule);
   color: var(--ink);
   background: var(--paper);
 }
 
+.home-page .ehero .lbl,
+.home-page .ehero-intro > p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 @media (max-width: 880px) {
-  .home-page.motion-ready .menu-toggle,
-  .motion-ready .home-page .menu-toggle,
   html.motion-ready .home-page .menu-toggle {
-    display: inline-flex;
+    display: inline-flex !important;
+  }
+
+  .home-page .ebar-in {
+    padding-inline: 22px;
+  }
+
+  .home-page .ebrand {
+    min-width: 0;
+    flex: 1 1 auto;
   }
 }
 
