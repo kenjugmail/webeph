@@ -769,6 +769,94 @@ body.vespera-page {
   line-height: 1.6;
 }
 
+.vespera-projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.vespera-project {
+  padding: 34px 36px 34px 0;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vespera-project:last-child {
+  border-right: 0;
+  padding-left: 36px;
+  padding-right: 0;
+}
+
+.vespera-project-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.vespera-project .no {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+
+.vespera-page .estatus {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.vespera-page .estatus.live {
+  color: var(--signal);
+  border: 1px solid var(--signal);
+}
+
+.vespera-page .estatus.preview {
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+}
+
+.vespera-project h3 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.2vw, 30px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.vespera-project-sub {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0;
+}
+
+.vespera-project > p:not(.vespera-project-sub) {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.62;
+  margin: 0;
+  flex: 1;
+}
+
+.vespera-project-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
 .vespera-masters {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -994,6 +1082,7 @@ body.vespera-page {
   }
 
   .vespera-evidence,
+  .vespera-projects,
   .vespera-masters,
   .vespera-close-inner,
   .vespera-page .efoot-grid {
@@ -1001,6 +1090,7 @@ body.vespera-page {
   }
 
   .vespera-evidence > div,
+  .vespera-project,
   .vespera-masters > div {
     margin: 0;
     padding: 24px 0;
@@ -1009,8 +1099,10 @@ body.vespera-page {
   }
 
   .vespera-evidence > div:last-child,
+  .vespera-project:last-child,
   .vespera-masters > div:last-child { border-bottom: 0; }
 
+  .vespera-project:last-child,
   .vespera-masters > div:last-child { padding-left: 0; }
 
   .vespera-lede { margin-left: 0; }
