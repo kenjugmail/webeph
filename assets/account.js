@@ -3,7 +3,7 @@
 import { getIdentity, clearIdentity, logActivity } from './identity.js';
 import { getCloudSession, cloudConfigured } from './cloud-auth.js';
 
-const DOWNLOAD_BTN = '<a class="btn btn-primary" href="download.html">Download <span aria-hidden="true">→</span></a>';
+const DOWNLOAD_BTN = '<a class="btn btn-primary" href="/download">Download <span aria-hidden="true">→</span></a>';
 
 /** Escape user-controlled strings before they touch innerHTML.
  *  identity.name/email come from a local form and the email from the
@@ -20,7 +20,7 @@ export async function mountNavAccount(slotId = 'auth-nav-slot') {
   if (cloud?.user) {
     const email = esc(cloud.user.email || 'Account');
     slot.innerHTML = `
-      <a class="btn btn-ghost" href="cloud.html" title="${email}">☁ ${email}</a>
+      <a class="btn btn-ghost" href="/cloud.html" title="${email}">☁ ${email}</a>
       ${DOWNLOAD_BTN}
     `;
     return;
@@ -43,7 +43,7 @@ export async function mountNavAccount(slotId = 'auth-nav-slot') {
   }
 
   slot.innerHTML = `
-    <a class="btn btn-ghost" href="login.html">Sign in</a>
+    <a class="btn btn-ghost" href="/login.html">Sign in</a>
     ${DOWNLOAD_BTN}
   `;
 }

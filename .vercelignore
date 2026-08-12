@@ -1,0 +1,6 @@
+.env
+.env.*
+.vercel
+assets/supabase-config.js
+tmp/
+output/

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vespera — creative systems for strange ideas · by Ephemerent</title>
 <meta name="description" content="Vespera is a private browser creative studio from Ephemerent. Research, script beats, narration, scenes, and evidence stay in one project through render.">
-<link rel="canonical" href="https://ephemerent.com/Vespera.html">
-<meta name="theme-color" content="#0d0e12">
+<link rel="canonical" href="https://ephemerent.com/vespera">
+<meta name="theme-color" content="#f7f3eb">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Vespera — creative systems for strange ideas">
 <meta property="og:description" content="A private browser creative studio. Films, ads, essays, and sound-led stories — with research and evidence attached through render.">
-<meta property="og:url" content="https://ephemerent.com/Vespera.html">
+<meta property="og:url" content="https://ephemerent.com/vespera">
 <meta property="og:image" content="https://ephemerent.com/assets/og-vespera.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -26,11 +26,11 @@
 <meta name="twitter:title" content="Vespera — creative systems for strange ideas">
 <meta name="twitter:description" content="A private browser creative studio from Ephemerent. One specific image, one rhythm, one honest surprise.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-vespera.png">
-<link rel="stylesheet" href="assets/vespera.css?v=20260803m">
+<link rel="stylesheet" href="assets/vespera.css?v=20260811c">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260803f">
-<script src="assets/motion.js?v=20260802c" defer></script>
-<script src="assets/vespera.js?v=20260803k" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811c">
+<script src="assets/motion.js?v=20260811c" defer></script>
+<script src="assets/vespera.js?v=20260811c" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,7 +38,7 @@
   "name": "Vespera",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Web",
-  "url": "https://ephemerent.com/Vespera.html",
+  "url": "https://ephemerent.com/vespera",
   "description": "A private browser creative studio for films, visual essays, interactive experiments, and source-aware video. Research, script beats, narration, scenes, and evidence stay in one project.",
   "image": "https://ephemerent.com/assets/og-vespera.png",
   "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" }
@@ -59,7 +59,7 @@
 
 <div class="ebar">
   <div class="ebar-in">
-    <a class="ebrand" href="Vespera.html">
+    <a class="ebrand" href="/vespera">
       <svg class="mk accent"><use href="#vmk"/></svg>
       <span class="brandcol">
         <span class="nm">Vespera</span>
@@ -72,7 +72,7 @@
       <a href="#pipeline">Pipeline</a>
       <a href="#evidence">Evidence</a>
       <a href="#masters">Masters</a>
-      <a class="est-keep" href="Ephemerent.html">by Ephemerent</a>
+      <a class="est-keep" href="/">by Ephemerent</a>
       <span class="est">PREVIEW</span>
     </nav>
   </div>
@@ -81,21 +81,58 @@
 <main id="main">
 <header class="vhero">
   <div class="ewrap">
-    <span class="lbl rv in">Creative studio · by Ephemerent</span>
-    <h1 class="rv in">Creative systems for strange ideas.</h1>
-    <div class="vhero-intro">
-      <p class="rv in">A private browser workspace for films, ads, essays, and sound-led stories. Research, beats, narration, and scenes stay in one project.</p>
-      <div class="vhero-cta rv in">
-        <a class="ebtn ebtn-fill" href="https://ephemerent.com/play?experience=vespera">Play the Vespera experience <span aria-hidden="true">→</span></a>
-        <a class="ebtn" href="https://buy.stripe.com/4gM6oHaMH5fU3eparY3Je09">Buy play access — $20</a>
-        <a class="ebtn" href="#projects">Projects</a>
+    <span class="lbl rv in">Vespera / a studio for the cut</span>
+    <div class="vhero-grid">
+      <div class="vhero-copy-block">
+        <h1 class="rv in">Give a strange idea a way to move.</h1>
+        <div class="vhero-intro">
+          <div class="vhero-copy">
+            <p class="rv in">A private browser studio for films, ads, essays, and sound-led stories. Bring a source, shape the beats, direct the scene, and keep the cut in reach.</p>
+            <div class="vhero-cta rv in">
+              <a class="ebtn ebtn-fill" href="https://ephemerent.com/play?experience=vespera">Play the Vespera experience <span aria-hidden="true">→</span></a>
+              <a class="ebtn" href="https://buy.stripe.com/4gM6oHaMH5fU3eparY3Je09">Buy play access — $20</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vespera-studio-board rv in" data-scene="vespera-board" role="img" aria-label="A moving contact sheet for a Vespera cut, changing from image to rhythm to scene to master">
+        <div class="vespera-board-head">
+          <span>Cut note / 01</span>
+          <span data-vespera-board-phase>Image</span>
+        </div>
+        <div class="vespera-board-stage">
+          <figure class="vespera-board-plate" aria-hidden="true">
+            <img class="vespera-board-image" src="assets/vespera-plate.jpg" alt="" width="1400" height="788" fetchpriority="high">
+            <figcaption class="vespera-plate-stamp">Plate 01 / working still</figcaption>
+            <span class="vespera-plate-cue">A01</span>
+          </figure>
+          <canvas class="vespera-board-reel" aria-hidden="true"></canvas>
+          <div class="vespera-board-note" aria-hidden="true">
+            <span data-vespera-board-word>IMAGE</span>
+            <small data-vespera-board-caption>Find the frame that makes the idea visible.</small>
+          </div>
+          <div class="vespera-board-crop vespera-board-crop-tl" aria-hidden="true"></div>
+          <div class="vespera-board-crop vespera-board-crop-br" aria-hidden="true"></div>
+        </div>
+        <div class="vespera-contact-strip" aria-hidden="true">
+          <span class="vespera-contact-frame" data-vespera-contact="0" data-active="true"><i>01</i></span>
+          <span class="vespera-contact-frame" data-vespera-contact="1"><i>02</i></span>
+          <span class="vespera-contact-frame" data-vespera-contact="2"><i>03</i></span>
+          <span class="vespera-contact-frame" data-vespera-contact="3"><i>04</i></span>
+          <b class="vespera-contact-playhead"></b>
+        </div>
+        <div class="vespera-board-foot">
+          <span>Four framings · one visual premise</span>
+          <span>Still → master</span>
+        </div>
       </div>
     </div>
 
     <section class="vespera-story rv in" data-scene="vespera-pipeline" aria-label="Vespera production sequence">
       <figure class="vespera-story-stage">
         <figcaption class="vespera-story-head">
-          <span>Field sequence 001 · production</span>
+          <span>The cut, in four decisions</span>
           <span><b data-vespera-index>01 / 04</b><i data-vespera-phase>Brief</i></span>
         </figcaption>
 
@@ -104,12 +141,12 @@
           <article class="vespera-story-frame" data-vespera-frame="0" data-active="true">
             <div class="vespera-frame-sheet">
               <span class="vespera-frame-kicker">01 / brief</span>
-              <strong>Name the direction first.</strong>
-              <small>Mode, audience, and constraints before anything generates.</small>
+              <strong>Choose the image.</strong>
+              <small>A visual premise, an audience, and one clean ask before the cut.</small>
               <ul class="vespera-frame-list" aria-label="Brief fields">
                 <li><span>Creative mode</span><b>chosen</b></li>
                 <li><span>Audience &amp; ask</span><b>stated</b></li>
-                <li><span>Working boundary</span><b>explicit</b></li>
+                <li><span>Working boundary</span><b>clear</b></li>
               </ul>
             </div>
           </article>
@@ -117,8 +154,8 @@
           <article class="vespera-story-frame" data-vespera-frame="1" aria-hidden="true">
             <div class="vespera-frame-sheet">
               <span class="vespera-frame-kicker">02 / beat</span>
-              <strong>Write with rhythm.</strong>
-              <small>Each beat carries purpose and visual direction. Pacing stays measurable.</small>
+              <strong>Write the rhythm.</strong>
+              <small>Every beat gives the image somewhere to go. Pacing stays visible.</small>
               <div class="vespera-beat-rail" aria-hidden="true">
                 <span data-vespera-beat="0" data-on="true">Hook</span>
                 <span data-vespera-beat="1">Turn</span>
@@ -131,13 +168,13 @@
           <article class="vespera-story-frame" data-vespera-frame="2" aria-hidden="true">
             <div class="vespera-frame-sheet">
               <span class="vespera-frame-kicker">03 / scene</span>
-              <strong>Direct what you can watch.</strong>
-              <small>A program monitor follows the selected beat under a locked camera.</small>
+              <strong>Make the scene move.</strong>
+              <small>A beat-linked monitor keeps framing, timing, and motion together.</small>
               <div class="vespera-scene-grid">
                 <dl class="vespera-scene-meta">
                   <div><dt>Monitor</dt><dd>beat-linked</dd></div>
-                  <div><dt>Camera</dt><dd>locked</dd></div>
-                  <div><dt>Motion</dt><dd>deterministic</dd></div>
+                  <div><dt>Camera</dt><dd>composed</dd></div>
+                  <div><dt>Motion</dt><dd>intentional</dd></div>
                 </dl>
               </div>
             </div>
@@ -146,53 +183,53 @@
           <article class="vespera-story-frame" data-vespera-frame="3" aria-hidden="true">
             <div class="vespera-frame-sheet">
               <span class="vespera-frame-kicker">04 / master</span>
-              <strong>Encode in the browser.</strong>
-              <small>1080p30 through WebCodecs and MediaBunny. Evidence stays with the cut.</small>
+              <strong>Cut a master.</strong>
+              <small>The browser locks the take. The source trail travels with the cut.</small>
               <div class="vespera-master-strip">
                 <div class="vespera-master-mark" aria-hidden="true">Master · MP4 / WebM</div>
-                <p>The visual runtime locks the master. Generative plates are reviewed inputs when used.</p>
+                <p>Timing, mix, and source notes stay attached to the finished cut.</p>
               </div>
             </div>
           </article>
         </div>
 
         <div class="vespera-story-foot">
-          <span>Pipeline sequence · no simulated render</span>
+          <span>Working sequence · four moves</span>
           <span data-vespera-caption>Direction named · constraints visible</span>
         </div>
       </figure>
 
       <ol class="vespera-story-steps" aria-label="Vespera production chapters">
-        <li data-vespera-step="0" data-active="true">
+        <li data-vespera-step="0" data-active="true" aria-current="step">
           <span class="vespera-story-number">01</span>
           <div>
-            <h2>Begin with a brief.</h2>
-            <p>Choose a creative direction and name the constraints before generation begins.</p>
-            <span class="vespera-story-evidence">Mode selected · scope visible</span>
+            <h2>Choose the image.</h2>
+            <p>Start with a visual premise, a viewer, and a clear ask.</p>
+            <span class="vespera-story-evidence">Direction chosen · frame ready</span>
           </div>
         </li>
         <li data-vespera-step="1">
           <span class="vespera-story-number">02</span>
           <div>
-            <h2>Write in beats.</h2>
-            <p>Scripts carry purpose, visual direction, and pacing targets per beat.</p>
-            <span class="vespera-story-evidence">Beats structured · duration tracked</span>
+            <h2>Write the rhythm.</h2>
+            <p>Give every beat a purpose, a picture, and a place to land.</p>
+            <span class="vespera-story-evidence">Beats shaped · pace visible</span>
           </div>
         </li>
         <li data-vespera-step="2">
           <span class="vespera-story-number">03</span>
           <div>
-            <h2>Direct the scene.</h2>
-            <p>A Three.js program monitor follows the selected beat with locked framing.</p>
-            <span class="vespera-story-evidence">Scene linked · camera locked</span>
+            <h2>Make the scene move.</h2>
+            <p>Tie framing and motion to the beat so the cut has somewhere to go.</p>
+            <span class="vespera-story-evidence">Scene linked · camera composed</span>
           </div>
         </li>
         <li data-vespera-step="3">
           <span class="vespera-story-number">04</span>
           <div>
-            <h2>Lock a master.</h2>
-            <p>Browser encoding produces a reviewable master. Claims and takes stay attached.</p>
-            <span class="vespera-story-evidence">Master encoded · evidence retained</span>
+            <h2>Cut a master.</h2>
+            <p>Encode a reviewable master with the source trail still attached.</p>
+            <span class="vespera-story-evidence">Master encoded · source retained</span>
           </div>
         </li>
       </ol>
@@ -202,7 +239,7 @@
 
 <div class="ewrap">
   <div class="vespera-register">
-    <p><span>Studio register 001</span>Private creative studio · first playable project live in browser.</p>
+    <p><span>Studio register 001</span>A private place to make the work — and keep the reasons behind the cut.</p>
   </div>
 </div>
 
@@ -210,9 +247,9 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">01 — Projects</span>
-      <h2>One umbrella. Concrete work.</h2>
+      <h2>A studio with somewhere to put the work.</h2>
     </div>
-    <p class="vespera-lede rv">Vespera covers films, ads, interactive pieces, and games. Each project ships under the studio — named in-product when it helps, branded Vespera outside.</p>
+    <p class="vespera-lede rv">Vespera holds films, ads, interactive pieces, and games in the same private room. The project can have its own name; the studio stays quietly underneath.</p>
     <div class="vespera-projects">
       <article class="vespera-project" data-motion="reveal">
         <div class="vespera-project-head">
@@ -248,9 +285,9 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">02 — Modes</span>
-      <h2>One studio. Several modes.</h2>
+      <h2>Choose the shape before you make it.</h2>
     </div>
-    <p class="vespera-lede rv">An evidence-led explainer is one mode among others. Projects choose a direction before generation begins: a specific image, a clean rhythm, one honest surprise.</p>
+    <p class="vespera-lede rv">An evidence-led explainer is only one kind of work. Start by choosing the feeling, pace, and promise the piece needs to keep.</p>
     <div class="eindex">
       <div class="erow" data-motion="reveal">
         <span class="no">M1</span>
@@ -295,44 +332,44 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">03 — Pipeline</span>
-      <h2>From brief to master, in the open.</h2>
+      <h2>A cut is made in passes.</h2>
     </div>
-    <p class="vespera-lede rv">The browser owns edit and encode. Every stage stays reviewable — not collapsed into one opaque generation.</p>
+    <p class="vespera-lede rv">The browser owns the edit and the encode. Each pass stays visible, so the finished piece still remembers how it got there.</p>
     <div class="vespera-pipeline">
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">01</span>
         <span class="ti">Brief</span>
-        <span class="de">Direction, audience, and constraints named before generation begins.</span>
+        <span class="de">Direction, audience, and the shape of the ask named before the first frame.</span>
       </div>
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">02</span>
         <span class="ti">Research &amp; claims</span>
-        <span class="de">Source notes for papers and licensed transcripts. Claims enter a ledger, not a freehand script.</span>
+        <span class="de">Source notes for papers and licensed transcripts. Facts stay close to the moment they shape.</span>
       </div>
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">03</span>
         <span class="ti">Script</span>
-        <span class="de">Multi-beat structure with purpose, visual direction, runtime, and words-per-minute pacing.</span>
+        <span class="de">A multi-beat structure with purpose, visual direction, runtime, and a pace you can feel.</span>
       </div>
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">04</span>
         <span class="ti">Narration</span>
-        <span class="de">Own-voice takes, uploads, or selectable narration profiles — with review before they lock to the timeline.</span>
+        <span class="de">Own-voice takes, uploads, or narration profiles — reviewed before they settle into the timeline.</span>
       </div>
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">05</span>
         <span class="ti">Scene</span>
-        <span class="de">Beat-linked Three.js direction, cue density, and deterministic easing under a locked camera.</span>
+        <span class="de">Beat-linked scene direction, cue density, and composed motion under a considered camera.</span>
       </div>
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">06</span>
         <span class="ti">Edit</span>
-        <span class="de">Command-based NLE primitives — split, trim, move, ripple, mute, lock, undo — with a linked playhead.</span>
+        <span class="de">Split, trim, move, ripple, mute, lock, and undo — with a playhead that stays in the conversation.</span>
       </div>
       <div class="vespera-pipe-row" data-motion="reveal">
         <span class="no">07</span>
         <span class="ti">Render</span>
-        <span class="de">Browser 1080p30 through WebCodecs and MediaBunny, with checksums and resumable upload when configured.</span>
+        <span class="de">Browser 1080p30 through WebCodecs and MediaBunny, with a reviewable master and its trail intact.</span>
       </div>
     </div>
   </div>
@@ -342,9 +379,9 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">04 — Evidence</span>
-      <h2>Claims stay labeled.</h2>
+      <h2>Keep the reason beside the image.</h2>
     </div>
-    <p class="vespera-lede rv">Verified facts, unsourced statements, and analysis stay distinct. Unsupported or stale claims can block a render.</p>
+    <p class="vespera-lede rv">When a piece makes a claim, the source is still there to meet it. Facts, open questions, and interpretation do not blur together.</p>
     <div class="vespera-evidence">
       <div data-motion="reveal">
         <h3>Verified</h3>
@@ -366,16 +403,16 @@
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">05 — Masters</span>
-      <h2>Masters lock. Plates are optional.</h2>
+      <h2>Leave the work somewhere you can return to.</h2>
     </div>
     <div class="vespera-masters">
       <div data-motion="reveal">
-        <h3>Locked in the browser</h3>
-        <p>The visual runtime and MediaBunny path produce a master you can re-encode and inspect. Timing and mix decisions stay intentional.</p>
+        <h3>Cut in the browser</h3>
+        <p>The visual runtime and MediaBunny path produce a master you can re-encode and inspect. Timing and mix decisions stay deliberate.</p>
       </div>
       <div data-motion="reveal">
-        <h3>Plates stay optional</h3>
-        <p>Generative vision plates are reviewed inputs when used. They do not replace the locked master.</p>
+        <h3>Plates stay honest</h3>
+        <p>Generative vision plates are reviewed inputs when used. They add material to the cut without pretending to be the cut.</p>
       </div>
     </div>
   </div>
@@ -393,7 +430,7 @@
         <div class="vespera-project-cta">
           <a class="ebtn ebtn-fill" href="https://ephemerent.com/play?experience=vespera">Play <span aria-hidden="true">→</span></a>
           <a class="ebtn" href="https://buy.stripe.com/4gM6oHaMH5fU3eparY3Je09">Buy access — $20</a>
-          <a class="ebtn" href="Ephemerent.html">Back to the lab</a>
+          <a class="ebtn" href="/">Back to the lab</a>
         </div>
       </div>
     </div>
@@ -405,10 +442,10 @@
   <div class="ewrap">
     <div class="efoot-grid">
       <div>
-        <div class="lbl" style="margin-bottom:18px;color:var(--accent);">Image · Rhythm · Surprise</div>
+        <div class="lbl vespera-footer-label">Image · Rhythm · Surprise</div>
         <div class="big serif">One specific image. One clean rhythm. One honest surprise.</div>
-        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="ebtn ebtn-fill" href="Ephemerent.html">Ephemerent lab →</a>
+        <div class="vespera-footer-actions">
+          <a class="ebtn ebtn-fill" href="/">Ephemerent lab →</a>
           <a class="ebtn" href="mailto:hello@ephemerent.com">Get in touch</a>
         </div>
       </div>
@@ -425,14 +462,14 @@
       <div>
         <h2 class="efoot-heading">Lab</h2>
         <ul>
-          <li><a href="Ephemerent.html">Ephemerent</a></li>
-          <li><a href="Orrery.html">Orrery</a></li>
-          <li><a href="Vespera.html">Vespera</a></li>
-          <li><a href="Shelterix.html">Shelterix</a></li>
-          <li><a href="arbiter-preview.html">Arbiter</a></li>
-          <li><a href="Vellum.html">Vellum</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-          <li><a href="terms.html">Terms</a></li>
+          <li><a href="/">Ephemerent</a></li>
+          <li><a href="/orrery">Orrery</a></li>
+          <li><a href="/vespera">Vespera</a></li>
+          <li><a href="/shelterix">Shelterix</a></li>
+          <li><a href="/arbiter">Arbiter</a></li>
+          <li><a href="/vellum">Vellum</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>

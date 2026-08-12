@@ -64,9 +64,16 @@ window.ORRERY_CONFIG = {
   MAX_CHECKOUT_URL: 'https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02',
   ULTRA_CHECKOUT_URL: 'https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03',
   /**
+   * Vespera / Aetherfront play — separate IdP from Orrery.
+   * Auth: Firebase (ephemerent.com/login). Not Supabase / login.html.
+   */
+  VESPERA_PLAY_URL: 'https://ephemerent.com/play?experience=vespera',
+  VESPERA_PLAY_HOME_URL: 'https://ephemerent.com/login',
+  VESPERA_PLAY_ACCESS_URL: 'https://buy.stripe.com/4gM6oHaMH5fU3eparY3Je09',
+  /**
    * Organization Stripe Payment Links (create in Dashboard as kt@ephemerent.com):
    * Business $500/mo, Enterprise $1000/mo. Paste buy.stripe.com URLs here.
-   * Success/cancel: https://ephemerent.com/organizations.html?checkout=success|cancelled
+   * Success/cancel: https://ephemerent.com/organizations?checkout=success|cancelled
    */
   BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/eVq14n1c77o2dT3gQm3Je06',
   ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/cNi5kD4ojbEibKVfMi3Je07',

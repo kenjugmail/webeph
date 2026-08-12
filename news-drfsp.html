@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A simpler rule beat the hierarchy on GPT-2 — Ephemerent News</title>
+<meta name="description" content="An intuitive guide to DR-FSP: why rare-domain behavior disappears during compression, why selection and refitting are different, and what a surprising GPT-2 result means.">
+<link rel="canonical" href="https://ephemerent.com/news/drfsp-robust-compression">
+<link rel="alternate" type="application/rss+xml" title="Ephemerent News" href="https://ephemerent.com/news.xml">
+<meta name="author" content="Kenju Tomita">
+<meta name="theme-color" content="#f4efe4">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ephemerent News">
+<meta property="og:title" content="A simpler rule beat the hierarchy on GPT-2. Here’s what that means.">
+<meta property="og:description" content="A controlled experiment rewarded the hierarchy. A small real-model test did not. The reversal became the real result.">
+<meta property="og:url" content="https://ephemerent.com/news/drfsp-robust-compression">
+<meta property="og:image" content="https://ephemerent.com/assets/og-news-drfsp.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Three calibration environments split between average and worst-environment neural network compression paths">
+<meta property="article:published_time" content="2026-08-09T12:00:00-04:00">
+<meta property="article:modified_time" content="2026-08-11T12:00:00-04:00">
+<meta property="article:author" content="Kenju Tomita">
+<meta property="article:section" content="Research Dispatch">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A simpler rule beat the hierarchy on GPT-2. Here’s what that means.">
+<meta name="twitter:description" content="The rare-musician problem, selection versus repair, and the real-model surprise inside DR-FSP.">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-news-drfsp.png">
+<link rel="stylesheet" href="/assets/news.css?v=20260811c">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NewsArticle",
+      "@id": "https://ephemerent.com/news/drfsp-robust-compression#article",
+      "mainEntityOfPage": "https://ephemerent.com/news/drfsp-robust-compression",
+      "headline": "A simpler rule beat the hierarchy on GPT-2. Here’s what that means.",
+      "description": "An intuitive guide to DR-FSP and its surprising GPT-2 result.",
+      "datePublished": "2026-08-09T12:00:00-04:00",
+      "dateModified": "2026-08-11T12:00:00-04:00",
+      "articleSection": "Research Dispatch",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://ephemerent.com/assets/og-news-drfsp.png",
+        "width": 1200,
+        "height": 630
+      },
+      "author": { "@type": "Person", "name": "Kenju Tomita" },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://ephemerent.com/#org",
+        "name": "Ephemerent",
+        "url": "https://ephemerent.com/",
+        "logo": { "@type": "ImageObject", "url": "https://ephemerent.com/assets/og-ephemerent.png" }
+      },
+      "citation": [
+        "https://ephemerent.com/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression",
+        "https://github.com/kenjugmail/DR-FSP"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ephemerent", "item": "https://ephemerent.com/" },
+        { "@type": "ListItem", "position": 2, "name": "News", "item": "https://ephemerent.com/news" },
+        { "@type": "ListItem", "position": 3, "name": "DR-FSP robust compression", "item": "https://ephemerent.com/news/drfsp-robust-compression" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="nw-page nw-article-page">
+<a class="nw-skip" href="#article">Skip to article</a>
+<div class="nw-reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+
+<header class="nw-header nw-header-compact">
+  <div class="nw-signal-bar"><div class="nw-shell"><span>Ephemerent publication desk</span><span>Independent · New York</span></div></div>
+  <div class="nw-shell nw-masthead-row">
+    <a class="nw-wordmark" href="/news" aria-label="Ephemerent News home"><span>Ephemerent</span><strong>News</strong></a>
+    <p class="nw-tagline">Research briefings,<br>technology, and evidence.</p>
+    <button class="nw-menu-button" type="button" aria-controls="news-navigation" aria-expanded="false">Menu</button>
+  </div>
+  <div class="nw-nav-rule">
+    <div class="nw-shell nw-nav-row">
+      <nav class="nw-nav" id="news-navigation" aria-label="News navigation">
+        <a href="/news">Latest</a>
+        <a href="/journal">Research record</a>
+        <a href="/research">Lab agenda</a>
+        <a href="/">Ephemerent</a>
+      </nav>
+      <a class="nw-rss" href="/news.xml">RSS <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="article">
+  <article>
+    <header class="nw-article-hero">
+      <div class="nw-shell">
+        <nav class="nw-breadcrumb" aria-label="Breadcrumb"><a href="/news">News</a><span aria-hidden="true">/</span><span>Research Dispatch</span></nav>
+        <p class="nw-article-label">Research Dispatch <span>001</span><a href="/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression">Open journal record <b aria-hidden="true">↗</b></a></p>
+        <h1>A simpler rule beat the hierarchy on GPT-2. <em>Here’s what that means.</em></h1>
+        <p class="nw-article-deck">I built a sophisticated hierarchy to compress neural networks without erasing rare-domain behavior. It worked perfectly in a controlled setting. On GPT-2, a much simpler robust baseline did better at aggressive compression—and that became the real result.</p>
+        <div class="nw-article-meta">
+          <div><span>Analysis by</span><strong>Kenju Tomita</strong></div>
+          <div><span>Published</span><time datetime="2026-08-09">August 9, 2026</time></div>
+          <div><span>Reading time</span><strong>15 minutes</strong></div>
+          <button type="button" class="nw-copy-link" data-copy-link>Copy link</button>
+        </div>
+        <a class="nw-hero-record" href="/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression">
+          <span>Research record</span>
+          <strong>Read the peer-reviewed article, version history, and source files</strong>
+          <small>Ephemerent Research · ER-2026-0001</small>
+          <b aria-hidden="true">↗</b>
+        </a>
+      </div>
+    </header>
+
+    <section class="nw-article-field" aria-labelledby="field-figure-caption">
+      <div class="nw-shell">
+        <figure class="nw-field-figure nw-field-figure-article" data-reveal>
+          <svg class="nw-field-svg" viewBox="0 0 1120 600" role="img" aria-labelledby="article-field-title article-field-desc">
+            <title id="article-field-title">Common prose, dialogue, and code feed two neural network compression selectors</title>
+            <desc id="article-field-desc">The average selector prioritizes frequent behavior and drops a rare code direction. The worst-environment selector protects behavior important in any named environment.</desc>
+            <rect class="nw-svg-ink" width="1120" height="600"/>
+            <text class="nw-svg-overline" x="62" y="60">THREE CALIBRATION ENVIRONMENTS</text>
+            <text class="nw-svg-overline" x="760" y="60">ONE WIDTH BUDGET</text>
+
+            <g class="nw-svg-source">
+              <rect x="62" y="100" width="290" height="92"/>
+              <text x="86" y="135">01 / COMMON PROSE</text>
+              <line x1="86" y1="164" x2="322" y2="164"/>
+              <line class="nw-svg-signal nw-svg-signal-cobalt" x1="86" y1="164" x2="302" y2="164"/>
+            </g>
+            <g class="nw-svg-source">
+              <rect x="62" y="236" width="290" height="92"/>
+              <text x="86" y="271">02 / DIALOGUE</text>
+              <line x1="86" y1="300" x2="322" y2="300"/>
+              <line class="nw-svg-signal nw-svg-signal-violet" x1="86" y1="300" x2="255" y2="300"/>
+            </g>
+            <g class="nw-svg-source">
+              <rect x="62" y="372" width="290" height="92"/>
+              <text x="86" y="407">03 / CODE</text>
+              <line x1="86" y1="436" x2="322" y2="436"/>
+              <line class="nw-svg-signal nw-svg-signal-coral" x1="86" y1="436" x2="151" y2="436"/>
+            </g>
+
+            <text class="nw-svg-axis-label" x="412" y="84">FREQUENCY-WEIGHTED PATH</text>
+            <path class="nw-svg-route nw-svg-route-mean" d="M352 146 C476 146 482 166 610 166"/>
+            <path class="nw-svg-route nw-svg-route-mean" d="M352 282 C474 282 488 181 610 181"/>
+            <path class="nw-svg-route nw-svg-route-mean nw-svg-route-faint" d="M352 418 C470 418 492 197 610 197"/>
+            <text class="nw-svg-axis-label" x="412" y="344">WORST-ENVIRONMENT PATH</text>
+            <path class="nw-svg-route nw-svg-route-robust" d="M352 146 C470 146 490 398 610 398"/>
+            <path class="nw-svg-route nw-svg-route-robust" d="M352 282 C470 282 490 413 610 413"/>
+            <path class="nw-svg-route nw-svg-route-robust" d="M352 418 C470 418 490 428 610 428"/>
+
+            <g class="nw-svg-selector nw-svg-selector-mean">
+              <rect x="610" y="105" width="448" height="152"/>
+              <text class="nw-svg-selector-label" x="638" y="143">AVERAGE SELECTION</text>
+              <text class="nw-svg-result" x="638" y="183">Keeps what matters most often.</text>
+              <text class="nw-svg-dropped" x="638" y="220">Rare direction can disappear before repair.</text>
+              <line x1="1004" y1="193" x2="1033" y2="222"/>
+              <line x1="1033" y1="193" x2="1004" y2="222"/>
+            </g>
+            <g class="nw-svg-selector nw-svg-selector-robust">
+              <rect x="610" y="357" width="448" height="152"/>
+              <text class="nw-svg-selector-label" x="638" y="395">ROBUST CAPACITY</text>
+              <text class="nw-svg-result" x="638" y="435">Keeps what matters anywhere.</text>
+              <text class="nw-svg-kept" x="638" y="472">Rare direction travels into the smaller layer.</text>
+              <path class="nw-svg-check" d="M1001 450 l12 13 25 -32"/>
+            </g>
+
+            <line class="nw-svg-baseline" x1="62" y1="548" x2="1058" y2="548"/>
+            <text class="nw-svg-foot" x="62" y="578">THE QUESTION IS NOT ONLY “WHAT FIRES MOST?”</text>
+            <text class="nw-svg-foot-strong" x="674" y="578">It is “what can we not afford to lose?”</text>
+          </svg>
+          <div class="nw-field-mobile">
+            <p>Three calibration environments</p>
+            <div class="nw-field-mobile-env">
+              <span>01 · Common prose <b>frequent</b></span>
+              <span>02 · Dialogue <b>regular</b></span>
+              <span>03 · Code <b>rare</b></span>
+            </div>
+            <div class="nw-field-mobile-arrow" aria-hidden="true">↓</div>
+            <div class="nw-field-mobile-paths">
+              <div><span>Average selection</span><strong>Keeps what matters most often</strong><small>Rare direction can disappear before repair</small></div>
+              <div><span>Robust capacity</span><strong>Keeps what matters anywhere</strong><small>Rare direction travels into the smaller layer</small></div>
+            </div>
+          </div>
+          <figcaption id="field-figure-caption"><span><b>Figure 1 · The selection problem.</b> Average calibration rewards frequency. Robust selection asks whether a unit is important in any named environment.</span><span>Editorial illustration · Ephemerent News</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="nw-shell nw-article-grid">
+      <nav class="nw-article-rail" aria-labelledby="dispatch-map-heading">
+        <div class="nw-rail-heading"><p id="dispatch-map-heading">In this dispatch</p><span>Six movements</span></div>
+        <ol data-article-toc>
+          <li><a href="#rare-musician">The rare musician</a></li>
+          <li><a href="#what-neuron-does">What a neuron contributes</a></li>
+          <li><a href="#selection-refit">Choosing versus repairing</a></li>
+          <li><a href="#controlled">Where the hierarchy worked</a></li>
+          <li><a href="#gpt2">The GPT-2 surprise</a></li>
+          <li><a href="#next">What comes next</a></li>
+        </ol>
+      </nav>
+
+      <div class="nw-article-body">
+        <p class="nw-opening" data-reveal><span>The shortest version:</span> the paper’s robust principle survived contact with GPT-2, but its most elaborate machinery did not earn the win. That is not a failed story. It is a more useful one.</p>
+        <p data-reveal>Neural network compression tries to make a model smaller by removing computation it appears not to need. The danger is that “not needed” is usually measured on a calibration sample—and a calibration sample can be very good at representing what is common while barely showing what is rare.</p>
+        <aside class="nw-thesis" data-reveal><span>What the experiment says</span><p>At mild GPT-2 reduction, the simple robust selector and the hierarchy were effectively tied. At more aggressive reduction, the simple selector had lower worst-domain perplexity increase. The study is too small to establish a general win or a state-of-the-art compressor.</p></aside>
+
+        <section class="nw-movement" id="rare-musician" data-article-section>
+          <div class="nw-movement-heading" data-reveal><span>01</span><div><p>The intuition</p><h2>The rare musician.</h2></div></div>
+          <p data-reveal>Imagine compressing an orchestra after listening to rehearsals. One musician plays constantly. Another enters only once, during a quiet coda—but without that note, the ending collapses.</p>
+          <p data-reveal>If you rank musicians by their average sound across rehearsal, the rare player looks expendable. That judgment is locally reasonable and globally wrong. The sample has confused <em>infrequency</em> with <em>redundancy</em>.</p>
+          <div class="nw-orchestra" role="img" aria-label="A rehearsal score where a rare but essential instrument appears only in the code environment" data-reveal>
+            <div class="nw-orchestra-head"><span>Calibration score</span><span>Contribution over time</span></div>
+            <div><strong>Common</strong><i><b style="--w:94%"></b></i><span>frequent</span></div>
+            <div><strong>Dialogue</strong><i><b style="--w:68%"></b></i><span>regular</span></div>
+            <div class="is-rare"><strong>Code</strong><i><b style="--w:17%"></b></i><span>rare · unique</span></div>
+            <p>The rare line is short. Its direction is still irreplaceable.</p>
+          </div>
+          <p data-reveal>DR-FSP starts from this concern: a unit that looks redundant on common inputs may carry a computational direction that a rare environment relies on. Its central proposal is to judge importance across named environments, not only in the mixture average.</p>
+          <p data-reveal>There is one extra fairness step. Prose, dialogue, and code can naturally produce outputs at different scales, so the paper measures each environment’s reconstruction error relative to that environment’s own original output. In plain language: <em>what fraction of this room’s behavior did compression fail to reproduce?</em></p>
+
+          <figure class="nw-risk-lab is-average" data-risk-lab data-reveal aria-labelledby="risk-caption">
+            <div class="nw-risk-head">
+              <div><span>How robust risk works</span><h3>Three rooms. Two ways to grade the repair.</h3></div>
+              <div class="nw-risk-controls" role="group" aria-label="Choose how the illustrative environment risks are summarized">
+                <button type="button" data-risk-mode="average" aria-pressed="true">Mixture average</button>
+                <button type="button" data-risk-mode="worst" aria-pressed="false">Worst room</button>
+              </div>
+            </div>
+            <div class="nw-risk-scale" aria-hidden="true"><span>Perfect reconstruction · 0</span><span>More lost behavior →</span></div>
+            <div class="nw-risk-rows">
+              <div class="nw-risk-row" data-risk-env="common" style="--risk-bar:8%; --share-bar:70%">
+                <div><strong>Common prose</strong><span>70% of illustrative mixture</span></div><i><b></b></i><em>R = 0.04</em>
+              </div>
+              <div class="nw-risk-row" data-risk-env="dialogue" style="--risk-bar:16%; --share-bar:25%">
+                <div><strong>Dialogue</strong><span>25% of illustrative mixture</span></div><i><b></b></i><em>R = 0.08</em>
+              </div>
+              <div class="nw-risk-row is-rare" data-risk-env="code" style="--risk-bar:84%; --share-bar:5%">
+                <div><strong>Code</strong><span>5% of illustrative mixture</span></div><i><b></b></i><em>R = 0.42</em>
+              </div>
+            </div>
+            <div class="nw-risk-verdict" aria-live="polite">
+              <span data-risk-label>Prevalence-weighted score</span>
+              <strong data-risk-value>0.07</strong>
+              <p data-risk-note>The frequent rooms dominate the mixture, so a serious code failure can look small in the overall grade.</p>
+            </div>
+            <figcaption id="risk-caption"><b>Illustrative risk units, not measured paper results.</b> A risk of 0 is a perfect reconstruction; a risk around 1 is roughly as much error as replacing the layer contribution with zero. Worst-environment optimization follows the largest normalized error instead of letting prevalence hide it.</figcaption>
+          </figure>
+        </section>
+
+        <section class="nw-movement" id="what-neuron-does" data-article-section>
+          <div class="nw-movement-heading" data-reveal><span>02</span><div><p>The mechanism</p><h2>What a neuron actually contributes.</h2></div></div>
+          <p data-reveal>A hidden unit has two parts to its job. First, it <em>fires</em>: it recognizes something in the current input. Then it <em>writes</em>: it pushes a direction into the next part of the network.</p>
+          <p data-reveal>Looking at only one half can mislead. A unit can activate loudly but write almost nothing useful. Another can fire rarely yet write a direction no surviving unit can reproduce.</p>
+          <figure class="nw-contribution-flow" aria-labelledby="contribution-caption" data-reveal>
+            <div class="nw-flow-step nw-flow-fire"><span>01</span><strong>What fires</strong><p>The inputs that make the unit respond.</p><div aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <span class="nw-flow-join" aria-hidden="true">×</span>
+            <div class="nw-flow-step nw-flow-write"><span>02</span><strong>What it writes</strong><p>The direction it adds to the layer output.</p><svg viewBox="0 0 150 48" aria-hidden="true"><path d="M7 37 L56 14 L89 31 L141 9"/><circle cx="56" cy="14" r="4"/><circle cx="89" cy="31" r="4"/></svg></div>
+            <span class="nw-flow-join" aria-hidden="true">→</span>
+            <div class="nw-flow-step nw-flow-survive"><span>03</span><strong>What survives</strong><p>The functional direction available after compression.</p><div aria-hidden="true"><i></i><i></i><i></i></div></div>
+            <figcaption id="contribution-caption">The paper represents a unit by both its activation pattern and its outgoing write. Compression should preserve the product, not merely the loudest half.</figcaption>
+          </figure>
+          <p data-reveal>The multiplication is easier to picture than it looks. Take one vertical tape showing how strongly the neuron fired on each example. Multiply it by one horizontal arrow showing where the neuron writes. The result is a sheet: the same write direction repeated for every example, louder or quieter according to the activation tape.</p>
+
+          <figure class="nw-operator-figure" data-operator-lab data-reveal aria-labelledby="operator-caption">
+            <div class="nw-operator-copy">
+              <span class="nw-operator-kicker">The rank-one operator</span>
+              <h3>One neuron leaves a sheet of evidence.</h3>
+              <p>Stack one contribution sheet for each environment and the unit’s job becomes visible across prose, dialogue, and code.</p>
+              <div class="nw-operator-equation" aria-label="Activation tape multiplied by write direction equals contribution sheet">
+                <span><b>a<sub>e,i</sub></b><small>activation tape</small></span><i aria-hidden="true">×</i><span><b>v<sub>i</sub></b><small>write direction</small></span><i aria-hidden="true">=</i><span><b>F<sub>e,i</sub></b><small>contribution sheet</small></span>
+              </div>
+              <div class="nw-operator-controls" role="group" aria-label="Inspect the neuron contribution in each environment">
+                <button type="button" data-operator-env="prose" aria-pressed="true"><span>01</span>Prose</button>
+                <button type="button" data-operator-env="dialogue" aria-pressed="false"><span>02</span>Dialogue</button>
+                <button type="button" data-operator-env="code" aria-pressed="false"><span>03</span>Code</button>
+              </div>
+              <div class="nw-operator-readout" aria-live="polite"><span>Selected sheet</span><strong data-operator-title>Common prose</strong><p data-operator-note>Frequent activation makes this sheet easy to see in an average calibration sample.</p></div>
+            </div>
+            <div class="nw-operator-stage" aria-hidden="true">
+              <span class="nw-operator-axis nw-operator-axis-activation">activation over examples</span>
+              <span class="nw-operator-axis nw-operator-axis-write">outgoing write direction</span>
+              <span class="nw-operator-axis nw-operator-axis-environment">environments</span>
+              <div class="nw-operator-stack" data-operator-stack>
+                <div class="nw-operator-plane is-active" data-operator-plane="prose" style="--plane-z:54px">
+                  <div class="nw-operator-matrix">
+                    <i class="l2"></i><i class="l3"></i><i class="l4"></i><i class="l2"></i><i class="l1"></i><i class="l3"></i>
+                    <i class="l3"></i><i class="l4"></i><i class="l5"></i><i class="l3"></i><i class="l2"></i><i class="l4"></i>
+                    <i class="l2"></i><i class="l3"></i><i class="l4"></i><i class="l2"></i><i class="l1"></i><i class="l3"></i>
+                    <i class="l4"></i><i class="l5"></i><i class="l5"></i><i class="l4"></i><i class="l2"></i><i class="l4"></i>
+                  </div><span>COMMON PROSE</span>
+                </div>
+                <div class="nw-operator-plane" data-operator-plane="dialogue" style="--plane-z:12px">
+                  <div class="nw-operator-matrix">
+                    <i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i>
+                    <i class="l3"></i><i class="l4"></i><i class="l5"></i><i class="l3"></i><i class="l2"></i><i class="l4"></i>
+                    <i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i>
+                    <i class="l2"></i><i class="l3"></i><i class="l4"></i><i class="l2"></i><i class="l1"></i><i class="l3"></i>
+                  </div><span>DIALOGUE</span>
+                </div>
+                <div class="nw-operator-plane" data-operator-plane="code" style="--plane-z:-30px">
+                  <div class="nw-operator-matrix">
+                    <i class="l1"></i><i class="l1"></i><i class="l2"></i><i class="l1"></i><i class="l1"></i><i class="l2"></i>
+                    <i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i class="l2"></i>
+                    <i class="l4"></i><i class="l5"></i><i class="l5"></i><i class="l4"></i><i class="l3"></i><i class="l5"></i>
+                    <i class="l1"></i><i class="l1"></i><i class="l2"></i><i class="l1"></i><i class="l1"></i><i class="l2"></i>
+                  </div><span>CODE · RARE SPIKE</span>
+                </div>
+              </div>
+            </div>
+            <figcaption id="operator-caption"><b>The stack is a visual metaphor, not an extra learned 3D tensor.</b> Formally, each environment contributes one two-dimensional activation-by-write sheet. DR-FSP compares those functional sheets rather than treating a neuron as a single weight magnitude.</figcaption>
+          </figure>
+        </section>
+
+        <section class="nw-movement" id="selection-refit" data-article-section>
+          <div class="nw-movement-heading" data-reveal><span>03</span><div><p>The distinction</p><h2>Choosing is not the same as repairing.</h2></div></div>
+          <p data-reveal>Most compression pipelines contain two decisions that are easy to blur together. <strong>Selection</strong> chooses which neurons remain. <strong>Refitting</strong> adjusts the outgoing weights of those survivors so they reproduce the old layer as closely as possible.</p>
+          <p data-reveal>Refitting can repair coefficients. It cannot generally invent an activation direction that selection already deleted. Once the rare musician has left the building, turning up the remaining microphones does not recreate the missing note.</p>
+
+          <figure class="nw-branch-figure" data-branch-diagram data-reveal aria-labelledby="branch-caption">
+            <div class="nw-branch-start"><span>Selection</span><strong>Which activation basis survives?</strong></div>
+            <div class="nw-branch-split" aria-hidden="true"><i></i></div>
+            <div class="nw-branch-paths">
+              <button class="nw-branch-path is-active" type="button" data-branch="fragile" aria-pressed="true">
+                <span>Path A · average-weighted</span><strong>Fragile subset</strong><small>Rare stable direction omitted</small>
+              </button>
+              <button class="nw-branch-path" type="button" data-branch="stable" aria-pressed="false">
+                <span>Path B · worst-environment</span><strong>Stable subset</strong><small>Rare stable direction retained</small>
+              </button>
+            </div>
+            <div class="nw-refit-pair">
+              <div data-branch-node="fragile"><span>Same robust refit</span><strong>Damage reduced</strong><small>Missing direction stays missing</small></div>
+              <div data-branch-node="stable"><span>Same robust refit</span><strong>Lowest worst-case risk</strong><small>The needed basis is still present</small></div>
+            </div>
+            <div class="nw-branch-merge" aria-hidden="true"><i></i></div>
+            <div class="nw-branch-insight" role="status" data-branch-note><span>Selected path</span><p>Robust refitting helps the fragile subset, but it cannot synthesize the activation direction that average-weighted selection removed.</p></div>
+            <figcaption id="branch-caption"><b>Selection changes the available basis. Refitting changes only how the surviving basis is combined.</b> Select either path to follow the consequence.</figcaption>
+          </figure>
+
+          <p data-reveal>The first controlled experiment made that separation unusually clean. Across 20 seeds, there were six coordinate decisions per seed—120 opportunities to retain the stable direction. Source-only and prevalence-weighted selection kept it <strong>0 out of 120</strong> times. Worst-environment selection kept it <strong>120 out of 120</strong> times and matched an exact search over 729 candidate subsets.</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="nw-evidence-figure" aria-labelledby="rare-figure-caption">
+      <div class="nw-shell" data-reveal>
+        <div class="nw-evidence-heading"><span>Paper figure · rare environments</span><p>Read the right panel first.</p></div>
+        <figure>
+          <img class="nw-evidence-full" src="/assets/news-drfsp-rare.png?v=20260809b" width="1806" height="668" loading="lazy" decoding="async" alt="Two paper charts showing held-out risk for selection and refitting combinations, and stable coordinates retained out of 120.">
+          <div class="nw-mobile-figure-panels">
+            <div class="nw-mobile-figure-panel"><p><b>Panel A</b><span>Selection and refit risk · lower is better</span></p><img src="/assets/news-drfsp-rare-a.png?v=20260809b" width="1035" height="668" loading="lazy" decoding="async" alt="Held-out risk for six combinations of source, average, and minimax selection and refitting."></div>
+            <div class="nw-mobile-figure-panel"><p><b>Panel B</b><span>Stable coordinates retained · higher is better</span></p><img src="/assets/news-drfsp-rare-b.png?v=20260809b" width="806" height="668" loading="lazy" decoding="async" alt="Stable coordinates retained out of 120: zero for source and average selection, 120 for minimax selection."></div>
+          </div>
+          <figcaption id="rare-figure-caption"><span><b>What to notice:</b> only minimax selection changes which basis survives. A minimax refit lowers the damage of a bad selection, but the right panel remains at zero until the selector itself becomes worst-environment aware.</span><span class="nw-figure-source"><b>Source</b> DR-FSP manuscript, corrected v3<br>20 seeds · 120 coordinate decisions</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="nw-shell nw-article-grid nw-article-grid-resume">
+      <div class="nw-article-body nw-article-body-offset">
+        <section class="nw-movement" id="controlled" data-article-section>
+          <div class="nw-movement-heading" data-reveal><span>04</span><div><p>The clean win</p><h2>Where the hierarchy worked.</h2></div></div>
+          <p data-reveal>The more ambitious part of DR-FSP builds a family tree of neurons. Units are grouped by compact functional fingerprints that combine when they fire with what they write. Cut the tree at a target width, keep one representative from each group, then refit globally.</p>
+          <p data-reveal>In a controlled overcomplete layer, that structure was exactly the right tool. The synthetic layer contained 100 units but only 50 dominant functional families, mixed with clones, near-clones, distractors, and low-energy directions. The task was to reduce the layer from width 100 to width 50.</p>
+          <p data-reveal>Comparing every full contribution sheet would be expensive, so DR-FSP first makes a compact <em>functional fingerprint</em>—more like a contact print than a biography. If two fingerprints preserve the same activation-and-write geometry across environments, the hierarchy can place those units in one family.</p>
+
+          <figure class="nw-family-figure" data-reveal aria-labelledby="family-caption">
+            <div class="nw-family-heading"><span>Subset projection</span><h3>Compress the copies, keep the vocabulary.</h3></div>
+            <div class="nw-family-scene" role="img" aria-label="Five schematic pairs of related neural units become five family representatives, followed by a global refit">
+              <div class="nw-family-side nw-family-before">
+                <div class="nw-family-label"><span>Before</span><strong>100 units</strong><small>copies · near-copies · distractors</small></div>
+                <div class="nw-family-groups" aria-hidden="true">
+                  <div><b>A</b><i class="nw-unit-cube"></i><i class="nw-unit-cube is-copy"></i></div>
+                  <div><b>B</b><i class="nw-unit-cube"></i><i class="nw-unit-cube is-copy"></i></div>
+                  <div><b>C</b><i class="nw-unit-cube"></i><i class="nw-unit-cube is-copy"></i></div>
+                  <div class="is-rare"><b>D</b><i class="nw-unit-cube"></i><i class="nw-unit-cube is-copy"></i></div>
+                  <div><b>E</b><i class="nw-unit-cube"></i><i class="nw-unit-cube is-copy"></i></div>
+                </div>
+              </div>
+              <div class="nw-family-gate" aria-hidden="true"><span>Functional fingerprints</span><div><i></i><i></i><i></i><i></i><i></i></div><b>group by job</b><em>→</em></div>
+              <div class="nw-family-side nw-family-after">
+                <div class="nw-family-label"><span>After selection</span><strong>50 representatives</strong><small>one dominant family per slot</small></div>
+                <div class="nw-family-groups" aria-hidden="true">
+                  <div><b>A</b><i class="nw-unit-cube"></i></div>
+                  <div><b>B</b><i class="nw-unit-cube"></i></div>
+                  <div><b>C</b><i class="nw-unit-cube"></i></div>
+                  <div class="is-rare"><b>D</b><i class="nw-unit-cube"></i></div>
+                  <div><b>E</b><i class="nw-unit-cube"></i></div>
+                </div>
+              </div>
+              <div class="nw-family-refit"><span>Then refit</span><p>The representatives adjust how strongly they write. They do not have to impersonate a family that selection erased.</p></div>
+            </div>
+            <figcaption id="family-caption"><b>Schematic view: five families stand in for the planted fifty.</b> The actual 100→50 experiment included clones, near-clones, distractors, and low-energy directions. The 5% energy floor prevented trivial low-energy units from occupying a family slot.</figcaption>
+          </figure>
+          <p data-reveal>The aim is not simply to keep the fifty biggest neurons. It is to preserve fifty distinct pieces of functional vocabulary, then let the global refit redistribute responsibility among the survivors.</p>
+          <div class="nw-number-pair" data-reveal>
+            <div><span>Hierarchy + energy floor</span><strong>50 / 50</strong><p>dominant families recovered</p></div>
+            <div><span>Activation-only ranking</span><strong>31.92 / 50</strong><p>families recovered on average</p></div>
+          </div>
+          <p data-reveal>Across 50 random seeds, the raw hierarchy with a declared 5% energy floor recovered all 50 families every time. Magnitude recovered about 41.74; random selection 35.24; activation strength alone 31.92.</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="nw-evidence-figure nw-evidence-figure-blue" aria-labelledby="controlled-figure-caption">
+      <div class="nw-shell" data-reveal>
+        <div class="nw-evidence-heading"><span>Paper figure · controlled compression</span><p>Lower risk is left; full family coverage is right.</p></div>
+        <figure>
+          <img class="nw-evidence-full" src="/assets/news-drfsp-controlled.png?v=20260809b" width="1788" height="765" loading="lazy" decoding="async" alt="Two charts comparing reconstruction risk and structural family coverage for controlled width-50 compression methods.">
+          <div class="nw-mobile-figure-panels">
+            <div class="nw-mobile-figure-panel"><p><b>Panel A</b><span>Reconstruction quality at width 50 · lower is better</span></p><img src="/assets/news-drfsp-controlled-a.png?v=20260809b" width="1160" height="765" loading="lazy" decoding="async" alt="Reconstruction quality at width 50 for the hierarchy, capacity scores, magnitude, random selection, and activation strength."></div>
+            <div class="nw-mobile-figure-panel"><p><b>Panel B</b><span>Dominant family coverage · higher is better</span></p><img src="/assets/news-drfsp-controlled-b.png?v=20260809b" width="688" height="765" loading="lazy" decoding="async" alt="Dominant family coverage out of 50, with hierarchy variants recovering all 50 families."></div>
+          </div>
+          <figcaption id="controlled-figure-caption"><span><b>What to notice:</b> the three hierarchy/reference rows land at full 50-family coverage. Simpler scalar scores lose families even though every method receives the same robust refit afterward.</span><span class="nw-figure-source"><b>Source</b> DR-FSP manuscript, corrected v3<br>100 → 50 units · 50 seeds</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="nw-shell nw-article-grid nw-article-grid-resume">
+      <div class="nw-article-body nw-article-body-offset">
+        <aside class="nw-boundary" data-reveal><span>The boundary</span><p>This was a planted construction with known families. It shows that the mechanism can work when its assumptions are clean. It does not show that natural language models organize themselves into equally recoverable families.</p></aside>
+
+        <section class="nw-movement" id="gpt2" data-article-section>
+          <div class="nw-movement-heading" data-reveal><span>05</span><div><p>The reversal</p><h2>The GPT-2 surprise.</h2></div></div>
+          <p data-reveal>Then came the harder test: GPT-2 Small. The study compressed one MLP layer at a time—layers 2, 5, and 8—using prose, dialogue, and code as separate environments. It repeated the test across three corpus offsets and three width-reduction levels, producing nine layer-split trials per ratio.</p>
+          <p data-reveal>The result did not reward complexity. At a mild 25% local width reduction, raw hierarchy and robust capacity were effectively tied: <strong>5.13%</strong> versus <strong>5.19%</strong> worst-domain perplexity increase. At 50% and 60% reduction, robust capacity was better: <strong>6.19% vs. 7.09%</strong>, then <strong>6.95% vs. 8.56%</strong>. Lower is better.</p>
+          <aside class="nw-method-note" data-reveal><span>What “robust capacity” means</span><p>Score every neuron by its strongest normalized contribution across the named environments. A neuron survives if it matters greatly anywhere—not only if it scores well on average. Then give every selected subset the same worst-environment refit.</p></aside>
+          <p data-reveal>The optional Gaussian refinement did worse still: 6.54%, 9.66%, and 11.26% across the three reductions. A technique intended to stabilize the hierarchy in noisy data appears to have distorted angles that mattered for the natural model.</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="nw-evidence-figure nw-evidence-figure-coral" aria-labelledby="gpt2-figure-caption">
+      <div class="nw-shell" data-reveal>
+        <div class="nw-evidence-heading"><span>Paper figure · repeated GPT-2 diagnostic</span><p>Lower is better. Error bars show trial variability.</p></div>
+        <figure>
+          <img class="nw-evidence-full" src="/assets/news-drfsp-gpt2.png?v=20260809b" width="1784" height="721" loading="lazy" decoding="async" alt="Charts comparing worst-domain perplexity change for five GPT-2 compression selectors at 25, 50, and 60 percent local width reduction.">
+          <div class="nw-mobile-figure-panels">
+            <div class="nw-mobile-figure-panel"><p><b>Panel A</b><span>Five selectors across three width reductions · lower is better</span></p><img src="/assets/news-drfsp-gpt2-a.png?v=20260809b" width="1015" height="721" loading="lazy" decoding="async" alt="Worst-domain GPT-2 perplexity change for five selectors across 25, 50, and 60 percent local MLP-width reduction."></div>
+            <div class="nw-mobile-figure-panel"><p><b>Panel B</b><span>Gaussian minus raw hierarchy by layer · positive means Gaussian is worse</span></p><img src="/assets/news-drfsp-gpt2-b.png?v=20260809b" width="794" height="721" loading="lazy" decoding="async" alt="Gaussian hierarchy minus raw hierarchy perplexity change by GPT-2 layer; positive values mean Gaussian is worse."></div>
+          </div>
+          <div class="nw-mobile-legend" aria-label="Method color legend"><span class="is-blue">Robust capacity</span><span class="is-orange">Wanda-style</span><span class="is-green">Magnitude</span><span class="is-red">Raw hierarchy</span><span class="is-purple">Gaussian hierarchy</span></div>
+          <figcaption id="gpt2-figure-caption"><span><b>What to notice:</b> blue robust capacity stays lowest at the two aggressive settings. Purple Gaussian hierarchy rises sharply, especially in layer 2. The wide error bars are why this is a diagnostic, not a definitive ranking.</span><span class="nw-figure-source"><b>Source</b> DR-FSP manuscript, corrected v3<br>3 layers × 3 corpus offsets · 9 trials per ratio</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="nw-shell nw-article-grid nw-article-grid-resume">
+      <div class="nw-article-body nw-article-body-offset">
+        <div class="nw-table-wrap" data-reveal>
+          <table>
+            <caption>Worst-domain relative perplexity increase on GPT-2 Small. Mean ± sample standard deviation; lower is better.</caption>
+            <thead><tr><th scope="col">Selector</th><th scope="col">25% reduction</th><th scope="col">50% reduction</th><th scope="col">60% reduction</th></tr></thead>
+            <tbody>
+              <tr class="is-highlight"><th scope="row">Robust capacity</th><td data-label="25% reduction">5.19 ± 3.58</td><td data-label="50% reduction"><strong>6.19 ± 3.76</strong></td><td data-label="60% reduction"><strong>6.95 ± 4.56</strong></td></tr>
+              <tr><th scope="row">Wanda-style</th><td data-label="25% reduction">5.20 ± 3.43</td><td data-label="50% reduction">6.53 ± 3.97</td><td data-label="60% reduction">7.29 ± 4.65</td></tr>
+              <tr><th scope="row">Magnitude</th><td data-label="25% reduction">6.10 ± 4.85</td><td data-label="50% reduction">6.75 ± 5.97</td><td data-label="60% reduction">7.87 ± 6.59</td></tr>
+              <tr><th scope="row">Raw hierarchy</th><td data-label="25% reduction"><strong>5.13 ± 3.70</strong></td><td data-label="50% reduction">7.09 ± 4.86</td><td data-label="60% reduction">8.56 ± 6.52</td></tr>
+              <tr><th scope="row">Gaussian hierarchy</th><td data-label="25% reduction">6.54 ± 4.22</td><td data-label="50% reduction">9.66 ± 5.32</td><td data-label="60% reduction">11.26 ± 7.45</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="nw-subhead" data-reveal>The result is promising. It is not settled.</h3>
+        <p data-reveal>When the three ratios are averaged within each trial, raw hierarchy is 0.82 percentage points worse than robust capacity—but the 95% interval runs from -0.06 to 1.82. That interval still includes no difference. The aggressive-setting pattern is compelling enough to investigate, not strong enough to declare universal victory.</p>
+        <p data-reveal>And these are local interventions. Reducing one MLP by 25%, 50%, or 60% removes only about 0.95%, 1.90%, or 2.28% of GPT-2 Small’s total parameters. The paper measures perplexity, not latency, energy, or end-to-end hardware speed.</p>
+
+        <section class="nw-movement" id="next" data-article-section>
+          <div class="nw-movement-heading" data-reveal><span>06</span><div><p>The open question</p><h2>What comes next.</h2></div></div>
+          <p data-reveal>The hierarchy remains an unproven idea for larger natural models. The robust principle is in better shape: protect the worst named environment, and do not expect refitting to rescue a basis that selection already erased.</p>
+          <p data-reveal>Future experiments can determine whether DR-FSP can compete with—or beat—state-of-the-art compression techniques. That requires matched comparisons, not a victory lap: larger models, more layers and multiple blocks, downstream tasks, equal recovery compute, fine-tuning, independent evaluation domains, and real hardware measurements.</p>
+          <div class="nw-next-grid" data-reveal>
+            <div><span>Scale</span><strong>Larger models and multiple compressed blocks</strong></div>
+            <div><span>Fairness</span><strong>Matched recovery compute and fine-tuning</strong></div>
+            <div><span>Use</span><strong>Downstream tasks beyond perplexity</strong></div>
+            <div><span>Reality</span><strong>Latency, memory, and energy on hardware</strong></div>
+          </div>
+          <p data-reveal>Methods such as OSSCAR, LLM-Pruner, and SliceGPT operate at different granularities and with different recovery budgets. A fair benchmark has to respect those differences. Until then, the honest claim is narrower—and more interesting: <strong>on this diagnostic, environment awareness mattered more than hierarchy at aggressive compression.</strong></p>
+        </section>
+
+        <section class="nw-record" aria-labelledby="record-heading" data-reveal>
+          <div class="nw-record-heading"><span>Research record</span><h2 id="record-heading">Read the work behind the dispatch.</h2></div>
+          <div class="nw-record-links">
+            <a class="nw-record-primary" href="/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression"><span>Journal article</span><strong>ER-2026-0001 · full research record</strong><b aria-hidden="true">↗</b></a>
+            <a href="https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/research-public/published/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression/v3/001-DRFSP_SNCS_Manuscript.pdf" target="_blank" rel="noopener"><span>Manuscript</span><strong>Corrected PDF · v3</strong><b aria-hidden="true">↗</b></a>
+            <a href="https://github.com/kenjugmail/DR-FSP" target="_blank" rel="noopener"><span>Code</span><strong>Public repository</strong><b aria-hidden="true">↗</b></a>
+            <a href="/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression#review-ledger"><span>Review</span><strong>Peer-review ledger</strong><b aria-hidden="true">↗</b></a>
+            <a href="https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/research-public/published/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression/v3/003-DRFSP_SNCS_Online_Resource_1.zip" target="_blank" rel="noopener"><span>Artifacts</span><strong>Online Resource 1 · ZIP</strong><b aria-hidden="true">↓</b></a>
+          </div>
+          <p>Ephemerent News is the explanatory layer. The journal record preserves the manuscript, version history, disclosures, review, and source files.</p>
+        </section>
+
+        <footer class="nw-article-end">
+          <p><span>Filed under</span> Model compression · Robustness · Open research</p>
+          <a href="/news">← Back to Ephemerent News</a>
+        </footer>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="nw-footer">
+  <div class="nw-shell">
+    <div class="nw-footer-grid">
+      <div><a class="nw-footer-wordmark" href="/news">Ephemerent <strong>News</strong></a><p>Research briefings, technology, and evidence.</p></div>
+      <div><span>Publication</span><a href="/news">Latest</a><a href="/news.xml">RSS feed</a><a href="mailto:hello@ephemerent.com?subject=Ephemerent%20News">Contact the desk</a></div>
+      <div><span>Ephemerent</span><a href="/">Institution</a><a href="/journal">Research journal</a><a href="/research">Lab agenda</a></div>
+    </div>
+    <div class="nw-footer-base"><span>© 2026 Ephemerent News · Ephemerent LLC</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span></div>
+  </div>
+</footer>
+
+<script src="/assets/news.js?v=20260811c" defer></script>
+</body>
+</html>

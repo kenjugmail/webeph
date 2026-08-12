@@ -165,8 +165,13 @@
         activeStep = index;
         root.dataset.orreryCurrent = String(index);
         steps.forEach((step, stepIndex) => {
-          if (stepIndex === index) step.setAttribute('data-active', 'true');
-          else step.removeAttribute('data-active');
+          if (stepIndex === index) {
+            step.setAttribute('data-active', 'true');
+            step.setAttribute('aria-current', 'step');
+          } else {
+            step.removeAttribute('data-active');
+            step.removeAttribute('aria-current');
+          }
         });
         frames.forEach((frame, frameIndex) => {
           if (frameIndex === index) frame.setAttribute('data-active', 'true');

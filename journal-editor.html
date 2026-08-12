@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial desk — Ephemerent Research</title>
+<meta name="description" content="Private editorial desk for Ephemerent Research.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://ephemerent.com/journal/editor">
+<meta name="theme-color" content="#f6f2e9">
+<script>document.documentElement.classList.add('jr-js')</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/journal.css?v=20260811c">
+</head>
+<body class="jr-page" data-journal-page="editor">
+<a class="jr-skip" href="#main">Skip to content</a>
+
+<header class="jr-header">
+  <div class="jr-header-inner">
+    <a class="jr-masthead-link" href="/journal" aria-label="Ephemerent Research home">
+      <span class="jr-masthead-mark" aria-hidden="true"></span>
+      <span><span class="jr-masthead-name">Ephemerent Research</span><span class="jr-masthead-sub">Editorial desk · private</span></span>
+    </a>
+    <button class="jr-menu-button" type="button" aria-expanded="false" aria-controls="journal-navigation">
+      <span>Menu</span><span class="jr-menu-mark" aria-hidden="true"></span>
+    </button>
+    <nav class="jr-nav" id="journal-navigation" aria-label="Editorial navigation">
+      <a href="/journal">Public archive</a>
+      <a href="/journal/policies">Policies</a>
+      <a href="/journal/submit">Submit view</a>
+      <a href="/news">News</a>
+      <a class="jr-nav-submit" href="/">Ephemerent <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="jr-main" id="main">
+  <section class="jr-form-page">
+    <div class="jr-container">
+      <div class="jr-form-heading">
+        <span class="jr-kicker">Private editorial desk</span>
+        <h1>Read the edges before release.</h1>
+        <p>This queue is for screening, AI-assisted peer review, publication, correction, and moderation. It never exposes a submitter's private email in the public record.</p>
+      </div>
+
+      <div id="journal-editor-auth-gate" class="jr-status-note jr-auth-status">
+        <strong>Editor account required</strong>
+        <p>Sign in with the Ephemerent account that has been granted the separate research-editor role.</p>
+        <a class="jr-button jr-button-primary" href="login.html?context=research&amp;next=journal-editor.html">Sign in to the desk <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="jr-hidden" id="journal-editor-shell" data-editor-shell>
+        <div class="jr-editor-toolbar">
+          <div>
+            <span class="jr-section-label">Editorial and peer-review queue</span>
+            <p>Transitions and review records are audited. Publication is blocked while an external hold is active.</p>
+          </div>
+          <div class="jr-form-actions jr-form-actions-flush">
+            <button class="jr-button jr-button-small" type="button" id="editor-refresh">Refresh queue</button>
+            <button class="jr-button jr-button-small jr-button-coral" type="button" id="editor-import-package">Stage local package</button>
+            <input class="jr-hidden" id="editor-package-input" type="file" webkitdirectory directory multiple>
+          </div>
+        </div>
+        <div class="jr-editor-list" data-editor-list aria-live="polite"><div class="jr-empty-row jr-loading-row">Reading private submissions…</div></div>
+
+        <section class="jr-editor-detail" id="editor-detail" data-editor-detail aria-labelledby="editor-detail-heading">
+          <div class="jr-section-label">Selected record</div>
+          <h2 id="editor-detail-heading" data-editor-title>Select a submission</h2>
+          <div class="jr-editor-detail-grid">
+            <div class="jr-editor-detail-card">
+              <h3>Declarations and disclosure</h3>
+              <p data-editor-declarations></p>
+            </div>
+            <div class="jr-editor-detail-card">
+              <h3>Private files</h3>
+              <ul class="jr-side-list" data-editor-files><li><span>No record selected.</span></li></ul>
+            </div>
+            <div class="jr-editor-detail-card">
+                <h3>Screening and peer-review checklist</h3>
+              <div class="jr-checklist" data-editor-checklist>
+                <label class="jr-check"><input type="checkbox" data-check="integrity"><span>Files and metadata are intact enough to screen.</span></label>
+                <label class="jr-check"><input type="checkbox" data-check="disclosure"><span>AI authorship, funding, conflicts, and ethics are disclosed.</span></label>
+                <label class="jr-check"><input type="checkbox" data-check="rights"><span>Rights and publication status are clear.</span></label>
+                <label class="jr-check"><input type="checkbox" data-check="safety"><span>No obvious safety, legal, abuse, or active-content issue is being released.</span></label>
+                <label class="jr-check"><input type="checkbox" data-check="duplicate"><span>Internal duplicate and overlap check is complete.</span></label>
+                <label class="jr-check"><input type="checkbox" data-check="peer_review"><span>At least one disclosed peer review with AI participation has been recorded.</span></label>
+              </div>
+            </div>
+            <div class="jr-editor-detail-card">
+              <h3>Record peer review with AI</h3>
+              <p>Use this ledger for a human review, an AI-system review, or a human review assisted by AI. The review becomes part of the public article record after publication.</p>
+              <form data-editor-review-form>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Reviewer type</span><select class="jr-select" name="reviewer_type"><option value="human_ai">Human + AI assisted</option><option value="human">Human reviewer</option><option value="ai_system">AI system</option></select></label>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Reviewer name or pseudonym</span><input class="jr-input" name="display_name" required maxlength="180" placeholder="Name, system, or pseudonym"></label>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Peer review</span><textarea class="jr-textarea" name="body" required maxlength="20000" placeholder="Use plain-text headings such as Decision:, Evidence checked:, Limitations:, and Recommendation: to create a structured public ledger."></textarea></label>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">AI disclosure</span><textarea class="jr-textarea" name="ai_disclosure" required maxlength="3000" placeholder="Name the model and role, or write “No AI used.”"></textarea></label>
+                <div class="jr-form-actions"><button class="jr-button jr-button-small" type="submit">Save peer review record</button><span class="jr-form-msg" data-editor-review-msg role="status"></span></div>
+              </form>
+            </div>
+            <div class="jr-editor-detail-card">
+              <h3>Editorial note</h3>
+              <textarea class="jr-textarea" id="editor-note" maxlength="6000" placeholder="What changed, what was checked, and what should the record say?"></textarea>
+              <label class="jr-field jr-field-spaced">
+                <span class="jr-section-label">Next state</span>
+                <select class="jr-select" id="editor-next-status">
+                  <option value="screening">Screening</option>
+                  <option value="peer_review">Peer review with AI</option>
+                  <option value="changes_requested">Changes requested</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="withdrawn">Withdrawn</option>
+                  <option value="retracted">Retracted</option>
+                  </select>
+              </label>
+              <label class="jr-field jr-field-spaced">
+                <span class="jr-section-label">Public notice <span class="jr-quiet">(optional)</span></span>
+                <select class="jr-select" id="editor-notice-type">
+                  <option value="">No notice</option>
+                  <option value="correction">Correction</option>
+                  <option value="withdrawal">Withdrawal</option>
+                  <option value="retraction">Retraction</option>
+                </select>
+                <textarea class="jr-textarea jr-control-spaced" id="editor-public-notice" maxlength="4000" placeholder="A short public explanation. Never include private editor notes."></textarea>
+              </label>
+            </div>
+          </div>
+          <div class="jr-editor-actions">
+            <button class="jr-button jr-button-primary" type="button" id="editor-save-state">Save editorial state</button>
+            <button class="jr-button jr-button-coral" type="button" id="editor-publish">Publish immutable version</button>
+            <span class="jr-form-msg" id="editor-msg" role="status" aria-live="polite"></span>
+          </div>
+
+          <div class="jr-editor-detail-card jr-moderation-panel">
+            <h3>Comments and reviews awaiting moderation</h3>
+            <div class="jr-moderation-list" data-editor-moderation><p class="jr-quiet">Select a published record to inspect discussion.</p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="jr-footer">
+  <div class="jr-container">
+    <div class="jr-footer-base jr-footer-base-compact">
+      <span><a href="/journal">Ephemerent Research</a> · private editorial desk</span>
+      <span><a href="/news">News</a> · <a href="/journal/policies">Policies</a> · <a href="mailto:hello@ephemerent.com">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site-config.js"></script>
+<script type="module" src="assets/journal.js?v=20260811c"></script>
+</body>
+</html>

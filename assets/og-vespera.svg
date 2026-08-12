@@ -1,17 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Vespera by Ephemerent">
-  <rect width="1200" height="630" fill="#0d0e12"/>
-  <rect x="0" y="0" width="1200" height="8" fill="#c9a46a"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Vespera — creative systems for strange ideas</title>
+  <desc id="desc">A warm editorial composition pairing Vespera typography with a photographed blue paper sculpture, crop marks, and a four-frame contact strip.</desc>
+  <defs>
+    <clipPath id="hero-plate"><rect x="654" y="116" width="482" height="330"/></clipPath>
+    <clipPath id="contact-1"><rect x="654" y="458" width="115" height="70"/></clipPath>
+    <clipPath id="contact-2"><rect x="776" y="458" width="115" height="70"/></clipPath>
+    <clipPath id="contact-3"><rect x="898" y="458" width="115" height="70"/></clipPath>
+    <clipPath id="contact-4"><rect x="1020" y="458" width="116" height="70"/></clipPath>
+  </defs>
 
-  <g transform="translate(980,200)" fill="none" stroke="#c9a46a" stroke-width="3">
-    <circle r="88"/>
-    <path d="M-48 42 C-20 -8 0 -36 0 -48 C0 -36 20 -8 48 42"/>
+  <rect width="1200" height="630" fill="#f7f3eb"/>
+  <rect width="1200" height="14" fill="#17212d"/>
+  <rect x="64" y="14" width="260" height="8" fill="#2f55ff"/>
+  <rect x="324" y="14" width="116" height="8" fill="#f2675b"/>
+  <rect x="440" y="14" width="86" height="8" fill="#c9e66a"/>
+  <rect x="526" y="14" width="70" height="8" fill="#8b67e8"/>
+
+  <g fill="#40505d" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="2.2">
+    <text x="64" y="82">VESPERA / CUT NOTE 001</text>
+    <text x="1136" y="82" text-anchor="end">IMAGE · RHYTHM · SURPRISE</text>
   </g>
-  <circle cx="980" cy="204" r="12" fill="#c9a46a"/>
 
-  <text x="88" y="230" fill="#f2ebe1" font-family="Georgia, 'Times New Roman', serif" font-size="92" letter-spacing="-2">Vespera</text>
-  <text x="92" y="300" fill="#c9a46a" font-family="Georgia, 'Times New Roman', serif" font-size="40">Creative systems for strange ideas.</text>
-  <text x="92" y="360" fill="#958c80" font-family="'Hanken Grotesk', system-ui, sans-serif" font-size="26">Private browser studio � films, ads, essays</text>
+  <g fill="#17212d" font-family="Georgia, 'Times New Roman', serif">
+    <text x="60" y="225" font-size="110" letter-spacing="-5">Vespera</text>
+    <text x="64" y="302" font-size="37" letter-spacing="-0.6">Give a strange idea</text>
+    <text x="64" y="346" font-size="37" letter-spacing="-0.6">a way to move.</text>
+  </g>
+  <rect x="64" y="388" width="2" height="102" fill="#2f55ff"/>
+  <g fill="#40505d" font-family="Arial, Helvetica, sans-serif" font-size="18">
+    <text x="86" y="414">A private browser studio for films, ads, essays,</text>
+    <text x="86" y="444">and sound-led stories—with the source still attached.</text>
+  </g>
 
-  <line x1="92" y1="430" x2="420" y2="430" stroke="rgba(232,224,210,0.18)" stroke-width="2"/>
-  <text x="92" y="480" fill="#7a7268" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="22" letter-spacing="3">BY EPHEMERENT</text>
+  <rect x="642" y="104" width="506" height="436" fill="#e8dfd1" stroke="#17212d" stroke-width="1"/>
+  <image x="654" y="116" width="482" height="330" xlink:href="vespera-plate.jpg" href="vespera-plate.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-plate)"/>
+  <rect x="654.5" y="116.5" width="481" height="329" fill="none" stroke="#17212d"/>
+  <rect x="666" y="128" width="458" height="306" fill="none" stroke="#f7f3eb" stroke-opacity=".68"/>
+
+  <g fill="none" stroke="#2f55ff" stroke-width="2">
+    <path d="M664 148v-20h20M1106 128h20v20M664 414v20h20M1106 434h20v-20"/>
+    <path d="M730 186h22v22M1044 354h-22v-22"/>
+  </g>
+  <g fill="#f7f3eb" font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="1.8">
+    <text x="674" y="148">PLATE 01 / WORKING STILL</text>
+    <text x="1114" y="424" text-anchor="end">A01</text>
+  </g>
+
+  <g stroke="#f7f3eb" stroke-width="3">
+    <image x="654" y="458" width="220" height="70" xlink:href="vespera-plate.jpg" href="vespera-plate.jpg" preserveAspectRatio="xMinYMid slice" clip-path="url(#contact-1)"/>
+    <image x="710" y="458" width="260" height="70" xlink:href="vespera-plate.jpg" href="vespera-plate.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#contact-2)"/>
+    <image x="836" y="458" width="260" height="70" xlink:href="vespera-plate.jpg" href="vespera-plate.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#contact-3)"/>
+    <image x="976" y="458" width="240" height="70" xlink:href="vespera-plate.jpg" href="vespera-plate.jpg" preserveAspectRatio="xMaxYMid slice" clip-path="url(#contact-4)"/>
+  </g>
+  <line x1="654" y1="456" x2="769" y2="456" stroke="#2f55ff" stroke-width="4"/>
+  <line x1="711" y1="452" x2="711" y2="534" stroke="#2f55ff"/>
+  <path d="M707 452h8l-4 6z" fill="#2f55ff"/>
+
+  <g fill="#68747d" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="1.7">
+    <text x="64" y="578">ONE IMAGE · A CONSIDERED RHYTHM · A REVIEWABLE MASTER</text>
+    <text x="1136" y="578" text-anchor="end">VESPERA / BY EPHEMERENT</text>
+  </g>
 </svg>

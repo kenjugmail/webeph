@@ -14,6 +14,7 @@ import {
 } from './accountPlan.js';
 
 let client = null;
+let clientPromise = null;
 
 function cfg() {
   return window.ORRERY_CONFIG || {};
@@ -32,8 +33,22 @@ function hasAuthCallbackInUrl() {
 
 /** OAuth/magic-link return URL — current auth page when possible, else config default. */
 export function getAuthRedirect() {
+  const params = new URLSearchParams(location.search);
+  const next = params.get('next');
+  if (next && !/^https?:\/\//i.test(next) && !next.startsWith('//')) {
+    const candidate = new URL(next, location.origin);
+    if (candidate.origin === location.origin) return candidate.href;
+  }
+
+  if (params.get('context') === 'research') {
+    return location.origin + '/journal';
+  }
+
   const path = location.pathname;
-  if (path.endsWith('login.html') || path.endsWith('cloud.html') || path.endsWith('vellum-connect.html') || path.endsWith('organizations.html')) {
+  const cleanAuthPaths = new Set(['/organizations', '/journal', '/journal/submit', '/journal/editor']);
+  const legacyAuthPage = /(login|cloud|vellum-connect|organizations|journal|journal-submit|journal-editor|journal-article)\.html$/i.test(path);
+  const articlePath = path.startsWith('/journal/article/');
+  if (cleanAuthPaths.has(path) || articlePath || legacyAuthPage) {
     return location.origin + path;
   }
   const explicit = cfg().AUTH_REDIRECT;
@@ -43,17 +58,30 @@ export function getAuthRedirect() {
 
 async function getClient() {
   if (!cloudConfigured()) return null;
-  if (!client) {
-    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/+esm');
-    client = createClient(cfg().CLOUD_AUTH_URL, cfg().CLOUD_AUTH_KEY, {
-      auth: {
-        detectSessionInUrl: true,
-        persistSession: true,
-        autoRefreshToken: true,
-      },
-    });
+  if (client) return client;
+  if (!clientPromise) {
+    clientPromise = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/+esm')
+      .then(({ createClient }) => {
+        client = createClient(cfg().CLOUD_AUTH_URL, cfg().CLOUD_AUTH_KEY, {
+          auth: {
+            detectSessionInUrl: true,
+            persistSession: true,
+            autoRefreshToken: true,
+          },
+        });
+        return client;
+      })
+      .catch((error) => {
+        clientPromise = null;
+        throw error;
+      });
   }
-  return client;
+  return clientPromise;
+}
+
+/** Shared browser client for the journal's RLS-protected records. */
+export async function getSupabaseClient() {
+  return getClient();
 }
 
 export async function getCloudSession() {
@@ -118,6 +146,24 @@ export async function getCloudProfile() {
       cloud_credit_granted_cents: 0,
       cloud_credit_used_cents: 0,
     };
+  }
+  return data;
+}
+
+export async function getResearchProfile() {
+  const sb = await getClient();
+  const session = await getCloudSession();
+  if (!sb || !session?.user) return null;
+
+  const { data, error } = await sb
+    .from('profiles')
+    .select('id,email,display_name,avatar_url,is_admin,research_editor')
+    .eq('id', session.user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.warn('research profile', error.message);
+    return { id: session.user.id, email: session.user.email, display_name: '', research_editor: false, is_admin: false };
   }
   return data;
 }

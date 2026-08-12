@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4efe4"/>
+  <rect width="1200" height="30" fill="#2553d8"/>
+  <text x="56" y="19" fill="#ffffff" font-family="Menlo, monospace" font-size="9" letter-spacing="2">EPHEMERENT PUBLICATION DESK · RESEARCH DISPATCH 001</text>
+
+  <text x="56" y="104" fill="#11172a" font-family="Georgia, serif" font-size="50" letter-spacing="-2">Ephemerent</text>
+  <text x="335" y="104" fill="#eb5b49" font-family="Georgia, serif" font-size="50" font-style="italic" letter-spacing="-2">News</text>
+  <line x1="56" y1="130" x2="1144" y2="130" stroke="#11172a" stroke-width="2"/>
+
+  <text x="56" y="187" fill="#16368f" font-family="Menlo, monospace" font-size="11" letter-spacing="2">NEURAL NETWORK COMPRESSION</text>
+  <text x="56" y="254" fill="#11172a" font-family="Georgia, serif" font-size="58" letter-spacing="-2.6">
+    <tspan x="56" dy="0">A simpler rule beat</tspan>
+    <tspan x="56" dy="60">the hierarchy on GPT-2.</tspan>
+    <tspan x="56" dy="60" fill="#eb5b49" font-style="italic">Here’s what that means.</tspan>
+  </text>
+  <text x="56" y="484" fill="#4a4d57" font-family="Georgia, serif" font-size="21">The robust principle survived. The hierarchy remains unproven.</text>
+  <line x1="56" y1="527" x2="680" y2="527" stroke="#bdb4a4" stroke-width="1"/>
+  <text x="56" y="558" fill="#69695f" font-family="Menlo, monospace" font-size="10" letter-spacing="1.2">ANALYSIS BY KENJU TOMITA · AUGUST 9, 2026</text>
+
+  <rect x="748" y="176" width="396" height="376" fill="#11172a"/>
+  <text x="778" y="211" fill="#aeb6cd" font-family="Menlo, monospace" font-size="9" letter-spacing="1.6">CALIBRATION ENVIRONMENTS</text>
+  <g fill="none" stroke="#596178">
+    <rect x="778" y="239" width="138" height="50"/>
+    <rect x="778" y="308" width="138" height="50"/>
+    <rect x="778" y="377" width="138" height="50"/>
+  </g>
+  <g fill="#fffdf8" font-family="Menlo, monospace" font-size="9" letter-spacing=".7">
+    <text x="792" y="269">COMMON</text>
+    <text x="792" y="338">DIALOGUE</text>
+    <text x="792" y="407">CODE</text>
+  </g>
+  <g fill="none" stroke-width="2" stroke-dasharray="5 5">
+    <path d="M916 264 C957 264 954 270 995 270" stroke="#ef735f"/>
+    <path d="M916 333 C958 333 955 282 995 282" stroke="#ef735f"/>
+    <path d="M916 402 C960 402 960 294 995 294" stroke="#ef735f" opacity=".25"/>
+    <path d="M916 264 C955 264 955 406 995 406" stroke="#6f92ff"/>
+    <path d="M916 333 C955 333 955 418 995 418" stroke="#6f92ff"/>
+    <path d="M916 402 C955 402 955 430 995 430" stroke="#6f92ff"/>
+  </g>
+  <rect x="995" y="236" width="121" height="88" fill="#181f35" stroke="#ef735f"/>
+  <rect x="995" y="378" width="121" height="88" fill="#181f35" stroke="#6f92ff"/>
+  <text x="1008" y="263" fill="#fffdf8" font-family="Menlo, monospace" font-size="8">AVERAGE</text>
+  <text x="1008" y="291" fill="#ef735f" font-family="Georgia, serif" font-size="17">rare lost</text>
+  <text x="1008" y="405" fill="#fffdf8" font-family="Menlo, monospace" font-size="8">ROBUST</text>
+  <text x="1008" y="433" fill="#86a4ff" font-family="Georgia, serif" font-size="17">rare kept</text>
+  <line x1="778" y1="496" x2="1116" y2="496" stroke="#596178"/>
+  <text x="778" y="522" fill="#fffdf8" font-family="Georgia, serif" font-size="17">Protect what matters anywhere.</text>
+  <rect x="1136" y="176" width="8" height="376" fill="#eb5b49"/>
+
+  <line x1="56" y1="600" x2="1144" y2="600" stroke="#11172a"/>
+  <text x="56" y="619" fill="#69695f" font-family="Menlo, monospace" font-size="8" letter-spacing="1.5">RESEARCH BRIEFINGS, TECHNOLOGY, AND EVIDENCE.</text>
+  <text x="1144" y="619" fill="#16368f" font-family="Menlo, monospace" font-size="8" text-anchor="end" letter-spacing="1.5">EPHEMERENT.COM/NEWS</text>
+</svg>

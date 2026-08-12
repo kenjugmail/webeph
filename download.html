@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Orrery beta</title>
 <meta name="description" content="Download the Orrery beta. Beta software may change, fail, or produce incorrect agent output; review changes and keep backups.">
-<link rel="canonical" href="https://ephemerent.com/download.html">
+<link rel="canonical" href="https://ephemerent.com/download">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Get Orrery beta">
 <meta property="og:description" content="Download the Orrery beta. Preview setup is available; real agent runs require an active subscription.">
-<meta property="og:url" content="https://ephemerent.com/download.html">
+<meta property="og:url" content="https://ephemerent.com/download">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -22,12 +22,14 @@
 <meta property="og:image:alt" content="Get Orrery beta">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Get Orrery beta">
+<meta name="twitter:description" content="Download the Orrery beta. Preview setup is available; real agent runs require an active subscription.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
 <link rel="stylesheet" href="assets/orrery.css?v=20260801b">
 <link rel="stylesheet" href="assets/auth.css?v=20260801">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260802e">
-<script src="assets/motion.js?v=20260802c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811c">
+<script src="assets/motion.js?v=20260811c" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="space-bg auth-page utility-page">
@@ -35,7 +37,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a class="brand" href="Orrery.html">
+    <a class="brand" href="/orrery">
       <svg class="mark" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
         <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
@@ -45,9 +47,9 @@
       <span>Orrery</span>
     </a>
     <div class="nav-links utility-nav-links">
-      <a href="Orrery.html">Orrery</a>
-      <a href="Vellum.html">Vellum</a>
-      <a href="Ephemerent.html">Lab</a>
+      <a href="/orrery">Orrery</a>
+      <a href="/vellum">Vellum</a>
+      <a href="/">Lab</a>
     </div>
     <div class="nav-spacer"></div>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
@@ -66,7 +68,7 @@
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
         <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run governed agents with open-source models on your device plus hosted DeepSeek API, Doubleword, Arbiter, and Orrery Cloud.</span></div>
       </div>
-      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
+      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
       <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
       <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">No permanent unpaid tier or public trial is offered at launch. Preview users can inspect setup; active subscribers can run agents. For beta questions, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
@@ -92,7 +94,7 @@
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
         <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits plus Orrery Cloud, subject to beta limits and provider availability.</span></div>
       </div>
-      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
+      <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <div class="download-steps">
         <h2>Quick start</h2>
         <ol>
@@ -133,7 +135,7 @@
 <footer class="utility-footer">
   <div class="utility-footer-inner">
     <span class="mono">Ephemerent · 2026</span>
-    <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
+    <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
   </div>
 </footer>
 

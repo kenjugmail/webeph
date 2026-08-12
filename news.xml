@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ephemerent News</title>
+    <link>https://ephemerent.com/news</link>
+    <description>Research briefings, technology, and evidence.</description>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Aug 2026 12:00:00 -0400</lastBuildDate>
+    <atom:link href="https://ephemerent.com/news.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://ephemerent.com/assets/og-news-drfsp.png</url>
+      <title>Ephemerent News</title>
+      <link>https://ephemerent.com/news</link>
+    </image>
+    <item>
+      <title>A simpler rule beat the hierarchy on GPT-2. Here’s what that means.</title>
+      <link>https://ephemerent.com/news/drfsp-robust-compression</link>
+      <guid isPermaLink="true">https://ephemerent.com/news/drfsp-robust-compression</guid>
+      <pubDate>Sun, 09 Aug 2026 12:00:00 -0400</pubDate>
+      <author>hello@ephemerent.com (Kenju Tomita)</author>
+      <category>Research Dispatch</category>
+      <category>Neural network compression</category>
+      <description>A controlled experiment rewarded a sophisticated compression hierarchy. A small GPT-2 test did not. The reversal became the real result.</description>
+      <content:encoded><![CDATA[
+        <p>I built a sophisticated hierarchy to compress neural networks without erasing rare-domain behavior. It worked perfectly in a controlled setting. On GPT-2, a much simpler robust baseline did better at aggressive compression—and that became the real result.</p>
+        <p><a href="https://ephemerent.com/news/drfsp-robust-compression">Read the full Research Dispatch at Ephemerent News.</a></p>
+        <p><a href="https://ephemerent.com/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression">Open the peer-reviewed research record at Ephemerent Research.</a></p>
+      ]]></content:encoded>
+    </item>
+  </channel>
+</rss>

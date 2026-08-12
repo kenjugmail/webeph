@@ -279,7 +279,7 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 .ebar {
   min-height: var(--site-nav);
   border-bottom: 1px solid var(--line, var(--rule));
-  background: color-mix(in srgb, var(--bg, var(--paper)) 98%, transparent);
+  background: var(--bg, var(--paper));
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -287,7 +287,7 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 .ebar-in { min-height: var(--site-nav); padding-block: 0; }
 .nav.scrolled,
 .ebar.scrolled {
-  background: color-mix(in srgb, var(--bg, var(--paper)) 97%, transparent) !important;
+  background: var(--bg, var(--paper)) !important;
   border-bottom-color: var(--line, var(--rule));
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -324,6 +324,11 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 .enav a[aria-current="page"]::after { transform: scaleX(1); }
 .enav .est::after,
 .enav .est-keep::after { display: none; }
+
+body.lab-page .ebar,
+body.lab-page .ebar.scrolled {
+  background: var(--paper) !important;
+}
 .menu-toggle {
   display: none;
   min-width: 74px;
@@ -428,7 +433,7 @@ body.vellum-page .prov-local { color: var(--signal); background: transparent; }
   min-width: 0;
   padding: 15px 16px;
   border-top: 1px solid var(--line-strong);
-  background: var(--panel);
+  background: transparent;
 }
 .hero-run-node { display: flex; flex-direction: column; gap: 6px; }
 .hero-run-node > span,
@@ -447,18 +452,20 @@ body.vellum-page .prov-local { color: var(--signal); background: transparent; }
   grid-template-columns: 36px 1fr;
   align-items: center;
   min-height: 48px;
-  border: 1px solid var(--line);
-  background: var(--panel-2);
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
 }
+.hero-run-branches article:first-child { border-top-color: var(--line-strong); }
 .hero-run-branches b {
   align-self: stretch;
   display: grid;
-  place-items: center;
-  border-right: 1px solid var(--line);
+  place-items: center start;
+  border-right: 0;
   color: var(--signal);
   font: 500 10px/1 var(--mono);
 }
-.hero-run-branches article span { padding: 0 12px; color: var(--ink-2); font-size: 13px; }
+.hero-run-branches article span { padding: 0; color: var(--ink-2); font-size: 13px; }
 .hero-run-decision { grid-column: 1 / -1; border-left: 3px solid var(--signal); }
 .hero-run-foot {
   display: flex;
@@ -477,6 +484,177 @@ body.vellum-page .models-section,
 body.orrery-page .pricing-section,
 body.vellum-page .pricing-section,
 body.vellum-page .review-section { background: var(--bg-2); }
+
+body.orrery-page .section,
+body.vellum-page .section {
+  border-bottom: 1px solid var(--line);
+}
+
+body.orrery-page #nexus,
+body.vellum-page #proof { background: var(--bg); }
+
+body.orrery-page #run-loop,
+body.vellum-page #review,
+body.vellum-page #pipeline { background: var(--bg-2); }
+
+body.orrery-page #safety,
+body.vellum-page #architecture { background: var(--panel); }
+
+body.orrery-page .cap-grid,
+body.vellum-page .cap-grid,
+body.orrery-page .chips,
+body.vellum-page .chips {
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+body.orrery-page .cap-grid .card,
+body.vellum-page .cap-grid .card,
+body.orrery-page .chips .chip,
+body.vellum-page .chips .chip {
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 24px 20px 28px 0;
+}
+
+body.orrery-page .cap-grid .card:hover,
+body.vellum-page .cap-grid .card:hover,
+body.orrery-page .chips .chip:hover,
+body.vellum-page .chips .chip:hover {
+  transform: none;
+  background: var(--panel-2) !important;
+  padding-left: 14px;
+}
+
+body.orrery-page .cap-grid .card:nth-child(4n),
+body.vellum-page .cap-grid .card:nth-child(4n),
+body.orrery-page .chips .chip:nth-child(4n),
+body.vellum-page .chips .chip:nth-child(4n) { padding-right: 0; }
+
+body.orrery-page .cap-grid .cap-ic,
+body.vellum-page .cap-grid .cap-ic,
+body.orrery-page .chip-ic,
+body.vellum-page .chip-ic {
+  display: block;
+  color: var(--signal);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+
+body.vellum-page .arch-grid {
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+body.vellum-page .arch-grid .arch-col {
+  border: 0 !important;
+  border-right: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 28px 24px 30px 0;
+}
+
+body.vellum-page .arch-grid .arch-col:last-child {
+  border-right: 0 !important;
+  padding-right: 0;
+}
+
+/* Continuous strips read as a sequence, not a row of feature cards. */
+body.orrery-page .pipe,
+body.vellum-page .pipe,
+body.vellum-page .proof-strip {
+  gap: 0;
+  border: 0 !important;
+  border-top: 1px solid var(--line-strong) !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible;
+}
+
+body.orrery-page .pipe-step,
+body.vellum-page .pipe-step,
+body.vellum-page .ps-item {
+  min-width: 0;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 22px 16px 24px 0;
+}
+
+body.orrery-page .pipe-step:last-child,
+body.vellum-page .pipe-step:last-child,
+body.vellum-page .ps-item:last-child { border-right: 0; padding-right: 0; }
+body.orrery-page .pipe-step + .pipe-step,
+body.vellum-page .pipe-step + .pipe-step,
+body.vellum-page .ps-item + .ps-item { padding-left: 16px; }
+body.orrery-page .pipe-n,
+body.vellum-page .pipe-n,
+body.vellum-page .ps-k { color: var(--signal); }
+
+body.orrery-page .prov-table,
+body.vellum-page .prov-table {
+  border: 0 !important;
+  border-top: 1px solid var(--line-strong) !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible;
+}
+body.orrery-page .prov-row,
+body.vellum-page .prov-row { padding-inline: 0; }
+body.orrery-page .organization-pricing {
+  border: 0 !important;
+  border-top: 1px solid var(--line-strong) !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding-inline: 0;
+}
+body.orrery-page .compare-wrap { border-right: 0; border-bottom: 1px solid var(--line); border-left: 0; border-radius: 0 !important; }
+
+body.vellum-page .flow {
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
+}
+body.vellum-page .flow-step {
+  border: 0 !important;
+  border-right: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 26px 22px 28px 0;
+}
+body.vellum-page .flow-step:last-of-type { border-right: 0 !important; padding-right: 0; }
+body.vellum-page .flow-step + .flow-conn + .flow-step { padding-left: 22px; }
+body.vellum-page .flow-conn { width: 22px; background: var(--signal); opacity: .72; }
+
+@media (max-width: 900px) {
+  body.orrery-page .pipe-step:nth-child(3n),
+  body.vellum-page .pipe-step:nth-child(3n),
+  body.vellum-page .ps-item:nth-child(3n) { border-right: 0; padding-right: 0; }
+  body.orrery-page .pipe-step:nth-child(3n + 1),
+  body.vellum-page .pipe-step:nth-child(3n + 1),
+  body.vellum-page .ps-item:nth-child(3n + 1) { padding-left: 0; }
+}
+
+@media (max-width: 540px) {
+  body.orrery-page .pipe-step:nth-child(3n),
+  body.vellum-page .pipe-step:nth-child(3n),
+  body.vellum-page .ps-item:nth-child(3n) { border-right: 1px solid var(--line); padding-right: 16px; }
+  body.orrery-page .pipe-step:nth-child(2n),
+  body.vellum-page .pipe-step:nth-child(2n),
+  body.vellum-page .ps-item:nth-child(2n) { border-right: 0; padding-right: 0; }
+  body.orrery-page .pipe-step:nth-child(2n + 1),
+  body.vellum-page .pipe-step:nth-child(2n + 1),
+  body.vellum-page .ps-item:nth-child(2n + 1) { padding-left: 0; }
+}
 .loop-rail { justify-content: space-between; }
 .loop-step { min-width: 120px; }
 
@@ -888,12 +1066,141 @@ body.utility-page .auth-main[data-workflow-label="Account / Vellum handoff"] .au
 .error-main h1 { margin-bottom: 18px; font-size: clamp(42px, 7vw, 82px); }
 .error-main p { max-width: 48ch; color: var(--muted); font-size: 18px; line-height: 1.65; }
 .error-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+body.lab-page.error-page .error-main h1 {
+  max-width: 10ch;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: .96;
+}
+body.lab-page.error-page .error-code { color: var(--accent); }
+body.lab-page.error-page .error-actions .ebtn { min-width: 0; }
+
+.legal-layout {
+  display: grid;
+  grid-template-columns: minmax(150px, 190px) minmax(0, 68ch);
+  gap: clamp(34px, 7vw, 96px);
+  align-items: start;
+}
+.legal-layout .legal-body { max-width: none; }
+.legal-index {
+  position: sticky;
+  top: calc(var(--site-nav) + 24px);
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+.legal-index > span {
+  color: var(--faint);
+  font: 500 9px/1.4 var(--mono);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.legal-index ol { margin-top: 12px; list-style: none; }
+.legal-index li { margin: 0; }
+.legal-index a {
+  display: block;
+  padding: 7px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.legal-index a:hover { color: var(--accent); }
+.legal-body h2 { scroll-margin-top: calc(var(--site-nav) + 28px); }
+
+@media (max-width: 820px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 32px; }
+  .legal-index { position: static; columns: 2; column-gap: 24px; }
+  .legal-index > span { display: block; column-span: all; }
+  .legal-index ol { column-span: all; columns: 2; }
+  .legal-index li { break-inside: avoid; }
+}
+
+@media (max-width: 520px) {
+  .legal-index,
+  .legal-index ol { columns: 1; }
+}
 
 /* Tables and data are treated as documents, not dashboard cards. */
 .compare-wrap { overflow-x: auto; border-top: 1px solid var(--line-strong); }
 .compare { min-width: 760px; }
 .compare th,
 .compare td { border-radius: 0 !important; }
+
+/* Supporting product documents are led by rules and sequence, not card chrome. */
+body.supporting-page .nav {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: none;
+}
+body.supporting-page .security-grid,
+body.supporting-page .product-grid,
+body.supporting-page .org-feature-grid {
+  gap: 0;
+  border-top: 1px solid var(--line-strong);
+}
+body.supporting-page .security-grid article,
+body.supporting-page .product-grid article,
+body.supporting-page .org-feature-grid article {
+  min-height: 210px;
+  padding: 28px 24px 34px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+body.supporting-page .security-grid article:nth-child(3n),
+body.supporting-page .product-grid article:last-child,
+body.supporting-page .org-feature-grid article:nth-child(even) { border-right: 0; }
+body.supporting-page .callout,
+body.supporting-page .org-billing-note,
+body.supporting-page .org-auth-card {
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.supporting-page .callout {
+  padding: 32px 0;
+  border-width: 1px 0;
+}
+body.supporting-page .org-trust span {
+  padding: 7px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+  body.orrery-page .compare-wrap { overflow: visible; border: 0; }
+  body.orrery-page .compare,
+  body.orrery-page .compare tbody,
+  body.orrery-page .compare tr,
+  body.orrery-page .compare td { display: block; width: 100%; min-width: 0; }
+  body.orrery-page .compare { min-width: 0; }
+  body.orrery-page .compare thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+  body.orrery-page .compare tr { padding: 16px 0; border-top: 1px solid var(--line-strong); }
+  body.orrery-page .compare td,
+  body.orrery-page .compare .col-us {
+    display: grid;
+    grid-template-columns: minmax(92px, .42fr) minmax(0, 1fr);
+    gap: 14px;
+    padding: 7px 0;
+    border: 0;
+    background: transparent;
+  }
+  body.orrery-page .compare td::before {
+    content: attr(data-label);
+    color: var(--faint);
+    font: 500 9px/1.45 var(--mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  body.supporting-page .security-grid article,
+  body.supporting-page .product-grid article,
+  body.supporting-page .org-feature-grid article {
+    min-height: 0;
+    border-right: 0;
+  }
+}
 
 @media (max-width: 980px) {
   .lifecycle-grid { grid-template-columns: 1fr; gap: 8px; padding-block: 24px; }

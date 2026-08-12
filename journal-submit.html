@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit work — Ephemerent Research</title>
+<meta name="description" content="Submit AI-authored research to Ephemerent Research. No degree, institution, ORCID, or prior publication is required.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://ephemerent.com/journal/submit">
+<meta name="theme-color" content="#f6f2e9">
+<script>document.documentElement.classList.add('jr-js')</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/journal.css?v=20260811c">
+</head>
+<body class="jr-page" data-journal-page="submit">
+<a class="jr-skip" href="#main">Skip to content</a>
+
+<header class="jr-header">
+  <div class="jr-header-inner">
+    <a class="jr-masthead-link" href="/journal" aria-label="Ephemerent Research home">
+      <span class="jr-masthead-mark" aria-hidden="true"></span>
+      <span><span class="jr-masthead-name">Ephemerent Research</span><span class="jr-masthead-sub">Open journal · est. 2026</span></span>
+    </a>
+    <button class="jr-menu-button" type="button" aria-expanded="false" aria-controls="journal-navigation">
+      <span>Menu</span><span class="jr-menu-mark" aria-hidden="true"></span>
+    </button>
+    <nav class="jr-nav" id="journal-navigation" aria-label="Journal navigation">
+      <a href="/journal">Archive</a>
+      <a href="/research">Lab agenda</a>
+      <a href="/journal/policies">Policies</a>
+      <a href="/news">News</a>
+      <a class="jr-nav-submit" href="/journal/submit" aria-current="page">Submit work <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="jr-main" id="main">
+  <section class="jr-form-page">
+    <div class="jr-container">
+      <div class="jr-form-heading">
+        <span class="jr-kicker">Submission desk · open intake</span>
+        <h1>Put the work on the table.</h1>
+        <p>There is no degree, institution, ORCID, or publication-history requirement here. You need an Ephemerent account so one person remains accountable for the record, even when an AI system is the author.</p>
+      </div>
+
+      <div id="journal-auth-gate" class="jr-status-note jr-auth-status">
+        <strong>Account required</strong>
+        <p>Sign in with a free Ephemerent account to save a private draft and upload files. Your Orrery subscription status does not matter.</p>
+        <a class="jr-button jr-button-primary" id="journal-submit-auth-link" href="/login.html?context=research&amp;next=%2Fjournal%2Fsubmit">Create or sign in <span aria-hidden="true">→</span></a>
+      </div>
+
+      <form class="jr-form-layout jr-hidden" id="journal-submit-form" data-journal-submit-form>
+        <div>
+          <section class="jr-form-section" aria-labelledby="work-section-heading">
+            <h2 id="work-section-heading">The work</h2>
+            <p>Give readers a clear handle. A document can be any format; the public record begins with this small amount of context.</p>
+            <div class="jr-form-grid">
+              <div class="jr-field jr-form-grid-wide">
+                <label for="submission-title">Title</label>
+                <input class="jr-input" id="submission-title" name="title" type="text" maxlength="240" required>
+              </div>
+              <div class="jr-field jr-form-grid-wide">
+                <label for="submission-summary">Short description</label>
+                <textarea class="jr-textarea" id="submission-summary" name="summary" maxlength="2000" required placeholder="What is this work trying to do, in language a curious reader can follow?"></textarea>
+                <span class="jr-field-hint">This appears on the archive and becomes the public record if the work is accepted.</span>
+              </div>
+              <div class="jr-field jr-form-grid-wide">
+                <label for="submission-abstract">Abstract or longer description <span class="jr-quiet">(optional)</span></label>
+                <textarea class="jr-textarea" id="submission-abstract" name="abstract" maxlength="12000" placeholder="Methods, materials, findings, limitations, or whatever context the work needs."></textarea>
+              </div>
+              <div class="jr-field">
+                <label for="submission-type">Work type</label>
+                <select class="jr-select" id="submission-type" name="article_type">
+                  <option>Research article</option>
+                  <option>Research note</option>
+                  <option>Technical report</option>
+                  <option>Dataset or benchmark</option>
+                  <option>Creative research</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="jr-field">
+                <label for="submission-keywords">Keywords <span class="jr-quiet">(optional)</span></label>
+                <input class="jr-input" id="submission-keywords" name="keywords" type="text" maxlength="500" placeholder="Separate with commas">
+              </div>
+              <div class="jr-field jr-form-grid-wide">
+                <label for="submission-links">Code, data, model, or project links <span class="jr-quiet">(optional)</span></label>
+                <textarea class="jr-textarea" id="submission-links" name="links" maxlength="4000" placeholder="One URL per line. Large datasets and model artifacts can stay external."></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="jr-form-section" aria-labelledby="authors-section-heading">
+            <h2 id="authors-section-heading">Authorship</h2>
+            <p>AI systems may be listed as authors. Use the fields to name the system and its role; do not make readers guess which parts came from a model.</p>
+            <div class="jr-authors" id="journal-authors" data-author-list>
+              <div class="jr-author-row" data-author-row>
+                <select class="jr-select jr-author-type" name="author_type" aria-label="Author type">
+                  <option value="human">Human</option>
+                  <option value="ai_system">AI system</option>
+                  <option value="organization">Organization</option>
+                </select>
+                <input class="jr-input" name="author_name" type="text" maxlength="180" placeholder="Name or pseudonym" aria-label="Author name">
+                <input class="jr-input" name="author_role" type="text" maxlength="180" placeholder="Role or model version" aria-label="Author role or model version">
+                <button class="jr-remove-author" type="button" aria-label="Remove author">×</button>
+              </div>
+            </div>
+            <div class="jr-form-actions">
+              <button class="jr-button" type="button" id="add-author">Add another author</button>
+            </div>
+            <div class="jr-form-grid jr-form-grid-spaced">
+              <div class="jr-field">
+                <label for="accountable-name">Accountable submitter</label>
+                <input class="jr-input" id="accountable-name" name="accountable_name" type="text" maxlength="180" required placeholder="Name or pseudonym readers can see">
+                <span class="jr-field-hint">This stays attached to the record even if the public author list contains only AI systems.</span>
+              </div>
+              <div class="jr-field">
+                <label for="submission-license">Article license</label>
+                <select class="jr-select" id="submission-license" name="license">
+                  <option>CC BY 4.0</option>
+                  <option>CC BY-SA 4.0</option>
+                  <option>All rights reserved</option>
+                </select>
+                <span class="jr-field-hint">Code and supplementary files keep their own licenses.</span>
+              </div>
+              <div class="jr-field jr-form-grid-wide">
+                <label for="ai-disclosure">AI authorship and contribution disclosure</label>
+                <textarea class="jr-textarea" id="ai-disclosure" name="ai_disclosure" maxlength="12000" required placeholder="Name systems, versions, dates, roles, and whether a human reviewed the final record. If no AI was used, say so."></textarea>
+              </div>
+            </div>
+            <label class="jr-check jr-accountability-check"><input type="checkbox" id="accountability-declaration" required><span>I am the accountable submitter for this record, and I will respond to rights, safety, and publication questions about it.</span></label>
+          </section>
+
+          <section class="jr-form-section" aria-labelledby="declarations-heading">
+            <h2 id="declarations-heading">Declarations</h2>
+            <p>These declarations are the first editorial gate. A later peer review with AI examines the work, not your credentials.</p>
+            <div class="jr-form-grid jr-form-grid-spaced">
+              <div class="jr-field jr-form-grid-wide">
+                <label for="funding-statement">Funding <span class="jr-quiet">(optional)</span></label>
+                <textarea class="jr-textarea" id="funding-statement" name="funding_statement" maxlength="3000" placeholder="Who funded the work? Write “No external funding” if none."></textarea>
+              </div>
+              <div class="jr-field">
+                <label for="conflict-statement">Conflicts of interest</label>
+                <textarea class="jr-textarea" id="conflict-statement" name="conflict_statement" maxlength="3000" required placeholder="Relevant ownership, employment, incentives, or “None.”"></textarea>
+              </div>
+              <div class="jr-field">
+                <label for="ethics-statement">Ethics and safety</label>
+                <textarea class="jr-textarea" id="ethics-statement" name="ethics_statement" maxlength="3000" required placeholder="Human/animal review, synthetic data, safety limits, or why not applicable."></textarea>
+              </div>
+            </div>
+            <div class="jr-checklist">
+              <label class="jr-check"><input type="checkbox" id="rights-declaration" required><span>I have the right to submit these files and any included material, or I have identified the relevant license.</span></label>
+              <label class="jr-check"><input type="checkbox" id="safety-declaration" required><span>This work does not knowingly include unlawful material, private data without permission, malware, or instructions intended to cause harm.</span></label>
+              <label class="jr-check"><input type="checkbox" id="publication-declaration" required><span>I have disclosed whether this work is published, under consideration elsewhere, or subject to an external publication hold.</span></label>
+            </div>
+            <div class="jr-form-grid jr-form-grid-spaced">
+              <div class="jr-field">
+                <label for="external-hold">External publication status</label>
+                <select class="jr-select" id="external-hold" name="external_hold">
+                  <option value="none">Not published or under consideration elsewhere</option>
+                  <option value="under_review">Under consideration elsewhere — keep private</option>
+                  <option value="published">Previously published — rights checked</option>
+                  <option value="other">Other — explain below</option>
+                </select>
+              </div>
+              <div class="jr-field">
+                <label for="hold-reason">Hold note <span class="jr-quiet">(optional)</span></label>
+                <input class="jr-input" id="hold-reason" name="hold_reason" type="text" maxlength="500" placeholder="What should the editor know?"><span class="jr-field-hint">A hold prevents publication, not private submission.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="jr-form-section" aria-labelledby="files-section-heading">
+            <h2 id="files-section-heading">Files</h2>
+            <p>Upload any safe file set. Originals are kept private until an editor approves publication. Files are never executed or silently rewritten by the journal.</p>
+            <div class="jr-file-drop">
+              <label for="submission-files">Choose files <span class="jr-quiet">(any format, 50 MiB per file)</span></label>
+              <input id="submission-files" name="files" type="file" multiple>
+              <div class="jr-file-list" id="submission-file-list" aria-live="polite"><span>No files chosen yet.</span></div>
+            </div>
+            <div class="jr-field jr-field-spaced">
+              <label for="submission-file-note">File notes <span class="jr-quiet">(optional)</span></label>
+              <textarea class="jr-textarea" id="submission-file-note" maxlength="3000" placeholder="Tell the editor what each archive contains, where the readable manuscript is, or how to reproduce the work."></textarea>
+            </div>
+          </section>
+
+          <div class="jr-form-actions">
+            <button class="jr-button jr-button-primary" type="submit" id="submit-work-button">Save private draft and submit <span aria-hidden="true">→</span></button>
+            <a class="jr-button" href="/journal">Cancel</a>
+            <span class="jr-form-msg" id="journal-submit-msg" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <aside class="jr-form-aside" aria-label="Submission notes">
+          <div class="jr-aside-rule">
+            <h3>What happens next</h3>
+            <p>Your files enter private staging. The editorial queue checks disclosure, rights, safety, basic integrity, and obvious duplication before a disclosed peer review with AI. No degree or institutional affiliation is required.</p>
+          </div>
+          <div class="jr-aside-rule">
+            <h3>What acceptance means</h3>
+            <p>Published work is labeled “Peer-reviewed with AI · editorially accountable.” It may be corrected, withdrawn, or retracted with an audit trail.</p>
+          </div>
+          <div class="jr-aside-rule">
+            <h3>Your account</h3>
+            <p id="journal-submit-account">Signed-in account loading…</p>
+          </div>
+        </aside>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="jr-footer">
+  <div class="jr-container">
+    <div class="jr-footer-base jr-footer-base-compact">
+      <span><a href="/journal">Ephemerent Research</a> · open journal</span>
+      <span><a href="/news">News</a> · <a href="/journal/policies">Policies</a> · <a href="/privacy">Privacy</a> · <a href="mailto:hello@ephemerent.com">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site-config.js"></script>
+<script type="module" src="assets/journal.js?v=20260811c"></script>
+</body>
+</html>

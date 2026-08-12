@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Orrery Nexus — agent runs you can supervise · by Ephemerent</title>
 <meta name="description" content="Orrery is a beta agentic code editor built around Nexus: open a workspace, choose a model route, run agents, review progress, usage, and proof before you accept work.">
-<link rel="canonical" href="https://ephemerent.com/Orrery.html">
+<link rel="canonical" href="https://ephemerent.com/orrery">
 <meta name="theme-color" content="#0b0b12">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Orrery Nexus — agent runs you can supervise">
 <meta property="og:description" content="A beta agentic code editor where Nexus helps you open a workspace, run agents, and review evidence while you stay in control.">
-<meta property="og:url" content="https://ephemerent.com/Orrery.html">
+<meta property="og:url" content="https://ephemerent.com/orrery">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -25,13 +25,13 @@
 <meta name="twitter:title" content="Orrery Nexus — agent runs you can supervise">
 <meta name="twitter:description" content="An agentic code editor where Nexus keeps agent work visible, scoped, and reviewable.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
-<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="assets/orrery.css?v=20260808c">
 <link rel="stylesheet" href="assets/components.css?v=20260801">
 <link rel="stylesheet" href="assets/auth.css?v=20260801">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260802e">
-<link rel="stylesheet" href="assets/orrery-story.css?v=20260802d">
-<script src="assets/motion.js?v=20260802c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811c">
+<link rel="stylesheet" href="assets/orrery-story.css?v=20260808a">
+<script src="assets/motion.js?v=20260811c" defer></script>
 <script src="assets/branch-field.js?v=20260802c" defer></script>
 <script type="application/ld+json">
 {
@@ -40,7 +40,7 @@
   "name": "Orrery",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Windows",
-  "url": "https://ephemerent.com/Orrery.html",
+  "url": "https://ephemerent.com/orrery",
       "description": "An agentic code editor centered on Nexus: open a workspace, choose a hosted route, run agents, and review progress, usage, proof, and boundaries before accepting work.",
   "image": "https://ephemerent.com/assets/og-orrery.png",
   "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" },
@@ -60,7 +60,7 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <div class="brand-wrap" style="display:flex;align-items:center;gap:10px;">
-      <a class="brand" href="Orrery.html">
+      <a class="brand" href="/orrery">
         <svg class="mark" viewBox="0 0 26 26" fill="none">
           <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
           <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
@@ -71,14 +71,14 @@
         </svg>
         <span>Orrery</span>
       </a>
-      <a class="brand-by mono" href="Ephemerent.html" style="font-size:11px;color:var(--faint);letter-spacing:.1em;transition:color .2s;">by Ephemerent</a>
+      <a class="brand-by mono" href="/" style="font-size:11px;color:var(--faint);letter-spacing:.1em;transition:color .2s;">by Ephemerent</a>
     </div>
     <div class="nav-links">
       <a href="#nexus">Nexus</a>
       <a href="#run-loop">Run loop</a>
       <a href="#models">Models</a>
       <a href="#pricing">Pricing</a>
-      <a href="organizations.html">Organizations</a>
+      <a href="/organizations">Organizations</a>
       <a href="#safety">Safety</a>
     </div>
     <div class="nav-spacer"></div>
@@ -95,7 +95,7 @@
       <h1 class="display hero-h1 reveal in d1">Agent runs,<br><span>under control.</span></h1>
       <p class="lead reveal in d2">Orrery is an agentic code editor centered on Nexus: open a workspace, pick a model route, send a task, watch the run stream, then review usage, proof, and safety receipts before you accept anything.</p>
       <div class="hero-cta reveal in d3">
-        <a class="btn btn-primary" href="download.html">Get started <span aria-hidden="true">→</span></a>
+        <a class="btn btn-primary" href="/download">Get started <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#nexus">See Nexus</a>
       </div>
       <div class="hero-providers reveal in d4">
@@ -288,11 +288,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Scope</td><td class="col-us">Workspace and permission boundary</td><td>Prepare the run</td><td>Approve or revise</td></tr>
-          <tr><td>Route</td><td class="col-us">Provider label and credit pool</td><td>Select hosted capacity</td><td>Confirm cost posture</td></tr>
-          <tr><td>Work</td><td class="col-us">Progress, tools, and changed-file activity</td><td>Attempt the task</td><td>Observe or interrupt</td></tr>
-          <tr><td>Verification</td><td class="col-us">Tests, diagnostics, and proof summary</td><td>Check the result</td><td>Inspect the evidence</td></tr>
-          <tr><td>Receipt</td><td class="col-us">Usage and boundary record</td><td>Close the run</td><td>Keep, revise, or discard</td></tr>
+          <tr><td data-label="Run stage">Scope</td><td class="col-us" data-label="Visible evidence">Workspace and permission boundary</td><td data-label="System action">Prepare the run</td><td data-label="Your decision">Approve or revise</td></tr>
+          <tr><td data-label="Run stage">Route</td><td class="col-us" data-label="Visible evidence">Provider label and credit pool</td><td data-label="System action">Select hosted capacity</td><td data-label="Your decision">Confirm cost posture</td></tr>
+          <tr><td data-label="Run stage">Work</td><td class="col-us" data-label="Visible evidence">Progress, tools, and changed-file activity</td><td data-label="System action">Attempt the task</td><td data-label="Your decision">Observe or interrupt</td></tr>
+          <tr><td data-label="Run stage">Verification</td><td class="col-us" data-label="Visible evidence">Tests, diagnostics, and proof summary</td><td data-label="System action">Check the result</td><td data-label="Your decision">Inspect the evidence</td></tr>
+          <tr><td data-label="Run stage">Receipt</td><td class="col-us" data-label="Visible evidence">Usage and boundary record</td><td data-label="System action">Close the run</td><td data-label="Your decision">Keep, revise, or discard</td></tr>
         </tbody>
       </table>
     </div>
@@ -386,11 +386,11 @@
       <div class="organization-pricing-actions">
         <span class="mono">Business $500/month</span>
         <span class="mono">Enterprise $1,000/month</span>
-        <a class="btn btn-primary" href="organizations.html">View organization plans</a>
+        <a class="btn btn-primary" href="/organizations">View organization plans</a>
         <a class="btn btn-ghost" href="mailto:hello@ephemerent.com?subject=Orrery%20organization%20setup%20help">Contact + setup help</a>
       </div>
     </div>
-    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Beta features, routes, quotas, and providers may change or be unavailable. Agent output is not guaranteed. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
+    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Beta features, routes, quotas, and providers may change or be unavailable. Agent output is not guaranteed. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="/terms">Terms</a> and <a href="/privacy">Privacy</a>.</p>
   </div>
 </section>
 
@@ -420,7 +420,7 @@
       <h2 class="display start-h">Open a workspace.<br>Send one task.</h2>
       <p class="lead" style="margin:0 auto 32px;text-align:center;">Get Orrery, choose a route, and keep the run reviewable from the first prompt.</p>
       <div class="hero-cta center" style="justify-content:center;">
-        <a class="btn btn-primary" href="download.html">Download <span aria-hidden="true">→</span></a>
+        <a class="btn btn-primary" href="/download">Download <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="cloud.html">Pro cloud sign in</a>
       </div>
     </div>
@@ -434,7 +434,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="brand" href="Orrery.html" style="margin-bottom:14px;">
+        <a class="brand" href="/orrery" style="margin-bottom:14px;">
           <svg class="mark" viewBox="0 0 26 26" fill="none">
             <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
             <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
@@ -443,11 +443,11 @@
           </svg>
           <span>Orrery</span>
         </a>
-        <p class="muted" style="font-size:14px;max-width:32ch;">Agent runs you can supervise. Made by <a href="Ephemerent.html" style="color:var(--teal-lt);">Ephemerent</a>.</p>
+        <p class="muted" style="font-size:14px;max-width:32ch;">Agent runs you can supervise. Made by <a href="/" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h3 class="footer-heading">Product</h3><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Individual pricing</a></li><li><a href="download.html">Download</a></li></ul></div>
-      <div><h3 class="footer-heading">Teams</h3><ul><li><a href="organizations.html">Business &amp; Enterprise</a></li><li><a href="slack.html">Slack</a></li><li><a href="security.html">Security</a></li><li><a href="mailto:hello@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
-      <div><h3 class="footer-heading">Company</h3><ul><li><a href="Ephemerent.html">About Ephemerent</a></li><li><a href="Shelterix.html">Shelterix</a></li><li><a href="arbiter-preview.html">Arbiter beta</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
+      <div><h3 class="footer-heading">Product</h3><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Individual pricing</a></li><li><a href="/download">Download</a></li></ul></div>
+      <div><h3 class="footer-heading">Teams</h3><ul><li><a href="/organizations">Business &amp; Enterprise</a></li><li><a href="/slack">Slack</a></li><li><a href="/security">Security</a></li><li><a href="mailto:hello@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
+      <div><h3 class="footer-heading">Company</h3><ul><li><a href="/">About Ephemerent</a></li><li><a href="/shelterix">Shelterix</a></li><li><a href="/arbiter">Arbiter beta</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:hello@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -470,7 +470,7 @@
     if (cta && url) cta.href = url;
   }
 </script>
-<script src="assets/swarm.js?v=20260802e"></script>
+<script src="assets/swarm.js?v=20260808a"></script>
 <script>
   addEventListener('load', () => mountSwarm(document.getElementById('swarm')), { once: true });
 </script>

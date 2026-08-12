@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Research — Ephemerent</title>
 <meta name="description" content="Ephemerent's research agenda: seven directions (R1–R7) across three fundable frontiers — emergent multi-agent coordination, verification and evaluation, and world models as a planning substrate. LLMs now, layers later.">
-<link rel="canonical" href="https://ephemerent.com/research.html">
+<link rel="canonical" href="https://ephemerent.com/research">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Research — Ephemerent">
 <meta property="og:description" content="Seven research directions across three frontiers, one question: how does useful intelligence emerge, briefly, from systems of small agents? LLMs now, layers later.">
-<meta property="og:url" content="https://ephemerent.com/research.html">
+<meta property="og:url" content="https://ephemerent.com/research">
 <meta property="og:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -28,8 +28,9 @@
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260802e">
-<script src="assets/motion.js?v=20260802c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811c">
+<link rel="stylesheet" href="assets/home.css?v=20260811c">
+<script src="assets/motion.js?v=20260811c" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,8 +48,8 @@
     },
     {
       "@type": "CollectionPage",
-      "@id": "https://ephemerent.com/research.html#research",
-      "url": "https://ephemerent.com/research.html",
+      "@id": "https://ephemerent.com/research#research",
+      "url": "https://ephemerent.com/research",
       "name": "Research — Ephemerent",
       "description": "Ephemerent's research agenda: seven directions (R1–R7) across three frontiers — emergent multi-agent coordination, verification and evaluation, and world models as a planning substrate.",
       "isPartOf": { "@id": "https://ephemerent.com/#website" },
@@ -82,20 +83,25 @@
 <!-- TOP BAR -->
 <div class="ebar">
   <div class="ebar-in">
-    <a class="ebrand" href="Ephemerent.html">
+    <a class="ebrand" href="/">
       <svg class="mk accent"><use href="#emk"/></svg>
       <span class="brandcol">
         <span class="nm">Ephemerent</span>
         <span class="motto">Ephemeral · Emergent</span>
       </span>
     </a>
-    <nav class="enav">
-      <a href="#frontier-a">Frontier A</a>
-      <a href="#frontier-b">Frontier B</a>
-      <a href="#frontier-c">Frontier C</a>
-      <a class="est-keep" href="Orrery.html">Orrery →</a>
-      <span class="est">EST. 2026</span>
+    <nav class="enav" id="lab-navigation">
+      <a href="/research" aria-current="page">Research</a>
+      <a href="/journal">Journal</a>
+      <a href="/news">News</a>
+      <a href="/#work">Work</a>
+      <a href="/#approach">Principles</a>
+      <a class="est-keep" href="/orrery">Orrery →</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-controls="lab-navigation" aria-expanded="false" aria-label="Open menu">
+      <span class="menu-toggle-label">Menu</span>
+      <span class="menu-toggle-lines" aria-hidden="true"><i></i><i></i></span>
+    </button>
   </div>
 </div>
 
@@ -104,13 +110,15 @@
 <header class="ehero">
   <div class="ewrap">
     <span class="lbl rv in">Research agenda &nbsp;—&nbsp; R1–R7, on the record</span>
-    <h1 class="rv in">Seven directions, three frontiers, one question.</h1>
-    <div class="ehero-sub">
-      <p class="rv in">Ephemerent studies how useful intelligence emerges, briefly, from systems of small agents — many minds spun up for a moment, cooperating, judged, and gone, leaving only the result. Our seven research directions are not seven bets; they are three fundable frontiers, each with a product that expresses it and a public artifact that proves it. The discipline that keeps the lab honest is one line: <em>LLMs now, layers later.</em> We ship LLM-powered, legible coding agents today, and research the layers that integrate <em>alongside</em> them — never as a replacement, always as a measured addition with an eval that proves it earned its place.</p>
+    <div class="research-hero-grid">
+      <h1 class="rv in">Seven directions, three frontiers, one question.</h1>
+      <div class="ehero-sub">
+        <p class="rv in">Ephemerent studies how useful intelligence emerges, briefly, from systems of small agents — many minds spun up for a moment, cooperating, judged, and gone, leaving only the result. Our seven research directions are not seven bets; they are three fundable frontiers, each with a product that expresses it and a public artifact that proves it. The discipline that keeps the lab honest is one line: <em>LLMs now, layers later.</em> We ship LLM-powered, legible coding agents today, and research the layers that integrate <em>alongside</em> them — never as a replacement, always as a measured addition with an eval that proves it earned its place.</p>
+      </div>
     </div>
     <div class="ehero-cta rv">
-      <a class="ebtn ebtn-fill" href="Orrery.html">Explore Orrery <span aria-hidden="true">→</span></a>
-      <a class="ebtn" href="Ephemerent.html">Back to the lab</a>
+      <a class="ebtn ebtn-fill" href="/orrery">Explore Orrery <span aria-hidden="true">→</span></a>
+      <a class="ebtn" href="/">Back to the lab</a>
     </div>
   </div>
 </header>
@@ -124,6 +132,46 @@
     <div><div class="k">Horizon</div><div class="v">Eight quarters · 2026 — 2028</div></div>
   </div>
 </div>
+
+<!-- FIELD MAP -->
+<section class="research-map-section" aria-labelledby="research-map-title">
+  <div class="ewrap">
+    <div class="research-map-head rv">
+      <span class="lbl">Field map · 2026–2028</span>
+      <div>
+        <h2 id="research-map-title">Every direction has a frontier and a public record.</h2>
+        <p>The map shows where each research direction belongs and what evidence the line is intended to leave behind. It is a route through the agenda, not a claim that unfinished work already exists.</p>
+      </div>
+    </div>
+    <ol class="research-field-map rv" aria-label="Seven research directions mapped to three frontiers and their intended public artifacts">
+      <li>
+        <div class="research-map-directions" aria-label="Directions R1 and R7">
+          <a href="#r1"><b>R1</b><span>Emergent orchestration</span></a>
+          <a href="#r7"><b>R7</b><span>Distributed compute mesh</span></a>
+        </div>
+        <a class="research-map-frontier" href="#frontier-a"><span>Frontier A</span><strong>Coordination</strong><small>Product expression · Colony</small></a>
+        <div class="research-map-artifacts"><span>Intended public record</span><ul><li>Anonymized coordination traces</li><li>Open coordination dataset</li><li>Gossip vs. central-dispatch report</li></ul></div>
+      </li>
+      <li>
+        <div class="research-map-directions" aria-label="Direction R2">
+          <a href="#r2"><b>R2</b><span>Verifiable selection</span></a>
+        </div>
+        <a class="research-map-frontier" href="#frontier-b"><span>Frontier B</span><strong>Verification</strong><small>Product expressions · Arbiter · Vellum</small></a>
+        <div class="research-map-artifacts"><span>Intended public record</span><ul><li>Reproducible evaluation harness</li><li>Multi-agent verification benchmark</li><li>Execution-selection report</li></ul></div>
+      </li>
+      <li>
+        <div class="research-map-directions" aria-label="Directions R3 through R6">
+          <a href="#r3"><b>R3</b><span>Latent world models</span></a>
+          <a href="#r4"><b>R4</b><span>Multimodal latent reasoning</span></a>
+          <a href="#r5"><b>R5</b><span>Spatial and embodied agents</span></a>
+          <a href="#r6"><b>R6</b><span>Wave compute substrates</span></a>
+        </div>
+        <a class="research-map-frontier" href="#frontier-c"><span>Frontier C</span><strong>World models</strong><small>Product expressions · Seed · Vellum</small></a>
+        <div class="research-map-artifacts"><span>Intended public record</span><ul><li>Patch-consequence dataset</li><li>Pre-execution pruning report</li><li>Measured multimodal probes</li></ul></div>
+      </li>
+    </ol>
+  </div>
+</section>
 
 <div class="ewrap research-index-wrap">
   <aside class="research-index" aria-label="Research document index">
@@ -143,12 +191,12 @@
     </div>
     <p class="ethesis rv">The open gap: today's interoperability protocols assume the problem is already solved. A2A v1.0 and MCP both encode <em>static roles</em> and <em>pairwise hand-offs</em> — neither has a framework for spontaneous collaboration, distributed consensus, or emergent task-sharing. Gossip-protocol-style decentralized coordination is a named open gap. For a lab called Ephemerent, this is the natural home and the most distinctive claim we can stake. Over eight quarters we will instrument Orrery's existing parallel-worktree runs as coordination traces, prototype a gossip-style consensus layer where agents exchange intermediate diffs and converge without a central judge, and scale that layer to Colony at fleet scale. The credible public output: an open multi-agent coordination dataset (anonymized Orrery traces) and a tech report on gossip vs. central dispatch — gossip coordination is marked as a bet, advisory-first, promoted only when it beats central dispatch on the benchmark.</p>
     <div class="eindex rv">
-      <div class="erow">
+      <div class="erow" id="r1">
         <span class="no">R1</span>
         <span class="ti">Emergent orchestration</span>
         <span class="de">Decomposing a goal into parallel agents, running each in isolation, and merging only what works. Orrery already does this with a central dispatcher; the research question is what coordination looks like with no dispatcher at all — agents that share partial results, vote, and re-allocate work via gossip. Product: Colony.</span>
       </div>
-      <div class="erow">
+      <div class="erow" id="r7">
         <span class="no">R7</span>
         <span class="ti">Distributed compute mesh</span>
         <span class="de">A hive-style network where contributors parallelize training and inference across their own GPUs — async gradient averaging, fault-tolerant participation, credit-backed rewards — so coordination is tested at fleet scale, not just on one laptop. Datacenter-scale ambition without datacenter monopoly. Product: Colony (marked as a bet).</span>
@@ -166,7 +214,7 @@
     </div>
     <p class="ethesis rv">The open gap is not another polished completion; it is evidence that a system did the requested work inside the intended boundary. Multi-agent, long-horizon, and self-improving systems make that gap harder because more steps can fail silently. Over eight quarters Arbiter becomes the through-line: we ship execution-based scoring as Orrery's default judge, build a public eval harness with step-level and outcome-level scoring, and stand up a drift record that re-measures solve rate as hosted models change. Vellum is the spatial expression — replacing theatrical proof with a real software rasterizer so “prove, don't eyeball” is literal, with no GPU in the loop. These are commitments, not benchmark claims. The intended public output is a reproducible eval harness, a multi-agent verification benchmark, and a short paper on execution-based selection versus model-judge review.</p>
     <div class="eindex rv">
-      <div class="erow">
+      <div class="erow" id="r2">
         <span class="no">R2</span>
         <span class="ti">Verifiable selection</span>
         <span class="de">Choosing the best attempt by execution, not impression — panels, metrics, and judges instead of guesswork, with step-level scoring (was each split, tool-call, and hand-off sound?) and outcome-level scoring (did the merged result work?). Products: Arbiter (the verification layer) and Vellum (spatial verification).</span>
@@ -184,22 +232,22 @@
     </div>
     <p class="ethesis rv">The open gap: 2026 mainstreamed world models — Genie 3, World Labs / Marble, LeCun's AMI direction. For code, the analogue is an agent that <em>simulates execution and repo state before acting</em> — simultaneously a planning primitive and a verification primitive: predict the consequence of a patch, prune the bad branches before spending tokens on them. Over eight quarters Seed is the bet, and we mark it as a bet. We will collect patch-consequence data from Orrery runs (proposed diff → test/build outcome), train a small predictor that estimates a patch outcome <em>before</em> execution and use it to prune best-of-N candidates, and explore latent and multimodal reasoning and spatial grounding where Vellum's geometry gives a signal. Seed runs advisory-only first — it ranks candidates; the LLM and Arbiter still decide. A pre-execution patch predictor lands behind a flag by Q1 2028, integrated alongside (never replacing) the LLM agents, and only promoted if it improves solve-rate-per-token on Arbiter's harness. The credible public output: an open patch-consequence dataset and a tech report on pre-execution pruning. R6 — wave/RF/photonic analog compute — is the longest-horizon bet and stays explicitly research-only across this window.</p>
     <div class="eindex rv">
-      <div class="erow">
+      <div class="erow" id="r3">
         <span class="no">R3</span>
         <span class="ti">Latent world models</span>
         <span class="de">Computational state — repos, runtimes, proof states — encoded and rolled forward in embedding space, scoring candidates and imagining outcomes before real execution. Product: Seed (marked as a bet).</span>
       </div>
-      <div class="erow">
+      <div class="erow" id="r4">
         <span class="no">R4</span>
         <span class="ti">Multimodal latent reasoning</span>
         <span class="de">Text, code, and vision sharing a representation space for planning and verification — alongside the LLMs that still emit the final code and proofs. Multimodal latent reasoning probes scheduled mid-window; integrated only when measured to earn its place.</span>
       </div>
-      <div class="erow">
+      <div class="erow" id="r5">
         <span class="no">R5</span>
         <span class="ti">Spatial &amp; embodied agents</span>
         <span class="de">Agents that build and check things you can see — shaders, parts, and scenes, verified without a GPU. Vellum's geometry gives a grounded signal; visual context as a future layer on the same agent stack.</span>
       </div>
-      <div class="erow">
+      <div class="erow" id="r6">
         <span class="no">R6</span>
         <span class="ti">Wave compute substrates</span>
         <span class="de">RF and photonic analog accelerators — matrix operations in electromagnetic waves instead of shuttled electrons. Algorithm–hardware co-design, not bigger GPUs alone. The lab's longest-horizon bet; explicitly research-only across this window.</span>
@@ -223,8 +271,8 @@
 <section class="esec" id="cta">
   <div class="ewrap">
     <div class="ehero-cta rv">
-      <a class="ebtn ebtn-fill" href="Orrery.html">Explore Orrery <span aria-hidden="true">→</span></a>
-      <a class="ebtn" href="Ephemerent.html">Back to the lab</a>
+      <a class="ebtn ebtn-fill" href="/orrery">Explore Orrery <span aria-hidden="true">→</span></a>
+      <a class="ebtn" href="/">Back to the lab</a>
     </div>
   </div>
 </section>
@@ -239,7 +287,7 @@
         <div class="lbl" style="margin-bottom:18px;color:var(--accent);">Ephemeral · Emergent</div>
         <div class="big serif">Building systems that let intelligence emerge — then step back.</div>
         <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="ebtn ebtn-fill" href="download.html">Get Orrery →</a>
+          <a class="ebtn ebtn-fill" href="/download">Get Orrery →</a>
           <a class="ebtn" href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord</a>
           <a class="ebtn" href="mailto:hello@ephemerent.com">Get in touch</a>
         </div>
@@ -247,21 +295,23 @@
       <div>
         <h2 class="efoot-heading">Lab</h2>
         <ul>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="Ephemerent.html#approach">Approach</a></li>
-          <li><a href="Ephemerent.html#pledge">Pledge</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-          <li><a href="terms.html">Terms</a></li>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/journal">Ephemerent Research journal →</a></li>
+          <li><a href="/news">Ephemerent News →</a></li>
+          <li><a href="/#approach">Approach</a></li>
+          <li><a href="/#pledge">Pledge</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
       <div>
         <h2 class="efoot-heading">Work</h2>
         <ul>
-          <li><a href="Orrery.html">Orrery</a></li>
-          <li><a href="Ephemerent.html#work">Seed</a></li>
-          <li><a href="Ephemerent.html#work">Arbiter</a></li>
-          <li><a href="Ephemerent.html#work">Colony</a></li>
-          <li><a href="Vellum.html">Vellum</a></li>
+          <li><a href="/orrery">Orrery</a></li>
+          <li><a href="/#work">Seed</a></li>
+          <li><a href="/#work">Arbiter</a></li>
+          <li><a href="/#work">Colony</a></li>
+          <li><a href="/vellum">Vellum</a></li>
           <li><a href="mailto:hello@ephemerent.com">Contact</a></li>
         </ul>
       </div>
@@ -273,13 +323,5 @@
   </div>
 </footer>
 
-<style>
-.ehero h1 { max-width: 28ch; }
-.ehero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
-.esec-head h2 { max-width: 46ch; }
-.efoot .big { max-width: 22ch; }
-.ethesis { font-size: 17px; color: var(--ink-2); line-height: 1.66; max-width: 68ch; margin-bottom: 40px; }
-.ethesis em { font-style: italic; color: var(--accent); }
-</style>
 </body>
 </html>

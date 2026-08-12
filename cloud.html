@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="assets/orrery.css?v=20260801b">
 <link rel="stylesheet" href="assets/auth.css?v=20260801">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260802e">
-<script src="assets/motion.js?v=20260802c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811c">
+<script src="assets/motion.js?v=20260811c" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="space-bg auth-page utility-page">
@@ -21,7 +21,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a class="brand" href="Orrery.html">
+    <a class="brand" href="/orrery">
       <svg class="mark" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
         <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
@@ -31,9 +31,9 @@
       <span>Orrery</span>
     </a>
     <div class="nav-links utility-nav-links">
-      <a href="Orrery.html">Orrery</a>
-      <a href="Vellum.html">Vellum</a>
-      <a href="Ephemerent.html">Lab</a>
+      <a href="/orrery">Orrery</a>
+      <a href="/vellum">Vellum</a>
+      <a href="/">Lab</a>
     </div>
     <div class="nav-spacer"></div>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
@@ -69,11 +69,11 @@
         <p>1.5B DeepSeek API + 1.5B Doubleword + 1.2B Arbiter credits/month (~$18,000 est. API usage value), research runs, and proof vault capacity.</p>
       </div>
     </div>
-    <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. Credits reset each billing month, do not roll over, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a>.</p>
+    <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. Credits reset each billing month, do not roll over, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
 
     <div id="cloud-auth-setup" class="hidden auth-optional">
       <p class="auth-msg" style="color:var(--muted);">Cloud auth is not configured yet. Follow <a href="docs/CLOUD.md">docs/CLOUD.md</a> to connect Supabase and billing. Preview setup can still be inspected locally.</p>
-      <a class="btn btn-ghost" href="download.html" style="width:100%;justify-content:center;margin-top:12px;">Download preview build</a>
+      <a class="btn btn-ghost" href="/download" style="width:100%;justify-content:center;margin-top:12px;">Download preview build</a>
     </div>
 
     <div id="cloud-auth-panel" class="auth-optional">
@@ -113,7 +113,7 @@
         <p class="auth-msg" style="color:var(--faint);font-size:13px;margin-top:12px;">Relay not deployed yet — codes are a preview. Phone remote will connect through <code>CLOUD_RELAY_URL</code>.</p>
       </div>
 
-      <a class="btn btn-primary" href="download.html" style="width:100%;justify-content:center;margin-top:20px;">Download desktop</a>
+      <a class="btn btn-primary" href="/download" style="width:100%;justify-content:center;margin-top:20px;">Download desktop</a>
       <button type="button" class="btn btn-ghost" id="cloud-sign-out" style="width:100%;margin-top:10px;">Sign out</button>
     </div>
   </div>
@@ -122,7 +122,7 @@
 <footer class="utility-footer">
   <div class="utility-footer-inner">
     <span class="mono">Ephemerent · 2026</span>
-    <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
+    <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
   </div>
 </footer>
 

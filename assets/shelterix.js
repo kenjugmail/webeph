@@ -138,8 +138,13 @@
         activeStep = index;
         root.dataset.sxCurrent = String(index);
         steps.forEach((stepEl, stepIndex) => {
-          if (stepIndex === index) stepEl.setAttribute('data-active', 'true');
-          else stepEl.removeAttribute('data-active');
+          if (stepIndex === index) {
+            stepEl.setAttribute('data-active', 'true');
+            stepEl.setAttribute('aria-current', 'step');
+          } else {
+            stepEl.removeAttribute('data-active');
+            stepEl.removeAttribute('aria-current');
+          }
         });
         frames.forEach((frame, frameIndex) => {
           if (frameIndex === index) frame.setAttribute('data-active', 'true');

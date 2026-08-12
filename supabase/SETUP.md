@@ -116,6 +116,36 @@ where email = 'user@example.com';
 
 Use `billing_events` to record checkout, renewal, cancellation, and credit grants.
 
-## 9. Service role key
+## 9. Ephemerent Research journal
+
+The same Supabase project also powers Ephemerent Research. Run the complete
+[`schema.sql`](./schema.sql) after the existing Orrery tables are present. The
+journal additions create private and public research storage buckets, RLS
+policies, immutable version records, AI-assisted peer-review records, moderated
+comments/reviews, and editor transition functions. Journal submissions do not use `plan`,
+`subscription_status`, or `download_approved`.
+
+Grant the separate editor role to an already-authenticated account from the
+SQL editor. Replace the placeholder with the account UUID from
+`auth.users`/`profiles`:
+
+```sql
+update public.profiles
+set research_editor = true
+where id = '00000000-0000-0000-0000-000000000000';
+```
+
+Then open `/journal/editor`. The **Stage local package** action accepts the
+supplied `sncs_submission_package 2` folder, preserves each original file and
+SHA-256 hash, and creates a private submission with an external-publication
+hold. It does not make the manuscript visible in the public archive. Move the record
+through screening into `peer_review`, then record at least one disclosed human+AI or
+AI-system review before accepting it.
+
+Keep the service role key out of the static site. The journal uses the browser
+publishable key with RLS; only an editor session can move records or files into
+the public bucket.
+
+## 10. Service role key
 
 Keep **service_role** secret. Only use in Edge Functions or local admin scripts — never in `assets/` or `public/`.

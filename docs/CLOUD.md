@@ -2,6 +2,18 @@
 
 Orrery is a premium cloud-credit beta. Preview setup is inspectable before subscribing, but real agent work runs through paid hosted credits and cloud features.
 
+## Ephemerent product auth (keep separate)
+
+Ephemerent hosts both Orrery and Vespera under one brand and Stripe merchant.
+**Identity and databases stay product-separate** — same Google email does not auto-link accounts.
+
+| Product | Sign-in URL | IdP | Data |
+|---|---|---|---|
+| **Orrery Cloud** | `https://ephemerent.com/login.html` | Supabase (`CLOUD_AUTH_*`) | `profiles`, credits, `activity_logs` |
+| **Vespera / Aetherfront** | `https://ephemerent.com/login` | Firebase (`ephmerent`) | Next `aether_session` + play entitlement |
+
+Do not redirect Orrery CTAs to `/login` (that is Vespera/Firebase). Do not put Vespera play entitlements in Supabase `profiles`.
+
 ## Two modes
 
 | | Local | Orrery Cloud |

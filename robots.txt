@@ -2,5 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /login.html
 Disallow: /cloud.html
+Disallow: /journal-submit.html
+Disallow: /journal-editor.html
+Disallow: /journal/submit
+Disallow: /journal/editor
 
 Sitemap: https://ephemerent.com/sitemap.xml

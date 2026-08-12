@@ -174,12 +174,12 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
    ============================================================ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+  transition: background 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(10,10,20,0.72);
-  backdrop-filter: blur(16px) saturate(1.4);
+  background: var(--bg);
+  backdrop-filter: none;
   border-bottom: 1px solid var(--line);
 }
 .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; gap: 32px; }

@@ -4,6 +4,8 @@
   'use strict';
 
   const SIGNAL_CYCLE = 10000;
+  const MAX_CANVAS_DPR = 2;
+  const MAX_CANVAS_EDGE = 2048;
   const ROUTES = [
     [[.135, .51], [.22, .44], [.36, .31], [.47, .18], [.58, .14], [.72, .20]],
     [[.135, .51], [.24, .49], [.35, .49], [.43, .49], [.53, .52], [.64, .48], [.75, .51]],
@@ -22,13 +24,74 @@
     return t * t * (3 - 2 * t);
   }
 
+  function reducedMotion() {
+    return window.EphemerentMotion?.reduced() || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function updatePlate(plate, index, reduced) {
+    if (!plate) return;
+    const item = STORY[index] || STORY[0];
+    const frames = Array.from(plate.querySelectorAll('[data-plate-frame]'));
+    const phase = plate.querySelector('[data-ehero-plate-phase]');
+    const detail = plate.querySelector('[data-plate-detail]');
+
+    plate.dataset.plateCurrent = String(index);
+    plate.classList.toggle('is-static', reduced);
+    frames.forEach((frame, frameIndex) => {
+      const active = frameIndex === index;
+      if (active) frame.setAttribute('data-active', 'true');
+      else frame.removeAttribute('data-active');
+      frame.setAttribute('aria-hidden', String(!active));
+    });
+    if (phase) phase.textContent = item.label.toUpperCase();
+    if (detail) detail.textContent = item.caption;
+  }
+
+  function mountFieldPlate(plate) {
+    if (!plate || plate.dataset.plateMounted === 'true') return;
+    plate.dataset.plateMounted = 'true';
+    updatePlate(plate, Number(plate.dataset.plateCurrent || 0), reducedMotion());
+
+    const firstImage = plate.querySelector('[data-plate-frame="0"] img');
+    const markReady = () => requestAnimationFrame(() => { plate.dataset.plateReady = 'true'; });
+    if (!firstImage || firstImage.complete) markReady();
+    else {
+      firstImage.addEventListener('load', markReady, { once: true });
+      firstImage.addEventListener('error', markReady, { once: true });
+    }
+
+    const setVisible = (visible) => {
+      plate.dataset.plateActive = String(visible && !document.hidden);
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => setVisible(entry.isIntersecting));
+      }, { threshold: .06, rootMargin: '80px 0px' });
+      observer.observe(plate);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) setVisible(false);
+        else setVisible(plate.getBoundingClientRect().bottom > 0 && plate.getBoundingClientRect().top < innerHeight);
+      });
+    } else {
+      setVisible(true);
+    }
+
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    preference.addEventListener?.('change', () => {
+      updatePlate(plate, Number(plate.dataset.plateCurrent || 0), reducedMotion());
+    });
+  }
+
   function mountEmergence(canvas) {
-    if (!canvas) return;
+    if (!canvas || canvas.dataset.emergenceMounted === 'true') return;
+    canvas.dataset.emergenceMounted = 'true';
 
     const context = canvas.getContext('2d');
+    if (!context) return;
     const scene = canvas.closest('[data-emergence-scene]') || canvas;
     const steps = Array.from(scene.querySelectorAll('[data-story-step]'));
     const frames = Array.from(scene.querySelectorAll('[data-story-frame]'));
+    const plate = document.querySelector('[data-emergence-plate]');
     const indexLabel = scene.querySelector('[data-story-index]');
     const nameLabel = scene.querySelector('[data-story-label]');
     const caption = scene.querySelector('[data-story-caption]');
@@ -44,7 +107,12 @@
       const rect = canvas.getBoundingClientRect();
       width = Math.max(1, rect.width);
       height = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.max(1, Math.min(
+        window.devicePixelRatio || 1,
+        MAX_CANVAS_DPR,
+        MAX_CANVAS_EDGE / width,
+        MAX_CANVAS_EDGE / height
+      ));
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -278,8 +346,13 @@
         scene.dataset.storyCurrent = String(index);
 
         steps.forEach((step, stepIndex) => {
-          if (stepIndex === index) step.setAttribute('data-active', 'true');
-          else step.removeAttribute('data-active');
+          if (stepIndex === index) {
+            step.setAttribute('data-active', 'true');
+            step.setAttribute('aria-current', 'step');
+          } else {
+            step.removeAttribute('data-active');
+            step.removeAttribute('aria-current');
+          }
         });
 
         frames.forEach((frame, frameIndex) => {
@@ -291,6 +364,7 @@
         if (indexLabel) indexLabel.textContent = `${String(index + 1).padStart(2, '0')} / 04`;
         if (nameLabel) nameLabel.textContent = item.label;
         if (caption) caption.textContent = item.caption;
+        updatePlate(plate, index, reduced);
       }
 
       frames.forEach((frame, frameIndex) => {
@@ -328,7 +402,7 @@
     function update(now) {
       const position = currentStoryPosition();
       lastStepProgress = position.local;
-      const reduced = window.EphemerentMotion?.reduced() || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduced = reducedMotion();
       setStep(position.selected, reduced);
       updateFrameBlend(position.raw, reduced);
       const total = clamp(position.raw / Math.max(1, steps.length - 1));
@@ -354,4 +428,15 @@
   }
 
   window.mountEmergence = mountEmergence;
+
+  function mountInstitutionalMotion() {
+    mountFieldPlate(document.querySelector('[data-emergence-plate]'));
+    mountEmergence(document.getElementById('fig'));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountInstitutionalMotion, { once: true });
+  } else {
+    mountInstitutionalMotion();
+  }
 })();

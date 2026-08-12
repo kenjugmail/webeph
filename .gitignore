@@ -4,3 +4,6 @@
 
 # Local Supabase overrides (safety net — never commit secrets)
 assets/supabase-config.js
+.vercel
+.env*
+output/

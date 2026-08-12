@@ -1,31 +1,33 @@
 /* ============================================================
    VESPERA — creative studio product theme
-   Warm dusk surfaces. Editorial type. One brass signal.
-   Distinct from Ephemerent paper and Orrery void/teal.
+   Bright studio surfaces. Editorial type. Four controlled color cues.
+   Distinct from Ephemerent paper, Orrery void, and Vellum proof UI.
    ============================================================ */
 
 :root {
-  --void:        #090a0c;
-  --bg:          #0d0e12;
-  --bg-2:        #12141a;
-  --panel:       #171920;
-  --panel-2:     #1d2028;
-  --card:        #1a1c24;
-  --line:        rgba(232, 224, 210, 0.10);
-  --line-strong: rgba(232, 224, 210, 0.18);
-  --rule:        rgba(232, 224, 210, 0.12);
-  --rule-2:      rgba(232, 224, 210, 0.07);
+  --void:        #111923;
+  --bg:          #f7f3eb;
+  --bg-2:        #fffdf8;
+  --panel:       #ece5d8;
+  --panel-2:     #e2d9ca;
+  --card:        #fffdf8;
+  --line:        rgba(23, 33, 45, 0.16);
+  --line-strong: rgba(23, 33, 45, 0.38);
+  --rule:        rgba(23, 33, 45, 0.15);
+  --rule-2:      rgba(23, 33, 45, 0.08);
 
-  --ink:         #f2ebe1;
-  --ink-2:       #c9c0b4;
-  --muted:       #958c80;
-  --faint:       #7a7268;
+  --ink:         #17212d;
+  --ink-2:       #40505d;
+  --muted:       #68747d;
+  --faint:       #6e7880;
 
-  --signal:      #c9a46a;
-  --signal-2:    #e0c08a;
-  --accent:      #c9a46a;
-  --accent-2:    #a67c4a;
-  --accent-soft: rgba(201, 164, 106, 0.35);
+  --signal:      #2f55ff;
+  --signal-2:    #f2675b;
+  --signal-3:    #c9e66a;
+  --signal-4:    #8b67e8;
+  --accent:      #2f55ff;
+  --accent-2:    #f2675b;
+  --accent-soft: rgba(47, 85, 255, 0.24);
 
   --serif:  'Newsreader', Georgia, 'Times New Roman', serif;
   --sans:   'Hanken Grotesk', system-ui, sans-serif;
@@ -38,6 +40,8 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --vespera-progress: 0;
   --vespera-local: 0;
+  --vespera-signal: var(--signal);
+  --vespera-mark: var(--signal);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,7 +60,7 @@ body.vespera-page {
 }
 
 .vespera-page ::selection {
-  background: rgba(201, 164, 106, 0.35);
+  background: var(--signal);
   color: #fff;
 }
 
@@ -80,9 +84,9 @@ body.vespera-page {
   font-size: 11.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--signal);
+  color: var(--vespera-signal);
 }
-.accent { color: var(--signal); }
+.accent { color: var(--vespera-signal); }
 
 /* ---------- nav (product shell) ---------- */
 .vespera-page .ebar {
@@ -90,9 +94,13 @@ body.vespera-page {
   top: 0;
   z-index: 40;
   min-height: var(--site-nav);
-  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  background: var(--bg) !important;
   border-bottom: 1px solid var(--line);
   backdrop-filter: none;
+}
+
+.vespera-page .ebar.scrolled {
+  background: var(--bg) !important;
 }
 
 .vespera-page .ebar-in {
@@ -120,7 +128,7 @@ body.vespera-page {
 .vespera-page .ebrand .mk {
   width: 16px;
   height: 16px;
-  color: var(--signal);
+  color: var(--vespera-signal);
 }
 
 .vespera-page .brandcol {
@@ -142,7 +150,7 @@ body.vespera-page {
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--signal);
+  color: var(--vespera-signal);
 }
 
 .vespera-page .enav {
@@ -174,7 +182,7 @@ body.vespera-page {
 }
 
 .vespera-page .enav .est-keep {
-  color: var(--signal);
+  color: var(--vespera-signal);
 }
 
 .vespera-page .menu-toggle {
@@ -186,7 +194,7 @@ body.vespera-page {
 
 /* ---------- hero ---------- */
 .vhero {
-  padding: clamp(76px, 8vw, 118px) 0 0;
+  padding: clamp(70px, 7vw, 106px) 0 0;
 }
 
 .vhero .lbl {
@@ -205,17 +213,22 @@ body.vespera-page {
   text-wrap: balance;
 }
 
-.vhero-intro {
+.vhero-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(16px, 2vw, 28px);
-  row-gap: 26px;
+  grid-template-columns: minmax(0, 7fr) minmax(320px, 5fr);
+  column-gap: clamp(28px, 5vw, 72px);
   align-items: start;
-  margin-top: 40px;
 }
 
-.vhero-intro > p {
-  grid-column: 1 / span 7;
+.vhero-intro {
+  margin-top: 34px;
+}
+
+.vhero-copy {
+  min-width: 0;
+}
+
+.vhero-copy > p {
   max-width: 50ch;
   color: var(--ink-2);
   font-size: clamp(17px, 1.45vw, 20px);
@@ -224,10 +237,10 @@ body.vespera-page {
 }
 
 .vhero-cta {
-  grid-column: 1 / span 7;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 24px;
 }
 
 .vespera-page .ebtn {
@@ -245,20 +258,190 @@ body.vespera-page {
 
 .vespera-page .ebtn:hover {
   border-color: var(--ink);
-  background: rgba(242, 235, 225, 0.06);
+  background: var(--panel);
 }
 
 .vespera-page .ebtn-fill {
-  background: var(--signal);
-  border-color: var(--signal);
-  color: #14110c;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
 }
 
 .vespera-page .ebtn-fill:hover {
   background: var(--signal-2);
   border-color: var(--signal-2);
-  color: #14110c;
+  color: #fff;
 }
+
+.vespera-page .ebtn-quiet {
+  border-color: transparent;
+  color: var(--muted);
+}
+
+.vespera-page .ebtn-quiet:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+/* ---------- opening studio board ---------- */
+.vespera-studio-board {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  margin-top: 8px;
+  min-height: clamp(318px, 32vw, 382px);
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--ink);
+}
+
+.vespera-board-head,
+.vespera-board-foot {
+  position: relative;
+  z-index: 3;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  font: 500 9px/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vespera-board-head {
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+.vespera-board-head span:last-child,
+.vespera-board-foot span:first-child { color: var(--vespera-signal); }
+
+.vespera-board-stage {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.vespera-board-plate {
+  position: absolute;
+  inset: 14px 14px 16px;
+  z-index: 1;
+  overflow: hidden;
+  margin: 0;
+  background: var(--ink);
+  border: 1px solid rgba(247, 243, 235, 0.46);
+}
+
+.vespera-board-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 48%;
+  filter: saturate(0.86) contrast(1.04);
+}
+
+.vespera-plate-stamp,
+.vespera-plate-cue {
+  position: absolute;
+  z-index: 2;
+  color: rgba(247, 243, 235, 0.82);
+  font: 500 8px/1.4 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(23, 33, 45, 0.72);
+}
+
+.vespera-plate-stamp {
+  top: 12px;
+  left: 14px;
+}
+
+.vespera-plate-cue {
+  right: 14px;
+  bottom: 12px;
+  color: var(--signal-3);
+}
+
+.vespera-board-plate::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(247, 243, 235, 0.26);
+  pointer-events: none;
+}
+
+.vespera-board-reel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.vespera-board-note {
+  position: absolute;
+  z-index: 3;
+  left: 8%;
+  bottom: 10%;
+  width: min(34%, 150px);
+  pointer-events: none;
+}
+
+.vespera-board-note span {
+  display: block;
+  color: rgba(247, 243, 235, 0.92);
+  font: 500 10px/1.2 var(--mono);
+  letter-spacing: 0.16em;
+  text-shadow: 0 1px 4px rgba(23, 33, 45, 0.72);
+}
+
+.vespera-board-note small {
+  display: block;
+  max-width: 22ch;
+  margin-top: 7px;
+  color: rgba(247, 243, 235, 0.84);
+  font-size: 11px;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(23, 33, 45, 0.72);
+}
+
+.vespera-board-crop {
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  border-color: var(--bg);
+  filter: drop-shadow(0 1px 3px rgba(23, 33, 45, 0.55));
+  pointer-events: none;
+}
+
+.vespera-board-crop-tl {
+  top: 11%;
+  left: 6%;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.vespera-board-crop-br {
+  right: 6%;
+  bottom: 11%;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.vespera-board-foot {
+  border-top: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+.vespera-board-foot span:last-child { text-align: right; }
 
 .vespera-register {
   margin-top: clamp(48px, 6vw, 72px);
@@ -279,7 +462,7 @@ body.vespera-page {
 
 .vespera-register span {
   flex: none;
-  color: var(--signal);
+  color: var(--vespera-signal);
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: 0.12em;
@@ -304,7 +487,7 @@ body.vespera-page {
   align-self: start;
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ink);
   background: var(--panel);
 }
 
@@ -325,7 +508,7 @@ body.vespera-page {
 .vespera-story-head {
   position: relative;
   border-bottom: 1px solid var(--line);
-  color: var(--signal);
+  color: var(--vespera-signal);
 }
 
 .vespera-story-head::after {
@@ -335,7 +518,7 @@ body.vespera-page {
   bottom: -1px;
   left: 0;
   height: 1px;
-  background: var(--signal);
+  background: var(--vespera-signal);
   transform: scaleX(var(--vespera-progress));
   transform-origin: 0 50%;
 }
@@ -350,7 +533,7 @@ body.vespera-page {
 .vespera-story-head b,
 .vespera-story-head i { font: inherit; }
 .vespera-story-head b { color: var(--faint); }
-.vespera-story-head i { color: var(--signal); font-style: normal; }
+.vespera-story-head i { color: var(--vespera-signal); font-style: normal; }
 
 .vespera-story-viewport {
   position: relative;
@@ -363,11 +546,12 @@ body.vespera-page {
 .vespera-reel {
   position: absolute;
   top: 0;
-  right: 0;
+  right: auto;
   bottom: 0;
   left: 48%;
   z-index: 1;
-  width: auto;
+  display: block;
+  width: 52%;
   height: 100%;
   pointer-events: none;
 }
@@ -399,15 +583,19 @@ body.vespera-page {
 .vespera-frame-sheet {
   position: relative;
   z-index: 2;
-  width: min(100%, 42%);
+  width: min(100%, 44%);
   max-width: 420px;
   padding: clamp(18px, 2.4vw, 26px);
-  border: 1px solid var(--line);
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-left: 3px solid var(--vespera-signal);
   background: var(--bg);
 }
 
 .vespera-frame-kicker {
-  color: var(--signal);
+  color: var(--vespera-signal);
   font: 500 9px/1.4 var(--mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -449,7 +637,7 @@ body.vespera-page {
 }
 
 @keyframes vespera-copy-in {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 1; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
 
@@ -499,7 +687,7 @@ body.vespera-page {
 
 .vespera-beat-rail span[data-on="true"] {
   color: var(--ink);
-  border-bottom-color: var(--signal);
+  border-bottom-color: var(--vespera-signal);
 }
 
 .vespera-scene-grid {
@@ -536,7 +724,7 @@ body.vespera-page {
 .vespera-master-mark {
   display: inline-block;
   margin-bottom: 10px;
-  color: var(--signal);
+  color: var(--vespera-signal);
   font: 500 10px/1 var(--mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -571,7 +759,7 @@ body.vespera-page {
 
 .vespera-story-steps::after {
   height: calc(80% * var(--vespera-progress));
-  background: var(--signal);
+  background: var(--vespera-signal);
 }
 
 .vespera-story-steps li {
@@ -604,13 +792,13 @@ body.vespera-page {
 }
 
 .vespera-story-steps li[data-active="true"]::before {
-  border-color: var(--signal);
-  background: var(--signal);
+  border-color: var(--vespera-signal);
+  background: var(--vespera-signal);
 }
 
 .vespera-story-number {
   padding-top: 5px;
-  color: var(--signal);
+  color: var(--vespera-signal);
   font: 500 10px/1 var(--mono);
   letter-spacing: 0.1em;
 }
@@ -646,7 +834,12 @@ body.vespera-page {
 .vespera-page .esec {
   padding: clamp(88px, 9vw, 128px) 0;
   border-bottom: 1px solid var(--line);
+  background: var(--bg);
 }
+
+.vespera-page #modes,
+.vespera-page #evidence,
+.vespera-page #masters { background: var(--panel); }
 
 .vespera-page .esec-head {
   display: grid;
@@ -687,13 +880,13 @@ body.vespera-page {
 .vespera-page .erow:hover {
   margin-inline: -14px;
   padding-inline: 14px;
-  background: rgba(242, 235, 225, 0.03);
+  background: var(--bg-2);
 }
 
 .vespera-page .erow .no {
   font-family: var(--mono);
   font-size: 13px;
-  color: var(--signal);
+  color: var(--vespera-signal);
 }
 
 .vespera-page .erow .ti {
@@ -720,7 +913,7 @@ body.vespera-page {
 }
 
 .vespera-pipe-row .no {
-  color: var(--signal);
+  color: var(--vespera-signal);
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -810,19 +1003,19 @@ body.vespera-page {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 2px;
+  padding: 2px 0 3px;
+  border-radius: 0;
   white-space: nowrap;
 }
 
 .vespera-page .estatus.live {
-  color: var(--signal);
-  border: 1px solid var(--signal);
+  color: var(--vespera-signal);
+  border-bottom: 1px solid var(--vespera-signal);
 }
 
 .vespera-page .estatus.preview {
   color: var(--muted);
-  border: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .vespera-project h3 {
@@ -891,6 +1084,8 @@ body.vespera-page {
 .vespera-close {
   padding: clamp(64px, 7vw, 96px) 0;
   border-bottom: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--bg);
 }
 
 .vespera-close-inner {
@@ -907,12 +1102,13 @@ body.vespera-page {
   font-size: clamp(28px, 4vw, 44px);
   line-height: 1.08;
   letter-spacing: -0.022em;
+  color: var(--bg);
 }
 
 .vespera-close p {
   max-width: 42ch;
   margin-bottom: 22px;
-  color: var(--ink-2);
+  color: rgba(247, 243, 235, 0.78);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -920,7 +1116,7 @@ body.vespera-page {
 .vespera-note {
   margin-top: 28px;
   max-width: 56ch;
-  color: var(--muted);
+  color: rgba(247, 243, 235, 0.58);
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -928,15 +1124,16 @@ body.vespera-page {
 }
 
 .vespera-page .elink {
-  color: var(--signal);
+  color: var(--vespera-signal);
   border-bottom: 1px solid var(--accent-soft);
 }
 
-.vespera-page .elink:hover { border-bottom-color: var(--signal); }
+.vespera-page .elink:hover { border-bottom-color: var(--vespera-signal); }
 
 /* ---------- footer ---------- */
 .vespera-page .efoot {
   padding: 60px 0 44px;
+  background: var(--panel);
 }
 
 .vespera-page .efoot-grid {
@@ -976,7 +1173,7 @@ body.vespera-page {
   color: var(--ink-2);
 }
 
-.vespera-page .efoot ul a:hover { color: var(--signal); }
+.vespera-page .efoot ul a:hover { color: var(--vespera-signal); }
 
 .vespera-page .efoot-base {
   display: flex;
@@ -997,8 +1194,8 @@ body.vespera-page {
 /* ---------- motion ---------- */
 .vespera-page .rv {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transform: translateY(10px);
+  transition: opacity 0.52s var(--ease), transform 0.52s var(--ease);
 }
 
 .vespera-page .rv.in {
@@ -1008,8 +1205,8 @@ body.vespera-page {
 
 .motion-ready .vespera-page [data-motion="reveal"] {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 560ms var(--ease), transform 560ms var(--ease);
+  transform: translateY(10px);
+  transition: opacity 460ms var(--ease), transform 460ms var(--ease);
 }
 
 .motion-ready .vespera-page [data-motion="reveal"].in {
@@ -1022,8 +1219,8 @@ body.vespera-page {
   left: 12px;
   top: 12px;
   padding: 10px 16px;
-  background: var(--signal);
-  color: #14110c;
+  background: var(--vespera-signal);
+  color: #fff;
   border-radius: 4px;
   font-family: var(--mono);
   font-size: 13px;
@@ -1136,6 +1333,11 @@ body.vespera-page {
 @media (max-width: 760px) {
   .vhero { padding: 64px 0 0; }
 
+  .vhero-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
   .vhero h1 {
     max-width: 11ch;
     font-size: clamp(42px, 11.5vw, 60px);
@@ -1145,15 +1347,11 @@ body.vespera-page {
   .vespera-page .brandcol .motto { display: none; }
 
   .vhero-intro {
-    grid-template-columns: 1fr;
-    gap: 22px;
     margin-top: 28px;
   }
 
-  .vhero-intro > p,
-  .vhero-cta {
-    grid-column: 1;
-  }
+  .vespera-studio-board { min-height: 304px; margin-top: 0; }
+  .vespera-board-stage { min-height: 220px; }
 
   .vespera-register p { display: block; }
   .vespera-register span {
@@ -1207,7 +1405,7 @@ body.vespera-page {
   }
 
   .vespera-beat-rail span[data-on="true"] {
-    border-bottom-color: var(--signal);
+    border-bottom-color: var(--vespera-signal);
   }
 
   .vespera-scene-meta {
@@ -1300,4 +1498,576 @@ body.vespera-page {
   visibility: visible;
   pointer-events: auto;
   transform: none;
+}
+
+/* ============================================================
+   2026 art direction pass
+   The studio should feel like a cut table, not a product dashboard:
+   less chrome, fewer containers, more paper, air, and intentional marks.
+   ============================================================ */
+
+.vespera-page {
+  --vespera-paper: #f7f3eb;
+  --vespera-paper-light: #fffdf8;
+  --vespera-paper-deep: #e8dfd1;
+  --vespera-hairline: rgba(23, 33, 45, 0.2);
+}
+
+.vespera-page .vhero {
+  padding-top: clamp(82px, 9vw, 132px);
+}
+
+.vespera-page .vhero .lbl {
+  margin-bottom: clamp(34px, 5vw, 62px);
+  letter-spacing: 0.19em;
+}
+
+.vespera-page .vhero-grid {
+  grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+  column-gap: clamp(36px, 7vw, 96px);
+}
+
+.vespera-page .vhero-copy-block {
+  padding-top: clamp(8px, 2vw, 26px);
+}
+
+.vespera-page .vhero h1 {
+  max-width: 9.5ch;
+  font-size: clamp(54px, 7.5vw, 104px);
+  line-height: 0.91;
+  letter-spacing: -0.042em;
+}
+
+.vespera-page .vhero-intro {
+  margin-top: clamp(34px, 4vw, 54px);
+  padding-left: clamp(0px, 3.2vw, 44px);
+  border-left: 2px solid var(--vespera-signal);
+}
+
+.vespera-page .vhero-copy > p {
+  max-width: 42ch;
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.64;
+}
+
+.vespera-page .vhero-cta {
+  gap: 12px 18px;
+  margin-top: 30px;
+}
+
+.vespera-page .vhero-cta .ebtn {
+  padding-inline: 16px;
+}
+
+/* The hero board is a sheet of paper with one moving image on it. */
+.vespera-page .vespera-studio-board {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  min-height: clamp(366px, 35vw, 450px);
+  margin-top: 0;
+  overflow: hidden;
+  border: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.vespera-page .vespera-board-head,
+.vespera-page .vespera-board-foot {
+  min-height: 38px;
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.vespera-page .vespera-board-head {
+  border-bottom-color: var(--vespera-hairline);
+}
+
+.vespera-page .vespera-board-head span:first-child,
+.vespera-page .vespera-board-foot span:last-child {
+  color: var(--faint);
+}
+
+.vespera-page .vespera-board-head span:last-child,
+.vespera-page .vespera-board-foot span:first-child {
+  color: var(--vespera-signal);
+}
+
+.vespera-page .vespera-board-stage {
+  min-height: 248px;
+  background: var(--vespera-paper-deep);
+  border-inline: 1px solid var(--vespera-hairline);
+}
+
+.vespera-page .vespera-board-plate {
+  inset: 22px 28px 28px;
+  background: var(--vespera-paper-light);
+  border: 1px solid var(--ink);
+  transform: rotate(-1.15deg);
+  transform-origin: 50% 54%;
+  transition: transform 1200ms var(--ease);
+}
+
+.vespera-page .vespera-board-image {
+  filter: saturate(0.82) contrast(1.06);
+  transform: scale(var(--vespera-plate-scale, 1.02)) translate3d(var(--vespera-plate-x, 0%), var(--vespera-plate-y, 0%), 0);
+  transform-origin: var(--vespera-plate-origin, 50% 50%);
+  transition: filter 900ms ease;
+  will-change: transform;
+}
+
+.vespera-page .vespera-studio-board[data-vespera-board-step="1"] .vespera-board-plate {
+  transform: rotate(0.7deg) translateY(2px);
+}
+
+.vespera-page .vespera-studio-board[data-vespera-board-step="2"] .vespera-board-plate {
+  transform: rotate(-0.35deg) translateY(-1px);
+}
+
+.vespera-page .vespera-studio-board[data-vespera-board-step="3"] .vespera-board-plate {
+  transform: rotate(1deg) translateY(3px);
+}
+
+.vespera-page .vespera-plate-stamp,
+.vespera-page .vespera-plate-cue {
+  color: var(--ink);
+  text-shadow: none;
+}
+
+.vespera-page .vespera-plate-cue { color: var(--vespera-signal); }
+
+.vespera-page .vespera-board-plate::after {
+  inset: 9px;
+  border-color: rgba(247, 243, 235, 0.62);
+}
+
+.vespera-page .vespera-board-note {
+  left: 4%;
+  bottom: 8%;
+  width: min(39%, 164px);
+  padding: 8px 10px 9px;
+  border: 1px solid var(--ink);
+  border-left: 2px solid var(--vespera-mark, var(--vespera-signal));
+  background: rgba(247, 243, 235, 0.94);
+}
+
+.vespera-page .vespera-board-note span,
+.vespera-page .vespera-board-note small {
+  color: var(--ink);
+  text-shadow: none;
+}
+
+.vespera-page .vespera-board-note span {
+  color: var(--vespera-signal);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+}
+
+.vespera-page .vespera-board-note small {
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 11px;
+}
+
+.vespera-page .vespera-board-crop {
+  width: 24px;
+  height: 24px;
+  border-color: var(--vespera-mark, var(--vespera-signal));
+  filter: none;
+  will-change: transform;
+}
+
+.vespera-page .vespera-board-crop-tl {
+  top: 9%;
+  left: 4%;
+  transform: translate3d(var(--vespera-crop-x, 0), var(--vespera-crop-y, 0), 0);
+}
+
+.vespera-page .vespera-board-crop-br {
+  right: 4%;
+  bottom: 9%;
+  transform: translate3d(var(--vespera-crop-x-inverse, 0), var(--vespera-crop-y-inverse, 0), 0);
+}
+
+.vespera-page .vespera-contact-strip {
+  --vespera-contact-progress: 0.125;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  height: 66px;
+  padding: 7px 0 8px;
+  border-top: 1px solid var(--vespera-hairline);
+  background: var(--vespera-paper);
+  overflow: hidden;
+}
+
+.vespera-page .vespera-contact-frame {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-top: 2px solid transparent;
+  background-color: var(--vespera-paper-deep);
+  background-image: url("vespera-plate.jpg");
+  background-repeat: no-repeat;
+  background-size: 360% auto;
+  filter: saturate(0.48) contrast(0.94);
+  opacity: 0.58;
+  transition: opacity 360ms ease, filter 520ms ease, border-color 360ms ease;
+}
+
+.vespera-page .vespera-contact-frame:nth-child(1) { background-position: 8% 48%; }
+.vespera-page .vespera-contact-frame:nth-child(2) { background-position: 36% 50%; }
+.vespera-page .vespera-contact-frame:nth-child(3) { background-position: 64% 48%; }
+.vespera-page .vespera-contact-frame:nth-child(4) { background-position: 92% 52%; }
+
+.vespera-page .vespera-contact-frame[data-active="true"] {
+  border-top-color: var(--vespera-mark, var(--vespera-signal));
+  filter: saturate(0.9) contrast(1.06);
+  opacity: 1;
+}
+
+.vespera-page .vespera-contact-frame i {
+  position: absolute;
+  right: 5px;
+  bottom: 3px;
+  color: var(--vespera-paper-light);
+  font: 500 7px/1 var(--mono);
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 3px rgba(23, 33, 45, 0.9);
+}
+
+.vespera-page .vespera-contact-playhead {
+  position: absolute;
+  z-index: 2;
+  top: 3px;
+  bottom: 4px;
+  left: calc(var(--vespera-contact-progress) * 100%);
+  width: 1px;
+  background: var(--vespera-mark, var(--vespera-signal));
+  transform: translateX(-0.5px);
+  pointer-events: none;
+}
+
+.vespera-page .vespera-contact-playhead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 7px;
+  height: 7px;
+  background: var(--vespera-mark, var(--vespera-signal));
+  transform: rotate(45deg);
+}
+
+.vespera-page .vespera-board-foot {
+  border-top-color: var(--vespera-hairline);
+}
+
+.vespera-page .vespera-register {
+  margin-top: clamp(58px, 8vw, 108px);
+  padding-block: 18px;
+}
+
+/* The production story is a magazine spread: one image field, one margin of type. */
+.vespera-page .vespera-story {
+  grid-template-columns: minmax(0, 1.66fr) minmax(230px, 0.84fr);
+  column-gap: clamp(34px, 6vw, 86px);
+  margin-top: clamp(72px, 10vw, 132px);
+}
+
+.vespera-page .vespera-story-stage {
+  border: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: var(--vespera-paper-light);
+}
+
+.vespera-page .vespera-story-head,
+.vespera-page .vespera-story-foot {
+  min-height: 46px;
+  padding: 10px 0;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+}
+
+.vespera-page .vespera-story-head {
+  margin-inline: 0;
+  border-bottom-color: var(--vespera-hairline);
+}
+
+.vespera-page .vespera-story-head::after {
+  height: 2px;
+}
+
+.vespera-page .vespera-story-viewport {
+  min-height: clamp(360px, 38vw, 470px);
+  contain: paint;
+  background: var(--vespera-paper-deep);
+}
+
+.vespera-page .vespera-reel {
+  left: 45%;
+  width: 55%;
+  max-width: 55%;
+  overflow: hidden;
+}
+
+.vespera-page .vespera-story-frame {
+  padding: clamp(30px, 4vw, 54px) clamp(26px, 4vw, 52px);
+}
+
+.vespera-page .vespera-frame-sheet {
+  width: min(100%, 43%);
+  max-width: 390px;
+  padding: 0 0 0 clamp(18px, 2.2vw, 30px);
+  border: 0;
+  border-left: 2px solid var(--vespera-mark, var(--vespera-signal));
+  background: transparent;
+}
+
+.vespera-page .vespera-frame-kicker { font-size: 8.5px; }
+
+.vespera-page .vespera-story-frame strong {
+  margin: 16px 0 13px;
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 0.99;
+}
+
+.vespera-page .vespera-story-frame small {
+  max-width: 32ch;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.vespera-page .vespera-frame-list,
+.vespera-page .vespera-beat-rail,
+.vespera-page .vespera-scene-grid,
+.vespera-page .vespera-master-strip {
+  margin-top: 25px;
+}
+
+.vespera-page .vespera-frame-list li {
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+.vespera-page .vespera-story-foot {
+  border-top-color: var(--vespera-hairline);
+}
+
+.vespera-page .vespera-story-steps {
+  border-top: 1px solid var(--ink);
+}
+
+.vespera-page .vespera-story-steps::before,
+.vespera-page .vespera-story-steps::after {
+  top: 0;
+  height: 100%;
+}
+
+.vespera-page .vespera-story-steps li {
+  min-height: 57vh;
+  padding: 8vh 0 8vh 24px;
+}
+
+.vespera-page .vespera-story-steps li + li {
+  border-top: 1px solid var(--line);
+}
+
+.vespera-page .vespera-story-steps li[data-active="true"] {
+  transform: translateX(4px);
+}
+
+.vespera-page .vespera-story-steps h2 {
+  font-size: clamp(27px, 2.75vw, 38px);
+}
+
+.vespera-page .vespera-story-evidence {
+  margin-top: 18px;
+  color: var(--vespera-signal);
+  font-size: 8px;
+}
+
+.vespera-page .vespera-story-head::after,
+.vespera-page .vespera-story-steps li[data-active="true"]::before {
+  background: var(--vespera-mark, var(--vespera-signal));
+}
+
+/* Lower pages are ruled spreads, not a pile of feature cards. */
+.vespera-page .esec {
+  position: relative;
+  padding-block: clamp(96px, 11vw, 152px);
+}
+
+.vespera-page .esec::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: min(24vw, 260px);
+  height: 3px;
+  background: var(--vespera-signal);
+}
+
+.vespera-page #modes::before { background: var(--signal-2); }
+.vespera-page #pipeline::before { background: var(--signal-3); }
+.vespera-page #evidence::before { background: var(--signal-4); }
+.vespera-page #masters::before { background: var(--signal); }
+
+.vespera-page .esec-head {
+  grid-template-columns: minmax(150px, 1.5fr) 10fr;
+  gap: 42px;
+  margin-bottom: 56px;
+}
+
+.vespera-page .esec-head h2 {
+  max-width: 18ch;
+  font-size: clamp(34px, 4.5vw, 60px);
+  line-height: 0.99;
+}
+
+.vespera-page .vespera-lede {
+  max-width: 54ch;
+  margin-bottom: 50px;
+  font-size: 16px;
+  line-height: 1.68;
+}
+
+.vespera-page .erow,
+.vespera-page .vespera-pipe-row {
+  transition: background 220ms ease, padding 220ms ease;
+}
+
+.vespera-page .erow:hover {
+  margin-inline: 0;
+  padding-inline: 10px;
+  background: rgba(255, 253, 248, 0.62);
+}
+
+.vespera-page .erow .ti,
+.vespera-page .vespera-pipe-row .ti {
+  font-size: clamp(21px, 2.1vw, 28px);
+}
+
+.vespera-page .vespera-project,
+.vespera-page .vespera-masters > div,
+.vespera-page .vespera-evidence > div {
+  padding-top: 38px;
+  padding-bottom: 38px;
+}
+
+.vespera-page .vespera-project-cta {
+  gap: 14px 20px;
+  margin-top: 20px;
+}
+
+.vespera-page .vespera-project-cta .ebtn {
+  padding: 8px 0;
+  border-width: 0 0 1px;
+  border-radius: 0;
+}
+
+.vespera-page .vespera-project-cta .ebtn-fill {
+  padding-inline: 12px;
+  border-width: 1px;
+}
+
+.vespera-page .vespera-footer-label {
+  margin-bottom: 18px;
+  color: var(--accent);
+}
+
+.vespera-page .vespera-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.vespera-page .vespera-close {
+  position: relative;
+  background: var(--ink);
+}
+
+.vespera-page .vespera-close::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(32vw, 360px);
+  height: 3px;
+  background: var(--signal-2);
+}
+
+@media (max-width: 900px) {
+  .vespera-page .vhero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.86fr);
+    column-gap: 34px;
+  }
+
+  .vespera-page .vespera-story {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .vespera-page .vespera-reel {
+    left: auto;
+    width: 100%;
+    max-width: none;
+  }
+
+  .vespera-page .vespera-story-steps li { min-height: 52vh; }
+}
+
+@media (max-width: 820px) {
+  .vespera-page .vhero { padding-top: 68px; }
+  .vespera-page .vhero-grid { grid-template-columns: 1fr; gap: 42px; }
+  .vespera-page .vespera-story { grid-template-columns: 1fr; }
+  .vespera-page .vhero-copy-block { padding-top: 0; }
+  .vespera-page .vhero h1 { max-width: 10ch; font-size: clamp(48px, 13vw, 70px); }
+  .vespera-page .vhero-intro { padding-left: 18px; }
+  .vespera-page .vespera-studio-board { min-height: 410px; }
+  .vespera-page .vespera-board-plate { inset: 20px 22px 28px; }
+  .vespera-page .vespera-board-note { bottom: 7%; }
+  .vespera-page .vespera-story { margin-top: 68px; }
+  .vespera-page .vespera-story-viewport { min-height: 0; }
+  .vespera-page .vespera-story-frame { padding: 24px 18px 28px; }
+  .vespera-page .vespera-frame-sheet { width: 54%; }
+  .vespera-page .esec { padding-block: 82px; }
+}
+
+@media (max-width: 640px) {
+  .vespera-page .vhero { padding-top: 46px; }
+  .vespera-page .vhero .lbl { margin-bottom: 24px; }
+  .vespera-page .vhero h1 { line-height: 0.94; }
+  .vespera-page .vhero-intro { margin-top: 26px; }
+  .vespera-page .vhero-cta { margin-top: 24px; }
+  .vespera-page .vespera-board-head,
+  .vespera-page .vespera-board-foot { font-size: 8px; }
+  .vespera-page .vespera-studio-board { min-height: 372px; }
+  .vespera-page .vespera-board-stage { min-height: 220px; }
+  .vespera-page .vespera-contact-strip { height: 58px; gap: 3px; }
+  .vespera-page .vespera-board-note { width: 43%; }
+  .vespera-page .vespera-board-note small { max-width: 17ch; font-size: 10px; }
+  .vespera-page .vespera-story-head,
+  .vespera-page .vespera-story-foot { min-height: 42px; }
+  .vespera-page .vespera-frame-sheet { width: 100%; }
+  .vespera-page .vespera-reel { left: auto; width: 100%; }
+  .vespera-page .vespera-story-frame { padding: 18px 18px 28px; }
+  .vespera-page .vespera-story-steps li { min-height: 50svh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vespera-page .vespera-board-plate,
+  .vespera-page .vespera-board-image,
+  .vespera-page .vespera-contact-frame { transition: none; }
+
+  .vespera-page .vespera-board-image,
+  .vespera-page .vespera-board-crop { transform: none; }
+
+  .vespera-page .vespera-contact-playhead { left: 12.5%; }
 }

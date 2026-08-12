@@ -120,6 +120,30 @@
     if (!inner || !links) return;
 
     if (!links.id) links.id = nav.classList.contains('ebar') ? 'lab-navigation' : 'product-navigation';
+
+    const cleanPath = (path) => ({
+      '/Ephemerent.html': '/',
+      '/research.html': '/research',
+      '/Orrery.html': '/orrery',
+      '/Vellum.html': '/vellum',
+      '/Vespera.html': '/vespera',
+      '/Shelterix.html': '/shelterix',
+      '/arbiter-preview.html': '/arbiter',
+      '/organizations.html': '/organizations',
+      '/security.html': '/security',
+      '/slack.html': '/slack',
+      '/download.html': '/download',
+      '/privacy.html': '/privacy',
+      '/terms.html': '/terms',
+    }[path] || path.replace(/\/$/, '') || '/');
+    const currentPath = cleanPath(location.pathname);
+    links.querySelectorAll('a[href]').forEach((link) => {
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin || url.hash) return;
+      if (cleanPath(url.pathname) === currentPath) link.setAttribute('aria-current', 'page');
+      else if (link.getAttribute('aria-current') === 'page') link.removeAttribute('aria-current');
+    });
+
     let button = inner.querySelector('.menu-toggle');
     if (!button) {
       button = document.createElement('button');
