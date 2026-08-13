@@ -1,5 +1,9 @@
 {
   "redirects": [
+    { "source": "/atlas", "destination": "https://atlas.ephemerent.com", "permanent": true },
+    { "source": "/atlas/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true },
+    { "source": "/education", "destination": "https://atlas.ephemerent.com", "permanent": true },
+    { "source": "/education/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true },
     { "source": "/Ephemerent.html", "destination": "/", "permanent": true },
     { "source": "/research.html", "destination": "/research", "permanent": true },
     { "source": "/Orrery.html", "destination": "/orrery", "permanent": true },
