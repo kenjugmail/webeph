@@ -7,6 +7,12 @@ export const GENESIS_METADATA = Object.freeze({
   release_version: '0.1.0-beta.1',
   fulfillment: 'itch_download_key',
 });
+export const GENESIS_DIRECT_METADATA = Object.freeze({
+  product: 'genesis_fall',
+  release_channel: 'beta',
+  release_version: '0.1.0-beta.1',
+  fulfillment: 'direct_download',
+});
 
 export function checkoutAvailableForCount(count) {
   return Number.isInteger(Number(count)) && Number(count) >= GENESIS_LOW_STOCK_THRESHOLD;
@@ -138,7 +144,8 @@ export function validateCheckoutSession(session, expected) {
     return { ok: false, code: 'invalid_purchase' };
   }
 
-  for (const [key, value] of Object.entries(GENESIS_METADATA)) {
+  const requiredMetadata = expected.metadata || GENESIS_METADATA;
+  for (const [key, value] of Object.entries(requiredMetadata)) {
     if (session.metadata?.[key] !== value) return { ok: false, code: 'invalid_purchase' };
   }
 
@@ -184,7 +191,15 @@ export function validateCheckoutSession(session, expected) {
 }
 
 export function publicError(code) {
-  const allowed = new Set(['pending', 'wrong_email', 'depleted', 'manual_review', 'invalid_purchase', 'unavailable']);
+  const allowed = new Set([
+    'pending',
+    'wrong_email',
+    'depleted',
+    'release_pending',
+    'manual_review',
+    'invalid_purchase',
+    'unavailable',
+  ]);
   return { ok: false, code: allowed.has(code) ? code : 'unavailable' };
 }
 

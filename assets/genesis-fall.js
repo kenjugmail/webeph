@@ -48,14 +48,7 @@
       stripe.addEventListener('click', openStripe);
     }
 
-    const itch = document.querySelector('[data-itch-checkout]');
-    if (itch && !placeholder(cfg.ITCH_PAGE_URL)) {
-      itch.href = cfg.ITCH_PAGE_URL;
-      itch.removeAttribute('aria-disabled');
-      itch.removeAttribute('tabindex');
-    }
-
-    setStatus('Purchasing is available through Stripe or itch.', 'ready');
+    setStatus('Purchasing and direct downloads are available through Ephemerent.', 'ready');
   }
 
   activatePurchases();

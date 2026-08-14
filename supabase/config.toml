@@ -379,6 +379,12 @@ verify_jwt = false
 [functions.claim-genesis-fall]
 verify_jwt = false
 
+[functions.stripe-genesis-live-webhook]
+verify_jwt = false
+
+[functions.claim-genesis-fall-live]
+verify_jwt = false
+
 # [edge_runtime.secrets]
 # secret_key = "env(SECRET_VALUE)"
 
