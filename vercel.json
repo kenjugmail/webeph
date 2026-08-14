@@ -9,6 +9,8 @@
     { "source": "/Orrery.html", "destination": "/orrery", "permanent": true },
     { "source": "/Vellum.html", "destination": "/vellum", "permanent": true },
     { "source": "/Vespera.html", "destination": "/vespera", "permanent": true },
+    { "source": "/genesis-fall.html", "destination": "/genesis-fall", "permanent": true },
+    { "source": "/genesis-fall-access.html", "destination": "/genesis-fall-access", "permanent": true },
     { "source": "/Shelterix.html", "destination": "/shelterix", "permanent": true },
     { "source": "/organizations.html", "destination": "/organizations", "permanent": true },
     { "source": "/security.html", "destination": "/security", "permanent": true },
@@ -44,6 +46,8 @@
     { "source": "/orrery", "destination": "/Orrery.html" },
     { "source": "/vellum", "destination": "/Vellum.html" },
     { "source": "/vespera", "destination": "/Vespera.html" },
+    { "source": "/genesis-fall", "destination": "/genesis-fall.html" },
+    { "source": "/genesis-fall-access", "destination": "/genesis-fall-access.html" },
     { "source": "/shelterix", "destination": "/Shelterix.html" },
     { "source": "/organizations", "destination": "/organizations.html" },
     { "source": "/security", "destination": "/security.html" },
@@ -58,6 +62,20 @@
     { "source": "/terms", "destination": "/terms.html" }
   ],
   "headers": [
+    {
+      "source": "/genesis-fall",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
+        { "key": "Cache-Control", "value": "private, no-store" }
+      ]
+    },
+    {
+      "source": "/genesis-fall-access",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
+        { "key": "Cache-Control", "value": "private, no-store" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
