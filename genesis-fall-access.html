@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Genesis Fall access · Ephemerent</title>
-<meta name="description" content="Verify a paid Genesis Fall Stripe purchase and recover its private itch ownership link.">
+<meta name="description" content="Verify a paid Genesis Fall Stripe purchase and create short-lived direct download links.">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="referrer" content="no-referrer">
 <link rel="canonical" href="https://ephemerent.com/genesis-fall-access">
@@ -24,8 +24,8 @@
   <div class="qe-wrap">
     <section class="qe-access-card" aria-labelledby="access-title">
       <span class="qe-kicker">Stripe purchase verification</span>
-      <h1 id="access-title">Claim your itch access.</h1>
-      <p>The redirect alone is not proof of payment. Enter the same email used at Stripe; the server will re-check the paid Checkout Session before revealing an ownership link.</p>
+      <h1 id="access-title">Download Genesis Fall.</h1>
+      <p>The redirect alone is not proof of payment. Enter the same email used at Stripe; the server will re-check the paid Checkout Session before creating short-lived download links.</p>
       <form class="qe-form" data-claim-form>
         <label for="purchase-email">Stripe purchase email</label>
         <input id="purchase-email" type="email" autocomplete="email" required maxlength="254" data-claim-email>
@@ -33,17 +33,17 @@
       </form>
       <p class="qe-notice" role="status" aria-live="polite" data-claim-notice></p>
       <div class="qe-success" data-claim-success hidden>
-        <strong>Verified access</strong>
-        <p>Open the private ownership link and sign in to itch.io. Attach the game to the itch account you want to use for installs and future updates.</p>
-        <a class="qe-button" target="_blank" rel="noopener noreferrer" data-itch-key-link>Open private itch ownership link</a>
+        <strong>Verified direct downloads</strong>
+        <p>Choose your platform. Each link expires after 15 minutes; revisit this completion URL with the same purchase email to create fresh links.</p>
+        <div class="qe-downloads" data-downloads></div>
       </div>
       <div class="qe-guidance">
         <h2>Recovery and support</h2>
         <ul>
-          <li>Returning to this same completion URL with the same purchase email returns the same ownership link.</li>
+          <li>Returning to this same completion URL with the same purchase email creates fresh download links for the same paid order.</li>
           <li>Pending payments may take a short time to settle; retry without purchasing again.</li>
-          <li>If delivery is paused, depleted, disputed, refunded, or marked for review, email <a href="mailto:hello@ephemerent.com?subject=Genesis%20Fall%20access">hello@ephemerent.com</a> with the Stripe receipt ID. Never email card details.</li>
-          <li>After attaching the key, use the itch app for installation and beta updates.</li>
+          <li>If delivery is pending, disputed, refunded, or marked for review, email <a href="mailto:hello@ephemerent.com?subject=Genesis%20Fall%20access">hello@ephemerent.com</a> with the Stripe receipt ID. Never email card details.</li>
+          <li>Verify the displayed SHA-256 before running an unsigned package.</li>
         </ul>
       </div>
     </section>

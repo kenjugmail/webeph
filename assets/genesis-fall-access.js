@@ -9,12 +9,13 @@
   const submit = document.querySelector('[data-claim-submit]');
   const notice = document.querySelector('[data-claim-notice]');
   const success = document.querySelector('[data-claim-success]');
-  const keyLink = document.querySelector('[data-itch-key-link]');
+  const downloads = document.querySelector('[data-downloads]');
 
   const messages = {
     pending: 'Stripe has not confirmed this payment yet. Wait a moment, then try again.',
     wrong_email: 'That email does not match the verified Stripe purchase.',
-    depleted: 'Key delivery is temporarily paused. Your paid order is recorded; contact support for manual delivery.',
+    depleted: 'Download delivery is temporarily paused. Your paid order is recorded; contact support.',
+    release_pending: 'Your purchase is recorded, but the release packages are not available yet. Contact support or retry later.',
     manual_review: 'This order needs manual review before access can be delivered. Contact support with your Stripe receipt.',
     invalid_purchase: 'This Checkout Session is not a valid paid Genesis Fall Beta purchase.',
     unavailable: 'Access recovery is not configured on this private candidate.',
@@ -51,14 +52,34 @@
         referrerPolicy: 'no-referrer',
       });
       const body = await response.json().catch(() => ({}));
-      if (!response.ok || body.ok !== true || !body.itchKeyUrl) {
+      if (!response.ok || body.ok !== true || !Array.isArray(body.downloads)) {
         show(messages[body.code] || 'Access could not be verified. Contact support if this continues.', 'error');
         return;
       }
 
-      keyLink.href = body.itchKeyUrl;
+      downloads.replaceChildren();
+      for (const item of body.downloads) {
+        if (!['macos-arm64', 'windows-x64'].includes(item.platform)
+            || !/^https:\/\//.test(String(item.url || ''))
+            || !/^[a-f0-9]{64}$/.test(String(item.sha256 || ''))) {
+          throw new Error('invalid_download_manifest');
+        }
+        const card = document.createElement('article');
+        card.className = 'qe-download-card';
+        const heading = document.createElement('strong');
+        heading.textContent = item.platform === 'macos-arm64' ? 'Apple Silicon macOS' : 'Windows x64';
+        const details = document.createElement('code');
+        details.textContent = `SHA-256 ${item.sha256}`;
+        const link = document.createElement('a');
+        link.className = 'qe-button';
+        link.href = item.url;
+        link.rel = 'noopener noreferrer';
+        link.textContent = `Download ${item.filename}`;
+        card.append(heading, details, link);
+        downloads.append(card);
+      }
       success.hidden = false;
-      show('Purchase verified. Your private itch ownership link is ready.', 'ready');
+      show('Purchase verified. Your short-lived direct download links are ready.', 'ready');
     } catch {
       show('The verification service could not be reached. No purchase data was changed; try again later.', 'error');
     } finally {

@@ -1,4 +1,10 @@
-# Genesis Fall Stripe-to-itch fulfillment
+# Genesis Fall Stripe-to-itch fulfillment (superseded)
+
+> **Superseded August 13, 2026.** Genesis Fall will use purchase-gated direct
+> downloads from Ephemerent instead of itch ownership keys. This document is
+> retained only as historical implementation evidence. Do not import keys,
+> enable its Payment Link, or use this flow for live sales. See
+> `GENESIS-FALL-DIRECT-DOWNLOAD.md`.
 
 This track is private infrastructure for `0.1.0-beta.1`. The committed browser
 configuration contains no active purchase URL, and both pages are `noindex`.
