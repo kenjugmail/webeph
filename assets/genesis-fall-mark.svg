@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Genesis Fall mark</title>
+  <desc id="desc">An original pale world-seed crossed by a dark root and a violet germinating point.</desc>
+  <defs>
+    <radialGradient id="night" cx="38%" cy="28%" r="82%">
+      <stop offset="0" stop-color="#183b42"/>
+      <stop offset="0.62" stop-color="#0b2229"/>
+      <stop offset="1" stop-color="#061319"/>
+    </radialGradient>
+    <radialGradient id="earth" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff4cf"/>
+      <stop offset="0.68" stop-color="#d9c99d"/>
+      <stop offset="1" stop-color="#9f906f"/>
+    </radialGradient>
+  </defs>
+  <rect x="42" y="42" width="940" height="940" rx="224" fill="url(#night)"/>
+  <circle cx="500" cy="490" r="300" fill="url(#earth)"/>
+  <path d="M222 566c133-46 233-54 337-31 84 19 161 14 247-21" fill="none" stroke="#173239" stroke-width="44" stroke-linecap="round"/>
+  <path d="M316 747c102-72 151-132 207-242 48-94 102-166 188-238" fill="none" stroke="#081c22" stroke-width="58" stroke-linecap="round"/>
+  <path d="M426 631c-41 9-82 31-117 68M511 527c-55-11-103-7-153 12M581 418c41-5 81 1 121 23" fill="none" stroke="#081c22" stroke-width="28" stroke-linecap="round"/>
+  <path d="M696 244l57 20-38 48-62-3z" fill="#d2b8ff" stroke="#160f24" stroke-width="18" stroke-linejoin="round"/>
+  <circle cx="701" cy="278" r="13" fill="#f5eaff"/>
+</svg>

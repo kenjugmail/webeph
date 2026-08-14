@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genesis Fall access · Ephemerent</title>
+<meta name="description" content="Verify a paid Genesis Fall Stripe purchase and recover its private itch ownership link.">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://ephemerent.com/genesis-fall-access">
+<meta name="theme-color" content="#061319">
+<link rel="icon" href="assets/genesis-fall-mark.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/base.css?v=20260813">
+<link rel="stylesheet" href="assets/genesis-fall.css?v=20260813-2">
+<script src="assets/genesis-fall-config.js?v=20260813" defer></script>
+<script src="assets/genesis-fall-access.js?v=20260813" defer></script>
+</head>
+<body class="genesis-fall-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="qe-nav" aria-label="Genesis Fall"><div class="qe-wrap qe-nav-in"><a class="qe-brand" href="/genesis-fall"><img src="assets/genesis-fall-mark.svg" alt="" width="34" height="34"><span>Genesis Fall</span></a><span class="qe-private">PRIVATE ACCESS</span></div></nav>
+<main class="qe-access" id="main">
+  <div class="qe-wrap">
+    <section class="qe-access-card" aria-labelledby="access-title">
+      <span class="qe-kicker">Stripe purchase verification</span>
+      <h1 id="access-title">Claim your itch access.</h1>
+      <p>The redirect alone is not proof of payment. Enter the same email used at Stripe; the server will re-check the paid Checkout Session before revealing an ownership link.</p>
+      <form class="qe-form" data-claim-form>
+        <label for="purchase-email">Stripe purchase email</label>
+        <input id="purchase-email" type="email" autocomplete="email" required maxlength="254" data-claim-email>
+        <button class="qe-button" type="submit" data-claim-submit>Verify purchase</button>
+      </form>
+      <p class="qe-notice" role="status" aria-live="polite" data-claim-notice></p>
+      <div class="qe-success" data-claim-success hidden>
+        <strong>Verified access</strong>
+        <p>Open the private ownership link and sign in to itch.io. Attach the game to the itch account you want to use for installs and future updates.</p>
+        <a class="qe-button" target="_blank" rel="noopener noreferrer" data-itch-key-link>Open private itch ownership link</a>
+      </div>
+      <div class="qe-guidance">
+        <h2>Recovery and support</h2>
+        <ul>
+          <li>Returning to this same completion URL with the same purchase email returns the same ownership link.</li>
+          <li>Pending payments may take a short time to settle; retry without purchasing again.</li>
+          <li>If delivery is paused, depleted, disputed, refunded, or marked for review, email <a href="mailto:hello@ephemerent.com?subject=Genesis%20Fall%20access">hello@ephemerent.com</a> with the Stripe receipt ID. Never email card details.</li>
+          <li>After attaching the key, use the itch app for installation and beta updates.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="qe-footer"><div class="qe-wrap qe-footer-in"><span>© 2026 Ephemerent</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span></div></footer>
+</body>
+</html>

@@ -6,5 +6,7 @@ Disallow: /journal-submit.html
 Disallow: /journal-editor.html
 Disallow: /journal/submit
 Disallow: /journal/editor
+Disallow: /genesis-fall
+Disallow: /genesis-fall-access
 
 Sitemap: https://ephemerent.com/sitemap.xml
