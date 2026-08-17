@@ -75,22 +75,22 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Paid agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 8M credits/month', 'Doubleword - 8M credits/month', 'Arbiter - 4M credits/month', 'Nexus + managed connector features'],
+      summary: 'Paid agent work through Orrery Relay-managed DeepSeek, Doubleword, and Arbiter pools, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'DeepSeek pool - 8M credits/month', 'Doubleword pool - 8M credits/month', 'Arbiter pool - 4M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'DeepSeek API - 18M credits/month', 'Doubleword - 20M credits/month', 'Arbiter - 12M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'DeepSeek pool - 18M credits/month', 'Doubleword pool - 20M credits/month', 'Arbiter pool - 12M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'DeepSeek API - 35M credits/month', 'Doubleword - 35M credits/month', 'Arbiter - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'DeepSeek pool - 35M credits/month', 'Doubleword pool - 35M credits/month', 'Arbiter pool - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }

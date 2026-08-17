@@ -100,9 +100,9 @@
       </div>
       <div class="hero-providers reveal in d4">
         <span class="mono">works with</span>
-        <span class="prov prov-local">Arbiter beta</span><span class="prov">DeepSeek API</span><span class="prov">Doubleword</span><span class="prov">Nexus Cloud</span><span class="prov">Proof Vault</span><span class="prov">Managed Connectors</span>
+        <span class="prov prov-local">Arbiter pool</span><span class="prov">DeepSeek pool</span><span class="prov">Doubleword pool</span><span class="prov">Orrery Relay</span><span class="prov">Proof Vault</span><span class="prov">Managed Connectors</span>
       </div>
-      <p class="hero-note mono reveal in d4">Arbiter, DeepSeek API, and Doubleword credits — choose hosted routes per workspace and task.</p>
+      <p class="hero-note mono reveal in d4">Arbiter, DeepSeek, and Doubleword credits — choose an Orrery Relay lane per workspace and task.</p>
       <p class="hero-note mono reveal in d4">Beta software. Agent output can be wrong or unsafe; keep backups and review changes before running or shipping them.</p>
     </div>
 
@@ -191,7 +191,7 @@
     </div>
     <div class="cap-grid cap-grid-4">
       <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Open folder</h3><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Pick a route</h3><p>Use subscription-hosted DeepSeek API, Doubleword, or Arbiter routes. Arbiter appears as a beta hosted coding route for eligible subscribers.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Pick a Relay lane</h3><p>Use subscription-managed DeepSeek, Doubleword, or Arbiter pools through Orrery Relay. Capacity and availability remain subject to the current plan and provider contracts.</p></div>
       <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Run an agent</h3><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
       <div class="card card-pad card-hover reveal d3"><div class="cap-ic">04</div><h3>Review receipts</h3><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
     </div>
@@ -222,11 +222,11 @@
       <div class="reveal">
         <div class="eyebrow">Model-agnostic</div>
         <h2 class="display" style="margin:18px 0 22px;">Preview the setup.<br>Subscribe for hosted runs.</h2>
-        <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through Orrery Cloud. Pro, Max, and Ultra add hosted DeepSeek API, Doubleword, and Arbiter credits plus managed connector automation.</p>
+        <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through Orrery Relay. Pro, Max, and Ultra add managed DeepSeek, Doubleword, and Arbiter pools plus managed connector automation.</p>
         <div class="prov-table">
-          <div class="prov-row"><span>DeepSeek API</span><span class="mono">subscription hosted</span><span class="muted">8M / 18M / 35M credits</span></div>
-          <div class="prov-row"><span>Doubleword</span><span class="mono">subscription hosted</span><span class="muted">8M / 20M / 35M credits</span></div>
-          <div class="prov-row"><span>Arbiter 0.1 Beta</span><span class="mono">subscription hosted</span><span class="muted">4M / 12M / 30M premium coding credits</span></div>
+          <div class="prov-row"><span>DeepSeek pool</span><span class="mono">Orrery Relay managed</span><span class="muted">8M / 18M / 35M credits</span></div>
+          <div class="prov-row"><span>Doubleword pool</span><span class="mono">Orrery Relay managed</span><span class="muted">8M / 20M / 35M credits</span></div>
+          <div class="prov-row"><span>Arbiter pool</span><span class="mono">Orrery Relay managed</span><span class="muted">4M / 12M / 30M credits</span></div>
           <div class="prov-row"><span>Nexus Cloud</span><span class="mono">managed operations</span><span class="muted">connectors, proof vaults, and usage receipts</span></div>
           <div class="prov-row"><span>Research runs</span><span class="mono">subscription hosted</span><span class="muted">available by plan and beta capacity</span></div>
         </div>
@@ -306,11 +306,11 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Data and account boundaries</div>
       <h2 class="display">Clear about what crosses the network.</h2>
-      <p class="lead">Hosted routes send the prompt and code context needed for a completion through Orrery Cloud to the configured provider. Ephemerent meters usage, does not retain relay content beyond fulfilling the request, and does not use your code or prompts to train its own models.</p>
+      <p class="lead">Relay routes send the prompt and code context needed for a completion through Orrery Relay to the approved provider pool. Ephemerent meters usage, does not retain relay content beyond fulfilling the request, and does not use your code or prompts to train its own models.</p>
     </div>
     <div class="cap-grid reveal d1">
-      <div class="card card-pad"><div class="cap-ic">01</div><h3>Explicit hosted route</h3><p>Nexus labels the selected DeepSeek API, Doubleword, or Arbiter route before a run starts.</p></div>
-      <div class="card card-pad"><div class="cap-ic">02</div><h3>Purpose-limited relay</h3><p>Only the prompt and context needed for the completion are relayed to the configured provider.</p></div>
+      <div class="card card-pad"><div class="cap-ic">01</div><h3>Explicit Relay lane</h3><p>Nexus labels the selected DeepSeek, Doubleword, or Arbiter pool before a run starts.</p></div>
+      <div class="card card-pad"><div class="cap-ic">02</div><h3>Purpose-limited relay</h3><p>Only the prompt and context needed for the completion are relayed to an approved provider pool.</p></div>
       <div class="card card-pad"><div class="cap-ic">03</div><h3>Content is not metering</h3><p>Stored usage counters are token totals and timestamps, not copies of prompt content.</p></div>
       <div class="card card-pad"><div class="cap-ic">04</div><h3>Your review remains final</h3><p>Keep source-control backups and inspect changes before accepting, running, or shipping output.</p></div>
     </div>
@@ -323,7 +323,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">Subscribe to run Orrery.</h2>
-      <p class="lead">Orrery is a paid product. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credits, cloud features, managed connectors, proof vaults, and usage receipts subject to beta availability and provider limits.</p>
+      <p class="lead">Orrery is a paid product. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs through Relay-managed credits, cloud features, managed connectors, proof vaults, and usage receipts subject to beta availability and provider limits.</p>
     </div>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro price-card-featured">
@@ -335,9 +335,9 @@
         </div>
         <p>Paid individual agent work with hosted credits and Nexus operations.</p>
         <ul>
-          <li>DeepSeek API - 8M credits/mo</li>
-          <li>Doubleword - 8M credits/mo</li>
-          <li>Arbiter - 4M credits/mo</li>
+          <li>DeepSeek Relay pool - 8M credits/mo</li>
+          <li>Doubleword Relay pool - 8M credits/mo</li>
+          <li>Arbiter Relay pool - 4M credits/mo</li>
           <li>Nexus cloud operations</li>
           <li>Nexus, Discord/mobile oversight, proof receipts</li>
         </ul>
@@ -351,9 +351,9 @@
         </div>
         <p>Bigger hosted-credit pools for daily multi-agent work.</p>
         <ul>
-          <li>DeepSeek API - 18M credits/mo</li>
-          <li>Doubleword - 20M credits/mo</li>
-          <li>Arbiter - 12M credits/mo</li>
+          <li>DeepSeek Relay pool - 18M credits/mo</li>
+          <li>Doubleword Relay pool - 20M credits/mo</li>
+          <li>Arbiter Relay pool - 12M credits/mo</li>
           <li>More cloud/background run capacity</li>
           <li>Managed connector automation</li>
         </ul>
@@ -367,9 +367,9 @@
         </div>
         <p>The largest hosted-credit pools and cloud automation capacity.</p>
         <ul>
-          <li>DeepSeek API - 35M credits/mo</li>
-          <li>Doubleword - 35M credits/mo</li>
-          <li>Arbiter - 30M credits/mo</li>
+          <li>DeepSeek Relay pool - 35M credits/mo</li>
+          <li>Doubleword Relay pool - 35M credits/mo</li>
+          <li>Arbiter Relay pool - 30M credits/mo</li>
           <li>Research runs and proof vault capacity</li>
           <li>Priority automation and usage receipts</li>
         </ul>
@@ -388,7 +388,7 @@
         <a class="btn btn-primary" href="organizations.html">View organization plans</a>
       </div>
     </div>
-    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Beta features, routes, quotas, and providers may change or be unavailable. Agent output is not guaranteed. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
+    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Model prompts for Relay lanes are proxied through Orrery Relay to approved provider pools. Beta features, routes, quotas, and providers may change or be unavailable. Agent output is not guaranteed. See <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>
   </div>
 </section>
 
@@ -400,10 +400,10 @@
       <h2 class="display">Before you download.</h2>
     </div>
     <div class="faq-list reveal d1">
-      <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a hosted route, the prompt and code context needed for that completion pass through Orrery Cloud to the configured provider. Usage counters store totals and timestamps; Ephemerent does not retain relay content beyond fulfilling the request or use it to train its own models. See the privacy policy for the full boundary.</div></details>
+      <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a Relay lane, the prompt and code context needed for that completion pass through Orrery Relay to the approved provider pool. Usage counters store totals and timestamps; Ephemerent does not retain relay content beyond fulfilling the request or use it to train its own models. See the privacy policy for the full boundary.</div></details>
       <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">The current beta packet targets Windows. macOS and Linux are on the roadmap; availability and update delivery may change during beta.</div></details>
-      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and configure routes. Real agent runs require a trial, subscription, or invite grant. Legacy local access remains honored for existing buyers but is no longer sold.</div></details>
-      <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly DeepSeek API, Doubleword, and Arbiter credits at the amounts shown above. Routes and capacity remain subject to beta and provider availability.</div></details>
+      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and review Relay lanes. Real customer agent runs require an active subscription. Verified developer builds may expose local routes separately.</div></details>
+      <details class="faq"><summary>Which Relay lanes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly DeepSeek, Doubleword, and Arbiter Relay credits at the amounts shown above. Routes and capacity remain subject to beta and provider availability.</div></details>
       <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
       <details class="faq"><summary>Can I cancel anytime?</summary><div class="faq-body">Yes. Paid tiers are monthly via Stripe and cancel anytime — access runs to the end of the paid period. Token quotas reset each billing month and don't roll over.</div></details>
     </div>

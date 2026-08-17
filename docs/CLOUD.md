@@ -6,9 +6,9 @@ Orrery is a premium cloud-credit beta. Preview setup is inspectable before subsc
 
 | | Local | Orrery Cloud |
 |---|--------|----------------|
-| **Auth** | Optional email in browser (honor system) | Paid Pro: Google / GitHub / email magic link |
-| **Access** | Preview setup | Desktop + phone/browser (via relay) |
-| **Pricing** | No active subscription | Pro `$40` / Max `$100` / Ultra `$200` per month; hosted credits, Nexus, managed connectors |
+| **Auth** | Preview setup only | Paid Pro: Google / GitHub / email magic link |
+| **Access** | Inspect setup and Relay lanes | Desktop + phone/browser (via Orrery Relay) |
+| **Pricing** | No active subscription | Pro `$40` / Max `$100` / Ultra `$200` per month; Relay-managed pools, Nexus, managed connectors |
 | **Setup** | None | Supabase + billing webhook (~15 min) |
 | **Audit logs** | `localStorage` + optional webhook | Central `activity_logs` table |
 
@@ -26,9 +26,9 @@ Preview setup is available before subscription, but real agent work requires an 
 
 No public no-cost local tier is offered. Preview users can inspect setup; active subscribers run through hosted credits and cloud features.
 
-There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
+There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and Orrery Relay-managed credit pools:
 
-| Tier | Price | DeepSeek API | Doubleword | Arbiter |
+| Tier | Price | DeepSeek pool | Doubleword pool | Arbiter pool |
 |------|-------|----------------|-----------------|---------|
 | **Pro** | `$40/month` | 8M credits/mo | 8M credits/mo | 4M credits/mo |
 | **Max** | `$100/month` | 18M credits/mo | 20M credits/mo | 12M credits/mo |
@@ -36,7 +36,7 @@ There are three paid tiers. Every paid tier includes cloud sign-in (Google / Git
 
 All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
 
-Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
+Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, and `ULTRA_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, Relay credit-pool counters, and `billing_events`. Provider credentials and Relay secrets stay server-side; never put them in `assets/` or customer configuration.
 
 **Next (relay — not live yet):**
 - **Phone / browser remote** — approve tool requests, steer agents, read status from your phone
@@ -59,7 +59,7 @@ Supabase is the **OAuth broker** for Pro cloud — you do not run your own auth 
 2. Run `supabase/schema.sql` in the SQL editor.
 3. Configure Google + GitHub OAuth (steps below).
 4. Add redirect URLs in Supabase (step below).
-5. Copy API keys into config files.
+5. Copy only public Supabase/Relay client configuration into the site and desktop public config. Provider credentials, signing keys, and Relay secrets remain server-side.
 6. Copy the same `CLOUD_AUTH_*` values to `buddyide/apps/web/public/orrery-config.js`.
 
 Set `profiles.is_admin = true` on your user to read all profiles, activity logs, and billing events.
