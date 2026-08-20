@@ -188,9 +188,8 @@ select { border-radius: var(--radius-control); }
   color: var(--bg);
   box-shadow: none;
 }
-.btn-primary:hover { background: #fff; box-shadow: none; }
+.btn-primary:hover { background: var(--ink-2, var(--ink)); box-shadow: none; }
 .btn-ghost { background: transparent; }
-.reveal { transition-duration: var(--motion-enter); }
 .hero .reveal.in,
 .ehero .rv.in,
 .ap-hero .rv.in {
@@ -350,17 +349,8 @@ body.lab-page .ebar.scrolled {
 .menu-open .menu-toggle-lines i:first-child { transform: translateY(2.5px) rotate(45deg); }
 .menu-open .menu-toggle-lines i:last-child { transform: translateY(-2.5px) rotate(-45deg); }
 
-/* Restrained entrance motion. */
-.reveal,
-.rv {
-  transform: translateY(14px);
-  transition-duration: var(--motion-enter);
-  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
-}
-.reveal.d1,
-.reveal.d2,
-.reveal.d3,
-.reveal.d4 { transition-delay: 0s; }
+/* Entrance motion, including the d1-d4 stagger, is defined in
+   tokens.css so the journal and news pages get it too. */
 .hero-scroll { animation: none; }
 
 /* Orrery: editorial copy paired with an honest system diagram. */

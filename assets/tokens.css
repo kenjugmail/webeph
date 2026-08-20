@@ -115,6 +115,14 @@
   --ease:     cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
+  /* ---- Mode ----------------------------------------------------
+     Grain sits differently on paper than on a dark ground: multiply
+     darkens the low-lights the way ink does on stock, soft-light lifts
+     a dark surface without milking it. Each surface sets its own pair
+     below, so a theme flipping mode carries its grain with it. */
+  --grain-opacity: 0.028;
+  --grain-blend: multiply;
+
   /* ---- Container ----------------------------------------------- */
   --site-max:    1280px;
   --site-gutter: clamp(20px, 3.2vw, 48px);
@@ -182,4 +190,156 @@ body {
   letter-spacing: var(--ls-label);
   color: var(--muted, inherit);
 }
+}
+
+/* ============================================================
+   CRAFT — the shared surface language.
+
+   Lives here rather than in polish.css because journal.css and
+   news.css are islands: those seven pages load no shared stylesheet
+   at all, and tokens.css is the only file every page has in common.
+
+   Contributed to @layer polish, so polish.css (same layer, loaded
+   later) can still override any of it.
+   ============================================================ */
+@layer polish {
+
+  /* ---- Film grain --------------------------------------------------
+     A single fractal-noise tile, inline as a data URI, so it costs one
+     rule and no request. `grain` was already a class on three pages
+     with no CSS behind it; this gives every surface the same tooth.
+
+     multiply on paper darkens the low-lights the way ink on stock
+     does; soft-light on the dark themes lifts without milking. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: var(--grain-opacity, 0.028);
+    mix-blend-mode: var(--grain-blend, multiply);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  /* ---- Entrance ----------------------------------------------------
+     Adding a short blur to the existing fade-and-rise is what reads as
+     depth of field rather than "a div appeared". 301 elements already
+     carry .rv or .reveal, so this needs no markup. */
+  .reveal,
+  .rv {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+    transition:
+      opacity var(--motion-settle) var(--ease-out),
+      transform var(--motion-settle) var(--ease-out),
+      filter var(--motion-settle) var(--ease-out);
+  }
+  .reveal.in,
+  .rv.in {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+
+  /* The markup already carries 51 of these; polish.css was zeroing
+     every delay, so a staggered group animated as one block. */
+  .reveal.d1, .rv.d1 { transition-delay: 80ms; }
+  .reveal.d2, .rv.d2 { transition-delay: 150ms; }
+  .reveal.d3, .rv.d3 { transition-delay: 240ms; }
+  .reveal.d4, .rv.d4 { transition-delay: 330ms; }
+
+  /* ---- Navigation underline ---------------------------------------
+     Wipes out to the right and back in from the left, so hovering
+     along a row reads as one continuous movement. */
+  .nav a:not(.btn):not(.ebtn),
+  .enav a:not(.btn):not(.ebtn),
+  .jr-nav a:not(.jr-nav-submit) {
+    position: relative;
+  }
+  .nav a:not(.btn):not(.ebtn)::after,
+  .enav a:not(.btn):not(.ebtn)::after,
+  .jr-nav a:not(.jr-nav-submit)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--motion-control) var(--ease);
+  }
+  .nav a:not(.btn):not(.ebtn):hover::after,
+  .enav a:not(.btn):not(.ebtn):hover::after,
+  .jr-nav a:not(.jr-nav-submit):hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* ---- Editorial rule ---------------------------------------------
+     The deck / pull-quote treatment, opt-in via class. */
+  .deck,
+  .pullquote {
+    border-left: 1px solid var(--signal, var(--accent, currentColor));
+    padding-left: var(--space-m);
+  }
+
+  /* ---- Emphasis ----------------------------------------------------
+     A serif italic inside a display line, in the theme's own signal.
+     Newsreader italic is already loaded on every page that has a
+     display face, so this costs nothing to download. */
+  h1 em, h2 em, .display em, .serif em {
+    font-family: var(--serif, Georgia, serif);
+    font-style: italic;
+    font-weight: var(--w-regular);
+    color: var(--signal, var(--accent, inherit));
+    letter-spacing: var(--ls-tight);
+  }
+}
+
+/* Motion off means motion off: no grain animation, no blur to resolve,
+   no stagger. The blur in particular is expensive to composite and is
+   exactly the kind of effect that provokes symptoms. */
+@media (prefers-reduced-motion: reduce) {
+  @layer polish {
+    .reveal, .rv {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+    .reveal.d1, .rv.d1, .reveal.d2, .rv.d2,
+    .reveal.d3, .rv.d3, .reveal.d4, .rv.d4 { transition-delay: 0s; }
+    .nav a::after, .enav a::after, .jr-nav a::after { transition: none; }
+  }
+}
+
+/* ------------------------------------------------------------
+   SURFACE MODE
+
+   Each surface declares how the shared craft layer should sit on it.
+   The dark-ground products invert the grain blend; everything else
+   inherits the paper defaults from :root.
+   ------------------------------------------------------------ */
+@layer tokens {
+  body.orrery-page,
+  body.utility-page,
+  body.auth-page,
+  body.vellum-page,
+  body.shelterix-page,
+  body.genesis-fall-page {
+    --grain-opacity: 0.038;
+    --grain-blend: soft-light;
+    color-scheme: dark;
+  }
+
+  body.lab-page,
+  body.jr-page,
+  body.nw-page,
+  body.vespera-page {
+    color-scheme: light;
+  }
 }
