@@ -64,7 +64,7 @@ for (const mode of MODES) {
     try {
       localStorage.setItem('eph-mode', m === 'glass' ? 'dark' : m);
       if (m === 'glass') localStorage.setItem('eph-material', 'glass');
-      else localStorage.removeItem('eph-material');
+      else localStorage.setItem('eph-material', 'flat');
     } catch (e) { /* ignore */ }
   }, mode);
   const page = await context.newPage();
@@ -148,11 +148,19 @@ for (const mode of MODES) {
         if (cs.clip !== 'auto' || cs.clipPath !== 'none') continue;
         if (r.bottom < 0 || r.right < 0) continue;
         /* Text sitting on a photograph cannot be measured against a
-           flat backdrop; those need a human eye, not this script. */
+           flat backdrop; those need a human eye, not this script.
+
+           A CSS gradient is not a photograph. This used to whitelist
+           linear-gradient by name, and when glass became the default
+           it put a radial-gradient atmosphere on <body> -- so every
+           element on every page was judged to be sitting on an image,
+           and the whole audit skipped to zero samples while still
+           printing that all sampled text passes. */
         let over = el, onImage = false;
+        const GRADIENT = /^(repeating-)?(linear|radial|conic)-gradient\(/;
         while (over && over !== document.documentElement) {
           const ocs = getComputedStyle(over);
-          if (ocs.backgroundImage && ocs.backgroundImage !== 'none' && !ocs.backgroundImage.startsWith('linear-gradient')) { onImage = true; break; }
+          if (ocs.backgroundImage && ocs.backgroundImage !== 'none' && !GRADIENT.test(ocs.backgroundImage)) { onImage = true; break; }
           if (over.querySelector && over.tagName === 'FIGURE') { onImage = true; break; }
           over = over.parentElement;
         }
@@ -198,6 +206,15 @@ for (const mode of MODES) {
 await browser.close();
 
 console.log(`check-contrast: ${sampled} text samples across ${PAGES.length} pages x ${MODES.length} looks (${MODES.join(', ')})`);
+/* Refuse to pass on an empty sample. This check reported success on
+   zero samples for one run, which is the most dangerous result an
+   accessibility gate can produce: green, and testing nothing. */
+const FLOOR = 300;
+if (sampled < FLOOR) {
+  console.error(`\nOnly ${sampled} samples (expected at least ${FLOOR}). Something is filtering everything out;`);
+  console.error('this is a broken check, not a clean site.');
+  process.exit(2);
+}
 if (failures.length) {
   console.error(`\n${failures.length} below WCAG AA:\n`);
   for (const f of failures) console.error('  ' + f);

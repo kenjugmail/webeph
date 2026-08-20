@@ -1191,6 +1191,11 @@ body {
     --jr-focus: #ec8f80;
   }
   :root[data-mode="dark"] body.nw-page {
+    /* --nw-plate deliberately stays dark here: it is the ground of an
+       illustration whose contents are hardcoded light. Nudged off the
+       light-face value so the plate still separates from a dark page
+       instead of merging with it. */
+    --nw-plate: #0b0f1c;
     --nw-paper: #12141d; --nw-paper-pale: #191c26; --nw-paper-deep: #0e1017;
     --nw-ink: #e8eaf2;
     --nw-rule: #3d4049; --nw-rule-light: #2b2e36;

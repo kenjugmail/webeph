@@ -4,6 +4,14 @@
   --nw-paper-pale: #fbf8f0;
   --nw-paper-deep: #e9e0d1;
   --nw-ink: #11172a;
+  /* The editorial plate is art-directed dark in BOTH faces: every
+     colour inside the illustration is a hardcoded light hex tuned
+     against it (#aeb6cd overlines, #f8f4ea source text, #8e97af axis
+     labels). It used to borrow --nw-ink for its ground, which is
+     correct in the light face and inverts in the dark one -- so on the
+     dark face the plate turned pale and its light text vanished into
+     it. It needs a token that does not flip. */
+  --nw-plate: #11172a;
   --nw-ink-soft: #30364a;
   --nw-muted: #69695f;
   --nw-faint: #908b7e;
@@ -146,7 +154,7 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
 
 /* Reusable editorial selection field */
 .nw-field-figure { min-width: 0; }
-.nw-field-svg { width: 100%; height: auto; background: var(--nw-ink); }
+.nw-field-svg { width: 100%; height: auto; background: var(--nw-plate); }
 .nw-field-figure figcaption {
   display: flex;
   justify-content: space-between;
@@ -161,7 +169,7 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   text-transform: uppercase;
 }
 .nw-field-figure figcaption span:last-child { flex: none; }
-.nw-svg-ink { fill: var(--nw-ink); }
+.nw-svg-ink { fill: var(--nw-plate); }
 .nw-field-svg text { font-family: var(--nw-mono); }
 .nw-svg-overline { fill: #aeb6cd; font-size: 11px; letter-spacing: 2.3px; }
 .nw-svg-source rect { fill: none; stroke: #596178; stroke-width: 1; }

@@ -13,7 +13,7 @@
     "contrast": "node scripts/check-contrast.mjs",
     "responsive": "node scripts/check-responsive.mjs",
     "motion": "node scripts/check-motion.mjs",
-    "verify": "npm run check && npm run contrast && npm run motion && npm run responsive && npm run layout && npm run alignment && npm run surface && npm run affordance && npm run modes",
+    "verify": "npm run check && npm run contrast && npm run motion && npm run responsive && npm run layout && npm run alignment && npm run surface && npm run affordance && npm run modes && npm run glass && npm run default && npm run plates && npm run figure",
     "shoot": "node scripts/shoot.mjs",
     "plates": "python3 scripts/make-dark-plates.py",
     "layout": "node scripts/check-layout.mjs",
@@ -23,7 +23,11 @@
     "surface": "node scripts/check-surface.mjs",
     "affordance": "node scripts/check-affordance.mjs",
     "modes": "node scripts/check-modes.mjs",
-    "rhythm": "node scripts/check-rhythm.mjs"
+    "rhythm": "node scripts/check-rhythm.mjs",
+    "glass": "node scripts/check-glass.mjs",
+    "default": "node scripts/check-default.mjs",
+    "plates": "node scripts/check-plates.mjs",
+    "figure": "node scripts/check-figure.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1"

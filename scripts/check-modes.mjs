@@ -48,7 +48,7 @@ const browser = await chromium.launch();
 const read = async (mode, path) => {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.addInitScript((m) => {
-    try { localStorage.setItem('eph-mode', m); localStorage.removeItem('eph-material'); } catch (e) {}
+    try { localStorage.setItem('eph-mode', m); localStorage.setItem('eph-material', 'flat'); } catch (e) {}
   }, mode);
   const page = await ctx.newPage();
   const res = await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => null);

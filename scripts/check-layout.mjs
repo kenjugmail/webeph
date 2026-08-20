@@ -38,7 +38,7 @@ for (const look of LOOKS) {
     try {
       localStorage.setItem('eph-mode', l === 'glass' ? 'dark' : l);
       if (l === 'glass') localStorage.setItem('eph-material', 'glass');
-      else localStorage.removeItem('eph-material');
+      else localStorage.setItem('eph-material', 'flat');
     } catch (e) { /* ignore */ }
   }, look);
   const page = await ctx.newPage();

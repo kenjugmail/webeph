@@ -29,8 +29,11 @@
     if (on) root.dataset.material = 'glass';
     else delete root.dataset.material;
     try {
-      if (on) localStorage.setItem(MATERIAL_KEY, 'glass');
-      else localStorage.removeItem(MATERIAL_KEY);
+      /* Write 'flat' rather than removing the key. Glass is the default
+         material now, so an absent key means "has not chosen" -- and if
+         turning glass off also cleared the key, the next page load
+         would read that as never-chosen and turn it straight back on. */
+      localStorage.setItem(MATERIAL_KEY, on ? 'glass' : 'flat');
     } catch (e) { /* private browsing */ }
 
     if (on) {
@@ -86,33 +89,28 @@
     }));
   }
 
-  /* Surfaces that follow the reader's system preference. The lab pages
-     are absent because they are night-native now, not because they are
-     pinned to paper. Must match the blocks in tokens.css, or the
-     control offers the wrong switch. */
-  var FOLLOWS_SYSTEM = ['jr-page', 'nw-page', 'vespera-page'];
+  /* There used to be two lists here: FOLLOWS_SYSTEM, for the surfaces
+     that took prefers-color-scheme, and NATIVE_DARK, for the ones
+     whose own face was night. Dark is the default for the whole site
+     now, so both collapsed -- one to empty and the other to every
+     class on the site, which made the function that read them return
+     'dark' down both branches. Deleted rather than left standing:
+     scaffolding that always answers the same way reads like a decision
+     is being made somewhere, and the next person to touch this would
+     look for it.
 
-  /* Surfaces whose native face is night. */
-  var NATIVE_DARK = ['orrery-page', 'utility-page', 'auth-page',
-    'vellum-page', 'shelterix-page', 'genesis-fall-page',
-    'lab-page', 'legal-page', 'error-page'];
+     The head snippet writes data-mode on <html> before the first
+     stylesheet, so the first branch below is the real path and the
+     fallback only runs if storage threw.
 
-  var has = function (list) {
-    var body = document.body;
-    if (!body) return false;
-    for (var i = 0; i < list.length; i++) {
-      if (body.classList.contains(list[i])) return true;
-    }
-    return false;
-  };
+     What this costs: jr-page, nw-page and vespera-page followed the
+     reader's system preference before, and a reader whose OS asks for
+     light now gets dark anyway. That is deliberate, and the toggle is
+     in every nav. */
 
   /** What the page is showing right now, whichever way it got there. */
   function effective() {
-    if (root.dataset.mode) return root.dataset.mode;
-    if (has(FOLLOWS_SYSTEM)) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return has(NATIVE_DARK) ? 'dark' : 'light';
+    return root.dataset.mode || 'dark';
   }
 
 
@@ -122,24 +120,32 @@
      tone-inverted twin (scripts/make-dark-plates.py) and these swap to
      it.
 
-     The light srcset stays in the markup rather than being held in a
-     data attribute and set from here. That keeps the browser's preload
-     scanner working for the common path, at the cost of one extra
-     fetch for a reader who has chosen dark -- on the lab pages dark is
-     opt-in, so that is the smaller population, and delaying the LCP
-     image for everyone to save it would be the wrong trade. */
+     Whichever variant sits in the markup is the one the preload
+     scanner fetches, so it has to be the one most readers will end up
+     looking at. That used to be the light plate, on the reasoning that
+     dark was opt-in on the lab pages and therefore the smaller
+     population. Making dark glass the default inverted it exactly: the
+     scanner was fetching the light plate for everyone, mode.js was
+     swapping it, and the hero -- the LCP image on the home page --
+     was being downloaded twice on the common path.
+
+     So the dark srcset is in the markup now and the light one rides in
+     data-srcset-light. The extra fetch moved to the reader who chooses
+     light, which is the minority again. */
   function plates(face) {
-    var dark = face === 'dark';
-    var nodes = document.querySelectorAll('[data-srcset-dark], [data-src-dark]');
+    var light = face === 'light';
+    var nodes = document.querySelectorAll('[data-srcset-light], [data-src-light]');
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
-      if (el.dataset.srcsetDark) {
-        if (!el.dataset.srcsetLight) el.dataset.srcsetLight = el.getAttribute('srcset');
-        el.setAttribute('srcset', dark ? el.dataset.srcsetDark : el.dataset.srcsetLight);
+      if (el.dataset.srcsetLight) {
+        /* The markup value is the dark one; cache it on first use so
+           switching back has something to return to. */
+        if (!el.dataset.srcsetDark) el.dataset.srcsetDark = el.getAttribute('srcset');
+        el.setAttribute('srcset', light ? el.dataset.srcsetLight : el.dataset.srcsetDark);
       }
-      if (el.dataset.srcDark) {
-        if (!el.dataset.srcLight) el.dataset.srcLight = el.getAttribute('src');
-        el.setAttribute('src', dark ? el.dataset.srcDark : el.dataset.srcLight);
+      if (el.dataset.srcLight) {
+        if (!el.dataset.srcDark) el.dataset.srcDark = el.getAttribute('src');
+        el.setAttribute('src', light ? el.dataset.srcLight : el.dataset.srcDark);
       }
     }
   }
@@ -202,11 +208,6 @@
     label();
     plates(effective());
 
-    /* Relabel on a system change only where the system drives the face. */
-    var mq = window.matchMedia('(prefers-color-scheme: dark)');
-    var onChange = function () { if (!stored() && has(FOLLOWS_SYSTEM)) label(); };
-    if (mq.addEventListener) mq.addEventListener('change', onChange);
-    else if (mq.addListener) mq.addListener(onChange);
   }
 
   /* The stylesheet arrived from the head snippet, but the enhancement

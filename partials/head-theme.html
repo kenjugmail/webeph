@@ -1,20 +1,29 @@
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
      before the first stylesheet, or the page paints the wrong one first. -->
-<script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode");if(m)d.dataset.mode=m;
-if(localStorage.getItem("eph-material")==="glass")d.dataset.material="glass";
+<script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode"),g=localStorage.getItem("eph-material");
+/* Dark glass is the default look, so the absence of a stored choice
+   means dark glass rather than "whatever the stylesheet says". The
+   material key is written as "flat" rather than removed when someone
+   turns glass off -- once glass is the default, an absent key cannot
+   mean both "never chose" and "chose flat". */
+d.dataset.mode=m||"dark";if((g||"glass")==="glass")d.dataset.material="glass";
 /* Set before the first paint so the hero never renders at rest and
    then jumps back to animate. Gated on the motion preference here
    rather than in CSS so that a reader who wants no motion never gets
    the hidden start state at all. */
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive"}catch(e){}</script>
 <link rel="stylesheet" href="/assets/tokens.css?v=20260820">
-<!-- Deliberately AFTER tokens.css, not folded into the snippet above.
-     Cascade layers take their order from where a name FIRST appears, so
-     a glass.css inserted ahead of tokens.css would create @layer
-     utilities before tokens.css declares the full order -- and utilities
-     would keep that first position, which is the LOWEST priority, the
-     exact opposite of what it is for. Loading it here lets tokens.css
-     establish the order and glass.css join the end of it. -->
-<script>try{if(document.documentElement.dataset.material==="glass"){
-var l=document.createElement("link");l.rel="stylesheet";l.href="/assets/glass.css?v=20260820";document.head.appendChild(l)}}catch(e){}</script>
+<!-- Deliberately AFTER tokens.css. Cascade layers take their order from
+     where a name FIRST appears, so a glass.css loaded ahead of
+     tokens.css would create @layer utilities before tokens.css declares
+     the full order -- and utilities would keep that first position,
+     which is the LOWEST priority, the exact opposite of what it is for.
+     Here, tokens.css establishes the order and glass.css joins its end.
+
+     A plain link now rather than a conditional script append: glass is
+     the default material, so this is the common path, and a real link
+     is visible to the preload scanner where an appended one is not.
+     Every rule inside is scoped to :root[data-material="glass"], so a
+     reader who switches it off pays for the file and nothing else. -->
+<link rel="stylesheet" href="/assets/glass.css?v=20260820">
 <script src="/assets/mode.js?v=20260820" defer></script>
