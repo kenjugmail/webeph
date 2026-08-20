@@ -436,7 +436,7 @@
 .jr-article-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(250px, .55fr); gap: clamp(44px, 8vw, 110px); padding: 56px 0 78px; }
 .jr-article-main { min-width: 0; }
 .jr-article-main h2 { margin: 37px 0 14px; font-size: 32px; line-height: 1; }
-.jr-article-main p { max-width: 70ch; color: var(--jr-ink-soft); font-size: 17px; line-height: 1.7; }
+.jr-article-main p { max-width: var(--measure-wide); color: var(--jr-ink-soft); font-size: 17px; line-height: 1.7; }
 .jr-article-main p + p { margin-top: 18px; }
 .jr-article-summary { padding-left: 22px; border-left: 3px solid var(--jr-cobalt); }
 .jr-abstract-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
@@ -622,7 +622,7 @@
 .jr-policy h2 { font-size: 32px; line-height: 1; }
 .jr-policy h3 { margin-top: 25px; font-size: 22px; }
 .jr-policy p,
-.jr-policy li { max-width: 70ch; margin-top: 14px; color: var(--jr-ink-soft); font-size: 15px; line-height: 1.7; }
+.jr-policy li { max-width: var(--measure-wide); margin-top: 14px; color: var(--jr-ink-soft); font-size: 15px; line-height: 1.7; }
 .jr-policy ul { padding-left: 20px; }
 .jr-policy a { color: var(--jr-cobalt-dark); text-decoration: underline; text-decoration-color: rgba(45,91,209,.35); }
 

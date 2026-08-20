@@ -171,7 +171,7 @@ details.faq > summary::after {
 details.faq[open] > summary::after { transform: rotate(45deg); }
 details.faq > .faq-body {
   padding: 0 0 22px;
-  max-width: 70ch;
+  max-width: var(--measure-wide);
   color: var(--ink-2, var(--muted, inherit));
   line-height: 1.62;
 }

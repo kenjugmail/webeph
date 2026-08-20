@@ -126,18 +126,52 @@ for (const look of LOOKS) {
       /* --- reading measure ---------------------------------------
          Past about 90 characters the eye loses the line on the way
          back. Only paragraphs of real prose are worth judging. */
+      /* Count the characters on the longest rendered line, using the
+         browser's own line boxes.
+
+         Two estimates preceded this and both were wrong. Half an em
+         per character is off by 10-20% and errs toward hiding long
+         lines. Measuring the element's prose with a nowrap ruler is
+         better but still a mean -- it divides total width by total
+         characters, so a paragraph whose long line is full of narrow
+         letters reads as shorter than it is. A Range knows exactly
+         where the browser broke each line, so ask it. */
+      const lineChars = (el) => {
+        const node = [...el.childNodes].find(
+          (n) => n.nodeType === 3 && (n.textContent || '').trim().length > 60);
+        if (!node) return 0;
+        const text = node.textContent;
+        const range = document.createRange();
+        const counts = new Map();
+        for (let i = 0; i < text.length; i++) {
+          /* Spaces count. They are two-thirds the width of a letter and
+             a line holds fifteen of them; dropping them undercounts the
+             measure by nearly a fifth. A space sitting at a wrap point
+             may be attributed to either line, which is a one-character
+             error and does not matter at this threshold. */
+          range.setStart(node, i);
+          range.setEnd(node, i + 1);
+          const rect = range.getClientRects()[0];
+          if (!rect) continue;
+          const row = Math.round(rect.top);
+          counts.set(row, (counts.get(row) ?? 0) + 1);
+        }
+        range.detach?.();
+        return counts.size ? Math.max(...counts.values()) : 0;
+      };
       for (const el of document.querySelectorAll('p, li, blockquote, dd')) {
         const cs = getComputedStyle(el);
         const r = el.getBoundingClientRect();
         if (!visible(el, cs, r)) continue;
         const text = (el.textContent || '').trim();
         if (text.length < 120) continue;
-        const size = parseFloat(cs.fontSize) || 16;
-        const mono = /mono|courier/i.test(cs.fontFamily);
-        const ch = r.width / (size * (mono ? 0.6 : 0.5));
-        if (ch > 92) {
+        /* Counting per character is only affordable on paragraphs that
+           could plausibly be too wide. */
+        if (r.width < 560) continue;
+        const chars = lineChars(el);
+        if (chars > 92) {
           out.push({ kind: 'measure', hard: false, sel: name(el),
-            note: `~${Math.round(ch)} characters per line`, sample: text.slice(0, 34) });
+            note: `${chars} characters on its longest line`, sample: text.slice(0, 34) });
         }
       }
 

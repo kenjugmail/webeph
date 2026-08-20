@@ -333,6 +333,73 @@ body {
    Contributed to @layer polish, so polish.css (same layer, loaded
    later) can still override any of it.
    ============================================================ */
+/* ---- Measure ----------------------------------------------------
+   Past roughly 75 characters the eye loses its place on the way back
+   to the next line, and secondary prose is where that goes wrong: a
+   note or a piece of fine print inherits the full width of whatever
+   grid cell it landed in and ends up running 140, 180, even 200
+   characters.
+
+   Two corrections to the first version of this, both measured rather
+   than reasoned:
+
+   ch is NOT a character. It is the advance width of "0", and in a
+   proportional face the digits are the widest thing in the font.
+   Measured against this site's own prose, one ch buys 1.23 characters
+   in Hanken Grotesk and 1.35 in Newsreader -- so the original 74ch cap
+   was quietly permitting 91 to 100 characters per line, which is the
+   number it was written to prevent. The values below are divided
+   through by that ratio and land at 71-78 real characters.
+
+   And this belongs in `base`, not in `polish`. A default measure is
+   the weakest possible opinion: it exists for the paragraphs nobody
+   considered, and it must lose to every paragraph somebody did. In
+   the polish layer it outranked the page stylesheets and overrode
+   their deliberate values -- the security page asks for 800px on its
+   lead and was getting 1035px from here, so the cap meant to tighten
+   that column was the thing widening it. The container catch-all is
+   wrapped in :where() for the same reason one layer down: it is a
+   safety net for unclassed paragraphs and has no business beating
+   .lead, which it did on specificity alone.
+   ------------------------------------------------------------------ */
+@layer base {
+  :root { --measure: 55ch; --measure-wide: 62ch; }
+
+  /* A paragraph that is a direct child of a page container has nothing
+     between it and the full site width, which is where the worst of
+     these were: 137 characters on the security page, 165 on Shelterix.
+     Grid and flex children are left alone -- their width is the
+     layout's decision, not an oversight. */
+  :where(
+    .wrap, .ewrap, .callout, .shelterix-register, .footer .wrap,
+    article, aside, section, figure, blockquote,
+    .nw-record, .nw-branch-insight, .nw-method-note,
+    .jr-status-note, .qe-section-head
+  ) > p,
+  :where(.qe-section-head, .jr-policy section) > div > p {
+    max-width: var(--measure-wide);
+  }
+
+  .lead,
+  .ethesis,
+  .artifact-note,
+  .research-graph-note,
+  .qe-warning,
+  .plan-fineprint,
+  .pricing-fineprint,
+  .pricing-efficiency,
+  .billing-fineprint,
+  .ework-pricing,
+  .jr-status-note,
+  .nw-standfirst,
+  .sub,
+  .fineprint,
+  .note {
+    max-width: var(--measure);
+  }
+}
+
+
 @layer polish {
 
   /* ---- Film grain --------------------------------------------------
@@ -620,49 +687,6 @@ body {
   body.jr-page .jr-section {
     content-visibility: auto;
     contain-intrinsic-size: auto 900px;
-  }
-
-  /* ---- Measure --------------------------------------------------
-     Past roughly 75 characters the eye loses its place on the way back
-     to the next line, and secondary prose is where that goes wrong:
-     a note or a piece of fine print inherits the full width of
-     whatever grid cell it landed in and ends up running 140, 180, even
-     200 characters. The body copy on this site is already measured;
-     these are the classes that were not.
-
-     ch is the right unit here because it tracks the font actually in
-     use rather than a guess about it. */
-  :root { --measure: 74ch; --measure-wide: 88ch; }
-
-  /* A paragraph that is a direct child of a page container has nothing
-     between it and the full site width, which is where the worst of
-     these were: 137 characters on the security page, 165 on Shelterix.
-     Grid and flex children are left alone -- their width is the
-     layout's decision, not an oversight. */
-  .wrap > p,
-  .ewrap > p,
-  .callout > p,
-  .shelterix-register > p,
-  .footer .wrap > p {
-    max-width: var(--measure-wide);
-  }
-
-  .lead,
-  .ethesis,
-  .artifact-note,
-  .research-graph-note,
-  .qe-warning,
-  .plan-fineprint,
-  .pricing-fineprint,
-  .pricing-efficiency,
-  .billing-fineprint,
-  .ework-pricing,
-  .jr-status-note,
-  .nw-standfirst,
-  .sub,
-  .fineprint,
-  .note {
-    max-width: var(--measure);
   }
 
   /* ---- Press --------------------------------------------------------
