@@ -316,6 +316,17 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   }
 
+  /* A narrow column and a long word are a bad pair for display type set
+     at a fixed size. Hyphenation is the typographic answer: the browser
+     breaks at real syllable boundaries for the document language rather
+     than letting the word push the page wider than the viewport. */
+  @media (max-width: 640px) {
+    h1, h2, .display, .display-serif, .display-sans {
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+  }
+
   /* ---- Entrance ----------------------------------------------------
      Adding a short blur to the existing fade-and-rise is what reads as
      depth of field rather than "a div appeared". 301 elements already
@@ -737,4 +748,38 @@ body {
 
 /* genesis-fall.html is a single art-directed teaser with its own
    --qe-* palette and no counterpart; it stays night in both modes. */
+
+/* ============================================================
+   REDUCED MOTION — the one thing here that is deliberately unlayered.
+
+   Every cascade layer loses to unlayered CSS, which is exactly what a
+   kill switch wants: nothing in a product stylesheet, a page
+   stylesheet or an inline block can put motion back. polish.css
+   carries the same block, but seven pages -- the journal and news
+   surfaces -- load no shared stylesheet at all, and tokens.css is the
+   only file all 25 have in common.
+
+   The durations are 0.001ms rather than 0, so transitionend and
+   animationend still fire and any script waiting on them still runs.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto !important; }
+  /* Content that only appears through an entrance must not stay hidden
+     when the entrance is switched off. */
+  .reveal, .rv, [data-motion="reveal"] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  /* The grain is static, so it stays; the atmosphere plates do not. */
+  .hero::before { animation: none !important; }
+}
 

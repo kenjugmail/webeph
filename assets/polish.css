@@ -1246,8 +1246,13 @@ body.supporting-page .org-trust span {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: var(--motion-press) !important;
+    /* Not a motion token: this is the kill switch, and the value has to
+       be effectively zero. An earlier pass tokenised it to 140ms, which
+       quietly turned animation back on for the readers who asked for it
+       to stop. */
+    animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
   .reveal, .rv { opacity: 1 !important; transform: none !important; transition: none !important; }

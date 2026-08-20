@@ -865,7 +865,7 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-story-body strong { font-size: 25px; }
   .nw-charter { padding: 72px 0; }
   .nw-charter-grid { gap: 50px; }
-  .nw-charter-lead h2 { font-size: 65px; }
+  .nw-charter-lead h2 { font-size: clamp(40px, 13vw, 65px); }
   .nw-charter-lead > p:last-child { font-size: 19px; }
   .nw-charter-list li { grid-template-columns: 36px 1fr; gap: 15px; }
   .nw-desk-note-grid { display: block; }
