@@ -286,7 +286,7 @@
 .ehero-intro > p {
   max-width: 53ch;
   color: var(--ink-2);
-  font-size: clamp(18px, 1.55vw, 21px);
+  font-size: clamp(17px, 1.45vw, 20px);
   line-height: 1.58;
 }
 
@@ -402,7 +402,7 @@
   margin: 0;
   overflow: hidden;
   color: var(--muted);
-  font-size: 9.5px;
+  font-size: 10px;
   line-height: 1.42;
   opacity: 0;
   transform: translateY(-3px);
@@ -457,7 +457,7 @@
   .ehero-glossary-rail ol { padding-left: 12px; }
   .ehero-glossary-rail li { grid-template-columns: 20px minmax(0, 1fr); gap: 4px; padding-block: 9px; }
   .ehero-glossary-rail li::before { left: -15px; }
-  .ehero-glossary-rail strong { font-size: 11.5px; }
+  .ehero-glossary-rail strong { font-size: 12px; }
 }
 
 .ehero-story-pin {
@@ -609,7 +609,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(24px, 4vw, 52px);
+  padding: clamp(24px, 4vw, 50px);
   border-right: 1px solid rgba(27, 35, 31, .18);
   background: rgba(243, 240, 232, .94);
 }
@@ -629,7 +629,7 @@
   margin: 22px 0 28px;
   color: var(--ink);
   font-family: var(--serif);
-  font-size: clamp(28px, 3.15vw, 45px);
+  font-size: clamp(27px, 3vw, 42px);
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: -.025em;
@@ -736,7 +736,7 @@
   max-width: 14ch;
   color: inherit;
   font-family: var(--serif);
-  font-size: clamp(28px, 3vw, 43px);
+  font-size: clamp(27px, 3vw, 42px);
   font-weight: 400;
   line-height: 1.06;
   letter-spacing: -.025em;
@@ -755,7 +755,7 @@
   margin-top: 24px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 10px;
   line-height: 1.5;
   letter-spacing: .09em;
   text-transform: uppercase;
@@ -781,7 +781,7 @@
   flex: none;
   color: var(--accent);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
@@ -932,7 +932,7 @@
 
 .home-page .ework-detail .ework-pricing {
   color: var(--muted);
-  font-size: 14.5px;
+  font-size: 15px;
 }
 
 .home-page .efunding-refuse {
@@ -993,7 +993,7 @@
   max-width: 42ch;
   margin: 0;
   color: var(--ink-2);
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -1095,7 +1095,7 @@
 }
 
 .home-page .eprin-4 h3 { font-size: 25px; font-weight: 400; line-height: 1.15; }
-.home-page .eprin-4 p { max-width: 46ch; font-size: 15.5px; }
+.home-page .eprin-4 p { max-width: 46ch; font-size: 16px; }
 
 .home-page .epledge {
   display: grid;
@@ -1121,7 +1121,7 @@
   margin-top: 16px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: .16em;
   text-transform: uppercase;
 }
@@ -1181,7 +1181,7 @@
 .research-page .ehero-sub p {
   max-width: 55ch;
   color: var(--ink-2);
-  font-size: clamp(16px, 1.35vw, 19px);
+  font-size: clamp(16px, 1.7vw, 20px);
   line-height: 1.66;
 }
 .research-page .ehero-sub > p:first-of-type::first-letter {
@@ -1231,7 +1231,7 @@
   max-width: 62ch;
   margin-top: 20px;
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.62;
 }
 .research-graph-cue {
@@ -1441,7 +1441,7 @@
   line-height: 1;
   letter-spacing: -.025em;
 }
-.research-map-frontier small { color: var(--ink-2); font-size: 12.5px; line-height: 1.45; }
+.research-map-frontier small { color: var(--ink-2); font-size: 13px; line-height: 1.45; }
 .research-map-products {
   display: flex;
   flex-direction: column;
@@ -1466,7 +1466,7 @@
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.35;
 }
 .research-map-products a:hover b,
@@ -1513,7 +1513,7 @@
   .home-page .enav,
   .research-page .enav { gap: 14px; }
   .home-page .enav a,
-  .research-page .enav a { font-size: 12.5px; }
+  .research-page .enav a { font-size: 13px; }
   .research-hero-grid { grid-template-columns: minmax(0, 6.5fr) minmax(300px, 5.5fr); gap: 38px; }
   .research-graph-cue { grid-template-columns: 92px minmax(0, 1fr) 70px; gap: 18px; }
   .research-graph-cue-relation { display: none; }
@@ -1665,7 +1665,7 @@
     min-height: 48px;
     gap: 12px;
     padding: 10px 12px;
-    font-size: 8.5px;
+    font-size: 9px;
     letter-spacing: .075em;
   }
   .ehero-story-state { gap: 7px; }
@@ -1678,7 +1678,7 @@
   }
   .ehero-release-copy strong {
     margin: 14px 0 17px;
-    font-size: clamp(25px, 7.8vw, 34px);
+    font-size: clamp(26px, 8vw, 34px);
   }
   .ehero-release-copy p { font-size: 8px; }
   .ehero-story-steps li {
@@ -1688,7 +1688,7 @@
     padding: 10svh 0 8svh 20px;
   }
   .ehero-story-steps h3 { max-width: 16ch; font-size: clamp(28px, 8.5vw, 38px); }
-  .ehero-story-steps p { font-size: 14.5px; }
+  .ehero-story-steps p { font-size: 15px; }
   .home-register p { display: block; }
   .home-register span { display: block; margin-bottom: 7px; }
   .home-page .esec-head { grid-template-columns: 1fr; gap: 17px; }
@@ -1722,7 +1722,7 @@
     padding: 14px;
   }
   .ehero-release-copy > span,
-  .ehero-release-copy p { font-size: 7.5px; }
+  .ehero-release-copy p { font-size: 8px; }
   .ehero-release-copy strong {
     margin: 8px 0 10px;
     font-size: clamp(21px, 6.5vw, 27px);

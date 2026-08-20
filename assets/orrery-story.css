@@ -137,7 +137,7 @@ body.orrery-page .swarm-card {
 .orrery-boundary-sheet > strong {
   display: block;
   margin: 13px 0 6px;
-  font-size: clamp(18px, 2vw, 28px);
+  font-size: clamp(18px, 2vw, 26px);
   font-weight: 560;
   line-height: 1.15;
 }
@@ -351,7 +351,7 @@ body.orrery-page .swarm-card {
 
 @media (max-width: 600px) {
   .orrery-story-head,
-  .orrery-story-foot { min-height: 44px; padding: 9px 10px; gap: 9px; font-size: 7.8px; letter-spacing: .07em; }
+  .orrery-story-foot { min-height: 44px; padding: 9px 10px; gap: 9px; font-size: 8px; letter-spacing: .07em; }
   .orrery-story-head > span:last-child { gap: 6px; }
   .orrery-story-viewport { height: 270px; }
   .orrery-story-frame { padding: 24px 18px; }
@@ -373,11 +373,11 @@ body.orrery-page .swarm-card {
   .orrery-verify-title small { font-size: 8px; }
   .orrery-verify-frame li { grid-template-columns: 65px 1fr 46px; min-height: 44px; padding-inline: 8px; font-size: 8px; }
   .orrery-decision-frame { grid-template-columns: 78px 1fr; gap: 12px 18px; }
-  .orrery-candidates span { min-height: 32px; padding-inline: 7px; font-size: 6.8px; }
+  .orrery-candidates span { min-height: 32px; padding-inline: 7px; font-size: 7px; }
   .orrery-selected-result { padding: 18px 14px; }
   .orrery-selected-result strong { font-size: 23px; }
   .orrery-selected-result small { font-size: 8px; }
-  .orrery-human-gate { font-size: 7.5px; }
+  .orrery-human-gate { font-size: 8px; }
   .orrery-story-foot span:first-child { max-width: 18ch; }
   .orrery-story-foot span:last-child { max-width: 20ch; }
   .orrery-story-steps li { min-height: 58svh; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; padding: 9svh 0 8svh 18px; }

@@ -48,7 +48,7 @@ body.genesis-fall-page {
 .qe-private { padding: 7px 10px; border: 1px solid rgba(210,184,255,.42); border-radius: 999px; color: var(--qe-violet); font: 700 .65rem/1 monospace; letter-spacing: .08em; }
 
 .qe-hero { padding: clamp(64px, 9vw, 118px) 0 70px; }
-.qe-hero-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr); gap: clamp(34px, 6vw, 82px); align-items: center; }
+.qe-hero-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr); gap: clamp(34px, 6vw, 84px); align-items: center; }
 .qe-hero h1 { margin: 14px 0 20px; max-width: 9ch; font: 400 clamp(4rem, 9vw, 8.6rem)/.82 "Newsreader", Georgia, serif; letter-spacing: -.06em; }
 .qe-lead { max-width: 37rem; color: #c6d2cd; font-size: clamp(1.05rem, 1.7vw, 1.3rem); line-height: 1.55; }
 .qe-meta { display: flex; flex-wrap: wrap; gap: 9px; margin: 28px 0; }

@@ -568,7 +568,7 @@ body.vellum-page .flow-conn { width: 22px; background: var(--signal); opacity: .
 .loop-rail { justify-content: space-between; }
 .loop-step { min-width: 120px; }
 
-body.orrery-page .swarm-card { padding: clamp(18px, 2.5vw, 32px); }
+body.orrery-page .swarm-card { padding: clamp(18px, 2.4vw, 30px); }
 .lifecycle-demo-head {
   display: flex;
   align-items: center;
@@ -636,7 +636,7 @@ body.orrery-page .swarm-card { padding: clamp(18px, 2.5vw, 32px); }
   color: var(--signal);
   font-size: 10px;
 }
-.lifecycle-worktree-list strong { font-size: 12.5px; font-weight: 540; }
+.lifecycle-worktree-list strong { font-size: 13px; font-weight: 540; }
 .lifecycle-worktree-list small { color: var(--muted); font: 400 10px/1.4 var(--mono); }
 .lifecycle-connector { display: grid; place-items: center; overflow: hidden; }
 .lifecycle-connector i { width: 100%; height: 1px; background: var(--line-strong); transform: scaleX(.35); transition: transform var(--motion-settle), background var(--motion-settle); }
@@ -685,7 +685,7 @@ body.orrery-page .swarm-card { padding: clamp(18px, 2.5vw, 32px); }
 }
 .lifecycle-transcript li:last-child { border-right: 0; }
 .lifecycle-transcript li[aria-current="step"] { opacity: 1; border-top-color: var(--signal); }
-.lifecycle-transcript li > span { color: var(--signal); font-size: 9.5px; }
+.lifecycle-transcript li > span { color: var(--signal); font-size: 10px; }
 .lifecycle-transcript li strong { display: block; margin-bottom: 6px; color: var(--ink-2); font-size: 12px; font-weight: 560; }
 .lifecycle-transcript li p { color: var(--muted); font-size: 11px; line-height: 1.5; }
 .lifecycle-demo[data-motion="static"] .lifecycle-controls { display: none; }
@@ -858,7 +858,7 @@ body.vellum-page .price-card.featured { box-shadow: none; }
 .evidence-row > * { min-width: 0; padding: 16px 18px; border-right: 1px solid var(--line); }
 .evidence-row > *:last-child { border-right: 0; }
 .evidence-row b { color: var(--ink); font-size: 14px; font-weight: 560; }
-.evidence-row span { color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.evidence-row span { color: var(--muted); font-size: 14px; line-height: 1.55; }
 .evidence-row-head > * { color: var(--faint); font: 500 10px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .system-anatomy { display: grid; grid-template-columns: repeat(3, 1fr); }
 .system-anatomy-head { grid-column: 1 / -1; }

@@ -157,7 +157,7 @@ details.faq > summary {
   gap: 20px;
   padding: 20px 0;
   font-family: var(--display, var(--serif, inherit));
-  font-size: clamp(17px, 2.2vw, 21px);
+  font-size: clamp(18px, 2vw, 21px);
   color: var(--ink, inherit);
 }
 details.faq > summary::-webkit-details-marker { display: none; }
