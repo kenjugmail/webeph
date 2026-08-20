@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- include: head-meta -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<!-- /include -->
 <title>Get Orrery beta</title>
 <meta name="description" content="Download the Orrery beta. Beta software may change, fail, or produce incorrect agent output; review changes and keep backups.">
 <link rel="canonical" href="https://ephemerent.com/download">
 <meta name="theme-color" content="#0b0b12">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Get Orrery beta">
@@ -25,9 +27,13 @@
 <meta name="twitter:title" content="Get Orrery beta">
 <meta name="twitter:description" content="Download the Orrery beta. Preview setup is available; real agent runs require an active subscription.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
+<!-- include: head-theme -->
+<!-- Blocking and inline on purpose: the stored face has to be on <html>
+     before the first stylesheet, or the page paints the wrong one first. -->
 <script>try{var m=localStorage.getItem("eph-mode");if(m)document.documentElement.dataset.mode=m}catch(e){}</script>
-<link rel="stylesheet" href="/assets/tokens.css?v=20260819">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260820">
 <script src="/assets/mode.js?v=20260820" defer></script>
+<!-- /include -->
 <link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
 <link rel="stylesheet" href="/assets/auth.css?v=20260801">
 <link rel="stylesheet" href="/assets/base.css?v=20260801">
@@ -137,12 +143,14 @@
   </div>
 </main>
 
+<!-- include: footer-utility -->
 <footer class="utility-footer">
   <div class="utility-footer-inner">
     <span class="mono">Ephemerent · 2026</span>
     <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
   </div>
 </footer>
+<!-- /include -->
 
 <style>
 /* Layered so polish.css still has the last word; unlayered CSS

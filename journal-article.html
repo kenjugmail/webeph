@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- include: head-meta -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<!-- /include -->
 <title>Published record — Ephemerent Research</title>
 <meta name="description" content="A published record in Ephemerent Research, the open AI research journal of Ephemerent.">
 <meta name="robots" content="index,follow">
@@ -30,12 +34,14 @@
 <meta name="twitter:description" content="A published record in Ephemerent Research, the open AI research journal of Ephemerent.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-research.png">
 <script>document.documentElement.classList.add('jr-js')</script>
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- include: head-theme -->
+<!-- Blocking and inline on purpose: the stored face has to be on <html>
+     before the first stylesheet, or the page paints the wrong one first. -->
 <script>try{var m=localStorage.getItem("eph-mode");if(m)document.documentElement.dataset.mode=m}catch(e){}</script>
-<link rel="stylesheet" href="/assets/tokens.css?v=20260819">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260820">
 <script src="/assets/mode.js?v=20260820" defer></script>
+<!-- /include -->
 <link rel="stylesheet" href="/assets/journal.css?v=20260812a">
 <script type="application/ld+json" id="article-structured-data">
 { "@context": "https://schema.org", "@type": "ScholarlyArticle", "publisher": { "@type": "Organization", "name": "Ephemerent Research", "url": "https://ephemerent.com/journal" } }
@@ -172,6 +178,11 @@
       <span><a href="/journal">← Back to the archive</a></span>
       <span><a href="/news">News</a> · <a href="/journal/policies">Policies</a> · <a href="mailto:hello@ephemerent.com">Report a concern</a></span>
     </div>
+  <!-- include: legal-strip-journal -->
+  <div class="jr-footer-legal">
+    <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="mailto:hello@ephemerent.com">Contact</a>
+  </div>
+  <!-- /include -->
   </div>
 </footer>
 

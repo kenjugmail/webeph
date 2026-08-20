@@ -4,11 +4,13 @@
   "type": "module",
   "description": "Static site for ephemerent.com. No bundler: the .html files in this directory are the deployable artifact. `build` only runs integrity checks, so a broken link or a missing route fails the deploy instead of shipping.",
   "scripts": {
-    "build": "node scripts/check-links.mjs",
-    "check": "node scripts/check-links.mjs",
+    "build": "node scripts/build-chrome.mjs --check && node scripts/check-links.mjs",
+    "check": "node scripts/build-chrome.mjs --check && node scripts/check-links.mjs",
     "snapshot:before": "node scripts/snapshot-styles.mjs before",
     "snapshot:after": "node scripts/snapshot-styles.mjs after",
-    "snapshot:diff": "node scripts/snapshot-styles.mjs diff"
+    "snapshot:diff": "node scripts/snapshot-styles.mjs diff",
+    "chrome": "node scripts/build-chrome.mjs",
+    "contrast": "node scripts/check-contrast.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1"

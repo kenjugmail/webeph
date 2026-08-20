@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- include: head-meta -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<!-- /include -->
 <title>Page not found — Ephemerent</title>
 <meta name="description" content="The requested page could not be found. Return to Ephemerent, Ephemerent News, the research journal, or a product page.">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#f3f0e8">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- include: head-theme -->
+<!-- Blocking and inline on purpose: the stored face has to be on <html>
+     before the first stylesheet, or the page paints the wrong one first. -->
 <script>try{var m=localStorage.getItem("eph-mode");if(m)document.documentElement.dataset.mode=m}catch(e){}</script>
-<link rel="stylesheet" href="/assets/tokens.css?v=20260819">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260820">
 <script src="/assets/mode.js?v=20260820" defer></script>
+<!-- /include -->
 <link rel="stylesheet" href="/assets/ephemerent.css?v=20260811">
 <link rel="stylesheet" href="/assets/base.css?v=20260801">
 <link rel="stylesheet" href="/assets/polish.css?v=20260811d">
@@ -47,11 +53,13 @@
     <a class="ebtn" href="https://atlas.ephemerent.com">Ephemerent Atlas</a>
   </div>
 </main>
+<!-- include: footer-utility -->
 <footer class="utility-footer">
   <div class="utility-footer-inner">
     <span class="mono">Ephemerent · 2026</span>
     <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@ephemerent.com">Contact</a></nav>
   </div>
 </footer>
+<!-- /include -->
 </body>
 </html>
