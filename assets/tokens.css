@@ -454,6 +454,41 @@ body {
     outline-offset: 2px;
   }
 
+  /* ============================================================
+     SECTION MARKS — lab surfaces
+
+     home.css already alternates the section grounds: #work, #funding
+     and #pledge sit on the second paper tone. A first attempt here
+     added an nth-of-type alternation on top, which collided with it
+     and put two adjacent sections on the same value -- worse than
+     either rule alone. The tonal rhythm was already there.
+
+     What was missing is the mark. Every section head looked identical,
+     and the lab's teal appeared nowhere except in links, so a spread
+     that is otherwise entirely ink on paper had no register colour at
+     all. A short rule and a coloured numeral is what a printed page
+     uses to say "this is where a chapter starts".
+     ============================================================ */
+  body.lab-page .esec-head {
+    position: relative;
+    padding-top: var(--space-m);
+  }
+  body.lab-page .esec-head::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    /* Short, not full-bleed: a rule running the whole measure reads as
+       a divider between things, a short one reads as a mark on one. */
+    width: 56px;
+    height: 2px;
+    background: var(--accent);
+  }
+  body.lab-page .esec-head .lbl {
+    color: var(--accent);
+    font-weight: var(--w-semi);
+  }
+
   /* ---- Measure --------------------------------------------------
      Past roughly 75 characters the eye loses its place on the way back
      to the next line, and secondary prose is where that goes wrong:
