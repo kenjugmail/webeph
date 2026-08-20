@@ -14,6 +14,7 @@
       color: '#2f55ff',
       rgb: '47, 85, 255',
       textColor: '#2446c7',
+      textColorDark: '#5d7bff',
       imagePosition: 0.22,
       imageScale: 1.035,
       imageOrigin: '38% 48%',
@@ -30,6 +31,7 @@
       color: '#f2675b',
       rgb: '242, 103, 91',
       textColor: '#b84538',
+      textColorDark: '#f2675b',
       imagePosition: 0.42,
       imageScale: 1.065,
       imageOrigin: '48% 52%',
@@ -46,6 +48,7 @@
       color: '#9abf38',
       rgb: '154, 191, 56',
       textColor: '#63781b',
+      textColorDark: '#9abf38',
       imagePosition: 0.66,
       imageScale: 1.08,
       imageOrigin: '62% 48%',
@@ -62,6 +65,7 @@
       color: '#8b67e8',
       rgb: '139, 103, 232',
       textColor: '#6949b7',
+      textColorDark: '#9270e9',
       imagePosition: 0.82,
       imageScale: 1.045,
       imageOrigin: '68% 54%',
@@ -104,8 +108,32 @@
     return STORY[Math.max(0, Math.min(STORY.length - 1, index))];
   }
 
+  /* The story tints are set from here rather than from CSS, so the dark
+     face needs its own set: a tint darkened for paper is unreadable on a
+     dark ground, and vice versa. */
+  function darkFace() {
+    const forced = document.documentElement.dataset.mode;
+    if (forced) return forced === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  /* Re-tint on a face change. The stage colours are written as inline
+     styles by setSignal, so a CSS-only mode switch leaves them behind;
+     these are the two elements that carry a current stage index. */
+  window.addEventListener('ephemerent:modechange', () => {
+    document.querySelectorAll('[data-vespera-current], [data-vespera-board-step]')
+      .forEach((el) => {
+        const raw = el.dataset.vesperaCurrent ?? el.dataset.vesperaBoardStep;
+        const i = Number(raw);
+        if (!Number.isNaN(i)) setSignal(el, stageFor(i));
+      });
+  });
+
   function setSignal(element, stage) {
-    element.style.setProperty('--vespera-signal', stage.textColor || stage.color);
+    const text = darkFace()
+      ? (stage.textColorDark || stage.color)
+      : (stage.textColor || stage.color);
+    element.style.setProperty('--vespera-signal', text);
     element.style.setProperty('--vespera-mark', stage.color);
   }
 

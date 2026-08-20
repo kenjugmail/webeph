@@ -40,20 +40,28 @@ function ratio(a, b) {
 }
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 const failures = [];
 let sampled = 0;
 
 for (const mode of MODES) {
+  /* Set the preference BEFORE the page loads, the way a returning reader
+     arrives. Flipping data-mode after load leaves some custom-property
+     dependent backgrounds on their previous computed value, which reports
+     failures that do not exist for any real visitor. */
+  const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  await context.addInitScript((m) => {
+    try { localStorage.setItem('eph-mode', m); } catch (e) { /* ignore */ }
+  }, mode);
+  const page = await context.newPage();
+
   for (const path of PAGES) {
     const res = await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => null);
     if (!res || res.status() >= 400) continue;
 
-    await page.evaluate((m) => {
-      document.documentElement.dataset.mode = m;
+    await page.evaluate(() => {
       document.querySelectorAll('.rv, .reveal').forEach((el) => el.classList.add('in'));
-    }, mode);
-    await page.waitForTimeout(120);
+    });
+    await page.waitForTimeout(150);
 
     const found = await page.evaluate(() => {
       /* Resolve through a canvas rather than by parsing the string.
@@ -169,6 +177,7 @@ for (const mode of MODES) {
       }
     }
   }
+  await context.close();
 }
 
 await browser.close();

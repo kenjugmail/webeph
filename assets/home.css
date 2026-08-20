@@ -1227,7 +1227,7 @@
   line-height: 1.62;
 }
 .research-graph-cue {
-  --graph-cue-accent: #3158c8;
+  --graph-cue-accent: var(--graph-blue, #3158c8);
   position: sticky;
   z-index: 7;
   top: var(--site-nav);
@@ -1338,7 +1338,7 @@
   list-style: none;
 }
 .research-field-map > li {
-  --graph-accent: #3158c8;
+  --graph-accent: var(--graph-blue, #3158c8);
   position: relative;
   display: grid;
   grid-template-columns: minmax(185px, 2.3fr) minmax(190px, 2fr) minmax(135px, 1.35fr) minmax(215px, 2.7fr);

@@ -450,13 +450,15 @@ body.shelterix-page {
 .shelterix-page .ebtn-fill {
   background: var(--signal);
   border-color: var(--signal);
-  color: #14110d;
+  /* The ground, not a fixed dark: the signal is pale amber on the night
+     face and deep amber on the paper face, so the label has to flip. */
+  color: var(--bg);
 }
 
 .shelterix-page .ebtn-fill:hover {
   background: var(--signal-2);
   border-color: var(--signal-2);
-  color: #14110d;
+  color: var(--bg);
 }
 
 .shelterix-register {

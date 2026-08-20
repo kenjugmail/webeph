@@ -1651,7 +1651,9 @@ body.vespera-page {
   padding: 8px 10px 9px;
   border: 1px solid var(--ink);
   border-left: 2px solid var(--vespera-mark, var(--vespera-signal));
-  background: rgba(247, 243, 235, 0.94);
+  /* The page ground rather than a fixed near-white: this note carries
+     --ink text, so the panel under it has to invert with the ink. */
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
 }
 
 .vespera-page .vespera-board-note span,

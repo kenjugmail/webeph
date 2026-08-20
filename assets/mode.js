@@ -29,6 +29,12 @@
       if (mode) localStorage.setItem(KEY, mode);
       else localStorage.removeItem(KEY);
     } catch (e) { /* private browsing: the choice just does not persist */ }
+    /* Some surfaces paint their accents from JavaScript rather than from
+       CSS custom properties, so a class swap is not enough to move them.
+       They listen for this. */
+    window.dispatchEvent(new CustomEvent('ephemerent:modechange', {
+      detail: { mode: effective() },
+    }));
   }
 
   /** What the page is showing right now, whichever way it got there. */

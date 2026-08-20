@@ -504,6 +504,7 @@ body {
     --line: rgba(23, 21, 15, 0.13); --line-strong: rgba(23, 21, 15, 0.26);
     --ink: #17150f;
     --signal: #8a5f0f; --brass: #8a5f0f; --brass-lt: #6f4c0c;
+    --red: #dc0014; --green: #0f8a52; --amber: #a3670a;
     --wf-edge: 138, 95, 15; --wf-hot: 23, 21, 15;
     --wf-node: 138, 95, 15; --wf-grid: 120, 112, 96;
   }
@@ -513,7 +514,7 @@ body {
     --line: rgba(20, 17, 12, 0.13); --line-strong: rgba(20, 17, 12, 0.22);
     --rule: rgba(20, 17, 12, 0.13); --rule-2: rgba(20, 17, 12, 0.07);
     --ink: #14110c;
-    --signal: #9a6614; --signal-2: #7d5210;
+    --signal: #885a12; --signal-2: #71490f;
     --accent: #a8490d; --accent-2: #833807;
     --accent-soft: rgba(154, 102, 20, 0.26);
   }
@@ -576,6 +577,12 @@ body {
     --teal: var(--signal); --teal-lt: var(--signal);
     --violet: var(--signal); --violet-lt: var(--signal);
     --brass: var(--signal); --brass-lt: var(--signal);
+  }
+
+  /* home.css draws its research map in a fixed blue tuned for paper. */
+  :root[data-mode="dark"] body.lab-page { --graph-blue: #6381d9; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mode="light"]) body.lab-page { --graph-blue: #6381d9; }
   }
 
   /* Grain and colour-scheme follow the face, not the surface. */
