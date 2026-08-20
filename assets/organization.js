@@ -74,5 +74,5 @@ if (enterpriseBtn) {
 }
 
 const checkoutState = new URLSearchParams(location.search).get('checkout');
-if (checkoutState === 'success') message('Checkout completed. Open Nexus to finish organization setup, or email hello@ephemerent.com for onboarding help.', true);
+if (checkoutState === 'success') message('Checkout completed. Open Nexus to finish organization setup, or email kt@ephemerent.com for onboarding help.', true);
 if (checkoutState === 'cancelled') message('Checkout was cancelled. No organization subscription was started.');

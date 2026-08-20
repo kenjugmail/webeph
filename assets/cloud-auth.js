@@ -200,7 +200,7 @@ function renderPlanSummary(root, profile) {
     const cls = tier === higherTiers[0] ? 'btn btn-primary' : 'btn btn-ghost';
     return url
       ? `<a class="${cls}" href="${url}">${label}</a>`
-      : `<a class="${cls}" href="mailto:hello@ephemerent.com?subject=Orrery%20${PLAN_LABELS[tier]}%20access">${label}</a>`;
+      : `<a class="${cls}" href="mailto:kt@ephemerent.com?subject=Orrery%20${PLAN_LABELS[tier]}%20access">${label}</a>`;
   });
   if (paid) {
     upgrades.push(portal

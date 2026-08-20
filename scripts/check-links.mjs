@@ -30,6 +30,18 @@ const rewriteDestinations = new Set(
 
 // ---------------------------------------------------------------- 1. relative refs
 // The core guard. Any of these break the moment a page moves to a nested route.
+/* Every address the site can send a reader to.
+   
+   hello@ephemerent.com was on 79 links across 30 files -- every
+   contact route, both legal pages, the security page, the journal
+   editorial desk -- and the mailbox does not exist. Nothing caught it
+   because a mailto: is syntactically fine whether or not anyone reads
+   what is sent there, and no check had an opinion about which
+   addresses are real. This one does. Adding an address here is a
+   deliberate act; typing one into a template is not. */
+const MAILBOXES = new Set(['kt@ephemerent.com']);
+const MAILTO = /mailto:([^"'?&)>\s]+)/g;
+
 const RELATIVE_ATTR = /(?:src|href)="(?!https?:|\/\/|\/|#|mailto:|tel:|data:|\$|\{)/g;
 const RELATIVE_IMPORT = /from\s+['"]\.\/?assets\//g;
 
@@ -110,6 +122,29 @@ for (const page of pages) {
 }
 
 // ------------------------------------------------------------------------ report
+/* Mailboxes, across markup and scripts alike. cloud-auth.js builds the
+   Stripe upgrade mailto at runtime, so a markup-only sweep would not
+   see it -- and that is the one link on the site attached to money. */
+const mailSources = [
+  ...pages.map((f) => [f, join(ROOT, f)]),
+  ...readdirSync(join(ROOT, 'assets'))
+    .filter((f) => f.endsWith('.js'))
+    .map((f) => [`assets/${f}`, join(ROOT, 'assets', f)]),
+  ...readdirSync(join(ROOT, 'partials'))
+    .filter((f) => f.endsWith('.html'))
+    .map((f) => [`partials/${f}`, join(ROOT, 'partials', f)]),
+];
+for (const [label, file] of mailSources) {
+  const text = readFileSync(file, 'utf8');
+  for (const m of text.matchAll(MAILTO)) {
+    const address = decodeURIComponent(m[1]).toLowerCase();
+    if (!MAILBOXES.has(address)) {
+      fail(label, `mailto:${address} is not a mailbox this project reads ` +
+        `(known: ${[...MAILBOXES].join(', ')})`);
+    }
+  }
+}
+
 if (failures.length) {
   console.error(`\ncheck-links: ${failures.length} problem(s)\n`);
   for (const f of failures) console.error('  ' + f);
