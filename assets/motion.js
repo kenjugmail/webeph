@@ -145,6 +145,14 @@
     schedule();
   }
 
+  /* Scroll-driven CSS animations were tried here and backed out. Two
+     reasons, in order of weight: content in the first viewport has no
+     scroll to drive it, so an element already on screen at load sat
+     part-way through its entrance; and a view() timeline scrubs, which
+     means scrolling back up un-reveals text the reader has already
+     read. A one-way entrance is the correct behaviour for reading.
+     Frame timing was also unchanged, so there was no performance case
+     to weigh against either. */
   function mountReveals() {
     const items = document.querySelectorAll('.reveal:not(.in), .rv:not(.in), [data-motion="reveal"]');
     if (reduced.matches || !('IntersectionObserver' in window)) {
