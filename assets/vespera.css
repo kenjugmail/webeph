@@ -38,7 +38,7 @@
 
   --maxw: 1120px;
   --site-nav: 68px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease: var(--ease);
   --vespera-progress: 0;
   --vespera-local: 0;
   --vespera-signal: var(--signal);
@@ -167,7 +167,7 @@ body.vespera-page {
   align-items: center;
   font-size: 14px;
   color: var(--ink-2);
-  transition: color 0.2s;
+  transition: color var(--motion-control);
 }
 
 .vespera-page .enav a:hover,
@@ -254,7 +254,7 @@ body.vespera-page {
   border: 1px solid var(--line-strong);
   border-radius: 3px;
   color: var(--ink);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition: background var(--motion-control), color var(--motion-control), border-color var(--motion-control);
 }
 
 .vespera-page .ebtn:hover {
@@ -623,7 +623,7 @@ body.vespera-page {
 }
 
 .vespera-story-frame[data-active="true"] .vespera-frame-sheet > * {
-  animation: vespera-copy-in 360ms var(--ease) both;
+  animation: vespera-copy-in var(--motion-glide) var(--ease) both;
 }
 
 .vespera-story-frame[data-active="true"] .vespera-frame-sheet > *:nth-child(1) { animation-delay: 0ms; }
@@ -681,7 +681,7 @@ body.vespera-page {
   font-family: var(--serif);
   font-size: clamp(16px, 1.7vw, 20px);
   line-height: 1.2;
-  transition: color 220ms ease, border-color 220ms ease;
+  transition: color var(--motion-control) ease, border-color var(--motion-control) ease;
 }
 
 .vespera-beat-rail span + span { padding-left: 18px; }
@@ -772,7 +772,7 @@ body.vespera-page {
   gap: 16px;
   padding: 12vh 0 12vh 26px;
   color: var(--ink-2);
-  transition: color 220ms ease, transform 420ms var(--ease);
+  transition: color var(--motion-control) ease, transform var(--motion-glide) var(--ease);
 }
 
 .vespera-story-steps li::before {
@@ -875,7 +875,7 @@ body.vespera-page {
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
   align-items: baseline;
-  transition: background 180ms ease, padding 180ms ease;
+  transition: background var(--motion-control) ease, padding var(--motion-control) ease;
 }
 
 .vespera-page .erow:hover {
@@ -1196,7 +1196,7 @@ body.vespera-page {
 .vespera-page .rv {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.52s var(--ease), transform 0.52s var(--ease);
+  transition: opacity var(--motion-settle) var(--ease), transform var(--motion-settle) var(--ease);
 }
 
 .vespera-page .rv.in {
@@ -1207,7 +1207,7 @@ body.vespera-page {
 .motion-ready .vespera-page [data-motion="reveal"] {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 460ms var(--ease), transform 460ms var(--ease);
+  transition: opacity var(--motion-glide) var(--ease), transform var(--motion-glide) var(--ease);
 }
 
 .motion-ready .vespera-page [data-motion="reveal"].in {
@@ -1615,7 +1615,7 @@ body.vespera-page {
   filter: saturate(0.82) contrast(1.06);
   transform: scale(var(--vespera-plate-scale, 1.02)) translate3d(var(--vespera-plate-x, 0%), var(--vespera-plate-y, 0%), 0);
   transform-origin: var(--vespera-plate-origin, 50% 50%);
-  transition: filter 900ms ease;
+  transition: filter var(--motion-slow) ease;
   will-change: transform;
 }
 
@@ -1718,7 +1718,7 @@ body.vespera-page {
   background-size: 360% auto;
   filter: saturate(0.48) contrast(0.94);
   opacity: 0.58;
-  transition: opacity 360ms ease, filter 520ms ease, border-color 360ms ease;
+  transition: opacity var(--motion-glide) ease, filter var(--motion-settle) ease, border-color var(--motion-glide) ease;
 }
 
 .vespera-page .vespera-contact-frame:nth-child(1) { background-position: 8% 48%; }
@@ -1942,7 +1942,7 @@ body.vespera-page {
 
 .vespera-page .erow,
 .vespera-page .vespera-pipe-row {
-  transition: background 220ms ease, padding 220ms ease;
+  transition: background var(--motion-control) ease, padding var(--motion-control) ease;
 }
 
 .vespera-page .erow:hover {

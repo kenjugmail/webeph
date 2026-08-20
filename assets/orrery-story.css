@@ -108,7 +108,7 @@ body.orrery-page .swarm-card {
   opacity: 1;
   transform: none;
   clip-path: inset(0);
-  animation: orrery-frame-enter 520ms cubic-bezier(.22, 1, .36, 1) both;
+  animation: orrery-frame-enter var(--motion-settle) var(--ease) both;
 }
 @keyframes orrery-frame-enter {
   from { clip-path: inset(0 100% 0 0); transform: translate3d(10px, 0, 0); }
@@ -156,7 +156,7 @@ body.orrery-page .swarm-card {
   border: 1px solid var(--line);
   opacity: .58;
   transform: scale(.96);
-  transition: opacity 500ms, transform 620ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-settle), transform var(--motion-settle) var(--ease);
 }
 .orrery-scope-frame[data-active="true"] .orrery-boundary-corner { opacity: 1; transform: none; }
 
@@ -185,7 +185,7 @@ body.orrery-page .swarm-card {
   background: var(--signal);
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: transform 520ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform var(--motion-settle) var(--ease);
 }
 .orrery-worktree-origin span { color: var(--signal); font: 400 9px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 .orrery-worktree-origin strong { font-size: 15px; font-weight: 560; }
@@ -199,7 +199,7 @@ body.orrery-page .swarm-card {
   width: 1px;
   background: var(--signal);
   transform: scaleY(0);
-  transition: transform 500ms 120ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform var(--motion-settle) 120ms var(--ease);
 }
 .orrery-worktree-branches article {
   position: relative;
@@ -211,7 +211,7 @@ body.orrery-page .swarm-card {
   background: var(--panel-2);
   opacity: 0;
   transform: translateX(-16px);
-  transition: opacity 360ms, transform 460ms cubic-bezier(.22, 1, .36, 1), border-color 360ms;
+  transition: opacity var(--motion-glide), transform var(--motion-glide) var(--ease), border-color var(--motion-glide);
 }
 .orrery-worktree-branches article::before { content: ""; position: absolute; top: 50%; right: 100%; width: 18px; height: 1px; background: var(--signal); }
 .orrery-worktree-branches article > * { padding-inline: 10px; }
@@ -243,7 +243,7 @@ body.orrery-page .swarm-card {
   color: var(--muted);
   font: 400 10px/1.3 var(--mono);
 }
-.orrery-verify-frame li i { height: 1px; background: var(--signal); transform: scaleX(0); transform-origin: 0 50%; transition: transform 620ms cubic-bezier(.22, 1, .36, 1); }
+.orrery-verify-frame li i { height: 1px; background: var(--signal); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--motion-settle) var(--ease); }
 .orrery-verify-frame li b { color: var(--ink-2); font-weight: 500; text-align: right; }
 .orrery-verify-frame[data-active="true"] li i { transform: scaleX(1); }
 .orrery-verify-frame[data-active="true"] li:nth-child(2) i { transition-delay: 90ms; }
@@ -264,7 +264,7 @@ body.orrery-page .swarm-card {
   background: var(--panel);
   opacity: 0;
   transform: translateX(-14px);
-  transition: opacity 420ms, transform 520ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-glide), transform var(--motion-settle) var(--ease);
 }
 .orrery-selected-result strong { display: block; margin: 12px 0 7px; font-size: clamp(23px, 3vw, 38px); font-weight: 560; line-height: 1; }
 .orrery-human-gate {
@@ -280,7 +280,7 @@ body.orrery-page .swarm-card {
   text-transform: uppercase;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 360ms 120ms, transform 440ms 120ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-glide) 120ms, transform var(--motion-glide) 120ms var(--ease);
 }
 .orrery-human-gate strong { font: inherit; color: var(--ink-2); }
 .orrery-decision-frame[data-active="true"] .orrery-selected-result,
@@ -321,7 +321,7 @@ body.orrery-page .swarm-card {
   gap: 16px;
   padding: 11vh 0 11vh 25px;
   color: var(--ink-2);
-  transition: color 220ms, transform 420ms cubic-bezier(.22, 1, .36, 1);
+  transition: color var(--motion-control), transform var(--motion-glide) var(--ease);
 }
 .orrery-story-steps li::before {
   content: "";
@@ -333,7 +333,7 @@ body.orrery-page .swarm-card {
   border: 1px solid var(--line-strong);
   background: var(--bg);
   transform: translateY(-50%);
-  transition: border-color 220ms, background-color 220ms;
+  transition: border-color var(--motion-control), background-color var(--motion-control);
 }
 .orrery-story-steps li[data-active="true"] { color: var(--ink); transform: translateX(6px); }
 .orrery-story-steps li[data-active="true"]::before { border-color: var(--signal); background: var(--signal); }

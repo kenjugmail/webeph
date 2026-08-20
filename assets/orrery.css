@@ -46,7 +46,7 @@
   --r-sm: 5px;
   --r:    9px;
   --r-lg: 14px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease: var(--ease);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -137,7 +137,7 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
   border-radius: var(--r-sm);
   display: inline-flex; align-items: center; gap: 9px;
   cursor: pointer; border: 1px solid transparent;
-  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), background 0.22s var(--ease), border-color 0.22s;
+  transition: transform var(--motion-control) var(--ease), box-shadow var(--motion-control) var(--ease), background var(--motion-control) var(--ease), border-color var(--motion-control);
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-1px); }
@@ -164,7 +164,7 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
   overflow: hidden;
 }
 .card-pad { padding: 30px; }
-.card-hover { transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s; }
+.card-hover { transition: transform var(--motion-glide) var(--ease), border-color var(--motion-glide), box-shadow var(--motion-glide); }
 .card-hover:hover {
   transform: translateY(-1px);
   border-color: var(--line-strong);
@@ -175,7 +175,7 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
    ============================================================ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background var(--motion-advance), border-color var(--motion-advance);
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
@@ -186,7 +186,7 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
 .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; gap: 32px; }
 .brand { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
 .nav-links { display: flex; gap: 28px; margin-left: 14px; }
-.nav-links a { font-size: 14.5px; color: var(--ink-2); transition: color 0.2s; }
+.nav-links a { font-size: 14.5px; color: var(--ink-2); transition: color var(--motion-control); }
 .nav-links a:hover { color: var(--ink); }
 .nav-spacer { flex: 1; }
 @media (max-width: 880px) { .nav-links { display: none; } }
@@ -202,14 +202,14 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
 .footer h5,
 .footer .footer-heading { font-family: var(--mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
 .footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.footer a { font-size: 14.5px; color: var(--ink-2); transition: color 0.2s; }
+.footer a { font-size: 14.5px; color: var(--ink-2); transition: color var(--motion-control); }
 .footer a:hover { color: var(--teal-lt); }
 @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 
 /* ============================================================
    REVEAL ON SCROLL
    ============================================================ */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity var(--motion-slow) var(--ease), transform var(--motion-slow) var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
 .reveal.d1 { transition-delay: 0.08s; }
 .reveal.d2 { transition-delay: 0.16s; }

@@ -1,14 +1,7 @@
 /* Ephemerent professional polish: shared grid, typography, navigation and restrained motion. */
 @layer polish {
-:root {
-  --site-max: 1280px;
-  --site-gutter: clamp(20px, 3.2vw, 48px);
-  --site-nav: 68px;
-  --radius-control: 3px;
-  --radius-panel: 4px;
-  --motion-control: 180ms;
-  --motion-enter: 520ms;
-}
+/* Scale tokens moved to tokens.css. Redeclaring them here shadowed it:
+   polish is a later layer, so these quietly won. */
 
 html {
   scrollbar-gutter: stable;
@@ -98,7 +91,7 @@ select { border-radius: var(--radius-control); }
 .btn [aria-hidden="true"],
 .ebtn [aria-hidden="true"] {
   display: inline-block;
-  transition: transform var(--motion-control) cubic-bezier(.22, 1, .36, 1);
+  transition: transform var(--motion-control) var(--ease);
 }
 
 .story-branch-field {
@@ -242,7 +235,7 @@ body.utility-page .eyebrow::before { background: var(--signal); }
   opacity: .5;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform var(--motion-control) cubic-bezier(.22, 1, .36, 1);
+  transition: transform var(--motion-control) var(--ease);
 }
 .nav-links a:hover::after,
 .nav-links a:focus-visible::after,
@@ -648,7 +641,7 @@ body.orrery-page .swarm-card { padding: clamp(18px, 2.5vw, 32px); }
 .lifecycle-worktree-list strong { font-size: 12.5px; font-weight: 540; }
 .lifecycle-worktree-list small { color: var(--muted); font: 400 10px/1.4 var(--mono); }
 .lifecycle-connector { display: grid; place-items: center; overflow: hidden; }
-.lifecycle-connector i { width: 100%; height: 1px; background: var(--line-strong); transform: scaleX(.35); transition: transform 520ms, background 520ms; }
+.lifecycle-connector i { width: 100%; height: 1px; background: var(--line-strong); transform: scaleX(.35); transition: transform var(--motion-settle), background var(--motion-settle); }
 [data-run-step="1"] .lifecycle-connector:nth-of-type(1) i,
 [data-run-step="2"] .lifecycle-connector:nth-of-type(-n+2) i,
 [data-run-step="3"] .lifecycle-connector i { transform: scaleX(1); background: var(--signal); }
@@ -740,7 +733,7 @@ body.vellum-page .vellum-hero-stage .hero-canvas {
   width: 100%;
   height: 100%;
   opacity: .92;
-  transition: opacity 420ms, filter 420ms;
+  transition: opacity var(--motion-glide), filter var(--motion-glide);
 }
 .vellum-cpu-frame {
   position: absolute;
@@ -751,7 +744,7 @@ body.vellum-page .vellum-hero-stage .hero-canvas {
   image-rendering: auto;
   opacity: 0;
   transform: scale(1.015);
-  transition: opacity 420ms, transform 420ms;
+  transition: opacity var(--motion-glide), transform var(--motion-glide);
 }
 .vellum-stage-head {
   position: absolute;
@@ -799,7 +792,7 @@ body.vellum-page .vellum-hero-stage .hero-canvas {
   font: 400 11px/1.7 var(--mono);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 420ms, transform 420ms;
+  transition: opacity var(--motion-glide), transform var(--motion-glide);
 }
 .vellum-stage-receipt b { display: block; color: var(--signal); font-weight: 500; margin-bottom: 6px; }
 [data-scene-step="0"] .vellum-state-rail span:nth-child(1),
@@ -1165,7 +1158,7 @@ body.supporting-page .org-trust span {
   .motion-ready .menu-open .nav-links,
   .motion-ready .menu-open .enav {
     display: flex;
-    animation: menu-panel-in 220ms cubic-bezier(.22, 1, .36, 1) both;
+    animation: menu-panel-in var(--motion-control) var(--ease) both;
   }
   .motion-ready .menu-open .enav a { display: flex; }
   .motion-ready .nav-links a,
@@ -1253,7 +1246,7 @@ body.supporting-page .org-trust span {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: .001ms !important;
+    animation-duration: var(--motion-press) !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }

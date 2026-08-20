@@ -36,7 +36,7 @@
 
   --maxw: 1120px;
   --site-nav: 68px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease: var(--ease);
   --shelterix-progress: 0;
   --shelterix-local: 0;
 }
@@ -186,7 +186,7 @@ body.shelterix-page {
   align-items: center;
   font-size: 14px;
   color: var(--ink-2);
-  transition: color 0.2s;
+  transition: color var(--motion-control);
 }
 
 .shelterix-page .enav a:hover,
@@ -439,7 +439,7 @@ body.shelterix-page {
   border: 1px solid var(--line-strong);
   border-radius: 3px;
   color: var(--ink);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition: background var(--motion-control), color var(--motion-control), border-color var(--motion-control);
 }
 
 .shelterix-page .ebtn:hover {
@@ -640,7 +640,7 @@ body.shelterix-page {
 }
 
 .shelterix-story-frame[data-active="true"] .shelterix-frame-sheet > * {
-  animation: shelterix-copy-in 360ms var(--ease) both;
+  animation: shelterix-copy-in var(--motion-glide) var(--ease) both;
 }
 
 .shelterix-story-frame[data-active="true"] .shelterix-frame-sheet > *:nth-child(1) { animation-delay: 0ms; }
@@ -717,7 +717,7 @@ body.shelterix-page {
   gap: 16px;
   padding: 10vh 0 10vh 26px;
   color: var(--ink-2);
-  transition: color 220ms ease, transform 420ms var(--ease);
+  transition: color var(--motion-control) ease, transform var(--motion-glide) var(--ease);
 }
 
 .shelterix-story-steps li::before {
@@ -823,7 +823,7 @@ body.shelterix-page {
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
   align-items: baseline;
-  transition: background 180ms ease, padding 180ms ease;
+  transition: background var(--motion-control) ease, padding var(--motion-control) ease;
 }
 
 .shelterix-page .erow:hover {
@@ -1011,7 +1011,7 @@ body.shelterix-page {
 .shelterix-page .rv {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition: opacity var(--motion-slow) var(--ease), transform var(--motion-slow) var(--ease);
 }
 
 .shelterix-page .rv.in {
@@ -1022,7 +1022,7 @@ body.shelterix-page {
 .motion-ready .shelterix-page [data-motion="reveal"] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 560ms var(--ease), transform 560ms var(--ease);
+  transition: opacity var(--motion-settle) var(--ease), transform var(--motion-settle) var(--ease);
 }
 
 .motion-ready .shelterix-page [data-motion="reveal"].in {

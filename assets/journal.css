@@ -79,7 +79,7 @@
   background: var(--jr-ink);
   color: var(--jr-paper);
   transform: translateY(-160%);
-  transition: transform .2s ease;
+  transition: transform var(--motion-control) ease;
 }
 .jr-skip:focus { transform: none; }
 
@@ -166,7 +166,7 @@
   text-transform: uppercase;
 }
 .jr-menu-mark { position: relative; width: 22px; height: 12px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; }
-.jr-menu-mark::after { content: ''; position: absolute; top: 5px; left: 7px; right: 0; height: 1px; background: currentColor; transition: transform .2s ease, left .2s ease; }
+.jr-menu-mark::after { content: ''; position: absolute; top: 5px; left: 7px; right: 0; height: 1px; background: currentColor; transition: transform var(--motion-control) ease, left var(--motion-control) ease; }
 .jr-menu-button[aria-expanded="true"] .jr-menu-mark { border-bottom-color: transparent; transform: translateY(4px) rotate(45deg); }
 .jr-menu-button[aria-expanded="true"] .jr-menu-mark::after { left: 0; transform: translateY(-6px) rotate(90deg); }
 
@@ -241,7 +241,7 @@
   letter-spacing: .02em;
   line-height: 1.25;
   text-align: center;
-  transition: background .22s ease, color .22s ease, border-color .22s ease, transform .22s ease;
+  transition: background var(--motion-control) ease, color var(--motion-control) ease, border-color var(--motion-control) ease, transform var(--motion-control) ease;
 }
 .jr-button:hover { background: var(--jr-ink); color: var(--jr-paper); transform: translateY(-1px); }
 /* Scoped with .jr-page because `.jr-page a { color: inherit }` above is
@@ -299,12 +299,12 @@
 .jr-register-footer span:last-child { color: var(--jr-cobalt-dark); text-transform: uppercase; }
 .jr-js .jr-provenance-register[data-register-mounted="true"] .jr-register-steps::before {
   transform: scaleY(0);
-  transition: transform 1250ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform 1250ms var(--ease);
 }
 .jr-js .jr-provenance-register[data-register-mounted="true"] .jr-register-steps li {
   opacity: .34;
   transform: translateY(8px);
-  transition: opacity 520ms ease, transform 720ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-settle) ease, transform var(--motion-slow) var(--ease);
   transition-delay: calc(var(--register-step, 0) * 125ms);
 }
 .jr-js .jr-provenance-register[data-register-active="true"] .jr-register-steps::before { transform: scaleY(1); }
@@ -354,7 +354,7 @@
   align-items: start;
   padding: 25px 0 27px;
   border-bottom: 1px solid var(--jr-rule);
-  transition: padding .2s ease, background .2s ease;
+  transition: padding var(--motion-control) ease, background var(--motion-control) ease;
 }
 .jr-archive-row:hover { padding-left: 10px; background: var(--jr-paper-deep); }
 .jr-archive-id,
@@ -364,7 +364,7 @@
 .jr-archive-title { font-family: var(--jr-serif); font-size: 27px; line-height: 1.08; }
 .jr-archive-authors { margin-top: 9px; color: var(--jr-muted); font-size: 13px; }
 .jr-archive-summary { color: var(--jr-muted); font-size: 13px; line-height: 1.55; }
-.jr-archive-arrow { align-self: center; color: var(--jr-coral); font-size: 21px; transition: transform .2s ease; }
+.jr-archive-arrow { align-self: center; color: var(--jr-coral); font-size: 21px; transition: transform var(--motion-control) ease; }
 .jr-archive-row:hover .jr-archive-arrow { transform: translateX(4px); }
 .jr-empty-row {
   padding: 40px 0;
@@ -533,7 +533,7 @@
   background: var(--jr-paper-pale);
   color: var(--jr-ink);
   outline: none;
-  transition: border-color .2s ease, background .2s ease;
+  transition: border-color var(--motion-control) ease, background var(--motion-control) ease;
 }
 .jr-input,
 .jr-select { min-height: 44px; padding: 9px 11px; }
@@ -685,7 +685,7 @@ body.research-login.utility-page .auth-input { border-color: var(--jr-rule); bor
     visibility: hidden;
     pointer-events: none;
     transform: translateY(-7px);
-    transition: opacity .18s ease, transform .18s ease, visibility .18s;
+    transition: opacity var(--motion-control) ease, transform var(--motion-control) ease, visibility var(--motion-control);
   }
   .jr-js .jr-nav[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
   .jr-js .jr-nav a { padding: 11px 0; border-bottom-color: var(--jr-rule-light); }

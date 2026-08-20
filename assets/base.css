@@ -105,8 +105,8 @@ summary:focus-visible,
 
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 0.32s;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-duration: var(--motion-advance);
+    animation-timing-function: var(--ease);
   }
 
   /* Persistent shared elements morph across navigations. Scoped so
@@ -165,7 +165,7 @@ details.faq > summary::after {
   content: '+';
   font-family: var(--mono, monospace);
   color: var(--accent, var(--teal-lt, currentColor));
-  transition: transform 0.25s var(--ease, ease);
+  transition: transform var(--motion-control) var(--ease, ease);
   flex: none;
 }
 details.faq[open] > summary::after { transform: rotate(45deg); }
@@ -176,7 +176,7 @@ details.faq > .faq-body {
   line-height: 1.62;
 }
 @media (prefers-reduced-motion: no-preference) {
-  details.faq[open] > .faq-body { animation: faq-open 0.3s var(--ease, ease); }
+  details.faq[open] > .faq-body { animation: faq-open var(--motion-advance) var(--ease, ease); }
 }
 @keyframes faq-open { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 

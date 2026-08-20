@@ -122,7 +122,7 @@
   overflow: hidden;
   opacity: 0;
   transform: translateY(10px) scale(1.018);
-  transition: opacity 540ms cubic-bezier(.22, 1, .36, 1), transform 900ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-settle) var(--ease), transform var(--motion-slow) var(--ease);
 }
 
 .ehero-plate-frame[data-active="true"] {
@@ -143,11 +143,11 @@
   object-position: 50% 50%;
   filter: saturate(.84) contrast(1.02);
   transform: scale(1.035);
-  transition: transform 12s cubic-bezier(.22, 1, .36, 1), filter 540ms ease;
+  transition: transform 12s var(--ease), filter var(--motion-settle) ease;
 }
 
 .ehero-plate-frame[data-active="true"] img {
-  animation: ehero-plate-drift 12s cubic-bezier(.22, 1, .36, 1) alternate infinite;
+  animation: ehero-plate-drift 12s var(--ease) alternate infinite;
   animation-play-state: paused;
 }
 
@@ -175,7 +175,7 @@
   text-transform: uppercase;
 }
 
-.ehero-plate-state span { transition: opacity 240ms ease; }
+.ehero-plate-state span { transition: opacity var(--motion-control) ease; }
 
 .ehero-plate-mark {
   position: absolute;
@@ -229,11 +229,11 @@
 .ehero-plate[data-plate-ready="true"][data-plate-active="true"] .ehero-plate-annotation {
   opacity: 1;
   transform: none;
-  transition: opacity 520ms 180ms ease, transform 720ms 180ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-settle) 180ms ease, transform var(--motion-slow) 180ms var(--ease);
 }
 .ehero-plate[data-plate-ready="true"][data-plate-active="true"] .ehero-plate-annotation i {
   transform: scaleX(1);
-  transition: transform 820ms 320ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform var(--motion-slow) 320ms var(--ease);
 }
 
 .ehero-plate-index,
@@ -315,7 +315,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translate3d(-9px, 0, 0);
-  transition: opacity 280ms ease, transform 620ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-advance) ease, transform var(--motion-settle) var(--ease);
 }
 
 .ehero-glossary-rail[data-visible] {
@@ -357,7 +357,7 @@
   min-width: 0;
   padding: 10px 0 11px;
   color: var(--faint);
-  transition: color 260ms ease, transform 520ms cubic-bezier(.22, 1, .36, 1);
+  transition: color var(--motion-advance) ease, transform var(--motion-settle) var(--ease);
 }
 
 .ehero-glossary-rail li::before {
@@ -370,7 +370,7 @@
   border: 1px solid var(--rule-strong);
   background: var(--paper);
   transform: translateY(-50%);
-  transition: border-color 220ms ease, background-color 220ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1);
+  transition: border-color var(--motion-control) ease, background-color var(--motion-control) ease, transform var(--motion-glide) var(--ease);
 }
 
 .ehero-glossary-no {
@@ -398,7 +398,7 @@
   line-height: 1.42;
   opacity: 0;
   transform: translateY(-3px);
-  transition: max-height 520ms cubic-bezier(.22, 1, .36, 1), margin 360ms ease, opacity 220ms ease, transform 440ms cubic-bezier(.22, 1, .36, 1);
+  transition: max-height var(--motion-settle) var(--ease), margin var(--motion-glide) ease, opacity var(--motion-control) ease, transform var(--motion-glide) var(--ease);
 }
 
 .ehero-glossary-rail li[data-active="true"] {
@@ -523,7 +523,7 @@
   margin: 0;
   opacity: 0;
   transform: translateY(14px) scale(1.008);
-  transition: opacity 140ms linear, transform 180ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-press) linear, transform var(--motion-control) var(--ease);
 }
 
 .ehero-story-frame[data-active="true"] {
@@ -544,7 +544,7 @@
   object-position: center;
   transform: translate3d(var(--story-camera-x, 0), var(--story-camera-y, 0), 0) scale(var(--story-camera-scale, 1.02));
   transform-origin: var(--story-camera-origin, 50% 50%);
-  transition: transform 180ms linear;
+  transition: transform var(--motion-control) linear;
   will-change: transform;
 }
 
@@ -571,7 +571,7 @@
   height: 25px;
   opacity: .62;
   transform: translate3d(0, 0, 0);
-  transition: transform 180ms linear, opacity 240ms ease;
+  transition: transform var(--motion-control) linear, opacity var(--motion-control) ease;
 }
 
 .ehero-story-aperture i::before,
@@ -632,7 +632,7 @@
 .ehero-release-copy > * {
   opacity: 0;
   transform: translateY(9px);
-  transition: opacity 360ms cubic-bezier(.22, 1, .36, 1), transform 420ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-glide) var(--ease), transform var(--motion-glide) var(--ease);
 }
 
 .ehero-release-frame[data-active="true"] .ehero-release-copy > * {
@@ -690,7 +690,7 @@
   padding: 12vh 0 12vh 27px;
   color: var(--ink-2);
   opacity: 1;
-  transition: color 220ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1);
+  transition: color var(--motion-control) ease, transform var(--motion-glide) var(--ease);
 }
 
 .ehero-story-steps li::before {
@@ -703,7 +703,7 @@
   border: 1px solid var(--rule-strong);
   background: var(--paper);
   transform: translateY(-50%);
-  transition: border-color 220ms ease, background-color 220ms ease;
+  transition: border-color var(--motion-control) ease, background-color var(--motion-control) ease;
 }
 
 .ehero-story-steps li[data-active="true"] {
@@ -789,7 +789,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translate3d(-8px, -50%, 0);
-  transition: opacity 360ms ease, transform 620ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-glide) ease, transform var(--motion-settle) var(--ease);
 }
 
 .home-chapter-rail[data-active="true"] {
@@ -826,7 +826,7 @@
   color: var(--faint);
   font-family: var(--mono);
   line-height: 1.2;
-  transition: color 240ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1);
+  transition: color var(--motion-control) ease, transform var(--motion-glide) var(--ease);
 }
 
 .home-chapter-rail a::before {
@@ -839,7 +839,7 @@
   border: 1px solid var(--rule-strong);
   background: var(--paper);
   transform: translateY(-50%);
-  transition: border-color 220ms ease, background-color 220ms ease;
+  transition: border-color var(--motion-control) ease, background-color var(--motion-control) ease;
 }
 
 .home-chapter-rail a span { font-size: 7px; letter-spacing: .08em; }
@@ -1038,7 +1038,7 @@
 
 .home-page .erow,
 .home-page .eprodrow {
-  transition: color 180ms ease, background-color 180ms ease, padding 180ms ease;
+  transition: color var(--motion-control) ease, background-color var(--motion-control) ease, padding var(--motion-control) ease;
 }
 
 .home-page .erow:hover,
@@ -1051,7 +1051,7 @@
 .motion-ready .home-page [data-motion="reveal"] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 560ms cubic-bezier(.22, 1, .36, 1), transform 560ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-settle) var(--ease), transform var(--motion-settle) var(--ease);
 }
 
 .motion-ready .home-page [data-motion="reveal"].in {
@@ -1260,7 +1260,7 @@
   margin: 0;
   opacity: 0;
   transform: translateY(7px);
-  transition: opacity 320ms ease, transform 520ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-advance) ease, transform var(--motion-settle) var(--ease);
 }
 .research-graph-cue-stack p[data-active="true"] { opacity: 1; transform: none; }
 .research-graph-cue-stack span {
@@ -1278,7 +1278,7 @@
 }
 .research-graph-cue-stack small { color: var(--muted); font-size: 11px; line-height: 1.4; }
 .research-graph-cue-meter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
-.research-graph-cue-meter i { height: 2px; background: var(--rule-strong); transition: background-color 280ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1); }
+.research-graph-cue-meter i { height: 2px; background: var(--rule-strong); transition: background-color var(--motion-advance) ease, transform var(--motion-glide) var(--ease); }
 .research-graph-cue-meter i[data-active="true"] { background: var(--graph-cue-accent); transform: scaleY(1.7); }
 .research-graph {
   position: relative;
@@ -1359,7 +1359,7 @@
   background: var(--graph-accent);
   transform: scaleX(.25);
   transform-origin: left;
-  transition: transform 700ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform var(--motion-slow) var(--ease);
 }
 .research-field-map > li > * {
   position: relative;
@@ -1367,7 +1367,7 @@
   min-width: 0;
   padding: 17px 0;
   background: var(--paper-2);
-  transition: opacity 520ms ease, transform 700ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity var(--motion-settle) ease, transform var(--motion-slow) var(--ease);
 }
 .research-graph[data-graph-mounted="true"] .research-field-map > li:not([data-graph-active]) > * {
   opacity: .82;

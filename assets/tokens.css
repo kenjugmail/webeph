@@ -186,18 +186,28 @@
   --radius-panel:   4px;
 
   /* ---- Motion -------------------------------------------------- */
-  --motion-press:   140ms;
-  --motion-control: 180ms;
-  --motion-advance: 280ms;
-  --motion-settle:  520ms;
-  --motion-enter:   520ms;
+  /* Six steps, collapsed from 59 distinct literals across 269 uses.
+     Anything at or above 1.15s is an ambient loop -- a drifting plate,
+     a slow pulse -- and stays a literal in the rule that owns it,
+     because those set a scene rather than answer a user. */
+  --motion-press:   140ms;   /* 70-150:   a button taking a press */
+  --motion-control: 200ms;   /* 151-250:  hover, focus, small state */
+  --motion-advance: 300ms;   /* 251-340:  a panel or step advancing */
+  --motion-glide:   420ms;   /* 341-470:  larger movement across space */
+  --motion-settle:  520ms;   /* 471-650:  entrances coming to rest */
+  --motion-slow:    900ms;   /* 651-1150: deliberate, scene-scale */
+  --motion-enter:   var(--motion-settle);
 
   /* Declared at :root so it resolves everywhere. It was previously
      defined only in orrery/shelterix/vespera, so base.css and
      ephemerent.css consumed it on the lab pages and silently fell
      back to the browser default `ease`. */
-  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease:      cubic-bezier(0.22, 1, 0.36, 1);   /* the house curve */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);   /* entrances, longer tail */
+  /* news.css animates its risk bars, 3D planes and reveals on a gentler
+     curve than the house one. It reads as physical rather than snappy,
+     which suits a diagram, so it gets a name instead of being folded in. */
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* ---- Mode ----------------------------------------------------
      Grain sits differently on paper than on a dark ground: multiply

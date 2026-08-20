@@ -99,7 +99,7 @@
   background: var(--bg-2);
   color: var(--ink);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--motion-control);
 }
 
 .auth-input:focus {
