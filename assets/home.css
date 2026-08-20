@@ -406,7 +406,37 @@
   line-height: 1.42;
   opacity: 0;
   transform: translateY(-3px);
-  transition: max-height var(--motion-settle) var(--ease), margin var(--motion-glide) ease, opacity var(--motion-control) ease, transform var(--motion-glide) var(--ease);
+  /* max-height rather than height because height: 0 -> auto is not
+     interpolable by default. The cost is that the easing is applied to
+     a distance the content never travels: the curve finishes at 76px
+     while the text stops at whatever it actually is, so the tail of
+     the animation is empty time and the motion reads as arriving early
+     and then waiting. The @supports block below fixes that where
+     interpolate-size exists.
+
+     margin is deliberately NOT in this list. Animating it forces
+     layout on every frame for 7px of movement nobody can see against
+     a simultaneous opacity fade. */
+  transition:
+    max-height var(--motion-settle) var(--ease),
+    opacity var(--motion-control) ease,
+    transform var(--motion-glide) var(--ease);
+}
+
+/* Where the browser can interpolate to a keyword, animate the real
+   height. The easing then describes the distance the content actually
+   travels, which is the difference between a disclosure that opens and
+   one that expands toward a number. */
+@supports (interpolate-size: allow-keywords) {
+  .ehero-glossary-rail p {
+    interpolate-size: allow-keywords;
+    max-height: none;
+    height: 0;
+    transition:
+      height var(--motion-settle) var(--ease),
+      opacity var(--motion-control) ease,
+      transform var(--motion-glide) var(--ease);
+  }
 }
 
 .ehero-glossary-rail li[data-active="true"] {
@@ -427,6 +457,9 @@
   opacity: 1;
   transform: none;
   transition-delay: 70ms;
+}
+@supports (interpolate-size: allow-keywords) {
+  .ehero-glossary-rail li[data-active="true"] p { height: auto; }
 }
 
 .ehero-glossary-progress {
