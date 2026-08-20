@@ -11,7 +11,56 @@
   'use strict';
 
   var KEY = 'eph-mode';
+  var MATERIAL_KEY = 'eph-material';
   var root = document.documentElement;
+
+  /* The control cycles through three looks rather than carrying two
+     controls in a nav that is already full. Glass is a material rather
+     than a face, so it composes with dark: it needs a ground with
+     something behind it to be worth refracting. */
+  var CYCLE = ['light', 'dark', 'glass'];
+
+  function material() {
+    return root.dataset.material === 'glass' ? 'glass' : 'flat';
+  }
+
+  function setMaterial(name) {
+    var on = name === 'glass';
+    if (on) root.dataset.material = 'glass';
+    else delete root.dataset.material;
+    try {
+      if (on) localStorage.setItem(MATERIAL_KEY, 'glass');
+      else localStorage.removeItem(MATERIAL_KEY);
+    } catch (e) { /* private browsing */ }
+
+    if (on) {
+      ensureGlassAssets();
+    }
+    window.dispatchEvent(new CustomEvent('ephemerent:materialchange', {
+      detail: { material: name },
+    }));
+  }
+
+  /* The stylesheet is already there when glass was the stored choice;
+     this covers switching to it during a visit. The script is an
+     enhancement either way, so it is always loaded late. */
+  function ensureGlassAssets() {
+    if (!document.querySelector('link[data-glass-css]') &&
+        !document.querySelector('link[href*="glass.css"]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/assets/glass.css?v=20260820';
+      link.setAttribute('data-glass-css', '');
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector('script[data-glass-js]')) {
+      var script = document.createElement('script');
+      script.src = '/assets/glass.js?v=20260820';
+      script.defer = true;
+      script.setAttribute('data-glass-js', '');
+      document.head.appendChild(script);
+    }
+  }
 
   /* Surfaces whose identity is fixed. genesis-fall is a single
      art-directed teaser with no counterpart palette, so offering it a
@@ -117,18 +166,35 @@
     btn.setAttribute('aria-live', 'polite');
     host.appendChild(btn);
 
+    var GLYPH = { light: '\u2600', dark: '\u263e', glass: '\u25c8' };
+    var NAME = { light: 'light', dark: 'dark', glass: 'liquid glass' };
+
+    /** Which of the three looks is on screen. */
+    function current() {
+      if (material() === 'glass') return 'glass';
+      return effective() === 'dark' ? 'dark' : 'light';
+    }
+
     function label() {
-      var now = effective();
-      var next = now === 'dark' ? 'light' : 'dark';
-      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
-      btn.setAttribute('title', 'Switch to ' + next + ' mode');
-      btn.dataset.mode = now;
-      /* Two glyphs, swapped by CSS, so no icon request. */
-      btn.innerHTML = '<span aria-hidden="true">' + (now === 'dark' ? '☾' : '☀') + '</span>';
+      var now = current();
+      var next = CYCLE[(CYCLE.indexOf(now) + 1) % CYCLE.length];
+      btn.setAttribute('aria-label', 'Appearance: ' + NAME[now] + '. Switch to ' + NAME[next] + '.');
+      btn.setAttribute('title', 'Switch to ' + NAME[next]);
+      btn.dataset.look = now;
+      btn.innerHTML = '<span aria-hidden="true">' + GLYPH[now] + '</span>';
     }
 
     btn.addEventListener('click', function () {
-      apply(effective() === 'dark' ? 'light' : 'dark');
+      var next = CYCLE[(CYCLE.indexOf(current()) + 1) % CYCLE.length];
+      if (next === 'glass') {
+        /* Glass wants a ground with something behind it, so it arrives
+           on the dark face rather than on paper. */
+        apply('dark');
+        setMaterial('glass');
+      } else {
+        setMaterial('flat');
+        apply(next);
+      }
       label();
       plates(effective());
     });
@@ -142,6 +208,12 @@
     if (mq.addEventListener) mq.addEventListener('change', onChange);
     else if (mq.addListener) mq.addListener(onChange);
   }
+
+  /* The stylesheet arrived from the head snippet, but the enhancement
+     script is only fetched here -- including on a load that already
+     started in glass, which is the common case for someone who chose
+     it last visit. */
+  if (root.dataset.material === 'glass') ensureGlassAssets();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', build);

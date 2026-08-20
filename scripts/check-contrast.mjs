@@ -31,7 +31,11 @@ const PAGES = [
   '/orrery', '/vellum', '/shelterix', '/download', '/cloud', '/signin',
   '/organizations', '/privacy', '/terms', '/security', '/slack',
 ];
-const MODES = ['light', 'dark'];
+/* Glass is a third thing to audit, not a variation on the second: its
+   panels are translucent, so text on them sits over whatever the page
+   puts behind, and that is exactly the arrangement a flat-background
+   check would miss. */
+const MODES = ['light', 'dark', 'glass'];
 
 /** WCAG relative luminance. */
 function luminance([r, g, b]) {
@@ -57,7 +61,11 @@ for (const mode of MODES) {
      failures that do not exist for any real visitor. */
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await context.addInitScript((m) => {
-    try { localStorage.setItem('eph-mode', m); } catch (e) { /* ignore */ }
+    try {
+      localStorage.setItem('eph-mode', m === 'glass' ? 'dark' : m);
+      if (m === 'glass') localStorage.setItem('eph-material', 'glass');
+      else localStorage.removeItem('eph-material');
+    } catch (e) { /* ignore */ }
   }, mode);
   const page = await context.newPage();
 
@@ -68,7 +76,7 @@ for (const mode of MODES) {
     await page.evaluate(() => {
       document.querySelectorAll('.rv, .reveal').forEach((el) => el.classList.add('in'));
     });
-    await page.waitForTimeout(150);
+    await page.waitForTimeout(mode === 'glass' ? 500 : 150);
 
     const found = await page.evaluate(() => {
       /* Resolve through a canvas rather than by parsing the string.
@@ -189,7 +197,7 @@ for (const mode of MODES) {
 
 await browser.close();
 
-console.log(`check-contrast: ${sampled} text samples across ${PAGES.length} pages x ${MODES.length} modes`);
+console.log(`check-contrast: ${sampled} text samples across ${PAGES.length} pages x ${MODES.length} looks (${MODES.join(', ')})`);
 if (failures.length) {
   console.error(`\n${failures.length} below WCAG AA:\n`);
   for (const f of failures) console.error('  ' + f);

@@ -31,8 +31,18 @@
 <!-- include: head-theme -->
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
      before the first stylesheet, or the page paints the wrong one first. -->
-<script>try{var m=localStorage.getItem("eph-mode");if(m)document.documentElement.dataset.mode=m}catch(e){}</script>
+<script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode");if(m)d.dataset.mode=m;
+if(localStorage.getItem("eph-material")==="glass")d.dataset.material="glass"}catch(e){}</script>
 <link rel="stylesheet" href="/assets/tokens.css?v=20260820">
+<!-- Deliberately AFTER tokens.css, not folded into the snippet above.
+     Cascade layers take their order from where a name FIRST appears, so
+     a glass.css inserted ahead of tokens.css would create @layer
+     utilities before tokens.css declares the full order -- and utilities
+     would keep that first position, which is the LOWEST priority, the
+     exact opposite of what it is for. Loading it here lets tokens.css
+     establish the order and glass.css join the end of it. -->
+<script>try{if(document.documentElement.dataset.material==="glass"){
+var l=document.createElement("link");l.rel="stylesheet";l.href="/assets/glass.css?v=20260820";document.head.appendChild(l)}}catch(e){}</script>
 <script src="/assets/mode.js?v=20260820" defer></script>
 <!-- /include -->
 <link rel="stylesheet" href="/assets/ephemerent.css?v=20260802">
