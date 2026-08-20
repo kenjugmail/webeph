@@ -57,7 +57,10 @@
     { "source": "/journal/editor", "destination": "/journal-editor.html" },
     { "source": "/journal/policies", "destination": "/journal-policies.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/terms", "destination": "/terms.html" }
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/signin", "destination": "/login.html" },
+    { "source": "/cloud", "destination": "/cloud.html" },
+    { "source": "/vellum/connect", "destination": "/vellum-connect.html" }
   ],
   "headers": [
     {

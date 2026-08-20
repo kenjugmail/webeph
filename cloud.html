@@ -7,13 +7,14 @@
 <meta name="description" content="Orrery Cloud account for paid beta access, hosted credits, and Nexus cloud features. Availability, quotas, and providers may change during beta.">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0b0b12">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
-<link rel="stylesheet" href="assets/auth.css?v=20260801">
-<link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260811d">
-<script src="assets/motion.js?v=20260811d" defer></script>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/base.css?v=20260801">
+<link rel="stylesheet" href="/assets/polish.css?v=20260811d">
+<script src="/assets/motion.js?v=20260811d" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="space-bg auth-page utility-page">
@@ -72,7 +73,7 @@
     <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. Credits reset each billing month, do not roll over, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
 
     <div id="cloud-auth-setup" class="hidden auth-optional">
-      <p class="auth-msg" style="color:var(--muted);">Cloud auth is not configured yet. Follow <a href="docs/CLOUD.md">docs/CLOUD.md</a> to connect Supabase and billing. Preview setup can still be inspected locally.</p>
+      <p class="auth-msg" style="color:var(--muted);">Cloud sign-in is not enabled for this environment yet. Local preview setup remains available below.</p>
       <a class="btn btn-ghost" href="/download" style="width:100%;justify-content:center;margin-top:12px;">Download preview build</a>
     </div>
 
@@ -103,14 +104,14 @@
         </div>
       </div>
 
-      <div class="auth-optional" id="pairing-section">
+      <!-- Shown only when SITE_CONFIG.CLOUD_RELAY_URL is set; see the guard at the end of this file. -->
+      <div class="auth-optional" id="pairing-section" hidden>
         <div class="auth-optional-head">
           <h2>Pair this machine</h2>
-          <p class="sub">Generate a code on your desktop editor, or create one here for when the relay goes live.</p>
+          <p class="sub">Generate a code here, then enter it in your desktop editor to link this machine.</p>
         </div>
         <div class="pair-code" id="pair-code">------</div>
         <button type="button" class="btn btn-ghost" id="pair-generate" style="width:100%;margin-top:10px;">Generate pairing code</button>
-        <p class="auth-msg" style="color:var(--faint);font-size:13px;margin-top:12px;">Relay not deployed yet — codes are a preview. Phone remote will connect through <code>CLOUD_RELAY_URL</code>.</p>
       </div>
 
       <a class="btn btn-primary" href="/download" style="width:100%;justify-content:center;margin-top:20px;">Download desktop</a>
@@ -143,13 +144,18 @@
 .billing-fineprint a { color:var(--teal-lt); }
 </style>
 
-<script src="assets/site-config.js"></script>
+<script src="/assets/site-config.js"></script>
 <script type="module">
-  import { mountNavAccount } from './assets/account.js';
-  import { mountCloudAccount } from './assets/cloud-auth.js';
+  import { mountNavAccount } from '/assets/account.js';
+  import { mountCloudAccount } from '/assets/cloud-auth.js';
 
   mountCloudAccount();
   mountNavAccount();
+
+  // Pairing needs a live relay. Without CLOUD_RELAY_URL the section stays hidden
+  // rather than handing out codes that connect to nothing.
+  const relayUrl = window.ORRERY_CONFIG?.CLOUD_RELAY_URL;
+  if (relayUrl) document.getElementById('pairing-section')?.removeAttribute('hidden');
 
   document.getElementById('pair-generate')?.addEventListener('click', () => {
     const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';

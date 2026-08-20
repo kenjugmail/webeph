@@ -20,7 +20,7 @@ export async function mountNavAccount(slotId = 'auth-nav-slot') {
   if (cloud?.user) {
     const email = esc(cloud.user.email || 'Account');
     slot.innerHTML = `
-      <a class="btn btn-ghost" href="/cloud.html" title="${email}">☁ ${email}</a>
+      <a class="btn btn-ghost" href="/cloud" title="${email}">☁ ${email}</a>
       ${DOWNLOAD_BTN}
     `;
     return;
@@ -43,7 +43,7 @@ export async function mountNavAccount(slotId = 'auth-nav-slot') {
   }
 
   slot.innerHTML = `
-    <a class="btn btn-ghost" href="/login.html">Sign in</a>
+    <a class="btn btn-ghost" href="/signin">Sign in</a>
     ${DOWNLOAD_BTN}
   `;
 }

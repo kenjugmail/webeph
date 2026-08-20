@@ -7,8 +7,8 @@
 <meta name="description" content="Download the Orrery beta. Beta software may change, fail, or produce incorrect agent output; review changes and keep backups.">
 <link rel="canonical" href="https://ephemerent.com/download">
 <meta name="theme-color" content="#0b0b12">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
@@ -25,11 +25,11 @@
 <meta name="twitter:title" content="Get Orrery beta">
 <meta name="twitter:description" content="Download the Orrery beta. Preview setup is available; real agent runs require an active subscription.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
-<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
-<link rel="stylesheet" href="assets/auth.css?v=20260801">
-<link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260811d">
-<script src="assets/motion.js?v=20260811d" defer></script>
+<link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/base.css?v=20260801">
+<link rel="stylesheet" href="/assets/polish.css?v=20260811d">
+<script src="/assets/motion.js?v=20260811d" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="space-bg auth-page utility-page">
@@ -70,7 +70,7 @@
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
-      <a class="btn btn-primary" href="login.html" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
+      <a class="btn btn-primary" href="/signin" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
       <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">No permanent unpaid tier or public trial is offered at launch. Preview users can inspect setup; active subscribers can run agents. For beta questions, email <a href="mailto:hello@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">hello@ephemerent.com</a>.</p>
     </div>
 
@@ -80,7 +80,7 @@
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
-        <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open Pro cloud</a>
+        <a class="btn btn-primary" href="/cloud" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
@@ -111,7 +111,7 @@
     <div class="auth-optional" id="identity">
       <div class="auth-optional-head">
         <h2>Identify (optional)</h2>
-        <p class="sub">Email only — stored on this device. Skip if you don't care about named audit logs.</p>
+        <p class="sub">Email only — stored on this device. Skip if you don't need named entries in your local activity log.</p>
       </div>
       <div id="identity-form-wrap">
         <form id="identity-form" class="auth-stack">
@@ -155,12 +155,12 @@
 .release-status a { color:var(--teal-lt); font-size:13px; }
 </style>
 
-<script src="assets/site-config.js"></script>
+<script src="/assets/site-config.js"></script>
 <script type="module">
-  import { mountDownloadPage } from './assets/identity.js';
-  import { mountNavAccount } from './assets/account.js';
-  import { cloudConfigured, getCloudProfile } from './assets/cloud-auth.js';
-  import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES } from './assets/accountPlan.js';
+  import { mountDownloadPage } from '/assets/identity.js';
+  import { mountNavAccount } from '/assets/account.js';
+  import { cloudConfigured, getCloudProfile } from '/assets/cloud-auth.js';
+  import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES } from '/assets/accountPlan.js';
   mountDownloadPage();
   mountNavAccount();
   const releaseConfig = window.ORRERY_CONFIG || {};
@@ -200,7 +200,7 @@
       if (cta) {
         cta.innerHTML = `
           <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Your ${tierLabel} plan is active - hosted credits, Nexus, and Orrery Cloud are enabled.</p>
-          <a class="btn btn-primary" href="cloud.html" style="width:100%;justify-content:center;">Open cloud dashboard</a>
+          <a class="btn btn-primary" href="/cloud" style="width:100%;justify-content:center;">Open cloud dashboard</a>
         `;
       }
     }).catch(() => {});

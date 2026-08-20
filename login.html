@@ -7,14 +7,15 @@
 <meta name="description" content="Create a free Ephemerent account for Orrery Cloud or Ephemerent Research submissions.">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0b0b12">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
-<link rel="stylesheet" href="assets/auth.css?v=20260801">
-<link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260811d">
-<link rel="stylesheet" href="assets/journal.css?v=20260812a">
-<script src="assets/motion.js?v=20260811d" defer></script>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/base.css?v=20260801">
+<link rel="stylesheet" href="/assets/polish.css?v=20260811d">
+<link rel="stylesheet" href="/assets/journal.css?v=20260812a">
+<script src="/assets/motion.js?v=20260811d" defer></script>
 <noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="space-bg auth-page utility-page">
@@ -48,7 +49,7 @@
 
     <div id="cloud-auth-primary">
       <div id="cloud-auth-setup" class="hidden">
-        <p class="auth-msg" style="color:var(--muted);">Cloud auth is not configured yet. See <a href="docs/CLOUD.md">docs/CLOUD.md</a>; preview setup remains available below.</p>
+        <p class="auth-msg" style="color:var(--muted);">Cloud sign-in is not enabled for this environment yet. Local preview setup remains available below.</p>
       </div>
       <div id="cloud-auth-panel">
         <div class="auth-stack">
@@ -62,7 +63,7 @@
           <button type="button" class="btn btn-primary" id="cloud-email-btn">Send link</button>
         </div>
         <p class="auth-msg" id="cloud-auth-msg" role="status" aria-live="polite"></p>
-        <a class="btn btn-ghost" href="cloud.html" id="login-cloud-link" style="width:100%;justify-content:center;margin-top:8px;">Open Orrery Cloud dashboard →</a>
+        <a class="btn btn-ghost" href="/cloud" id="login-cloud-link" style="width:100%;justify-content:center;margin-top:8px;">Open Orrery Cloud dashboard →</a>
       </div>
     </div>
 
@@ -97,10 +98,10 @@
   </div>
 </footer>
 
-<script src="assets/site-config.js"></script>
+<script src="/assets/site-config.js"></script>
 <script type="module">
-  import { getIdentity, mountIdentityPanel } from './assets/identity.js';
-  import { bindCloudAuthForm, getAuthRedirect, waitForCloudSession } from './assets/cloud-auth.js';
+  import { getIdentity, mountIdentityPanel } from '/assets/identity.js';
+  import { bindCloudAuthForm, getAuthRedirect, waitForCloudSession } from '/assets/cloud-auth.js';
 
   const loginParams = new URLSearchParams(location.search);
   const researchContext = loginParams.get('context') === 'research';

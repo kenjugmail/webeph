@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "webeph",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8099"],
-      "port": 8099
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "vercel", "dev", "--yes"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }

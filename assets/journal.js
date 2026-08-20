@@ -312,7 +312,7 @@ async function clientOrNull() {
 }
 
 function authLink(next) {
-  return `/login.html?context=research&next=${encodeURIComponent(next)}`;
+  return `/signin?context=research&next=${encodeURIComponent(next)}`;
 }
 
 async function renderIndex() {

@@ -145,7 +145,7 @@ export function mountNavIdentity(slotId = 'auth-nav-slot') {
 
   const identity = getIdentity();
   if (!identity?.email) {
-    slot.innerHTML = '<a class="btn btn-ghost" href="login.html">Identify</a>';
+    slot.innerHTML = '<a class="btn btn-ghost" href="/signin">Identify</a>';
     return;
   }
 

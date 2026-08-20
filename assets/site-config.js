@@ -24,6 +24,11 @@ window.ORRERY_CONFIG = {
   CLOUD_AUTH_URL: 'https://wjjthkqwcyahamhjkeux.supabase.co',
   CLOUD_AUTH_KEY: 'sb_publishable_fTYErD5rUJfDCj68Siif0Q_CMj0O2gI',
 
+  /**
+   * Must exactly match an entry in the Supabase Auth "Redirect URLs" allowlist.
+   * Before changing this to the pretty /cloud route, add https://ephemerent.com/cloud
+   * to that allowlist — otherwise every OAuth sign-in fails on the callback.
+   */
   AUTH_REDIRECT: window.location.origin + '/cloud.html',
 
   /** Pricing + entitlements. */

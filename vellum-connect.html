@@ -7,15 +7,15 @@
 <meta name="description" content="Sign in once and link the Vellum editor to your Orrery account. One subscription covers both apps with shared hosted credits.">
 <link rel="canonical" href="https://ephemerent.com/vellum-connect.html">
 <meta name="theme-color" content="#0b0b12">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="/site.webmanifest">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="assets/orrery.css?v=20260801b">
-<link rel="stylesheet" href="assets/auth.css?v=20260801">
-<link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260811d">
-<script src="assets/motion.js?v=20260811d" defer></script>
+<link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
+<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/base.css?v=20260801">
+<link rel="stylesheet" href="/assets/polish.css?v=20260811d">
+<script src="/assets/motion.js?v=20260811d" defer></script>
 </head>
 <body class="space-bg auth-page utility-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -58,7 +58,7 @@
         <button type="button" class="btn btn-ghost" id="cloud-email-btn" style="width:100%;">Email me a sign-in link</button>
       </div>
       <p class="auth-msg" id="cloud-auth-msg" role="status" aria-live="polite"></p>
-      <p class="sub" style="font-size:13px;color:var(--muted);margin-top:14px;">Already signed in on this browser (e.g. via the <a href="cloud.html" style="color:var(--teal-lt);">cloud dashboard</a>)? Reload this page and your session is picked up automatically.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);margin-top:14px;">Already signed in on this browser (e.g. via the <a href="/cloud" style="color:var(--teal-lt);">cloud dashboard</a>)? Reload this page and your session is picked up automatically.</p>
     </div>
 
     <!-- Cloud not configured (placeholder keys). -->
@@ -88,13 +88,13 @@
   </div>
 </footer>
 
-<script src="assets/site-config.js"></script>
+<script src="/assets/site-config.js"></script>
 <script type="module">
-  import { mountNavAccount } from './assets/account.js';
+  import { mountNavAccount } from '/assets/account.js';
   import {
     cloudConfigured, bindCloudAuthForm, waitForCloudSession, getCloudProfile,
-  } from './assets/cloud-auth.js';
-  import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES, checkoutUrlForTier } from './assets/accountPlan.js';
+  } from '/assets/cloud-auth.js';
+  import { planFromCloudProfile, isPaidPlan, PLAN_LABELS, PLAN_PRICES, checkoutUrlForTier } from '/assets/accountPlan.js';
 
   mountNavAccount();
 
