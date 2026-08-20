@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- include: head-meta -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest">
-<!-- /include -->
-<title>Genesis Fall — paid beta candidate · Ephemerent</title>
-<meta name="description" content="Genesis Fall is an atmospheric 2D ecological action-adventure by Ephemerent. Paid Beta 1 is being prepared for Apple Silicon macOS and Windows x64.">
-<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Genesis Fall — private paid beta candidate · Ephemerent</title>
+<meta name="description" content="Genesis Fall is an atmospheric 2D ecological action-adventure by Ephemerent. Paid Beta 1 is being prepared privately for Apple Silicon macOS and Windows x64.">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <link rel="canonical" href="https://ephemerent.com/genesis-fall">
 <meta name="theme-color" content="#061319">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/assets/genesis-fall-mark.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- include: head-theme -->
@@ -45,54 +43,22 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <link rel="stylesheet" href="/assets/glass.css?v=20260820">
 <script src="/assets/mode.js?v=20260820" defer></script>
 <!-- /include -->
-<!-- genesis-fall opts out of the glass material. It is FIXED in
-     mode.js -- one art-directed teaser with a private --qe- palette
-     and no --bg, --ink or counterpart face -- so the material has
-     nothing to read its tint from and falls through to white panels
-     over a near-black page. Cleared here rather than in glass.css
-     because it runs during head parsing, before the first paint, so
-     there is no flash to clear. -->
+<!-- Art-directed, FIXED in mode.js: a private --qe- palette with no
+     counterpart face, so the glass material has nothing to read its
+     tint from and would paint white panels over a near-black page.
+     Cleared during head parsing, before the first paint. -->
 <script>try{delete document.documentElement.dataset.material}catch(e){}</script>
-<link rel="stylesheet" href="/assets/base.css?v=20260812">
-<link rel="stylesheet" href="/assets/genesis-fall.css?v=20260812">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Genesis Fall — paid beta candidate">
-<meta property="og:description" content="Explore a living, dangerous 2D world. Beta 1 is being prepared for macOS Apple Silicon and Windows x64.">
-<meta property="og:url" content="https://ephemerent.com/genesis-fall">
-<meta property="og:image" content="https://ephemerent.com/assets/genesis-fall-mark.svg">
-<meta name="twitter:card" content="summary">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "VideoGame",
-  "name": "Genesis Fall",
-  "description": "An atmospheric 2D ecological action-adventure in paid beta preparation.",
-  "url": "https://ephemerent.com/genesis-fall",
-  "image": "https://ephemerent.com/assets/genesis-fall-mark.svg",
-  "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" },
-  "gamePlatform": ["Apple Silicon macOS", "Windows x64"],
-  "playMode": ["SinglePlayer", "MultiPlayer"],
-  "applicationCategory": "Game"
-}
-</script>
+<link rel="stylesheet" href="/assets/base.css?v=20260813">
+<link rel="stylesheet" href="/assets/genesis-fall.css?v=20260813-2">
+<script src="/assets/genesis-fall-config.js?v=20260813" defer></script>
+<script src="/assets/genesis-fall.js?v=20260813" defer></script>
 </head>
 <body class="genesis-fall-page">
 <a class="skip-link" href="#main">Skip to content</a>
-
 <nav class="qe-nav" aria-label="Genesis Fall">
   <div class="qe-wrap qe-nav-in">
-    <a class="qe-brand" href="/">
-      <img src="/assets/genesis-fall-mark.svg" alt="" width="34" height="34">
-      <span>Genesis Fall</span>
-    </a>
-    <div class="qe-nav-links">
-      <a href="#world">World</a>
-      <a href="#beta">Beta</a>
-      <a href="#requirements">Requirements</a>
-      <a href="mailto:kt@ephemerent.com?subject=Genesis%20Fall%20Beta">Support</a>
-      <span class="qe-private">PRIVATE CANDIDATE</span>
-    </div>
+    <a class="qe-brand" href="/"><img src="/assets/genesis-fall-mark.svg" alt="" width="34" height="34"><span>Genesis Fall</span></a>
+    <div class="qe-nav-links"><a href="#world">World</a><a href="#beta">Beta</a><a href="#requirements">Requirements</a><a href="mailto:kt@ephemerent.com?subject=Genesis%20Fall%20Beta">Support</a><span class="qe-private">PRIVATE CANDIDATE</span></div>
   </div>
 </nav>
 
@@ -103,17 +69,13 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <span class="qe-kicker">Ephemerent presents · 0.1.0-beta.1 candidate</span>
         <h1>Genesis Fall</h1>
         <p class="qe-lead">A small creature wakes beneath a world that keeps living without it. Explore five distinct regions, learn the ecology, make tools from what remains, and survive predators that telegraph before they strike.</p>
-        <div class="qe-meta" aria-label="Release summary">
-          <span>PAID BETA · $9.99 MINIMUM</span>
-          <span>APPLE SILICON MACOS</span>
-          <span>WINDOWS X64</span>
-          <span>SINGLE-PLAYER</span>
-          <span>EXPERIMENTAL LAN CO-OP</span>
-        </div>
+        <div class="qe-meta" aria-label="Release summary"><span>PAID BETA · $20</span><span>APPLE SILICON MACOS</span><span>WINDOWS X64</span><span>SINGLE-PLAYER</span><span>EXPERIMENTAL LAN CO-OP</span></div>
         <div class="qe-actions">
-          <span class="qe-button" aria-disabled="true" title="Purchasing opens only after the exact release candidate passes human testing">Purchase opens after final approval</span>
-          <a class="qe-button qe-button-secondary" href="#beta">Read the Beta 1 limitations</a>
+          <button class="qe-button" type="button" disabled aria-disabled="true" data-stripe-checkout>Stripe · $20 + applicable tax</button>
+          <a class="qe-button qe-button-secondary" href="#beta">Beta limitations</a>
         </div>
+        <p class="qe-purchase-status" data-purchase-status>Purchasing is private and disabled until the exact release candidate is approved.</p>
+        <p class="qe-section-intro">A verified one-time purchase grants both Beta 1 platform builds and future beta updates offered through Ephemerent. Download links are short-lived and can be regenerated from the Stripe completion page using the purchase email.</p>
       </div>
       <figure class="qe-capture" aria-label="Reserved for gameplay captured from the exact approved release candidate">
         <img class="qe-capture-mark" src="/assets/genesis-fall-mark.svg" alt="Genesis Fall world-seed mark" width="1024" height="1024">
@@ -124,100 +86,47 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
   <section class="qe-section" id="world">
     <div class="qe-wrap">
-      <div class="qe-section-head">
-        <span class="qe-kicker">A world with its own agenda</span>
-        <div>
-          <h2>Read the danger. Find a way through.</h2>
-          <p class="qe-section-intro">Movement, digging, crafting, combat, water, climbing, and ecology share one continuous simulation. The Garden opens into Rootworks, Glass, Iron, and Archive—each with different light, terrain, creatures, and threats.</p>
-        </div>
-      </div>
+      <div class="qe-section-head"><span class="qe-kicker">A world with its own agenda</span><div><h2>Read the danger. Find a way through.</h2><p class="qe-section-intro">Movement, digging, crafting, combat, water, climbing, and ecology share one continuous simulation. The Garden opens into Rootworks, Glass, Iron, and Archive—each with different light, terrain, creatures, and threats.</p></div></div>
       <div class="qe-grid">
-        <article class="qe-card"><span class="qe-num">01 / TRAVERSE</span><h3>Move like a creature</h3><p>Jump, roll, crawl, swim, wall-climb, and grip deterministic flora routes. Movement stays tactile without taking authority away from physics.</p></article>
-        <article class="qe-card"><span class="qe-num">02 / MAKE</span><h3>Dig and improvise</h3><p>Excavate authored routes, gather materials, craft at stations, and unlock the critical path through ordinary actions rather than invisible grants.</p></article>
-        <article class="qe-card"><span class="qe-num">03 / FIGHT</span><h3>Wield organic relics</h3><p>Carry the reusable Bone Nail or recoverable Thorn Darts. Predators are durable, dangerous, and readable; pogo damage is disabled while traversal bounce remains.</p></article>
-        <article class="qe-card"><span class="qe-num">04 / OBSERVE</span><h3>Share an ecosystem</h3><p>Hundreds of creatures hunt, flee, disperse, burrow, cling, fly, swim, and recover with deterministic identities and bounded simulation budgets.</p></article>
-        <article class="qe-card"><span class="qe-num">05 / DISCOVER</span><h3>Reach seven endings</h3><p>The Beta 1 target is the complete campaign, not a short demo. Ending and campaign certification remain launch blockers until tested on the exact package.</p></article>
-        <article class="qe-card"><span class="qe-num">06 / TOGETHER</span><h3>Experimental LAN co-op</h3><p>Nearby-network co-op is included as an experimental feature. Public matchmaking, long-distance networking guidance, and hosted servers are not part of Beta 1.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="qe-section" aria-labelledby="media-title">
-    <div class="qe-wrap">
-      <div class="qe-section-head">
-        <span class="qe-kicker">Candidate media gate</span>
-        <div>
-          <h2 id="media-title">Only the shipping build goes here.</h2>
-          <p class="qe-section-intro">These slots intentionally remain empty until the exact tagged candidate is captured in a drawable window. Concept art and old builds are not substitutes for buyer-facing gameplay evidence.</p>
-        </div>
-      </div>
-      <div class="qe-media-grid" aria-label="Pending exact-candidate screenshots">
-        <div class="qe-media-slot">Garden · player and Bone Nail</div>
-        <div class="qe-media-slot">Rootworks · traversal and predators</div>
-        <div class="qe-media-slot">Glass · water and lighting</div>
-        <div class="qe-media-slot">Iron · dense combat</div>
-        <div class="qe-media-slot">Archive · boss telegraph</div>
-        <div class="qe-media-slot">Experimental LAN co-op</div>
+        <article class="qe-card"><span class="qe-num">01 / TRAVERSE</span><h3>Move like a creature</h3><p>Jump, roll, crawl, swim, wall-climb, and grip deterministic flora routes.</p></article>
+        <article class="qe-card"><span class="qe-num">02 / MAKE</span><h3>Dig and improvise</h3><p>Excavate authored routes, gather materials, craft at stations, and unlock the critical path through ordinary actions.</p></article>
+        <article class="qe-card"><span class="qe-num">03 / FIGHT</span><h3>Wield organic relics</h3><p>Carry the reusable Bone Nail or recoverable Thorn Darts against durable, readable predators.</p></article>
+        <article class="qe-card"><span class="qe-num">04 / OBSERVE</span><h3>Share an ecosystem</h3><p>Creatures hunt, flee, disperse, burrow, cling, fly, swim, search, and recover.</p></article>
+        <article class="qe-card"><span class="qe-num">05 / DISCOVER</span><h3>Reach seven endings</h3><p>Beta 1 targets the complete campaign, not a short demo.</p></article>
+        <article class="qe-card"><span class="qe-num">06 / TOGETHER</span><h3>Experimental LAN co-op</h3><p>Nearby-network co-op is experimental. Public matchmaking and hosted servers are not included.</p></article>
       </div>
     </div>
   </section>
 
   <section class="qe-section" id="beta">
     <div class="qe-wrap">
-      <div class="qe-section-head">
-        <span class="qe-kicker">Paid Beta 1</span>
-        <div>
-          <h2>Complete campaign. Honest limitations.</h2>
-          <p class="qe-section-intro">The release stays private until campaign, package, controller, save, update, and platform tests pass. Lower-severity defects will be listed here and in the packaged Known Issues file.</p>
-        </div>
-      </div>
+      <div class="qe-section-head"><span class="qe-kicker">Paid Beta 1</span><div><h2>Complete campaign. Honest limitations.</h2><p class="qe-section-intro">The release stays private until campaign, package, controller, save, update, fulfillment, and platform tests pass.</p></div></div>
       <dl class="qe-specs">
-        <div class="qe-spec"><dt>Price</dt><dd>$9.99 minimum through itch.io. Purchases and downloads remain under itch’s account and payment systems.</dd></div>
+        <div class="qe-spec"><dt>Purchase</dt><dd>One-time $20 USD plus applicable tax through Stripe. No subscription or recurring charge.</dd></div>
+        <div class="qe-spec"><dt>Delivery</dt><dd>Ephemerent verifies the paid Checkout Session before issuing short-lived direct-download links for both supported platforms.</dd></div>
         <div class="qe-spec"><dt>Platforms</dt><dd>Apple Silicon macOS and Windows x64 only for Beta 1.</dd></div>
-        <div class="qe-spec"><dt>Signing</dt><dd>Unsigned and not notarized. Windows SmartScreen and macOS Gatekeeper may warn, especially for direct browser downloads.</dd></div>
-        <div class="qe-spec"><dt>Install route</dt><dd>The itch app is the supported Beta 1 installation and update route. SHA-256 checksums accompany package artifacts.</dd></div>
-        <div class="qe-spec"><dt>Networking</dt><dd>Experimental nearby-LAN co-op only. No public matchmaking, hosted servers, or Tailscale setup guide.</dd></div>
+        <div class="qe-spec"><dt>Signing</dt><dd>Unsigned and not notarized. Windows SmartScreen and macOS Gatekeeper may warn.</dd></div>
+        <div class="qe-spec"><dt>Install route</dt><dd>Download the ZIP directly from the private access page. SHA-256 checksums accompany every package.</dd></div>
+        <div class="qe-spec"><dt>Networking</dt><dd>Experimental nearby-LAN co-op only. No public matchmaking or hosted servers.</dd></div>
         <div class="qe-spec"><dt>Data</dt><dd>Local saves and bounded local crash reports. No telemetry and no automatic support-bundle upload.</dd></div>
-        <div class="qe-spec"><dt>Generative AI</dt><dd>AI-assisted development is disclosed. Beta 1 bundles no model weights and enables no native generative-dialogue runtime.</dd></div>
-        <div class="qe-spec"><dt>Updates</dt><dd>Paid itch buyers keep access to future builds offered on the project. Back up important saves before updating beta software.</dd></div>
+        <div class="qe-spec"><dt>Generative AI</dt><dd>AI-assisted development is disclosed. Beta 1 bundles no model weights or native generative-dialogue runtime.</dd></div>
       </dl>
-      <p class="qe-warning"><strong>Unsigned-build warning:</strong> the beta does not use paid code signing or notarization. Never bypass a warning for a file whose published SHA-256 does not match. Email <a href="mailto:kt@ephemerent.com?subject=Genesis%20Fall%20install%20support">kt@ephemerent.com</a> if installation fails.</p>
+      <p class="qe-warning"><strong>Private candidate:</strong> no purchase link is active. Never bypass an unsigned-build warning for a file whose published SHA-256 does not match.</p>
     </div>
   </section>
 
   <section class="qe-section" id="requirements">
     <div class="qe-wrap">
-      <div class="qe-section-head">
-        <span class="qe-kicker">Controls and requirements</span>
-        <div>
-          <h2>Built for keyboard or controller.</h2>
-          <p class="qe-section-intro">Public screens and the full critical path must pass with keyboard/mouse and a physical controller before the purchase link is enabled.</p>
-        </div>
-      </div>
+      <div class="qe-section-head"><span class="qe-kicker">Controls and requirements</span><div><h2>Built for keyboard or controller.</h2><p class="qe-section-intro">Public screens and the full critical path must pass with keyboard/mouse and a physical controller before purchasing is enabled.</p></div></div>
       <div class="qe-grid">
         <article class="qe-card"><span class="qe-num">KEYBOARD</span><h3>Move and act</h3><ul><li>WASD / arrows: move</li><li>Space: jump</li><li>F: attack</li><li>Tab / Shift: weapon cycle</li><li>E: interact</li></ul></article>
         <article class="qe-card"><span class="qe-num">CONTROLLER</span><h3>One-device path</h3><ul><li>Stick / d-pad: move</li><li>Face buttons: jump and interact</li><li>Trigger: attack</li><li>Shoulders: weapon cycle</li><li>No keyboard fallback required at release</li></ul></article>
-        <article class="qe-card"><span class="qe-num">SYSTEM</span><h3>Beta targets</h3><ul><li>Apple Silicon Mac or Windows x64 PC</li><li>64-bit operating system</li><li>Vulkan/Metal-capable graphics</li><li>Exact minimum specifications pending package certification</li><li>Internet only for purchase/download</li></ul></article>
+        <article class="qe-card"><span class="qe-num">SYSTEM</span><h3>Beta targets</h3><ul><li>Apple Silicon Mac or Windows x64 PC</li><li>64-bit operating system</li><li>Vulkan/Metal-capable graphics</li><li>Exact minimum specifications pending package certification</li></ul></article>
       </div>
-    </div>
-  </section>
-
-  <section class="qe-section" aria-labelledby="changelog-title">
-    <div class="qe-wrap">
-      <div class="qe-section-head">
-        <span class="qe-kicker">Changelog</span>
-        <div><h2 id="changelog-title">Beta 1 candidate</h2><p class="qe-section-intro">Version 0.1.0-beta.1 is in release qualification. The final short commit SHA, checksums, dated known issues, and accepted capture set will be added only after the immutable candidate passes.</p></div>
-      </div>
-      <p class="qe-warning"><strong>Support:</strong> use the in-game Export Support Bundle action, then email the file to <a href="mailto:kt@ephemerent.com?subject=Genesis%20Fall%20Beta%20support">kt@ephemerent.com</a> or post in the itch community. Support bundles remain local until you choose to share them.</p>
     </div>
   </section>
 </main>
 
-<footer class="qe-footer">
-  <div class="qe-wrap qe-footer-in">
-    <span>© 2026 Ephemerent · Genesis Fall paid beta candidate</span>
-    <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="mailto:kt@ephemerent.com">kt@ephemerent.com</a></span>
-  </div>
-</footer>
+<footer class="qe-footer"><div class="qe-wrap qe-footer-in"><span>© 2026 Ephemerent · Genesis Fall private beta candidate</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="mailto:kt@ephemerent.com">kt@ephemerent.com</a></span></div></footer>
 </body>
 </html>

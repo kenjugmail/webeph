@@ -340,6 +340,11 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
 .nw-charter-list strong { font-family: var(--nw-serif); font-size: 25px; font-weight: 400; }
 .nw-charter-list p { max-width: 53ch; margin-top: 8px; color: var(--nw-muted); font-size: 14px; line-height: 1.55; }
 
+/* Keep the tokenised foreground. --nw-cobalt is not a fixed colour --
+   it is dark blue on the light face and light blue on the dark one --
+   so white text only works on one of them. On the dark face, which is
+   now the default, #fff on #7c9cf5 does not carry. --nw-paper flips
+   with the ground and reads on both. */
 .nw-desk-note { background: var(--nw-cobalt); color: var(--nw-paper); }
 .nw-desk-note-grid { display: grid; grid-template-columns: .62fr 1fr 1fr 1fr; }
 .nw-desk-note-grid > p,
@@ -825,7 +830,12 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-desk-note-grid { grid-template-columns: 1fr 1fr; }
   .nw-desk-note-grid > p { grid-column: 1 / -1; min-height: 70px; padding: 25px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.45); }
   .nw-desk-note-grid > a:first-of-type { padding-left: 0; }
-  .nw-desk-note-grid > a:nth-of-type(3) { padding-left: 0; }
+  /* main added this divider; taken, but drawn from the foreground
+     rather than hardcoded white, for the same reason as above. */
+  .nw-desk-note-grid > a:nth-of-type(3) {
+    padding-left: 0;
+    border-top: 1px solid color-mix(in srgb, var(--nw-paper) 45%, transparent);
+  }
   .nw-article-grid { display: block; width: min(760px, calc(100% - 44px)); }
   .nw-article-rail { position: static; margin-bottom: 62px; padding-bottom: 14px; border-bottom: 1px solid var(--nw-ink); }
   .nw-article-rail ol { grid-template-columns: 1fr 1fr; column-gap: 30px; }

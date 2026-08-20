@@ -32,7 +32,7 @@ const rewriteDestinations = new Set(
 // The core guard. Any of these break the moment a page moves to a nested route.
 /* Every address the site can send a reader to.
    
-   hello@ephemerent.com was on 79 links across 30 files -- every
+   kt@ephemerent.com was on 79 links across 30 files -- every
    contact route, both legal pages, the security page, the journal
    editorial desk -- and the mailbox does not exist. Nothing caught it
    because a mailto: is syntactically fine whether or not anyone reads
