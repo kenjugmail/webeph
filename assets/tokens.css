@@ -682,10 +682,16 @@ body {
   body { --atmos-tint: var(--card, #fff); --atmos-tint-2: var(--card, #fff); }
   /* A light effect needs somewhere dark to happen. The same wash that
      muddies cream is the light in the room on a night ground. */
+  /* Gated on the FACE, not on the surface. Listing body.orrery-page
+     unconditionally meant a reader who forced light still got the
+     coloured lamp, which put an amber wash across Shelterix's paper
+     face and a blue one across Orrery's. */
   :root:not([data-mode="light"]) body.lab-page,
-  :root[data-mode="dark"] body,
-  body.orrery-page, body.vellum-page,
-  body.shelterix-page, body.utility-page {
+  :root:not([data-mode="light"]) body.orrery-page,
+  :root:not([data-mode="light"]) body.vellum-page,
+  :root:not([data-mode="light"]) body.shelterix-page,
+  :root:not([data-mode="light"]) body.utility-page,
+  :root[data-mode="dark"] body {
     --atmos-tint: var(--accent);
     --atmos-tint-2: var(--signal, var(--accent));
     --atmos-a: 26%;
@@ -811,11 +817,11 @@ body {
    inherits the paper defaults from :root.
    ------------------------------------------------------------ */
 @layer tokens {
-  body.orrery-page,
-  body.utility-page,
-  body.auth-page,
-  body.vellum-page,
-  body.shelterix-page,
+  :root:not([data-mode="light"]) body.orrery-page,
+  :root:not([data-mode="light"]) body.utility-page,
+  :root:not([data-mode="light"]) body.auth-page,
+  :root:not([data-mode="light"]) body.vellum-page,
+  :root:not([data-mode="light"]) body.shelterix-page,
   body.genesis-fall-page {
     --grain-opacity: 0.055;
     --grain-blend: soft-light;
@@ -1090,6 +1096,11 @@ body {
 
   /* The journal and news headers are grids with a fixed column count,
      so the button has to be told where to sit rather than appended. */
+  /* Several navs order their flex children explicitly. An appended
+     child with no order sorts to the front of every ordered sibling,
+     which put the control at the far left of the Shelterix bar --
+     last in the DOM, first on screen. */
+  .mode-toggle { order: 99; }
   .jr-header-inner .mode-toggle { align-self: center; }
   /* The news masthead is a three-column grid with the menu button in
      the last cell, so the control takes its own place rather than
