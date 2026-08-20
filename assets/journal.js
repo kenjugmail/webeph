@@ -196,22 +196,51 @@ function mountJournalNavigation() {
   $$('.jr-menu-button').forEach((button) => {
     const nav = document.getElementById(button.getAttribute('aria-controls'));
     if (!nav) return;
+    const pageRegions = $$('main, body > footer').filter((region) => !region.contains(nav));
+    const menuItems = () => $$('a, button', nav).filter((item) => item.offsetParent !== null);
+    const setBackgroundInert = (inert) => pageRegions.forEach((region) => {
+      if (inert) region.setAttribute('inert', '');
+      else region.removeAttribute('inert');
+    });
     const close = (returnFocus = false) => {
       nav.removeAttribute('data-open');
       button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-label', 'Open menu');
+      setBackgroundInert(false);
       if (returnFocus) button.focus();
     };
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
       const open = button.getAttribute('aria-expanded') !== 'true';
       button.setAttribute('aria-expanded', String(open));
-      if (open) nav.dataset.open = 'true';
-      else nav.removeAttribute('data-open');
+      if (open) {
+        nav.dataset.open = 'true';
+        button.setAttribute('aria-label', 'Close menu');
+        setBackgroundInert(true);
+        if (event.detail === 0) menuItems()[0]?.focus();
+      } else close();
     });
     nav.addEventListener('click', (event) => {
       if (event.target.closest('a')) close();
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') close(true);
+      if (button.getAttribute('aria-expanded') !== 'true') return;
+      if (event.key === 'Escape') {
+        close(true);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusables = [button, ...menuItems()];
+      const current = focusables.indexOf(document.activeElement);
+      if (event.shiftKey && current <= 0) {
+        event.preventDefault();
+        focusables[focusables.length - 1]?.focus();
+      } else if (!event.shiftKey && current === focusables.length - 1) {
+        event.preventDefault();
+        button.focus();
+      } else if (!event.shiftKey && document.activeElement === button) {
+        event.preventDefault();
+        focusables[1]?.focus();
+      }
     });
     document.addEventListener('click', (event) => {
       if (button.getAttribute('aria-expanded') === 'true' && !nav.contains(event.target) && !button.contains(event.target)) close();
@@ -220,6 +249,26 @@ function mountJournalNavigation() {
       if (event.matches) close();
     });
   });
+}
+
+function mountProvenanceRegister() {
+  const register = $('[data-provenance-register]');
+  if (!register || register.dataset.registerMounted === 'true') return;
+  register.dataset.registerMounted = 'true';
+
+  const activate = () => register.setAttribute('data-register-active', 'true');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches || !('IntersectionObserver' in window)) {
+    activate();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    activate();
+    observer.disconnect();
+  }, { rootMargin: '0px 0px -8% 0px', threshold: .18 });
+  observer.observe(register);
 }
 
 function setMessage(element, message, tone = '') {
@@ -314,6 +363,8 @@ async function renderIndex() {
 
 function renderArticleNotice(root, title, message) {
   if (!root) return;
+  root.removeAttribute('data-article-loading');
+  root.removeAttribute('aria-busy');
   root.innerHTML = `<section class="jr-container jr-form-page"><div class="jr-status-note jr-error jr-article-error"><strong>${escapeHtml(title)}</strong><p>${escapeHtml(message)}</p><a class="jr-button" href="/journal">Back to archive</a></div></section>`;
 }
 
@@ -454,6 +505,9 @@ async function renderArticle() {
     actions.push('<a class="jr-button" href="#article-files">Research files</a>', '<a class="jr-button" href="#review-ledger">Review ledger</a>');
     actionsRoot.innerHTML = actions.join('');
   }
+
+  root.removeAttribute('data-article-loading');
+  root.removeAttribute('aria-busy');
 
   if (currentVersion) await renderDiscussion(sb, submission, currentVersion, versions);
 }
@@ -999,6 +1053,7 @@ async function mountEditor() {
 }
 
 mountJournalNavigation();
+mountProvenanceRegister();
 if (page === 'index') renderIndex();
 if (page === 'article') renderArticle();
 if (page === 'submit') mountSubmit();

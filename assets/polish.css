@@ -991,7 +991,9 @@ body.research-page .research-index {
   font-size: 13px;
 }
 .research-index a span { color: var(--accent); font-family: var(--mono); font-size: 10px; }
-.research-index a:hover { color: var(--ink); }
+.research-index a:hover,
+.research-index a[aria-current="location"] { color: var(--ink); font-weight: 560; }
+.research-index a[aria-current="location"] span { color: var(--ink); }
 @media (min-width: 881px) {
   body.research-page .esec > .ewrap { padding-left: calc(var(--site-gutter) + 250px); }
 }

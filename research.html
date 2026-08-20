@@ -28,9 +28,10 @@
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
 <link rel="stylesheet" href="assets/base.css?v=20260801">
-<link rel="stylesheet" href="assets/polish.css?v=20260811c">
-<link rel="stylesheet" href="assets/home.css?v=20260811c">
-<script src="assets/motion.js?v=20260811c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811d">
+<link rel="stylesheet" href="assets/home.css?v=20260811e">
+<script src="assets/motion.js?v=20260811d" defer></script>
+<script src="assets/research.js?v=20260811e" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -139,37 +140,73 @@
     <div class="research-map-head rv">
       <span class="lbl">Field map · 2026–2028</span>
       <div>
-        <h2 id="research-map-title">Every direction has a frontier and a public record.</h2>
-        <p>The map shows where each research direction belongs and what evidence the line is intended to leave behind. It is a route through the agenda, not a claim that unfinished work already exists.</p>
+        <h2 id="research-map-title">Every direction has a frontier, an expression, and a record.</h2>
+        <p>The map shows how the agenda is structured: where each direction belongs, where the frontier enters product work, and what evidence it is intended to leave behind. It is a route through the agenda, not a claim that unfinished work already exists.</p>
       </div>
     </div>
-    <ol class="research-field-map rv" aria-label="Seven research directions mapped to three frontiers and their intended public artifacts">
-      <li>
-        <div class="research-map-directions" aria-label="Directions R1 and R7">
-          <a href="#r1"><b>R1</b><span>Emergent orchestration</span></a>
-          <a href="#r7"><b>R7</b><span>Distributed compute mesh</span></a>
-        </div>
-        <a class="research-map-frontier" href="#frontier-a"><span>Frontier A</span><strong>Coordination</strong><small>Product expression · Colony</small></a>
-        <div class="research-map-artifacts"><span>Intended public record</span><ul><li>Anonymized coordination traces</li><li>Open coordination dataset</li><li>Gossip vs. central-dispatch report</li></ul></div>
-      </li>
-      <li>
-        <div class="research-map-directions" aria-label="Direction R2">
-          <a href="#r2"><b>R2</b><span>Verifiable selection</span></a>
-        </div>
-        <a class="research-map-frontier" href="#frontier-b"><span>Frontier B</span><strong>Verification</strong><small>Product expressions · Arbiter · Vellum</small></a>
-        <div class="research-map-artifacts"><span>Intended public record</span><ul><li>Reproducible evaluation harness</li><li>Multi-agent verification benchmark</li><li>Execution-selection report</li></ul></div>
-      </li>
-      <li>
-        <div class="research-map-directions" aria-label="Directions R3 through R6">
-          <a href="#r3"><b>R3</b><span>Latent world models</span></a>
-          <a href="#r4"><b>R4</b><span>Multimodal latent reasoning</span></a>
-          <a href="#r5"><b>R5</b><span>Spatial and embodied agents</span></a>
-          <a href="#r6"><b>R6</b><span>Wave compute substrates</span></a>
-        </div>
-        <a class="research-map-frontier" href="#frontier-c"><span>Frontier C</span><strong>World models</strong><small>Product expressions · Seed · Vellum</small></a>
-        <div class="research-map-artifacts"><span>Intended public record</span><ul><li>Patch-consequence dataset</li><li>Pre-execution pruning report</li><li>Measured multimodal probes</li></ul></div>
-      </li>
-    </ol>
+    <div class="research-graph-cue" data-research-graph-cue aria-hidden="true">
+      <span class="research-graph-cue-label">Field route</span>
+      <div class="research-graph-cue-stack">
+        <p data-graph-cue="coordination" data-active="true"><span>01 / 03</span><strong>Coordination</strong><small>R1 + R7 → Colony → three intended records</small></p>
+        <p data-graph-cue="verification"><span>02 / 03</span><strong>Verification</strong><small>R2 → Arbiter + Vellum → three intended records</small></p>
+        <p data-graph-cue="world-models"><span>03 / 03</span><strong>World models</strong><small>R3–R6 → Seed + Vellum → three intended records</small></p>
+      </div>
+      <span class="research-graph-cue-relation">Direction → frontier → expression → record</span>
+      <span class="research-graph-cue-meter"><i></i><i></i><i></i></span>
+    </div>
+    <div class="research-graph rv" data-research-graph data-scene data-scene-ease="8">
+      <canvas class="research-map-canvas" aria-hidden="true"></canvas>
+      <div class="research-graph-schema" role="note" aria-label="Relationship key">
+        <p><b>ResearchDirection</b><span>BELONGS_TO</span><b>Frontier</b></p>
+        <p><b>Frontier</b><span>EXPRESSED_IN</span><b>Product</b></p>
+        <p><b>Frontier</b><span>TARGETS_RECORD</span><b>PublicArtifact</b></p>
+      </div>
+      <ol class="research-field-map" aria-label="Seven research directions mapped to three frontiers, product expressions, and intended public artifacts">
+        <li data-graph-row="coordination">
+          <div class="research-map-directions" data-graph-group="directions" aria-label="Directions R1 and R7">
+            <span class="research-map-kind">Research directions</span>
+            <a href="#r1" data-graph-node><b>R1</b><span>Emergent orchestration</span></a>
+            <a href="#r7" data-graph-node><b>R7</b><span>Distributed compute mesh</span></a>
+          </div>
+          <a class="research-map-frontier" data-graph-group="frontier" data-graph-node href="#frontier-a"><span>Frontier A</span><strong>Coordination</strong><small>Agents exchange, decide, and converge.</small></a>
+          <div class="research-map-products" data-graph-group="products">
+            <span class="research-map-kind">Product expression</span>
+            <a href="/#work" data-graph-node><b>Colony</b><small>Fleet coordination</small></a>
+          </div>
+          <div class="research-map-artifacts" data-graph-group="artifacts"><span>Intended public record</span><ul><li data-graph-node>Anonymized coordination traces</li><li data-graph-node>Open coordination dataset</li><li data-graph-node>Gossip vs. central-dispatch report</li></ul></div>
+        </li>
+        <li data-graph-row="verification">
+          <div class="research-map-directions" data-graph-group="directions" aria-label="Direction R2">
+            <span class="research-map-kind">Research direction</span>
+            <a href="#r2" data-graph-node><b>R2</b><span>Verifiable selection</span></a>
+          </div>
+          <a class="research-map-frontier" data-graph-group="frontier" data-graph-node href="#frontier-b"><span>Frontier B</span><strong>Verification</strong><small>Claims survive contact with execution.</small></a>
+          <div class="research-map-products" data-graph-group="products">
+            <span class="research-map-kind">Product expressions</span>
+            <a href="/arbiter" data-graph-node><b>Arbiter</b><small>Branch comparison</small></a>
+            <a href="/vellum" data-graph-node><b>Vellum</b><small>Renderer-neutral receipts</small></a>
+          </div>
+          <div class="research-map-artifacts" data-graph-group="artifacts"><span>Intended public record</span><ul><li data-graph-node>Reproducible evaluation harness</li><li data-graph-node>Multi-agent verification benchmark</li><li data-graph-node>Execution-selection report</li></ul></div>
+        </li>
+        <li data-graph-row="world-models">
+          <div class="research-map-directions" data-graph-group="directions" aria-label="Directions R3 through R6">
+            <span class="research-map-kind">Research directions</span>
+            <a href="#r3" data-graph-node><b>R3</b><span>Latent world models</span></a>
+            <a href="#r4" data-graph-node><b>R4</b><span>Multimodal latent reasoning</span></a>
+            <a href="#r5" data-graph-node><b>R5</b><span>Spatial and embodied agents</span></a>
+            <a href="#r6" data-graph-node><b>R6</b><span>Wave compute substrates</span></a>
+          </div>
+          <a class="research-map-frontier" data-graph-group="frontier" data-graph-node href="#frontier-c"><span>Frontier C</span><strong>World models</strong><small>Predict consequences before execution.</small></a>
+          <div class="research-map-products" data-graph-group="products">
+            <span class="research-map-kind">Product expressions</span>
+            <a href="/#work" data-graph-node><b>Seed</b><small>Software world model</small></a>
+            <a href="/vellum" data-graph-node><b>Vellum</b><small>Spatial verification</small></a>
+          </div>
+          <div class="research-map-artifacts" data-graph-group="artifacts"><span>Intended public record</span><ul><li data-graph-node>Patch-consequence dataset</li><li data-graph-node>Pre-execution pruning report</li><li data-graph-node>Measured multimodal probes</li></ul></div>
+        </li>
+      </ol>
+      <p class="research-graph-note"><span>Reading rule</span> Lines show declared relationships. Dimmed paths remain part of the agenda; the moving path only marks the chapter currently in view.</p>
+    </div>
   </div>
 </section>
 
@@ -298,6 +335,7 @@
           <li><a href="/research">Research</a></li>
           <li><a href="/journal">Ephemerent Research journal →</a></li>
           <li><a href="/news">Ephemerent News →</a></li>
+          <li><a href="https://atlas.ephemerent.com">Ephemerent Atlas education →</a></li>
           <li><a href="/#approach">Approach</a></li>
           <li><a href="/#pledge">Pledge</a></li>
           <li><a href="/privacy">Privacy</a></li>
@@ -312,6 +350,7 @@
           <li><a href="/#work">Arbiter</a></li>
           <li><a href="/#work">Colony</a></li>
           <li><a href="/vellum">Vellum</a></li>
+          <li><a href="https://atlas.ephemerent.com">Atlas</a></li>
           <li><a href="mailto:hello@ephemerent.com">Contact</a></li>
         </ul>
       </div>

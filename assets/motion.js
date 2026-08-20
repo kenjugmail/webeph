@@ -23,11 +23,22 @@
     frameId = 0;
     if (document.hidden) return;
 
-    let hasActiveScene = false;
+    let needsAnotherFrame = false;
     scenes.forEach((scene, element) => {
       if (!scene.visible) return;
-      hasActiveScene = true;
-      const progress = sceneProgress(element);
+      const target = sceneProgress(element);
+      if (scene.progress === null || reduced.matches || scene.rate <= 0) {
+        scene.progress = target;
+      } else {
+        const elapsed = scene.lastTime ? Math.min(.064, (now - scene.lastTime) / 1000) : 1 / 60;
+        const blend = 1 - Math.exp(-scene.rate * elapsed);
+        scene.progress += (target - scene.progress) * blend;
+        if (Math.abs(target - scene.progress) < .0001) scene.progress = target;
+        else needsAnotherFrame = true;
+      }
+      scene.lastTime = now;
+
+      const progress = scene.progress;
       element.style.setProperty('--scene-progress', progress.toFixed(4));
 
       const stepCount = Number(element.dataset.sceneSteps || 0);
@@ -36,10 +47,13 @@
         if (element.dataset.sceneStep !== String(step)) element.dataset.sceneStep = String(step);
       }
 
-      scene.callbacks.forEach((callback) => callback(now, progress));
+      scene.callbacks.forEach((record) => {
+        record.callback(now, progress, target);
+        if (record.continuous && !reduced.matches) needsAnotherFrame = true;
+      });
     });
 
-    if (hasActiveScene && !reduced.matches) frameId = requestAnimationFrame(drawFrame);
+    if (needsAnotherFrame && !reduced.matches) frameId = requestAnimationFrame(drawFrame);
   }
 
   function schedule() {
@@ -52,11 +66,8 @@
           const scene = scenes.get(entry.target);
           if (!scene) return;
           scene.visible = entry.isIntersecting;
+          scene.lastTime = 0;
           entry.target.toggleAttribute('data-scene-active', entry.isIntersecting);
-          if (entry.isIntersecting && reduced.matches) {
-            const progress = sceneProgress(entry.target);
-            scene.callbacks.forEach((callback) => callback(performance.now(), progress));
-          }
         });
         schedule();
       }, { rootMargin: '0px', threshold: 0.02 })
@@ -65,21 +76,45 @@
   function ensureScene(element) {
     let scene = scenes.get(element);
     if (!scene) {
-      scene = { visible: sceneObserver === null, callbacks: new Set() };
+      const declaredRate = Number(element.dataset.sceneEase || 0);
+      scene = {
+        visible: sceneObserver === null,
+        callbacks: new Map(),
+        progress: null,
+        lastTime: 0,
+        declaredRate: Number.isFinite(declaredRate) ? Math.max(0, declaredRate) : 0,
+        rate: Number.isFinite(declaredRate) ? Math.max(0, declaredRate) : 0
+      };
       scenes.set(element, scene);
       if (sceneObserver) sceneObserver.observe(element);
     }
     return scene;
   }
 
+  function refreshSceneOptions(scene) {
+    let rate = scene.declaredRate;
+    scene.callbacks.forEach((record) => {
+      if (record.rate > rate) rate = record.rate;
+    });
+    scene.rate = rate;
+  }
+
   window.EphemerentMotion = {
-    register(element, callback) {
+    register(element, callback, options) {
       if (!element || typeof callback !== 'function') return function () {};
       const scene = ensureScene(element);
-      scene.callbacks.add(callback);
+      const settings = options || {};
+      const requestedRate = Number(settings.rate || 0);
+      scene.callbacks.set(callback, {
+        callback,
+        continuous: settings.continuous !== false,
+        rate: Number.isFinite(requestedRate) ? Math.max(0, requestedRate) : 0
+      });
+      refreshSceneOptions(scene);
       schedule();
       return function unregister() {
         scene.callbacks.delete(callback);
+        refreshSceneOptions(scene);
         if (!scene.callbacks.size && !element.hasAttribute('data-scene')) {
           sceneObserver?.unobserve(element);
           scenes.delete(element);

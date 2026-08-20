@@ -28,7 +28,7 @@
 <script>document.documentElement.classList.add('jr-js')</script>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/journal.css?v=20260811c">
+<link rel="stylesheet" href="/assets/journal.css?v=20260812a">
 <script type="application/ld+json" id="article-structured-data">
 {
   "@context": "https://schema.org",
@@ -84,23 +84,23 @@
   </main>
 </noscript>
 
-<main class="jr-main" id="main" data-journal-article-root>
+<main class="jr-main" id="main" data-journal-article-root data-article-loading="true" aria-busy="true">
   <section class="jr-article-hero">
     <div class="jr-container jr-article-hero-grid">
       <div class="jr-article-lead">
         <div class="jr-article-kicker"><strong data-article-id>Reading the register</strong><span data-article-type></span><span data-article-status></span></div>
-        <h1 data-article-title>Loading the article…</h1>
-        <p class="jr-article-deck" data-article-summary></p>
-        <p class="jr-article-authors" data-article-authors></p>
+        <h1 data-article-title>Opening the research record.</h1>
+        <p class="jr-article-deck" data-article-summary>Reading published metadata, immutable versions, files, and disclosed review from the public register.</p>
+        <p class="jr-article-authors" data-article-authors>Public register · source connection in progress</p>
         <div class="jr-article-actions" data-article-actions aria-label="Article actions">
           <a class="jr-button" href="#article-files">Research files</a>
           <a class="jr-button" href="#review-ledger">Review ledger</a>
         </div>
       </div>
       <aside class="jr-version-register" aria-label="Version register">
-        <div class="jr-version-register-heading"><span>Version register</span><strong data-article-current-version>Reading…</strong></div>
+        <div class="jr-version-register-heading"><span>Version register</span><strong data-article-current-version>Opening</strong></div>
         <div class="jr-article-notice jr-hidden" data-article-notice role="note"></div>
-        <ol class="jr-version-list" data-article-versions><li><span>Loading version history…</span></li></ol>
+        <ol class="jr-version-list" data-article-versions><li class="jr-version-loading"><strong>···</strong><span>Reading public snapshots</span></li></ol>
       </aside>
     </div>
   </section>
@@ -184,6 +184,6 @@
 </footer>
 
 <script src="/assets/site-config.js"></script>
-<script type="module" src="/assets/journal.js?v=20260811c"></script>
+<script type="module" src="/assets/journal.js?v=20260812a"></script>
 </body>
 </html>

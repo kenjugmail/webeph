@@ -30,7 +30,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Ephemerent</title>
-<meta name="description" content="How Ephemerent handles data for Orrery: paid tiers add hosted credits, cloud sign-in, billing, and usage meters. What we collect, who processes it, and your rights.">
+<meta name="description" content="How Ephemerent handles data for Orrery, Genesis Fall, the research journal, billing, support, and local software use.">
 <link rel="canonical" href="https://ephemerent.com/privacy">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f3f0e8">
@@ -48,8 +48,8 @@
 <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
-<link rel="stylesheet" href="assets/polish.css?v=20260811c">
-<script src="assets/motion.js?v=20260811c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811d">
+<script src="assets/motion.js?v=20260811d" defer></script>
 <script src="assets/legal.js?v=20260811c" defer></script>
 <style>
   .legal { padding-block: 70px 40px; }
@@ -90,12 +90,12 @@
     <span class="lbl">Legal</span>
     <h1>Privacy Policy</h1>
   </div>
-  <div class="legal-updated">Last updated: August 2, 2026 - Beta</div>
+  <div class="legal-updated">Last updated: August 12, 2026 - Beta</div>
 
   <div class="legal-layout">
   <nav class="legal-index" aria-label="Privacy policy sections"><span>On this page</span><ol data-legal-index></ol></nav>
   <div class="legal-body">
-    <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console you install on your own computer. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup, personal subscriptions, organization plans, and managed connectors such as Slack. Orrery is in beta, so this policy may change as the product does - see Changes below.</p>
+    <p>Ephemerent builds Orrery, a premium agentic code editor and Nexus operations console, and Genesis Fall, a paid desktop-game beta. This policy explains what data we collect, why, who processes it, and the choices you have. It covers preview setup, personal subscriptions, organization plans, managed connectors such as Slack, game purchases handled by itch.io, and optional game-support bundles. These products are in beta, so this policy may change as they do - see Changes below.</p>
 
     <h2>The short version</h2>
     <p>In preview setup mode, you can inspect the app and configure a workspace before subscribing. Real subscriber agent work uses eligible Orrery Cloud routes. Verified development builds may expose developer-only routes. Hosted DeepSeek API, Doubleword, Arbiter, or other hosted routes send the prompt and selected context needed for the completion through our relay to the provider. We keep usage meters for quota and organization-budget enforcement.</p>
@@ -115,6 +115,12 @@
     <h2>What we do NOT collect</h2>
     <p class="legal-note">We do not collect your source code, repositories, or prompt content for any purpose other than proxying a hosted-model request you explicitly make or providing a cloud feature you request. <b>We do not store prompt or completion content beyond what is needed to relay the request and return the answer</b>, and we do not use your prompts or code to train our own models.</p>
 
+    <h2>Genesis Fall game data</h2>
+    <p>Genesis Fall stores saves, settings, bounded crash reports, and backup files locally on your computer. Beta 1 includes no telemetry, analytics, advertising tracker, automatic crash upload, cloud save, bundled model weights, or enabled native generative-dialogue service.</p>
+    <p>The in-game Export Support Bundle action writes a bounded diagnostic bundle to your computer. It can include the build ID, platform, settings, world seed and simulation tick, region, bounded performance and game-state diagnostics, and—only when you separately choose the save-including action—a copy of your save. The exporter is designed to redact absolute paths, network addresses, invite tokens, model paths, credentials, and other private diagnostic content. Nothing is uploaded automatically. You decide whether to inspect and share the bundle with Ephemerent or the itch community.</p>
+    <p>Experimental LAN co-op sends gameplay traffic directly between players on the network addresses they choose. Ephemerent does not provide a matchmaking relay or hosted game server for Beta 1 and does not receive that LAN traffic. Other people or network operators on the chosen network may be able to observe network metadata, so use co-op only with people and networks you trust.</p>
+    <p>Purchases and downloads are handled by itch.io. itch.io receives and processes the account, payment, tax, download, and transaction information needed for that service under its own privacy terms. Ephemerent receives the purchase and support information itch makes available to creators but does not receive your full payment-card number.</p>
+
     <h2>How we use your data</h2>
     <ul>
       <li>To sign you in and keep one identity across the website and the desktop app.</li>
@@ -128,6 +134,7 @@
     <p>We rely on a small number of third parties to run the service. Each processes only the data needed for its role:</p>
     <ul>
       <li><b>Stripe</b> — payment processing, subscriptions, and billing. Stripe receives the data needed to charge you and is the system of record for payment details.</li>
+      <li><b>itch.io</b> — Genesis Fall purchases, buyer access, downloads, updates, owner/test keys, and community support. itch.io is the payment and download authority for the game beta.</li>
       <li><b>Supabase</b> — authentication and the database that stores your account profile, subscription state, and usage counters.</li>
       <li><b>Hosted inference providers</b> - DeepSeek API, Doubleword, and future configured providers process hosted route requests under their own terms.</li>
       <li><b>Google and GitHub</b> — OAuth sign-in, only if you choose one of them to log in.</li>

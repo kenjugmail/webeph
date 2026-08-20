@@ -17,12 +17,19 @@
     { label: 'Verify', caption: 'Evidence compared · one result selected' },
     { label: 'Release', caption: 'Workers released · trace retained' }
   ];
+  const STORY_CAMERA = [
+    { from: [-1.6, .5, 1.054], to: [.8, -.6, 1.022], origin: '43% 50%' },
+    { from: [1.7, .3, 1.058], to: [-.8, -.7, 1.024], origin: '55% 48%' },
+    { from: [-1.5, .5, 1.052], to: [.7, -.6, 1.021], origin: '62% 52%' },
+    { from: [.8, .1, 1.034], to: [0, -.5, 1.017], origin: '68% 50%' }
+  ];
 
   function clamp(value) { return Math.max(0, Math.min(1, value)); }
   function ease(value) {
     const t = clamp(value);
     return t * t * (3 - 2 * t);
   }
+  function lerp(from, to, amount) { return from + (to - from) * amount; }
 
   function reducedMotion() {
     return window.EphemerentMotion?.reduced() || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -95,12 +102,15 @@
     const indexLabel = scene.querySelector('[data-story-index]');
     const nameLabel = scene.querySelector('[data-story-label]');
     const caption = scene.querySelector('[data-story-caption]');
+    const glossary = scene.querySelector('[data-story-glossary]');
+    const glossaryTerms = Array.from(glossary?.querySelectorAll('[data-story-term]') || []);
     let width = 1;
     let height = 1;
     let dpr = 1;
     let activeStep = -1;
     let lastStepProgress = .62;
     let lastFramePosition = -1;
+    let lastCameraProgress = -1;
     let lastDrawPosition = -1;
 
     function resize() {
@@ -317,26 +327,38 @@
       return { selected, local, raw };
     }
 
-    function updateFrameBlend(raw, reduced) {
+    function updateFrameBlend(raw, selected, local, reduced) {
       if (reduced) {
         frames.forEach((frame) => {
           frame.style.removeProperty('opacity');
           frame.style.removeProperty('transform');
           frame.style.removeProperty('z-index');
+          frame.style.removeProperty('--story-camera-x');
+          frame.style.removeProperty('--story-camera-y');
+          frame.style.removeProperty('--story-camera-scale');
+          frame.style.removeProperty('--story-camera-origin');
         });
         lastFramePosition = raw;
+        lastCameraProgress = local;
         return;
       }
-      if (Math.abs(raw - lastFramePosition) < .0005) return;
+      if (Math.abs(raw - lastFramePosition) < .0005 && Math.abs(local - lastCameraProgress) < .001) return;
       lastFramePosition = raw;
+      lastCameraProgress = local;
       frames.forEach((frame, index) => {
         const distance = Math.min(1, Math.abs(raw - index));
         const opacity = clamp(1 - distance);
         const shift = (index - raw) * 12;
         const scale = 1 + distance * .006;
+        const camera = STORY_CAMERA[index] || STORY_CAMERA[0];
+        const cameraProgress = index === selected ? ease(local) : (raw > index ? 1 : 0);
         frame.style.opacity = opacity.toFixed(3);
         frame.style.transform = `translate3d(0, ${shift.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
         frame.style.zIndex = opacity > 0 ? String(Math.round(opacity * 10) + 1) : '0';
+        frame.style.setProperty('--story-camera-x', `${lerp(camera.from[0], camera.to[0], cameraProgress).toFixed(3)}%`);
+        frame.style.setProperty('--story-camera-y', `${lerp(camera.from[1], camera.to[1], cameraProgress).toFixed(3)}%`);
+        frame.style.setProperty('--story-camera-scale', lerp(camera.from[2], camera.to[2], cameraProgress).toFixed(4));
+        frame.style.setProperty('--story-camera-origin', camera.origin);
       });
     }
 
@@ -354,6 +376,17 @@
             step.removeAttribute('aria-current');
           }
         });
+
+        glossaryTerms.forEach((term, termIndex) => {
+          if (termIndex === index) {
+            term.setAttribute('data-active', 'true');
+            term.setAttribute('aria-current', 'step');
+          } else {
+            term.removeAttribute('data-active');
+            term.removeAttribute('aria-current');
+          }
+        });
+        if (glossary) glossary.dataset.glossaryCurrent = String(index);
 
         frames.forEach((frame, frameIndex) => {
           if (frameIndex === index) frame.setAttribute('data-active', 'true');
@@ -404,9 +437,11 @@
       lastStepProgress = position.local;
       const reduced = reducedMotion();
       setStep(position.selected, reduced);
-      updateFrameBlend(position.raw, reduced);
+      updateFrameBlend(position.raw, position.selected, position.local, reduced);
       const total = clamp(position.raw / Math.max(1, steps.length - 1));
       scene.style.setProperty('--story-progress', total.toFixed(4));
+      scene.style.setProperty('--story-local', position.local.toFixed(4));
+      if (glossary) glossary.style.setProperty('--glossary-progress', total.toFixed(4));
 
       const hasTimedSignal = position.selected === 0 && position.local > .34 && !reduced;
       if (hasTimedSignal || Math.abs(position.raw - lastDrawPosition) >= .0005 || reduced) {
@@ -429,9 +464,81 @@
 
   window.mountEmergence = mountEmergence;
 
+  function mountHomeChapterRail() {
+    const rail = document.querySelector('[data-home-chapter-rail]');
+    const glossary = document.querySelector('[data-story-glossary]');
+    const story = document.querySelector('[data-emergence-scene]');
+    if ((!rail && !glossary) || rail?.dataset.chapterRailMounted === 'true') return;
+
+    const links = Array.from(rail?.querySelectorAll('[data-home-chapter-link]') || []);
+    const chapters = links.map((link) => document.querySelector(`[data-home-chapter="${link.dataset.homeChapterLink}"]`));
+    if (rail && (!links.length || chapters.some((chapter) => !chapter))) return;
+
+    if (rail) rail.dataset.chapterRailMounted = 'true';
+    let activeIndex = -1;
+
+    function update() {
+      if (glossary && story) {
+        const storyRect = story.getBoundingClientRect();
+        const glossaryVisible = storyRect.top < window.innerHeight * .76 && storyRect.bottom > window.innerHeight * .24;
+        glossary.toggleAttribute('data-visible', glossaryVisible);
+      }
+
+      if (!rail) return;
+      const focus = window.innerHeight * .42;
+      let nextIndex = 0;
+      chapters.forEach((chapter, index) => {
+        if (chapter.getBoundingClientRect().top <= focus) nextIndex = index;
+      });
+
+      if (nextIndex !== activeIndex) {
+        activeIndex = nextIndex;
+        links.forEach((link, index) => {
+          if (index === activeIndex) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        chapters.forEach((chapter, index) => {
+          if (index === activeIndex) chapter.setAttribute('data-home-active', 'true');
+          else chapter.removeAttribute('data-home-active');
+        });
+        document.body.dataset.homeChapter = links[activeIndex].dataset.homeChapterLink;
+      }
+
+      const firstRect = chapters[0].getBoundingClientRect();
+      const lastRect = chapters[chapters.length - 1].getBoundingClientRect();
+      const visible = firstRect.top < window.innerHeight * .4 && lastRect.bottom > window.innerHeight * .2;
+      if (visible) rail.setAttribute('data-active', 'true');
+      else rail.removeAttribute('data-active');
+
+      const scrollPosition = window.scrollY;
+      const start = scrollPosition + firstRect.top - window.innerHeight * .55;
+      const end = scrollPosition + lastRect.bottom - window.innerHeight * .45;
+      const progress = clamp((scrollPosition - start) / Math.max(1, end - start));
+      rail.style.setProperty('--home-register-progress', progress.toFixed(4));
+    }
+
+    if (window.EphemerentMotion) {
+      window.EphemerentMotion.register(document.body, update, { continuous: false });
+    } else {
+      let queued = false;
+      const schedule = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          update();
+        });
+      };
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule, { passive: true });
+      schedule();
+    }
+  }
+
   function mountInstitutionalMotion() {
     mountFieldPlate(document.querySelector('[data-emergence-plate]'));
     mountEmergence(document.getElementById('fig'));
+    mountHomeChapterRail();
   }
 
   if (document.readyState === 'loading') {

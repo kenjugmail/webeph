@@ -5,28 +5,59 @@
 
   const menuButton = document.querySelector('.nw-menu-button');
   const navigation = document.getElementById('news-navigation');
+  const pageRegions = [...document.querySelectorAll('main, body > footer')]
+    .filter((region) => !region.contains(navigation));
+  const menuItems = () => navigation
+    ? [...navigation.querySelectorAll('a, button')].filter((item) => item.offsetParent !== null)
+    : [];
+  const setBackgroundInert = (inert) => pageRegions.forEach((region) => {
+    if (inert) region.setAttribute('inert', '');
+    else region.removeAttribute('inert');
+  });
   const closeMenu = ({ restoreFocus = false } = {}) => {
     if (!menuButton || !navigation) return;
     const wasOpen = navigation.getAttribute('data-open') === 'true';
     navigation.removeAttribute('data-open');
     menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open menu');
+    setBackgroundInert(false);
     if (restoreFocus && wasOpen) menuButton.focus();
   };
 
   if (menuButton && navigation) {
-    menuButton.addEventListener('click', () => {
+    menuButton.addEventListener('click', (event) => {
       const open = navigation.getAttribute('data-open') === 'true';
       if (open) closeMenu();
       else {
         navigation.setAttribute('data-open', 'true');
         menuButton.setAttribute('aria-expanded', 'true');
+        menuButton.setAttribute('aria-label', 'Close menu');
+        setBackgroundInert(true);
+        if (event.detail === 0) menuItems()[0]?.focus();
       }
     });
     navigation.addEventListener('click', (event) => {
       if (event.target.closest('a')) closeMenu();
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeMenu({ restoreFocus: true });
+      if (navigation.getAttribute('data-open') !== 'true') return;
+      if (event.key === 'Escape') {
+        closeMenu({ restoreFocus: true });
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusables = [menuButton, ...menuItems()];
+      const current = focusables.indexOf(document.activeElement);
+      if (event.shiftKey && current <= 0) {
+        event.preventDefault();
+        focusables[focusables.length - 1]?.focus();
+      } else if (!event.shiftKey && current === focusables.length - 1) {
+        event.preventDefault();
+        menuButton.focus();
+      } else if (!event.shiftKey && document.activeElement === menuButton) {
+        event.preventDefault();
+        focusables[1]?.focus();
+      }
     });
     document.addEventListener('pointerdown', (event) => {
       if (navigation.getAttribute('data-open') !== 'true') return;
@@ -90,25 +121,57 @@
 
   const toc = document.querySelector('[data-article-toc]');
   const sections = [...document.querySelectorAll('[data-article-section][id]')];
-  if (toc && sections.length && 'IntersectionObserver' in window) {
-    const links = new Map([...toc.querySelectorAll('a[href^="#"]')].map((link) => [link.hash.slice(1), link]));
+  const chapterRibbon = document.querySelector('[data-chapter-ribbon]');
+  if ((toc || chapterRibbon) && sections.length && 'IntersectionObserver' in window) {
+    const links = new Map([...(toc?.querySelectorAll('a[href^="#"]') || [])].map((link) => [link.hash.slice(1), link]));
+    const chapterLink = chapterRibbon?.querySelector('[data-chapter-current-link]');
+    const chapterIndex = chapterRibbon?.querySelector('[data-chapter-current-index]');
+    const chapterProgress = chapterRibbon?.querySelector('[data-chapter-progress]');
     const visible = new Map();
+    let activeSection = sections[0];
+    let chapterTicking = false;
+
+    const updateChapterProgress = () => {
+      chapterTicking = false;
+      if (!activeSection || !chapterProgress) return;
+      const rect = activeSection.getBoundingClientRect();
+      const travel = Math.max(1, rect.height - Math.min(window.innerHeight * 0.34, 280));
+      const amount = Math.min(1, Math.max(0, (76 - rect.top) / travel));
+      chapterProgress.style.transform = `scaleX(${amount})`;
+    };
+    const requestChapterProgress = () => {
+      if (chapterTicking) return;
+      chapterTicking = true;
+      requestAnimationFrame(updateChapterProgress);
+    };
     const updateCurrent = () => {
       const candidates = sections
         .filter((section) => visible.get(section.id))
         .sort((a, b) => Math.abs(a.getBoundingClientRect().top - 120) - Math.abs(b.getBoundingClientRect().top - 120));
       const passed = sections.filter((section) => section.getBoundingClientRect().top < 180);
       const current = candidates[0] || passed[passed.length - 1] || sections[0];
+      activeSection = current;
       links.forEach((link, id) => {
         if (id === current.id) link.setAttribute('aria-current', 'location');
         else link.removeAttribute('aria-current');
       });
+      const currentLink = links.get(current.id);
+      if (chapterLink) {
+        chapterLink.href = `#${current.id}`;
+        chapterLink.textContent = currentLink?.textContent?.trim() || current.querySelector('h2')?.textContent?.trim() || current.id;
+        chapterLink.setAttribute('aria-current', 'location');
+      }
+      if (chapterIndex) chapterIndex.textContent = String(sections.indexOf(current) + 1).padStart(2, '0');
+      if (chapterRibbon) chapterRibbon.dataset.chapterCurrent = current.id;
+      requestChapterProgress();
     };
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => visible.set(entry.target.id, entry.isIntersecting));
       updateCurrent();
     }, { rootMargin: '-15% 0px -68% 0px', threshold: 0 });
     sections.forEach((section) => sectionObserver.observe(section));
+    addEventListener('scroll', requestChapterProgress, { passive: true });
+    addEventListener('resize', requestChapterProgress);
     updateCurrent();
   }
 
@@ -122,6 +185,7 @@
       stable: 'Worst-environment selection keeps the stable activation direction available; the same robust refit can now use it to lower the worst-case risk.',
     };
     const selectBranch = (name) => {
+      branchFigure.dataset.branchActive = name;
       buttons.forEach((button) => {
         const active = button.dataset.branch === name;
         button.classList.toggle('is-active', active);

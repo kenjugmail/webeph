@@ -27,9 +27,9 @@
 <meta name="twitter:description" content="AI for good, useful, and accessible. Orrery is available. Seeking aligned non-dilutive support.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <link rel="stylesheet" href="assets/ephemerent.css?v=20260802">
-<link rel="stylesheet" href="assets/polish.css?v=20260811c">
-<link rel="stylesheet" href="assets/home.css?v=20260811c">
-<script src="assets/motion.js?v=20260811c" defer></script>
+<link rel="stylesheet" href="assets/polish.css?v=20260811d">
+<link rel="stylesheet" href="assets/home.css?v=20260812f">
+<script src="assets/motion.js?v=20260811d" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -163,6 +163,43 @@
     </div>
     <section class="ehero-story rv in" data-emergence-scene data-scene aria-labelledby="field-sequence-title">
       <h2 class="sr-only" id="field-sequence-title">The temporary-mind field sequence</h2>
+      <aside class="ehero-glossary-rail" data-story-glossary aria-label="Field glossary">
+        <div class="ehero-glossary-head">
+          <span>Field glossary</span>
+          <b>04 terms</b>
+        </div>
+        <ol>
+          <li data-story-term="0" data-active="true" aria-current="step">
+            <span class="ehero-glossary-no">G.01</span>
+            <div>
+              <strong>Temporary mind</strong>
+              <p>A bounded worker assembled for one explicit task, then released when the run closes.</p>
+            </div>
+          </li>
+          <li data-story-term="1">
+            <span class="ehero-glossary-no">G.02</span>
+            <div>
+              <strong>Working boundary</strong>
+              <p>The isolated space that keeps one attempt from silently changing another.</p>
+            </div>
+          </li>
+          <li data-story-term="2">
+            <span class="ehero-glossary-no">G.03</span>
+            <div>
+              <strong>Available evidence</strong>
+              <p>The checks, outputs, and observations used to compare attempted results.</p>
+            </div>
+          </li>
+          <li data-story-term="3">
+            <span class="ehero-glossary-no">G.04</span>
+            <div>
+              <strong>Run trace</strong>
+              <p>The durable record left after temporary workers have been released.</p>
+            </div>
+          </li>
+        </ol>
+        <span class="ehero-glossary-progress" aria-hidden="true"><i></i></span>
+      </aside>
       <div class="ehero-story-pin">
         <div class="ehero-story-head">
           <span>Field sequence 001 · temporary minds</span>
@@ -207,6 +244,7 @@
             </div>
           </div>
           <canvas class="ehero-story-overlay" id="fig" aria-hidden="true"></canvas>
+          <span class="ehero-story-aperture" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         </div>
 
         <div class="ehero-story-foot">
@@ -269,8 +307,20 @@
   </div>
 </aside>
 
+<nav class="home-chapter-rail" data-home-chapter-rail aria-label="Institution sections">
+  <span class="home-chapter-rail-label">Lab register</span>
+  <ol>
+    <li><a href="#research" data-home-chapter-link="research"><span>01</span><b>Research</b></a></li>
+    <li><a href="#work" data-home-chapter-link="work"><span>02</span><b>Work</b></a></li>
+    <li><a href="#approach" data-home-chapter-link="approach"><span>03</span><b>Principles</b></a></li>
+    <li><a href="#funding" data-home-chapter-link="funding"><span>04</span><b>Funding</b></a></li>
+    <li><a href="#pledge" data-home-chapter-link="pledge"><span>05</span><b>Pledge</b></a></li>
+  </ol>
+  <span class="home-chapter-rail-progress" aria-hidden="true"><i></i></span>
+</nav>
+
 <!-- 01 — RESEARCH -->
-<section class="esec" id="research">
+<section class="esec" id="research" data-home-chapter="research">
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">01 — Research</span>
@@ -299,7 +349,7 @@
 </section>
 
 <!-- 02 — WORK -->
-<section class="esec" id="work">
+<section class="esec" id="work" data-home-chapter="work">
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">02 — Work</span>
@@ -326,10 +376,21 @@
         <span class="de">Creative studio plus a first playable browser project — films, ads, essays, and Vespera play. One-time $20 access gate; never combat power.</span>
         <span class="meta"><span class="estatus live">Playable beta</span><span class="arr">→</span></span>
       </a>
+      <!-- Launch gate: remove `hidden` only after the exact paid-beta artifacts pass. -->
+      <a class="eprodrow" href="/genesis-fall" data-motion="reveal" hidden>
+        <span class="nm">Genesis Fall</span>
+        <span class="de">An atmospheric 2D ecological action-adventure. Complete-campaign paid beta for Apple Silicon macOS and Windows x64.</span>
+        <span class="meta"><span class="estatus preview">Paid beta</span><span class="arr">→</span></span>
+      </a>
       <a class="eprodrow" href="/shelterix" data-motion="reveal">
         <span class="nm"><svg class="mk accent"><use href="#sxmk"/></svg> Shelterix</span>
         <span class="de">AI-first poverty-to-productivity platform — paid tasks, Learn, wallet credits, and hire pipelines. Not a donation platform. Humans approve every payout.</span>
         <span class="meta"><span class="estatus preview">Preview</span><span class="arr">→</span></span>
+      </a>
+      <a class="eprodrow" href="https://atlas.ephemerent.com" data-motion="reveal">
+        <span class="nm">Atlas</span>
+        <span class="de">Free web-based STEM education from first principles to frontiers — a sourced curriculum map, complete learning routes, experiments, and open CC BY 4.0 releases.</span>
+        <span class="meta"><span class="estatus preview">0.1 preview</span><span class="arr">→</span></span>
       </a>
       <div class="eprodrow" data-motion="reveal">
         <span class="nm">Seed</span>
@@ -350,7 +411,7 @@
 </section>
 
 <!-- 03 — PRINCIPLES -->
-<section class="esec" id="approach">
+<section class="esec" id="approach" data-home-chapter="approach">
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">03 — Principles</span>
@@ -379,7 +440,7 @@
 </section>
 
 <!-- 04 — FUNDING -->
-<section class="esec" id="funding">
+<section class="esec" id="funding" data-home-chapter="funding">
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">04 — Funding</span>
@@ -440,7 +501,7 @@
 </section>
 
 <!-- ON THE RECORD — PLEDGE -->
-<section class="esec" id="pledge">
+<section class="esec" id="pledge" data-home-chapter="pledge">
   <div class="ewrap">
     <div class="esec-head rv">
       <span class="lbl">On the record</span>
@@ -485,6 +546,7 @@
           <li><a href="/research">Research agenda →</a></li>
           <li><a href="/journal">Ephemerent Research journal →</a></li>
           <li><a href="/news">Ephemerent News →</a></li>
+          <li><a href="https://atlas.ephemerent.com">Ephemerent Atlas education →</a></li>
           <li><a href="#approach">Principles</a></li>
           <li><a href="#funding">Funding</a></li>
           <li><a href="#pledge">Pledge</a></li>
@@ -498,8 +560,11 @@
           <li><a href="/orrery">Orrery</a></li>
           <li><a href="/vellum">Vellum Engineering</a></li>
           <li><a href="/vespera">Vespera</a></li>
+          <!-- Launch gate: remove `hidden` with the public homepage row. -->
+          <li hidden><a href="/genesis-fall">Genesis Fall</a></li>
           <li><a href="/shelterix">Shelterix</a></li>
           <li><a href="/arbiter">Arbiter</a></li>
+          <li><a href="https://atlas.ephemerent.com">Atlas</a></li>
           <li><a href="#work">Seed</a></li>
           <li><a href="#work">Colony</a></li>
           <li><a href="mailto:hello@ephemerent.com">Contact</a></li>
@@ -513,7 +578,7 @@
   </div>
 </footer>
 
-<script src="assets/ephemerent.js?v=20260811c"></script>
+<script src="assets/ephemerent.js?v=20260812f"></script>
 
 </body>
 </html>

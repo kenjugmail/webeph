@@ -5,6 +5,7 @@
     { "source": "/Orrery.html", "destination": "/orrery", "permanent": true },
     { "source": "/Vellum.html", "destination": "/vellum", "permanent": true },
     { "source": "/Vespera.html", "destination": "/vespera", "permanent": true },
+    { "source": "/genesis-fall.html", "destination": "/genesis-fall", "permanent": true },
     { "source": "/Shelterix.html", "destination": "/shelterix", "permanent": true },
     { "source": "/organizations.html", "destination": "/organizations", "permanent": true },
     { "source": "/security.html", "destination": "/security", "permanent": true },
@@ -17,7 +18,11 @@
     { "source": "/news-drfsp.html", "destination": "/news/drfsp-robust-compression", "permanent": true },
     { "source": "/arbiter-preview.html", "destination": "/arbiter", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
-    { "source": "/terms.html", "destination": "/terms", "permanent": true }
+    { "source": "/terms.html", "destination": "/terms", "permanent": true },
+    { "source": "/atlas", "destination": "https://atlas.ephemerent.com", "permanent": true },
+    { "source": "/atlas/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true },
+    { "source": "/education", "destination": "https://atlas.ephemerent.com", "permanent": true },
+    { "source": "/education/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true }
   ],
   "rewrites": [
     { "source": "/play", "destination": "https://web-five-amber-88.vercel.app/play" },
@@ -40,6 +45,7 @@
     { "source": "/orrery", "destination": "/Orrery.html" },
     { "source": "/vellum", "destination": "/Vellum.html" },
     { "source": "/vespera", "destination": "/Vespera.html" },
+    { "source": "/genesis-fall", "destination": "/genesis-fall.html" },
     { "source": "/shelterix", "destination": "/Shelterix.html" },
     { "source": "/organizations", "destination": "/organizations.html" },
     { "source": "/security", "destination": "/security.html" },
