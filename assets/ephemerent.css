@@ -109,12 +109,20 @@ a { color: inherit; text-decoration: none; }
 
 /* work / products */
 .ework { border-top: 1px solid var(--rule); }
-.eprodrow { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 30px; padding: 30px 0; border-bottom: 1px solid var(--rule); align-items: center; transition: background var(--motion-control); }
+/* The third column was auto, so it sized to its own badge text --
+   "0.1 PREVIEW" against "PREVIEW" -- and pushed the other two to a
+   different width on every row. Twelve products, twelve different
+   positions for the description column, spread over 33px. A fixed
+   track is what makes a list read as a list. */
+.eprodrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 186px; gap: 30px; padding: 30px 0; border-bottom: 1px solid var(--rule); align-items: center; transition: background var(--motion-control); }
 a.eprodrow:hover { background: var(--paper-2); }
 .eprodrow .nm { font-family: var(--serif); font-size: 26px; display: flex; align-items: center; gap: 12px; }
 .eprodrow .nm .mk { width: 20px; height: 20px; }
 .eprodrow .de { font-size: 16px; color: var(--muted); line-height: 1.55; }
-.eprodrow .meta { display: flex; align-items: center; gap: 18px; justify-self: end; }
+/* The arrow keeps its slot whether or not the row has one, so a
+   linked row and an unlinked row put their badge in the same
+   place. */
+.eprodrow .meta { display: grid; grid-template-columns: 1fr 18px; align-items: center; gap: 18px; justify-items: end; }
 .estatus { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
 .estatus.live { color: var(--accent); border: 1px solid var(--accent); }
 .estatus.research { color: var(--muted); border: 1px solid var(--rule); }
