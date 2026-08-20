@@ -21,6 +21,32 @@
    palette for each one.
    ============================================================ */
 
+/* ------------------------------------------------------------
+   CASCADE LAYERS — declared here because this file loads first,
+   so the order below holds regardless of <link> order on a page.
+
+   That decoupling is the point. polish.css loads BEFORE the page
+   stylesheet on six pages (Ephemerent, research, Orrery, Shelterix,
+   arbiter-preview, login) and after it on the rest, so it could not
+   win on source order and won on !important instead — 81 of them.
+   With the order fixed here, those become ordinary rules.
+
+   reset     normalize
+   tokens    this file: scales, derived slots, type roles
+   product   per-surface palettes and their shared components
+   base      base.css, which documents itself as loading after the
+             theme CSS. Three pages linked it first anyway; the layer
+             makes that contract hold everywhere.
+   page      stylesheets loaded by a single page
+   polish    polish.css — the shared polish layer. It sits last because
+             that is what its 84 !important declarations were encoding:
+             hard corners over each product's own radius, flat cards,
+             one nav treatment. As a layer it wins by position instead.
+   utilities single-purpose helpers; always last
+   ------------------------------------------------------------ */
+@layer reset, tokens, product, base, page, polish, utilities;
+
+@layer tokens {
 :root {
   color-scheme: light dark;
 
@@ -155,4 +181,5 @@ body {
   text-transform: uppercase;
   letter-spacing: var(--ls-label);
   color: var(--muted, inherit);
+}
 }

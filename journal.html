@@ -136,7 +136,12 @@
         <div class="jr-empty-row jr-loading-row">Reading the register…</div>
       </div>
       <noscript>
-        <style>[data-journal-list]{display:none}</style>
+        <style>
+/* Layered so polish.css still has the last word; unlayered CSS
+   outranks every cascade layer. */
+@layer page {[data-journal-list]{display:none}
+}
+</style>
         <div class="jr-archive-list">
           <a class="jr-archive-row" href="/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression">
             <span class="jr-archive-id">ER-2026-0001</span>

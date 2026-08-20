@@ -4,6 +4,7 @@
    brass, Orrery void/teal, and Ephemerent paper.
    ============================================================ */
 
+@layer page {
 :root {
   --void:        #040302;
   --bg:          #060504;
@@ -1186,5 +1187,15 @@ body.shelterix-page {
 @media (min-width: 881px) {
   html.motion-ready body.shelterix-page .ebar .menu-toggle {
     display: none !important;
+  }
+}
+}
+
+/* polish.css normalizes .ebar to an opaque bar. This page's nav is
+   deliberately translucent over the near-black ground, so it takes the
+   last word from the utilities layer rather than by raising specificity. */
+@layer utilities {
+  .shelterix-page .ebar {
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
   }
 }

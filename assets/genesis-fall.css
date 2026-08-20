@@ -1,3 +1,4 @@
+@layer page {
 :root {
   --qe-night: #061319;
   --qe-deep: #0b2229;
@@ -119,4 +120,5 @@ body.genesis-fall-page {
 
 @media (prefers-reduced-motion: reduce) {
   .genesis-fall-page *, .genesis-fall-page *::before, .genesis-fall-page *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
 }

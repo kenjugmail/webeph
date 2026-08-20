@@ -1,3 +1,4 @@
+@layer page {
 .ap-hero { padding: 82px 0 58px; border-bottom: 1px solid var(--rule); }
 
 @media (min-width: 901px) {
@@ -657,3 +658,4 @@ main > .ap-hero + .esec { background: var(--paper-2); }
 .arbiter-story[data-motion="static"] .arbiter-review-receipt,
 .arbiter-story[data-motion="static"] .arbiter-review-gate,
 .arbiter-story[data-motion="static"] .arbiter-review-receipt > div i { opacity: 1; transform: none; transition: none; }
+}

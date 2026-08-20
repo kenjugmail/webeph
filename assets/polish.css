@@ -1,4 +1,5 @@
 /* Ephemerent professional polish: shared grid, typography, navigation and restrained motion. */
+@layer polish {
 @font-face {
   font-family: 'Hanken Grotesk';
   font-style: normal;
@@ -107,15 +108,15 @@ summary:focus-visible,
   outline-offset: 3px;
 }
 .sr-only {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 section[id],
 header[id],
@@ -155,16 +156,16 @@ body.space-bg,
 .flow-step,
 .proof-stage,
 .engine-card {
-  border-radius: var(--radius-panel) !important;
+  border-radius: var(--radius-panel);
 }
 .btn,
 .ebtn,
 button,
 input,
-select { border-radius: var(--radius-control) !important; }
+select { border-radius: var(--radius-control); }
 .btn {
   min-height: 44px;
-  transition: color var(--motion-control), background var(--motion-control), border-color var(--motion-control), transform var(--motion-control) !important;
+  transition: color var(--motion-control), background var(--motion-control), border-color var(--motion-control), transform var(--motion-control);
 }
 .btn [aria-hidden="true"],
 .ebtn [aria-hidden="true"] {
@@ -183,28 +184,28 @@ select { border-radius: var(--radius-control) !important; }
 .btn:hover [aria-hidden="true"],
 .ebtn:hover [aria-hidden="true"] { transform: translateX(3px); }
 .btn-primary {
-  background: var(--ink) !important;
-  color: var(--bg) !important;
-  box-shadow: none !important;
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: none;
 }
-.btn-primary:hover { background: #fff !important; box-shadow: none !important; }
-.btn-ghost { background: transparent !important; }
-.reveal { transition-duration: var(--motion-enter) !important; }
+.btn-primary:hover { background: #fff; box-shadow: none; }
+.btn-ghost { background: transparent; }
+.reveal { transition-duration: var(--motion-enter); }
 .hero .reveal.in,
 .ehero .rv.in,
 .ap-hero .rv.in {
   opacity: 1;
   transform: none;
-  transition: none !important;
+  transition: none;
 }
 .card,
 .price-card,
 .flow-step,
 .account-plan {
-  background: var(--panel) !important;
-  box-shadow: none !important;
+  background: var(--panel);
+  box-shadow: none;
 }
-.card-hover:hover { transform: translateY(-1px); box-shadow: none !important; }
+.card-hover:hover { transform: translateY(-1px); box-shadow: none; }
 
 /* Product palette: one signal colour per product. */
 body.orrery-page,
@@ -287,10 +288,10 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 .ebar-in { min-height: var(--site-nav); padding-block: 0; }
 .nav.scrolled,
 .ebar.scrolled {
-  background: var(--bg, var(--paper)) !important;
+  background: var(--bg, var(--paper));
   border-bottom-color: var(--line, var(--rule));
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .nav-links,
 .enav { gap: clamp(16px, 2vw, 28px); }
@@ -327,7 +328,7 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 
 body.lab-page .ebar,
 body.lab-page .ebar.scrolled {
-  background: var(--paper) !important;
+  background: var(--paper);
 }
 .menu-toggle {
   display: none;
@@ -353,14 +354,14 @@ body.lab-page .ebar.scrolled {
 .reveal,
 .rv {
   transform: translateY(14px);
-  transition-duration: var(--motion-enter) !important;
-  transition-timing-function: cubic-bezier(.22, 1, .36, 1) !important;
+  transition-duration: var(--motion-enter);
+  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
 }
 .reveal.d1,
 .reveal.d2,
 .reveal.d3,
 .reveal.d4 { transition-delay: 0s; }
-.hero-scroll { animation: none !important; }
+.hero-scroll { animation: none; }
 
 /* Orrery: editorial copy paired with an honest system diagram. */
 body.orrery-page .hero {
@@ -394,7 +395,7 @@ body.vellum-page .prov {
   padding: 4px 10px 4px 0;
   margin-right: 10px;
   border: 0;
-  border-radius: 0 !important;
+  border-radius: 0;
   background: transparent;
   color: var(--muted);
 }
@@ -512,11 +513,11 @@ body.orrery-page .cap-grid .card,
 body.vellum-page .cap-grid .card,
 body.orrery-page .chips .chip,
 body.vellum-page .chips .chip {
-  border: 0 !important;
-  border-bottom: 1px solid var(--line) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   padding: 24px 20px 28px 0;
 }
 
@@ -525,7 +526,7 @@ body.vellum-page .cap-grid .card:hover,
 body.orrery-page .chips .chip:hover,
 body.vellum-page .chips .chip:hover {
   transform: none;
-  background: var(--panel-2) !important;
+  background: var(--panel-2);
   padding-left: 14px;
 }
 
@@ -552,16 +553,16 @@ body.vellum-page .arch-grid {
 }
 
 body.vellum-page .arch-grid .arch-col {
-  border: 0 !important;
-  border-right: 1px solid var(--line) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   padding: 28px 24px 30px 0;
 }
 
 body.vellum-page .arch-grid .arch-col:last-child {
-  border-right: 0 !important;
+  border-right: 0;
   padding-right: 0;
 }
 
@@ -570,11 +571,11 @@ body.orrery-page .pipe,
 body.vellum-page .pipe,
 body.vellum-page .proof-strip {
   gap: 0;
-  border: 0 !important;
-  border-top: 1px solid var(--line-strong) !important;
-  border-bottom: 1px solid var(--line) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
   overflow: visible;
 }
 
@@ -584,8 +585,8 @@ body.vellum-page .ps-item {
   min-width: 0;
   border: 0;
   border-right: 1px solid var(--line);
-  border-radius: 0 !important;
-  background: transparent !important;
+  border-radius: 0;
+  background: transparent;
   padding: 22px 16px 24px 0;
 }
 
@@ -601,37 +602,37 @@ body.vellum-page .ps-k { color: var(--signal); }
 
 body.orrery-page .prov-table,
 body.vellum-page .prov-table {
-  border: 0 !important;
-  border-top: 1px solid var(--line-strong) !important;
-  border-bottom: 1px solid var(--line) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
   overflow: visible;
 }
 body.orrery-page .prov-row,
 body.vellum-page .prov-row { padding-inline: 0; }
 body.orrery-page .organization-pricing {
-  border: 0 !important;
-  border-top: 1px solid var(--line-strong) !important;
-  border-bottom: 1px solid var(--line) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
   padding-inline: 0;
 }
-body.orrery-page .compare-wrap { border-right: 0; border-bottom: 1px solid var(--line); border-left: 0; border-radius: 0 !important; }
+body.orrery-page .compare-wrap { border-right: 0; border-bottom: 1px solid var(--line); border-left: 0; border-radius: 0; }
 
 body.vellum-page .flow {
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line);
 }
 body.vellum-page .flow-step {
-  border: 0 !important;
-  border-right: 1px solid var(--line) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
   padding: 26px 22px 28px 0;
 }
-body.vellum-page .flow-step:last-of-type { border-right: 0 !important; padding-right: 0; }
+body.vellum-page .flow-step:last-of-type { border-right: 0; padding-right: 0; }
 body.vellum-page .flow-step + .flow-conn + .flow-step { padding-left: 22px; }
 body.vellum-page .flow-conn { width: 22px; background: var(--signal); opacity: .72; }
 
@@ -815,7 +816,7 @@ body.vellum-page .hero-veil { display: none; }
   overflow: hidden;
 }
 body.vellum-page .vellum-hero-stage .hero-canvas {
-  display: block !important;
+  display: block;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -899,13 +900,13 @@ body.vellum-page .hero-scroll { display: none; }
 body.vellum-page .proof-stage,
 body.vellum-page .review-stage,
 body.vellum-page .engine-view {
-  background: #090806 !important;
-  box-shadow: none !important;
+  background: #090806;
+  box-shadow: none;
 }
 body.vellum-page .proof-stage::after,
 body.vellum-page .review-stage::after,
-body.vellum-page .engine-view::after { display: none !important; }
-body.vellum-page .price-card.featured { box-shadow: none !important; }
+body.vellum-page .engine-view::after { display: none; }
+body.vellum-page .price-card.featured { box-shadow: none; }
 
 .evidence-document,
 .system-anatomy,
@@ -1021,7 +1022,7 @@ body.utility-page .auth-main::before {
 }
 body.utility-page .auth-card {
   grid-column: 5 / span 6;
-  max-width: none !important;
+  max-width: none;
   padding: 0 0 48px;
   border: 0;
   border-top: 1px solid var(--line-strong);
@@ -1125,7 +1126,7 @@ body.lab-page.error-page .error-actions .ebtn { min-width: 0; }
 .compare-wrap { overflow-x: auto; border-top: 1px solid var(--line-strong); }
 .compare { min-width: 760px; }
 .compare th,
-.compare td { border-radius: 0 !important; }
+.compare td { border-radius: 0; }
 
 /* Supporting product documents are led by rules and sequence, not card chrome. */
 body.supporting-page .nav {
@@ -1155,9 +1156,9 @@ body.supporting-page .org-feature-grid article:nth-child(even) { border-right: 0
 body.supporting-page .callout,
 body.supporting-page .org-billing-note,
 body.supporting-page .org-auth-card {
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 body.supporting-page .callout {
   padding: 32px 0;
@@ -1241,7 +1242,7 @@ body.supporting-page .org-trust span {
     display: flex;
     animation: menu-panel-in 220ms cubic-bezier(.22, 1, .36, 1) both;
   }
-  .motion-ready .menu-open .enav a { display: flex !important; }
+  .motion-ready .menu-open .enav a { display: flex; }
   .motion-ready .nav-links a,
   .motion-ready .enav a {
     min-height: 58px;
@@ -1340,4 +1341,5 @@ body.supporting-page .org-trust span {
   .story-branch-field { display: none !important; }
   .nav-links a::after,
   .enav a::after { transition: none; }
+}
 }

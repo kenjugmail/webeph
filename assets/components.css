@@ -1,4 +1,5 @@
 /* Evidence receipt UI shared by the live Vellum CPU proof bench. */
+@layer product {
 .review-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -145,4 +146,5 @@
 
 @media (max-width: 820px) {
   .review-grid { grid-template-columns: 1fr; }
+}
 }

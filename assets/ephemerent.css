@@ -4,6 +4,7 @@
    Fonts are self-hosted through the shared polish stylesheet.
    ============================================================ */
 
+@layer product {
 :root {
   --paper:   #f3f0e8;
   --paper-2: #eee9de;
@@ -160,3 +161,4 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 /* skip link */
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
 .skip-link:focus { left: 12px; top: 12px; padding: 10px 16px; background: var(--ink); color: var(--paper); border-radius: 4px; font-family: var(--mono); font-size: 13px; }
+}

@@ -113,6 +113,9 @@
 <script type="module">import { mountNavAccount } from '/assets/account.js'; mountNavAccount();</script>
 <script type="module" src="/assets/organization.js"></script>
 <style>
+/* Layered so polish.css still has the last word; unlayered CSS
+   outranks every cascade layer. */
+@layer page {
 .organization-page{color:var(--ink)}
 .org-hero{padding-top:150px;padding-bottom:72px;max-width:1100px}
 .org-hero h1{max-width:900px;margin:18px 0}
@@ -133,10 +136,15 @@
 .org-feature-grid h3{margin:0 0 8px;font-size:16px}
 .org-feature-grid p,.org-billing-note p{color:var(--muted);line-height:1.65}
 .org-billing-note{max-width:840px}
-.org-auth-card{margin-block:20px 90px;max-width:620px}
+.org-auth-card{margin-block:20px 90px}
 .org-footer{justify-content:space-between;padding-block:24px}
 .org-footer a{color:var(--muted)}
 @media(max-width:800px){.org-plan-grid,.org-detail-grid,.org-feature-grid{grid-template-columns:1fr}.org-hero{padding-top:120px}.org-footer{align-items:flex-start;gap:14px;flex-direction:column}}
+}
+/* This card sets its own measure; polish.css's generic .wrap rule would
+   otherwise stretch it to --site-max. */
+@layer utilities {.org-auth-card{max-width:620px}
+}
 </style>
 </body>
 </html>

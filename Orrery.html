@@ -52,7 +52,9 @@
   ]
 }
 </script>
-<noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>
+.rv,.reveal{opacity:1!important;transform:none!important}
+</style></noscript>
 </head>
 <body class="space-bg orrery-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -477,6 +479,9 @@
 </script>
 
 <style>
+/* Layered so polish.css still has the last word; unlayered CSS
+   outranks every cascade layer. */
+@layer page {
 /* ===== Page-specific layout (Orrery landing) ===== */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
 .hero-inner { position: relative; z-index: 2; padding-top: 90px; }
@@ -599,6 +604,7 @@
 /* faq */
 .faq-section { border-top: 1px solid var(--line); }
 .faq-list { max-width: 840px; border-top: 1px solid var(--line); }
+}
 </style>
 </body>
 </html>

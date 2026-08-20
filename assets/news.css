@@ -1,3 +1,4 @@
+@layer page {
 @font-face {
   font-family: "Newsreader";
   src: url("fonts/newsreader-latin.woff2") format("woff2");
@@ -1124,4 +1125,5 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-refit-pair > div,
   .nw-record-links a { transition: none; }
   .nw-chapter-ribbon-meter i { transition: none; }
+}
 }

@@ -4,6 +4,7 @@
    Distinct from Ephemerent paper, Orrery void, and Vellum proof UI.
    ============================================================ */
 
+@layer product {
 :root {
   --void:        #111923;
   --bg:          #f7f3eb;
@@ -2070,4 +2071,5 @@ body.vespera-page {
   .vespera-page .vespera-board-crop { transform: none; }
 
   .vespera-page .vespera-contact-playhead { left: 12.5%; }
+}
 }

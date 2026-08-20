@@ -1,4 +1,5 @@
 /* Orrery run story: dark technical scrollytelling, never presented as product UI. */
+@layer page {
 body.orrery-page .swarm-card {
   padding: 0 !important;
   border: 0 !important;
@@ -429,4 +430,5 @@ body.orrery-page .swarm-card {
   .orrery-story-steps li,
   .orrery-story-steps li[data-active="true"] { border-right: 0; border-bottom: 1px solid var(--line); }
   .orrery-story-steps li:last-child { border-bottom: 0; }
+}
 }

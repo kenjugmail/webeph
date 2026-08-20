@@ -1,3 +1,4 @@
+@layer page {
 .home-page .ebar {
   position: sticky;
   top: 0;
@@ -1808,4 +1809,5 @@
     padding-inline: 20px;
   }
   .ehero-story-steps li:last-child { border-bottom: 0; }
+}
 }

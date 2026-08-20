@@ -7,6 +7,7 @@
    Theme tokens used with fallbacks so it works on both palettes.
    ============================================================ */
 
+@layer base {
 /* ---- Shared fluid modular scale (opt-in via var(), additive) ---- */
 :root {
   --step--2: clamp(0.69rem, 0.67rem + 0.11vw, 0.75rem);
@@ -200,4 +201,5 @@ details.faq > .faq-body {
 .proof-render-label {
   font-size: 10px; letter-spacing: 0.03em; line-height: 1.45;
   color: var(--teal-lt, var(--accent, currentColor));
+}
 }

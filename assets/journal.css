@@ -4,6 +4,7 @@
    publication surface, not a product dashboard.
    ============================================================ */
 
+@layer page {
 @font-face {
   font-family: 'Journal Newsreader';
   src: url('fonts/newsreader-latin.woff2') format('woff2');
@@ -797,4 +798,5 @@ body.research-login.utility-page .auth-input { border-color: var(--jr-rule); bor
   .jr-editor-row .jr-editor-status,
   .jr-editor-row .jr-editor-date { display: none; }
   .jr-editor-row p { padding-right: 20px; }
+}
 }

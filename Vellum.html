@@ -45,7 +45,9 @@
   "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" }
 }
 </script>
-<noscript><style>.rv,.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>
+.rv,.reveal{opacity:1!important;transform:none!important}
+</style></noscript>
 </head>
 <body class="vellum-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -448,6 +450,9 @@
 </script>
 
 <style>
+/* Layered so polish.css still has the last word; unlayered CSS
+   outranks every cascade layer. */
+@layer page {
 /* ===== Page-specific layout (Vellum landing) ===== */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
 .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
@@ -595,6 +600,7 @@
 .start-section { position: relative; overflow: hidden; text-align: center; }
 .start-inner { position: relative; z-index: 2; }
 .start-h { margin: 18px 0 22px; }
+}
 </style>
 </body>
 </html>
