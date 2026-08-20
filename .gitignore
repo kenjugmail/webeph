@@ -7,3 +7,7 @@ assets/supabase-config.js
 .vercel
 .env*
 output/
+
+# Tooling — the deployable artifact is the .html files, not a build output
+node_modules/
+.artifacts/

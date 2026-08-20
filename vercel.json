@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "installCommand": "npm install --omit=dev",
   "redirects": [
     { "source": "/Ephemerent.html", "destination": "/", "permanent": true },
     { "source": "/research.html", "destination": "/research", "permanent": true },

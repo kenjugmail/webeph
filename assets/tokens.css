@@ -1,0 +1,158 @@
+/* ============================================================
+   TOKENS — the single source of truth for scale and rhythm.
+
+   Loaded FIRST on every page, before any theme or page stylesheet.
+   That ordering is deliberate: everything here is a default that a
+   later stylesheet may override, so adding this file cannot change
+   an existing page. It only fills gaps.
+
+   Colour palettes stay where they are. Each surface (lab, orrery,
+   vellum, vespera, shelterix, journal, news, genesis) owns its own
+   hues, and this file never overwrites them. What it does own:
+
+     - the type, space, radius, elevation and motion scales
+     - the values derived FROM a theme's ink, via color-mix, so a
+       rule or a muted tone is always a tint of that theme's own
+       ink rather than a separately-tuned hex
+     - two variables the site consumed but never defined
+
+   Deriving instead of hard-coding is what will let every surface
+   gain a light and a dark counterpart without hand-tuning a second
+   palette for each one.
+   ============================================================ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---- Type scale -------------------------------------------------
+     Ten steps plus three display ramps, replacing 81 ad-hoc sizes.
+     Body copy and below is fixed; only display type is fluid, because
+     fluid body text fights the reading measure. */
+  --t-micro: 0.625rem;   /* 10px — mono micro-labels */
+  --t-xs:    0.6875rem;  /* 11px */
+  --t-sm:    0.75rem;    /* 12px */
+  --t-base:  0.8125rem;  /* 13px */
+  --t-md:    0.875rem;   /* 14px */
+  --t-lg:    0.9375rem;  /* 15px */
+  --t-xl:    1.0625rem;  /* 17px — body */
+  --t-2xl:   1.1875rem;  /* 19px */
+  --t-3xl:   1.375rem;   /* 22px */
+  --t-4xl:   1.625rem;   /* 26px */
+  --d-sm: clamp(1.5rem, 2.6vw, 2.125rem);
+  --d-md: clamp(2.125rem, 4.3vw, 3.625rem);
+  --d-lg: clamp(3.25rem, 6.4vw, 5.5rem);
+
+  /* Line-height, tracking and weight: five of each, no more. */
+  --lh-display: 1.05;
+  --lh-tight:   1.2;
+  --lh-snug:    1.35;
+  --lh-body:    1.6;
+  --lh-loose:   1.75;
+
+  --ls-display: -0.02em;   /* Newsreader: a text serif, so gentle. */
+  --ls-sans:    -0.04em;   /* Hanken Grotesk display can take more. */
+  --ls-tight:   -0.01em;
+  --ls-0:        0;
+  --ls-label:    0.12em;
+  --ls-wide:     0.16em;
+
+  --w-regular: 400;
+  --w-medium:  500;
+  --w-semi:    600;
+  --w-bold:    700;
+
+  /* ---- Space — 4px base ---------------------------------------- */
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs:  8px;
+  --space-s:   12px;
+  --space-m:   20px;
+  --space-l:   32px;
+  --space-xl:  52px;
+  --space-2xl: 84px;
+
+  /* ---- Radius — hard corners are this site's signature ---------- */
+  --radius-control: 3px;
+  --radius-panel:   4px;
+
+  /* ---- Motion -------------------------------------------------- */
+  --motion-press:   140ms;
+  --motion-control: 180ms;
+  --motion-advance: 280ms;
+  --motion-settle:  520ms;
+  --motion-enter:   520ms;
+
+  /* Declared at :root so it resolves everywhere. It was previously
+     defined only in orrery/shelterix/vespera, so base.css and
+     ephemerent.css consumed it on the lab pages and silently fell
+     back to the browser default `ease`. */
+  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Container ----------------------------------------------- */
+  --site-max:    1280px;
+  --site-gutter: clamp(20px, 3.2vw, 48px);
+  --site-nav:    68px;
+}
+
+/* ============================================================
+   DERIVED SLOTS
+
+   These read the active theme's own --ink, so one definition serves
+   every palette on the site and each new theme gets them for free.
+   Set on `body` rather than `:root` so a theme's own :root palette
+   is already resolved by the time these are computed.
+   ============================================================ */
+body {
+  /* --rule-strong was consumed 10 times in home.css and defined
+     nowhere, so `border: 1px solid var(--rule-strong)` fell back to
+     currentColor on the two most-visited pages. */
+  --rule-strong: color-mix(in srgb, var(--ink, currentColor) 28%, transparent);
+
+  /* Elevation: three tiers, each tinted with the theme's ink rather
+     than neutral black, so a shadow reads as the surface's own
+     shade instead of a grey wash. */
+  --shadow-1: 0 1px 2px color-mix(in srgb, var(--ink, #000) 5%, transparent);
+  --shadow-2: 0 12px 28px -12px color-mix(in srgb, var(--ink, #000) 12%, transparent);
+  --shadow-3: 0 28px 60px -20px color-mix(in srgb, var(--ink, #000) 16%, transparent);
+  --glow: 0 0 60px color-mix(in srgb, var(--signal, var(--accent, transparent)) 16%, transparent);
+
+  /* A wash of the theme's signal, for hairline fills and hovers. */
+  --accent-soft: color-mix(in srgb, var(--signal, var(--accent, transparent)) 12%, transparent);
+}
+
+/* ============================================================
+   TYPOGRAPHIC ROLES
+
+   Three named rules replacing the ad-hoc display and label
+   treatments scattered across the stylesheets.
+   ============================================================ */
+
+/* Newsreader is a text serif with wide sidebearings. The aggressive
+   negative tracking used on geometric grotesks would collide its
+   serifs, so it gets -0.02em and leans on its optical-size axis,
+   which base.css already enables. */
+.display-serif {
+  font-family: var(--serif, Georgia, serif);
+  font-weight: var(--w-regular);
+  letter-spacing: var(--ls-display);
+  line-height: var(--lh-display);
+}
+
+.display-sans {
+  font-family: var(--sans, system-ui, sans-serif);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--ls-sans);
+  line-height: 1.04;
+}
+
+/* The house micro-label — already the site's voice, finally named. */
+.label {
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: var(--t-micro);
+  font-weight: var(--w-semi);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--muted, inherit);
+}

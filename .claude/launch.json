@@ -4,9 +4,9 @@
     {
       "name": "webeph",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["-y", "vercel", "dev", "--yes"],
-      "port": 3000,
-      "autoPort": true
+      "runtimeArgs": ["-y", "vercel", "dev", "--yes", "--listen", "3111"],
+      "port": 3111,
+      "autoPort": false
     }
   ]
 }
