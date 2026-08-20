@@ -159,9 +159,36 @@
   --lh-body:    1.6;
   --lh-loose:   1.75;
 
-  --ls-display: -0.02em;   /* Newsreader: a text serif, so gentle. */
-  --ls-sans:    -0.04em;   /* Hanken Grotesk display can take more. */
-  --ls-tight:   -0.01em;
+  /* Tracking is a function of size, not of role.
+
+     A face is drawn with sidebearings that suit one optical size. Set
+     it much smaller and the letters crowd; set it much larger and they
+     drift apart. The fix is the one every type foundry specimen
+     applies and most sites skip: open the small sizes, tighten the
+     large ones. SSTR, an awwwards site of the day, tracks +0.46px at
+     11.5px and -1.88px at 53.8px -- the same curve, in the same
+     direction.
+
+     Paired with the step it belongs to, so reaching for a size means
+     reaching for its tracking. */
+  --ls-micro:   0.06em;    /* 10px mono labels: needs the most air */
+  --ls-xs:      0.03em;
+  --ls-sm:      0.015em;
+  --ls-base:    0.005em;
+  --ls-md:      0;         /* around 14px the face is drawn correctly */
+  --ls-lg:      0;
+  --ls-xl:     -0.003em;
+  --ls-2xl:    -0.008em;
+  --ls-3xl:    -0.014em;
+  --ls-4xl:    -0.018em;
+  --ls-d-sm:   -0.022em;
+  --ls-d-md:   -0.028em;
+  --ls-d-lg:   -0.034em;
+
+  /* Kept because 500-odd declarations still name them. */
+  --ls-display: var(--ls-d-md);
+  --ls-sans:    -0.04em;   /* Hanken Grotesk display can take more */
+  --ls-tight:   var(--ls-2xl);
   --ls-0:        0;
   --ls-label:    0.12em;
   --ls-wide:     0.16em;

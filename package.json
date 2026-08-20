@@ -16,7 +16,8 @@
     "verify": "npm run check && npm run contrast && npm run motion && npm run responsive && npm run layout",
     "shoot": "node scripts/shoot.mjs",
     "plates": "python3 scripts/make-dark-plates.py",
-    "layout": "node scripts/check-layout.mjs"
+    "layout": "node scripts/check-layout.mjs",
+    "tracking": "node scripts/check-tracking.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1"

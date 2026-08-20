@@ -1115,6 +1115,7 @@ body.vespera-page {
 }
 
 .vespera-note {
+  letter-spacing: var(--ls-xl);
   margin-top: 28px;
   max-width: 56ch;
   color: color-mix(in srgb, var(--bg) 58%, transparent);

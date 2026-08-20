@@ -925,6 +925,7 @@ body.shelterix-page {
 }
 
 .shelterix-note {
+  letter-spacing: var(--ls-xl);
   margin-top: 28px;
   max-width: 56ch;
   color: var(--muted);
