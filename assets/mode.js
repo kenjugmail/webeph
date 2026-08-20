@@ -87,15 +87,15 @@
   }
 
   /* Surfaces that follow the reader's system preference. The lab pages
-     are deliberately absent: they are built around photography of lit
-     paper and stay paper unless a reader asks for dark here. Must match
-     the @media blocks in tokens.css, or the control offers the wrong
-     switch. */
+     are absent because they are night-native now, not because they are
+     pinned to paper. Must match the blocks in tokens.css, or the
+     control offers the wrong switch. */
   var FOLLOWS_SYSTEM = ['jr-page', 'nw-page', 'vespera-page'];
 
   /* Surfaces whose native face is night. */
   var NATIVE_DARK = ['orrery-page', 'utility-page', 'auth-page',
-    'vellum-page', 'shelterix-page', 'genesis-fall-page'];
+    'vellum-page', 'shelterix-page', 'genesis-fall-page',
+    'lab-page', 'legal-page', 'error-page'];
 
   var has = function (list) {
     var body = document.body;

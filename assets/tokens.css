@@ -244,7 +244,7 @@
      darkens the low-lights the way ink does on stock, soft-light lifts
      a dark surface without milking it. Each surface sets its own pair
      below, so a theme flipping mode carries its grain with it. */
-  --grain-opacity: 0.028;
+  --grain-opacity: 0.032;
   --grain-blend: multiply;
 
   /* ---- Container ----------------------------------------------- */
@@ -270,10 +270,17 @@ body {
   /* Elevation: three tiers, each tinted with the theme's ink rather
      than neutral black, so a shadow reads as the surface's own
      shade instead of a grey wash. */
-  --shadow-1: 0 1px 2px color-mix(in srgb, var(--ink, #000) 5%, transparent);
-  --shadow-2: 0 12px 28px -12px color-mix(in srgb, var(--ink, #000) 12%, transparent);
-  --shadow-3: 0 28px 60px -20px color-mix(in srgb, var(--ink, #000) 16%, transparent);
+  /* Tinted toward the ground rather than the ink. A shadow the colour
+     of the ink is invisible on a dark surface, because on a dark
+     surface the ink is the light thing. */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, var(--shadow-a1, 0.05));
+  --shadow-2: 0 12px 28px -12px rgba(0, 0, 0, var(--shadow-a2, 0.12));
+  --shadow-3: 0 30px 64px -22px rgba(0, 0, 0, var(--shadow-a3, 0.18));
   --glow: 0 0 60px color-mix(in srgb, var(--signal, var(--accent, transparent)) 16%, transparent);
+
+  /* Night grounds need a deeper shadow to separate at all, and can
+     carry one without looking heavy. */
+  --shadow-a1: 0.05; --shadow-a2: 0.12; --shadow-a3: 0.18;
 
   /* A wash of the theme's signal, for hairline fills and hovers. */
   --accent-soft: color-mix(in srgb, var(--signal, var(--accent, transparent)) 12%, transparent);
@@ -455,6 +462,44 @@ body {
   }
 
   /* ============================================================
+     DISPLAY CONFIDENCE — lab surfaces
+
+     Every awwwards winner in the reference set sets its display type
+     larger and tighter than feels comfortable in a stylesheet, and
+     that is most of why they read as designed rather than as typed. A
+     serif at 112px with leading under 1 is a different object from the
+     same serif at 88px with leading at 1.1: the first is an image, the
+     second is a paragraph that happens to be big.
+
+     Newsreader carries this well because it is a text serif with a
+     real optical-size axis, which base.css already switches on. What
+     it will not carry is grotesk-level tracking -- the sidebearings
+     are drawn wide and the serifs collide before -0.04em.
+     ============================================================ */
+  /* The size here was already judged against the fold: at 132px the
+     last line and both calls to action fall off a 900px viewport, and
+     a hero that does not finish is not a bigger hero. Left at the
+     original scale; what changes is the leading and the tracking,
+     which is where the confidence actually lives. */
+  body.home-page .ehero h1 {
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+  body.lab-page .esec-head h2 {
+    font-size: clamp(26px, 3.6vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+  }
+  /* The closing statement is the one line most likely to be
+     photographed and posted, so it gets to be the largest thing on the
+     page after the hero. */
+  body.lab-page .efoot-grid .big.serif {
+    font-size: clamp(30px, 4.2vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.026em;
+  }
+
+  /* ============================================================
      SECTION MARKS — lab surfaces
 
      home.css already alternates the section grounds: #work, #funding
@@ -610,11 +655,22 @@ body {
     position: relative;
     background-image:
       radial-gradient(72% 58% at 22% 18%,
-        var(--accent-soft, transparent), transparent 68%),
+        color-mix(in srgb, var(--accent, transparent) var(--atmos-a, 12%), transparent),
+        transparent 68%),
       radial-gradient(58% 50% at 86% 78%,
-        color-mix(in srgb, var(--signal, var(--accent, transparent)) 7%, transparent),
+        color-mix(in srgb, var(--signal, var(--accent, transparent)) var(--atmos-b, 7%), transparent),
         transparent 64%);
     background-repeat: no-repeat;
+  }
+  /* A light effect needs somewhere dark to happen. The same wash that
+     muddies cream is the light in the room on a night ground. */
+  :root:not([data-mode="light"]) body.lab-page,
+  :root[data-mode="dark"] body,
+  body.orrery-page, body.vellum-page,
+  body.shelterix-page, body.utility-page {
+    --atmos-a: 26%;
+    --atmos-b: 16%;
+    --shadow-a1: 0.30; --shadow-a2: 0.46; --shadow-a3: 0.58;
   }
 
   /* ---- Vignette -----------------------------------------------------
@@ -741,7 +797,7 @@ body {
   body.vellum-page,
   body.shelterix-page,
   body.genesis-fall-page {
-    --grain-opacity: 0.038;
+    --grain-opacity: 0.055;
     --grain-blend: soft-light;
     color-scheme: dark;
   }
@@ -844,18 +900,40 @@ body {
     --accent: #a8490d; --accent-2: #833807;
     --accent-soft: rgba(154, 102, 20, 0.26);
   }
-  /* The journal, news and Vespera surfaces follow the reader's system
-     preference: they are typographic, and a dark face is a real comfort
-     for long reading.
+  /* The lab surfaces are night-native now.
 
-     The lab surfaces do not. They are built around commissioned
-     photography of lit paper, and that work reads as it was made on a
-     paper ground -- on a dark one it needs a grade that fights the
-     image rather than serving it. Those pages stay paper unless a
-     reader asks for dark from the control, which remains available.
+     They were paper-by-default because the hero photography is lit
+     paper and glowed on a dark ground. That reason is gone: the plates
+     have purpose-made dark twins, so the pictures belong on this
+     ground rather than fighting it.
 
-     The night products are likewise left alone: their darkness is the
-     product, not a preference. */
+     The deeper reason for the flip is that every surface device on
+     this site -- the grain, the atmosphere, the elevation, the glow --
+     is a light effect, and a light effect needs somewhere dark to
+     happen. On cream at 3% opacity none of them read at all. The same
+     values on a night ground are the whole texture of the page.
+
+     Paper remains one click away and the plates swap back with it.
+
+     The journal, news and Vespera surfaces still follow the reader's
+     system preference: they are typographic, and the choice there is
+     about reading comfort rather than about identity. */
+  :root:not([data-mode="light"]) body.lab-page,
+  :root:not([data-mode="light"]) body.legal-page,
+  :root:not([data-mode="light"]) body.error-page {
+    --paper: #14130f; --paper-2: #1a1813; --card: #1f1d17;
+    --ink: #ece7db;
+    --rule: rgba(236, 231, 219, 0.15); --rule-2: rgba(236, 231, 219, 0.08);
+    --accent: #5cbcaa; --accent-2: #e0956b;
+    --graph-blue: #6381d9;
+    --grain-opacity: 0.055; --grain-blend: soft-light;
+    color-scheme: dark;
+  }
+  :root:not([data-mode="light"]) body.lab-page img:not([src$=".svg"]):not([data-src-dark]),
+  :root:not([data-mode="light"]) body.legal-page img:not([src$=".svg"]) {
+    filter: brightness(0.82) contrast(1.04);
+  }
+
   @media (prefers-color-scheme: dark) {
     :root:not([data-mode="light"]) body.jr-page {
       --jr-paper: #12151c; --jr-paper-deep: #0e1116; --jr-paper-pale: #191d26;
