@@ -37,7 +37,7 @@
   --amber:      #ffb547;
 
   /* ---- Type ---- */
-  --display: 'Space Grotesk', system-ui, sans-serif;
+  --display: 'Hanken Grotesk', system-ui, sans-serif; /* Space Grotesk was never self-hosted */
   --body:    'Hanken Grotesk', system-ui, sans-serif;
   --mono:    'IBM Plex Mono', ui-monospace, monospace;
 
