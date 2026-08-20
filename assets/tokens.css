@@ -123,9 +123,12 @@
              that is what its 84 !important declarations were encoding:
              hard corners over each product's own radius, flat cards,
              one nav treatment. As a layer it wins by position instead.
+   mode      light/dark counterpart palettes. Sets custom properties
+             only, and sits after polish because polish.css still
+             carries theme blocks for orrery and vellum.
    utilities single-purpose helpers; always last
    ------------------------------------------------------------ */
-@layer reset, tokens, product, base, page, polish, utilities;
+@layer reset, tokens, product, base, page, polish, mode, utilities;
 
 @layer tokens {
 :root {
@@ -424,3 +427,297 @@ body {
     color-scheme: light;
   }
 }
+
+/* ============================================================
+   MODE — a light and a dark face for every surface.
+
+   Each surface has a NATIVE mode: the lab, journal, news and Vespera
+   pages are paper; Orrery, Vellum and Shelterix are night. That
+   identity is the default and stays in each surface's own stylesheet.
+   This layer supplies the counterpart.
+
+   Selection has three states:
+     - no data-mode      the surface's native identity, except that a
+                         reader whose OS asks for dark gets the dark
+                         face of the paper surfaces. A dark-native
+                         product stays dark for a light-OS reader,
+                         because that is the brand, not a preference.
+     - data-mode=light   force the light face everywhere
+     - data-mode=dark    force the dark face everywhere
+
+   Only custom properties are set here, so nothing about layout or
+   spacing depends on the mode.
+   ============================================================ */
+
+/* ---- Paper surfaces, dark face ------------------------------- */
+@layer mode {
+  :root[data-mode="dark"] body.lab-page,
+  :root[data-mode="dark"] body.legal-page,
+  :root[data-mode="dark"] body.error-page {
+    --paper: #14130f; --paper-2: #1a1813; --card: #1f1d17;
+    --ink: #ece7db;
+    --rule: rgba(236, 231, 219, 0.15); --rule-2: rgba(236, 231, 219, 0.08);
+    --accent: #5cbcaa; --accent-2: #e0956b;
+  }
+  :root[data-mode="dark"] body.jr-page {
+    --jr-paper: #12151c; --jr-paper-deep: #0e1116; --jr-paper-pale: #191d26;
+    --jr-ink: #e6e9ef;
+    --jr-rule: rgba(230, 233, 239, 0.17); --jr-rule-light: rgba(230, 233, 239, 0.09);
+    --jr-cobalt: #86a4ff; --jr-cobalt-dark: #aec0ff;
+    --jr-coral: #ec8f80; --jr-lime: #b8ce66; --jr-violet: #ab92dc;
+    --jr-focus: #ec8f80;
+  }
+  :root[data-mode="dark"] body.nw-page {
+    --nw-paper: #12141d; --nw-paper-pale: #191c26; --nw-paper-deep: #0e1017;
+    --nw-ink: #e8eaf2;
+    --nw-rule: #3d4049; --nw-rule-light: #2b2e36;
+    --nw-cobalt: #7c9cf5; --nw-cobalt-dark: #aabeff;
+    --nw-coral: #ec7264; --nw-coral-bright: #ff8f7e;
+    --nw-violet: #ab92dc; --nw-lime: #c8d963; --nw-white: #12141d;
+  }
+  :root[data-mode="dark"] body.vespera-page {
+    --void: #070a0f; --bg: #10141b; --bg-2: #161b24;
+    --panel: #1a2029; --panel-2: #202733; --card: #161b24;
+    --line: rgba(232, 236, 242, 0.16); --line-strong: rgba(232, 236, 242, 0.34);
+    --rule: rgba(232, 236, 242, 0.15); --rule-2: rgba(232, 236, 242, 0.08);
+    --ink: #e8ecf2;
+    --signal: #7d94ff; --signal-2: #ff8a7d; --signal-3: #d3ec7e; --signal-4: #a68cf0;
+    --accent: #7d94ff; --accent-2: #ff8a7d;
+    --accent-soft: rgba(125, 148, 255, 0.26);
+  }
+  /* ---- Night surfaces, light face ---------------------------- */
+  :root[data-mode="light"] body.orrery-page,
+  :root[data-mode="light"] body.utility-page,
+  :root[data-mode="light"] body.auth-page {
+    --void: #e2e7ec; --bg: #f4f6f8; --bg-2: #eaeef2;
+    --panel: #ffffff; --panel-2: #f0f3f6;
+    --line: rgba(16, 20, 26, 0.13); --line-strong: rgba(16, 20, 26, 0.26);
+    --ink: #10141a;
+    --violet: #2c6fa8; --violet-lt: #1f5480; --violet-dk: #143a5c;
+    --teal: #0e8e7e; --teal-lt: #0a7062;
+    --brass: #96661a; --brass-lt: #7b5414;
+    --signal: #2c6fa8;
+    --green: #0f8a52; --red: #c22f3d; --amber: #a3670a;
+  }
+  :root[data-mode="light"] body.vellum-page {
+    --bg: #f7f4ee; --bg-2: #efebe2; --panel: #fffdf8; --panel-2: #f3efe6;
+    --line: rgba(23, 21, 15, 0.13); --line-strong: rgba(23, 21, 15, 0.26);
+    --ink: #17150f;
+    --signal: #8a5f0f; --brass: #8a5f0f; --brass-lt: #6f4c0c;
+    --wf-edge: 138, 95, 15; --wf-hot: 23, 21, 15;
+    --wf-node: 138, 95, 15; --wf-grid: 120, 112, 96;
+  }
+  :root[data-mode="light"] body.shelterix-page {
+    --void: #efe9df; --bg: #faf7f2; --bg-2: #f2ede4;
+    --panel: #ffffff; --panel-2: #f6f1e8; --card: #fffdf9;
+    --line: rgba(20, 17, 12, 0.13); --line-strong: rgba(20, 17, 12, 0.22);
+    --rule: rgba(20, 17, 12, 0.13); --rule-2: rgba(20, 17, 12, 0.07);
+    --ink: #14110c;
+    --signal: #9a6614; --signal-2: #7d5210;
+    --accent: #a8490d; --accent-2: #833807;
+    --accent-soft: rgba(154, 102, 20, 0.26);
+  }
+  /* A reader whose system asks for dark gets the dark face of the
+     paper surfaces without touching a control. The night products are
+     left alone: their darkness is the product, not a preference. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mode="light"]) body.lab-page,
+    :root:not([data-mode="light"]) body.legal-page,
+    :root:not([data-mode="light"]) body.error-page {
+      --paper: #14130f; --paper-2: #1a1813; --card: #1f1d17;
+      --ink: #ece7db;
+      --rule: rgba(236, 231, 219, 0.15); --rule-2: rgba(236, 231, 219, 0.08);
+      --accent: #5cbcaa; --accent-2: #e0956b;
+    }
+    :root:not([data-mode="light"]) body.jr-page {
+      --jr-paper: #12151c; --jr-paper-deep: #0e1116; --jr-paper-pale: #191d26;
+      --jr-ink: #e6e9ef;
+      --jr-rule: rgba(230, 233, 239, 0.17); --jr-rule-light: rgba(230, 233, 239, 0.09);
+      --jr-cobalt: #86a4ff; --jr-cobalt-dark: #aec0ff;
+      --jr-coral: #ec8f80; --jr-lime: #b8ce66; --jr-violet: #ab92dc;
+      --jr-focus: #ec8f80;
+    }
+    :root:not([data-mode="light"]) body.nw-page {
+      --nw-paper: #12141d; --nw-paper-pale: #191c26; --nw-paper-deep: #0e1017;
+      --nw-ink: #e8eaf2;
+      --nw-rule: #3d4049; --nw-rule-light: #2b2e36;
+      --nw-cobalt: #7c9cf5; --nw-cobalt-dark: #aabeff;
+      --nw-coral: #ec7264; --nw-coral-bright: #ff8f7e;
+      --nw-violet: #ab92dc; --nw-lime: #c8d963; --nw-white: #12141d;
+    }
+    :root:not([data-mode="light"]) body.vespera-page {
+      --void: #070a0f; --bg: #10141b; --bg-2: #161b24;
+      --panel: #1a2029; --panel-2: #202733; --card: #161b24;
+      --line: rgba(232, 236, 242, 0.16); --line-strong: rgba(232, 236, 242, 0.34);
+      --rule: rgba(232, 236, 242, 0.15); --rule-2: rgba(232, 236, 242, 0.08);
+      --ink: #e8ecf2;
+      --signal: #7d94ff; --signal-2: #ff8a7d; --signal-3: #d3ec7e; --signal-4: #a68cf0;
+      --accent: #7d94ff; --accent-2: #ff8a7d;
+      --accent-soft: rgba(125, 148, 255, 0.26);
+    }
+  }
+  /* ---- Aliases, re-resolved -------------------------------------
+     vespera.css defines --vespera-signal: var(--signal) on :root, so
+     it captured the :root value. A counterpart palette declared on
+     body then changes --signal without the alias noticing, and every
+     element reading the alias keeps the old hue.
+
+     Re-declaring the aliases on body makes them resolve against the
+     value body actually has. Same reason polish.css's --teal family
+     is repeated here. */
+  body {
+    --vespera-signal: var(--signal);
+    --focus-ring: var(--accent, var(--signal, currentColor));
+  }
+  :root[data-mode="light"] body.orrery-page,
+  :root[data-mode="light"] body.utility-page,
+  :root[data-mode="light"] body.auth-page,
+  :root[data-mode="light"] body.vellum-page {
+    --teal: var(--signal); --teal-lt: var(--signal);
+    --violet: var(--signal); --violet-lt: var(--signal);
+    --brass: var(--signal); --brass-lt: var(--signal);
+  }
+
+  /* Grain and colour-scheme follow the face, not the surface. */
+  :root[data-mode="dark"] body.lab-page,
+  :root[data-mode="dark"] body.legal-page,
+  :root[data-mode="dark"] body.error-page,
+  :root[data-mode="dark"] body.jr-page,
+  :root[data-mode="dark"] body.nw-page,
+  :root[data-mode="dark"] body.vespera-page {
+    --grain-opacity: 0.038; --grain-blend: soft-light; color-scheme: dark;
+  }
+  :root[data-mode="light"] body.orrery-page,
+  :root[data-mode="light"] body.utility-page,
+  :root[data-mode="light"] body.auth-page,
+  :root[data-mode="light"] body.vellum-page,
+  :root[data-mode="light"] body.shelterix-page {
+    --grain-opacity: 0.028; --grain-blend: multiply; color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mode="light"]) body.lab-page,
+    :root:not([data-mode="light"]) body.legal-page,
+    :root:not([data-mode="light"]) body.error-page,
+    :root:not([data-mode="light"]) body.jr-page,
+    :root:not([data-mode="light"]) body.nw-page,
+    :root:not([data-mode="light"]) body.vespera-page {
+      --grain-opacity: 0.038; --grain-blend: soft-light; color-scheme: dark;
+    }
+  }
+
+  /* Photography on this site is lit paper. On a dark ground an
+     untouched paper photograph glows like a lightbox, so pull it back
+     to sit in the page rather than on top of it. */
+  :root[data-mode="dark"] body.lab-page img:not([src$=".svg"]),
+  :root[data-mode="dark"] body.nw-page img:not([src$=".svg"]),
+  :root[data-mode="dark"] body.jr-page img:not([src$=".svg"]) {
+    filter: brightness(0.82) contrast(1.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mode="light"]) body.lab-page img:not([src$=".svg"]),
+    :root:not([data-mode="light"]) body.nw-page img:not([src$=".svg"]),
+    :root:not([data-mode="light"]) body.jr-page img:not([src$=".svg"]) {
+      filter: brightness(0.82) contrast(1.04);
+    }
+  }
+}
+
+/* ---- Mode control -------------------------------------------------
+   Injected by mode.js into whichever nav wrapper the page happens to
+   use. Deliberately quiet: a hairline square that matches the site's
+   hard corners, not a pill or a switch. */
+@layer polish {
+  .mode-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-inline-start: var(--space-s);
+    padding: 0;
+    flex: none;
+    background: transparent;
+    border: 1px solid var(--line, var(--rule, currentColor));
+    border-radius: var(--radius-control);
+    color: var(--ink-2, inherit);
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color var(--motion-control) var(--ease),
+      border-color var(--motion-control) var(--ease),
+      background var(--motion-control) var(--ease);
+  }
+  .mode-toggle:hover {
+    color: var(--signal, var(--accent, inherit));
+    border-color: var(--signal, var(--accent, currentColor));
+    background: var(--accent-soft, transparent);
+  }
+  .mode-toggle span {
+    display: block;
+    transition: transform var(--motion-advance) var(--ease);
+  }
+  .mode-toggle:hover span { transform: rotate(-18deg); }
+
+  /* The journal and news headers are grids with a fixed column count,
+     so the button has to be told where to sit rather than appended. */
+  .jr-header-inner .mode-toggle,
+  .nw-header-inner .mode-toggle { align-self: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer polish {
+    .mode-toggle, .mode-toggle span { transition: none; }
+    .mode-toggle:hover span { transform: none; }
+  }
+}
+
+/* ============================================================
+   QUIET TONES, DERIVED
+
+   --muted and --faint were hand-picked per surface, which meant
+   fourteen separate judgement calls about how quiet is quiet enough.
+   Several landed just under WCAG AA (4.24, 4.33, 4.47 against 4.5),
+   and adding a counterpart face to each surface would have doubled
+   the number of those judgements.
+
+   Instead, mix the surface's own ink into the surface's own ground.
+   Hue is preserved because both operands belong to the theme, and the
+   contrast ratio is a property of the mix rather than of a guess.
+   Measured across all fourteen surface/mode pairs against the page
+   ground, 70% ink clears 5.4:1 at worst. The extra margin over the
+   4.5 threshold pays for panels, which sit a step off the ground and
+   cost roughly half a point.
+
+   This sits in @layer mode so it applies in both faces, and so each
+   surface's stylesheet can still state its own ink and ground.
+   ============================================================ */
+@layer mode {
+  /* Any element that restates its own ink and ground re-derives these,
+     so a fixed-tone surface (a render viewport, a photographic plate)
+     keeps legible labels whichever face the page is wearing. */
+  body,
+  [data-tone],
+  .proof-stage, .review-stage, .engine-view {
+    --ink-2: color-mix(in srgb, var(--ink) 88%, var(--bg, var(--paper, #fff)));
+    --muted: color-mix(in srgb, var(--ink) 78%, var(--bg, var(--paper, #fff)));
+    --faint: color-mix(in srgb, var(--ink) 70%, var(--bg, var(--paper, #fff)));
+  }
+
+  /* The journal and news pages namespace their palettes, so they need
+     the same treatment spelled with their own token names. */
+  body.jr-page {
+    --jr-ink-soft: color-mix(in srgb, var(--jr-ink) 88%, var(--jr-paper));
+    --jr-muted:    color-mix(in srgb, var(--jr-ink) 78%, var(--jr-paper));
+    --jr-faint:    color-mix(in srgb, var(--jr-ink) 70%, var(--jr-paper));
+  }
+  body.nw-page {
+    --nw-ink-soft: color-mix(in srgb, var(--nw-ink) 88%, var(--nw-paper));
+    --nw-muted:    color-mix(in srgb, var(--nw-ink) 78%, var(--nw-paper));
+    --nw-faint:    color-mix(in srgb, var(--nw-ink) 70%, var(--nw-paper));
+  }
+}
+
+/* genesis-fall.html is a single art-directed teaser with its own
+   --qe-* palette and no counterpart; it stays night in both modes. */
+

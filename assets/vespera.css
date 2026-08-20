@@ -1109,7 +1109,7 @@ body.vespera-page {
 .vespera-close p {
   max-width: 42ch;
   margin-bottom: 22px;
-  color: rgba(247, 243, 235, 0.78);
+  color: color-mix(in srgb, var(--bg) 78%, transparent);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -1117,7 +1117,7 @@ body.vespera-page {
 .vespera-note {
   margin-top: 28px;
   max-width: 56ch;
-  color: rgba(247, 243, 235, 0.58);
+  color: color-mix(in srgb, var(--bg) 58%, transparent);
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.04em;

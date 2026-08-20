@@ -16,7 +16,7 @@
   --rule:    rgba(23, 22, 15, 0.14);
   --rule-2:  rgba(23, 22, 15, 0.07);
   --accent:  #156054;
-  --accent-2:#b1542d;
+  --accent-2:#a54e2a;  /* darkened from #b1542d: 4.15:1 on --paper-2 */
 
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans:  'Hanken Grotesk', system-ui, sans-serif;

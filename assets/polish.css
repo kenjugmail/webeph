@@ -820,6 +820,13 @@ body.vellum-page .review-stage,
 body.vellum-page .engine-view {
   background: #090806;
   box-shadow: none;
+  /* These are render viewports: they stay dark in the light face the
+     same way a photograph does. Restating ink and ground here makes
+     the derived quiet tones resolve against this surface instead of
+     the page, so labels over the render stay legible in both faces. */
+  --bg: #090806;
+  --ink: #f2ede2;
+  --red: #ff8a94;
 }
 body.vellum-page .proof-stage::after,
 body.vellum-page .review-stage::after,

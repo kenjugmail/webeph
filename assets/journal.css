@@ -17,7 +17,7 @@
   --jr-rule-light: rgba(16, 26, 42, .09);
   --jr-cobalt: #2d5bd1;
   --jr-cobalt-dark: #1c3e99;
-  --jr-coral: #c95e4e;
+  --jr-coral: #b74838;   /* darkened from #c95e4e: 3.62:1 on jr-paper */
   --jr-lime: #869f39;
   --jr-violet: #7658ae;
   --jr-serif: 'Newsreader', Georgia, serif;
@@ -244,10 +244,15 @@
   transition: background .22s ease, color .22s ease, border-color .22s ease, transform .22s ease;
 }
 .jr-button:hover { background: var(--jr-ink); color: var(--jr-paper); transform: translateY(-1px); }
-.jr-button-primary { background: var(--jr-cobalt); border-color: var(--jr-cobalt); color: #fff; }
-.jr-button-primary:hover { background: var(--jr-cobalt-dark); border-color: var(--jr-cobalt-dark); }
-.jr-button-coral { border-color: var(--jr-coral); color: var(--jr-coral); }
-.jr-button-coral:hover { background: var(--jr-coral); color: #fff; }
+/* Scoped with .jr-page because `.jr-page a { color: inherit }` above is
+   more specific than a bare .jr-button-primary, so an unscoped rule
+   here loses and the button paints itself in the page ink. */
+.jr-page .jr-button-primary { background: var(--jr-cobalt); border-color: var(--jr-cobalt); color: var(--jr-paper); }
+.jr-page .jr-button-primary * { color: inherit; }
+.jr-page .jr-button-primary:hover { background: var(--jr-cobalt-dark); border-color: var(--jr-cobalt-dark); }
+.jr-page .jr-button-coral { border-color: var(--jr-coral); color: var(--jr-coral); }
+.jr-page .jr-button-coral:hover { background: var(--jr-coral); color: var(--jr-paper); }
+.jr-page .jr-button-coral:hover * { color: inherit; }
 .jr-button-small { min-height: 36px; padding: 7px 11px; font-size: 10px; }
 .jr-button[disabled] { cursor: wait; opacity: .48; transform: none; }
 
@@ -376,14 +381,16 @@
 .jr-band {
   padding: 53px 0;
   background: var(--jr-cobalt);
-  color: #fff;
+  /* The page ground, not a literal white: the band inverts with the
+     page, so its text has to invert with it. */
+  color: var(--jr-paper);
 }
 .jr-band-inner { display: grid; grid-template-columns: 1fr auto; gap: 35px; align-items: center; }
-.jr-band .jr-section-label { color: rgba(255,255,255,.74); }
+.jr-band .jr-section-label { color: color-mix(in srgb, var(--jr-paper) 88%, transparent); }
 .jr-band h2 { max-width: 19ch; margin-top: 13px; font-size: clamp(29px, 4vw, 50px); line-height: 1; }
-.jr-band p { max-width: 49ch; margin-top: 15px; color: rgba(255,255,255,.78); font-size: 14px; }
-.jr-band .jr-button { border-color: #fff; color: #fff; }
-.jr-band .jr-button:hover { background: #fff; color: var(--jr-cobalt-dark); }
+.jr-band p { max-width: 49ch; margin-top: 15px; color: color-mix(in srgb, var(--jr-paper) 92%, transparent); font-size: 14px; }
+.jr-band .jr-button { border-color: var(--jr-paper); color: var(--jr-paper); }
+.jr-band .jr-button:hover { background: var(--jr-paper); color: var(--jr-cobalt); }
 
 .jr-footer { padding: 54px 0 35px; }
 .jr-footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px; }
@@ -545,7 +552,7 @@
 .jr-author-row .jr-input,
 .jr-author-row .jr-select { min-height: 39px; font-size: 14px; }
 .jr-remove-author { width: 36px; min-height: 39px; padding: 0; border: 1px solid var(--jr-rule); background: transparent; color: var(--jr-coral); }
-.jr-remove-author:hover { background: var(--jr-coral); color: #fff; }
+.jr-remove-author:hover { background: var(--jr-coral); color: var(--jr-paper); }
 .jr-form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
 .jr-form-msg { min-height: 1.5em; color: var(--jr-muted); font-size: 13px; }
 .jr-form-msg[data-tone="error"] { color: var(--jr-coral); }
@@ -642,7 +649,7 @@ body.research-login.utility-page .auth-card { max-width: 580px; padding: 39px 34
 .research-login .auth-divider::after { background: var(--jr-rule); }
 body.research-login.utility-page .auth-input { border-color: var(--jr-rule); border-radius: 0; background: var(--jr-paper); color: var(--jr-ink); }
 .research-login .auth-input:focus { border-color: var(--jr-cobalt); }
-.research-login .btn-primary { border-color: var(--jr-cobalt); background: var(--jr-cobalt); color: #fff; }
+.research-login .btn-primary { border-color: var(--jr-cobalt); background: var(--jr-cobalt); color: var(--jr-paper); }
 .research-login .btn-primary:hover { border-color: var(--jr-cobalt-dark); background: var(--jr-cobalt-dark); }
 .research-login .btn-ghost { border-color: var(--jr-ink); color: var(--jr-ink); }
 .research-login .btn-ghost:hover { background: var(--jr-ink); color: var(--jr-paper); }
