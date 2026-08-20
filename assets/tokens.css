@@ -629,11 +629,23 @@ body {
     transform-origin: left;
   }
 
-  /* Type that sits on a photograph rather than on the page. A plate is
-     a picture in both faces -- lit paper in one, a toned negative in
-     the other -- so a caption over it needs its own constant tone and
-     a scrim, not the page ground. */
+  /* Type that sits on a photograph rather than on the page.
+
+     A first version made this a constant light tone, reasoning that a
+     plate is a picture in both faces and so wants its own colour
+     regardless of the page. That was half right and produced
+     near-white captions on a near-white photograph: the two plates are
+     tonal opposites. The light face shows lit paper, the dark face
+     shows its inversion, so the caption has to follow the plate --
+     dark ink over the bright one, light ink over the dark one, each
+     with the opposite scrim. */
   body {
+    --on-plate: #17160f;
+    --on-plate-scrim: 0 1px 3px rgba(255, 255, 255, .6), 0 1px 10px rgba(255, 255, 255, .45);
+  }
+  :root[data-mode="dark"] body,
+  :root:not([data-mode="light"]) body.lab-page,
+  :root:not([data-mode="light"]) body.legal-page {
     --on-plate: #f6f2e8;
     --on-plate-scrim: 0 1px 3px rgba(0, 0, 0, .55), 0 1px 12px rgba(0, 0, 0, .4);
   }
@@ -655,19 +667,27 @@ body {
     position: relative;
     background-image:
       radial-gradient(72% 58% at 22% 18%,
-        color-mix(in srgb, var(--accent, transparent) var(--atmos-a, 12%), transparent),
+        color-mix(in srgb, var(--atmos-tint, var(--accent, transparent)) var(--atmos-a, 40%), transparent),
         transparent 68%),
       radial-gradient(58% 50% at 86% 78%,
-        color-mix(in srgb, var(--signal, var(--accent, transparent)) var(--atmos-b, 7%), transparent),
+        color-mix(in srgb, var(--atmos-tint-2, var(--signal, transparent)) var(--atmos-b, 24%), transparent),
         transparent 64%);
     background-repeat: no-repeat;
   }
+  /* On paper, light is not coloured. A lamp in a dark room has a hue
+     and casts one; daylight on a sheet of stock just makes the sheet
+     brighter. Tinting cream with the teal accent produced a grey-green
+     cast in the corner that reads as dirt rather than as light, so the
+     paper faces lift toward their own lightest tone instead. */
+  body { --atmos-tint: var(--card, #fff); --atmos-tint-2: var(--card, #fff); }
   /* A light effect needs somewhere dark to happen. The same wash that
      muddies cream is the light in the room on a night ground. */
   :root:not([data-mode="light"]) body.lab-page,
   :root[data-mode="dark"] body,
   body.orrery-page, body.vellum-page,
   body.shelterix-page, body.utility-page {
+    --atmos-tint: var(--accent);
+    --atmos-tint-2: var(--signal, var(--accent));
     --atmos-a: 26%;
     --atmos-b: 16%;
     --shadow-a1: 0.30; --shadow-a2: 0.46; --shadow-a3: 0.58;
