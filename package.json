@@ -17,7 +17,8 @@
     "shoot": "node scripts/shoot.mjs",
     "plates": "python3 scripts/make-dark-plates.py",
     "layout": "node scripts/check-layout.mjs",
-    "tracking": "node scripts/check-tracking.mjs"
+    "tracking": "node scripts/check-tracking.mjs",
+    "jank": "node scripts/check-jank.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1"

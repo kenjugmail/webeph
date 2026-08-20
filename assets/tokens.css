@@ -534,6 +534,29 @@ body {
     font-weight: var(--w-semi);
   }
 
+  /* ---- Off-screen work ------------------------------------------
+     motion.js writes --scene-progress on a scene root every frame, and
+     an untyped custom property change invalidates style for the whole
+     subtree beneath it. On an eleven-thousand-pixel page that is most
+     of the document, most frames: measured at 3818 recalculations
+     costing 2.08s over one scroll, against 0.05s of layout.
+
+     content-visibility lets the engine skip style and layout entirely
+     for a section that is not near the viewport. The intrinsic size
+     keeps the scrollbar honest while a section is skipped, so the page
+     does not jump as sections enter.
+
+     Registering the property with @property was tried first and made
+     it worse -- 2.88s, because a typed property is validated on every
+     write. The win is in not doing the work, not in doing it faster. */
+  body.lab-page .esec,
+  body.lab-page .efoot,
+  body.nw-page .nw-section,
+  body.jr-page .jr-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
   /* ---- Measure --------------------------------------------------
      Past roughly 75 characters the eye loses its place on the way back
      to the next line, and secondary prose is where that goes wrong:

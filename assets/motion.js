@@ -39,7 +39,21 @@
       scene.lastTime = now;
 
       const progress = scene.progress;
-      element.style.setProperty('--scene-progress', progress.toFixed(4));
+
+      /* Only written when a scene asks for it. An untyped custom
+         property change invalidates style for the element and every
+         descendant that might read it, and this was being written to
+         every scene root on every frame -- 94 descendants on the home
+         page for a value that exactly one rule on one other page
+         consumes. Measured at 2.08s of style recalculation over one
+         scroll, against 0.05s of layout.
+
+         Scenes that drive CSS from the progress value opt in with
+         data-scene-progress. Everything else is driven by
+         data-scene-step or by a callback, neither of which needs it. */
+      if (scene.emitProgress) {
+        element.style.setProperty('--scene-progress', progress.toFixed(4));
+      }
 
       const stepCount = Number(element.dataset.sceneSteps || 0);
       if (stepCount > 0) {
@@ -83,7 +97,8 @@
         progress: null,
         lastTime: 0,
         declaredRate: Number.isFinite(declaredRate) ? Math.max(0, declaredRate) : 0,
-        rate: Number.isFinite(declaredRate) ? Math.max(0, declaredRate) : 0
+        rate: Number.isFinite(declaredRate) ? Math.max(0, declaredRate) : 0,
+        emitProgress: element.dataset.sceneProgress !== undefined
       };
       scenes.set(element, scene);
       if (sceneObserver) sceneObserver.observe(element);
