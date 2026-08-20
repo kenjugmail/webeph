@@ -1216,17 +1216,6 @@ body.vespera-page {
   transform: none;
 }
 
-.skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
-.skip-link:focus {
-  left: 12px;
-  top: 12px;
-  padding: 10px 16px;
-  background: var(--vespera-signal);
-  color: #fff;
-  border-radius: 4px;
-  font-family: var(--mono);
-  font-size: 13px;
-}
 
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {

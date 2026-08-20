@@ -165,17 +165,64 @@
 
   /* Nav already sets its own background in tokens.css's utilities
      block; glass loads later in the same layer and takes over. */
+  /* SSTR's nav backdrop is rgba(0,0,0,0.01) with blur(20px)
+     saturate(180%) -- almost no tint, letting the blur carry it. That
+     works there and works here for the chrome, which holds a handful
+     of words over content that scrolls behind. A card holding body
+     copy cannot afford it, so only the bars get the light tint. */
+  :root[data-material="glass"] .nav,
+  :root[data-material="glass"] .ebar,
+  :root[data-material="glass"] .jr-header,
+  :root[data-material="glass"] .nw-header {
+    background: color-mix(in srgb, var(--bg, var(--paper)) 58%, transparent);
+    --glass-blur: 28px;
+    --glass-saturate: 185%;
+  }
   :root[data-material="glass"] .nav.scrolled,
   :root[data-material="glass"] .ebar.scrolled {
     background: var(--glass-tint-strong);
   }
 
-  /* Hard corners are this site's signature and glass does not get to
-     change that. The lens in glass.js reads the computed radius, so a
-     3px corner refracts as a 3px corner rather than an iOS pill. */
+  /* ---- Chamfer -------------------------------------------------
+     Hard corners are this site's signature and glass does not get to
+     round them. The lens in glass.js reads the computed radius, so a
+     3px corner refracts as a 3px corner rather than an iOS pill.
+
+     What glass does get is a cut corner. SSTR uses clip-path polygons
+     rather than radii throughout, and a chamfer suits a research
+     instrument far better than a rounded rectangle: it reads as
+     machined rather than as soft. It is also the one shape a radius
+     cannot fake.
+
+     Two layers, because a clip-path removes the corner rather than
+     bending the border around it, so a bordered element loses its edge
+     exactly where the cut is. The ::before carries the rim at the same
+     shape, inset by a pixel, and the panel sits on top of it. */
   :root[data-material="glass"] .card,
   :root[data-material="glass"] .price-card,
-  :root[data-material="glass"] .auth-card { border-radius: var(--radius-panel); }
+  :root[data-material="glass"] .auth-card,
+  :root[data-material="glass"] .menu-panel {
+    --chamfer: 10px;
+    border-radius: 0;
+    clip-path: polygon(
+      var(--chamfer) 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer),
+      100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%,
+      var(--chamfer) 100%, 0 calc(100% - var(--chamfer)), 0 var(--chamfer));
+  }
+  :root[data-material="glass"] .card::before,
+  :root[data-material="glass"] .price-card::before,
+  :root[data-material="glass"] .auth-card::before,
+  :root[data-material="glass"] .menu-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: var(--glass-rim-lit);
+    clip-path: inherit;
+  }
+  /* The mode control is small enough that a 10px cut would eat it. */
+  :root[data-material="glass"] .mode-toggle { --chamfer: 5px; }
 }
 
 /* The blur and the pointer-tracked sheen are both continuous work for

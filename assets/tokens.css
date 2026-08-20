@@ -402,6 +402,58 @@ body {
   .reveal.d3, .rv.d3 { transition-delay: 195ms; }
   .reveal.d4, .rv.d4 { transition-delay: 250ms; }
 
+  /* ---- Skip link ------------------------------------------------
+     Defined here because it is the one control whose failure mode is
+     silent in the wrong direction: styled wrong, it is a stray link
+     sitting in the top-left corner of the design. It was defined in
+     four product stylesheets and genesis-fall.html loads none of
+     them, so that page shipped a visible "Skip to content".
+
+     Hidden by clipping rather than by left: -9999px. The offset
+     technique keeps the element in the layout at a huge coordinate,
+     which some engines will scroll to on focus and which contributes
+     to scrollable overflow; clip removes it from paint while leaving
+     it exactly where it is. */
+  .skip-link, .jr-skip, .nw-skip {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .skip-link:focus, .jr-skip:focus, .nw-skip:focus,
+  .skip-link:focus-visible, .jr-skip:focus-visible, .nw-skip:focus-visible {
+    position: fixed;
+    z-index: 10000;
+    top: 12px;
+    left: 12px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 10px 16px;
+    overflow: visible;
+    clip-path: none;
+    /* The chain has to reach the namespaced palettes and then end in a
+       literal. The journal, news and genesis surfaces define none of
+       --signal, --accent or --ink, so a chain that stopped there gave
+       the focused link a transparent background -- visible, focused,
+       and unreadable, which is worse than hidden. */
+    background: var(--signal, var(--accent,
+      var(--jr-cobalt, var(--nw-cobalt, var(--qe-teal, var(--ink, #16181c))))));
+    color: var(--bg, var(--paper,
+      var(--jr-paper, var(--nw-paper, var(--qe-night, #ffffff)))));
+    font-family: var(--mono);
+    font-size: var(--t-base);
+    letter-spacing: var(--ls-sm);
+    border-radius: var(--radius-control);
+    outline: 2px solid var(--ink, var(--jr-ink, var(--nw-ink, currentColor)));
+    outline-offset: 2px;
+  }
+
   /* ---- Measure --------------------------------------------------
      Past roughly 75 characters the eye loses its place on the way back
      to the next line, and secondary prose is where that goes wrong:

@@ -81,6 +81,22 @@ for (const look of LOOKS) {
         }
       }
 
+      /* --- affordances that should be hidden until focused --------
+         A skip link is the one control whose failure is silent in the
+         wrong direction: unstyled, it is a stray link sitting in the
+         corner of the design, and nothing else on the page looks
+         wrong. genesis-fall.html shipped one that way. */
+      for (const el of document.querySelectorAll('.skip-link, .jr-skip, .nw-skip, [href^="#main"], [href^="#content"]')) {
+        const cs = getComputedStyle(el);
+        const r = el.getBoundingClientRect();
+        if (!visible(el, cs, r)) continue;
+        if (r.width < 8 || r.height < 8) continue;      // clipped as intended
+        if (el.matches(':focus, :focus-visible')) continue;
+        out.push({ kind: 'skip', hard: true, sel: name(el),
+          note: `visible at rest, ${Math.round(r.width)}x${Math.round(r.height)}px`,
+          sample: (el.textContent || '').trim().slice(0, 30) });
+      }
+
       /* --- images off their intrinsic aspect --------------------- */
       for (const img of document.querySelectorAll('img')) {
         const r = img.getBoundingClientRect();
@@ -223,7 +239,7 @@ for (const f of findings) {
   groups.set(key, g);
 }
 
-const order = ['clipped', 'image', 'overlap', 'aspect', 'measure', 'orphan'];
+const order = ['skip', 'clipped', 'image', 'overlap', 'aspect', 'measure', 'orphan'];
 const rows = [...groups.values()].sort(
   (a, b) => order.indexOf(a.kind) - order.indexOf(b.kind) || a.path.localeCompare(b.path));
 

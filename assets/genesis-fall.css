@@ -70,7 +70,11 @@ body.genesis-fall-page {
   box-shadow: 0 35px 90px rgba(0,0,0,.38);
 }
 .qe-capture::before { content: ""; position: absolute; inset: 9% 8%; border: 1px solid var(--qe-rule); border-radius: 10px; }
-.qe-capture-mark { position: absolute; width: 32%; left: 34%; top: 20%; filter: drop-shadow(0 18px 28px rgba(0,0,0,.36)); }
+/* height: auto is load-bearing. The markup carries width="1024"
+   height="1024" for aspect hinting, and with width set in CSS but
+   height left alone the attribute is taken as a literal pixel
+   height: the mark drew 164x1024 inside a 322px figure. */
+.qe-capture-mark { position: absolute; width: 32%; height: auto; left: 34%; top: 20%; filter: drop-shadow(0 18px 28px rgba(0,0,0,.36)); }
 .qe-capture-note { position: absolute; left: 8%; right: 8%; bottom: 8%; display: flex; justify-content: space-between; gap: 18px; padding-top: 14px; border-top: 1px solid var(--qe-rule); color: var(--qe-muted); font: 600 .7rem/1.45 monospace; letter-spacing: .06em; text-transform: uppercase; }
 .qe-capture-note b { color: var(--qe-violet); font-weight: 700; }
 

@@ -159,6 +159,4 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce){ .rv { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
 
 /* skip link */
-.skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
-.skip-link:focus { left: 12px; top: 12px; padding: 10px 16px; background: var(--ink); color: var(--paper); border-radius: 4px; font-family: var(--mono); font-size: 13px; }
 }
