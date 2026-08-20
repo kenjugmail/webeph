@@ -37,17 +37,62 @@
     }));
   }
 
+  /* Surfaces that follow the reader's system preference. The lab pages
+     are deliberately absent: they are built around photography of lit
+     paper and stay paper unless a reader asks for dark here. Must match
+     the @media blocks in tokens.css, or the control offers the wrong
+     switch. */
+  var FOLLOWS_SYSTEM = ['jr-page', 'nw-page', 'vespera-page'];
+
+  /* Surfaces whose native face is night. */
+  var NATIVE_DARK = ['orrery-page', 'utility-page', 'auth-page',
+    'vellum-page', 'shelterix-page', 'genesis-fall-page'];
+
+  var has = function (list) {
+    var body = document.body;
+    if (!body) return false;
+    for (var i = 0; i < list.length; i++) {
+      if (body.classList.contains(list[i])) return true;
+    }
+    return false;
+  };
+
   /** What the page is showing right now, whichever way it got there. */
   function effective() {
     if (root.dataset.mode) return root.dataset.mode;
-    var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var body = document.body;
-    var paper = body && (body.classList.contains('lab-page') ||
-      body.classList.contains('jr-page') || body.classList.contains('nw-page') ||
-      body.classList.contains('vespera-page') || body.classList.contains('legal-page') ||
-      body.classList.contains('error-page'));
-    if (paper) return dark ? 'dark' : 'light';
-    return 'dark';
+    if (has(FOLLOWS_SYSTEM)) {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return has(NATIVE_DARK) ? 'dark' : 'light';
+  }
+
+
+  /* ---- Photographic plates -------------------------------------------
+     The hero plates are pins and thread on lit paper. On the dark face
+     an untouched one glows like a lightbox, so the build carries a
+     tone-inverted twin (scripts/make-dark-plates.py) and these swap to
+     it.
+
+     The light srcset stays in the markup rather than being held in a
+     data attribute and set from here. That keeps the browser's preload
+     scanner working for the common path, at the cost of one extra
+     fetch for a reader who has chosen dark -- on the lab pages dark is
+     opt-in, so that is the smaller population, and delaying the LCP
+     image for everyone to save it would be the wrong trade. */
+  function plates(face) {
+    var dark = face === 'dark';
+    var nodes = document.querySelectorAll('[data-srcset-dark], [data-src-dark]');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.dataset.srcsetDark) {
+        if (!el.dataset.srcsetLight) el.dataset.srcsetLight = el.getAttribute('srcset');
+        el.setAttribute('srcset', dark ? el.dataset.srcsetDark : el.dataset.srcsetLight);
+      }
+      if (el.dataset.srcDark) {
+        if (!el.dataset.srcLight) el.dataset.srcLight = el.getAttribute('src');
+        el.setAttribute('src', dark ? el.dataset.srcDark : el.dataset.srcLight);
+      }
+    }
   }
 
   function build() {
@@ -62,7 +107,7 @@
        markup, so attach to whichever inner wrapper this page happens
        to use rather than assuming one structure. */
     var host = document.querySelector(
-      '.ebar-in, .nav-inner, .jr-header-inner, .nw-header-inner, .enav, .nav-links'
+      '.ebar-in, .nav-inner, .jr-header-inner, .nw-masthead-row, .enav, .nav-links'
     );
     if (!host) return;
 
@@ -85,13 +130,15 @@
     btn.addEventListener('click', function () {
       apply(effective() === 'dark' ? 'light' : 'dark');
       label();
+      plates(effective());
     });
 
     label();
+    plates(effective());
 
-    /* If the reader has expressed no preference, keep following the OS. */
+    /* Relabel on a system change only where the system drives the face. */
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
-    var onChange = function () { if (!stored()) label(); };
+    var onChange = function () { if (!stored() && has(FOLLOWS_SYSTEM)) label(); };
     if (mq.addEventListener) mq.addEventListener('change', onChange);
     else if (mq.addListener) mq.addListener(onChange);
   }

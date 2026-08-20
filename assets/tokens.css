@@ -208,6 +208,9 @@
      curve than the house one. It reads as physical rather than snappy,
      which suits a diagram, so it gets a name instead of being folded in. */
   --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Symmetrical, for something that has to track a finger rather
+     than perform an arrival. */
+  --ease-press: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ---- Mode ----------------------------------------------------
      Grain sits differently on paper than on a dark ground: multiply
@@ -321,9 +324,16 @@ body {
      breaks at real syllable boundaries for the document language rather
      than letting the word push the page wider than the viewport. */
   @media (max-width: 640px) {
-    h1, h2, .display, .display-serif, .display-sans {
+    /* h1 is deliberately excluded. A brand statement broken as
+       "tempo-rary" reads as a fault, not as typesetting, and the hero
+       clamps are sized to fit a 375px measure without help. Section
+       headings and decks are long enough that a real syllable break is
+       preferable to a ragged line, and the limits keep the fragments
+       from getting silly. */
+    h2, h3, .display, .display-serif, .display-sans, .deck {
       hyphens: auto;
       -webkit-hyphens: auto;
+      hyphenate-limit-chars: 8 4 4;
     }
   }
 
@@ -334,12 +344,20 @@ body {
   .reveal,
   .rv {
     opacity: 0;
-    transform: translateY(14px);
-    filter: blur(6px);
+    transform: translateY(12px);
+    filter: blur(5px);
+    /* Three properties, three durations, on purpose. Moving them
+       together is the single thing that makes an entrance read as one
+       mechanical slide: the element arrives and settles on the same
+       frame, which nothing physical does.
+
+       Opacity finishes first, so the content is readable while it is
+       still coming to rest. Focus resolves next. Position takes
+       longest, because weight is the slowest thing to settle. */
     transition:
-      opacity var(--motion-settle) var(--ease-out),
-      transform var(--motion-settle) var(--ease-out),
-      filter var(--motion-settle) var(--ease-out);
+      opacity var(--motion-advance) var(--ease-out),
+      filter var(--motion-glide) var(--ease-out),
+      transform var(--motion-slow) var(--ease-out);
   }
   .reveal.in,
   .rv.in {
@@ -350,10 +368,35 @@ body {
 
   /* The markup already carries 51 of these; polish.css was zeroing
      every delay, so a staggered group animated as one block. */
-  .reveal.d1, .rv.d1 { transition-delay: 80ms; }
-  .reveal.d2, .rv.d2 { transition-delay: 150ms; }
-  .reveal.d3, .rv.d3 { transition-delay: 240ms; }
-  .reveal.d4, .rv.d4 { transition-delay: 330ms; }
+  /* Widening gaps, not even ones: an evenly spaced cascade reads as a
+     machine counting rather than as a page arriving. */
+  .reveal.d1, .rv.d1 { transition-delay: 70ms; }
+  .reveal.d2, .rv.d2 { transition-delay: 135ms; }
+  .reveal.d3, .rv.d3 { transition-delay: 195ms; }
+  .reveal.d4, .rv.d4 { transition-delay: 250ms; }
+
+  /* ---- Press --------------------------------------------------------
+     A control that does not move under the finger feels dead. Small
+     enough to be felt rather than watched, and fast, because the whole
+     point is that it tracks the press rather than animating after it. */
+  .btn, .ebtn, .jr-button, .nw-button, .mode-toggle, button {
+    transition:
+      background var(--motion-control) var(--ease),
+      border-color var(--motion-control) var(--ease),
+      color var(--motion-control) var(--ease),
+      transform var(--motion-press) var(--ease-press);
+  }
+  .btn:active, .ebtn:active, .jr-button:active,
+  .mode-toggle:active, button:active { transform: scale(0.985); }
+
+  /* Links that carry an arrow move it, not themselves. */
+  .btn [aria-hidden="true"], .ebtn [aria-hidden="true"],
+  .jr-button [aria-hidden="true"] {
+    display: inline-block;
+    transition: transform var(--motion-advance) var(--ease);
+  }
+  .btn:hover [aria-hidden="true"], .ebtn:hover [aria-hidden="true"],
+  .jr-button:hover [aria-hidden="true"] { transform: translateX(3px); }
 
   /* ---- Navigation underline ---------------------------------------
      Wipes out to the right and back in from the left, so hovering
@@ -384,6 +427,89 @@ body {
     transform-origin: left;
   }
 
+  /* Type that sits on a photograph rather than on the page. A plate is
+     a picture in both faces -- lit paper in one, a toned negative in
+     the other -- so a caption over it needs its own constant tone and
+     a scrim, not the page ground. */
+  body {
+    --on-plate: #f6f2e8;
+    --on-plate-scrim: 0 1px 3px rgba(0, 0, 0, .55), 0 1px 12px rgba(0, 0, 0, .4);
+  }
+
+  /* ---- Atmosphere ---------------------------------------------------
+     One very soft wash behind each hero. Borrowed from kloak and the
+     DateAutomater stage, dialled back hard: on paper it is a warm
+     breath under the type rather than a gradient anyone would name,
+     and on the night surfaces it does the work a lit backdrop does in
+     a photograph.
+
+     Painted as the hero's own background rather than a blurred
+     pseudo-element. A wide, gentle falloff IS the blur, so there is no
+     filter to composite, nothing to bleed past the element box -- the
+     first attempt used inset: -8% -12% with filter: blur(46px) and
+     pushed the home page 45px wider than a phone -- and nothing that
+     needs switching off for reduced motion. */
+  .ehero, .hero, .vhero, .sxhero, .jr-hero, .ap-hero, .nw-article-hero {
+    position: relative;
+    background-image:
+      radial-gradient(72% 58% at 22% 18%,
+        var(--accent-soft, transparent), transparent 68%),
+      radial-gradient(58% 50% at 86% 78%,
+        color-mix(in srgb, var(--signal, var(--accent, transparent)) 7%, transparent),
+        transparent 64%);
+    background-repeat: no-repeat;
+  }
+
+  /* ---- Vignette -----------------------------------------------------
+     Dark surfaces only. Corners a shade deeper than the centre is what
+     stops a large black field reading as flat paint.
+
+     Deliberately weak, and the weakness is measured rather than
+     judged. This is a fixed overlay, so it is not an ancestor of any
+     text and scripts/check-contrast.mjs cannot see it: whatever it
+     costs is invisible to the audit. At opacity .5 it took the corner
+     text on the dark journal face from 15.0:1 to 4.45:1 -- below AA,
+     silently. At .28 against a 70% mix the same text holds 8.2:1, and
+     the transparent stop is pushed out to 55% so the darkening only
+     reaches the outer margin where text rarely sits. */
+  body.orrery-page::before, body.vellum-page::before,
+  body.shelterix-page::before, body.utility-page::before,
+  :root[data-mode="dark"] body.jr-page::before,
+  :root[data-mode="dark"] body.nw-page::before,
+  :root[data-mode="dark"] body.vespera-page::before,
+  :root[data-mode="dark"] body.lab-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1999;
+    pointer-events: none;
+    background: radial-gradient(ellipse 124% 94% at 50% 44%,
+      transparent 55%,
+      color-mix(in srgb, var(--bg, var(--paper, #000)) 70%, black) 100%);
+    opacity: 0.28;
+  }
+
+  /* ---- Elevation, used sparingly -------------------------------------
+     The flatness here is deliberate -- hard corners, hairline rules --
+     so shadow is reserved for the two cases that earn it: a
+     photographic plate, which is an object sitting on the page, and a
+     card under the cursor, which needs to answer. Both tiers are
+     tinted with the surface ink, so they read as that surface's own
+     shade rather than a grey wash.
+
+     DateAutomater uses six shadows in five thousand lines. That is the
+     right order of magnitude. */
+  .ehero-plate-image, .ap-hero-plate, .vespera-board {
+    box-shadow: var(--shadow-3);
+  }
+  .card-hover, .price-card, .jr-card, .nw-card {
+    transition: box-shadow var(--motion-control) var(--ease),
+                transform var(--motion-control) var(--ease);
+  }
+  .card-hover:hover, .price-card:hover {
+    box-shadow: var(--shadow-2);
+  }
+
   /* ---- Editorial rule ---------------------------------------------
      The deck / pull-quote treatment, opt-in via class. */
   .deck,
@@ -403,6 +529,28 @@ body {
     color: var(--signal, var(--accent, inherit));
     letter-spacing: var(--ls-tight);
   }
+}
+
+@layer utilities {
+/* ---- Glass chrome --------------------------------------------------
+   The nav was opaque, which makes it a bar the page slides under.
+   A blurred, saturated pane makes it a surface the page passes
+   behind -- the single change that most makes a fixed header feel
+   considered rather than stuck on. Behind @supports, and dropped
+   entirely on the low-power tier and for reduced motion. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  html:not(.no-heavy-motion) .nav,
+  html:not(.no-heavy-motion) .ebar,
+  html:not(.no-heavy-motion) .jr-header {
+    background: color-mix(in srgb, var(--bg, var(--paper, var(--jr-paper))) 78%, transparent);
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+  }
+  html:not(.no-heavy-motion) .nav.scrolled,
+  html:not(.no-heavy-motion) .ebar.scrolled {
+    background: color-mix(in srgb, var(--bg, var(--paper)) 88%, transparent);
+  }
+}
 }
 
 /* Motion off means motion off: no grain animation, no blur to resolve,
@@ -539,18 +687,19 @@ body {
     --accent: #a8490d; --accent-2: #833807;
     --accent-soft: rgba(154, 102, 20, 0.26);
   }
-  /* A reader whose system asks for dark gets the dark face of the
-     paper surfaces without touching a control. The night products are
-     left alone: their darkness is the product, not a preference. */
+  /* The journal, news and Vespera surfaces follow the reader's system
+     preference: they are typographic, and a dark face is a real comfort
+     for long reading.
+
+     The lab surfaces do not. They are built around commissioned
+     photography of lit paper, and that work reads as it was made on a
+     paper ground -- on a dark one it needs a grade that fights the
+     image rather than serving it. Those pages stay paper unless a
+     reader asks for dark from the control, which remains available.
+
+     The night products are likewise left alone: their darkness is the
+     product, not a preference. */
   @media (prefers-color-scheme: dark) {
-    :root:not([data-mode="light"]) body.lab-page,
-    :root:not([data-mode="light"]) body.legal-page,
-    :root:not([data-mode="light"]) body.error-page {
-      --paper: #14130f; --paper-2: #1a1813; --card: #1f1d17;
-      --ink: #ece7db;
-      --rule: rgba(236, 231, 219, 0.15); --rule-2: rgba(236, 231, 219, 0.08);
-      --accent: #5cbcaa; --accent-2: #e0956b;
-    }
     :root:not([data-mode="light"]) body.jr-page {
       --jr-paper: #12151c; --jr-paper-deep: #0e1116; --jr-paper-pale: #191d26;
       --jr-ink: #e6e9ef;
@@ -602,9 +751,6 @@ body {
 
   /* home.css draws its research map in a fixed blue tuned for paper. */
   :root[data-mode="dark"] body.lab-page { --graph-blue: #6381d9; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-mode="light"]) body.lab-page { --graph-blue: #6381d9; }
-  }
 
   /* Grain and colour-scheme follow the face, not the surface. */
   :root[data-mode="dark"] body.lab-page,
@@ -623,9 +769,6 @@ body {
     --grain-opacity: 0.028; --grain-blend: multiply; color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-mode="light"]) body.lab-page,
-    :root:not([data-mode="light"]) body.legal-page,
-    :root:not([data-mode="light"]) body.error-page,
     :root:not([data-mode="light"]) body.jr-page,
     :root:not([data-mode="light"]) body.nw-page,
     :root:not([data-mode="light"]) body.vespera-page {
@@ -635,14 +778,17 @@ body {
 
   /* Photography on this site is lit paper. On a dark ground an
      untouched paper photograph glows like a lightbox, so pull it back
-     to sit in the page rather than on top of it. */
-  :root[data-mode="dark"] body.lab-page img:not([src$=".svg"]),
+     to sit in the page rather than on top of it.
+
+     Plates that carry a purpose-made dark twin are excluded: those are
+     already toned for this ground, and grading them again would take
+     them down twice. */
+  :root[data-mode="dark"] body.lab-page img:not([src$=".svg"]):not([data-src-dark]),
   :root[data-mode="dark"] body.nw-page img:not([src$=".svg"]),
   :root[data-mode="dark"] body.jr-page img:not([src$=".svg"]) {
     filter: brightness(0.82) contrast(1.04);
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-mode="light"]) body.lab-page img:not([src$=".svg"]),
     :root:not([data-mode="light"]) body.nw-page img:not([src$=".svg"]),
     :root:not([data-mode="light"]) body.jr-page img:not([src$=".svg"]) {
       filter: brightness(0.82) contrast(1.04);
@@ -689,8 +835,11 @@ body {
 
   /* The journal and news headers are grids with a fixed column count,
      so the button has to be told where to sit rather than appended. */
-  .jr-header-inner .mode-toggle,
-  .nw-header-inner .mode-toggle { align-self: center; }
+  .jr-header-inner .mode-toggle { align-self: center; }
+  /* The news masthead is a three-column grid with the menu button in
+     the last cell, so the control takes its own place rather than
+     stacking under the tagline. */
+  .nw-masthead-row .mode-toggle { align-self: start; justify-self: end; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -779,7 +928,12 @@ body {
     transform: none !important;
     filter: none !important;
   }
-  /* The grain is static, so it stays; the atmosphere plates do not. */
-  .hero::before { animation: none !important; }
+  /* The grain is static, so it stays. The blur behind the chrome and
+     the atmosphere plates are both expensive to composite and are the
+     kind of effect that provokes symptoms, so both go. */
+  .nav, .ebar, .jr-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
 }
 

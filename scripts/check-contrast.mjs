@@ -13,6 +13,13 @@
  *
  * Exits non-zero if any normal-size text falls below WCAG AA (4.5:1),
  * or large text below 3:1.
+ *
+ * KNOWN BLIND SPOT: full-viewport fixed overlays -- the grain and the
+ * vignette -- are not ancestors of any text, so nothing here accounts
+ * for them. The grain is 3% and cannot matter. The vignette is capped
+ * at 28% opacity for exactly this reason; at 50% it took dark-face
+ * corner text from 15:1 to 4.45:1 without a single failure reported.
+ * If either gets stronger, this script stops telling the truth.
  */
 
 import { chromium } from 'playwright';

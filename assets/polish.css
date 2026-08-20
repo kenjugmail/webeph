@@ -201,8 +201,8 @@ body.utility-page .eyebrow::before { background: var(--signal); }
   min-height: var(--site-nav);
   border-bottom: 1px solid var(--line, var(--rule));
   background: var(--bg, var(--paper));
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  /* The glass treatment lives in tokens.css behind @supports and the
+     low-power tier; this is the fallback for anyone who gets neither. */
 }
 .nav-inner,
 .ebar-in { min-height: var(--site-nav); padding-block: 0; }
@@ -210,8 +210,6 @@ body.utility-page .eyebrow::before { background: var(--signal); }
 .ebar.scrolled {
   background: var(--bg, var(--paper));
   border-bottom-color: var(--line, var(--rule));
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 .nav-links,
 .enav { gap: clamp(16px, 2vw, 28px); }
@@ -1049,7 +1047,6 @@ body.lab-page.error-page .error-actions .ebtn { min-width: 0; }
 /* Supporting product documents are led by rules and sequence, not card chrome. */
 body.supporting-page .nav {
   background: color-mix(in srgb, var(--bg) 94%, transparent);
-  backdrop-filter: none;
 }
 body.supporting-page .security-grid,
 body.supporting-page .product-grid,

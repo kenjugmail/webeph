@@ -136,13 +136,45 @@
       items.forEach((item) => item.classList.add('in'));
       return;
     }
+
+    /* A section usually crosses the threshold as one batch, and flipping
+       every element in it on the same frame is what makes an entrance
+       read as a block sliding in rather than a page arriving. Ordering
+       the batch by position and spacing it out costs nothing and is the
+       difference between mechanical and composed.
+
+       The gaps widen slightly rather than being even -- an evenly
+       spaced cascade reads as a machine counting. */
+    const STEP = [0, 55, 105, 150, 190, 225, 255, 280];
+    const AUTHORED = /\bd[1-4]\b/;
+
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
+      const arriving = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+      arriving.forEach((entry, index) => {
+        const el = entry.target;
+        /* An authored delay class always wins; this only fills the gap
+           where the markup says nothing. */
+        if (index > 0 && !AUTHORED.test(el.className)) {
+          const delay = STEP[Math.min(index, STEP.length - 1)];
+          el.style.transitionDelay = delay + 'ms';
+          /* Clear it once the entrance is done, or every later
+             transition on this element -- a hover, a focus ring --
+             inherits the delay and feels broken. */
+          const clear = (event) => {
+            if (event.target !== el) return;
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          };
+          el.addEventListener('transitionend', clear);
+        }
+        el.classList.add('in');
+        observer.unobserve(el);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+
     items.forEach((item) => observer.observe(item));
   }
 
