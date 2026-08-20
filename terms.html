@@ -38,7 +38,12 @@
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
      before the first stylesheet, or the page paints the wrong one first. -->
 <script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode");if(m)d.dataset.mode=m;
-if(localStorage.getItem("eph-material")==="glass")d.dataset.material="glass"}catch(e){}</script>
+if(localStorage.getItem("eph-material")==="glass")d.dataset.material="glass";
+/* Set before the first paint so the hero never renders at rest and
+   then jumps back to animate. Gated on the motion preference here
+   rather than in CSS so that a reader who wants no motion never gets
+   the hidden start state at all. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive"}catch(e){}</script>
 <link rel="stylesheet" href="/assets/tokens.css?v=20260820">
 <!-- Deliberately AFTER tokens.css, not folded into the snippet above.
      Cascade layers take their order from where a name FIRST appears, so

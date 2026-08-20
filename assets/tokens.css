@@ -371,6 +371,71 @@ body {
     }
   }
 
+  /* ============================================================
+     ARRIVAL
+
+     The hero had no entrance at all: polish.css set transition: none
+     on hero reveals and the markup ships them already revealed, so the
+     single most-seen moment on the site -- opening it -- was a cut.
+     Everything else on the page animates and the first screen did not.
+
+     Staged, not simultaneous. The eye reads a hero in a fixed order --
+     kicker, headline, sentence, actions, image -- and motion that
+     respects that order reads as the page assembling itself, while
+     motion that ignores it reads as one block sliding.
+
+     The headline moves without fading. It is almost certainly the
+     largest contentful paint on this page, and an element at opacity 0
+     is not painted, so fading it in would delay the metric by the
+     length of the animation. Transform is free of that: the text is
+     on screen from the first frame, just not yet at rest.
+     ============================================================ */
+  @media (prefers-reduced-motion: no-preference) {
+    html.arrive .ehero .lbl {
+      animation: eph-rise 620ms var(--ease-out) both;
+    }
+    html.arrive .ehero h1 {
+      animation: eph-settle 900ms 60ms var(--ease-out) both;
+    }
+    html.arrive .ehero .ethesis,
+    html.arrive .ehero .esub,
+    html.arrive .ehero > .ewrap > p {
+      animation: eph-rise 760ms 200ms var(--ease-out) both;
+    }
+    html.arrive .ehero-cta,
+    html.arrive .ehero .ebtn {
+      animation: eph-rise 700ms 320ms var(--ease-out) both;
+    }
+    /* The plate settles rather than rises: a picture that slides in
+       reads as a slide, one that eases out of a slight overscale reads
+       as a camera coming to rest. */
+    html.arrive .ehero-plate {
+      animation: eph-plate 1100ms 180ms var(--ease-out) both;
+    }
+    html.arrive .ebar,
+    html.arrive .nav {
+      animation: eph-chrome 700ms var(--ease-out) both;
+    }
+  }
+
+  @keyframes eph-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  /* No opacity: see the note above about largest contentful paint. */
+  @keyframes eph-settle {
+    from { transform: translateY(20px); }
+    to   { transform: none; }
+  }
+  @keyframes eph-plate {
+    from { opacity: 0; transform: scale(1.035); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes eph-chrome {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: none; }
+  }
+
   /* ---- Entrance ----------------------------------------------------
      Adding a short blur to the existing fade-and-rise is what reads as
      depth of field rather than "a div appeared". 301 elements already
@@ -770,6 +835,68 @@ body {
   }
   .card-hover:hover, .price-card:hover {
     box-shadow: var(--shadow-2);
+  }
+
+  /* ---- Index rows -------------------------------------------------
+     A whole-row background tint on hover is the cheapest possible
+     answer and it reads that way: the row lights up as a block and
+     nothing about it says which part you are pointing at. An index
+     row in print is marked at its edge and its number, so that is
+     what moves -- a rule grows from the leading edge, the numeral
+     takes the accent, and the whole row shifts by three pixels.
+
+     transform and colour only. The tint stays, quieter, because it is
+     what carries the hit area. */
+  .erow, .eprodrow {
+    position: relative;
+    transition:
+      background var(--motion-control) var(--ease),
+      transform var(--motion-control) var(--ease);
+  }
+  .erow::before, .eprodrow::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: 50% 0;
+    transition: transform var(--motion-advance) var(--ease);
+  }
+  .erow:hover, .eprodrow:hover { transform: translateX(3px); }
+  .erow:hover::before, .eprodrow:hover::before { transform: scaleY(1); }
+  .erow .no, .eprodrow .no {
+    transition: color var(--motion-control) var(--ease);
+  }
+  .erow:hover .no, .eprodrow:hover .no { color: var(--ink); }
+
+  /* ---- Inline links -----------------------------------------------
+     A first version wiped the underline away on hover, borrowing the
+     navigation sweep. Wrong gesture: the nav sweep has two states to
+     move between, so it can leave and return, while a prose link only
+     has one, and erasing its underline reads as the link becoming
+     less clickable at the moment you point at it.
+
+     Hover should intensify. The rule takes the accent and drops away
+     from the baseline, which is the same thing a printer does to mark
+     a reference. */
+  .ethesis a, .esec p a, .efoot a:not(.ebtn), .lead a, .erow a {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    text-underline-offset: 0.16em;
+    transition:
+      text-decoration-color var(--motion-control) var(--ease),
+      text-underline-offset var(--motion-control) var(--ease),
+      color var(--motion-control) var(--ease);
+  }
+  .ethesis a:hover, .esec p a:hover, .efoot a:not(.ebtn):hover,
+  .lead a:hover, .erow a:hover {
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.24em;
+    color: var(--accent);
   }
 
   /* ---- Editorial rule ---------------------------------------------
