@@ -518,6 +518,11 @@ var l=document.createElement("link");l.rel="stylesheet";l.href="/assets/glass.cs
 }
 .proof-tabs button:hover { color: var(--ink); border-color: var(--violet); }
 .proof-tabs button.on { border-color: var(--teal); color: var(--ink); background: rgba(45,212,191,0.1); }
+/* .proof-tabs button.on and .proof-tabs button:hover carry the same
+   specificity (0-2-1), so the later one wins outright and the active
+   tab -- the one under the pointer most often -- was the single
+   control on this page that did not answer it. */
+.proof-tabs button.on:hover { background: rgba(45,212,191,0.2); border-color: var(--teal-lt, var(--teal)); }
 .proof-engine { font-size: 12px; color: var(--faint); letter-spacing: 0.08em; }
 .proof-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 22px; align-items: stretch; }
 .proof-stage {

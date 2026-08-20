@@ -20,6 +20,18 @@
   --nw-sans: "Hanken Grotesk", Arial, sans-serif;
   --nw-mono: "IBM Plex Mono", ui-monospace, monospace;
   --nw-shell: 1280px;
+
+  /* One section rhythm, fluid.
+
+     Three sections carried five different values -- 27/88 on the lead,
+     81/92 on the ledger, 106/106 on the charter -- so the page never
+     settled into a beat. The small-viewport overrides are what gave it
+     away: at 640px the ledger is already symmetric (61px 0), so the
+     asymmetry existed only at desktop, where nobody had gone back to
+     it. These clamps resolve to the values the page was already using
+     at each end, and to one consistent rhythm in between. */
+  --nw-rhythm: clamp(61px, 8.3vw, 106px);
+  --nw-rhythm-lead: clamp(19px, 2.1vw, 27px);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -186,7 +198,7 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
 @keyframes nw-route-travel { to { stroke-dashoffset: -84; } }
 
 /* News index */
-.nw-lead { padding: 27px 0 88px; }
+.nw-lead { padding: var(--nw-rhythm-lead) 0 var(--nw-rhythm); }
 .nw-issue-line {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -266,7 +278,7 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
 .nw-hero-link { min-width: 0; }
 .nw-field-figure-home { padding-top: 14px; border-top: 6px solid var(--nw-cobalt); }
 
-.nw-ledger { padding: 81px 0 92px; background: var(--nw-paper-pale); border-block: 1px solid var(--nw-rule); }
+.nw-ledger { padding: var(--nw-rhythm) 0; background: var(--nw-paper-pale); border-block: 1px solid var(--nw-rule); }
 .nw-section-head { display: grid; grid-template-columns: 190px 1fr; gap: 35px; margin-bottom: 42px; }
 .nw-section-head > p {
   padding-top: 9px;
@@ -310,7 +322,7 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
 .nw-story-body > span:last-child { max-width: 67ch; color: var(--nw-muted); font-size: 14px; line-height: 1.5; }
 .nw-story-arrow { padding-top: 2px; color: var(--nw-coral-bright); font-size: 24px; }
 
-.nw-charter { padding: 106px 0; }
+.nw-charter { padding: var(--nw-rhythm) 0; }
 .nw-charter-grid { display: grid; grid-template-columns: minmax(0, .88fr) minmax(420px, 1.12fr); gap: clamp(70px, 10vw, 155px); }
 .nw-charter-lead h2 { margin-top: 24px; font-family: var(--nw-serif); font-size: clamp(58px, 6.5vw, 92px); font-weight: 400; letter-spacing: -.055em; line-height: .84; }
 .nw-charter-lead > p:last-child { max-width: 49ch; margin-top: 30px; color: var(--nw-ink-soft); font-family: var(--nw-serif); font-size: 21px; line-height: 1.42; }
@@ -834,7 +846,6 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-nav a::after { display: none; }
   .nw-rss { grid-column: 2; grid-row: 1; align-self: center; margin-left: auto; }
 
-  .nw-lead { padding: 19px 0 61px; }
   .nw-issue-line { grid-template-columns: 1fr auto; }
   .nw-issue-line span:last-child { display: none; }
   .nw-lead-grid { gap: 42px; padding-top: 35px; }
@@ -857,13 +868,11 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-field-figure figcaption span { display: block; }
   .nw-field-figure figcaption span:last-child { margin-top: 6px; }
 
-  .nw-ledger { padding: 61px 0; }
   .nw-section-head { grid-template-columns: 1fr; gap: 13px; margin-bottom: 30px; }
   .nw-section-head h2 { font-size: 48px; }
   .nw-story-row { grid-template-columns: 38px minmax(0, 1fr) 19px; gap: 12px; }
   .nw-story-row time { display: none; }
   .nw-story-body strong { font-size: 25px; }
-  .nw-charter { padding: 72px 0; }
   .nw-charter-grid { gap: 50px; }
   .nw-charter-lead h2 { font-size: clamp(40px, 13vw, 65px); }
   .nw-charter-lead > p:last-child { font-size: 19px; }
@@ -1090,4 +1099,61 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-record-links a { transition: none; }
   .nw-chapter-ribbon-meter i { transition: none; }
 }
+
+
+  /* ---- Affordance ----------------------------------------------------
+     Six controls on this page did not answer the pointer: both
+     wordmarks, the nav's current item, the hero figure link, the RSS
+     link and the dispatch card. They live here rather than in
+     tokens.css because tokens.css never defines --ink or --accent for
+     nw-page -- this surface is not in any of its palette lists, which
+     is the same reason news.css carries its own colours at all.
+
+     The wordmark is a lockup of two weights, so the hover is the quiet
+     half coming up to meet the strong one. Nothing fades.
+     ------------------------------------------------------------------ */
+  .nw-wordmark > span, .nw-footer-wordmark, .nw-footer-wordmark strong {
+    transition: color var(--motion-control, 180ms) var(--ease, cubic-bezier(.22,1,.36,1));
+  }
+  .nw-wordmark:hover > span { color: var(--nw-cobalt); }
+  .nw-footer-wordmark:hover, .nw-footer-wordmark:hover strong { color: var(--nw-cobalt); }
+
+  /* The nav marks its current item with aria-current and nothing else,
+     so the one link you are most likely to point at was the one with no
+     answer. */
+  .nw-nav a {
+    transition: color var(--motion-control, 180ms) var(--ease, cubic-bezier(.22,1,.36,1));
+  }
+  .nw-nav a:hover { color: var(--nw-cobalt); }
+
+  /* The hero link wraps a figure, not a title, so there is no text to
+     colour. What a figure can do is lift: a hairline of its own accent
+     under the plate, drawn from the left. */
+  .nw-hero-link { position: relative; display: block; }
+  .nw-hero-link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--nw-cobalt);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--motion-advance, 280ms) var(--ease, cubic-bezier(.22,1,.36,1));
+  }
+  .nw-hero-link:hover::after { transform: scaleX(1); }
+
+  .nw-rss, .nw-rss [aria-hidden="true"] {
+    display: inline-block;
+    transition: color var(--motion-control, 180ms) var(--ease, cubic-bezier(.22,1,.36,1)),
+                transform var(--motion-control, 180ms) var(--ease, cubic-bezier(.22,1,.36,1));
+  }
+  .nw-rss:hover { color: var(--nw-cobalt); }
+  /* Up and out, because that is the direction the mark points. */
+  .nw-rss:hover [aria-hidden="true"] { transform: translate(2px, -2px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nw-hero-link::after { transition: none; }
+    .nw-rss:hover [aria-hidden="true"] { transform: none; }
+  }
+
 }

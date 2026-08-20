@@ -234,4 +234,21 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
 @media (prefers-reduced-motion: reduce) {
   .hero-canvas, .start-canvas { display: none !important; }
 }
+
+
+  /* The Discord link carried its type and colour in an inline style
+     attribute, which no layer and no mode can reach -- it was the only
+     control on the page whose hover could not be written at all. Its
+     rest colour was --teal-lt, which aliases to --signal, so once
+     --accent resolved to --signal too the hover became a no-op even in
+     principle: it was already the colour it was hovering to. Lifting to
+     --ink is the only direction left that reads. */
+  .orrery-discord {
+    font-size: 12px;
+    color: var(--teal-lt, var(--signal));
+    text-decoration: none;
+    transition: color var(--motion-control, 180ms) var(--ease, cubic-bezier(.22,1,.36,1));
+  }
+  .orrery-discord:hover { color: var(--ink); }
+
 }

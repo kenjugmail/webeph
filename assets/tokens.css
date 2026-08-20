@@ -254,6 +254,52 @@
 }
 
 /* ============================================================
+   THE HIGH COLOUR HAS TWO NAMES
+
+   Half this site calls its accent --accent and half calls it
+   --signal, and nothing ever reconciled them. Measured across the
+   surfaces: home, research, arbiter and the legal pages define only
+   --accent; orrery, vellum, cloud and download define only --signal;
+   vespera and shelterix define both; news, journal and genesis-fall
+   define neither and carry private --nw-/--jr-/--qe- palettes.
+
+   The consequence is quiet and expensive. There are thirteen bare
+   var(--accent) references in this file -- the prose-link hover, the
+   focus ring, the editorial rule, the atmosphere -- and on any
+   --signal surface every one of them computes to an invalid value and
+   is dropped. The rule is there, it matches, and it does nothing. A
+   hover audit is what finally surfaced it: four controls that had a
+   matching :hover rule and still did not move.
+
+   This aliases rather than rewriting thirteen call sites, and it
+   names the surfaces explicitly. Two attempts before this one got the
+   scope wrong in opposite directions, both worth recording:
+
+   A blanket `body { --accent: var(--signal, currentColor) }` beats
+   shelterix.css's own `:root` accent, because inheritance is not a
+   cascade competition -- a declaration on `body` wins over an
+   inherited `:root` value from ANY layer, no matter which came first.
+   It silently repainted shelterix from #d98a4a to #f4c98a.
+
+   Moving it to `:root` fixed shelterix and broke the rest: polish.css
+   declares --signal on `body.orrery-page`, so a :root rule cannot
+   read it and every alias fell through to currentColor.
+
+   So: name the surfaces that have no --accent of their own. It is an
+   enumeration, which is usually the wrong shape -- but the set of
+   palettes is closed, a new surface simply keeps today's behaviour
+   rather than inheriting a wrong colour, and check-surface.mjs fails
+   the build if one ever ships without an accent.
+   ============================================================ */
+body.orrery-page, body.vellum-page,
+body.utility-page, body.auth-page {
+  --accent: var(--signal, currentColor);
+}
+/* These two have a real accent, it is just spelled privately. */
+body.nw-page { --accent: var(--nw-cobalt, currentColor); }
+body.jr-page { --accent: var(--jr-cobalt, currentColor); }
+
+/* ============================================================
    DERIVED SLOTS
 
    These read the active theme's own --ink, so one definition serves
@@ -922,6 +968,101 @@ body {
     text-underline-offset: 0.24em;
     color: var(--accent);
   }
+
+  /* ---- Affordance -------------------------------------------------
+     Thirty-four controls on this site did not answer the pointer at
+     all. None of them look wrong in a screenshot -- a still image
+     cannot show a hover -- which is how they survived every pass.
+
+     The rule above is the reason for most of them: it enumerates the
+     containers that get the prose-link treatment, and the site has
+     three footer classes (.efoot, .footer, .utility-footer) of which
+     it names one. An enumeration is the wrong shape for a default.
+     Everything below either widens one to a :where() default or gives
+     a specific control the house idiom it was missing.
+
+  /* Prose links, by default rather than by list. Unclassed only: an
+     anchor carrying a class has its own identity and often wraps a
+     whole card, where an underline would be nonsense. */
+  :where(main, footer, .footer, .utility-footer, .nw-article-body, .jr-main)
+    :not(h1, h2, h3, h4, h5, h6) >
+    a:not([class]):not(:has(img, svg, figure, strong)) {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    text-underline-offset: 0.16em;
+    transition:
+      text-decoration-color var(--motion-control) var(--ease),
+      text-underline-offset var(--motion-control) var(--ease),
+      color var(--motion-control) var(--ease);
+  }
+  :where(main, footer, .footer, .utility-footer, .nw-article-body, .jr-main)
+    :not(h1, h2, h3, h4, h5, h6) >
+    a:not([class]):not(:has(img, svg, figure, strong)):hover {
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.24em;
+    color: var(--accent);
+  }
+
+  /* A headline that is a link is still a headline: it takes the accent
+     on hover and never an underline. The first version of the rule
+     above put one under the news lead's h1. */
+  :where(h1, h2, h3, h4) > a:not([class]) {
+    transition: color var(--motion-control) var(--ease);
+  }
+  :where(h1, h2, h3, h4) > a:not([class]):hover { color: var(--accent); }
+
+  /* Wordmarks. Every one of them is a lockup of two weights -- a quiet
+     half and a strong half -- so the hover is that the quiet half
+     comes up to meet the loud one. A logo does not want a loud
+     answer, and a plain opacity fade is not an idea. */
+     News and journal carry their own complete palettes (--nw-*,
+     --jr-*) because tokens.css never defines --ink or --accent for
+     nw-page or jr-page -- they are not in any of its surface lists.
+     So their affordances live in their own stylesheets, next to the
+     colours they can actually name. Writing them here bought a rule
+     that referenced an undefined variable and therefore did nothing,
+     which is worse than no rule at all: it looks handled. */
+  .ebrand { transition: color var(--motion-control) var(--ease); }
+  .ebrand .motto { transition: color var(--motion-control) var(--ease); }
+  .ebrand:hover .motto { color: var(--ink); }
+
+  /* Block links: an anchor wrapping a title and a deck. The house
+     idiom for a row is the mark takes the accent and the whole thing
+     steps right, so a card that is really a row uses it too. */
+  .home-news-grid > a, a.home-news-read, .research-map-frontier {
+    transition: color var(--motion-control) var(--ease),
+                transform var(--motion-control) var(--ease);
+  }
+  .home-news-grid > a strong {
+    transition: color var(--motion-control) var(--ease);
+  }
+  .home-news-grid > a:hover strong { color: var(--accent); }
+  a.home-news-read:hover,
+  .research-map-frontier:hover { color: var(--accent); }
+  a.home-news-read:hover { transform: translateX(3px); }
+
+  /* Arrow glyphs already shift on buttons; give the text links that
+     carry one the same manners. The external mark goes up and out,
+     because that is the direction it points. */
+  a.mono [aria-hidden="true"],
+  a.home-news-read [aria-hidden="true"] {
+    display: inline-block;
+    transition: transform var(--motion-control) var(--ease);
+  }
+  a.mono:hover [aria-hidden="true"] { transform: translateX(3px); }
+
+  /* The disclosure is a control and was the only one on the page that
+     did not say so. Its + mark is already there; light it. */
+  details.faq > summary {
+    transition: color var(--motion-control) var(--ease);
+  }
+  details.faq > summary::after {
+    transition: transform var(--motion-advance) var(--ease),
+                color var(--motion-control) var(--ease);
+  }
+  details.faq > summary:hover,
+  details.faq > summary:hover::after { color: var(--accent); }
 
   /* ---- Editorial rule ---------------------------------------------
      The deck / pull-quote treatment, opt-in via class. */

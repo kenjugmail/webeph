@@ -786,4 +786,18 @@ body.research-login.utility-page .auth-input { border-color: var(--jr-rule); bor
 }
 .jr-footer-legal a { color: inherit; text-decoration: none; }
 .jr-footer-legal a:hover { color: var(--jr-cobalt); }
+
+
+  /* ---- Affordance ----------------------------------------------------
+     The masthead link had no hover. Same reasoning as news.css: jr-page
+     is not in any of tokens.css's palette lists, so --ink and --accent
+     do not exist here and the rule has to name --jr-* to say anything.
+     The masthead is a mark plus a name plus a sub, so the sub is what
+     lifts. */
+  .jr-masthead-link .jr-masthead-sub,
+  .jr-masthead-link .jr-masthead-name {
+    transition: color var(--motion-control, 180ms) var(--ease, cubic-bezier(.22,1,.36,1));
+  }
+  .jr-masthead-link:hover .jr-masthead-sub { color: var(--jr-ink); }
+
 }
