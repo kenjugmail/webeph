@@ -397,6 +397,41 @@
   letter-spacing: -.01em;
 }
 
+/* The rail is an annotation layer, not a margin note: it sits ON the
+   field plate at every width it appears, and by design -- the offset
+   tracks the plate rather than escaping it, so the labels read as
+   markings on the photograph.
+
+   What it lacked was separation. Measured under the four terms, the
+   ground swings between 3x and 9.3x in luminance inside a single
+   word's own bounding box, in both faces, because the threads and pin
+   heads run straight through them. No single text colour holds against
+   that, which is why "Available evidence" was unreadable where it
+   crossed the pin cluster.
+
+   A halo in the ground's own colour is the standard answer for
+   annotation over a plate -- it is what a printed map does -- and this
+   file's contrast audit already treats a text-shadow as the accepted
+   scrim over imagery. Tight and doubled rather than wide and soft: a
+   large radius reads as a glow around the type, a small one reads as
+   the type having been knocked out of the picture.
+
+   Ground-coloured, so it follows the mode. The plate is dark on the
+   dark face and light on the light one, and --paper tracks both. */
+.ehero-glossary-rail {
+  --glossary-scrim: color-mix(in srgb,
+    var(--paper, var(--bg, currentColor)) 92%, transparent);
+}
+.ehero-glossary-rail strong,
+.ehero-glossary-rail .ehero-glossary-no,
+.ehero-glossary-head,
+.ehero-glossary-rail p {
+  text-shadow:
+    0 0 3px var(--glossary-scrim),
+    0 0 7px var(--glossary-scrim),
+    0 1px 2px var(--glossary-scrim);
+}
+
 .ehero-glossary-rail p {
   max-height: 0;
   margin: 0;
