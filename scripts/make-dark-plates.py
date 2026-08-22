@@ -102,7 +102,7 @@ def fit_spread(img: Image.Image, target: float) -> Image.Image:
         return img
     # Scale every channel about the luminance mean, so hue is untouched.
     out = mean + (arr - mean) * factor
-    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGB")
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8))
 
 
 def tone(path: Path):

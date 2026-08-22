@@ -170,10 +170,27 @@
     btn.type = 'button';
     btn.className = 'mode-toggle';
     btn.setAttribute('aria-live', 'polite');
+
+    var mark = document.createElement('span');
+    mark.className = 'mode-toggle-mark';
+    mark.setAttribute('aria-hidden', 'true');
+
+    var copy = document.createElement('span');
+    copy.className = 'mode-toggle-copy';
+    copy.setAttribute('aria-hidden', 'true');
+
+    var copyLabel = document.createElement('small');
+    copyLabel.textContent = 'Look';
+    var copyValue = document.createElement('b');
+    copy.appendChild(copyLabel);
+    copy.appendChild(copyValue);
+    btn.appendChild(mark);
+    btn.appendChild(copy);
     host.appendChild(btn);
 
     var GLYPH = { light: '\u2600', dark: '\u263e', glass: '\u25c8' };
     var NAME = { light: 'light', dark: 'dark', glass: 'liquid glass' };
+    var SHORT_NAME = { light: 'Light', dark: 'Dark', glass: 'Glass' };
 
     /** Which of the three looks is on screen. */
     function current() {
@@ -187,7 +204,8 @@
       btn.setAttribute('aria-label', 'Appearance: ' + NAME[now] + '. Switch to ' + NAME[next] + '.');
       btn.setAttribute('title', 'Switch to ' + NAME[next]);
       btn.dataset.look = now;
-      btn.innerHTML = '<span aria-hidden="true">' + GLYPH[now] + '</span>';
+      mark.textContent = GLYPH[now];
+      copyValue.textContent = SHORT_NAME[now];
     }
 
     btn.addEventListener('click', function () {

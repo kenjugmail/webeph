@@ -36,7 +36,7 @@ d.dataset.mode=m||"dark";if((g||"glass")==="glass")d.dataset.material="glass";
    rather than in CSS so that a reader who wants no motion never gets
    the hidden start state at all. */
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive"}catch(e){}</script>
-<link rel="stylesheet" href="/assets/tokens.css?v=20260820">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260822a">
 <!-- Deliberately AFTER tokens.css. Cascade layers take their order from
      where a name FIRST appears, so a glass.css loaded ahead of
      tokens.css would create @layer utilities before tokens.css declares
@@ -50,7 +50,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
      Every rule inside is scoped to :root[data-material="glass"], so a
      reader who switches it off pays for the file and nothing else. -->
 <link rel="stylesheet" href="/assets/glass.css?v=20260820">
-<script src="/assets/mode.js?v=20260820" defer></script>
+<script src="/assets/mode.js?v=20260822a" defer></script>
 <!-- /include -->
 <link rel="stylesheet" href="/assets/base.css?v=20260811">
 <link rel="stylesheet" href="/assets/components.css?v=20260811">

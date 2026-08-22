@@ -23,7 +23,7 @@ const PAGES = (process.env.PAGES ?? [
    computes 115px for its section rhythm and that is correct -- it is
    clamp(92px, 9vw, 138px), a fluid rhythm resolving at this viewport,
    and no fixed scale can contain it.
-   
+
    What the eye actually catches is inconsistency WITHIN one page: the
    reader never sees two pages at once, but they do see section three
    sitting closer to section two than section four does. So report the

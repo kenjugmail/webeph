@@ -12,6 +12,7 @@ import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
 const PAGES = ['/','/research','/orrery','/vellum','/vespera','/shelterix','/genesis-fall','/arbiter','/news','/news/drfsp-robust-compression','/journal','/journal/submit','/journal/policies','/journal/editor','/journal/article/x','/signin','/cloud','/vellum/connect','/download','/organizations','/security','/slack','/privacy','/terms','/404.html'];
 const browser = await chromium.launch();
+const failures = [];
 for (const width of [375, 768]) {
   const ctx = await browser.newContext({ viewport: { width, height: 812 }, deviceScaleFactor: 2 });
   const page = await ctx.newPage();
@@ -43,7 +44,14 @@ for (const width of [375, 768]) {
     }, width);
     const flag = res.over ? `OVERFLOW ${res.scrollWidth}px` : 'ok      ';
     console.log(`  ${flag} ${p.padEnd(32)} smallTargets=${res.small}${res.culprits.length ? '\n        ' + res.culprits.join('\n        ') : ''}`);
+    if (res.over) failures.push(`${width}px ${p} is ${res.scrollWidth}px wide`);
   }
   await ctx.close();
 }
 await browser.close();
+
+if (failures.length) {
+  console.error(`\n${failures.length} responsive overflow failure(s):`);
+  failures.forEach((failure) => console.error(`  ${failure}`));
+  process.exit(1);
+}

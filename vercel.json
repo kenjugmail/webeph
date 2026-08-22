@@ -26,11 +26,7 @@
     { "source": "/news-drfsp.html", "destination": "/news/drfsp-robust-compression", "permanent": true },
     { "source": "/arbiter-preview.html", "destination": "/arbiter", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
-    { "source": "/terms.html", "destination": "/terms", "permanent": true },
-    { "source": "/atlas", "destination": "https://atlas.ephemerent.com", "permanent": true },
-    { "source": "/atlas/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true },
-    { "source": "/education", "destination": "https://atlas.ephemerent.com", "permanent": true },
-    { "source": "/education/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true }
+    { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
     { "source": "/play", "destination": "https://web-five-amber-88.vercel.app/play" },

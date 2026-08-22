@@ -213,6 +213,7 @@ const FLOOR = 300;
 if (sampled < FLOOR) {
   console.error(`\nOnly ${sampled} samples (expected at least ${FLOOR}). Something is filtering everything out;`);
   console.error('this is a broken check, not a clean site.');
+  console.error(`Check BASE (${BASE}) and run a route-aware preview such as: npx vercel dev --listen 3111`);
   process.exit(2);
 }
 if (failures.length) {

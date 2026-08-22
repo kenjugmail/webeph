@@ -1379,17 +1379,21 @@ body {
 
 /* ---- Mode control -------------------------------------------------
    Injected by mode.js into whichever nav wrapper the page happens to
-   use. Deliberately quiet: a hairline square that matches the site's
-   hard corners, not a pill or a switch. */
+   use. The old control was only a diamond: accessible to a screen
+   reader, but visually indistinguishable from an ornamental icon.
+   Name the current look on full navigation bars and collapse back to
+   the mark where the mobile menu needs the room. */
 @layer polish {
   .mode-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    margin-inline-start: var(--space-s);
-    padding: 0;
+    width: auto;
+    min-width: 82px;
+    height: 38px;
+    gap: 8px;
+    margin-inline-start: clamp(8px, 1.2vw, 16px);
+    padding: 0 10px 0 9px;
     flex: none;
     background: transparent;
     border: 1px solid var(--line, var(--rule, currentColor));
@@ -1408,11 +1412,39 @@ body {
     border-color: var(--signal, var(--accent, currentColor));
     background: var(--accent-soft, transparent);
   }
-  .mode-toggle span {
-    display: block;
+  .mode-toggle-mark {
+    display: grid;
+    place-items: center;
+    width: 14px;
+    height: 14px;
     transition: transform var(--motion-advance) var(--ease);
   }
-  .mode-toggle:hover span { transform: rotate(-18deg); }
+  .mode-toggle:hover .mode-toggle-mark { transform: rotate(-18deg); }
+  .mode-toggle-copy {
+    display: grid;
+    gap: 2px;
+    min-width: 32px;
+    color: inherit;
+    font-family: var(--mono, ui-monospace, monospace);
+    line-height: 1;
+    text-align: left;
+  }
+  .mode-toggle-copy small,
+  .mode-toggle-copy b {
+    display: block;
+    font: inherit;
+    text-transform: uppercase;
+  }
+  .mode-toggle-copy small {
+    color: var(--faint, currentColor);
+    font-size: 6.5px;
+    letter-spacing: .14em;
+  }
+  .mode-toggle-copy b {
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: .08em;
+  }
 
   /* The journal and news headers are grids with a fixed column count,
      so the button has to be told where to sit rather than appended. */
@@ -1428,10 +1460,32 @@ body {
   .nw-masthead-row .mode-toggle { align-self: start; justify-self: end; }
 }
 
+@media (max-width: 900px) {
+  @layer polish {
+    .mode-toggle {
+      width: 34px;
+      min-width: 34px;
+      height: 34px;
+      margin-inline-start: 8px;
+      padding: 0;
+    }
+    .mode-toggle-copy { display: none; }
+  }
+}
+
+@media (max-width: 640px) {
+  @layer polish {
+    /* Supporting pages repeat their contact action in the body. Keeping
+       that full-width action beside Menu and Look pushed the header to
+       513px on a 375px screen. */
+    body.supporting-page .nav-inner > .btn-ghost { display: none; }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   @layer polish {
-    .mode-toggle, .mode-toggle span { transition: none; }
-    .mode-toggle:hover span { transform: none; }
+    .mode-toggle, .mode-toggle-mark { transition: none; }
+    .mode-toggle:hover .mode-toggle-mark { transform: none; }
   }
 }
 

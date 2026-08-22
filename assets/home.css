@@ -409,28 +409,10 @@
    that, which is why "Available evidence" was unreadable where it
    crossed the pin cluster.
 
-   A halo in the ground's own colour is the standard answer for
-   annotation over a plate -- it is what a printed map does -- and this
-   file's contrast audit already treats a text-shadow as the accepted
-   scrim over imagery. Tight and doubled rather than wide and soft: a
-   large radius reads as a glow around the type, a small one reads as
-   the type having been knocked out of the picture.
-
-   Ground-coloured, so it follows the mode. The plate is dark on the
-   dark face and light on the light one, and --paper tracks both. */
-.ehero-glossary-rail {
-  --glossary-scrim: color-mix(in srgb,
-    var(--paper, var(--bg, currentColor)) 92%, transparent);
-}
-.ehero-glossary-rail strong,
-.ehero-glossary-rail .ehero-glossary-no,
-.ehero-glossary-head,
-.ehero-glossary-rail p {
-  text-shadow:
-    0 0 3px var(--glossary-scrim),
-    0 0 7px var(--glossary-scrim),
-    0 1px 2px var(--glossary-scrim);
-}
+   The compact layout now gives the glossary a real editorial matte.
+   Type over a high-variance photograph needed a halo to survive, but
+   the halo read as a glow and still changed character as pins crossed
+   it. A solid piece of the page ground is calmer and deterministic. */
 
 .ehero-glossary-rail p {
   max-height: 0;
@@ -519,13 +501,19 @@
 }
 
 @media (min-width: 1420px) and (max-width: 1539px) {
-  .ehero-glossary-head { display: block; margin-left: 12px; }
+  .ehero-glossary-rail {
+    padding: 11px 9px 11px 12px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .ehero-glossary-head { display: block; margin: 0 0 8px; }
   .ehero-glossary-head b,
   .ehero-glossary-rail p { display: none; }
-  .ehero-glossary-rail ol { padding-left: 12px; }
-  .ehero-glossary-rail li { grid-template-columns: 20px minmax(0, 1fr); gap: 4px; padding-block: 9px; }
-  .ehero-glossary-rail li::before { left: -15px; }
+  .ehero-glossary-rail ol { padding-left: 9px; }
+  .ehero-glossary-rail li { grid-template-columns: 19px minmax(0, 1fr); gap: 4px; padding-block: 8px; }
+  .ehero-glossary-rail li::before { left: -12px; }
   .ehero-glossary-rail strong { font-size: 12px; }
+  .ehero-glossary-progress { top: 0; bottom: 0; left: -1px; }
 }
 
 .ehero-story-pin {
