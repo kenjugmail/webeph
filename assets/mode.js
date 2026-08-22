@@ -24,6 +24,17 @@
     return root.dataset.material === 'glass' ? 'glass' : 'flat';
   }
 
+  function syncThemeColor() {
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta || !document.body) return;
+    var color = getComputedStyle(document.body).backgroundColor;
+    if (color && color !== 'rgba(0, 0, 0, 0)') meta.setAttribute('content', color);
+  }
+
+  function scheduleThemeColor() {
+    requestAnimationFrame(syncThemeColor);
+  }
+
   function setMaterial(name) {
     var on = name === 'glass';
     if (on) root.dataset.material = 'glass';
@@ -42,6 +53,7 @@
     window.dispatchEvent(new CustomEvent('ephemerent:materialchange', {
       detail: { material: name },
     }));
+    scheduleThemeColor();
   }
 
   /* The stylesheet is already there when glass was the stored choice;
@@ -87,6 +99,7 @@
     window.dispatchEvent(new CustomEvent('ephemerent:modechange', {
       detail: { mode: effective() },
     }));
+    scheduleThemeColor();
   }
 
   /* There used to be two lists here: FOLLOWS_SYSTEM, for the surfaces
@@ -117,8 +130,9 @@
   /* ---- Photographic plates -------------------------------------------
      The hero plates are pins and thread on lit paper. On the dark face
      an untouched one glows like a lightbox, so the build carries a
-     tone-inverted twin (scripts/make-dark-plates.py) and these swap to
-     it.
+     separately art-directed charcoal-paper series and these swap to it.
+     The former tone-derived plates remain only as a reversible fallback;
+     docs/EPHEMERENT-DARK-STUDIO.md records the authored source mapping.
 
      Whichever variant sits in the markup is the one the preload
      scanner fetches, so it has to be the one most readers will end up
@@ -134,9 +148,14 @@
      light, which is the minority again. */
   function plates(face) {
     var light = face === 'light';
-    var nodes = document.querySelectorAll('[data-srcset-light], [data-src-light]');
+    var nodes = document.querySelectorAll('[data-srcset-light], [data-src-light], [data-type-light]');
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
+      if (el.dataset.typeLight) {
+        if (!el.dataset.typeDark) el.dataset.typeDark = el.getAttribute('type') || '';
+        var nextType = light ? el.dataset.typeLight : el.dataset.typeDark;
+        if (nextType) el.setAttribute('type', nextType);
+      }
       if (el.dataset.srcsetLight) {
         /* The markup value is the dark one; cache it on first use so
            switching back has something to return to. */
@@ -225,6 +244,7 @@
 
     label();
     plates(effective());
+    scheduleThemeColor();
 
   }
 
@@ -240,5 +260,5 @@
     build();
   }
 
-  window.EphemerentMode = { apply: apply, effective: effective };
+  window.EphemerentMode = { apply: apply, effective: effective, syncThemeColor: syncThemeColor };
 })();

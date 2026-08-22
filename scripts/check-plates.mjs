@@ -2,7 +2,8 @@
 /**
  * Plate fetches on the default path.
  *
- * The hero plates have a light and a dark twin, and whichever sits in
+ * The hero plates have a light photograph and an authored dark-studio
+ * counterpart, and whichever sits in
  * the markup is the one the preload scanner fetches. If that is the
  * wrong one, the LCP image is downloaded twice: once by the scanner,
  * once by mode.js swapping it. The comment in mode.js claims the
@@ -25,7 +26,7 @@ for (const look of ['default (no storage)', 'chose light']) {
   const plates = [];
   page.on('request', (r) => {
     const u = r.url();
-    if (/ephemerent-[a-z]+(-dark)?-\d+\.(avif|webp|png|jpg)/.test(u)) {
+    if (/ephemerent-[a-z]+(?:-dark(?:-studio)?)?-\d+\.(avif|webp|png|jpg)/.test(u)) {
       plates.push({ url: u.split('/').pop(), dark: u.includes('-dark-') });
     }
   });
@@ -41,7 +42,7 @@ for (const look of ['default (no storage)', 'chose light']) {
      which are the same photograph at two widths, so a filename-level
      check called them unrelated and reported the default path clean
      while the LCP image was being fetched twice. */
-  const family = (n) => n.replace('-dark-', '-').replace(/-\d+\.[a-z]+$/, '');
+  const family = (n) => n.replace(/-dark(?:-studio)?-/, '-').replace(/-\d+\.[a-z]+$/, '');
   const dupes = [...new Set(plates.map((p) => family(p.url)))]
     .filter((f) => plates.some((p) => p.dark && family(p.url) === f) &&
                    plates.some((p) => !p.dark && family(p.url) === f));

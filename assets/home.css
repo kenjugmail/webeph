@@ -312,7 +312,6 @@
 }
 
 .ehero-glossary-rail {
-  --glossary-progress: 0;
   position: fixed;
   z-index: 18;
   top: calc(var(--site-nav) + clamp(40px, 7vh, 72px));
@@ -322,6 +321,7 @@
   color: var(--muted);
   opacity: 0;
   pointer-events: none;
+  contain: layout paint style;
   transform: translate3d(-9px, 0, 0);
   transition: opacity var(--motion-advance) ease, transform var(--motion-settle) var(--ease);
 }
@@ -491,9 +491,11 @@
 .ehero-glossary-progress i {
   display: block;
   width: 100%;
-  height: calc(var(--glossary-progress) * 100%);
+  height: 100%;
   background: var(--accent);
+  transform: scaleY(0);
   transform-origin: top;
+  will-change: transform;
 }
 
 @media (min-width: 1420px) {
@@ -578,6 +580,10 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #e9e4d9;
+}
+
+:root[data-mode="dark"] .ehero-story-viewport {
+  background: #1d1914;
 }
 
 .ehero-story-frame {
@@ -1874,4 +1880,13 @@
   }
   .ehero-story-steps li:last-child { border-bottom: 0; }
 }
+}
+
+/* The shared reveal ends at filter: blur(0), which still establishes a
+   containing block for fixed descendants. The glossary then scrolls with
+   this 3,000px scene and disappears after chapter one. Once revealed, the
+   story needs no filter at all so the glossary remains a viewport rail.
+   This belongs in polish because that is where the shared blur resolves. */
+@layer polish {
+  .ehero-story.rv.in { filter: none; }
 }

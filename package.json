@@ -16,7 +16,7 @@
     "verify": "npm run check && npm run contrast && npm run motion && npm run responsive && npm run layout && npm run alignment && npm run surface && npm run affordance && npm run modes && npm run glass && npm run default && npm run plates:fetch && npm run plates:tone && npm run figure && npm run focus",
     "shoot": "node scripts/shoot.mjs",
     "plates:build": "python3 scripts/make-dark-plates.py",
-    "plates:tone": "python3 scripts/make-dark-plates.py --check",
+    "plates:tone": "python3 scripts/check-dark-studio-plates.py",
     "layout": "node scripts/check-layout.mjs",
     "tracking": "node scripts/check-tracking.mjs",
     "jank": "node scripts/check-jank.mjs",

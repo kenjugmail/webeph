@@ -104,6 +104,7 @@
     const caption = scene.querySelector('[data-story-caption]');
     const glossary = scene.querySelector('[data-story-glossary]');
     const glossaryTerms = Array.from(glossary?.querySelectorAll('[data-story-term]') || []);
+    const glossaryMeter = glossary?.querySelector('.ehero-glossary-progress i');
     let width = 1;
     let height = 1;
     let dpr = 1;
@@ -112,6 +113,7 @@
     let lastFramePosition = -1;
     let lastCameraProgress = -1;
     let lastDrawPosition = -1;
+    let lastGlossaryProgress = -1;
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
@@ -441,7 +443,10 @@
       const total = clamp(position.raw / Math.max(1, steps.length - 1));
       scene.style.setProperty('--story-progress', total.toFixed(4));
       scene.style.setProperty('--story-local', position.local.toFixed(4));
-      if (glossary) glossary.style.setProperty('--glossary-progress', total.toFixed(4));
+      if (glossaryMeter && Math.abs(total - lastGlossaryProgress) >= .0005) {
+        glossaryMeter.style.transform = `scaleY(${total.toFixed(4)})`;
+        lastGlossaryProgress = total;
+      }
 
       const hasTimedSignal = position.selected === 0 && position.local > .34 && !reduced;
       if (hasTimedSignal || Math.abs(position.raw - lastDrawPosition) >= .0005 || reduced) {

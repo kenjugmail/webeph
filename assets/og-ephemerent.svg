@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Ephemerent — many temporary minds, one inspectable result</title>
+  <desc id="desc">A dark editorial social card pairing Ephemerent typography with a charcoal pin-and-thread field study.</desc>
+  <defs>
+    <style>
+      @font-face{font-family:Newsreader;src:url('fonts/newsreader-latin.woff2') format('woff2');font-weight:400}
+      @font-face{font-family:Hanken;src:url('fonts/hanken-grotesk-latin.woff2') format('woff2');font-weight:400 700}
+      @font-face{font-family:Plex;src:url('fonts/ibm-plex-mono-500-latin.woff2') format('woff2');font-weight:500}
+      .serif{font-family:Newsreader,Georgia,serif}
+      .sans{font-family:Hanken,Arial,sans-serif}
+      .mono{font-family:Plex,monospace}
+    </style>
+    <clipPath id="photo"><rect x="648" y="78" width="492" height="474"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="#14130f"/>
+  <rect x="0" y="0" width="9" height="630" fill="#5cbcaa"/>
+
+  <g transform="translate(56 43)" fill="none" stroke="#5cbcaa">
+    <path d="M0 0 18 5 5 21Z" opacity=".38"/>
+    <circle cx="0" cy="0" r="3" fill="#5cbcaa" stroke="none"/>
+    <circle cx="18" cy="5" r="3" fill="#5cbcaa" stroke="none"/>
+    <circle cx="5" cy="21" r="3" fill="#5cbcaa" stroke="none"/>
+  </g>
+  <text x="91" y="54" class="serif" fill="#ece7db" font-size="28">Ephemerent</text>
+  <text x="91" y="76" class="mono" fill="#5cbcaa" font-size="9" letter-spacing="3.2">EPHEMERAL · EMERGENT</text>
+
+  <line x1="56" y1="121" x2="600" y2="121" stroke="#ece7db" stroke-opacity=".18"/>
+  <text x="56" y="157" class="mono" fill="#9f9a8d" font-size="11" letter-spacing="2.7">INDEPENDENT · PRINCIPLES-BASED RESEARCH</text>
+
+  <text x="54" y="238" class="serif" fill="#ece7db" font-size="69" letter-spacing="-2">Many temporary</text>
+  <text x="54" y="307" class="serif" fill="#ece7db" font-size="69" letter-spacing="-2">minds. One result</text>
+  <text x="54" y="376" class="serif" fill="#ece7db" font-size="69" letter-spacing="-2">you can inspect.</text>
+
+  <text x="57" y="436" class="sans" fill="#bcb6a8" font-size="18">Useful intelligence, briefly assembled.</text>
+  <text x="57" y="464" class="sans" fill="#bcb6a8" font-size="18">The selected work and its trace remain.</text>
+
+  <g clip-path="url(#photo)">
+    <image href="ephemerent-network-dark-studio-1600.jpg" x="648" y="78" width="492" height="474" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="648.5" y="78.5" width="491" height="473" fill="none" stroke="#ece7db" stroke-opacity=".22"/>
+  <path d="M670 111v-17h17M1118 111v-17h-17M670 519v17h17M1118 519v17h-17" fill="none" stroke="#5cbcaa" stroke-width="1.5"/>
+  <text x="673" y="103" class="mono" fill="#8fd2c4" font-size="9" letter-spacing="1.8">FIELD NOTE · 001</text>
+  <text x="1114" y="532" class="mono" fill="#d8d2c5" font-size="9" letter-spacing="1.5" text-anchor="end">ASSEMBLE · ISOLATE · VERIFY · RELEASE</text>
+
+  <line x1="56" y1="558" x2="1140" y2="558" stroke="#ece7db" stroke-opacity=".22"/>
+  <text x="56" y="591" class="mono" fill="#8fd2c4" font-size="10" letter-spacing="1.9">RESEARCH · JOURNAL · NEWS · WORK</text>
+  <text x="1140" y="591" class="mono" fill="#8d887c" font-size="10" letter-spacing="1.9" text-anchor="end">EPHEMERENT.COM · EST. 2026</text>
+</svg>
