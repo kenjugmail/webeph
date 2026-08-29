@@ -18,6 +18,7 @@
 
   body.hearthrail-page {
     min-width: 320px;
+    margin: 0;
     background: var(--hr-ink);
     color: var(--hr-paper);
     font-family: var(--hr-sans);
@@ -50,7 +51,7 @@
     color-scheme: light;
   }
 
-  .hearthrail-page a { color: inherit; }
+  .hearthrail-page a { color: inherit; text-decoration: none; }
   .hearthrail-page ::selection { background: var(--hr-ember); color: var(--hr-ink); }
   .hr-wrap { width: min(var(--hr-max), calc(100% - 80px)); margin-inline: auto; }
 
@@ -59,7 +60,9 @@
     background: color-mix(in srgb, var(--hr-ink) 90%, transparent);
   }
   .hearthrail-page .ebar-in { display: flex; width: min(var(--hr-max), calc(100% - 80px)); min-height: var(--site-nav); max-width: none; align-items: center; justify-content: space-between; padding: 0; }
-  .hearthrail-page .ebrand { gap: 12px; }
+  .hearthrail-page .ebrand { display: flex; align-items: center; gap: 12px; transition: color var(--motion-control) var(--ease), transform var(--motion-control) var(--ease); }
+  .hearthrail-page .ebrand:hover,
+  .hearthrail-page .ebrand:focus-visible { color: var(--hr-ember); transform: translateY(-1px); }
   .hearthrail-page .ebrand .nm { color: var(--hr-paper); }
   .hearthrail-page .brandcol { display: grid; gap: 3px; }
   .hearthrail-page .brandcol .motto { color: var(--hr-ember); }
@@ -67,16 +70,17 @@
   .hearthrail-page .enav a:hover,
   .hearthrail-page .enav a:focus-visible { color: var(--hr-paper); transform: translateY(-1px); }
   .hearthrail-page .enav a { transition: color var(--motion-control) var(--ease), transform var(--motion-control) var(--ease); }
+  .hearthrail-page .hr-nav .enav a::after { display: none; }
   .hearthrail-page .enav .est { color: var(--hr-ember); }
   .hearthrail-page .enav { display: flex; gap: clamp(16px, 2vw, 28px); align-items: center; margin-left: auto; }
   .hearthrail-page .menu-toggle { display: none; }
   .hr-mark { display: grid; width: 28px; height: 28px; place-items: center; color: var(--hr-ember); }
   .hr-mark svg { width: 100%; height: 100%; }
 
-  .hr-hero { padding: clamp(64px, 9vw, 112px) 0 84px; }
+  .hr-hero { padding: clamp(52px, 6vw, 80px) 0 72px; }
   .hr-hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 0.75fr); column-gap: clamp(48px, 8vw, 112px); align-items: end; }
   .hr-eyebrow { margin: 0 0 24px; color: var(--hr-ember); font: 500 11px/1.4 var(--hr-mono); letter-spacing: 0.14em; text-transform: uppercase; }
-  .hr-hero-copy > .hr-eyebrow { grid-column: 1 / -1; }
+  .hr-hero-copy > .hr-eyebrow { grid-column: 1 / -1; margin-bottom: 18px; }
   .hr-hero h1 { margin: 0; max-width: 12ch; font: 400 clamp(48px, 7vw, 88px)/0.98 var(--hr-serif); letter-spacing: -0.035em; }
   .hr-deck { margin: 0 0 28px; max-width: 46ch; color: var(--hr-paper-soft); font-size: clamp(17px, 2vw, 20px); }
   .hr-release-card { grid-column: 2; display: grid; gap: 18px; padding-top: 24px; border-top: 1px solid var(--hr-rule-strong); }
@@ -92,8 +96,11 @@
   .hr-release-asset { display: grid; gap: 7px; padding: 14px; border: 1px solid var(--hr-rule); }
   .hr-release-asset code { overflow-wrap: anywhere; color: var(--hr-paper-soft); font: 400 10px/1.5 var(--hr-mono); }
   .hr-release-asset-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: var(--hr-paper-soft); font-size: 12px; }
+  .hr-release-notes { display: inline-flex; width: max-content; align-items: center; color: var(--hr-ember); font: 500 11px/1.5 var(--hr-mono); letter-spacing: .04em; transition: color var(--motion-control) var(--ease), transform var(--motion-control) var(--ease); }
+  .hr-release-notes:hover,
+  .hr-release-notes:focus-visible { color: var(--hr-paper); transform: translateX(2px); }
 
-  .hr-product-shot { margin: clamp(56px, 8vw, 96px) 0 0; border: 1px solid var(--hr-rule-strong); background: #090909; }
+  .hr-product-shot { margin: clamp(44px, 5vw, 64px) 0 0; border: 1px solid var(--hr-rule-strong); background: #090909; }
   .hr-product-shot img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; }
   .hr-product-shot figcaption { display: flex; justify-content: space-between; gap: 24px; padding: 12px 16px; border-top: 1px solid var(--hr-rule); color: var(--hr-paper-soft); font: 400 10px/1.5 var(--hr-mono); letter-spacing: 0.06em; text-transform: uppercase; }
 
@@ -132,13 +139,16 @@
   .hr-release-ledger small { text-align: right; }
 
   .hearthrail-page .utility-footer { border-top: 1px solid var(--hr-rule); background: var(--hr-ink); color: var(--hr-paper-soft); }
+  .hearthrail-page .utility-footer a { display: inline-block; transition: color var(--motion-control) var(--ease), transform var(--motion-control) var(--ease); }
+  .hearthrail-page .utility-footer a:hover,
+  .hearthrail-page .utility-footer a:focus-visible { color: var(--hr-paper); transform: translateY(-1px); }
 
   @media (max-width: 820px) {
     .hr-wrap,
     .hearthrail-page .ebar-in { width: min(100% - 44px, var(--hr-max)); }
     .hr-hero-copy { grid-template-columns: 1fr; }
-    .hr-deck { margin-top: 30px; }
-    .hr-release-card { grid-column: 1; }
+    .hr-deck { margin: 24px 0; }
+    .hr-release-card { grid-column: 1; padding-top: 20px; }
     .hr-register dl { grid-template-columns: 1fr 1fr; }
     .hr-register dl > div { padding: 18px 16px; border-bottom: 1px solid var(--hr-rule); }
     .hr-register dl > div:nth-child(2) { border-right: 0; }
@@ -160,9 +170,10 @@
   }
 
   @media (max-width: 560px) {
-    .hr-hero { padding-top: 52px; }
+    .hr-hero { padding-top: 40px; }
     .hr-hero h1 { font-size: clamp(42px, 14vw, 60px); }
     .hr-product-shot figcaption { display: grid; gap: 4px; }
+    .hr-product-shot { margin-top: 32px; }
     .hr-register dl { grid-template-columns: 1fr; }
     .hr-register dl > div,
     .hr-register dl > div:first-child,
@@ -183,6 +194,15 @@
     .hearthrail-page *::before,
     .hearthrail-page *::after { scroll-behavior: auto !important; }
     .hearthrail-page .enav a { transition: none; }
+    .hearthrail-page .ebrand,
+    .hearthrail-page .hr-release-notes,
+    .hearthrail-page .utility-footer a { transition: none; }
+    .hearthrail-page .ebrand:hover,
+    .hearthrail-page .ebrand:focus-visible,
+    .hearthrail-page .hr-release-notes:hover,
+    .hearthrail-page .hr-release-notes:focus-visible,
+    .hearthrail-page .utility-footer a:hover,
+    .hearthrail-page .utility-footer a:focus-visible { transform: none; }
     .hearthrail-page .enav a:hover,
     .hearthrail-page .enav a:focus-visible { transform: none; }
   }
@@ -198,6 +218,8 @@ body.hearthrail-page .utility-footer-inner {
   margin-inline: auto;
   padding-inline: 0;
 }
+
+body.hearthrail-page a { text-decoration: none; }
 
 body.hearthrail-page .hr-nav {
   position: sticky;

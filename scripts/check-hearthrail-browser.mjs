@@ -85,7 +85,25 @@ for (const mode of ["dark", "light"]) {
       });
       await page.goto(`${base}/hearthrail`, { waitUntil: "load" });
       await page.waitForTimeout(120);
-      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), viewport.width);
+      const layout = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        bodyMargin: getComputedStyle(document.body).margin,
+        brandDisplay: getComputedStyle(document.querySelector(".ebrand")).display,
+        headerHeight: Math.round(document.querySelector(".hr-nav").getBoundingClientRect().height),
+        shotTop: Math.round(document.querySelector(".hr-product-shot").getBoundingClientRect().top),
+        underlinedLinks: [...document.querySelectorAll(".hr-nav a, .utility-footer a")].filter((element) => getComputedStyle(element).textDecorationLine !== "none").length,
+        navRuleDisplay: getComputedStyle(document.querySelector("#hearthrail-navigation a"), "::after").display,
+      }));
+      assert.equal(layout.scrollWidth, viewport.width);
+      assert.equal(layout.bodyMargin, "0px");
+      assert.equal(layout.brandDisplay, "flex");
+      assert.equal(layout.underlinedLinks, 0);
+      assert.equal(layout.navRuleDisplay, "none");
+      if (viewport.width === 360) assert.ok(layout.shotTop <= 730, `real product shot starts at ${layout.shotTop}px on phone`);
+      if (viewport.width === 1280) {
+        assert.ok(layout.headerHeight <= 70, `desktop header is ${layout.headerHeight}px tall`);
+        assert.ok(layout.shotTop <= 650, `real product shot starts at ${layout.shotTop}px on desktop`);
+      }
       assert.equal(await page.locator("[data-hearthrail-release] a[href]").count(), 0);
       assert.deepEqual(errors, []);
       assert.deepEqual(external, []);
