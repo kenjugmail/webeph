@@ -18,7 +18,7 @@ import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
 const LOOKS = (process.env.LOOKS ?? 'light,dark,glass').split(',');
 const PAGES = (process.env.PAGES ?? [
-  '/', '/research', '/orrery', '/vellum', '/vespera', '/shelterix',
+  '/', '/research', '/orrery', '/hearthrail', '/vellum', '/vespera', '/shelterix',
   '/arbiter', '/news', '/news/drfsp-robust-compression', '/journal',
   '/genesis-fall', '/download', '/organizations',
 ].join(',')).split(',');

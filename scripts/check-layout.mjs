@@ -21,7 +21,7 @@ import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
 const LOOKS = (process.env.LOOKS ?? 'light,dark,glass').split(',');
 const PAGES = (process.env.PAGES ?? [
-  '/', '/research', '/orrery', '/vellum', '/vespera', '/shelterix',
+  '/', '/research', '/orrery', '/hearthrail', '/vellum', '/vespera', '/shelterix',
   '/genesis-fall', '/arbiter', '/news', '/news/drfsp-robust-compression',
   '/journal', '/journal/submit', '/journal/policies', '/journal/editor',
   '/journal/article/x', '/signin', '/cloud', '/vellum/connect', '/download',

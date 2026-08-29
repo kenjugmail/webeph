@@ -13,7 +13,7 @@
  */
 import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
-const PAGES = (process.env.PAGES ?? '/,/research,/orrery,/vellum,/vespera,/shelterix,/journal,/news,/download,/organizations,/arbiter').split(',');
+const PAGES = (process.env.PAGES ?? '/,/research,/orrery,/hearthrail,/vellum,/vespera,/shelterix,/journal,/news,/download,/organizations,/arbiter').split(',');
 const TOLERANCE = 4;   // px; sub-pixel and rounding are not defects
 
 const b = await chromium.launch();

@@ -32,7 +32,7 @@ const EXEMPT = ['/genesis-fall'];
 const REQUIRED = ['--accent'];
 const SLOTS = ['--accent', '--signal', '--ink', '--bg', '--paper'];
 const PAGES = (process.env.PAGES ?? [
-  '/', '/research', '/orrery', '/vellum', '/vespera', '/shelterix',
+  '/', '/research', '/orrery', '/hearthrail', '/vellum', '/vespera', '/shelterix',
   '/arbiter', '/news', '/news/drfsp-robust-compression', '/journal',
   '/journal/policies', '/download', '/cloud', '/signin', '/organizations',
   '/security', '/privacy', '/terms', '/slack', '/vellum/connect',

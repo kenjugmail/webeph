@@ -124,6 +124,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <path d="M3 11.5 12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M5 10v9h14v-9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
+  <symbol id="hrmk" viewBox="0 0 512 512">
+    <path d="M84 360c74-20 105-80 111-174 58 46 82 98 66 157 59-33 91-93 88-178 64 64 84 145 50 222H101z" fill="none" stroke="currentColor" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M92 405h328M143 455h226" fill="none" stroke="currentColor" stroke-width="23" stroke-linecap="round"/>
+  </symbol>
 </defs></svg>
 
 <!-- TOP BAR -->
@@ -402,6 +406,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <span class="de">A coding harness for developing, understanding, testing, and improving software with agents, persistent codebase context, and verification. Available through Ephemerent.</span>
         <span class="meta"><span class="estatus live">Available</span><span class="arr">→</span></span>
       </a>
+      <a class="eprodrow" href="/hearthrail" data-motion="reveal">
+        <span class="nm"><svg class="mk accent"><use href="#hrmk"/></svg> Hearthrail</span>
+        <span class="de">A local-first desktop library for games you already own, signed Ephemerent releases, and isolated offline web games. Installers are not public yet.</span>
+        <span class="meta"><span class="estatus preview">Private alpha</span><span class="arr">→</span></span>
+      </a>
       <a class="eprodrow" href="/arbiter" data-motion="reveal">
         <span class="nm">Arbiter</span>
         <span class="de">Ephemerent’s coding agent. Access releases after its full pretraining run on Amazon Web Services (AWS) is complete.</span>
@@ -599,6 +608,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <h2 class="efoot-heading">Work</h2>
         <ul>
           <li><a href="/orrery">Orrery</a></li>
+          <li><a href="/hearthrail">Hearthrail</a></li>
           <li><a href="/vellum">Vellum Engineering</a></li>
           <li><a href="/vespera">Vespera</a></li>
           <!-- Launch gate: remove `hidden` with the public homepage row. -->

@@ -21,7 +21,7 @@ const BASE = process.env.BASE ?? 'http://localhost:3111';
    toggle. Every other page must answer it. */
 const FIXED = ['/genesis-fall'];
 const PAGES = (process.env.PAGES ?? [
-  '/', '/research', '/orrery', '/vellum', '/vespera', '/shelterix',
+  '/', '/research', '/orrery', '/hearthrail', '/vellum', '/vespera', '/shelterix',
   '/genesis-fall', '/arbiter', '/news', '/news/drfsp-robust-compression',
   '/journal', '/journal/submit', '/journal/policies', '/journal/editor',
   '/signin', '/cloud', '/vellum/connect', '/download', '/organizations',

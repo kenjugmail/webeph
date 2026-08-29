@@ -8,7 +8,7 @@
  */
 import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
-const PAGES = ['/', '/research', '/orrery', '/vellum', '/vespera', '/shelterix', '/journal', '/news'];
+const PAGES = ['/', '/research', '/orrery', '/hearthrail', '/vellum', '/vespera', '/shelterix', '/journal', '/news'];
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });

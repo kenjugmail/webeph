@@ -26,6 +26,7 @@ Vespera.html             Vespera creative studio + playable project (information
 Shelterix.html           Shelterix poverty-to-productivity platform (preview)
 Vellum.html              Vellum (3D) product page
 download.html            Download + current beta update channel
+Hearthrail.html           Hearthrail product page + fail-closed private-alpha download slot
 login.html               Sign-in
 cloud.html               Cloud dashboard + sign-in
 privacy.html             Privacy Policy
@@ -55,6 +56,9 @@ docs/DEPLOY.md           Vercel/domain/download/update release steps
   local plan. Paid plans own cloud sign-in, DeepSeek API, Doubleword, Arbiter credits,
   Nexus cloud features, managed connectors, and cloud audit/proof.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
+- **Hearthrail remains private alpha.** `/hearthrail` is public product information, but
+  `assets/hearthrail-release.json` contains no installer URL. Its same-origin manifest must pass
+  the release validator before the static unavailable state can become a download link.
 
 ## Deploy (Vercel + ephemerent.com)
 

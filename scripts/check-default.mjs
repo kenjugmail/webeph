@@ -12,7 +12,7 @@ import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
 const FLAT = ['/genesis-fall'];        // FIXED: art-directed, opts out
 const PAGES = (process.env.PAGES ?? [
-  '/', '/research', '/orrery', '/vellum', '/vespera', '/shelterix',
+  '/', '/research', '/orrery', '/hearthrail', '/vellum', '/vespera', '/shelterix',
   '/arbiter', '/news', '/journal', '/download', '/cloud', '/signin',
   '/organizations', '/security', '/privacy', '/terms', '/slack',
   '/genesis-fall',

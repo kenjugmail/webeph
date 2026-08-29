@@ -28,7 +28,7 @@ const BASE = process.env.BASE ?? 'http://localhost:3111';
 
 const PAGES = [
   '/', '/research', '/journal', '/journal/policies', '/news', '/vespera',
-  '/orrery', '/vellum', '/shelterix', '/download', '/cloud', '/signin',
+  '/orrery', '/hearthrail', '/vellum', '/shelterix', '/download', '/cloud', '/signin',
   '/organizations', '/privacy', '/terms', '/security', '/slack',
 ];
 /* Glass is a third thing to audit, not a variation on the second: its

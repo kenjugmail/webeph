@@ -12,7 +12,7 @@
  */
 import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
-const PAGES = ['/','/research','/orrery','/vellum','/vespera','/shelterix','/journal','/news','/download','/organizations','/arbiter','/genesis-fall'];
+const PAGES = ['/','/research','/orrery','/hearthrail','/vellum','/vespera','/shelterix','/journal','/news','/download','/organizations','/arbiter','/genesis-fall'];
 
 /**
  * Target tracking in em for a size, and the slack allowed.
