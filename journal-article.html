@@ -33,6 +33,7 @@
 <meta name="twitter:title" content="Published record — Ephemerent Research">
 <meta name="twitter:description" content="A published record in Ephemerent Research, the open AI research journal of Ephemerent.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-research.png">
+<meta name="twitter:image:alt" content="Ephemerent Research">
 <script>document.documentElement.classList.add('jr-js')</script>
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- include: head-theme -->
@@ -66,7 +67,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <link rel="stylesheet" href="/assets/glass.css?v=20260820">
 <script src="/assets/mode.js?v=20260822c" defer></script>
 <!-- /include -->
-<link rel="stylesheet" href="/assets/journal.css?v=20260812a">
+<link rel="stylesheet" href="/assets/journal.css?v=20260904a">
 <script type="application/ld+json" id="article-structured-data">
 { "@context": "https://schema.org", "@type": "ScholarlyArticle", "publisher": { "@type": "Organization", "name": "Ephemerent Research", "url": "https://ephemerent.com/journal" } }
 </script>
@@ -114,6 +115,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <h1 data-article-title>Opening the research record.</h1>
         <p class="jr-article-deck" data-article-summary>Reading published metadata, immutable versions, files, and disclosed review from the public register.</p>
         <p class="jr-article-authors" data-article-authors>Public register · source connection in progress</p>
+        <p class="jr-article-affiliations" data-article-affiliations hidden></p>
         <div class="jr-article-actions" data-article-actions aria-label="Article actions">
           <a class="jr-button" href="#article-files">Research files</a>
           <a class="jr-button" href="#review-ledger">Review ledger</a>
@@ -157,6 +159,23 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <ul class="jr-side-list" data-article-links><li><span>No external links listed.</span></li></ul>
       </div>
     </aside>
+  </section>
+
+  <section class="jr-declarations" id="article-declarations" aria-labelledby="declarations-heading">
+    <div class="jr-container">
+      <div class="jr-record-heading">
+        <span class="jr-section-label">Declarations</span>
+        <div><h2 id="declarations-heading">Responsibility stays visible.</h2><p>Funding, conflicts, ethics, AI contribution, licensing, and human accountability are attached to the published record.</p></div>
+      </div>
+      <dl class="jr-declaration-ledger">
+        <div><dt>Funding</dt><dd data-article-funding>Reading declaration…</dd></div>
+        <div><dt>Conflicts and editorial relationship</dt><dd data-article-conflicts>Reading declaration…</dd></div>
+        <div><dt>Ethics and safety</dt><dd data-article-ethics>Reading declaration…</dd></div>
+        <div><dt>AI contribution</dt><dd data-article-ai-contribution>Reading declaration…</dd></div>
+        <div><dt>Licensing</dt><dd data-article-licensing>Reading declaration…</dd></div>
+        <div><dt>Accountability</dt><dd data-article-accountability>Reading declaration…</dd></div>
+      </dl>
+    </div>
   </section>
 
   <section class="jr-record-files" id="article-files" aria-labelledby="files-heading">
@@ -211,6 +230,6 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 </footer>
 
 <script src="/assets/site-config.js"></script>
-<script type="module" src="/assets/journal.js?v=20260812a"></script>
+<script type="module" src="/assets/journal.js?v=20260904a"></script>
 </body>
 </html>

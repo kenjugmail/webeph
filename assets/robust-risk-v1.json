@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "scenario:robust-risk:drfsp-v1",
+  "status": "field_trial",
+  "title": "When the average hides a rare failure",
+  "description": "A deterministic conceptual scenario for comparing prevalence-weighted mean risk with worst-environment risk. It is not a paper replication or a new experimental result.",
+  "rare_environment_id": "code",
+  "prevalence": {
+    "minimum": 0.01,
+    "maximum": 0.3,
+    "step": 0.01,
+    "default": 0.05
+  },
+  "remainder_split": {
+    "prose": 0.7,
+    "dialogue": 0.3
+  },
+  "environments": [
+    { "id": "prose", "label": "Common prose" },
+    { "id": "dialogue", "label": "Dialogue" },
+    { "id": "code", "label": "Code" }
+  ],
+  "candidates": [
+    {
+      "id": "frequency_first",
+      "label": "Frequency-first",
+      "losses": { "prose": 0.08, "dialogue": 0.12, "code": 0.84 }
+    },
+    {
+      "id": "robust_capacity",
+      "label": "Robust capacity",
+      "losses": { "prose": 0.14, "dialogue": 0.18, "code": 0.27 }
+    }
+  ],
+  "expected_checkpoints": {
+    "default_mean_selected": "frequency_first",
+    "worst_selected": "robust_capacity",
+    "break_even_share": 0.09523809523809523,
+    "above_crossover_share": 0.15,
+    "above_crossover_mean_selected": "robust_capacity"
+  },
+  "concept_ids": [
+    "concept:quantities-ratios-and-scale",
+    "concept:probability-as-evidence",
+    "concept:learning-systems-and-evaluation"
+  ],
+  "links": {
+    "news": "https://ephemerent.com/news/drfsp-robust-compression",
+    "journal": "https://ephemerent.com/journal/article/distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression",
+    "atlas_lab": "https://atlas.ephemerent.com/labs/robust-selection"
+  },
+  "source_ids": [
+    "source:atlas-method-v2",
+    "source:drfsp-paper-v3"
+  ],
+  "license": "CC BY 4.0",
+  "content_hash": "4b8c275c0086b41948ae0bc474a63bf0e552353d4d39a37698d4a760917adcbe"
+}

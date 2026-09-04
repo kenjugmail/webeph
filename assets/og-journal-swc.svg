@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Stochastic Witness Calculus — Ephemerent Research</title>
+  <desc id="desc">An editorial diagram moves from a witness distribution through an exact positive-mass certificate to a deterministic theorem, with empirical evidence kept on a separate track.</desc>
+  <rect width="1200" height="630" fill="#f5f0e6"/>
+  <path d="M0 76H1200M70 548H1130" stroke="#d8d0c2"/>
+  <g transform="translate(70 28)">
+    <rect width="34" height="34" fill="none" stroke="#101a32" stroke-width="1.5"/>
+    <path d="M13 0V34M0 13H34" stroke="#365bd6" stroke-width="1.5"/>
+    <text x="52" y="22" fill="#101a32" font-family="Georgia,serif" font-size="25">Ephemerent Research</text>
+    <text x="52" y="38" fill="#536079" font-family="ui-monospace,monospace" font-size="8" letter-spacing="2.2">OPEN JOURNAL · ORIGINAL RESEARCH</text>
+  </g>
+  <text x="70" y="126" fill="#365bd6" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">STOCHASTIC WITNESS CALCULUS</text>
+  <g fill="#101a32" font-family="Georgia,serif" font-size="43">
+    <text x="70" y="184">Exact measure certificates</text>
+    <text x="70" y="232">for existence, proof search,</text>
+    <text x="70" y="280">and empirical claims</text>
+  </g>
+  <text x="70" y="328" fill="#536079" font-family="Arial,sans-serif" font-size="17">Exact mathematics and empirical evidence remain visibly distinct.</text>
+
+  <g transform="translate(640 116)">
+    <rect width="490" height="370" fill="#eee7da" stroke="#101a32" stroke-width="1.5"/>
+    <text x="26" y="34" fill="#536079" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.7">EXACT CERTIFICATE TRACK</text>
+    <path d="M26 52H464" stroke="#c8beaf"/>
+
+    <g transform="translate(30 84)">
+      <circle cx="35" cy="33" r="8" fill="#365bd6"/>
+      <circle cx="67" cy="17" r="5" fill="#6c55a5"/>
+      <circle cx="77" cy="53" r="11" fill="#c45e52"/>
+      <circle cx="24" cy="66" r="4" fill="#365bd6"/>
+      <path d="M105 39H145" stroke="#365bd6" stroke-width="2"/>
+      <path d="M137 31L146 39L137 47" fill="none" stroke="#365bd6" stroke-width="2"/>
+      <rect x="160" y="5" width="130" height="70" fill="#f5f0e6" stroke="#365bd6"/>
+      <text x="225" y="32" text-anchor="middle" fill="#101a32" font-family="Georgia,serif" font-size="18">μ(A) ≥ δ &gt; 0</text>
+      <text x="225" y="55" text-anchor="middle" fill="#536079" font-family="ui-monospace,monospace" font-size="8" letter-spacing="1">EXACT MASS</text>
+      <path d="M305 39H344" stroke="#365bd6" stroke-width="2"/>
+      <path d="M336 31L345 39L336 47" fill="none" stroke="#365bd6" stroke-width="2"/>
+      <rect x="359" y="5" width="92" height="70" fill="#101a32"/>
+      <text x="405" y="32" text-anchor="middle" fill="#f5f0e6" font-family="Georgia,serif" font-size="17">∃ witness</text>
+      <text x="405" y="55" text-anchor="middle" fill="#9eb8ff" font-family="ui-monospace,monospace" font-size="8" letter-spacing="1">THEOREM</text>
+    </g>
+    <g fill="#536079" font-family="ui-monospace,monospace" font-size="8" letter-spacing="1.2">
+      <text x="30" y="189">WITNESS DISTRIBUTION</text>
+      <text x="190" y="189">POSITIVE-MASS CERTIFICATE</text>
+      <text x="389" y="189">DETERMINISTIC</text>
+    </g>
+
+    <path d="M26 225H464" stroke="#c8beaf"/>
+    <text x="26" y="252" fill="#c45e52" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.7">EMPIRICAL MODE · SEPARATE CLAIM TYPE</text>
+    <path d="M30 301H112L146 278L190 319L235 289L278 313L325 267L372 298L438 256" fill="none" stroke="#c45e52" stroke-width="2"/>
+    <path d="M30 326H438" stroke="#536079" stroke-dasharray="4 6" opacity=".7"/>
+    <g fill="#c45e52">
+      <circle cx="146" cy="278" r="4"/><circle cx="235" cy="289" r="4"/><circle cx="325" cy="267" r="4"/><circle cx="438" cy="256" r="4"/>
+    </g>
+    <text x="30" y="349" fill="#536079" font-family="Arial,sans-serif" font-size="12">Anytime-valid evidence accumulates; it does not become a theorem.</text>
+  </g>
+
+  <text x="70" y="520" fill="#101a32" font-family="Georgia,serif" font-size="20">Kenju Tomita</text>
+  <text x="70" y="581" fill="#536079" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.6">FINITE VERIFICATION IS NOT A UNIVERSAL PROOF</text>
+  <text x="1130" y="581" text-anchor="end" fill="#365bd6" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.6">EPHEMERENT.COM/JOURNAL</text>
+</svg>

@@ -45,7 +45,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <link rel="stylesheet" href="/assets/glass.css?v=20260820">
 <script src="/assets/mode.js?v=20260822c" defer></script>
 <!-- /include -->
-<link rel="stylesheet" href="/assets/journal.css?v=20260812a">
+<link rel="stylesheet" href="/assets/journal.css?v=20260904a">
 </head>
 <body class="jr-page" data-journal-page="editor">
 <a class="jr-skip" href="#main">Skip to content</a>
@@ -122,14 +122,16 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
               </div>
             </div>
             <div class="jr-editor-detail-card">
-              <h3>Record peer review with AI</h3>
-              <p>Use this ledger for a human review, an AI-system review, or a human review assisted by AI. The review becomes part of the public article record after publication.</p>
+              <h3>Record review evidence</h3>
+              <p>Peer review assesses the research. An AI editorial recommendation checks the record and policy, but cannot satisfy the peer-review gate or perform the accountable publication action.</p>
               <form data-editor-review-form>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Review role</span><select class="jr-select" name="review_type"><option value="Peer review with AI">Peer review with AI</option><option value="AI editorial recommendation">AI editorial recommendation</option></select></label>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Recommendation</span><select class="jr-select" name="recommendation"><option value="revise">Revise</option><option value="accept_after_changes">Accept after completed changes</option><option value="accept">Accept</option><option value="reject">Reject</option><option value="not_applicable">Not applicable</option></select></label>
                 <label class="jr-field jr-field-spaced"><span class="jr-section-label">Reviewer type</span><select class="jr-select" name="reviewer_type"><option value="human_ai">Human + AI assisted</option><option value="human">Human reviewer</option><option value="ai_system">AI system</option></select></label>
                 <label class="jr-field jr-field-spaced"><span class="jr-section-label">Reviewer name or pseudonym</span><input class="jr-input" name="display_name" required maxlength="180" placeholder="Name, system, or pseudonym"></label>
-                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Peer review</span><textarea class="jr-textarea" name="body" required maxlength="20000" placeholder="Use plain-text headings such as Decision:, Evidence checked:, Limitations:, and Recommendation: to create a structured public ledger."></textarea></label>
+                <label class="jr-field jr-field-spaced"><span class="jr-section-label">Review record</span><textarea class="jr-textarea" name="body" required maxlength="20000" placeholder="Use plain-text headings such as Decision:, Evidence checked:, Limitations:, and Recommendation: to create a structured public ledger."></textarea></label>
                 <label class="jr-field jr-field-spaced"><span class="jr-section-label">AI disclosure</span><textarea class="jr-textarea" name="ai_disclosure" required maxlength="3000" placeholder="Name the model and role, or write “No AI used.”"></textarea></label>
-                <div class="jr-form-actions"><button class="jr-button jr-button-small" type="submit">Save peer review record</button><span class="jr-form-msg" data-editor-review-msg role="status"></span></div>
+                <div class="jr-form-actions"><button class="jr-button jr-button-small" type="submit">Save review record</button><span class="jr-form-msg" data-editor-review-msg role="status"></span></div>
               </form>
             </div>
             <div class="jr-editor-detail-card">
@@ -189,6 +191,6 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 </footer>
 
 <script src="/assets/site-config.js"></script>
-<script type="module" src="/assets/journal.js?v=20260812a"></script>
+<script type="module" src="/assets/journal.js?v=20260904a"></script>
 </body>
 </html>

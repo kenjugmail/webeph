@@ -44,10 +44,12 @@ const FILE_GROUPS = [
 
 const RELATED_STORIES = {
   'distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression': '/news/drfsp-robust-compression',
+  'stochastic-witness-calculus': '/news/stochastic-witness-calculus',
 };
 
 const ARTICLE_SOCIAL_IMAGES = {
   'distribution-robust-functional-subset-projection-for-structured-neural-network-width-compression': 'https://ephemerent.com/assets/og-journal-drfsp.png',
+  'stochastic-witness-calculus': 'https://ephemerent.com/assets/og-journal-swc.png',
 };
 
 const REVIEW_HEADINGS = new Map([
@@ -114,6 +116,18 @@ function authorLine(authors) {
   return names.length ? names.join(' · ') : 'Author list supplied in the record';
 }
 
+function authorAffiliations(authors) {
+  const affiliations = [];
+  (Array.isArray(authors) ? authors : []).forEach((author) => {
+    if (!author || typeof author === 'string' || !Array.isArray(author.affiliations)) return;
+    author.affiliations.forEach((affiliation) => {
+      const value = String(affiliation || '').trim();
+      if (value && !affiliations.includes(value)) affiliations.push(value);
+    });
+  });
+  return affiliations;
+}
+
 function slugify(value) {
   return String(value || 'work')
     .normalize('NFKD')
@@ -139,7 +153,10 @@ function extension(value) {
 }
 
 function fileRole(value, index = 0) {
+  const name = String(value || '').toLowerCase();
   const ext = extension(value);
+  if (/cover|checklist|metadata|readme|licen[sc]e|submission/.test(name)) return 'submission';
+  if (/reproduc|artifact|result|output|manifest|checksum|sha256|notebook|dataset/.test(name)) return 'reproducibility';
   if (index === 0 && TYPE_EXTENSIONS.manuscript.includes(ext)) return 'manuscript';
   for (const [role, extensions] of Object.entries(TYPE_EXTENSIONS)) {
     if (extensions.includes(ext)) return role;
@@ -412,11 +429,13 @@ async function renderArticle() {
   setMetaContent('meta[property="og:description"]', socialDescription);
   setMetaContent('meta[property="og:url"]', canonicalUrl);
   setMetaContent('meta[property="og:image"]', socialImage);
+  setMetaContent('meta[property="og:image:alt"]', `${submission.title} — Ephemerent Research`);
   setMetaContent('meta[property="article:published_time"]', submission.published_at);
   setMetaContent('meta[property="article:modified_time"]', submission.updated_at || submission.published_at);
   setMetaContent('meta[name="twitter:title"]', submission.title);
   setMetaContent('meta[name="twitter:description"]', socialDescription);
   setMetaContent('meta[name="twitter:image"]', socialImage);
+  setMetaContent('meta[name="twitter:image:alt"]', `${submission.title} — Ephemerent Research`);
   const structuredData = $('#article-structured-data');
   if (structuredData) {
     const authors = Array.isArray(submission.public_authors) ? submission.public_authors : [];
@@ -435,6 +454,9 @@ async function renderArticle() {
       author: authors.map((author) => ({
         '@type': author.type === 'organization' ? 'Organization' : author.type === 'ai_system' ? 'SoftwareApplication' : 'Person',
         name: author.name,
+        ...(Array.isArray(author.affiliations) && author.affiliations.length ? {
+          affiliation: author.affiliations.map((name) => ({ '@type': 'Organization', name })),
+        } : {}),
       })),
       publisher: { '@type': 'Organization', name: 'Ephemerent Research', url: 'https://ephemerent.com/journal' },
       about: Array.isArray(submission.keywords) ? submission.keywords : [],
@@ -444,14 +466,28 @@ async function renderArticle() {
   $('[data-article-id]').textContent = submission.article_id || 'Ephemerent Research record';
   $('[data-article-type]').textContent = submission.article_type || 'Research';
   $('[data-article-status]').textContent = STATUS_LABELS[submission.status] || 'Published';
-  $('[data-article-title]').textContent = submission.title || 'Untitled work';
+  const articleTitle = $('[data-article-title]');
+  articleTitle.textContent = submission.title || 'Untitled work';
+  articleTitle.classList.toggle('jr-title-long', articleTitle.textContent.length > 100);
   $('[data-article-summary]').textContent = submission.summary || '';
   $('[data-article-authors]').textContent = authorLine(submission.public_authors);
+  const affiliations = authorAffiliations(submission.public_authors);
+  const affiliationsRoot = $('[data-article-affiliations]');
+  if (affiliationsRoot) {
+    affiliationsRoot.textContent = affiliations.join(' · ');
+    affiliationsRoot.hidden = !affiliations.length;
+  }
   $('[data-article-accountable]').textContent = submission.accountable_name || 'Accountable submitter on file';
   $('[data-article-date]').textContent = formatDate(submission.published_at);
   $('[data-article-license]').textContent = submission.license || 'License not specified';
   $('[data-article-keywords]').textContent = Array.isArray(submission.keywords) && submission.keywords.length ? submission.keywords.join(' · ') : 'None listed';
   $('[data-article-disclosure]').innerHTML = `<strong>${submission.ai_disclosure ? 'AI contribution' : 'Authorship disclosure'}</strong><p>${escapeHtml(submission.ai_disclosure || 'No AI contribution statement was supplied.')}</p>`;
+  $('[data-article-funding]').textContent = submission.funding_statement || 'No funding statement supplied.';
+  $('[data-article-conflicts]').textContent = submission.conflict_statement || 'No conflict statement supplied.';
+  $('[data-article-ethics]').textContent = submission.ethics_statement || 'No ethics or safety statement supplied.';
+  $('[data-article-ai-contribution]').textContent = submission.ai_disclosure || 'No AI contribution statement supplied.';
+  $('[data-article-licensing]').textContent = `${submission.license || 'Article license not specified'}. Code and supplementary artifacts retain the licenses recorded with their files.`;
+  $('[data-article-accountability]').textContent = `${submission.accountable_name || 'The accountable submitter on file'} remains responsible for the submitted record and the publishing action is attributable to an authorized human editor.`;
   const notice = $('[data-article-notice]');
   if (submission.public_notice || submission.status === 'retracted') {
     notice.classList.remove('jr-hidden');
@@ -472,6 +508,13 @@ async function renderArticle() {
   const currentVersion = versions.find((version) => version.published_at) || versions[0];
   const files = (fileResult.data || []).filter((file) => !currentVersion || file.version_id === currentVersion.id);
   const filesRoot = $('[data-article-files]');
+  const signedFileUrls = new Map();
+  if (!fileResult.error && files.length) {
+    await Promise.all(files.map(async (file) => {
+      const { data } = await sb.storage.from(file.bucket_id || 'research-public').createSignedUrl(file.storage_path, 3600);
+      if (data?.signedUrl) signedFileUrls.set(file.id, data.signedUrl);
+    }));
+  }
   if (fileResult.error) {
     filesRoot.innerHTML = '<div class="jr-thread-empty jr-error">Public files are temporarily unavailable.</div>';
   } else if (!files.length) {
@@ -480,8 +523,10 @@ async function renderArticle() {
     const grouped = Object.fromEntries(FILE_GROUPS.map(({ key }) => [key, []]));
     files.forEach((file, index) => grouped[fileGroup(file, index)].push(file));
     filesRoot.innerHTML = FILE_GROUPS.filter(({ key }) => grouped[key].length).map(({ key, label }) => `<section class="jr-file-group"><h3>${escapeHtml(label)} <span>${grouped[key].length} ${grouped[key].length === 1 ? 'file' : 'files'}</span></h3><ul class="jr-file-group-list">${grouped[key].map((file) => {
-      const publicUrl = sb.storage.from(file.bucket_id || 'research-public').getPublicUrl(file.storage_path).data.publicUrl;
-      return `<li><a class="jr-file-link" href="${escapeHtml(publicUrl)}" target="_blank" rel="noopener"><span class="jr-file-name">${escapeHtml(file.original_filename)}</span><span class="jr-file-meta">${escapeHtml(fileFormat(file))} · ${escapeHtml(formatBytes(file.byte_size))} ↗</span></a></li>`;
+      const signedUrl = signedFileUrls.get(file.id);
+      return signedUrl
+        ? `<li><a class="jr-file-link" href="${escapeHtml(signedUrl)}" target="_blank" rel="noopener"><span class="jr-file-name">${escapeHtml(file.original_filename)}</span><span class="jr-file-meta">${escapeHtml(fileFormat(file))} · ${escapeHtml(formatBytes(file.byte_size))} ↗</span></a></li>`
+        : `<li><span class="jr-file-link jr-file-link-unavailable"><span class="jr-file-name">${escapeHtml(file.original_filename)}</span><span class="jr-file-meta">Download temporarily unavailable</span></span></li>`;
     }).join('')}</ul></section>`).join('');
   }
   const versionsRoot = $('[data-article-versions]');
@@ -498,8 +543,8 @@ async function renderArticle() {
     const relatedStory = RELATED_STORIES[submission.slug];
     const actions = [];
     if (firstPdf) {
-      const pdfUrl = sb.storage.from(firstPdf.bucket_id || 'research-public').getPublicUrl(firstPdf.storage_path).data.publicUrl;
-      actions.push(`<a class="jr-button jr-button-primary" href="${escapeHtml(pdfUrl)}" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>`);
+      const pdfUrl = signedFileUrls.get(firstPdf.id);
+      if (pdfUrl) actions.push(`<a class="jr-button jr-button-primary" href="${escapeHtml(pdfUrl)}" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a>`);
     }
     if (relatedStory) actions.push(`<a class="jr-button" href="${escapeHtml(relatedStory)}">Read the visual explainer</a>`);
     actions.push('<a class="jr-button" href="#article-files">Research files</a>', '<a class="jr-button" href="#review-ledger">Review ledger</a>');
@@ -524,6 +569,16 @@ function reviewMode(item) {
   return 'Human review';
 }
 
+function reviewRecommendation(value) {
+  return ({
+    accept: 'Recommendation · accept',
+    accept_after_changes: 'Recommendation · accept after changes',
+    revise: 'Recommendation · revise',
+    reject: 'Recommendation · reject',
+    not_applicable: 'Recommendation · not applicable',
+  })[value] || 'Recommendation not recorded';
+}
+
 function reviewRecord(item, versionNumbers, showReport = false) {
   const report = showReport ? `<button class="jr-text-button" type="button" data-report-id="${escapeHtml(item.id)}" data-report-kind="review">Report</button>` : '';
   const versionNumber = versionNumbers.get(item.version_id);
@@ -531,7 +586,7 @@ function reviewRecord(item, versionNumbers, showReport = false) {
   return `<article class="jr-review-record">
     <header class="jr-review-header">
       <div><h3 class="jr-review-title">${escapeHtml(item.review_type || 'Peer review')}</h3><p class="jr-review-byline">${escapeHtml(item.display_name || 'Disclosed reviewer')} · ${escapeHtml(formatDate(item.created_at))}</p></div>
-      <div class="jr-review-stamp"><strong>${escapeHtml(reviewMode(item))}</strong><span>${item.review_stage === 'prepublication' ? 'Prepublication' : 'Post-publication'}</span><span>${versionNumber ? `Version ${escapeHtml(versionNumber)} reviewed` : 'Published version reviewed'}</span></div>
+      <div class="jr-review-stamp"><strong>${escapeHtml(reviewMode(item))}</strong><span>${escapeHtml(reviewRecommendation(item.recommendation))}</span><span>${item.review_stage === 'prepublication' ? 'Prepublication' : 'Post-publication'}</span><span>${versionNumber ? `Version ${escapeHtml(versionNumber)} reviewed` : 'Published version reviewed'}</span></div>
     </header>
     <div class="jr-review-sections">${sections}</div>
     ${item.ai_disclosure ? `<p class="jr-review-disclosure"><strong>AI disclosure</strong><br>${escapeHtml(item.ai_disclosure)}</p>` : ''}
@@ -543,7 +598,7 @@ async function renderDiscussion(sb, submission, version, allVersions = [version]
   const versionIds = allVersions.map((item) => item.id).filter(Boolean);
   const [commentsResult, reviewsResult, session, authorResult] = await Promise.all([
     sb.from('research_public_comments').select('id,version_id,display_name,body,is_author_response,ai_disclosure,created_at').in('version_id', versionIds).order('created_at'),
-    sb.from('research_public_reviews').select('id,version_id,display_name,review_type,reviewer_type,review_stage,body,ai_disclosure,created_at').in('version_id', versionIds).order('created_at'),
+    sb.from('research_public_reviews').select('id,version_id,display_name,review_type,recommendation,reviewer_type,review_stage,body,ai_disclosure,created_at').in('version_id', versionIds).order('created_at'),
     getCloudSession(),
     sb.from('research_submissions').select('submitter_id').eq('id', submission.id).maybeSingle(),
   ]);
@@ -629,6 +684,8 @@ function readAuthors() {
     type: $('.jr-author-type', row)?.value || 'human',
     name: $('[name="author_name"]', row)?.value.trim() || '',
     role: $('[name="author_role"]', row)?.value.trim() || '',
+    affiliations: String($('[name="author_affiliations"]', row)?.value || '')
+      .split(';').map((value) => value.trim()).filter(Boolean).slice(0, 12),
   })).filter((author) => author.name);
 }
 
@@ -638,6 +695,7 @@ function bindAuthorRow(row) {
     if (rows.length <= 1) {
       $('[name="author_name"]', row).value = '';
       $('[name="author_role"]', row).value = '';
+      $('[name="author_affiliations"]', row).value = '';
       return;
     }
     row.remove();
@@ -792,34 +850,53 @@ async function mountSubmit() {
 }
 
 async function createImportedPackage(sb, session, files) {
-  const metadataFile = files.find((file) => file.name.split('/').pop() === 'DRFSP_SNCS_Metadata.txt');
-  const metadataText = metadataFile ? await metadataFile.text() : '';
-  const title = metadataText.match(/^TITLE:\s*(.+)$/m)?.[1]?.trim() || 'Distribution-Robust Functional Subset Projection for Structured Neural Network Width Compression';
-  const author = metadataText.match(/^AUTHOR:\s*(.+)$/m)?.[1]?.trim() || 'Kenju Tomita';
   const packageFiles = files.filter((file) => !file.name.endsWith('/'));
-  const payload = {
+  const normalizedNames = packageFiles.map((file) => file.name.toLowerCase()).join('\n');
+  const isSwc = /stochastic[_ -]witness[_ -]calculus|\bswc\b/.test(normalizedNames);
+  const metadataFile = packageFiles.find((file) => /metadata/i.test(file.name.split('/').pop()) && /\.(txt|md|json)$/i.test(file.name));
+  const metadataText = metadataFile ? await metadataFile.text() : '';
+  const title = metadataText.match(/^TITLE:\s*(.+)$/mi)?.[1]?.trim() || (isSwc
+    ? 'Stochastic Witness Calculus: Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims'
+    : 'Distribution-Robust Functional Subset Projection for Structured Neural Network Width Compression');
+  const author = metadataText.match(/^AUTHOR:\s*(.+)$/m)?.[1]?.trim() || 'Kenju Tomita';
+  const sharedPayload = {
     submitter_id: session.user.id,
     status: 'draft',
     title,
-    summary: 'A private first submission imported from the SNCS package. Publication is held until the external journal decision is complete.',
     abstract: metadataText.split(/^ABSTRACT\s*$/m)[1]?.trim() || null,
-    article_type: 'Original Research',
-    keywords: ['structured neural network compression', 'distribution shift', 'robust optimization', 'functional representations'],
-    public_authors: [{ type: 'human', name: author, role: 'Accountable author' }],
+    article_type: 'Original research',
     accountable_name: author,
     accountability_declaration: true,
-    ai_disclosure: 'AI tools assisted editorial drafting, code review, and experiment orchestration; the accountable author set the questions, implemented and audited the work, and takes responsibility for the record.',
     funding_statement: 'No external funding.',
-    conflict_statement: 'The accountable author is founder and owner of Ephemerent LLC; the work is disclosed for editorial review.',
-    ethics_statement: 'Synthetic data, public-domain text, public licensed source code, and public pretrained models; no human or animal subjects.',
     rights_declaration: true,
     safety_declaration: true,
     publication_declaration: true,
+    license: 'CC BY 4.0',
+  };
+  const payload = isSwc ? {
+    ...sharedPayload,
+    summary: 'A machine-auditable framework that turns certified positive probability mass over valid witnesses into ordinary existence proofs while keeping exact mathematics, randomized search, and anytime-valid empirical claims distinct.',
+    keywords: ['probabilistic method', 'formal verification', 'automated theorem proving', 'proof certificates', 'witness distributions', 'e-processes', 'anytime-valid inference', 'Erdős–Straus conjecture'],
+    public_authors: [{ type: 'human', name: author, role: 'Sole author', affiliations: ['Rochester Institute of Technology', 'Ephemerent Research'] }],
+    ai_disclosure: 'Arbiter v23 contributed hypotheses, reformulations, and proof drafts to the Erdős–Straus case study; retained claims were checked through symbolic algebra, exact computation, or proof, and Arbiter is neither an author nor part of the trusted verification base. GPT-5.6 Pro assisted literature synthesis, code and figure generation, and drafting. Kenju Tomita directed and audited the work and remains responsible for the final record.',
+    conflict_statement: 'Kenju Tomita operates Ephemerent Research and is the author and accountable publisher of this record. The peer review and AI editorial recommendation are separate disclosed AI-system records; the final publication action remains attributable to the authorized human account.',
+    ethics_statement: 'Computational and synthetic experiments; no human or animal subjects and no private personal data.',
+    external_publication_hold: false,
+    hold_reason: null,
+    external_links: [],
+    file_note: 'Stochastic Witness Calculus v3 intake. Preserve original filenames, file roles, licenses, and SHA-256 manifests. The Erdős–Straus result is exact finite verification over the declared range, not a universal proof.',
+  } : {
+    ...sharedPayload,
+    summary: 'A private first submission imported from the SNCS package. Publication is held until the external journal decision is complete.',
+    keywords: ['structured neural network compression', 'distribution shift', 'robust optimization', 'functional representations'],
+    public_authors: [{ type: 'human', name: author, role: 'Accountable author' }],
+    ai_disclosure: 'AI tools assisted editorial drafting, code review, and experiment orchestration; the accountable author set the questions, implemented and audited the work, and takes responsibility for the record.',
+    conflict_statement: 'The accountable author is founder and owner of Ephemerent LLC; the work is disclosed for editorial review.',
+    ethics_statement: 'Synthetic data, public-domain text, public licensed source code, and public pretrained models; no human or animal subjects.',
     external_publication_hold: true,
     hold_reason: 'Hold until the external journal decision is complete.',
-    license: 'CC BY 4.0',
     external_links: ['https://github.com/kenjugmail/DR-FSP'],
-    file_note: 'Imported from the supplied sncs_submission_package 2 directory. Original filenames and SHA-256 hashes are retained.',
+    file_note: 'Imported from the supplied SNCS package. Original filenames and SHA-256 hashes are retained.',
   };
   const { data: submission, error } = await sb.from('research_submissions').insert(payload).select('*').single();
   if (error || !submission) throw error || new Error('Could not create imported submission.');
@@ -843,20 +920,41 @@ function renderEditorRows(root, submissions, selectedId = '') {
   </button>`).join('');
 }
 
-async function promotePrivateFiles(sb, session, submission, slug) {
+async function cleanupPublishedFiles(sb, paths) {
+  if (!paths.length) return;
+  const { error } = await sb.storage.from('research-public').remove(paths);
+  if (error) throw new Error(`Publication failed and copied-file cleanup also failed: ${error.message}`);
+}
+
+async function promotePrivateFiles(sb, submission, slug) {
   const { data: privateFiles, error } = await sb.from('research_files').select('*').eq('submission_id', submission.id).eq('visibility', 'private').order('created_at');
   if (error) throw error;
+  if (!privateFiles?.length) throw new Error('At least one approved private file is required for publication.');
   const { data: versions, error: versionsError } = await sb.from('research_versions').select('version_number').eq('submission_id', submission.id).order('version_number', { ascending: false }).limit(1);
   if (versionsError) throw versionsError;
   const nextVersion = (versions?.[0]?.version_number || 0) + 1;
   const publicFiles = [];
-  for (const file of privateFiles || []) {
-    const publicPath = `published/${slug}/v${nextVersion}/${filename(file.original_filename)}`;
-    const { data: blob, error: downloadError } = await sb.storage.from(file.bucket_id || 'research-private').download(file.storage_path);
-    if (downloadError) throw downloadError;
-    const { error: uploadError } = await sb.storage.from('research-public').upload(publicPath, blob, { upsert: false, contentType: file.mime_type || 'application/octet-stream' });
-    if (uploadError) throw uploadError;
-    publicFiles.push({ ...file, bucket_id: 'research-public', storage_path: publicPath, visibility: 'public', created_by: session.user.id });
+  try {
+    for (let index = 0; index < privateFiles.length; index += 1) {
+      const file = privateFiles[index];
+      const publicPath = `published/${slug}/v${nextVersion}/${String(index + 1).padStart(3, '0')}-${filename(file.original_filename)}`;
+      const { data: blob, error: downloadError } = await sb.storage.from(file.bucket_id || 'research-private').download(file.storage_path);
+      if (downloadError) throw downloadError;
+      const { error: uploadError } = await sb.storage.from('research-public').upload(publicPath, blob, { upsert: false, contentType: file.mime_type || 'application/octet-stream' });
+      if (uploadError) throw uploadError;
+      publicFiles.push({
+        bucket_id: 'research-public',
+        storage_path: publicPath,
+        original_filename: file.original_filename,
+        file_role: file.file_role,
+        mime_type: file.mime_type || 'application/octet-stream',
+        byte_size: file.byte_size,
+        sha256: file.sha256,
+      });
+    }
+  } catch (copyError) {
+    await cleanupPublishedFiles(sb, publicFiles.map((file) => file.storage_path));
+    throw copyError;
   }
   return publicFiles;
 }
@@ -915,6 +1013,8 @@ async function loadEditorDetail(sb, session, submission) {
     const message = $('[data-editor-review-msg]', reviewForm);
     if (!versionIds.length) return setMessage(message, 'Move this submission into peer review first so it has a private version to review.', 'error');
     const data = new FormData(reviewForm);
+    const reviewType = String(data.get('review_type') || 'Peer review with AI');
+    const recommendation = String(data.get('recommendation') || 'revise');
     const reviewerType = String(data.get('reviewer_type') || 'human_ai');
     const disclosure = String(data.get('ai_disclosure') || '').trim();
     if (reviewerType !== 'human' && !disclosure) return setMessage(message, 'AI-assisted and AI-system reviews need a disclosure.', 'error');
@@ -922,7 +1022,8 @@ async function loadEditorDetail(sb, session, submission) {
       version_id: versionIds[0],
       user_id: session.user.id,
       display_name: String(data.get('display_name') || '').trim(),
-      review_type: 'Peer review with AI',
+      review_type: reviewType,
+      recommendation,
       reviewer_type: reviewerType,
       review_stage: 'prepublication',
       body: String(data.get('body') || '').trim(),
@@ -931,7 +1032,7 @@ async function loadEditorDetail(sb, session, submission) {
     });
     if (error) return setMessage(message, 'The peer review could not be recorded. Check the editor role and schema.', 'error');
     reviewForm.reset();
-    setMessage(message, 'Peer review recorded and attached to the private version.', 'success');
+    setMessage(message, `${reviewType} recorded and attached to the private version.`, 'success');
     await renderModeration(sb, submission.id, versionIds);
   };
 
@@ -956,31 +1057,28 @@ async function loadEditorDetail(sb, session, submission) {
     const button = $('#editor-publish');
     button.disabled = true;
     setMessage($('#editor-msg'), 'Copying approved files into the public bucket…');
+    let publicFiles = [];
     try {
-      const publicFiles = await promotePrivateFiles(sb, session, submission, publicSlug);
-      const { data: published, error: publishError } = await sb.rpc('publish_research_submission', { p_submission_id: submission.id, p_slug: publicSlug, p_note: $('#editor-note').value.trim(), p_public_notice: $('#editor-public-notice').value.trim(), p_notice_type: $('#editor-notice-type').value });
+      publicFiles = await promotePrivateFiles(sb, submission, publicSlug);
+      setMessage($('#editor-msg'), 'Sealing metadata and the approved file register in one transaction…');
+      const { data: published, error: publishError } = await sb.rpc('publish_research_submission_with_files', {
+        p_submission_id: submission.id,
+        p_slug: publicSlug,
+        p_public_files: publicFiles,
+        p_note: $('#editor-note').value.trim(),
+        p_public_notice: $('#editor-public-notice').value.trim(),
+        p_notice_type: $('#editor-notice-type').value,
+      });
       if (publishError) throw publishError;
-      const { data: version } = await sb.from('research_versions').select('id').eq('submission_id', submission.id).order('version_number', { ascending: false }).limit(1).maybeSingle();
-      if (publicFiles.length) {
-        const { error: publicFileError } = await sb.from('research_files').insert(publicFiles.map((file) => ({
-          submission_id: submission.id,
-          version_id: version?.id || null,
-          bucket_id: file.bucket_id,
-          storage_path: file.storage_path,
-          original_filename: file.original_filename,
-          file_role: file.file_role,
-          mime_type: file.mime_type,
-          byte_size: file.byte_size,
-          sha256: file.sha256,
-          visibility: 'public',
-          created_by: session.user.id,
-        })));
-        if (publicFileError) throw publicFileError;
-      }
       setMessage($('#editor-msg'), `Published ${published?.article_id || 'the immutable version'}.`, 'success');
       await loadEditorQueue(sb, session, submission.id);
     } catch (publishError) {
-      setMessage($('#editor-msg'), `Publication stopped: ${publishError.message}`, 'error');
+      try {
+        await cleanupPublishedFiles(sb, publicFiles.map((file) => file.storage_path));
+        setMessage($('#editor-msg'), `Publication stopped before the public record changed: ${publishError.message}`, 'error');
+      } catch (cleanupError) {
+        setMessage($('#editor-msg'), cleanupError.message, 'error');
+      }
     } finally {
       button.disabled = false;
     }

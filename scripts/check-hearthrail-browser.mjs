@@ -66,6 +66,23 @@ await check("valid future release", async () => {
   await context.close();
 });
 
+await check("mobile menu keyboard contract", async () => {
+  const context = await browser.newContext({ viewport: { width: 360, height: 800 } });
+  const page = await context.newPage();
+  await page.goto(`${base}/hearthrail`, { waitUntil: "load" });
+  const button = page.locator(".menu-toggle");
+  await button.waitFor({ state: "visible" });
+  assert.equal(await button.getAttribute("aria-label"), "Open menu");
+  await button.click();
+  assert.equal(await button.getAttribute("aria-expanded"), "true");
+  assert.equal(await page.locator("main").getAttribute("inert"), "");
+  await page.keyboard.press("Escape");
+  assert.equal(await button.getAttribute("aria-expanded"), "false");
+  assert.equal(await page.locator("main").getAttribute("inert"), null);
+  assert.equal(await button.evaluate((element) => document.activeElement === element), true);
+  await context.close();
+});
+
 for (const mode of ["dark", "light"]) {
   for (const viewport of [{ width: 360, height: 800 }, { width: 768, height: 1024 }, { width: 1280, height: 800 }, { width: 1440, height: 900 }]) {
     await check(`${mode} ${viewport.width}x${viewport.height}`, async () => {
@@ -93,13 +110,19 @@ for (const mode of ["dark", "light"]) {
         shotTop: Math.round(document.querySelector(".hr-product-shot").getBoundingClientRect().top),
         underlinedLinks: [...document.querySelectorAll(".hr-nav a, .utility-footer a")].filter((element) => getComputedStyle(element).textDecorationLine !== "none").length,
         navRuleDisplay: getComputedStyle(document.querySelector("#hearthrail-navigation a"), "::after").display,
+        lookCopyDisplay: getComputedStyle(document.querySelector(".mode-toggle-copy")).display,
+        lookCopyText: document.querySelector(".mode-toggle-copy b")?.textContent?.trim(),
       }));
       assert.equal(layout.scrollWidth, viewport.width);
       assert.equal(layout.bodyMargin, "0px");
       assert.equal(layout.brandDisplay, "flex");
       assert.equal(layout.underlinedLinks, 0);
       assert.equal(layout.navRuleDisplay, "none");
-      if (viewport.width === 360) assert.ok(layout.shotTop <= 730, `real product shot starts at ${layout.shotTop}px on phone`);
+      if (viewport.width === 360) {
+        assert.ok(layout.shotTop <= 730, `real product shot starts at ${layout.shotTop}px on phone`);
+        assert.equal(layout.lookCopyDisplay, "grid");
+        assert.match(layout.lookCopyText ?? "", /^(Dark|Light)$/);
+      }
       if (viewport.width === 1280) {
         assert.ok(layout.headerHeight <= 70, `desktop header is ${layout.headerHeight}px tall`);
         assert.ok(layout.shotTop <= 650, `real product shot starts at ${layout.shotTop}px on desktop`);

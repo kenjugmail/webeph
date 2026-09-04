@@ -10,7 +10,7 @@
  */
 import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
-const PAGES = ['/','/research','/orrery','/hearthrail','/vellum','/vespera','/shelterix','/genesis-fall','/arbiter','/news','/news/drfsp-robust-compression','/journal','/journal/submit','/journal/policies','/journal/editor','/journal/article/x','/signin','/cloud','/vellum/connect','/download','/organizations','/security','/slack','/privacy','/terms','/404.html'];
+const PAGES = ['/','/research','/orrery','/hearthrail','/vellum','/vespera','/shelterix','/genesis-fall','/arbiter','/news','/news/drfsp-robust-compression','/news/stochastic-witness-calculus','/journal','/journal/preprint/stochastic-witness-calculus','/journal/submit','/journal/policies','/journal/editor','/journal/article/x','/signin','/cloud','/vellum/connect','/download','/organizations','/security','/slack','/privacy','/terms','/404.html'];
 const browser = await chromium.launch();
 const failures = [];
 for (const width of [375, 768]) {
