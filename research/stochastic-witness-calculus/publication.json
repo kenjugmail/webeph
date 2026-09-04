@@ -88,7 +88,7 @@
     "eProcessPowerPercent": 97.738,
     "naivePowerPercent": 99.946
   },
-  "claimGuardrail": "The Erdős–Straus experiment is exact finite verification over the declared range. It is not a universal proof of the conjecture.",
+  "claimGuardrail": "The Erdős–Straus computation is a genuine exact theorem over the declared finite domain. Universal closure requires an additional exact certificate covering every integer n >= 2.",
   "github": {
     "repository": "kenjugmail/stochastic-witness-calculus",
     "visibilityUntilPublication": "private",

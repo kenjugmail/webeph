@@ -37,8 +37,8 @@ test('publishes a labeled preprint while blocking journal acceptance until the c
   assert.equal(record.baselinePdf.pages, 34);
   assert.equal(record.baselinePdf.sha256, '17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a');
   assert.equal(createHash('sha256').update(preprintPdf).digest('hex'), record.baselinePdf.sha256);
-  assert.match(record.claimGuardrail, /finite verification/i);
-  assert.match(record.claimGuardrail, /not a universal proof/i);
+  assert.match(record.claimGuardrail, /genuine exact theorem/i);
+  assert.match(record.claimGuardrail, /universal closure/i);
 });
 
 test('renders affiliations and complete declarations without exposing private fields', () => {
@@ -97,13 +97,14 @@ test('publishes the intuitive News route while keeping the journal record privat
   assert.ok(vercel.rewrites.some((entry) => entry.source === '/journal/preprint/stochastic-witness-calculus' && entry.destination === '/journal-swc.html'));
   assert.match(news, /"@type": "NewsArticle"/);
   assert.match(news, /data-swc-miss-lab/);
-  assert.match(news, /This is not a proof of the open conjecture/);
+  assert.match(news, /genuine finite-domain theorem/);
   assert.match(news, /source archive, reproducibility archive, manifests, and disclosed review records/i);
   assert.match(newsIndex, /href="\/news\/stochastic-witness-calculus"/);
   assert.match(rss, /https:\/\/ephemerent\.com\/news\/stochastic-witness-calculus/);
   assert.doesNotMatch(news, /(?:we|this (?:paper|work|method))\s+(?:prove|proved|proves)\s+(?:the\s+)?Erd[oő]s[-–— ]Straus/i);
   assert.match(preprint, /Public preprint/);
   assert.match(preprint, /not peer-reviewed/i);
-  assert.match(preprint, /This is finite verification, not a proof of the Erdős–Straus conjecture/);
+  assert.match(preprint, /genuine finite-domain theorem/);
+  assert.match(preprint, /Full-support universal lifting/);
   assert.equal(preprintManifest.source.sha256, record.baselinePdf.sha256);
 });

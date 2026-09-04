@@ -204,7 +204,7 @@
           <li><span>01 · Learned SAT proposal</span><strong>60 satisfiable / 20 contradictory controls</strong><p>Exact mass rises sharply while the uniform mixture protects support.</p></li>
           <li><span>02 · Structured model counting</span><strong>Witness space 2²⁰⁴⁸ · about 1.1 seconds</strong><p>A dynamic program certifies exact mass without enumerating the full space.</p></li>
           <li><span>03 · Quantifier audit</span><strong>99.00% and 90.48% miss probabilities</strong><p>Large-looking test budgets can still miss a single exception or rare witness mass.</p></li>
-          <li><span>04 · Erdős–Straus case study</span><strong>82,887 / 82,887 declared primes verified</strong><p>Every prime p ≡ 1 mod 24 below 10⁷ receives an exact finite witness using shifts c ≤ 127. This is not a proof of the open conjecture.</p></li>
+          <li><span>04 · Erdős–Straus case study</span><strong>82,887 / 82,887 declared primes exactly proved</strong><p>Every prime p ≡ 1 mod 24 below 10⁷ receives an exact witness using shifts c ≤ 127. This is a genuine finite-domain theorem; universal closure requires a further exact all-instance certificate.</p></li>
           <li><span>05 · Certificate integrity</span><strong>300 accepted · 1,800 altered variants rejected</strong><p>The checker accepts exact certificates and rejects the declared tampering and floating-point-only suite.</p></li>
           <li><span>06 · Optional stopping</span><strong>30.826% naive · 4.342% e-process</strong><p>Repeated nominal testing inflates false certification; the anytime-valid process stays within its declared 5% risk budget in simulation.</p></li>
         </ol>
@@ -218,6 +218,7 @@
           <section><span>Empirical mode</span><h3>Calibrated evidence</h3><p>An e-process or confidence sequence controls error under explicit assumptions and adaptive monitoring.</p><small>The conclusion remains model-conditional.</small></section>
         </div>
         <p data-reveal>The distinction is the heart of the paper. Probability inside a proof, randomized proof search, and statistical evidence about nature are related—but they are not interchangeable.</p>
+        <aside class="nw-thesis" data-reveal><span>Universal lifting</span><p>For a countable instance family sampled from a full-support distribution, an exactly proved global acceptance probability of one implies that every instance has a witness. An observed 100% sample rate does not establish that premise; an exact symbolic certificate can.</p></aside>
       </section>
 
       <section class="nw-movement" id="next" data-article-section>

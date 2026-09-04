@@ -25,6 +25,8 @@
   .swc-paper-register code { font-size: 10px; }
   .swc-preprint-notice { max-width: 1010px; margin-top: 42px; padding: 17px 0 0 18px; border-top: 1px solid var(--jr-rule); border-left: 3px solid var(--jr-coral); color: var(--jr-muted); font-size: 13px; line-height: 1.58; }
   .swc-preprint-notice strong { color: var(--jr-coral); font-family: var(--jr-mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+  .swc-proof-clarification { max-width: 1010px; margin-top: 18px; padding: 16px 18px; border-block: 1px solid var(--jr-cobalt); background: color-mix(in srgb, var(--jr-cobalt) 7%, var(--jr-paper)); color: var(--jr-ink-soft); font-size: 13px; line-height: 1.58; }
+  .swc-proof-clarification strong { color: var(--jr-cobalt-dark); font-family: var(--jr-mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 
   .swc-paper-layout { display: grid; grid-template-columns: 210px minmax(0,790px) minmax(0,1fr); gap: clamp(42px, 6vw, 80px); align-items: start; padding-top: 70px; padding-bottom: 100px; }
   .swc-paper-rail { position: sticky; top: 28px; padding-top: 14px; border-top: 2px solid var(--jr-ink); }
@@ -53,6 +55,12 @@
   .swc-keywords strong { color: var(--jr-cobalt-dark); font-family: var(--jr-mono); font-size: 8px; letter-spacing: .09em; text-transform: uppercase; }
   .swc-abstract-results p { color: var(--jr-ink-soft); font-size: 14px; line-height: 1.55; }
   .swc-keywords { margin-top: 29px !important; color: var(--jr-muted) !important; font-family: var(--jr-sans) !important; font-size: 13px !important; }
+  .swc-proof-status { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); margin: 35px 0; border-block: 2px solid var(--jr-ink); }
+  .swc-proof-status > div { min-width: 0; padding: 20px 21px 22px 0; }
+  .swc-proof-status > div + div { padding-left: 21px; border-left: 1px solid var(--jr-rule); }
+  .swc-proof-status span { color: var(--jr-coral); font-family: var(--jr-mono); font-size: 8px; letter-spacing: .09em; text-transform: uppercase; }
+  .swc-proof-status strong { display: block; margin-top: 10px; font-family: var(--jr-serif); font-size: 21px; font-weight: 400; line-height: 1.12; }
+  .swc-proof-status p { margin-top: 9px; color: var(--jr-muted); font-size: 12px; line-height: 1.5; }
 
   .swc-mode-ledger { margin: 35px 0; list-style: none; border-top: 2px solid var(--jr-ink); }
   .swc-mode-ledger li { display: grid; grid-template-columns: 160px minmax(0,1fr); gap: 5px 25px; padding: 20px 0; border-bottom: 1px solid var(--jr-rule); }
@@ -73,6 +81,8 @@
   .swc-theorem summary { padding: 13px 23px; color: var(--jr-cobalt-dark); font-family: var(--jr-mono); font-size: 9px; letter-spacing: .09em; cursor: pointer; text-transform: uppercase; }
   .swc-theorem details p { padding: 0 23px 21px; color: var(--jr-muted); font-size: 13px; line-height: 1.6; }
   .swc-theorem-coral { border-top: 5px solid var(--jr-coral); }
+  .swc-theorem-lifting { border-top: 5px solid var(--jr-cobalt); }
+  .swc-inline-equation { margin: 0 23px 18px; padding: 18px 20px; background: var(--jr-paper-deep); color: var(--jr-ink); font-family: var(--jr-serif); font-size: clamp(22px, 3vw, 31px); text-align: center; }
   .swc-definition-grid { display: grid; grid-template-columns: 1fr 1fr; margin: 37px 0; border-top: 2px solid var(--jr-ink); }
   .swc-definition-grid > div { padding: 20px 23px 22px 0; border-bottom: 1px solid var(--jr-rule); }
   .swc-definition-grid > div:nth-child(even) { padding-left: 23px; border-left: 1px solid var(--jr-rule); }
@@ -172,9 +182,12 @@
     .swc-equation-empirical { grid-template-columns: 1fr auto; }
     .swc-equation-empirical b { transform: none; }
     .swc-definition-grid,
+    .swc-proof-status,
     .swc-result-pair,
     .swc-agenda,
     .swc-declarations { grid-template-columns: 1fr; }
+    .swc-proof-status > div,
+    .swc-proof-status > div + div { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--jr-rule); }
     .swc-definition-grid > div,
     .swc-definition-grid > div:nth-child(even),
     .swc-result-pair > div,
