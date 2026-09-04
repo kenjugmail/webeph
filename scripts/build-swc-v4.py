@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build SWC v4 by preserving v3 and inserting a formal revision chapter."""
+"""Build SWC v4.1 by preserving v3 and inserting a formal revision chapter."""
 
 from io import BytesIO
 from pathlib import Path
@@ -23,9 +23,10 @@ from reportlab.platypus import (
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path('/Users/kt/Downloads/stochastic_witness_calculus_arxiv_v3.pdf')
-OUTPUT = ROOT / 'output' / 'pdf' / 'stochastic_witness_calculus_v4.pdf'
-WEB_OUTPUT = ROOT / 'assets' / 'research' / 'stochastic-witness-calculus-v4.pdf'
+OUTPUT = ROOT / 'output' / 'pdf' / 'stochastic_witness_calculus_v4_1.pdf'
+WEB_OUTPUT = ROOT / 'assets' / 'research' / 'stochastic-witness-calculus-v4-1.pdf'
 EXPECTED_V3 = '17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a'
+PARENT_V4 = '114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01'
 
 if not SOURCE.is_file() or sha256(SOURCE.read_bytes()).hexdigest() != EXPECTED_V3:
     raise SystemExit('Audited SWC v3 source is missing or has changed')
@@ -72,8 +73,8 @@ def footer(canvas, doc):
     canvas.line(0.72 * inch, 0.54 * inch, 7.78 * inch, 0.54 * inch)
     canvas.setFont('V4Sans', 6.6)
     canvas.setFillColor(MUTED)
-    canvas.drawString(0.72 * inch, 0.35 * inch, 'STOCHASTIC WITNESS CALCULUS · VERSION 4 REVISION CHAPTER')
-    canvas.drawRightString(7.78 * inch, 0.35 * inch, f'V4-R{doc.page}')
+    canvas.drawString(0.72 * inch, 0.35 * inch, 'STOCHASTIC WITNESS CALCULUS · VERSION 4.1 REVISION CHAPTER')
+    canvas.drawRightString(7.78 * inch, 0.35 * inch, f'V4.1-R{doc.page}')
     canvas.restoreState()
 
 
@@ -117,16 +118,16 @@ def status_table():
 
 
 def make_revision(path):
-    doc = BaseDocTemplate(str(path), pagesize=letter, leftMargin=0.72 * inch, rightMargin=0.72 * inch, topMargin=0.68 * inch, bottomMargin=0.72 * inch, title='SWC v4 revision chapter', author='Kenju Tomita')
+    doc = BaseDocTemplate(str(path), pagesize=letter, leftMargin=0.72 * inch, rightMargin=0.72 * inch, topMargin=0.68 * inch, bottomMargin=0.72 * inch, title='SWC v4.1 revision chapter', author='Kenju Tomita')
     frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id='main')
     doc.addPageTemplates([PageTemplate(id='revision', frames=[frame], onPage=footer)])
     story = []
 
-    story += [Paragraph('VERSION 4 · FORMAL REVISION CHAPTER', label), Spacer(1, 9), Paragraph('Universal lifting and<br/>exact proof status', h1), Paragraph('Stochastic Witness Calculus', ParagraphStyle('Subtitle', parent=h2, textColor=CORAL, fontSize=15)), Spacer(1, 6)]
+    story += [Paragraph('VERSION 4.1 · FORMAL REVISION CHAPTER', label), Spacer(1, 9), Paragraph('Universal lifting,<br/>induction, and exact proof status', h1), Paragraph('Stochastic Witness Calculus', ParagraphStyle('Subtitle', parent=h2, textColor=CORAL, fontSize=15)), Spacer(1, 6)]
     story += [Paragraph('<b>Kenju Tomita</b><br/><font size="8">Rochester Institute of Technology · Ephemerent Research</font>', body)]
-    story += [Spacer(1, 12), Paragraph('Version 4 supersedes wording that could be read as denying proof status to the finite computation. SWC is an exact probabilistic proof calculus. Its finite Erdős–Straus computation is a genuine theorem over the declared domain. Universal closure is a separate quantifier.', quote), Spacer(1, 17), status_table(), Spacer(1, 18)]
-    story += [Paragraph('How to read the integrated manuscript', h2), Paragraph('The following four revision pages are inserted after the original title page. The complete audited v3 body then follows unchanged. Where the retained body says “not a proof of the open conjecture,” version 4 reads that phrase narrowly: it means “not yet a proof of the universal quantifier.” It does not downgrade the exact finite-domain theorem.', body)]
-    story += [Paragraph('This reconstructed revision is necessary because the independently compiling LaTeX source was not supplied with the PDF. The mathematical additions below are authoritative for v4; a future source-complete edition should integrate them into the main numbering and regenerate the full manuscript.', small), PageBreak()]
+    story += [Spacer(1, 12), Paragraph('Version 4.1 preserves version 4 and adds a well-founded induction rule. SWC is an exact probabilistic proof calculus. Its finite Erdős–Straus computation is a genuine theorem over the declared domain. Universal closure may be discharged by exact failure mass, a mass gap, an analytic tail, a complete cover, or a verified inductive descent.', quote), Spacer(1, 17), status_table(), Spacer(1, 18)]
+    story += [Paragraph('How to read the integrated manuscript', h2), Paragraph('The following five revision pages are inserted after the original title page. The complete audited v3 body then follows unchanged. Where the retained body says “not a proof of the open conjecture,” version 4.1 reads that phrase narrowly: it means “not yet a proof of the universal quantifier.” It does not downgrade the exact finite-domain theorem.', body)]
+    story += [Paragraph('This reconstructed revision is necessary because the independently compiling LaTeX source was not supplied with the PDF. The mathematical additions below are authoritative for v4.1; a future source-complete edition should integrate them into the main numbering and regenerate the full manuscript.', small), PageBreak()]
 
     story += [Paragraph('V4.1 · EXACT PROOF STATUS', label), Paragraph('Probability can carry a deterministic proof', h1)]
     story += [Paragraph('The logical endpoint of SWC exact mode is theoremhood, not confidence. If a sound verifier accepts a set of witnesses with exactly certified positive mass, then that set is nonempty. The probability calculation is part of the proof object.', body)]
@@ -154,7 +155,14 @@ def make_revision(path):
     table = Table([[Paragraph(cell, label if row == 0 else small) for cell in line] for row, line in enumerate(data)], colWidths=[3.42 * inch, 3.42 * inch], repeatRows=1)
     table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), INK), ('GRID', (0, 0), (-1, -1), 0.4, RULE), ('VALIGN', (0, 0), (-1, -1), 'TOP'), ('LEFTPADDING', (0, 0), (-1, -1), 9), ('RIGHTPADDING', (0, 0), (-1, -1), 9), ('TOPPADDING', (0, 0), (-1, -1), 8), ('BOTTOMPADDING', (0, 0), (-1, -1), 8)]))
     story += [table, Spacer(1, 14), Paragraph('Erdős–Straus closure program', h2), Paragraph('SWC can close the conjecture by proving one exact remaining premise: pointwise positive witness mass for every remaining prime; exact zero mass of the zero-witness set under a full-support instance prior; a counterexample mass-gap theorem plus an exact upper bound; an analytic tail theorem plus finite verification; or a symbolic family cover containing every remaining prime.', body)]
-    story += [Paragraph('The current finite computation is already a completed proof component. Version 4 strengthens its status while keeping the unproved universal step visible and testable.', body)]
+    story += [Paragraph('The current finite computation is already a completed proof component. Version 4.1 strengthens its status while keeping the unproved universal step visible and testable.', body), PageBreak()]
+
+    story += [Paragraph('V4.5 · WELL-FOUNDED INDUCTION', label), Paragraph('An infinite family can close by verified descent', h1)]
+    story += [Paragraph('Let (I, prec) be a well-founded instance order. Let B be a set of base instances with exact SWC certificates. For every nonbase instance i, suppose an exact reduction chooses finitely many dependencies j prec i and provides a checked transformer that converts valid witnesses for those dependencies into a valid witness for i.', body)]
+    story += [theorem_block('Theorem V4.5', 'Well-founded inductive witness lifting', 'If every base instance has a valid witness and every nonbase instance has a verified witness-lifting reduction to strictly smaller instances, then every instance in I has a valid witness.', 'Apply well-founded induction. Assume every j prec i has a valid witness. If i is a base instance, its exact certificate supplies one. Otherwise the reduction dependencies have witnesses by the induction hypothesis, and the checked lifting map constructs a witness for i. Thus every instance is certified.')]
+    story += [Spacer(1, 13), theorem_block('Corollary V4.6', 'Divisor-to-multiple lifting for Erdős–Straus', 'If d divides n and 4/d = 1/x + 1/y + 1/z, then writing n=kd gives 4/n = 1/(kx) + 1/(ky) + 1/(kz). Therefore composite instances lift from certified factors.', 'Multiply every denominator in the representation for d by k. The resulting unit fractions sum to (1/k)(4/d)=4/n.')]
+    story += [Spacer(1, 13), Paragraph('Where the induction must still be proved', h2), Paragraph('The scaling corollary reduces composite integers to prime factors, so the unresolved induction domain is the remaining prime class p congruent to 1 modulo 24. Ordinary induction on p does not help unless one proves a strict descent p -> q together with a witness-lifting map, or supplies another well-founded rank such as residual certificate complexity.', body)]
+    story += [Paragraph('A complete Erdős–Straus proof would therefore consist of the exact finite base already verified plus a theorem showing that every larger remaining prime either has a direct SWC certificate or reduces to lower-rank certified instances. Version 4.1 formalizes this closure rule; it does not assume the missing prime descent.', body)]
     doc.build(story, canvasmaker=InvariantCanvas)
 
 
@@ -174,7 +182,7 @@ def overlay_notice(page, message):
     c.rect(45, 16, 180, 15, fill=1, stroke=0)
     c.setFillColor(BLUE)
     c.setFont('V4Sans', 5.9)
-    c.drawString(49, 21, 'V4: FINITE-DOMAIN PROOF; UNIVERSAL LIFTING SEPARATE')
+    c.drawString(49, 21, 'V4.1: FINITE BASE + INDUCTION; PRIME DESCENT SEPARATE')
     c.restoreState()
     c.save()
     stream.seek(0)
@@ -190,37 +198,42 @@ with TemporaryDirectory(prefix='swc-v4-') as tmp:
     writer = PdfWriter()
 
     title_page = base.pages[0]
-    overlay_notice(title_page, 'VERSION 4 · EXACT PROOF-STATUS CLARIFICATION AND UNIVERSAL-LIFTING THEOREMS')
+    overlay_notice(title_page, 'VERSION 4.1 · EXACT PROOF STATUS, UNIVERSAL LIFTING, AND WELL-FOUNDED INDUCTION')
     writer.add_page(title_page)
     for page in revision.pages:
         writer.add_page(page)
     for index, page in enumerate(base.pages[1:], start=2):
         if index in {24, 27, 30}:
-            overlay_notice(page, 'VERSION 4 · “NOT UNIVERSAL” DOES NOT DENY THE EXACT FINITE-DOMAIN THEOREM')
+            overlay_notice(page, 'VERSION 4.1 · “NOT UNIVERSAL” DOES NOT DENY THE EXACT FINITE-DOMAIN THEOREM')
         writer.add_page(page)
 
     writer.add_metadata({
-        '/Title': 'Stochastic Witness Calculus: Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims — Version 4',
+        '/Title': 'Stochastic Witness Calculus: Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims — Version 4.1',
         '/Author': 'Kenju Tomita',
-        '/Subject': 'Version 4 revision with exact proof-status, universal-lifting, and mass-gap theorems',
-        '/Keywords': 'probabilistic method, formal verification, witness certificates, universal lifting, Erdős–Straus',
+        '/Subject': 'Version 4.1 revision with exact proof status, universal lifting, mass-gap closure, and well-founded induction',
+        '/Keywords': 'probabilistic method, formal verification, witness certificates, universal lifting, well-founded induction, Erdős–Straus',
     })
-    writer.add_outline_item('Version 4 revision chapter', 1)
-    writer.add_outline_item('Integrated manuscript', 5)
+    writer.add_outline_item('Version 4.1 revision chapter', 1)
+    writer.add_outline_item('Integrated manuscript', 6)
     with OUTPUT.open('wb') as handle:
         writer.write(handle)
 
 WEB_OUTPUT.write_bytes(OUTPUT.read_bytes())
 output_hash = sha256(OUTPUT.read_bytes()).hexdigest()
-revision_source = ROOT / 'research' / 'stochastic-witness-calculus' / 'v4-revision.md'
+revision_source = ROOT / 'research' / 'stochastic-witness-calculus' / 'v4.1-revision.md'
 manifest = {
     'schemaVersion': 1,
-    'version': 4,
+    'version': '4.1',
     'status': 'public-reconstructed-preprint',
     'filename': WEB_OUTPUT.name,
     'pages': len(PdfReader(str(OUTPUT)).pages),
     'sha256': output_hash,
-    'derivedFrom': {
+    'parentVersion': {
+        'filename': 'stochastic-witness-calculus-v4.pdf',
+        'pages': 38,
+        'sha256': PARENT_V4,
+    },
+    'constructionBase': {
         'filename': SOURCE.name,
         'pages': 34,
         'sha256': EXPECTED_V3,
@@ -229,8 +242,8 @@ manifest = {
         'filename': str(revision_source.relative_to(ROOT)),
         'sha256': sha256(revision_source.read_bytes()).hexdigest(),
     },
-    'construction': 'The complete audited v3 PDF is preserved, with a four-page v4 revision chapter inserted after the title page and visible superseding notices on affected pages.',
-    'sourceStatus': 'The original independently compiling LaTeX source has not been supplied; a source-complete v4 recompilation remains required for the accepted journal version.',
+    'construction': 'The complete audited v3 PDF is preserved, with a five-page v4.1 revision chapter inserted after the title page and visible superseding notices on affected pages.',
+    'sourceStatus': 'The original independently compiling LaTeX source has not been supplied; a source-complete v4.1 recompilation remains required for the accepted journal version.',
 }
-(WEB_OUTPUT.parent / 'swc-v4-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+(WEB_OUTPUT.parent / 'swc-v4-1-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
 print(f'built {OUTPUT} · {manifest["pages"]} pages · sha256 {output_hash}')

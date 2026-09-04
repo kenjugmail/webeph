@@ -884,7 +884,7 @@ async function createImportedPackage(sb, session, files) {
     external_publication_hold: false,
     hold_reason: null,
     external_links: [],
-    file_note: 'Stochastic Witness Calculus v3 intake. Preserve original filenames, file roles, licenses, and SHA-256 manifests. The Erdős–Straus result is exact finite verification over the declared range, not a universal proof.',
+    file_note: 'Stochastic Witness Calculus v4.1 intake. Preserve original filenames, version lineage, file roles, licenses, and SHA-256 manifests. The finite-domain theorem, universal-lifting rules, and remaining prime-descent obligation must stay distinct.',
   } : {
     ...sharedPayload,
     summary: 'A private first submission imported from the SNCS package. Publication is held until the external journal decision is complete.',

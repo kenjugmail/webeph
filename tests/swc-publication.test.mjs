@@ -19,8 +19,8 @@ const rss = await readFile(join(root, 'news.xml'), 'utf8');
 const sitemap = await readFile(join(root, 'sitemap.xml'), 'utf8');
 const vercel = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
 const preprint = await readFile(join(root, 'journal-swc.html'), 'utf8');
-const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v4-manifest.json'), 'utf8'));
-const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v4.pdf'));
+const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v4-1-manifest.json'), 'utf8'));
+const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v4-1.pdf'));
 
 function pngDimensions(value) {
   if (value.toString('ascii', 1, 4) !== 'PNG') return undefined;
@@ -34,8 +34,8 @@ test('publishes a labeled preprint while blocking journal acceptance until the c
   assert.equal(record.releaseGates.peerReviewAcceptsReviewedVersion, false);
   assert.equal(record.releaseGates.humanPublicationAction, false);
   assert.equal(record.slug, 'stochastic-witness-calculus');
-  assert.equal(record.baselinePdf.pages, 38);
-  assert.equal(record.baselinePdf.sha256, '114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01');
+  assert.equal(record.baselinePdf.pages, 39);
+  assert.equal(record.baselinePdf.sha256, '2ce75cf7c681b466dd20a202e80e433d0e92a60016158995a60f7e489f2c9c71');
   assert.equal(createHash('sha256').update(preprintPdf).digest('hex'), record.baselinePdf.sha256);
   assert.match(record.claimGuardrail, /genuine exact theorem/i);
   assert.match(record.claimGuardrail, /universal closure/i);
@@ -106,6 +106,9 @@ test('publishes the intuitive News route while keeping the journal record privat
   assert.match(preprint, /not peer-reviewed/i);
   assert.match(preprint, /genuine finite-domain theorem/);
   assert.match(preprint, /Full-support universal lifting/);
+  assert.match(preprint, /Well-founded inductive witness lifting/);
+  assert.match(preprint, /Erdős–Straus divisor lift/);
   assert.equal(preprintManifest.sha256, record.baselinePdf.sha256);
-  assert.equal(preprintManifest.derivedFrom.sha256, record.sourceV3.sha256);
+  assert.equal(preprintManifest.parentVersion.sha256, record.sourceV4.sha256);
+  assert.equal(preprintManifest.constructionBase.sha256, record.sourceV3.sha256);
 });

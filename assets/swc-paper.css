@@ -82,6 +82,7 @@
   .swc-theorem details p { padding: 0 23px 21px; color: var(--jr-muted); font-size: 13px; line-height: 1.6; }
   .swc-theorem-coral { border-top: 5px solid var(--jr-coral); }
   .swc-theorem-lifting { border-top: 5px solid var(--jr-cobalt); }
+  .swc-theorem-induction { border-top: 5px solid var(--jr-violet); }
   .swc-inline-equation { margin: 0 23px 18px; padding: 18px 20px; background: var(--jr-paper-deep); color: var(--jr-ink); font-family: var(--jr-serif); font-size: clamp(22px, 3vw, 31px); text-align: center; }
   .swc-definition-grid { display: grid; grid-template-columns: 1fr 1fr; margin: 37px 0; border-top: 2px solid var(--jr-ink); }
   .swc-definition-grid > div { padding: 20px 23px 22px 0; border-bottom: 1px solid var(--jr-rule); }
