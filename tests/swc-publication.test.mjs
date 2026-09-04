@@ -27,10 +27,12 @@ function pngDimensions(value) {
   return [value.readUInt32BE(16), value.readUInt32BE(20)];
 }
 
-test('publishes a labeled preprint while blocking journal acceptance until the complete package and reviews exist', () => {
+test('publishes a labeled preprint while blocking journal acceptance until package audit and reviews are complete', () => {
   assert.equal(record.publicationStatus, 'public_preprint');
   assert.equal(record.journalPublicationStatus, 'blocked_missing_package');
-  assert.equal(record.releaseGates.completePackageReceived, false);
+  assert.equal(record.releaseGates.completePackageReceived, true);
+  assert.equal(record.intakeArtifact.auditStatus, 'received_with_stale_manifest_entries');
+  assert.equal(record.intakeArtifact.manifestMismatches, 6);
   assert.equal(record.releaseGates.peerReviewAcceptsReviewedVersion, false);
   assert.equal(record.releaseGates.humanPublicationAction, false);
   assert.equal(record.slug, 'stochastic-witness-calculus');
@@ -98,7 +100,8 @@ test('publishes the intuitive News route while keeping the journal record privat
   assert.match(news, /"@type": "NewsArticle"/);
   assert.match(news, /data-swc-miss-lab/);
   assert.match(news, /genuine finite-domain theorem/);
-  assert.match(news, /source archive, reproducibility archive, manifests, and disclosed review records/i);
+  assert.match(news, /all 82,887 exact certificate rows reproduce/i);
+  assert.match(news, /six stale manifest entries/i);
   assert.match(newsIndex, /href="\/news\/stochastic-witness-calculus"/);
   assert.match(rss, /https:\/\/ephemerent\.com\/news\/stochastic-witness-calculus/);
   assert.doesNotMatch(news, /(?:we|this (?:paper|work|method))\s+(?:prove|proved|proves)\s+(?:the\s+)?Erd[oő]s[-–— ]Straus/i);

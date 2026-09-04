@@ -92,10 +92,10 @@
           </div>
           <aside class="swc-paper-register" aria-label="Preprint record">
             <span>Record state</span>
-            <dl><div><dt>Journal identifier</dt><dd>Not assigned</dd></div><div><dt>Review</dt><dd>Pending</dd></div><div><dt>PDF SHA-256</dt><dd><code>2ce75cf7…f2c9c71</code></dd></div><div><dt>Article license</dt><dd>CC BY 4.0</dd></div><div><dt>Source status</dt><dd>v4.1 revision source public · original LaTeX awaiting deposit</dd></div></dl>
+            <dl><div><dt>Journal identifier</dt><dd>Not assigned</dd></div><div><dt>Review</dt><dd>Pending</dd></div><div><dt>PDF SHA-256</dt><dd><code>2ce75cf7…f2c9c71</code></dd></div><div><dt>Article license</dt><dd>CC BY 4.0</dd></div><div><dt>Source status</dt><dd>v3 source and artifact received · checksum reconciliation pending</dd></div></dl>
           </aside>
         </div>
-        <p class="swc-preprint-notice"><strong>Publication boundary.</strong> This page is a public reconstructed preprint and accessible HTML reading edition. Version 4.1 preserves the complete audited v3 body and inserts a five-page formal revision chapter because the original LaTeX source was not supplied. It is not the accepted Ephemerent Research journal version and must not be described as peer-reviewed.</p>
+        <p class="swc-preprint-notice"><strong>Publication boundary.</strong> This page is a public reconstructed preprint and accessible HTML reading edition. Version 4.1 was built before the original source arrived; the v3 LaTeX source and reproducibility artifact have now been received and are under audit. Six files were regenerated without matching updates to the included manifest, so a source-complete v4.1 rebuild and reconciled checksums remain required. This is not the accepted Ephemerent Research journal version.</p>
         <p class="swc-proof-clarification"><strong>Proof-status clarification · September 4, 2026.</strong> SWC’s exact mathematical mode is a genuine proof system, not statistical confidence. The Erdős–Straus computation is likewise a genuine theorem over its declared finite domain. What remains open is the additional universal-lifting premise needed to cover every integer.</p>
       </div>
     </header>
@@ -182,8 +182,8 @@
         </section>
 
         <section id="reproducibility" data-swc-section>
-          <div class="swc-section-heading"><span>09</span><div><p>Reproducibility</p><h2>The PDF is public. The artifact is not yet deposited.</h2></div></div>
-          <p>The manuscript states that its accompanying archive contains fixed seeds, raw CSV/JSON results, figures, tests, LaTeX source, a C++ finite verifier, and one-command reproduction. Those files were described in the prior preparation chat but were not attached to this workspace; this preprint therefore does not claim that independent reproduction has been completed here.</p>
+          <div class="swc-section-heading"><span>09</span><div><p>Reproducibility</p><h2>The artifact is received. Reconciliation is in progress.</h2></div></div>
+          <p>The supplied archive contains fixed seeds, raw CSV/JSON results, figures, tests, LaTeX source, a C++ finite verifier, and reproduction commands. The exact Erdős–Straus certificate columns reproduce across all 82,887 rows. Six included files do not match the older SHA-256 manifest, including the final PDF and regenerated result summaries; those entries must be reconciled before the artifact can become the immutable accepted-journal deposit.</p>
           <div class="swc-command-record"><span>Declared principal commands</span><pre><code>python experiments/exp_sat.py
 python experiments/exp_chain_wmc.py
 python experiments/exp_quantifier_audit.py

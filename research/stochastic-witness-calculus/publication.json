@@ -65,6 +65,14 @@
     "pages": 34,
     "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"
   },
+  "intakeArtifact": {
+    "filename": "stochastic_witness_calculus_artifact_v3.zip",
+    "byteSize": 5543858,
+    "sha256": "e22bc0f376244744e6b506b9562465ffc5174239f0fb9f0f7e8e1368f7121899",
+    "auditStatus": "received_with_stale_manifest_entries",
+    "exactErdosCertificateRowsReproduced": true,
+    "manifestMismatches": 6
+  },
   "requiredPackageGroups": [
     { "id": "final_pdf", "description": "final PDF", "filenamePattern": "\\.pdf$" },
     { "id": "source_archive", "description": "independently compiling arXiv source archive", "filenamePattern": "(source|arxiv|latex).*(\\.zip|\\.tar\\.gz|\\.tgz)$" },
@@ -105,7 +113,7 @@
     "release": "v1.0.0"
   },
   "releaseGates": {
-    "completePackageReceived": false,
+    "completePackageReceived": true,
     "sourceCompilesCleanly": false,
     "reproductionMatchesManifest": false,
     "peerReviewAcceptsReviewedVersion": false,

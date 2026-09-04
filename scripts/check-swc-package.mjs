@@ -37,7 +37,7 @@ function checkRecord() {
   if (!affiliations.includes('Rochester Institute of Technology') || !affiliations.includes('Ephemerent Research')) errors.push('required affiliations are missing');
   if (record.licenses?.articleFiguresAndNumericalData !== 'CC BY 4.0') errors.push('article license changed');
   if (record.licenses?.originalCode !== 'Apache-2.0') errors.push('code license changed');
-  if (record.releaseGates?.completePackageReceived !== false) errors.push('package gate must remain false before audited intake');
+  if (typeof record.releaseGates?.completePackageReceived !== 'boolean') errors.push('package receipt gate must be explicit');
 }
 
 async function checkPdf(path) {
@@ -126,7 +126,7 @@ async function checkPackage(directory) {
 checkRecord();
 await checkPdf(baselinePath);
 if (packageArg) await checkPackage(packageArg);
-else notes.push('JOURNAL BLOCKED · complete source and reproducibility package has not been supplied');
+else notes.push('JOURNAL BLOCKED · package reconciliation, source compilation, peer review, and human publication gates remain incomplete');
 
 notes.forEach((note) => console.log(note));
 if (errors.length) {
