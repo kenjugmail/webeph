@@ -9,15 +9,17 @@ import { chromium } from 'playwright';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(root, 'output/swc-web-preprint');
-const expectedHash = '17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a';
+const expectedHash = '114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01';
 await mkdir(output, { recursive: true });
 
-const pdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v3.pdf'));
+const pdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v4.pdf'));
 assert.equal(createHash('sha256').update(pdf).digest('hex'), expectedHash);
-const manifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v3-manifest.json'), 'utf8'));
-assert.equal(manifest.source.pages, 34);
-assert.equal(manifest.figureCrops.length, 6);
-for (const figure of manifest.figureCrops) {
+const manifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v4-manifest.json'), 'utf8'));
+const figureManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v3-manifest.json'), 'utf8'));
+assert.equal(manifest.pages, 38);
+assert.equal(manifest.sha256, expectedHash);
+assert.equal(figureManifest.figureCrops.length, 6);
+for (const figure of figureManifest.figureCrops) {
   const bytes = await readFile(join(root, 'assets/research', figure.filename));
   assert.equal(createHash('sha256').update(bytes).digest('hex'), figure.sha256, `${figure.filename} hash drifted`);
 }
@@ -59,7 +61,7 @@ try {
       figures: [...document.images].filter((image) => image.src.includes('/assets/research/swc-')).length,
       brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).length,
       status: document.querySelector('.swc-paper-status')?.textContent,
-      pdfHref: document.querySelector('a[href$="stochastic-witness-calculus-v3.pdf"]')?.getAttribute('href'),
+      pdfHref: document.querySelector('a[href$="stochastic-witness-calculus-v4.pdf"]')?.getAttribute('href'),
       culprits: [...document.querySelectorAll('body *')].map((element) => {
         const rect = element.getBoundingClientRect();
         return rect.right > innerWidth + 1 && getComputedStyle(element).position !== 'fixed'
@@ -73,7 +75,7 @@ try {
     assert.equal(result.figures, 6);
     assert.equal(result.brokenImages, 0);
     assert.match(result.status || '', /not peer-reviewed/i);
-    assert.equal(result.pdfHref, '/assets/research/stochastic-witness-calculus-v3.pdf');
+    assert.equal(result.pdfHref, '/assets/research/stochastic-witness-calculus-v4.pdf');
     assert.deepEqual(errors, []);
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({ path: join(output, `${viewport.name}-top.png`) });

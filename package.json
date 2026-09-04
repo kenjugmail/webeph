@@ -8,6 +8,7 @@
     "check": "node scripts/build-chrome.mjs --check && node scripts/check-links.mjs && npm run hearthrail:release && npm run scenario:check && npm run swc:contract",
     "scenario:check": "node scripts/check-robust-risk-scenario.mjs",
     "swc:status": "node scripts/check-swc-package.mjs",
+    "swc:v4": "python3 scripts/build-swc-v4.py",
     "swc:preflight": "node scripts/check-swc-package.mjs --strict",
     "swc:og": "node scripts/build-og-journal-swc.mjs",
     "swc:preview": "node scripts/check-journal-swc-preview.mjs",

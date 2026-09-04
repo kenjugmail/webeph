@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "version": 4,
+  "status": "public-reconstructed-preprint",
+  "filename": "stochastic-witness-calculus-v4.pdf",
+  "pages": 38,
+  "sha256": "114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01",
+  "derivedFrom": {
+    "filename": "stochastic_witness_calculus_arxiv_v3.pdf",
+    "pages": 34,
+    "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"
+  },
+  "revisionSource": {
+    "filename": "research/stochastic-witness-calculus/v4-revision.md",
+    "sha256": "000a4c4276cd22051284c4085dd57ded39dbcf7b1c400aba33dd6dada1dc763c"
+  },
+  "construction": "The complete audited v3 PDF is preserved, with a four-page v4 revision chapter inserted after the title page and visible superseding notices on affected pages.",
+  "sourceStatus": "The original independently compiling LaTeX source has not been supplied; a source-complete v4 recompilation remains required for the accepted journal version."
+}

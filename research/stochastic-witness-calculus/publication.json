@@ -51,6 +51,11 @@
     }
   ],
   "baselinePdf": {
+    "filename": "stochastic-witness-calculus-v4.pdf",
+    "pages": 38,
+    "sha256": "114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01"
+  },
+  "sourceV3": {
     "filename": "stochastic_witness_calculus_arxiv_v3.pdf",
     "pages": 34,
     "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"

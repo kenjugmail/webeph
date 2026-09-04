@@ -19,8 +19,8 @@ const rss = await readFile(join(root, 'news.xml'), 'utf8');
 const sitemap = await readFile(join(root, 'sitemap.xml'), 'utf8');
 const vercel = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
 const preprint = await readFile(join(root, 'journal-swc.html'), 'utf8');
-const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v3-manifest.json'), 'utf8'));
-const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v3.pdf'));
+const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v4-manifest.json'), 'utf8'));
+const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v4.pdf'));
 
 function pngDimensions(value) {
   if (value.toString('ascii', 1, 4) !== 'PNG') return undefined;
@@ -34,8 +34,8 @@ test('publishes a labeled preprint while blocking journal acceptance until the c
   assert.equal(record.releaseGates.peerReviewAcceptsReviewedVersion, false);
   assert.equal(record.releaseGates.humanPublicationAction, false);
   assert.equal(record.slug, 'stochastic-witness-calculus');
-  assert.equal(record.baselinePdf.pages, 34);
-  assert.equal(record.baselinePdf.sha256, '17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a');
+  assert.equal(record.baselinePdf.pages, 38);
+  assert.equal(record.baselinePdf.sha256, '114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01');
   assert.equal(createHash('sha256').update(preprintPdf).digest('hex'), record.baselinePdf.sha256);
   assert.match(record.claimGuardrail, /genuine exact theorem/i);
   assert.match(record.claimGuardrail, /universal closure/i);
@@ -102,9 +102,10 @@ test('publishes the intuitive News route while keeping the journal record privat
   assert.match(newsIndex, /href="\/news\/stochastic-witness-calculus"/);
   assert.match(rss, /https:\/\/ephemerent\.com\/news\/stochastic-witness-calculus/);
   assert.doesNotMatch(news, /(?:we|this (?:paper|work|method))\s+(?:prove|proved|proves)\s+(?:the\s+)?Erd[oő]s[-–— ]Straus/i);
-  assert.match(preprint, /Public preprint/);
+  assert.match(preprint, /Public reconstructed preprint/);
   assert.match(preprint, /not peer-reviewed/i);
   assert.match(preprint, /genuine finite-domain theorem/);
   assert.match(preprint, /Full-support universal lifting/);
-  assert.equal(preprintManifest.source.sha256, record.baselinePdf.sha256);
+  assert.equal(preprintManifest.sha256, record.baselinePdf.sha256);
+  assert.equal(preprintManifest.derivedFrom.sha256, record.sourceV3.sha256);
 });

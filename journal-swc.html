@@ -43,8 +43,8 @@
   "description": "A machine-oriented certificate interface for proving that a sound verifier accepts a set of witnesses with strictly positive measure.",
   "url": "https://ephemerent.com/journal/preprint/stochastic-witness-calculus",
   "datePublished": "2026-09-04",
-  "version": "v3 preprint",
-  "creativeWorkStatus": "Preprint; not peer-reviewed",
+  "version": "v4 reconstructed preprint",
+  "creativeWorkStatus": "Reconstructed preprint; not peer-reviewed; source-complete recompilation pending",
   "isAccessibleForFree": true,
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "author": {
@@ -58,9 +58,9 @@
   "publisher": { "@type": "Organization", "name": "Ephemerent Research", "url": "https://ephemerent.com/journal" },
   "encoding": {
     "@type": "MediaObject",
-    "contentUrl": "https://ephemerent.com/assets/research/stochastic-witness-calculus-v3.pdf",
+    "contentUrl": "https://ephemerent.com/assets/research/stochastic-witness-calculus-v4.pdf",
     "encodingFormat": "application/pdf",
-    "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"
+    "sha256": "114297ab418c798e1ca24cdd893cd154275770416ca799c6c6c27f99bcaa3a01"
   }
 }
 </script>
@@ -81,21 +81,21 @@
   <article class="swc-paper">
     <header class="swc-paper-hero">
       <div class="jr-container">
-        <div class="swc-paper-status"><span>Public preprint</span><strong>Version 3 · not peer-reviewed</strong><span>34 pages · September 4, 2026</span></div>
+        <div class="swc-paper-status"><span>Public reconstructed preprint</span><strong>Version 4 · not peer-reviewed</strong><span>38 pages · September 4, 2026</span></div>
         <div class="swc-paper-hero-grid">
           <div>
             <p class="swc-paper-kicker">Original research · formal verification · automated reasoning</p>
             <h1><span>Stochastic Witness Calculus</span><small>Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims</small></h1>
             <p class="swc-paper-deck">Probability is used to certify that a valid witness set is nonempty—not to weaken mathematical truth.</p>
             <div class="swc-paper-author"><strong>Kenju Tomita</strong><span>Rochester Institute of Technology · Ephemerent Research</span></div>
-            <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-v3.pdf" target="_blank" rel="noopener">Read canonical PDF <span aria-hidden="true">↗</span></a><a class="jr-button" href="/news/stochastic-witness-calculus">Read the intuitive explainer</a></div>
+            <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-v4.pdf" target="_blank" rel="noopener">Read v4 PDF <span aria-hidden="true">↗</span></a><a class="jr-button" href="/news/stochastic-witness-calculus">Read the intuitive explainer</a></div>
           </div>
           <aside class="swc-paper-register" aria-label="Preprint record">
             <span>Record state</span>
-            <dl><div><dt>Journal identifier</dt><dd>Not assigned</dd></div><div><dt>Review</dt><dd>Pending</dd></div><div><dt>PDF SHA-256</dt><dd><code>17ff47c2…7b462a</code></dd></div><div><dt>Article license</dt><dd>CC BY 4.0</dd></div><div><dt>Source and artifact</dt><dd>Awaiting deposit</dd></div></dl>
+            <dl><div><dt>Journal identifier</dt><dd>Not assigned</dd></div><div><dt>Review</dt><dd>Pending</dd></div><div><dt>PDF SHA-256</dt><dd><code>114297ab…aa3a01</code></dd></div><div><dt>Article license</dt><dd>CC BY 4.0</dd></div><div><dt>Source status</dt><dd>v4 revision source public · original LaTeX awaiting deposit</dd></div></dl>
           </aside>
         </div>
-        <p class="swc-preprint-notice"><strong>Publication boundary.</strong> This page is a public preprint and accessible HTML reading edition. It is not the accepted Ephemerent Research journal version and must not be described as peer-reviewed. The PDF is canonical where this edition condenses proofs or notation.</p>
+        <p class="swc-preprint-notice"><strong>Publication boundary.</strong> This page is a public reconstructed preprint and accessible HTML reading edition. Version 4 preserves the complete audited v3 body and inserts a four-page formal revision chapter because the original LaTeX source was not supplied. It is not the accepted Ephemerent Research journal version and must not be described as peer-reviewed.</p>
         <p class="swc-proof-clarification"><strong>Proof-status clarification · September 4, 2026.</strong> SWC’s exact mathematical mode is a genuine proof system, not statistical confidence. The Erdős–Straus computation is likewise a genuine theorem over its declared finite domain. What remains open is the additional universal-lifting premise needed to cover every integer.</p>
       </div>
     </header>
@@ -104,7 +104,7 @@
       <aside class="swc-paper-rail">
         <p>Contents</p>
         <ol data-swc-toc><li><a href="#abstract">Abstract</a></li><li><a href="#orientation">Orientation</a></li><li><a href="#semantics">Certificate semantics</a></li><li><a href="#calculus">Calculus</a></li><li><a href="#architecture">Trusted architecture</a></li><li><a href="#empirical">Empirical mode</a></li><li><a href="#experiments">Experiments</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#agenda">Research agenda</a></li><li><a href="#reproducibility">Reproducibility</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#references">References</a></li></ol>
-        <div class="swc-paper-rail-meta"><span>Canonical record</span><a href="/assets/research/stochastic-witness-calculus-v3.pdf">PDF · v3 · 604 KiB</a><a href="/news/stochastic-witness-calculus">News explainer</a></div>
+        <div class="swc-paper-rail-meta"><span>Version record</span><a href="/assets/research/stochastic-witness-calculus-v4.pdf">PDF · v4 · 38 pages</a><a href="/assets/research/stochastic-witness-calculus-v3.pdf">Parent PDF · v3</a><a href="/news/stochastic-witness-calculus">News explainer</a></div>
       </aside>
 
       <div class="swc-paper-body">
@@ -216,7 +216,7 @@ software_and_formalization_hashes</code></pre></div>
           <div class="swc-section-heading"><span>11</span><div><p>References</p><h2>The intellectual neighborhood.</h2></div></div>
           <p>This reading edition retains the complete 25-item bibliography. Use the canonical PDF for final journal formatting, page ranges, and the paper’s numbered citation context.</p>
           <ol class="swc-references"><li>Alon &amp; Spencer. <em>The Probabilistic Method</em>. 4th ed., Wiley, 2016.</li><li>Audebaud &amp; Paulin-Mohring. “Proofs of Randomized Algorithms in Coq,” 2006.</li><li>Barthe et al. “Proving Uniformity and Independence by Self-Composition and Coupling,” 2017.</li><li>Bryant, Nawrocki, Avigad &amp; Heule. “Certified Knowledge Compilation with Application to Formally Verified Model Counting,” 2025.</li><li>Capelli. “Knowledge Compilation Languages as Proof Systems,” 2019.</li><li>Dahan. “Sieve Dimension and Search Depth for the Erdős–Straus Conjecture, n ≡ 1 (mod 24),” 2026.</li><li>Eberl, Hölzl &amp; Nipkow. “A Verified Compiler for Probability Density Functions,” 2017.</li><li>Edmonds &amp; Paulson. “Formal Probabilistic Methods for Combinatorial Structures using the Lovász Local Lemma,” 2023.</li><li>Elsholtz &amp; Tao. “Counting the Number of Solutions to the Erdős–Straus Equation on Unit Fractions,” 2013.</li><li>Erdős &amp; Lovász. “Problems and Results on 3-Chromatic Hypergraphs and Some Related Questions,” 1975.</li><li>Howard, Ramdas, McAuliffe &amp; Sekhon. “Time-Uniform, Nonparametric, Nonasymptotic Confidence Sequences,” 2021.</li><li>Karayel. “Derandomization with Pseudorandomness,” 2024.</li><li>Ma et al. “ShannonProver: Towards Automating Formal Cryptographic Proofs,” 2026.</li><li>Mihnea &amp; Bogdan. “Further Verification and Empirical Evidence for the Erdős–Straus Conjecture,” 2025.</li><li>de Moura &amp; Ullrich. “The Lean 4 Theorem Prover and Programming Language,” 2021.</li><li>Necula. “Proof-Carrying Code,” 1997.</li><li>Neri, Oliva &amp; Pischke. “A Systematic Way of Analysing Proofs in Probability Theory,” 2026.</li><li>Paradise, Richardson, Bengio &amp; Goldwasser. “How to Verify Consistency of Probabilistic Claims,” 2026.</li><li>Ramdas, Grünwald, Vovk &amp; Shafer. “Game-Theoretic Statistics and Safe Anytime-Valid Inference,” 2023.</li><li>Salez. “The Erdős–Straus Conjecture: New Modular Equations and Checking up to N = 10<sup>17</sup>,” 2014.</li><li>Schröer et al. “A Deductive Verifier for Probabilistic Programs – Caesar,” 2026.</li><li>Tan et al. “Formally Certified Approximate Model Counting,” 2024.</li><li>The mathlib Community. “The Lean Mathematical Library,” 2020.</li><li>Tristan et al. “Verification of Machine Learning Systems via Reparameterization,” 2020.</li><li>Valiant. “The Complexity of Enumeration and Reliability Problems,” 1979.</li></ol>
-          <div class="swc-paper-end"><span>End of web edition</span><p>For theorem numbering, full proofs, appendices, certificate schema, all tables, and the complete bibliography, use the canonical v3 PDF.</p><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-v3.pdf" target="_blank" rel="noopener">Open canonical PDF <span aria-hidden="true">↗</span></a></div>
+          <div class="swc-paper-end"><span>End of web edition</span><p>Use the v4 PDF for the formal revision chapter, original theorem numbering, retained proofs, appendices, certificate schema, tables, and complete integrated record.</p><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-v4.pdf" target="_blank" rel="noopener">Open v4 PDF <span aria-hidden="true">↗</span></a></div>
         </section>
       </div>
     </div>
