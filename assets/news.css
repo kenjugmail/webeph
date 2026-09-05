@@ -1302,6 +1302,8 @@ p, h1, h2, h3, figure, ol, ul { margin: 0; }
   .nw-swc-home-step.is-mass .is-title { fill: #11172a; }
   .nw-swc-home-step .is-note { fill: #9aa4bf; font-size: 8px; }
   .nw-swc-home-step.is-mass .is-note { fill: #6e6b62; }
+  .nw-swc-home-step.is-mass > text:not(.is-title):not(.is-note) { fill: #57564f; }
+  .nw-swc-home-step.is-theorem > text { fill: #f8f4ea; }
   .nw-swc-field-mobile { display: none; }
 
   .nw-swc-jar { display: grid; grid-template-columns: minmax(270px,.9fr) minmax(240px,1.1fr); gap: 31px; align-items: center; margin: 41px 0; padding: 27px; border-block: 1px solid var(--nw-ink); background: var(--nw-paper-pale); }

@@ -1,8 +1,10 @@
 import { chromium } from 'playwright';
+import { mkdirSync } from 'node:fs';
+mkdirSync('output/waitlist', { recursive: true });
 import assert from 'node:assert/strict';
 const browser = await chromium.launch();
 const page = await browser.newPage({viewport:{width:1440,height:1000}});
-await page.goto('http://localhost:8091/waitlist.html');
+await page.goto((process.env.BASE || 'http://localhost:3111') + '/waitlist');
 await page.screenshot({path:'output/waitlist/desktop.png',fullPage:true});
 await page.setViewportSize({width:390,height:844});
 assert(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth));

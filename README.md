@@ -1,6 +1,9 @@
 # Ephemerent + Orrery
 
 Static marketing site for **Ephemerent** (research lab) and **Orrery** (agentic code editor).
+
+**Moving computers?** Follow [the setup and publishing guide](docs/NEW-COMPUTER.md).
+The current complete site is on the `polish/design-system` branch.
 Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide): sidecar + web UI.
 
 ## Orrery access model
@@ -56,9 +59,9 @@ docs/DEPLOY.md           Vercel/domain/download/update release steps
   local plan. Paid plans own cloud sign-in, DeepSeek API, Doubleword, Arbiter credits,
   Nexus cloud features, managed connectors, and cloud audit/proof.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
-- **Hearthrail remains private alpha.** `/hearthrail` is public product information, but
-  `assets/hearthrail-release.json` contains no installer URL. Its same-origin manifest must pass
-  the release validator before the static unavailable state can become a download link.
+- **Hearthrail has an experimental Mac alpha.** `/hearthrail` offers the Apple Silicon build
+  described in `assets/hearthrail-release.json`. It is ad-hoc signed, not notarized; Windows
+  is unavailable. The release validator checks the manifest and page against the approved artifact.
 
 ## Deploy (Vercel + ephemerent.com)
 

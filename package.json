@@ -43,7 +43,7 @@
     "glass": "node scripts/check-glass.mjs",
     "default": "node scripts/check-default.mjs",
     "plates:fetch": "node scripts/check-plates.mjs",
-    "figure": "node scripts/check-figure.mjs",
+    "figure": "node --test tests/figure-contrast.test.mjs && node scripts/check-figure.mjs",
     "focus": "node scripts/check-focus.mjs",
     "cast": "node scripts/check-cast.mjs",
     "swc:v5": "python3 scripts/build-swc-v5.py",

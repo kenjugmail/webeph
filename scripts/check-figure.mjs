@@ -82,13 +82,26 @@ for (const look of LOOKS) {
           if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.6) continue;
           const tb = t.getBoundingClientRect();
           if (tb.width < 4 || tb.height < 4) continue;
+          // A diagram can contain differently coloured panels. Use the last
+          // opaque rectangle painted before this label that contains it, not
+          // the SVG-wide ground behind that panel.
+          let textPlate = plate;
+          for (const rect of svg.querySelectorAll('rect')) {
+            if (!(rect.compareDocumentPosition(t) & Node.DOCUMENT_POSITION_FOLLOWING)) continue;
+            const style = getComputedStyle(rect);
+            if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) < 1 || Number(style.fillOpacity) < 1) continue;
+            const box = rect.getBoundingClientRect();
+            if (box.left > tb.left || box.right < tb.right || box.top > tb.top || box.bottom < tb.bottom) continue;
+            const color = rgb(style.fill);
+            if (color[3] === 255) textPlate = color;
+          }
           const fill = rgb(cs.fill);
           if (fill[3] < 40) continue;
           const size = parseFloat(cs.fontSize) || 11;
-          const key = cs.fill + '|' + size;
+          const key = cs.fill + '|' + size + '|' + textPlate.join(',');
           if (seen.has(key)) continue;
           seen.add(key);
-          out.push({ fill: fill.slice(0, 3), plate: plate.slice(0, 3), size,
+          out.push({ fill: fill.slice(0, 3), plate: textPlate.slice(0, 3), size,
             sample: s.slice(0, 26),
             svg: svg.getAttribute('class') || svg.parentElement?.className || 'svg' });
         }

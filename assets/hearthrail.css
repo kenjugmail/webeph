@@ -83,7 +83,7 @@
   .hr-hero-copy > .hr-eyebrow { grid-column: 1 / -1; margin-bottom: 18px; }
   .hr-hero h1 { margin: 0; max-width: 12ch; font: 400 clamp(48px, 7vw, 88px)/0.98 var(--hr-serif); letter-spacing: -0.035em; }
   .hr-deck { margin: 0 0 28px; max-width: 46ch; color: var(--hr-paper-soft); font-size: clamp(17px, 2vw, 20px); }
-  .hr-release-card { grid-column: 2; display: grid; gap: 18px; padding-top: 24px; border-top: 1px solid var(--hr-rule-strong); }
+  .hr-release-card { grid-column: 2; display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--hr-rule-strong); }
   .hr-release-card > div { display: grid; gap: 8px; }
   .hr-release-card strong { font: 400 22px/1.25 var(--hr-serif); letter-spacing: -.015em; }
   .hr-status { width: max-content; border: 1px solid var(--hr-ember-deep); padding: 4px 9px; color: var(--hr-ember); font: 500 10px/1.2 var(--hr-mono); letter-spacing: 0.12em; text-transform: uppercase; }
@@ -93,9 +93,14 @@
   .hr-download-link:focus-visible { background: transparent; color: var(--hr-ember); }
   .hr-release-detail { margin: -4px 0 0; color: var(--hr-paper-soft); font-size: 13px; }
   .hr-release-assets { display: grid; gap: 12px; }
-  .hr-release-asset { display: grid; gap: 7px; padding: 14px; border: 1px solid var(--hr-rule); }
+  .hr-release-asset { display: grid; gap: 8px; min-width: 0; }
   .hr-release-asset code { overflow-wrap: anywhere; color: var(--hr-paper-soft); font: 400 10px/1.5 var(--hr-mono); }
   .hr-release-asset-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: var(--hr-paper-soft); font-size: 12px; }
+  .hr-release-asset summary { cursor: pointer; color: var(--hr-paper-soft); font-size: 13px; }
+  .hr-release-asset summary:hover { color: var(--hr-paper); }
+  .hr-release-asset summary:focus-visible { outline: 2px solid var(--hr-ember); outline-offset: 4px; }
+  .hr-release-asset details[open] summary { margin-bottom: 8px; }
+  .hr-release-asset details { min-width: 0; }
   .hr-release-notes { display: inline-flex; width: max-content; align-items: center; color: var(--hr-ember); font: 500 11px/1.5 var(--hr-mono); letter-spacing: .04em; transition: color var(--motion-control) var(--ease), transform var(--motion-control) var(--ease); }
   .hr-release-notes:hover,
   .hr-release-notes:focus-visible { color: var(--hr-paper); transform: translateX(2px); }
@@ -148,7 +153,7 @@
     .hearthrail-page .ebar-in { width: min(100% - 44px, var(--hr-max)); }
     .hr-hero-copy { grid-template-columns: 1fr; }
     .hr-deck { margin: 24px 0; }
-    .hr-release-card { grid-column: 1; padding-top: 20px; }
+    .hr-release-card { grid-column: 1; padding-top: 12px; }
     .hr-register dl { grid-template-columns: 1fr 1fr; }
     .hr-register dl > div { padding: 18px 16px; border-bottom: 1px solid var(--hr-rule); }
     .hr-register dl > div:nth-child(2) { border-right: 0; }
@@ -261,3 +266,9 @@ body.hearthrail-page .hr-nav {
     letter-spacing: .06em;
   }
 }
+
+/* Shared unlayered link colours must not override the download button's
+   deliberately paired foreground/background in either theme. */
+body.hearthrail-page .hr-download-link { color: var(--hr-ink); }
+body.hearthrail-page .hr-download-link:hover,
+body.hearthrail-page .hr-download-link:focus-visible { color: var(--hr-ember); }

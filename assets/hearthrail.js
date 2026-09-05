@@ -23,6 +23,8 @@ export function validateHearthrailRelease(value) {
     return { schemaVersion: 1, product: "hearthrail", status: "private-alpha", version: null, publishedAt: null, notesUrl: null, assets: [] };
   }
   if (value.status !== "released") return undefined;
+  if (value.channel !== undefined && value.channel !== "community-alpha") return undefined;
+  const community = value.channel === "community-alpha";
   if (typeof value.version !== "string" || !/^[0-9A-Za-z][0-9A-Za-z.+-]{0,63}$/.test(value.version)) return undefined;
   if (typeof value.publishedAt !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value.publishedAt) || !Number.isFinite(Date.parse(value.publishedAt))) return undefined;
   const notesUrl = credentialFreeHttps(value.notesUrl);
@@ -33,6 +35,7 @@ export function validateHearthrailRelease(value) {
   for (const candidate of value.assets) {
     if (!isObject(candidate) || typeof candidate.platform !== "string" || !(candidate.platform in PLATFORMS) || seen.has(candidate.platform)) return undefined;
     const platform = PLATFORMS[candidate.platform];
+    if (community && (candidate.platform !== "macos-arm64" || candidate.signing !== "ad-hoc" || candidate.notarized !== false)) return undefined;
     if (typeof candidate.filename !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._+-]{7,159}$/.test(candidate.filename)) return undefined;
     if (!platform.extensions.some((extension) => candidate.filename.toLowerCase().endsWith(extension.toLowerCase()))) return undefined;
     if (!/^Hearthrail[-_.]/i.test(candidate.filename) || !candidate.filename.includes(value.version) || !platform.filenameToken.test(candidate.filename)) return undefined;
@@ -45,9 +48,9 @@ export function validateHearthrailRelease(value) {
       return undefined;
     }
     seen.add(candidate.platform);
-    assets.push({ platform: candidate.platform, filename: candidate.filename, url, sha256: candidate.sha256.toLowerCase(), sizeBytes: candidate.sizeBytes });
+    assets.push({ platform: candidate.platform, filename: candidate.filename, url, sha256: candidate.sha256.toLowerCase(), sizeBytes: candidate.sizeBytes, ...(community ? { signing: "ad-hoc", notarized: false } : {}) });
   }
-  return { schemaVersion: 1, product: "hearthrail", status: "released", version: value.version, publishedAt: new Date(value.publishedAt).toISOString(), notesUrl, assets };
+  return { schemaVersion: 1, product: "hearthrail", status: "released", ...(community ? { channel: "community-alpha" } : {}), version: value.version, publishedAt: new Date(value.publishedAt).toISOString(), notesUrl, assets };
 }
 
 export async function loadHearthrailRelease(fetcher = fetch) {
@@ -65,13 +68,14 @@ function megabytes(sizeBytes) {
 }
 
 export function renderHearthrailRelease(container, release) {
+  release = validateHearthrailRelease(release);
   if (!(container instanceof HTMLElement) || release?.status !== "released") return false;
   const heading = document.createElement("div");
   const status = document.createElement("span");
   status.className = "hr-status";
   status.textContent = `Version ${release.version}`;
   const title = document.createElement("strong");
-  title.textContent = "Verified installers";
+  title.textContent = release.channel === "community-alpha" ? "Experimental Mac LAN preview" : "Release downloads";
   heading.append(status, title);
 
   const list = document.createElement("div");
@@ -95,7 +99,11 @@ export function renderHearthrailRelease(container, release) {
     meta.append(filename, size);
     const checksum = document.createElement("code");
     checksum.textContent = `SHA-256 ${asset.sha256}`;
-    item.append(link, meta, checksum);
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = `File details · ${megabytes(asset.sizeBytes)}`;
+    details.append(summary, meta, checksum);
+    item.append(link, details);
     list.append(item);
   }
   const notes = document.createElement("a");
@@ -103,8 +111,11 @@ export function renderHearthrailRelease(container, release) {
   notes.href = release.notesUrl;
   notes.rel = "noopener";
   notes.referrerPolicy = "no-referrer";
-  notes.textContent = "Release notes and verification record";
-  container.replaceChildren(heading, list, notes);
+  notes.textContent = "Release notes and limits";
+  const warning = document.createElement("p");
+  warning.className = "hr-release-detail";
+  warning.textContent = "Not notarized by Apple; macOS may block opening. Windows is not available.";
+  container.replaceChildren(heading, list, ...(release.channel === "community-alpha" ? [warning] : []), notes);
   container.dataset.releaseState = "released";
   return true;
 }
@@ -112,8 +123,18 @@ export function renderHearthrailRelease(container, release) {
 export async function mountHearthrailRelease() {
   const container = document.querySelector("[data-hearthrail-release]");
   if (!container) return;
+  // The reviewed static fallback works without JS. With JS, suspend those
+  // links until the current manifest validates, including after a withdrawal.
+  for (const link of container.querySelectorAll("a")) link.removeAttribute("href");
   const release = await loadHearthrailRelease();
-  if (release?.status === "released") renderHearthrailRelease(container, release);
+  if (release?.status === "released") {
+    renderHearthrailRelease(container, release);
+  } else {
+    const status = document.createElement("strong");
+    status.textContent = release?.status === "private-alpha" ? "Installers are not public yet." : "Downloads are temporarily unavailable.";
+    container.replaceChildren(status);
+    container.dataset.releaseState = release?.status ?? "unavailable";
+  }
 }
 
 if (typeof document !== "undefined") void mountHearthrailRelease();

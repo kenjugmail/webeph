@@ -32,6 +32,14 @@ test("accepts a bounded future release", () => {
   assert.equal(value?.assets[0]?.platform, "macos-arm64");
   assert.equal(value?.assets[0]?.sha256.length, 64);
 });
+
+test("community alpha requires an explicit unnotarized Mac declaration", () => {
+  const preview = { ...released, channel: "community-alpha", assets: [{ ...released.assets[0], signing: "ad-hoc", notarized: false }] };
+  assert.equal(validateHearthrailRelease(preview)?.channel, "community-alpha");
+  assert.equal(validateHearthrailRelease({ ...released, channel: "community-alpha" }), undefined);
+  assert.equal(validateHearthrailRelease({ ...preview, assets: [{ ...preview.assets[0], notarized: true }] }), undefined);
+  assert.equal(validateHearthrailRelease({ ...preview, channel: "trusted-release" }), undefined);
+});
 test("fetch failure fails closed", async () => {
   const value = await loadHearthrailRelease(async () => { throw new Error("offline"); });
   assert.equal(value, undefined);
