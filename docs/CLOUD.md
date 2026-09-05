@@ -40,11 +40,11 @@ No public no-cost local tier is offered. Preview users can inspect setup; active
 
 There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
 
-| Tier | Price | DeepSeek API | Doubleword | Arbiter | Est. API usage value |
-|------|-------|----------------|-----------------|---------|----------------------|
-| **Pro** | `$40/month` | 200M credits/mo | 200M credits/mo | 100M credits/mo | ~$2,400/mo |
-| **Max** | `$100/month` | 600M credits/mo | 650M credits/mo | 400M credits/mo | ~$7,500/mo |
-| **Ultra** | `$200/month` | 1.5B credits/mo | 1.5B credits/mo | 1.2B credits/mo | ~$18,000/mo |
+| Tier | Price | Doubleword | Arbiter (v23) | Est. API usage value |
+|------|-------|-----------------|---------|----------------------|
+| **Pro** | `$40/month` | 200M credits/mo | 100M credits/mo | ~$1,400/mo |
+| **Max** | `$100/month` | 650M credits/mo | 400M credits/mo | ~$4,800/mo |
+| **Ultra** | `$200/month` | 1.5B credits/mo | 1.2B credits/mo | ~$11,700/mo |
 
 Public allotments assume prompt caching and token-efficient run context. Estimated API usage value is a list-rate marketing figure, not provider COGS. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
 

@@ -10,7 +10,7 @@ Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide): sidecar +
 | Setup | Download beta, sign in, open Nexus, prepare workspace/model routes | Supabase auth + Stripe billing |
 | Auth | Required for current beta account flow | Google / GitHub / email |
 | Access | Preview setup; real runs require an active subscription | Pro/Max/Ultra subscriptions |
-| Pricing | No public permanent free local plan | DeepSeek API, Doubleword, Arbiter, managed connectors, proof vault, cloud runs |
+| Pricing | No public permanent free local plan | Doubleword, Arbiter, managed connectors, proof vault, cloud runs |
 | Think of it as | Installed Orrery shell and local workspace setup | Hosted agent capacity and account-backed operations |
 
 See **[docs/CLOUD.md](docs/CLOUD.md)** for cloud setup and the phone/remote roadmap.
@@ -53,7 +53,7 @@ docs/DEPLOY.md           Vercel/domain/download/update release steps
   the billing webhook updates active subscription metadata in Supabase.
 - **Pricing is configured in one public catalog.** `assets/site-config.js` defines
   preview/no-active-subscription plus Pro/Max/Ultra. Preview is not a public free
-  local plan. Paid plans own cloud sign-in, DeepSeek API, Doubleword, Arbiter credits,
+  local plan. Paid plans own cloud sign-in, Doubleword, Arbiter credits,
   Nexus cloud features, managed connectors, and cloud audit/proof.
 - **Single host.** Vercel only; the GitHub Pages workflow was removed to keep one OAuth origin.
 - **Hearthrail remains private alpha.** `/hearthrail` is public product information, but
