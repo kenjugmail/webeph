@@ -8,3 +8,4 @@
 @media(max-width:1080px){.home-page .enav{gap:16px}.home-page .ecompany-grid{gap:50px}}
 @media(max-width:720px){.home-page .ecompany{padding:42px 0}.home-page .ecompany-grid{grid-template-columns:1fr;gap:35px}.home-page .ecompany-intro>p:not(.lbl){font-size:15px}.home-page .ecompany-scope>a{padding:18px 0}}
 .home-page .ecompany-scope>a.ecompany-image{display:block;border:0;padding:0;margin-bottom:24px;overflow:hidden}.home-page .ecompany-image img{width:100%;height:auto;aspect-ratio:2.1;object-fit:cover;display:block}.home-page .ecompany-scope>a:not(.ecompany-image){padding:16px 0}.home-page .ecompany-scope .lbl{margin-bottom:4px}
+.home-page .ecompany-image img{transition:opacity .16s ease}.home-page .ecompany-image:hover img{opacity:.86}.home-page .ecompany-image:focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(prefers-reduced-motion:reduce){.home-page .ecompany-image img{transition:none}}

@@ -11,6 +11,7 @@ Install Git and a current Node.js LTS version, then run:
 git clone --branch polish/design-system https://github.com/kenjugmail/webeph.git
 cd webeph
 npm ci
+npx playwright install chromium
 npx vercel login
 npx vercel link --project ephemerent
 npx vercel dev --listen 3111
@@ -19,6 +20,7 @@ npx vercel dev --listen 3111
 Choose the existing Ephemerent account/team and project; do not create a new project.
 Open http://localhost:3111 . In a second terminal, use `npm run verify` for the site checks,
 `node scripts/check-waitlist.mjs` for the waitlist browser checks, and `npm run build` before publishing.
+The full visual suite also requires Python 3 with Pillow and NumPy (`python3 -m pip install Pillow numpy` in a Python virtual environment).
 
 ## Save and publish
 
