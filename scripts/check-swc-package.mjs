@@ -62,7 +62,7 @@ async function checkPdf(path) {
     return;
   }
   if (!new RegExp(`^Pages:\\s+${record.baselinePdf.pages}$`, 'm').test(info)) errors.push(`baseline PDF must have ${record.baselinePdf.pages} pages`);
-  const normalizedText = text.replace(/\s+/g, ' ').trim();
+  const normalizedText = text.replaceAll('ﬁ', 'fi').replaceAll('ﬂ', 'fl').replace(/\s+/g, ' ').trim();
   if (!normalizedText.includes(record.title)) errors.push('authoritative PDF title is missing or changed');
   const checkpoints = ['27,810', '82,887', 'n = 2048', '0.9900', '0.9048', '300', '1,800', 'c = 107', '4.342%', '30.826%', '97.738%', '99.946%'];
   checkpoints.forEach((value) => { if (!text.includes(value)) errors.push(`PDF claim checkpoint missing: ${value}`); });
@@ -72,7 +72,7 @@ async function checkPdf(path) {
     /officially\s+proved/i,
   ];
   dangerous.forEach((pattern) => { if (pattern.test(text)) errors.push(`forbidden universal-claim wording found: ${pattern}`); });
-  if (!/finite verification[^.]{0,180}(?:not|does not)[^.]{0,80}(?:proof|prove)/i.test(text)) errors.push('finite-verification limitation is not explicit in the PDF');
+  if (!/finite verification[^.]{0,180}(?:not|does not)[^.]{0,80}(?:proof|prove)/i.test(normalizedText)) errors.push('finite-verification limitation is not explicit in the PDF');
   notes.push(`PDF baseline verified · ${record.baselinePdf.pages} pages · ${record.baselinePdf.sha256}`);
 }
 
@@ -126,7 +126,7 @@ async function checkPackage(directory) {
 checkRecord();
 await checkPdf(baselinePath);
 if (packageArg) await checkPackage(packageArg);
-else notes.push('JOURNAL BLOCKED · package reconciliation, source compilation, peer review, and human publication gates remain incomplete');
+else notes.push('JOURNAL BLOCKED · artifact reconciliation, peer review, and human publication gates remain incomplete');
 
 notes.forEach((note) => console.log(note));
 if (errors.length) {

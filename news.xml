@@ -24,7 +24,7 @@
       <content:encoded><![CDATA[
         <p>A model can help search an enormous space for a proof witness. It should not get to certify its own work.</p>
         <p><a href="https://ephemerent.com/news/stochastic-witness-calculus">Read the full Research Dispatch at Ephemerent News.</a></p>
-        <p><a href="https://ephemerent.com/journal/preprint/stochastic-witness-calculus">Read the public v5 HTML preprint at Ephemerent Research.</a> Updated September 5: corrected arithmetic, exact-mass checkers, combined infinite families, and a final literature audit. Universal existence remains open; source/build reconciliation and review are pending.</p>
+        <p><a href="https://ephemerent.com/journal/preprint/stochastic-witness-calculus">Read the public v5 HTML preprint at Ephemerent Research.</a> Updated September 5: corrected arithmetic, exact-mass checkers, combined infinite families, a final literature audit, and an integrated arXiv-ready source build. Universal existence remains open; artifact checksum reconciliation and review are pending.</p>
       ]]></content:encoded>
     </item>
     <item>

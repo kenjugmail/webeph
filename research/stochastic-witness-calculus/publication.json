@@ -55,9 +55,9 @@
     }
   ],
   "baselinePdf": {
-    "filename": "stochastic-witness-calculus-v5.pdf",
-    "pages": 43,
-    "sha256": "6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d"
+    "filename": "stochastic-witness-calculus-arxiv-v5.pdf",
+    "pages": 38,
+    "sha256": "bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2"
   },
   "sourceV4": {
     "filename": "stochastic-witness-calculus-v4.pdf",
@@ -158,7 +158,7 @@
   },
   "releaseGates": {
     "completePackageReceived": true,
-    "sourceCompilesCleanly": false,
+    "sourceCompilesCleanly": true,
     "reproductionMatchesManifest": false,
     "peerReviewAcceptsReviewedVersion": false,
     "editorialRecommendationComplete": false,
@@ -172,11 +172,21 @@
   "dateModified": "2026-09-05",
   "researchSupplement": {
     "filename": "swc-v5-research-supplement.zip",
-    "sha256": "5df1ab392121439cd690b7d6cce9442cef41223cfbbf5384e2ceafa23d9ae27f",
-    "bytes": 146865,
+    "sha256": "e0aa0f50979f23eac3841950de011d0ab0383cc49d3cd7c4e331759f87a91be9",
+    "bytes": 146866,
     "files": 74,
     "scope": "research_supplement_not_accepted_journal_deposit",
     "date": "2026-09-05"
   },
-  "revisionStatus": "v5_research_revision_universal_existence_unproved"
+  "revisionStatus": "v5_research_revision_universal_existence_unproved",
+  "arxivSource": {
+    "filename": "stochastic-witness-calculus-arxiv-v5-source.tar.gz",
+    "sha256": "b473614d11144a6800c44e4dcc85e78a4086ab5a43b13bb52c84d2d0aa8c5f98",
+    "bytes": 166326
+  },
+  "sourceV5RevisionFolio": {
+    "filename": "stochastic-witness-calculus-v5.pdf",
+    "pages": 43,
+    "sha256": "6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d"
+  }
 }

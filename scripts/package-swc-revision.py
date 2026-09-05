@@ -33,7 +33,7 @@ Historical large-prime search programs are included for provenance but are
 not required for these checks. Do not run large sweeps on a memory-limited
 machine. Read final-literature-audit-2026-09-05.md and the notes' scope limits.
 
-PDF: https://ephemerent.com/assets/research/stochastic-witness-calculus-v5.pdf
+PDF: https://ephemerent.com/assets/research/stochastic-witness-calculus-arxiv-v5.pdf
 Web: https://ephemerent.com/journal/preprint/stochastic-witness-calculus
 '''
 hashes={name:hashlib.sha256(data).hexdigest() for name,data in files.items()}
