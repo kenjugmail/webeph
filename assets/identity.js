@@ -98,7 +98,7 @@ export function bindIdentityForm(root = document) {
 function setupDownloadButton() {
   const dl = document.getElementById('orrery-download-btn');
   const url = cfg().DOWNLOAD_URL || '#';
-  if (dl && url !== '#') {
+  if (dl && cfg().RELEASE_AVAILABLE === true && url !== '#') {
     dl.href = url;
     dl.setAttribute('download', '');
     dl.addEventListener('click', () => {

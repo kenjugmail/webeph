@@ -98,10 +98,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <!-- Shown until a beta packet is published (RELEASE_AVAILABLE = false) -->
     <div id="beta-gate">
       <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
-      <p class="sub" style="margin-bottom:20px;">Orrery beta access is controlled through sign-in and subscription status. Request access and we may email approved testers when a build is available.</p>
+      <p class="sub" style="margin-bottom:20px;">Direct website downloads are being prepared. The next installer will appear here after signing and release verification. An active subscription is required for agent execution; a subscription does not make an unpublished build available.</p>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
-        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run governed agents with open-source models on your device plus hosted DeepSeek API, Doubleword, Arbiter, and Orrery Cloud.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run governed agents through hosted subscription routes. No free compute, public local-model execution, or provider-key setup.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
@@ -120,10 +120,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
       <div class="release-status" id="release-status">
-        <div><b>Current beta</b><span id="release-version">0.1.0-beta</span></div>
-        <div><b>Update mode</b><span id="release-update-mode">Manual portable update</span></div>
+        <div><b>Release candidate</b><span id="release-version">Pending verification</span></div>
+        <div><b>Update mode</b><span id="release-update-mode">Website-hosted updates</span></div>
         <div><b>Verify download</b><span class="mono" id="release-sha">SHA-256 on release page</span></div>
-        <a id="release-page-link" href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">Open release notes and checksums</a>
+        <a id="release-page-link" href="/download">Release notes and checksums</a>
       </div>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
@@ -133,11 +133,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="download-steps">
         <h2>Quick start</h2>
         <ol>
-          <li>Unzip the beta packet and run <b>Orrery.exe</b>. Windows SmartScreen may warn on this portable beta — choose <b>More info → Run anyway</b>.</li>
+          <li>Download the verified installer for your platform. Check its publisher and checksum; stop if verification fails.</li>
           <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
           <li>Sign in from Settings -> Account and subscribe - hosted DeepSeek API, Doubleword, and Arbiter credits work with zero provider-key setup.</li>
           <li>Use Nexus to open a workspace, pick a hosted route, send work, and review proof, boundary, and usage receipts.</li>
-          <li>Checksums, manifest, and the package security report live on the <a href="https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta" target="_blank" rel="noopener">binary release page</a>.</li>
+          <li>Release notes and checksums will accompany the installer on this website. Updates download from the website feed and install only after a safe restart confirmation.</li>
         </ol>
         <p class="sub download-help" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord</a>.</p>
       </div>
@@ -211,7 +211,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   if (releaseMode) {
     releaseMode.textContent = releaseConfig.UPDATE_MODE === 'manual-portable-beta'
       ? 'Manual portable update - download the newest beta zip'
-      : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
+      : releaseConfig.UPDATE_MODE === 'website-feed' ? 'Website updates — confirm a safe restart to install' : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
   }
   const releaseSha = document.getElementById('release-sha');
   if (releaseSha && releaseConfig.RELEASE_SHA256) releaseSha.textContent = `SHA-256 ${String(releaseConfig.RELEASE_SHA256)}`;
@@ -224,12 +224,12 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     // Preview access can inspect setup; real agent work requires an active subscription.
     getCloudProfile().then((profile) => {
       const plan = planFromCloudProfile(profile);
-      if (!isPaidPlan(plan)) return;
+      if (!isPaidPlan(plan) || profile?.subscription_status !== 'active') return;
       const tierLabel = `${PLAN_LABELS[plan]} ($${PLAN_PRICES[plan]}/mo)`;
 
       const entitled = document.getElementById('beta-entitled');
       if (entitled) {
-        entitled.textContent = `Beta access is included with your ${tierLabel} plan — no request needed. We'll email your build; manage everything from the cloud dashboard.`;
+        entitled.textContent = `Your ${tierLabel} subscription is active. Verified installers will be available here when the release is ready; manage billing from the cloud dashboard.`;
         entitled.classList.remove('hidden');
       }
       const request = document.getElementById('beta-request');

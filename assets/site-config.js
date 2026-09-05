@@ -8,15 +8,16 @@
  * NEVER put the Supabase service_role key, Stripe secret key, provider keys, or any other secret here.
  */
 window.ORRERY_CONFIG = {
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/orrery-releases/releases/download/orrery-0.1.0-beta/Orrery-0.1.0-beta-win-x64-portable.zip',
-  RELEASE_VERSION: '0.1.0-beta',
-  RELEASE_CHANNEL: 'beta',
-  RELEASE_PAGE_URL: 'https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta',
-  RELEASE_SHA256: '421cb012d7f0f9a390aabc3e108bdc180f5a8851b0b3fa207d348dc1127b8543',
-  UPDATE_MODE: 'manual-portable-beta',
+  DOWNLOAD_URL: '',
+  RELEASE_VERSION: '4.0.0-rc.3',
+  RELEASE_CHANNEL: 'rc',
+  RELEASE_PAGE_URL: '/download',
+  RELEASE_SHA256: '',
+  UPDATE_MODE: 'website-feed',
+  UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
 
-  /** Windows beta packet published to the binary-only Orrery release repository. */
-  RELEASE_AVAILABLE: true,
+  /** Enable only after signed installers, checksums and update metadata are uploaded and verified. */
+  RELEASE_AVAILABLE: false,
 
   AUDIT_WEBHOOK_URL: '',
 

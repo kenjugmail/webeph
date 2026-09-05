@@ -3,6 +3,7 @@
   "outputDirectory": ".",
   "installCommand": "npm install --omit=dev",
   "redirects": [
+    { "source": "/downloads/orrery/:path*", "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/orrery-releases/:path*", "permanent": false },
     { "source": "/waitlist/manage", "destination": "https://supabase.com/dashboard/project/wjjthkqwcyahamhjkeux/editor", "permanent": false },
     { "source": "/waitlist.html", "destination": "/waitlist", "permanent": true },
     { "source": "/atlas", "destination": "https://atlas.ephemerent.com", "permanent": true },

@@ -86,17 +86,10 @@ Do not put Stripe secret keys in this repository's static files.
 
 ## 6. Download bundle and update channel
 
-`assets/site-config.js` has `RELEASE_AVAILABLE: true`, so `download.html` shows the current
-Windows beta packet and update metadata.
+Orrery uses locally built installers and website-owned URLs, not GitHub Releases or Actions.
+`RELEASE_AVAILABLE` is false until a signed candidate is uploaded and independently verified.
 
-For the current beta:
-
-1. Build it from `buddyide` and publish a **GitHub Release** in the binary-only
-   `kenjugmail/orrery-releases` repo with `Orrery-0.1.0-beta-win-x64-portable.zip`.
-2. Point `DOWNLOAD_URL` at that release asset.
-3. Keep `RELEASE_VERSION`, `RELEASE_PAGE_URL`, `RELEASE_SHA256`, and `UPDATE_MODE` in
-   `assets/site-config.js` synchronized with the binary release.
-4. The current public packet is a portable Windows beta, so updates are manual: users
-   download the newest zip from the website/release page. The desktop app has an
-   electron-updater feed configured for signed installer builds later.
-5. Grant testers access through Supabase billing/profile metadata for real agent runs.
+`/downloads/orrery/:path*` redirects to the public `orrery-releases` Supabase Storage bucket
+in the existing Ephemerent project. The bucket must contain approved binary/proof assets only.
+It has not been provisioned or populated by the configuration change. See
+[Orrery website distribution](./ORRERY-DISTRIBUTION.md) for the release order and update channel.
