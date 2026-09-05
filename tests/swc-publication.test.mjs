@@ -19,8 +19,8 @@ const rss = await readFile(join(root, 'news.xml'), 'utf8');
 const sitemap = await readFile(join(root, 'sitemap.xml'), 'utf8');
 const vercel = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
 const preprint = await readFile(join(root, 'journal-swc.html'), 'utf8');
-const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v4-1-manifest.json'), 'utf8'));
-const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v4-1.pdf'));
+const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v5-manifest.json'), 'utf8'));
+const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v5.pdf'));
 
 function pngDimensions(value) {
   if (value.toString('ascii', 1, 4) !== 'PNG') return undefined;
@@ -29,15 +29,15 @@ function pngDimensions(value) {
 
 test('publishes a labeled preprint while blocking journal acceptance until package audit and reviews are complete', () => {
   assert.equal(record.publicationStatus, 'public_preprint');
-  assert.equal(record.journalPublicationStatus, 'blocked_missing_package');
+  assert.equal(record.journalPublicationStatus, 'blocked_package_reconciliation_and_review');
   assert.equal(record.releaseGates.completePackageReceived, true);
   assert.equal(record.intakeArtifact.auditStatus, 'received_with_stale_manifest_entries');
   assert.equal(record.intakeArtifact.manifestMismatches, 6);
   assert.equal(record.releaseGates.peerReviewAcceptsReviewedVersion, false);
   assert.equal(record.releaseGates.humanPublicationAction, false);
   assert.equal(record.slug, 'stochastic-witness-calculus');
-  assert.equal(record.baselinePdf.pages, 39);
-  assert.equal(record.baselinePdf.sha256, '2ce75cf7c681b466dd20a202e80e433d0e92a60016158995a60f7e489f2c9c71');
+  assert.equal(record.baselinePdf.pages, 43);
+  assert.equal(record.baselinePdf.sha256, '6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d');
   assert.equal(createHash('sha256').update(preprintPdf).digest('hex'), record.baselinePdf.sha256);
   assert.match(record.claimGuardrail, /genuine exact theorem/i);
   assert.match(record.claimGuardrail, /universal closure/i);
@@ -112,6 +112,6 @@ test('publishes the intuitive News route while keeping the journal record privat
   assert.match(preprint, /Well-founded inductive witness lifting/);
   assert.match(preprint, /Erdős–Straus divisor lift/);
   assert.equal(preprintManifest.sha256, record.baselinePdf.sha256);
-  assert.equal(preprintManifest.parentVersion.sha256, record.sourceV4.sha256);
+  assert.equal(preprintManifest.parentVersion.sha256, record.sourceV41.sha256);
   assert.equal(preprintManifest.constructionBase.sha256, record.sourceV3.sha256);
 });

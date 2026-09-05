@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="A witness distribution passes through an exact positive-mass certificate to produce a deterministic existence theorem">
 <meta property="article:published_time" content="2026-09-04T12:00:00-04:00">
-<meta property="article:modified_time" content="2026-09-04T12:00:00-04:00">
+<meta property="article:modified_time" content="2026-09-05T12:00:00-04:00">
 <meta property="article:author" content="Kenju Tomita">
 <meta property="article:section" content="Research Dispatch">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
       "description": "An intuitive guide to Stochastic Witness Calculus and the boundary between learned proof search, exact certificates, and empirical evidence.",
       "url": "https://ephemerent.com/news/stochastic-witness-calculus",
       "datePublished": "2026-09-04T12:00:00-04:00",
-      "dateModified": "2026-09-04T12:00:00-04:00",
+      "dateModified": "2026-09-05T12:00:00-04:00",
       "articleSection": "Research Dispatch",
       "isAccessibleForFree": true,
       "author": { "@type": "Person", "name": "Kenju Tomita" },
@@ -65,6 +65,7 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="/assets/swc-revision.css?v=20260905v5">
 </head>
 <body class="nw-page nw-article-page nw-swc-page">
 <a class="nw-skip" href="#article">Skip to article</a>
@@ -96,12 +97,12 @@
       <div class="nw-article-meta">
         <div><span>Analysis by</span><strong>Kenju Tomita</strong></div>
         <div><span>Published</span><time datetime="2026-09-04">September 4, 2026</time></div>
-        <div><span>Reading time</span><strong>13 minutes</strong></div>
+        <div><span>Reading time</span><strong>15 minutes</strong></div>
         <button type="button" class="nw-copy-link" data-copy-link>Copy link</button>
       </div>
       <a class="nw-hero-record nw-hero-record-pending" href="/journal/preprint/stochastic-witness-calculus">
-        <span>Research preprint</span><strong>Read the accessible HTML edition and 39-page v4.1 revision</strong>
-        <small>Universal lifting + well-founded induction · not yet peer-reviewed · journal identifier not assigned</small><b aria-hidden="true">→</b>
+        <span>Research preprint</span><strong>Read the accessible HTML edition and 43-page v5 revision</strong>
+        <small>Corrected results + final literature audit · not peer-reviewed · universal existence remains open</small><b aria-hidden="true">→</b>
       </a>
     </div>
   </header>
@@ -150,7 +151,7 @@
   <div class="nw-shell nw-article-grid">
     <nav class="nw-article-rail" aria-labelledby="swc-map-heading">
       <div class="nw-rail-heading"><p id="swc-map-heading">In this dispatch</p><span>Six movements</span></div>
-      <ol data-article-toc><li><a href="#jar">A jar of witnesses</a></li><li><a href="#boundary">Search versus certificate</a></li><li><a href="#zero-hits">Zero hits can lie</a></li><li><a href="#experiments">What v4.1 establishes</a></li><li><a href="#two-endpoints">Two honest endpoints</a></li><li><a href="#next">What must happen next</a></li></ol>
+      <ol data-article-toc><li><a href="#jar">A jar of witnesses</a></li><li><a href="#boundary">Search versus certificate</a></li><li><a href="#zero-hits">Zero hits can lie</a></li><li><a href="#experiments">What the research establishes</a></li><li><a href="#two-endpoints">Two honest endpoints</a></li><li><a href="#next">What must happen next</a></li></ol>
     </nav>
 
     <div class="nw-article-body">
@@ -177,7 +178,7 @@
           <i aria-hidden="true">→</i>
           <div class="is-trusted"><span>Inside the trusted base</span><strong>Exact kernel recomputes</strong><p>Verifier soundness, normalization, accepted mass, and the final logical status.</p></div>
         </div>
-        <p data-reveal>The v4.1 integrated SAT study makes that separation concrete. Across 60 planted satisfiable instances, the learned proposal raised median exact witness mass from <strong>1/65,536</strong> to <strong>0.9393</strong>. A mixture retaining 10% uniform support produced a median <strong>27,809.8×</strong> increase while preserving a theorem-level floor.</p>
+        <p data-reveal>The retained v3 SAT study makes that separation concrete. Across 60 planted satisfiable instances, the learned proposal raised median exact witness mass from <strong>1/65,536</strong> to <strong>0.9393</strong>. A mixture retaining 10% uniform support produced a median <strong>27,809.8×</strong> increase while preserving a theorem-level floor.</p>
         <p data-reveal>The result is not “the model proved SAT.” The model reshaped search. Exact rational recomputation established the accepted mass, and all 20 contradictory controls received exactly zero.</p>
       </section>
 
@@ -224,14 +225,15 @@
 
       <section class="nw-movement" id="next" data-article-section>
         <div class="nw-movement-heading" data-reveal><span>06</span><div><p>The open work</p><h2>What must happen next.</h2></div></div>
-        <p data-reveal>Version 4.1 is a systems and certificate proposal with exact lifting and induction theorems, not yet a proof-assistant implementation and not a shortcut around computational hardness. The exact kernel is Python/C++ rather than Lean, Isabelle, or Coq. The SAT distribution is synthetic. The dynamic program scales because its constraint has local structure.</p>
+        <p data-reveal>Version 5 consolidates corrected arithmetic results, probability calculations, and a reusable certificate checker. It is not a proof-assistant formalization or a universal solution. The exact kernel is Python/C++ rather than Lean, Isabelle, or Coq. The SAT distribution is synthetic. The dynamic program scales because its constraint has local structure.</p>
+        <div class="nw-revision-note" id="v5-update"><p class="nw-article-label">Updated September 5 · Version 5</p><h3>Better proof tools. A precisely stated remaining gap.</h3><p>Imagine a search that can take wrong turns, but must return a receipt whenever it finds a solution. The follow-up SWC checker can verify those receipts, combine their exact probabilities, and check formulas for every member of an infinite family. The latest kernel passes 24 tests and combines twelve infinite families without treating their union as all primes.</p><p>Filtering out candidates with the wrong arithmetic character improves the specified recursive sampler by 1.5×–2.5× when its original success mass is positive. A separate comparison of ten samplers on eight difficult primes found useful gains, but no overall winner. These improve search and verification; they do not prove that every prime has a successful candidate.</p><p>The final literature pass found exact parametrizations, sparse exceptional sets, and conditional probability tools, but no theorem that closes the missing pointwise existence claim. <a href="/journal/preprint/stochastic-witness-calculus#revision-v5">Read the evidence and corrected proofs</a> or <a href="/assets/research/swc-v5-research-supplement.zip" download>download the lightweight research supplement</a>.</p></div>
         <p data-reveal>The important next tests are whether proof-producing model counters can carry the interface to realistic formulas; whether theorem-proving agents can optimize certified rather than sampled witness mass; and whether the calculus can be formalized end-to-end in a proof assistant.</p>
-        <aside class="nw-boundary" data-reveal><span>Publication boundary</span><p>The 39-page v4.1 reconstructed revision has been visually and cryptographically audited. The v3 source and reproducibility artifact are now received: all 82,887 exact certificate rows reproduce, while six stale manifest entries require reconciliation. The accepted journal record and any universal Erdős–Straus claim remain pending independent source compilation, review, and a proved prime-specific descent.</p></aside>
+        <aside class="nw-boundary" data-reveal><span>Publication boundary</span><p>The 43-page v5 edition contains nine consolidated revision pages and the unchanged original manuscript. The v3 source and reproducibility artifact are now received: all 82,887 exact certificate rows reproduce, while six stale manifest entries require reconciliation. Journal acceptance still requires source/build reconciliation and independent review. A universal mathematical claim separately requires a valid proof of coverage for every integer; passing publication checks would not establish it.</p></aside>
 
         <section class="nw-record">
           <div class="nw-record-heading"><span>Follow the research record</span><h2>Explanation here. Evidence in the journal.</h2></div>
           <div class="nw-record-links"><a class="nw-record-primary" href="/journal/preprint/stochastic-witness-calculus"><span>Preprint</span><strong>HTML paper, canonical PDF, figures, and declarations</strong><b aria-hidden="true">→</b></a><a href="/journal"><span>Journal</span><strong>Archive and publication policies</strong><b aria-hidden="true">→</b></a><a href="/research"><span>Agenda</span><strong>Research directions and public artifacts</strong><b aria-hidden="true">→</b></a></div>
-          <p>The journal identifier, immutable PDF, source, reproducibility files, review ledger, and GitHub release will appear only after the remaining publication gates pass.</p>
+          <p>The preprint PDF and follow-up supplement are available now. An accepted journal identifier, reviewed immutable deposit, and formal release remain subject to the publication gates.</p>
         </section>
 
         <footer class="nw-article-end"><p><span>Filed under</span> Formal verification · Automated reasoning · Open research</p><a href="/news">← Back to Ephemerent News</a></footer>

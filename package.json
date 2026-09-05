@@ -45,7 +45,8 @@
     "plates:fetch": "node scripts/check-plates.mjs",
     "figure": "node scripts/check-figure.mjs",
     "focus": "node scripts/check-focus.mjs",
-    "cast": "node scripts/check-cast.mjs"
+    "cast": "node scripts/check-cast.mjs",
+    "swc:v5": "python3 scripts/build-swc-v5.py"
   },
   "devDependencies": {
     "playwright": "^1.62.1",

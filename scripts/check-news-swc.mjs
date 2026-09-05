@@ -51,7 +51,8 @@ try {
     await page.selectOption('[data-swc-samples]', '4');
     assert.equal(await page.locator('[data-swc-miss-value]').textContent(), '36.79%');
     assert.deepEqual(errors, []);
-    await page.screenshot({ path: join(output, `${viewport.name}.png`), fullPage: true });
+    await page.screenshot({ path: join(output, `${viewport.name}.png`), fullPage: false });
+    await page.locator('#v5-update').screenshot({ path: join(output, `${viewport.name}-v5.png`) });
     await page.close();
   }
   const home = await browser.newPage({ viewport: { width: 1280, height: 720 } });
@@ -65,7 +66,7 @@ try {
   assert.ok(homeState.overflow <= 1, `news home has ${homeState.overflow}px horizontal overflow`);
   assert.equal(homeState.lead, '/news/stochastic-witness-calculus');
   assert.equal(homeState.stories, 2);
-  await home.screenshot({ path: join(output, 'home-light.png'), fullPage: true });
+  await home.screenshot({ path: join(output, 'home-light.png'), fullPage: false });
   await home.close();
   console.log('news SWC dispatch: PASS · interaction + light/dark responsive layouts');
 } finally {

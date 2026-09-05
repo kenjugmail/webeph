@@ -9,14 +9,14 @@ import { chromium } from 'playwright';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(root, 'output/swc-web-preprint');
-const expectedHash = '2ce75cf7c681b466dd20a202e80e433d0e92a60016158995a60f7e489f2c9c71';
+const expectedHash = '6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d';
 await mkdir(output, { recursive: true });
 
-const pdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v4-1.pdf'));
+const pdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-v5.pdf'));
 assert.equal(createHash('sha256').update(pdf).digest('hex'), expectedHash);
-const manifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v4-1-manifest.json'), 'utf8'));
+const manifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v5-manifest.json'), 'utf8'));
 const figureManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-v3-manifest.json'), 'utf8'));
-assert.equal(manifest.pages, 39);
+assert.equal(manifest.pages, 43);
 assert.equal(manifest.sha256, expectedHash);
 assert.equal(figureManifest.figureCrops.length, 6);
 for (const figure of figureManifest.figureCrops) {
@@ -61,7 +61,7 @@ try {
       figures: [...document.images].filter((image) => image.src.includes('/assets/research/swc-')).length,
       brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).length,
       status: document.querySelector('.swc-paper-status')?.textContent,
-      pdfHref: document.querySelector('a[href$="stochastic-witness-calculus-v4-1.pdf"]')?.getAttribute('href'),
+      pdfHref: document.querySelector('a[href$="stochastic-witness-calculus-v5.pdf"]')?.getAttribute('href'),
       culprits: [...document.querySelectorAll('body *')].map((element) => {
         const rect = element.getBoundingClientRect();
         return rect.right > innerWidth + 1 && getComputedStyle(element).position !== 'fixed'
@@ -71,20 +71,21 @@ try {
     }));
     assert.ok(result.overflow <= 1, `${viewport.name} has ${result.overflow}px horizontal overflow · ${result.culprits.join(' · ')}`);
     assert.match(result.title || '', /Stochastic Witness Calculus/);
-    assert.equal(result.sections, 12);
+    assert.equal(result.sections, 13);
     assert.equal(result.figures, 6);
     assert.equal(result.brokenImages, 0);
     assert.match(result.status || '', /not peer-reviewed/i);
-    assert.equal(result.pdfHref, '/assets/research/stochastic-witness-calculus-v4-1.pdf');
+    assert.equal(result.pdfHref, '/assets/research/stochastic-witness-calculus-v5.pdf');
     assert.deepEqual(errors, []);
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({ path: join(output, `${viewport.name}-top.png`) });
+    await page.locator('#revision-v5').screenshot({ path: join(output, `${viewport.name}-v5.png`) });
     await page.locator('#semantics').screenshot({ path: join(output, `${viewport.name}-semantics.png`) });
     await page.locator('#reproducibility').screenshot({ path: join(output, `${viewport.name}-reproducibility.png`) });
     await page.locator('#references').screenshot({ path: join(output, `${viewport.name}-references.png`) });
     await page.close();
   }
-  console.log('SWC HTML preprint: PASS · canonical PDF + 6 figures + 12 sections · responsive light/dark');
+  console.log('SWC HTML preprint: PASS · canonical PDF + 6 figures + 13 sections · responsive light/dark');
 } finally {
   await browser.close();
   await new Promise((resolve) => server.close(resolve));

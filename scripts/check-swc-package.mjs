@@ -10,7 +10,7 @@ const record = JSON.parse(await readFile(join(root, 'research/stochastic-witness
 const args = process.argv.slice(2);
 const packageArg = args.includes('--package') ? args[args.indexOf('--package') + 1] : process.env.SWC_PACKAGE;
 const strict = args.includes('--strict') || Boolean(packageArg);
-const baselinePath = process.env.SWC_PDF || join(root, 'assets/research/stochastic-witness-calculus-v4-1.pdf');
+const baselinePath = process.env.SWC_PDF || join(root, 'assets/research', record.baselinePdf.filename);
 
 const errors = [];
 const notes = [];
