@@ -3,6 +3,8 @@
   "outputDirectory": ".",
   "installCommand": "npm install --omit=dev",
   "redirects": [
+    { "source": "/waitlist/manage", "destination": "https://supabase.com/dashboard/project/wjjthkqwcyahamhjkeux/editor", "permanent": false },
+    { "source": "/waitlist.html", "destination": "/waitlist", "permanent": true },
     { "source": "/atlas", "destination": "https://atlas.ephemerent.com", "permanent": true },
     { "source": "/atlas/:path*", "destination": "https://atlas.ephemerent.com/:path*", "permanent": true },
     { "source": "/education", "destination": "https://atlas.ephemerent.com", "permanent": true },
@@ -32,6 +34,7 @@
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/waitlist", "destination": "/waitlist.html" },
     { "source": "/play", "destination": "https://web-five-amber-88.vercel.app/play" },
     { "source": "/play/:path*", "destination": "https://web-five-amber-88.vercel.app/play/:path*" },
     { "source": "/login", "destination": "https://web-five-amber-88.vercel.app/login" },

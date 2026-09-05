@@ -4,8 +4,8 @@
   "type": "module",
   "description": "Static site for ephemerent.com. No bundler: the .html files in this directory are the deployable artifact. `build` only runs integrity checks, so a broken link or a missing route fails the deploy instead of shipping.",
   "scripts": {
-    "build": "node scripts/build-chrome.mjs --check && node scripts/check-links.mjs && npm run hearthrail:release && npm run scenario:check && npm run swc:contract",
-    "check": "node scripts/build-chrome.mjs --check && node scripts/check-links.mjs && npm run hearthrail:release && npm run scenario:check && npm run swc:contract",
+    "build": "node scripts/check-waitlist-release.mjs && node scripts/build-chrome.mjs --check && node scripts/check-links.mjs && npm run hearthrail:release && npm run scenario:check && npm run swc:contract",
+    "check": "node scripts/check-waitlist-release.mjs && node scripts/build-chrome.mjs --check && node scripts/check-links.mjs && npm run hearthrail:release && npm run scenario:check && npm run swc:contract",
     "scenario:check": "node scripts/check-robust-risk-scenario.mjs",
     "swc:status": "node scripts/check-swc-package.mjs",
     "swc:v4.1": "python3 scripts/build-swc-v4.py",
