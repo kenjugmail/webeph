@@ -98,7 +98,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <!-- Shown until a beta packet is published (RELEASE_AVAILABLE = false) -->
     <div id="beta-gate">
       <span class="mono" style="display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;margin-bottom:16px;">Private beta</span>
-      <p class="sub" style="margin-bottom:20px;">Direct website downloads are being prepared. The next installer will appear here after signing and release verification. An active subscription is required for agent execution; a subscription does not make an unpublished build available.</p>
+      <p class="sub" style="margin-bottom:20px;">An unsigned Windows test beta is being prepared for a small tester group, with manual downloads only. Downloads will appear after Windows installation and subscriber-access checks pass. An active subscription is required for agent execution; a subscription does not make an unpublished build available.</p>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
         <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run governed agents through hosted subscription routes. No free compute, public local-model execution, or provider-key setup.</span></div>
@@ -118,7 +118,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <a class="btn btn-primary" href="/cloud" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download for Windows (beta) <span aria-hidden="true">↓</span></a>
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download Windows test beta (ZIP) <span aria-hidden="true">↓</span></a>
       <div class="release-status" id="release-status">
         <div><b>Release candidate</b><span id="release-version">Pending verification</span></div>
         <div><b>Update mode</b><span id="release-update-mode">Website-hosted updates</span></div>
@@ -133,11 +133,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="download-steps">
         <h2>Quick start</h2>
         <ol>
-          <li>Download the verified installer for your platform. Check its publisher and checksum; stop if verification fails.</li>
+          <li>This test beta is unsigned: Windows may warn or block it, and its publisher is not authenticated. Compare the ZIP checksum before extracting it; do not disable operating-system protections.</li>
           <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
           <li>Sign in from Settings -> Account and subscribe - hosted DeepSeek API, Doubleword, and Arbiter credits work with zero provider-key setup.</li>
           <li>Use Nexus to open a workspace, pick a hosted route, send work, and review proof, boundary, and usage receipts.</li>
-          <li>Release notes and checksums will accompany the installer on this website. Updates download from the website feed and install only after a safe restart confirmation.</li>
+          <li>Release notes and checksums accompany the test ZIP. Updates are manual: close the app, preserve your work, and download a newly reviewed ZIP from this page. Automatic installation is disabled for this beta.</li>
         </ol>
         <p class="sub download-help" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord</a>.</p>
       </div>
@@ -211,7 +211,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   if (releaseMode) {
     releaseMode.textContent = releaseConfig.UPDATE_MODE === 'manual-portable-beta'
       ? 'Manual portable update - download the newest beta zip'
-      : releaseConfig.UPDATE_MODE === 'website-feed' ? 'Website updates — confirm a safe restart to install' : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
+      : releaseConfig.UPDATE_MODE === 'unsigned-test-beta-manual' ? 'Unsigned test beta — manual downloads only' : releaseConfig.UPDATE_MODE === 'website-feed' ? 'Website updates — confirm a safe restart to install' : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
   }
   const releaseSha = document.getElementById('release-sha');
   if (releaseSha && releaseConfig.RELEASE_SHA256) releaseSha.textContent = `SHA-256 ${String(releaseConfig.RELEASE_SHA256)}`;

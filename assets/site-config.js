@@ -10,13 +10,13 @@
 window.ORRERY_CONFIG = {
   DOWNLOAD_URL: '',
   RELEASE_VERSION: '4.0.0-rc.3',
-  RELEASE_CHANNEL: 'rc',
+  RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
   RELEASE_SHA256: '',
-  UPDATE_MODE: 'website-feed',
+  UPDATE_MODE: 'unsigned-test-beta-manual',
   UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
 
-  /** Enable only after signed installers, checksums and update metadata are uploaded and verified. */
+  /** Enable only after the unsigned test ZIP, checksum, Windows tests and subscriber checks are approved. */
   RELEASE_AVAILABLE: false,
 
   AUDIT_WEBHOOK_URL: '',

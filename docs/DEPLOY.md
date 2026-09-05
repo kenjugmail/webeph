@@ -87,7 +87,8 @@ Do not put Stripe secret keys in this repository's static files.
 ## 6. Download bundle and update channel
 
 Orrery uses locally built installers and website-owned URLs, not GitHub Releases or Actions.
-`RELEASE_AVAILABLE` is false until a signed candidate is uploaded and independently verified.
+`RELEASE_AVAILABLE` is false until the explicitly unsigned Windows test beta is built, tested and
+approved. This beta uses manual ZIP downloads; the signed automatic-update channel is separate.
 
 `/downloads/orrery/:path*` redirects to the public `orrery-releases` Supabase Storage bucket
 in the existing Ephemerent project. The bucket must contain approved binary/proof assets only.

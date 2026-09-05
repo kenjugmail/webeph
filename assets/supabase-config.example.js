@@ -5,10 +5,10 @@ window.ORRERY_CONFIG = {
   /** GitHub Release asset URL for the Orrery beta packet (zip). */
   DOWNLOAD_URL: '',
   RELEASE_VERSION: '4.0.0-rc.3',
-  RELEASE_CHANNEL: 'rc',
+  RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
   RELEASE_SHA256: '',
-  UPDATE_MODE: 'website-feed',
+  UPDATE_MODE: 'unsigned-test-beta-manual',
   UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
   RELEASE_AVAILABLE: false,
   /** Where auth redirects after OAuth (must match Supabase allow list). */

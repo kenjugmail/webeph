@@ -11,7 +11,17 @@
 - GitHub remains source control. No GitHub Actions minutes or GitHub Release publication are required.
   Vercel builds and Supabase storage/egress have their own quotas.
 
-## Before making a download available
+## Immediate unsigned Windows test beta
+
+The chosen initial distribution is an unsigned Windows ZIP for a small tester group, with manual
+updates. Build it on Windows using buddyide `app:package:unsigned-beta`. Verify Windows startup,
+subscriber access and its leak-audit/checksum receipt before approving the ZIP. Upload only the approved
+ZIP, checksums and explicitly unsigned receipt under `test-beta/`. Do not upload automatic-update
+manifests for this mode. `RELEASE_AVAILABLE` stays false until the tests and human approval are complete.
+Windows may warn or block unsigned programs; do not claim publisher authentication or ask users to
+disable system protections. No paid code-signing service is used for this path.
+
+## Future signed distribution
 
 1. Create the `orrery-releases` public-read Storage bucket in the existing Supabase project.
    Do not grant anonymous/authenticated customers upload, update or delete policies. Upload only as

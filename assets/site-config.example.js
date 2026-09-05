@@ -8,10 +8,10 @@
 window.ORRERY_CONFIG = {
   DOWNLOAD_URL: '',
   RELEASE_VERSION: '4.0.0-rc.3',
-  RELEASE_CHANNEL: 'rc',
+  RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
   RELEASE_SHA256: '',
-  UPDATE_MODE: 'website-feed',
+  UPDATE_MODE: 'unsigned-test-beta-manual',
   UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
   RELEASE_AVAILABLE: false,
   /** Optional — POST JSON audit events here. Leave empty to keep logs on-device. */
