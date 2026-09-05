@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
-<title>Probability can prove existence. Sampling cannot. — Ephemerent News</title>
-<meta name="description" content="An intuitive guide to Stochastic Witness Calculus: how learned systems can search for witnesses while exact certificates—not model confidence or sampling—carry the proof.">
+<title>What a checked answer can promise. — Ephemerent News</title>
+<meta name="description" content="SWC version 6: exact returned answers, complete finite-domain coverage, and a measured availability guarantee for a declared input distribution.">
 <link rel="canonical" href="https://ephemerent.com/news/stochastic-witness-calculus">
 <link rel="alternate" type="application/rss+xml" title="Ephemerent News" href="https://ephemerent.com/news.xml">
 <meta name="author" content="Kenju Tomita">
 <meta name="theme-color" content="#f4efe4">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ephemerent News">
-<meta property="og:title" content="Probability can prove existence. Sampling cannot. Here’s the difference.">
-<meta property="og:description" content="A learned system may help find where a proof lives. Stochastic Witness Calculus asks an exact checker—not the model—to certify that the witness set is nonempty.">
+<meta property="og:title" content="What a checked answer can promise.">
+<meta property="og:description" content="12,673 finite-domain certificates. 4,603 fresh generated inputs. The practical scope of an exact answer and a statistical reliability claim.">
 <meta property="og:url" content="https://ephemerent.com/news/stochastic-witness-calculus">
 <meta property="og:image" content="https://ephemerent.com/assets/og-news-swc.png">
 <meta property="og:image:type" content="image/png">
@@ -26,8 +26,8 @@
 <meta property="article:author" content="Kenju Tomita">
 <meta property="article:section" content="Research Dispatch">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Probability can prove existence. Sampling cannot.">
-<meta name="twitter:description" content="The exact boundary between learned proof search, mathematical certificates, and empirical evidence.">
+<meta name="twitter:title" content="What a checked answer can promise.">
+<meta name="twitter:description" content="How SWC binds exact answers, finite coverage, and measured availability to the evidence supporting each claim.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-news-swc.png">
 <meta name="twitter:image:alt" content="Stochastic Witness Calculus explained by Ephemerent News">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -42,8 +42,8 @@
   "@graph": [
     {
       "@type": "NewsArticle",
-      "headline": "Probability can prove existence. Sampling cannot. Here’s the difference.",
-      "description": "An intuitive guide to Stochastic Witness Calculus and the boundary between learned proof search, exact certificates, and empirical evidence.",
+      "headline": "What a checked answer can promise.",
+      "description": "An intuitive guide to exact answers, complete finite domains, and the distributional reliability contract in SWC version 6.",
       "url": "https://ephemerent.com/news/stochastic-witness-calculus",
       "datePublished": "2026-09-04T12:00:00-04:00",
       "dateModified": "2026-09-05T12:00:00-04:00",
@@ -65,7 +65,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/swc-revision.css?v=20260905v5">
+<link rel="stylesheet" href="/assets/swc-revision.css?v=20260905v6">
 </head>
 <body class="nw-page nw-article-page nw-swc-page">
 <a class="nw-skip" href="#article">Skip to article</a>
@@ -92,17 +92,17 @@
     <div class="nw-shell">
       <nav class="nw-breadcrumb" aria-label="Breadcrumb"><a href="/news">News</a><span aria-hidden="true">/</span><span>Research Dispatch</span></nav>
       <p class="nw-article-label">Research Dispatch <span>002</span><a href="/journal/preprint/stochastic-witness-calculus">Open HTML preprint <b aria-hidden="true">↗</b></a></p>
-      <h1>Probability can prove existence. <em>Sampling cannot.</em></h1>
-      <p class="nw-article-deck">A model can help search an enormous space for a proof witness. Stochastic Witness Calculus draws a hard line at the moment of trust: the model proposes; an exact certificate decides what may be called a theorem.</p>
+      <h1>What a checked answer <em>can promise.</em></h1>
+      <p class="nw-article-deck">An answer can be correct even when a solver cannot answer every question. Stochastic Witness Calculus now makes three practical promises explicit: check the answer, cover a declared domain, and measure how often the system succeeds.</p>
       <div class="nw-article-meta">
         <div><span>Analysis by</span><strong>Kenju Tomita</strong></div>
         <div><span>Published</span><time datetime="2026-09-04">September 4, 2026</time></div>
-        <div><span>Reading time</span><strong>15 minutes</strong></div>
+        <div><span>Reading time</span><strong>17 minutes</strong></div>
         <button type="button" class="nw-copy-link" data-copy-link>Copy link</button>
       </div>
       <a class="nw-hero-record nw-hero-record-pending" href="/journal/preprint/stochastic-witness-calculus">
-        <span>Research preprint</span><strong>Read the accessible HTML edition and integrated 38-page v5 manuscript</strong>
-        <small>Corrected results + final literature audit · not peer-reviewed · universal existence remains open</small><b aria-hidden="true">→</b>
+        <span>Version 6 · September 5 update</span><strong>Read the HTML edition and complete 40-page manuscript</strong>
+        <small>Exact certificates · finite coverage · measured availability · preprint, not peer-reviewed</small><b aria-hidden="true">→</b>
       </a>
     </div>
   </header>
@@ -225,10 +225,18 @@
 
       <section class="nw-movement" id="next" data-article-section>
         <div class="nw-movement-heading" data-reveal><span>06</span><div><p>The open work</p><h2>What must happen next.</h2></div></div>
+        <div class="nw-revision-note" id="v6-update">
+          <p class="nw-article-label">Version 6 · A practical guarantee</p><h3>Three promises, each with its own evidence.</h3>
+          <p>Think of a calculator that hands you a receipt you can check. The receipt establishes that this answer is correct. To promise an answer for every allowed input, you need another record: a complete inventory of that domain with a checked result for every member. To describe how often it succeeds on future inputs, you need a sampling plan and a reliability calculation.</p>
+          <ol class="swc-contract-ledger"><li><span>Exact answer</span><h3>A witness you can inspect.</h3><p>The wrapper releases an answer only after the exact checker accepts it. A failed search remains unresolved.</p></li><li><span>Complete finite domain</span><h3>12,673 out of 12,673.</h3><p>Every primitive open seven-speed set in the declared 1–20 domain has a verified witness. Another checker reconstructs the domain to confirm nothing was skipped.</p></li><li><span>Fresh-input evaluation</span><h3>4,603 trials. Zero failures.</h3><p>A fixed test on uniform seven-speed subsets of 1–60 supports at least 99.9% verified-answer availability at 99% confidence, under its stated IID assumptions and frozen solver.</p></li></ol>
+          <p>The percentage concerns how often the system returns a checked answer. It does not turn mathematical truth into a confidence score. These inputs were generated for a mathematical laboratory test; physical-world claims would need actual measurements and a deployment protocol.</p>
+          <p>A useful failure helped shape the implementation. The proposed short list of canonical targets missed (44, 60, 104, 205), even though 9/148 is a valid witness time. The solver now retains a complete fallback instead of treating a favorite search pattern as a universal theorem.</p>
+          <p><a href="/journal/preprint/stochastic-witness-calculus#revision-v6">Read the precise contracts</a> · <a href="/assets/research/swc-v6-research-supplement.zip" download>Download the code and full evidence</a>.</p>
+        </div>
         <p data-reveal>Version 5 consolidates corrected arithmetic results, probability calculations, and a reusable certificate checker. It is not a proof-assistant formalization or a universal solution. The exact kernel is Python/C++ rather than Lean, Isabelle, or Coq. The SAT distribution is synthetic. The dynamic program scales because its constraint has local structure.</p>
         <div class="nw-revision-note" id="v5-update"><p class="nw-article-label">Updated September 5 · Version 5</p><h3>Better proof tools. A precisely stated remaining gap.</h3><p>Imagine a search that can take wrong turns, but must return a receipt whenever it finds a solution. The follow-up SWC checker can verify those receipts, combine their exact probabilities, and check formulas for every member of an infinite family. The latest kernel passes 24 tests and combines twelve infinite families without treating their union as all primes.</p><p>Filtering out candidates with the wrong arithmetic character improves the specified recursive sampler by 1.5×–2.5× when its original success mass is positive. A separate comparison of ten samplers on eight difficult primes found useful gains, but no overall winner. These improve search and verification; they do not prove that every prime has a successful candidate.</p><p>The final literature pass found exact parametrizations, sparse exceptional sets, and conditional probability tools, but no theorem that closes the missing pointwise existence claim. <a href="/journal/preprint/stochastic-witness-calculus#revision-v5">Read the evidence and corrected proofs</a> or <a href="/assets/research/swc-v5-research-supplement.zip" download>download the lightweight research supplement</a>.</p></div>
         <p data-reveal>The important next tests are whether proof-producing model counters can carry the interface to realistic formulas; whether theorem-proving agents can optimize certified rather than sampled witness mass; and whether the calculus can be formalized end-to-end in a proof assistant.</p>
-        <aside class="nw-boundary" data-reveal><span>Publication boundary</span><p>The 38-page v5 edition integrates the corrected theorems, mass rules, and final literature audit directly into the complete LaTeX manuscript; its arXiv source is downloadable with the PDF. The v3 reproducibility artifact is also available: all 82,887 exact certificate rows reproduce, while six stale manifest entries still require reconciliation. Journal acceptance requires independent review and an accountable publication decision. A universal mathematical claim separately requires a valid proof of coverage for every integer; passing publication checks would not establish it.</p></aside>
+        <aside class="nw-boundary" data-reveal><span>Publication record</span><p>The 40-page v6 manuscript and compiled LaTeX source are available with the new evidence package. The earlier Erdős–Straus artifact reproduces all 82,887 exact certificate rows; six older checksum entries remain to be reconciled. Peer review, journal acceptance, and arXiv submission are pending. The finite and distributional results do not claim a solution to either universal conjecture.</p></aside>
 
         <section class="nw-record">
           <div class="nw-record-heading"><span>Follow the research record</span><h2>Explanation here. Evidence in the journal.</h2></div>

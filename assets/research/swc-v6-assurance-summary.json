@@ -1,0 +1,47 @@
+{
+  "schema": "swc-assurance-pilot-v1",
+  "finite": {
+    "status": "complete_finite_coverage",
+    "domain": {
+      "kind": "bounded_speed_combinations",
+      "relation": "lonely_runner",
+      "speed_count": 7,
+      "min_speed": 1,
+      "max_speed": 20,
+      "primitive_only": true,
+      "open_only": true
+    },
+    "domain_sha256": "f9311aecced06886398ef8d502c0cf7fc84d3b8d9418242131abf43660160268",
+    "instances_verified": 12673,
+    "scope": "exactly_the_declared_finite_domain",
+    "claim": "Every instance in this manifest has a verified mathematical witness."
+  },
+  "reliability": {
+    "schema": "swc-reliability-report-v1",
+    "trials": 4603,
+    "failures": 0,
+    "status_counts": {
+      "verified": 4603
+    },
+    "alpha": "1/100",
+    "confidence_level": "99/100",
+    "failure_rate_upper_bound": "1/1000",
+    "success_rate_lower_bound": "999/1000",
+    "target_failure_rate": "1/1000",
+    "target_demonstrated": true,
+    "plan_sha256": "450d10c6880c217b80f68a919a94ddfabea3dd94b8da7e56f899d3fe7d1084e4",
+    "event_chain_final": "af4f0ad1a78377b8f69d8c7d68a7555db967cf9c9382e6c69626f1b22578c9fa",
+    "scope": "Uniform seven-element subsets of integers 1..60; independent draws with replacement between trials.",
+    "configuration_sha256": "6100639ea3593084201f6487a8ee37debc718716738773a34943787b49329707",
+    "assumptions": [
+      "fresh independent identically distributed inputs from the declared distribution",
+      "fixed configuration and horizon chosen before inspecting outcomes",
+      "all trials reported truthfully, including errors and unresolved results"
+    ],
+    "interpretation": "Frequentist confidence guarantee for this input distribution and configuration.",
+    "physical_deployment_validated": false
+  },
+  "new_mathematical_theorem_scope": "declared finite domain only",
+  "elapsed_seconds": 0.894,
+  "completed_at_utc": "2026-09-05T16:38:33.716071+00:00"
+}

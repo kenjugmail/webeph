@@ -33,19 +33,20 @@
 <link rel="stylesheet" href="/assets/glass.css?v=20260820">
 <script src="/assets/mode.js?v=20260822c" defer></script>
 <link rel="stylesheet" href="/assets/journal.css?v=20260904a">
-<link rel="stylesheet" href="/assets/swc-paper.css?v=20260905v5">
+<link rel="stylesheet" href="/assets/swc-paper.css?v=20260905v6">
+<link rel="stylesheet" href="/assets/swc-revision.css?v=20260905v6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Stochastic Witness Calculus: Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims",
   "name": "Stochastic Witness Calculus",
-  "description": "A machine-oriented certificate interface for proving that a sound verifier accepts a set of witnesses with strictly positive measure.",
+  "description": "An exact certificate interface with declared finite-domain coverage and a fixed-horizon distributional reliability evaluation.",
   "url": "https://ephemerent.com/journal/preprint/stochastic-witness-calculus",
   "datePublished": "2026-09-04",
   "dateModified": "2026-09-05",
-  "version": "v5 arXiv-ready research revision",
-  "creativeWorkStatus": "Reconstructed preprint; not peer-reviewed; source-complete recompilation pending",
+  "version": "v6 certified computation and reliability",
+  "creativeWorkStatus": "Public preprint; not peer-reviewed; source compiled; arXiv submission pending",
   "isAccessibleForFree": true,
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "author": {
@@ -59,9 +60,9 @@
   "publisher": { "@type": "Organization", "name": "Ephemerent Research", "url": "https://ephemerent.com/journal" },
   "encoding": {
     "@type": "MediaObject",
-    "contentUrl": "https://ephemerent.com/assets/research/stochastic-witness-calculus-arxiv-v5.pdf",
+    "contentUrl": "https://ephemerent.com/assets/research/stochastic-witness-calculus-arxiv-v6.pdf",
     "encodingFormat": "application/pdf",
-    "sha256": "bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2"
+    "sha256": "fa6bcab7ff8073f8369f3ffb3c8c575cb4e9ff7cc1e614c5aaa5555fea88702f"
   }
 }
 </script>
@@ -82,40 +83,53 @@
   <article class="swc-paper">
     <header class="swc-paper-hero">
       <div class="jr-container">
-        <div class="swc-paper-status"><span>Public research preprint</span><strong>Version 5 · arXiv-ready · not peer-reviewed</strong><span>38 pages · September 5, 2026</span></div>
+        <div class="swc-paper-status"><span>Public research preprint</span><strong>Version 6 · not peer-reviewed</strong><span>40 pages · September 5, 2026</span></div>
         <div class="swc-paper-hero-grid">
           <div>
             <p class="swc-paper-kicker">Original research · formal verification · automated reasoning</p>
             <h1><span>Stochastic Witness Calculus</span><small>Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims</small></h1>
-            <p class="swc-paper-deck">Probability is used to certify that a valid witness set is nonempty—not to weaken mathematical truth.</p>
+            <p class="swc-paper-deck">Exact certificates for returned answers. Complete coverage for a declared domain. Measured reliability for a specified population.</p>
             <div class="swc-paper-author"><strong>Kenju Tomita</strong><span>Rochester Institute of Technology · Ephemerent Research</span></div>
-            <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v5.pdf" target="_blank" rel="noopener">Read arXiv-ready PDF <span aria-hidden="true">↗</span></a><a class="jr-button" href="/assets/research/stochastic-witness-calculus-arxiv-v5-source.tar.gz" download>Download LaTeX source</a><a class="jr-button" href="/news/stochastic-witness-calculus">Read the intuitive explainer</a></div>
+            <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v6.pdf" target="_blank" rel="noopener">Read v6 PDF <span aria-hidden="true">↗</span></a><a class="jr-button" href="/assets/research/stochastic-witness-calculus-arxiv-v6-source.tar.gz" download>Download LaTeX source</a><a class="jr-button" href="/news/stochastic-witness-calculus">Read the intuitive explainer</a></div>
           </div>
           <aside class="swc-paper-register" aria-label="Preprint record">
             <span>Record state</span>
-            <dl><div><dt>Journal identifier</dt><dd>Not assigned</dd></div><div><dt>Review</dt><dd>Pending</dd></div><div><dt>PDF SHA-256</dt><dd><code>bd4b3a9a…7f650d2</code></dd></div><div><dt>Article license</dt><dd>CC BY 4.0</dd></div><div><dt>Source status</dt><dd>Integrated LaTeX source published · original artifact checksum reconciliation pending</dd></div></dl>
+            <dl><div><dt>Journal identifier</dt><dd>Not assigned</dd></div><div><dt>Review</dt><dd>Pending</dd></div><div><dt>PDF SHA-256</dt><dd><code>fa6bcab7…ea88702f</code></dd></div><div><dt>Article license</dt><dd>CC BY 4.0</dd></div><div><dt>Source status</dt><dd>Integrated LaTeX source published · original artifact checksum reconciliation pending</dd></div></dl>
           </aside>
         </div>
-        <p class="swc-preprint-notice"><strong>Publication boundary.</strong> Version 5 is a public research revision, not the accepted journal version. Nine consolidated revision pages precede the unchanged 34-page v3 manuscript. The source artifact is received, but its six stale checksum entries, clean source rebuild, and independent review remain outstanding. The universal Erdős–Straus conjecture is not proved by this work.</p>
-        <p class="swc-proof-clarification"><strong>Proof-status clarification · September 5, 2026.</strong> SWC’s exact mathematical mode is a genuine proof system, not statistical confidence. The Erdős–Straus computation is likewise a genuine theorem over its declared finite domain. What remains open is the additional universal-lifting premise needed to cover every integer.</p>
+        <p class="swc-preprint-notice"><strong>Version 6 record.</strong> The manuscript and LaTeX source are compiled and available below. Peer review, journal acceptance, and arXiv submission are pending. Six older artifact checksum entries still require reconciliation.</p>
+        <p class="swc-proof-clarification"><strong>Scope of the claims.</strong> The finite-domain results are exact mathematical claims. The availability bound assumes the recorded IID sampling model and frozen solver. No physical deployment was evaluated, and neither the universal Erdős–Straus nor Lonely Runner conjecture is solved here.</p>
       </div>
     </header>
 
     <div class="jr-container swc-paper-layout">
       <aside class="swc-paper-rail">
         <p>Contents</p>
-        <ol data-swc-toc><li><a href="#revision-v5">Version 5 checkpoint</a></li><li><a href="#abstract">Abstract</a></li><li><a href="#orientation">Orientation</a></li><li><a href="#semantics">Certificate semantics</a></li><li><a href="#calculus">Calculus</a></li><li><a href="#architecture">Trusted architecture</a></li><li><a href="#empirical">Empirical mode</a></li><li><a href="#experiments">Experiments</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#agenda">Research agenda</a></li><li><a href="#reproducibility">Reproducibility</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#references">References</a></li></ol>
-        <div class="swc-paper-rail-meta"><span>Version record</span><a href="/assets/research/stochastic-witness-calculus-arxiv-v5.pdf">PDF · v5 arXiv edition · 38 pages</a><a href="/assets/research/stochastic-witness-calculus-v5.pdf">Revision folio · 43 pages</a><a href="/assets/research/stochastic-witness-calculus-v4-1.pdf">Previous PDF · v4.1</a><a href="/assets/research/stochastic-witness-calculus-v4.pdf">Parent PDF · v4</a><a href="/assets/research/stochastic-witness-calculus-v3.pdf">Original PDF · v3</a><a href="/news/stochastic-witness-calculus">News explainer</a></div>
+        <ol data-swc-toc><li><a href="#revision-v6">Version 6 · operating contracts</a></li><li><a href="#revision-v5">Version 5 checkpoint</a></li><li><a href="#abstract">Abstract</a></li><li><a href="#orientation">Orientation</a></li><li><a href="#semantics">Certificate semantics</a></li><li><a href="#calculus">Calculus</a></li><li><a href="#architecture">Trusted architecture</a></li><li><a href="#empirical">Empirical mode</a></li><li><a href="#experiments">Experiments</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#agenda">Research agenda</a></li><li><a href="#reproducibility">Reproducibility</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#references">References</a></li></ol>
+        <div class="swc-paper-rail-meta"><span>Version record</span><a href="/assets/research/stochastic-witness-calculus-arxiv-v6.pdf">PDF · v6 · 40 pages</a><a href="/assets/research/stochastic-witness-calculus-arxiv-v5.pdf">Previous PDF · v5 · 38 pages</a><a href="/assets/research/stochastic-witness-calculus-v5.pdf">Revision folio · 43 pages</a><a href="/assets/research/stochastic-witness-calculus-v4-1.pdf">Previous PDF · v4.1</a><a href="/assets/research/stochastic-witness-calculus-v4.pdf">Parent PDF · v4</a><a href="/assets/research/stochastic-witness-calculus-v3.pdf">Original PDF · v3</a><a href="/news/stochastic-witness-calculus">News explainer</a></div>
       </aside>
 
       <div class="swc-paper-body">
+        <section id="revision-v6" data-swc-section>
+          <div class="swc-section-heading"><span>V6</span><div><p>Certified computation and reliability</p><h2>A claim with a defined scope.</h2></div></div>
+          <p class="swc-lead">An exact answer, a complete domain, and a reliable service require different evidence. Version 6 gives each claim an executable contract and a record that another checker can inspect.</p>
+          <ol class="swc-contract-ledger">
+            <li><span>01 · Returned answers</span><h3>Check the witness.</h3><p>Every returned mathematical answer must satisfy its exact relation. If the solver cannot supply a checked witness, the outcome is unresolved.</p></li>
+            <li><span>02 · Declared domain</span><h3>Account for every input.</h3><p>All <strong>12,673</strong> primitive open seven-speed sets in 1–20 have checked witnesses. The verifier reconstructs this finite domain and rejects missing cases.</p></li>
+            <li><span>03 · Sampled population</span><h3>Measure availability.</h3><p><strong>4,603 fresh generated inputs, zero failures.</strong> The fixed test supports at least 99.9% verified-answer availability at 99% confidence for uniform seven-speed subsets of 1–60, under the stated IID assumptions and frozen solver.</p></li>
+          </ol>
+          <p class="swc-contract-scope">These are generated mathematical inputs. The availability percentage describes how often a verified answer is returned; it is not a probability that an exact witness is true. No physical deployment has been validated.</p>
+          <details><summary>Why the complete fallback matters</summary><p>The proposed canonical pair-position rule fails on the primitive open set (44, 60, 104, 205). A complete search still finds the valid time 9/148, with minimum distance 12/37 &gt; 1/5. The new interface treats a canonical miss as unresolved and retains complete candidate support within its work budget.</p></details>
+          <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v6.pdf">Read the 40-page v6 paper</a><a class="jr-button" href="/assets/research/stochastic-witness-calculus-arxiv-v6-source.tar.gz" download>LaTeX source</a><a class="jr-button" href="/assets/research/swc-v6-research-supplement.zip" download>Code and complete evidence</a></div>
+          <p><a href="/assets/research/swc-arxiv-v6-manifest.json">PDF and source manifest</a> · <a href="/assets/research/swc-v6-assurance-summary.json">Evaluation summary</a> · <a href="/news/stochastic-witness-calculus#v6-update">Read the intuitive account</a>. The recorded trial ledger, finite certificate, and independent verifier are included in the supplement.</p>
+        </section>
         <section id="revision-v5" data-swc-section>
           <div class="swc-section-heading"><span>V5</span><div><p>September 5 research checkpoint</p><h2>What the final proof attempt established.</h2></div></div>
           <p class="swc-lead">The final literature pass did not close universal existence. Version 5 records the corrected constructions, the useful SWC improvements, and the exact boundary of the combined proof.</p>
           <div class="swc-proof-status"><div><span>Arithmetic</span><strong>Corrected hypotheses</strong><p>Positive shifts and coprimality repair the monomial and prime-anchor claims. A derived complete range is c ≤ p−6 for primes p ≡ 1 (mod 4), p &gt; 5; the PDF includes the proof.</p></div><div><span>Sampling</span><strong>1.5×–2.5× conditional gain</strong><p>Jacobi-character conditioning preserves valid Type-II witnesses through the specified recursion. The comparison assumes the same uniform-exponent baseline; it does not establish starting positivity.</p></div><div><span>Verification</span><strong>24 checks · 12 families</strong><p>The exact-arithmetic kernel checks polynomial identities, mixtures, witness transport, and case unions. A family proof retains its own domain rather than claiming all-prime coverage.</p></div></div>
           <article class="swc-theorem"><header><span>Reproducible correction</span><strong>Infinite families do not automatically exhaust the primes.</strong></header><p>The combined certificate verifies twelve infinite families and two individual instances. Induction proves existence throughout their union. A separate arithmetic theorem must show that every remaining prime enters that union or has another sound positive-mass certificate.</p><details><summary>What the final literature pass found</summary><p>Exact parametrizations and exceptional-set bounds remain useful, but they do not provide pointwise positivity. <a href="https://arxiv.org/abs/2608.24035">Dahan</a> explicitly leaves the conjecture open. <a href="https://arxiv.org/abs/2511.16817">Pomerance and Weingartner</a> address the generalized numerator problem. Local-to-global and drift results require additional hypotheses; the inspected claimed closures did not discharge the coverage step.</p></details></article>
-          <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v5.pdf">Read the integrated 38-page PDF</a><a class="jr-button" href="/assets/research/stochastic-witness-calculus-arxiv-v5-source.tar.gz" download>Download arXiv source</a><a class="jr-button" href="/assets/research/swc-v5-research-supplement.zip" download>Download notes and checkers</a></div>
-          <p><a href="/assets/research/swc-arxiv-v5-manifest.json">PDF and source manifest</a> · <a href="/assets/research/swc-v5-supplement-manifest.json">Supplement manifest</a>. The corrected results are now integrated into the original LaTeX manuscript, with a portable source archive and rebuilt bibliography. The separate supplement contains exact checkers and the research record; it is not the accepted-journal deposit.</p>
+          <div class="swc-paper-actions"><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v6.pdf">Read the integrated 40-page PDF</a><a class="jr-button" href="/assets/research/stochastic-witness-calculus-arxiv-v6-source.tar.gz" download>Download arXiv source</a><a class="jr-button" href="/assets/research/swc-v5-research-supplement.zip" download>Download notes and checkers</a></div>
+          <p><a href="/assets/research/swc-arxiv-v6-manifest.json">PDF and source manifest</a> · <a href="/assets/research/swc-v5-supplement-manifest.json">Supplement manifest</a>. The corrected results are now integrated into the original LaTeX manuscript, with a portable source archive and rebuilt bibliography. The separate supplement contains exact checkers and the research record; it is not the accepted-journal deposit.</p>
         </section>
 
         <section id="abstract" data-swc-section>
@@ -123,6 +137,7 @@
           <p class="swc-lead">Probability can establish deterministic existence, but automated reasoning systems often treat randomized search, formal proof, model counting, and empirical confidence as unrelated objects. Stochastic Witness Calculus (SWC) proposes a machine-oriented certificate interface for proving that a sound verifier accepts a set of witnesses with strictly positive measure.</p>
           <p>The resulting conclusion is an ordinary deterministic theorem: probability certifies nonemptiness rather than weakening truth. The framework supplies instance-indexed semantics, compositional certificate rules, support-preserving mixtures, exact finite backends, a dual obstruction rule, a compactness extension for continuous spaces, and a separate empirical mode for anytime-valid claims.</p>
           <div class="swc-abstract-results"><span>Six evaluation settings</span><p>Learned SAT proposals, non-enumerative path counting, adversarial quantifier auditing, finite Erdős–Straus certificates, proof-carrying integrity tests, and optional-stopping simulations.</p></div>
+          <p>Version 6 adds an operating-contract evaluation: all 12,673 inputs in a declared finite Lonely Runner domain have verified witnesses. A separately planned test returned verified answers for all 4,603 fresh generated inputs, supporting a 99% confidence bound of at least 99.9% availability under its specified IID input model and frozen solver. This is a mathematical-input laboratory result, with no physical deployment evaluated.</p>
           <div class="swc-proof-status" aria-label="Proof status ledger"><div><span>SWC exact mode</span><strong>Genuine deterministic proof</strong><p>Certified positive witness mass plus verifier soundness proves existence with mathematical certainty.</p></div><div><span>Erdős–Straus survey</span><strong>Genuine finite-domain theorem</strong><p>All 82,887 declared primes are exactly verified—not estimated or merely sampled.</p></div><div><span>Universal conjecture</span><strong>Exact lifting premise still required</strong><p>The current finite family does not yet quantify over every integer n≥2.</p></div></div>
           <p class="swc-keywords"><strong>Keywords</strong> probabilistic method · formal verification · automated theorem proving · proof certificates · witness distributions · weighted model counting · quantifier auditing · e-processes · anytime-valid inference · Erdős–Straus conjecture</p>
         </section>
@@ -228,7 +243,7 @@ software_and_formalization_hashes</code></pre></div>
           <div class="swc-section-heading"><span>11</span><div><p>References</p><h2>The intellectual neighborhood.</h2></div></div>
           <p>This reading edition retains the complete 25-item bibliography. Use the canonical PDF for final journal formatting, page ranges, and the paper’s numbered citation context.</p>
           <ol class="swc-references"><li>Alon &amp; Spencer. <em>The Probabilistic Method</em>. 4th ed., Wiley, 2016.</li><li>Audebaud &amp; Paulin-Mohring. “Proofs of Randomized Algorithms in Coq,” 2006.</li><li>Barthe et al. “Proving Uniformity and Independence by Self-Composition and Coupling,” 2017.</li><li>Bryant, Nawrocki, Avigad &amp; Heule. “Certified Knowledge Compilation with Application to Formally Verified Model Counting,” 2025.</li><li>Capelli. “Knowledge Compilation Languages as Proof Systems,” 2019.</li><li>Dahan. “Sieve Dimension and Search Depth for the Erdős–Straus Conjecture, n ≡ 1 (mod 24),” 2026.</li><li>Eberl, Hölzl &amp; Nipkow. “A Verified Compiler for Probability Density Functions,” 2017.</li><li>Edmonds &amp; Paulson. “Formal Probabilistic Methods for Combinatorial Structures using the Lovász Local Lemma,” 2023.</li><li>Elsholtz &amp; Tao. “Counting the Number of Solutions to the Erdős–Straus Equation on Unit Fractions,” 2013.</li><li>Erdős &amp; Lovász. “Problems and Results on 3-Chromatic Hypergraphs and Some Related Questions,” 1975.</li><li>Howard, Ramdas, McAuliffe &amp; Sekhon. “Time-Uniform, Nonparametric, Nonasymptotic Confidence Sequences,” 2021.</li><li>Karayel. “Derandomization with Pseudorandomness,” 2024.</li><li>Ma et al. “ShannonProver: Towards Automating Formal Cryptographic Proofs,” 2026.</li><li>Mihnea &amp; Bogdan. “Further Verification and Empirical Evidence for the Erdős–Straus Conjecture,” 2025.</li><li>de Moura &amp; Ullrich. “The Lean 4 Theorem Prover and Programming Language,” 2021.</li><li>Necula. “Proof-Carrying Code,” 1997.</li><li>Neri, Oliva &amp; Pischke. “A Systematic Way of Analysing Proofs in Probability Theory,” 2026.</li><li>Paradise, Richardson, Bengio &amp; Goldwasser. “How to Verify Consistency of Probabilistic Claims,” 2026.</li><li>Ramdas, Grünwald, Vovk &amp; Shafer. “Game-Theoretic Statistics and Safe Anytime-Valid Inference,” 2023.</li><li>Salez. “The Erdős–Straus Conjecture: New Modular Equations and Checking up to N = 10<sup>17</sup>,” 2014.</li><li>Schröer et al. “A Deductive Verifier for Probabilistic Programs – Caesar,” 2026.</li><li>Tan et al. “Formally Certified Approximate Model Counting,” 2024.</li><li>The mathlib Community. “The Lean Mathematical Library,” 2020.</li><li>Tristan et al. “Verification of Machine Learning Systems via Reparameterization,” 2020.</li><li>Valiant. “The Complexity of Enumeration and Reliability Problems,” 1979.</li></ol>
-          <div class="swc-paper-end"><span>End of web edition</span><p>Use the arXiv-ready v5 PDF for the integrated corrected proofs, final literature audit, and complete manuscript. Exact checkers remain in the research supplement, and earlier editions remain linked in the version record.</p><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v5.pdf" target="_blank" rel="noopener">Open arXiv-ready PDF <span aria-hidden="true">↗</span></a></div>
+          <div class="swc-paper-end"><span>End of web edition</span><p>Use the compiled v6 PDF for the integrated corrected proofs, final literature audit, and complete manuscript. Exact checkers remain in the research supplement, and earlier editions remain linked in the version record.</p><a class="jr-button jr-button-primary" href="/assets/research/stochastic-witness-calculus-arxiv-v6.pdf" target="_blank" rel="noopener">Open v6 PDF <span aria-hidden="true">↗</span></a></div>
         </section>
       </div>
     </div>

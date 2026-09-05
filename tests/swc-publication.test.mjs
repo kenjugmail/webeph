@@ -19,8 +19,8 @@ const rss = await readFile(join(root, 'news.xml'), 'utf8');
 const sitemap = await readFile(join(root, 'sitemap.xml'), 'utf8');
 const vercel = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
 const preprint = await readFile(join(root, 'journal-swc.html'), 'utf8');
-const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-arxiv-v5-manifest.json'), 'utf8'));
-const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-arxiv-v5.pdf'));
+const preprintManifest = JSON.parse(await readFile(join(root, 'assets/research/swc-arxiv-v6-manifest.json'), 'utf8'));
+const preprintPdf = await readFile(join(root, 'assets/research/stochastic-witness-calculus-arxiv-v6.pdf'));
 
 function pngDimensions(value) {
   if (value.toString('ascii', 1, 4) !== 'PNG') return undefined;
@@ -36,8 +36,8 @@ test('publishes a labeled preprint while blocking journal acceptance until packa
   assert.equal(record.releaseGates.peerReviewAcceptsReviewedVersion, false);
   assert.equal(record.releaseGates.humanPublicationAction, false);
   assert.equal(record.slug, 'stochastic-witness-calculus');
-  assert.equal(record.baselinePdf.pages, 38);
-  assert.equal(record.baselinePdf.sha256, 'bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2');
+  assert.equal(record.baselinePdf.pages, 40);
+  assert.equal(record.baselinePdf.sha256, 'fa6bcab7ff8073f8369f3ffb3c8c575cb4e9ff7cc1e614c5aaa5555fea88702f');
   assert.equal(createHash('sha256').update(preprintPdf).digest('hex'), record.baselinePdf.sha256);
   assert.match(record.claimGuardrail, /genuine exact theorem/i);
   assert.match(record.claimGuardrail, /universal closure/i);
@@ -100,8 +100,8 @@ test('publishes the intuitive News route while keeping the journal record privat
   assert.match(news, /"@type": "NewsArticle"/);
   assert.match(news, /data-swc-miss-lab/);
   assert.match(news, /genuine finite-domain theorem/);
-  assert.match(news, /all 82,887 exact certificate rows reproduce/i);
-  assert.match(news, /six stale manifest entries/i);
+  assert.match(news, /82,887 exact certificate rows/i);
+  assert.match(news, /six (?:older checksum|stale manifest) entries/i);
   assert.match(newsIndex, /href="\/news\/stochastic-witness-calculus"/);
   assert.match(rss, /https:\/\/ephemerent\.com\/news\/stochastic-witness-calculus/);
   assert.doesNotMatch(news, /(?:we|this (?:paper|work|method))\s+(?:prove|proved|proves)\s+(?:the\s+)?Erd[oő]s[-–— ]Straus/i);

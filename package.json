@@ -47,7 +47,8 @@
     "focus": "node scripts/check-focus.mjs",
     "cast": "node scripts/check-cast.mjs",
     "swc:v5": "python3 scripts/build-swc-v5.py",
-    "swc:arxiv": "python3 scripts/build-swc-arxiv-v5.py"
+    "swc:arxiv": "python3 scripts/build-swc-arxiv-v5.py",
+    "swc:arxiv:v6": "python3 scripts/build-swc-arxiv-v6.py"
   },
   "devDependencies": {
     "playwright": "^1.62.1",

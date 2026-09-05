@@ -2,4 +2,10 @@
 .nw-revision-note h3 { font-family: var(--font-serif, Georgia, serif); font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.15; margin: .6rem 0 1rem; }
 .nw-revision-note p { max-width: 68ch; }
 .nw-revision-note a { overflow-wrap: anywhere; text-underline-offset: .16em; }
+.swc-contract-ledger { list-style: none; padding: 0; margin: 1.75rem 0; border-top: 1px solid currentColor; }
+.swc-contract-ledger > li { padding: 1.15rem 0; border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent); }
+.swc-contract-ledger > li > span { display: block; font-family: var(--font-mono, monospace); font-size: .75rem; line-height: 1.5; margin-bottom: .45rem; }
+.swc-contract-ledger h3 { font-family: var(--font-serif, Georgia, serif); font-size: clamp(1.4rem, 3vw, 1.85rem); line-height: 1.2; margin: .35rem 0 .65rem; }
+.swc-contract-ledger p { margin: 0; max-width: 66ch; }
+.swc-contract-scope { border-left: 2px solid currentColor; padding-left: 1rem; }
 @media (max-width: 600px) { .nw-revision-note { margin-block: 1.5rem; padding-block: 1.2rem; } }

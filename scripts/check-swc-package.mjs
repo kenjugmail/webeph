@@ -72,7 +72,9 @@ async function checkPdf(path) {
     /officially\s+proved/i,
   ];
   dangerous.forEach((pattern) => { if (pattern.test(text)) errors.push(`forbidden universal-claim wording found: ${pattern}`); });
-  if (!/finite verification[^.]{0,180}(?:not|does not)[^.]{0,80}(?:proof|prove)/i.test(normalizedText)) errors.push('finite-verification limitation is not explicit in the PDF');
+  const finiteScope = /finite verification[^.]{0,180}(?:not|does not)[^.]{0,80}(?:proof|prove)/i.test(normalizedText)
+    || /neither this finite result[^.]{0,160}solve the universal/i.test(normalizedText);
+  if (!finiteScope) errors.push('finite-verification limitation is not explicit in the PDF');
   notes.push(`PDF baseline verified · ${record.baselinePdf.pages} pages · ${record.baselinePdf.sha256}`);
 }
 

@@ -29,7 +29,7 @@ const port = server.address().port;
 const browser = await chromium.launch({ headless: true });
 
 try {
-  for (const viewport of [{ name: 'desktop-light', width: 1280, height: 720, mode: 'light' }, { name: 'mobile-dark', width: 390, height: 844, mode: 'dark' }]) {
+  for (const viewport of [{ name: 'desktop-light', width: 1280, height: 720, mode: 'light' }, { name: 'desktop-dark', width: 1440, height: 900, mode: 'dark' }, { name: 'intermediate-light', width: 900, height: 720, mode: 'light' }, { name: 'tablet-light', width: 768, height: 1024, mode: 'light' }, { name: 'mobile-dark', width: 390, height: 844, mode: 'dark' }]) {
     const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } });
     await page.addInitScript((mode) => { localStorage.setItem('eph-mode', mode); localStorage.setItem('eph-material', 'flat'); }, viewport.mode);
     const errors = [];
@@ -44,7 +44,7 @@ try {
     }));
     assert.ok(result.overflow <= 1, `${viewport.name} has ${result.overflow}px horizontal overflow`);
     assert.equal(result.sections, 6);
-    assert.match(result.title || '', /Probability can prove existence/);
+    assert.match(result.title || '', /What a checked answer/);
     assert.equal(result.defaultMiss, '90.48%');
     assert.equal(result.tableRows, 2);
     await page.selectOption('[data-swc-mass]', '4');
@@ -53,6 +53,7 @@ try {
     assert.deepEqual(errors, []);
     await page.screenshot({ path: join(output, `${viewport.name}.png`), fullPage: false });
     await page.locator('#v5-update').screenshot({ path: join(output, `${viewport.name}-v5.png`) });
+    await page.locator('#v6-update').screenshot({ path: join(output, `${viewport.name}-v6.png`) });
     await page.close();
   }
   const home = await browser.newPage({ viewport: { width: 1280, height: 720 } });

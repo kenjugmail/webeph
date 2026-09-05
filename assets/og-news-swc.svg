@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Probability can prove existence. Sampling cannot. — Ephemerent News</title>
+  <title id="title">What a checked answer can promise. — Ephemerent News</title>
   <desc id="desc">An editorial diagram separates learned witness search from exact certification and deterministic theoremhood.</desc>
   <rect width="1200" height="630" fill="#f4efe4"/>
   <rect width="1200" height="18" fill="#2553d8"/>
   <path d="M66 96H1134M66 552H1134" stroke="#bdb4a4"/>
   <g transform="translate(66 38)">
     <text x="0" y="33" fill="#11172a" font-family="Georgia,serif" font-size="38">Ephemerent</text>
-    <text x="188" y="33" fill="#e75845" font-family="Georgia,serif" font-size="38" font-style="italic">News</text>
+    <text x="240" y="33" fill="#e75845" font-family="Georgia,serif" font-size="38" font-style="italic">News</text>
     <text x="1068" y="30" text-anchor="end" fill="#69695f" font-family="ui-monospace,monospace" font-size="10" letter-spacing="2">RESEARCH DISPATCH · 002</text>
   </g>
   <text x="66" y="145" fill="#c23f31" font-family="ui-monospace,monospace" font-size="11" letter-spacing="2">AUTOMATED REASONING</text>
   <g fill="#11172a" font-family="Georgia,serif" font-size="59">
-    <text x="66" y="213">Probability can prove</text>
-    <text x="66" y="274">existence.</text>
-    <text x="66" y="346" fill="#e75845">Sampling cannot.</text>
+    <text x="66" y="213">What a checked</text>
+    <text x="66" y="274">answer</text>
+    <text x="66" y="346" fill="#e75845">can promise.</text>
   </g>
-  <text x="66" y="401" fill="#30364a" font-family="Arial,sans-serif" font-size="19">The model proposes. The exact certificate decides.</text>
+  <text x="66" y="401" fill="#30364a" font-family="Arial,sans-serif" font-size="19">Exact answers. Explicit scope. Measured reliability.</text>
 
   <g transform="translate(665 144)">
     <rect width="469" height="330" fill="#11172a"/>

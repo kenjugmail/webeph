@@ -55,9 +55,9 @@
     }
   ],
   "baselinePdf": {
-    "filename": "stochastic-witness-calculus-arxiv-v5.pdf",
-    "pages": 38,
-    "sha256": "bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2"
+    "filename": "stochastic-witness-calculus-arxiv-v6.pdf",
+    "pages": 40,
+    "sha256": "fa6bcab7ff8073f8369f3ffb3c8c575cb4e9ff7cc1e614c5aaa5555fea88702f"
   },
   "sourceV4": {
     "filename": "stochastic-witness-calculus-v4.pdf",
@@ -171,22 +171,44 @@
   },
   "dateModified": "2026-09-05",
   "researchSupplement": {
+    "filename": "swc-v6-research-supplement.zip",
+    "sha256": "33ca1f77491df15540021efa65d112d04fd29efe3dbd6c56221271fd30b841bc",
+    "bytes": 4546562,
+    "files": 160,
+    "date": "2026-09-05",
+    "scope": "research_supplement_not_accepted_journal_deposit"
+  },
+  "revisionStatus": "v6_certified_computation_and_distributional_reliability",
+  "arxivSource": {
+    "filename": "stochastic-witness-calculus-arxiv-v6-source.tar.gz",
+    "sha256": "bb341abaf6e4252412b13c8112638c0a621659f03f1f72028dadfe4b81bcd318",
+    "bytes": 167982
+  },
+  "sourceV5RevisionFolio": {
+    "filename": "stochastic-witness-calculus-v5.pdf",
+    "pages": 43,
+    "sha256": "6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d"
+  },
+  "sourceV5Arxiv": {
+    "filename": "stochastic-witness-calculus-arxiv-v5.pdf",
+    "pages": 38,
+    "sha256": "bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2"
+  },
+  "assurance": {
+    "finiteDomainInstances": 12673,
+    "freshTrials": 4603,
+    "freshFailures": 0,
+    "confidenceLevel": "99/100",
+    "availabilityLowerBound": "999/1000",
+    "scope": "Uniform seven-element subsets of integers 1..60, frozen solver, stated IID assumptions.",
+    "physicalDeploymentValidated": false
+  },
+  "researchSupplementV5": {
     "filename": "swc-v5-research-supplement.zip",
     "sha256": "e0aa0f50979f23eac3841950de011d0ab0383cc49d3cd7c4e331759f87a91be9",
     "bytes": 146866,
     "files": 74,
     "scope": "research_supplement_not_accepted_journal_deposit",
     "date": "2026-09-05"
-  },
-  "revisionStatus": "v5_research_revision_universal_existence_unproved",
-  "arxivSource": {
-    "filename": "stochastic-witness-calculus-arxiv-v5-source.tar.gz",
-    "sha256": "b473614d11144a6800c44e4dcc85e78a4086ab5a43b13bb52c84d2d0aa8c5f98",
-    "bytes": 166326
-  },
-  "sourceV5RevisionFolio": {
-    "filename": "stochastic-witness-calculus-v5.pdf",
-    "pages": 43,
-    "sha256": "6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d"
   }
 }

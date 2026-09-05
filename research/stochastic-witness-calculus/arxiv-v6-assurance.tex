@@ -1,0 +1,177 @@
+\section{Certified Computation and Distributional Reliability}\label{sec:assurance}
+
+The practical use of \SWC{} does not require settling an infinite existence
+conjecture.  A system can instead certify its returned answers, prove coverage
+of a declared finite domain, and measure verified-answer availability under a
+specified input distribution.  Each conclusion has a distinct evidence record.
+The following contracts operationalize the exact and empirical modes already
+defined in this paper; their logical and statistical ingredients are classical.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw=navy,rounded corners=0pt,text width=0.265\linewidth,
+              minimum height=2.2cm,align=left,inner sep=7pt,font=\small},
+  node distance=6mm]
+\node[box] (answer) {\textbf{One returned answer}\\[4pt]
+Exact relation and witness\\[4pt]\textcolor{blue}{Checked correctness}};
+\node[box,right=of answer] (domain) {\textbf{A finite input domain}\\[4pt]
+Manifest and all witnesses\\[4pt]\textcolor{blue}{Every listed input covered}};
+\node[box,right=of domain] (population) {\textbf{A sampled population}\\[4pt]
+Frozen protocol and all trials\\[4pt]\textcolor{blue}{Availability bound}};
+\end{tikzpicture}
+\caption{Three SWC operating contracts. The statistical guarantee concerns how
+often the system returns a verified answer; exact verification concerns whether
+that answer satisfies the specified mathematical relation.}
+\label{fig:operating-contracts}
+\end{figure}
+
+\subsection{Exact outputs and complete finite coverage}
+
+\begin{theorem}[Certified-output contract]\label{thm:output-contract}
+Let $V(x,w)$ be a deterministic verifier with proved soundness
+$V(x,w)=1\Rightarrow R(x,w)$. Suppose a wrapper emits an answer $w$ only after
+$V(x,w)=1$, and otherwise reports unresolved. Every emitted answer satisfies
+$R(x,w)$.
+\end{theorem}
+\begin{proof}
+An emitted answer satisfies the acceptance guard. Apply verifier soundness.
+The statement requires neither termination nor successful search on every input.
+\end{proof}
+
+\begin{theorem}[Finite operating-domain contract]\label{thm:finite-contract}
+Let a manifest define a nonempty finite domain $D$ independently of the
+producer's successes. If a checker reconstructs $D$, verifies one sound
+witness for each member, and checks that no member is omitted, then
+$\forall x\in D\;\exists w\;R(x,w)$.
+\end{theorem}
+\begin{proof}
+For arbitrary $x\in D$, completeness of the manifest traversal supplies its
+accepted witness. Apply soundness. The conclusion is restricted to $D$.
+\end{proof}
+
+The implementation binds each receipt to its relation, input, witness, and
+single-instance scope. The domain checker reconstructs the specified
+combinations and rejects omitted, duplicate, or mismatched rows. Fingerprints
+identify the checked bytes; they do not replace verification or authenticate
+the person who supplied the data. The exact Python implementation remains
+part of the trusted computing base.
+
+\subsection{Fixed-horizon availability guarantee}
+
+Freeze a solver configuration and an input distribution $P$. Draw
+$X_1,\ldots,X_N$ independently from $P$, and set $F_i=1$ whenever no verified
+receipt is returned. This includes unresolved searches, invalid candidates,
+errors, and timeouts. Let $p=\Pr_P(F_i=1)$ and $f=\sum_iF_i$.
+
+\begin{proposition}[Zero-failure reliability contract]\label{prop:reliability}
+Choose $N$, $\epsilon\in(0,1)$, and $\alpha\in(0,1)$ before examining outcomes,
+and suppose $(1-\epsilon)^N\le\alpha$. Under the stated IID model, a protocol
+that declares the target $p\le\epsilon$ only after observing zero failures has
+false-certification probability at most $\alpha$ when $p>\epsilon$.
+\end{proposition}
+\begin{proof}
+For $p>\epsilon$, the probability of zero failures is
+$(1-p)^N\le(1-\epsilon)^N\le\alpha$.
+\end{proof}
+
+This is the zero-failure specialization of a one-sided exact binomial
+confidence bound. More generally, inversion of the binomial lower tail yields
+a Clopper--Pearson upper bound. The implementation uses rational arithmetic
+and conservative rounding. It also verifies a chosen rational target directly
+against the exact tail probability. See the NIST exact-binomial
+documentation\footnote{\url{https://itl.nist.gov/div898/software/dataplot/refman2/auxillar/exacbino.htm}}.
+This fixed-horizon contract does not permit unaccounted optional stopping.
+The time-uniform methods discussed earlier provide a different protocol with
+their own assumptions \cite{HowardEtAl2021}.
+
+\subsection{Recorded operating-domain and fresh-input evaluation}
+
+For this demonstration, the relation is the stationary Lonely Runner condition
+for seven distinct positive speeds, with threshold $1/8$. The finite domain is
+\[
+ D=\left\{V\subseteq\{1,\ldots,20\}: |V|=7,\ \gcd(V)=1,
+   \ \forall r\in\{2,\ldots,8\}\ \exists v\in V:\ r\mid v\right\}.
+\]
+The main checker and an independent implementation enumerated all $12{,}673$
+members and checked a rational witness for each. This establishes complete
+coverage of that domain; no new general Lonely Runner theorem is claimed.
+
+A separate plan was recorded before sampling. It froze the solver, selected
+$N=4{,}603$, and prescribed uniform seven-element subsets of $\{1,\ldots,60\}$
+with replacement between trials. Each input tuple contains distinct speeds;
+there is no rejection filter for openness, primitiveness, difficulty, or
+success. Python's \texttt{SystemRandom} supplied operating-system randomness,
+whose IID sampling behavior is an explicit modeling assumption.
+
+\begin{table}[htbp]
+\centering
+\caption{Version 6 assurance demonstration. These are generated mathematical
+inputs, not physical measurements.}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Record & Verified result\\
+\midrule
+Finite operating domain & $12{,}673/12{,}673$ witnesses checked\\
+Fresh fixed-horizon evaluation & $4{,}603$ verified answers; zero failures\\
+Declared input distribution & Uniform seven-element subsets of $1,\ldots,60$\\
+One-sided confidence level & $99\%$, conditional on the stated sampling assumptions\\
+Upper failure-rate bound & $1/1000$; verified-answer availability at least $99.9\%$\\
+Physical deployment validation & None; no physical measurements were collected\\
+\bottomrule
+\end{tabularx}
+\label{tab:assurance-results}
+\end{table}
+
+The required inequality is $(999/1000)^{4603}\le1/100$; $4{,}602$ trials do not
+satisfy it. All $4{,}603$ trials returned verified answers. The confidence
+statement concerns the failure probability of this frozen solver under the
+declared distribution, not the truth of an individual verified witness and not
+an arbitrary deployment population. The raw ledger includes every trial, with
+plan, configuration, and receipt fingerprints. The independent verifier checked
+all receipts and recomputed the binomial threshold.
+
+\subsection{A failed canonical restriction as a support regression}
+
+The search interface attempts cheap canonical pair-position proposals before
+a complete pair-sum fallback. The need for that fallback is demonstrated by
+the primitive open speed set $(44,60,104,205)$, with threshold $1/5$.
+Two proposed finite canonical target lists both fail on this set, even when
+non-unit multipliers are permitted. Nevertheless $t=9/148$ has distances
+\[
+  \left(\frac{12}{37},\frac{13}{37},\frac{12}{37},\frac{69}{148}\right),
+\]
+whose minimum exceeds $1/5$. An independent checker enumerated every
+multiplier for every pair, checking $1{,}239$ seeds with $212$ accepted seeds.
+The full lists and negative canonical certificate are in the supplement.
+This refutes the proposed canonical restriction, not Lonely Runner.
+
+The complete pair-sum candidate support uses the established local-maximum
+result of Kravitz\footnote{N. Kravitz, \emph{Barely lonely runners and very
+lonely runners}, Combinatorial Theory 1 (2021), Proposition 2.1.
+\url{https://escholarship.org/uc/item/3wx931fh}}. A canonical miss is therefore
+unresolved until the complete fallback is executed. If its work budget is
+exceeded, the interface returns unresolved rather than inferring nonexistence.
+
+An atomic candidate distribution also retains boundary witnesses that a
+continuous proposal can miss with probability one. For example, for speeds
+$(1,2)$ the times satisfying threshold $1/3$ in $[0,1)$ are exactly
+$\{1/3,2/3\}$. This accepted set has Lebesgue measure zero but mass $2/3$
+under the uniform pair-sum grid. This is an application of support choice,
+not a proof that every instance has positive accepted mass.
+
+\subsection{Measurement and reproducibility scope}
+
+For mathematical inputs, the ground-truth relation is the exact predicate
+being checked. For a physical application, the record must additionally state
+measurement provenance, calibration, uncertainty, the relevant population,
+and a success definition. Exact calculation over recorded values establishes
+a fact about those values; claims about a physical system require measurement
+and sampling assumptions. No physical deployment was evaluated here.
+
+The supplement includes the frozen plan, every finite-domain witness, the
+complete fresh-trial ledger, and independent verification commands. Fifty-seven
+test methods pass across the exact kernel, canonical audits, and operating
+contracts. Tests support the implementation but are not proof-assistant
+verification or independent peer review. The earlier artifact's checksum
+reconciliation remains a separate publication task.
