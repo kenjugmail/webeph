@@ -48,7 +48,7 @@ Porkbun -> domain -> **DNS Records**. Use values from Vercel's domain screen (ty
 | Type | Host | Answer / Value |
 |------|------|----------------|
 | A | @ | `76.76.21.21` |
-| CNAME | api | `cname.vercel-dns.com` (Arbiter API: this Vercel project rewrites `api.ephemerent.com/v1/*` to the Orrery relay, so it is always on; add the domain under Vercel → Settings → Domains) |
+| CNAME | api | `cname.vercel-dns.com` (Arbiter API: this Vercel project rewrites `api.ephemerent.com/v1/*` to the Orrery relay, so it is always on; added 2026-09-06 to the `ephemerent` Vercel project, the one serving ephemerent.com) |
 | A | arbiter-1 | `3.228.134.211` (the GPU box behind the relay; Elastic IP; Caddy issues TLS for arbiter-1.ephemerent.com on first bring-up) |
 | CNAME | www | `cname.vercel-dns.com` |
 
