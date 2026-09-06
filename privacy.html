@@ -214,8 +214,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <p>Privacy questions or data requests: <a href="mailto:kt@ephemerent.com">kt@ephemerent.com</a>. This service is operated by Ephemerent and its operators.</p>
   </div>
   </div>
-      <h2>Arbiter: zero data retention, opt-in improvement</h2>
-      <p>Requests to the Arbiter route are metered by compute and counted per account and month. The Arbiter service does not store your prompts or outputs: it keeps counts and an access-log line (status, latency, token and compute counts) and nothing else. If you turn on <strong>Help improve Arbiter</strong> in Orrery (Nexus → Settings → Safety, off by default), your Arbiter requests and responses may be kept to train and evaluate future Arbiter models; the switch applies only to the Arbiter route, never to other providers, and you can turn it off at any time. Doubleword turns are handled under Doubleword's own terms and are never captured by us.</p>
+      <h2>Arbiter: learns from your sessions by default, zero data retention in one switch</h2>
+      <p>Requests to the Arbiter route are metered by compute and counted per account and month. By default Orrery shares your Arbiter coding and research sessions with the Arbiter service so the next version of the model is trained on exactly this kind of work: the prompt and tool results sent to the model, the model's response, and the outcome of the turn (tests passed or failed, a diff accepted or rejected, a research verifier's verdict), tied to an anonymous per-session id. We never receive your account, your email, or file paths outside what the prompt itself contains, and Doubleword turns are never captured. Turn on <em>Zero data retention for Arbiter</em> in Orrery (Nexus, Files &amp; Context) and the Arbiter service keeps counts and an access-log line (status, latency, token and compute counts) and nothing else, from the next request on. Captured sessions are used only to train and evaluate Arbiter and are never sold or shared with third parties.</p>
 
 </main>
 
