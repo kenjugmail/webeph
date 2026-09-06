@@ -1,0 +1,159 @@
+{
+  "version": "5",
+  "date": "2026-09-05",
+  "title": "Stochastic Witness Calculus",
+  "subtitle": "Exact Measure Certificates for Mathematical Existence, Learned Proof Search, and Anytime-Valid Empirical Claims",
+  "pages": [
+    {
+      "title": "Corrected constructions. Explicit scope.",
+      "label": "Version 5 / Research revision",
+      "blocks": [
+        ["p", "<b>Kenju Tomita</b><br/>Rochester Institute of Technology; Ephemerent Research"],
+        ["p", "This revision consolidates the September 4-5 proof attempts, corrected arithmetic hypotheses, exact probability calculations, recursive constructions, and a final literature audit. It is a public preprint, not peer-reviewed. The universal Erdős-Straus conjecture is not proved by this work."],
+        ["h", "Revision abstract"],
+        ["p", "SWC uses a sound verifier and a proved positive accepted-mass bound to establish deterministic existence. This revision repairs missing coprimality assumptions, proves an excluded near-prime shift, derives a tighter complete shift range, and composes character-conditioned sampling with recursive witness transport. It adds finite-state reachability certificates that permit failed paths and an exact-arithmetic checker for instances, mixtures, polynomial families, and case unions."],
+        ["p", "The improvements establish valid conditional rules, explicit infinite families, and finite certificates. Neither repeated induction nor a probability mixture supplies the missing assertion that every prime has an accepting state. The final literature audit found no result that closes that pointwise gap."],
+        ["table", [["Result", "Scope"], ["Corrected identities and obstructions", "Elementary proofs under stated hypotheses"], ["Character conditioning", "1.5x-2.5x gain over the specified uniform recursion"], ["Kernel and case composition", "24 lightweight tests; 12 checked families"], ["Erdős-Straus universal existence", "Open in this work"]]],
+        ["h", "How this edition is assembled"],
+        ["p", "Nine revision pages precede the complete 34-page v3 manuscript, retained without changing its content. The original figure and theorem numbering remain in the retained body. This is a consolidated PDF edition, not a claimed clean recompilation of the original LaTeX source. Versions 3, 4, and 4.1 remain available separately."],
+        ["p", "The original source/reproducibility archive has been received. Its six stale checksum entries, full source-build reconciliation, and independent review remain outstanding. The original reported experiment statistics are retained as historical manuscript results."],
+        ["small", "Article and numerical data: CC BY 4.0. Original accompanying code: Apache-2.0. Kenju Tomita is the sole author and operates Ephemerent Research. No DOI, ISSN, journal acceptance, or universal proof is implied."]
+      ]
+    },
+    {
+      "title": "The exact arithmetic interface",
+      "label": "R1 / Corrected hypotheses and statements",
+      "blocks": [
+        ["p", "<b>Standing setting.</b> Let p be prime, p = 1 mod 4, 0 &lt; c &lt;= 2p, c = 3 mod 4, a=(p+c)/4, and M=ap. All divisors are positive. Then a&lt;p and gcd(c,M)=1: a common factor divides p, while c=p and c=2p are excluded by the congruence on c."],
+        ["h", "Witness identity and exact shift reformulation"],
+        ["eq", "(cy-M)(cz-M)=M²"],
+        ["p", "A divisor e of M² with c dividing M+e and M+M²/e gives x=a, y=(M+e)/c, z=(M+M²/e)/c. Expansion of the rectangle identity proves 1/y+1/z=c/M, hence 1/x+1/y+1/z=4/p. Conversely, order any solution x&lt;=y&lt;=z. Positivity gives p/4&lt;x&lt;=3p/4, so c=4x-p lies in the stated range; e=cy-M supplies the divisor certificate. The generic least-denominator bound is also stated in Dahan, Proposition 2.5 [2]."],
+        ["h", "Bounded multiplicative box"],
+        ["eq", "M = ∏ qᵢ<super>kᵢ</super>;  B(M,c) = { ∏ qᵢ<super>gᵢ</super> mod c : -kᵢ &lt;= gᵢ &lt;= kᵢ }"],
+        ["p", "The representation exists at this shift exactly when -1 belongs to B(M,c). Write e=∏qᵢ<super>jᵢ</super>, 0&lt;=jᵢ&lt;=2kᵢ, and set gᵢ=jᵢ-kᵢ. Then e/M=-1 mod c is the first congruence. Since M is a unit, the complementary congruence follows. A box formed from a alone instead has the two targets -1 and -p<super>-1</super>; these two boxes must not be conflated."],
+        ["table", [["Monomial candidate e", "Required congruence"], ["1, a²p²", "c divides p²+4: impossible"], ["a, ap²", "c divides p+1"], ["p, a²p", "c divides p+4"], ["ap", "c divides 2: impossible"], ["a², p²", "c divides 5: impossible"]]],
+        ["p", "For the endpoint candidates, one congruence requires c|(M+1), hence c|(p²+4). A positive c=3 mod4 has a prime factor r=3 mod4. Such r cannot divide p²+4, since that would make -1 a quadratic residue modulo r. The same argument applies to c|(t²+4) for integer t."],
+        ["small", "The table is an exhaustive monomial classification under the standing hypotheses, not a classification of every divisor when a is composite. These are elementary constructions; no priority claim is made."]
+      ]
+    },
+    {
+      "title": "Filters, rigidity, and an excluded shift",
+      "label": "R2 / Corrected structural results",
+      "blocks": [
+        ["h", "Two constructive filters"],
+        ["p", "If p+1 has a prime factor c=3 mod4, use e=a. If p+4 has such a factor, use e=p. The previous table and witness identity prove both constructions. The reproduced count is 1,507 of 2,370 primes in the six Mordell-hard residue classes below 10⁶. No asymptotic law for the remaining fraction is established."],
+        ["h", "Prime-anchor rigidity"],
+        ["p", "If a is prime, then a and p are distinct and the nine monomials exhaust the divisors of M². Therefore a shift works exactly when c|(a+1) or c|(4a+1), equivalently c|(p+4) or c|(p+1). Without the range/coprimality hypotheses this statement is false: p=17, c=51, a=17, e=17 gives the valid triple (17,6,102), but neither asserted divisibility holds."],
+        ["h", "Complementary symmetry"],
+        ["p", "The involution e ↦ M²/e preserves witnesses and exchanges y,z. Restricting to e|M covers 272 of 273 Mordell-hard primes below 10⁵ over shifts c&lt;=59. The exception is 2521. At c=23, a=636, M=1603356 and e=848 is a valid M² divisor that does not divide M. This is a finite result, not an unrestricted sufficiency claim."],
+        ["h", "Proposition: c=p-2 cannot work for p&gt;5"],
+        ["p", "Set a=(p-1)/2, so a is even, a&gt;2, c=2a-1 and p=2a+1. A two-unit-fraction decomposition of c/(ap), after dividing denominators by their gcd, supplies coprime u,v with uv|ap and c|(u+v). Thus either u,v are divisors d₁,d₂ of a, or one is p times a divisor of a."],
+        ["p", "In the first case, 0&lt;d₁+d₂&lt;2c forces d₁+d₂=2a-1. The divisors must be a and a-1, impossible for a&gt;2. In the second, p=2 mod c gives 2d₁+d₂=2a-1, since 2d₁+d₂&lt;=3a&lt;2c. The choice d₁=a is too large; otherwise d₁&lt;=a/2 and d₂ lies in {a-1,a}. The first option is not a divisor; the second would give 2d₁=a-1, contradicting even a. Hence both cases fail. The exception p=5, c=3 works."],
+        ["small", "This promotes a former empirical observation to an elementary obstruction with an explicit proof. A separate priority review is required before attributing novelty."]
+      ]
+    },
+    {
+      "title": "A tighter complete search range",
+      "label": "R3 / Derived bound and exact SWC consequence",
+      "blocks": [
+        ["h", "Corollary: a least-denominator shift satisfies c&lt;=p-6"],
+        ["p", "Assume p&gt;5 and p=1 mod4. At least one denominator in a solution is divisible by p, by reducing 4xyz=p(xy+xz+yz) modulo p. Not all three are, since their reciprocals would sum to at most 3/p."],
+        ["p", "If two denominators are pb,pe, the remaining x satisfies 4=p/x+1/b+1/e&lt;=p/x+2. Thus x&lt;p/2, and it is the least denominator. If exactly one denominator is pt and the others are u,v, clearing denominators gives p|(4t-1). Write 4t-1=kp. Then k&gt;0 and k=3 mod4, so t&gt;=(3p+1)/4."],
+        ["p", "If the least denominator exceeded p/2, both u,v would be at least (p+1)/2. Therefore"],
+        ["eq", "1/u + 1/v + 1/(pt) &lt;= 4/(p+1) + 4/[p(3p+1)] &lt; 4/p."],
+        ["p", "The gap in the last inequality is 8/[(p+1)(3p+1)]&gt;0, a contradiction. Hence the least denominator is at most (p-1)/2. Its shift c=4x-p is at most p-2. The preceding proposition excludes that endpoint, leaving c&lt;=p-6. Conversely any accepted shift in this range gives a solution by the witness identity. This establishes a complete smaller search range; it does not establish that the search succeeds."],
+        ["h", "Discarding provably zero ordered mass"],
+        ["p", "Consider the specified sampler: choose c uniformly among 3,7,...,2p; choose e uniformly from divisors of M² at that shift; accept only valid reconstructed triples with a&lt;=min(y,z). All shifts above p-6 have zero accepted mass by the corollary. Truncating to 3,7,...,p-6 therefore gives"],
+        ["eq", "new accepted mass = [2(p-1)/(p-5)] × old accepted mass."],
+        ["p", "There are (p-1)/2 old shifts and (p-5)/4 new shifts, while the accepted numerator is unchanged. The identity also holds when both masses are zero. It must not be applied to an unordered sampler, which can accept a large nonleast first denominator."],
+        ["table", [["Prime", "Old ordered mass", "New ordered mass"], ["13", "14/135", "14/45"], ["73", "1/90", "2/85"], ["193", "1/324", "8/1269"]]],
+        ["small", "Regression checks cover 4,960 prime/shift states for p&lt;=500. The general result rests on the argument above. It is a derived tightening; originality is not asserted."]
+      ]
+    },
+    {
+      "title": "Character mass through recursive induction",
+      "label": "R4 / A conditional improvement theorem",
+      "blocks": [
+        ["p", "For state (n,x), let h=4x-n&gt;=3, h=3 mod4 and gcd(x,h)=1. Factor x=∏rᵢ<super>eᵢ</super> and choose independent uniform signed exponents -eᵢ&lt;=zᵢ&lt;=eᵢ. The Type-II target is R=∏rᵢ<super>zᵢ</super>=-1 mod h."],
+        ["p", "Let χ be the Jacobi character modulo h. Every accepted vector has χ(R)=-1. For χ(rᵢ)=-1, its local expectation is (-1)<super>eᵢ</super>/(2eᵢ+1). Consequently"],
+        ["eq", "η = ∏<sub>χ(rᵢ)=-1</sub> (-1)<super>eᵢ</super>/(2eᵢ+1);  Z = Pr[χ(R)=-1] = (1-η)/2."],
+        ["p", "If there are no negative-character factors, Z=0 and the target mass is zero; reject rather than condition on a null event. Otherwise -1/3&lt;=η&lt;=1/5. A negative η has denominator at least 3. For positive η, the relevant exponent sum is positive and even, at least 2, so ∏(2eᵢ+1)&gt;=1+2∑eᵢ&gt;=5. Hence 2/5&lt;=Z&lt;=2/3."],
+        ["p", "Conditioning the sampler on χ(R)=-1 preserves every accepted seed. If D is its original success mass, the conditioned mass is D/Z, giving (3/2)D&lt;=D<sub>cond</sub>&lt;=(5/2)D, with the explicit zero-case convention."],
+        ["h", "Composition with decreasing states"],
+        ["p", "Choose L&gt;=2 dividing x, set y=x/L and q=4y-h&gt;=2. Then y&lt;x and q&lt;n/2. A parent witness (y,qb,qe) maps to (Ly,Lnb,Lne). This preserves the exact equation and keeps h fixed."],
+        ["p", "Use the same branch weights before and after conditioning: half direct, half a uniform choice among eligible recursive parents; use only the direct branch at leaves. Well-founded induction on x transfers the direct bounds to total masses U and C:"],
+        ["eq", "(3/2) U(n,x) &lt;= C(n,x) &lt;= (5/2) U(n,x)."],
+        ["p", "Multiply each parent inequality by its nonnegative branch weight and add. This proves the inductive step. It also shows C&gt;0 exactly when U&gt;0; the theorem improves sampling but does not create a missing witness."],
+        ["table", [["State (n,x)", "Uniform recursion", "Conditioned recursion"], ["(2458369,614606)", "29/2106", "7/234"], ["(8803369,2200869)", "253/51300", "253/34200"]]],
+        ["small", "A separate checker verified 83 recorded states and rejected a forged mass. This is exact Python arithmetic, not a Lean/mathlib formalization."]
+      ]
+    },
+    {
+      "title": "Failed paths can still carry a proof",
+      "label": "R5 / Reachability and certificate composition",
+      "blocks": [
+        ["p", "SWC needs positive success probability, not success on every recursive path. A finite-state certificate may therefore include successful terminals, failed terminals, and cycles. Every successful terminal must carry an independently checked witness for the original target n."],
+        ["h", "Reachability lower-bound rule"],
+        ["p", "Provide L(s) in [0,1], equal to 1 at success and 0 at failure, and V(s)&gt;=0, zero at both terminal types. Terminals are absorbing. At every nonterminal state require normalized nonnegative transition probabilities and"],
+        ["eq", "L(s) &lt;= E[L(next)|s];  V(s) &gt;= ε + E[V(next)|s],  ε&gt;0."],
+        ["p", "Then for any positive integer horizon H,"],
+        ["eq", "Pr[success by H] &gt;= L(start) - V(start)/(εH)."],
+        ["p", "<b>Proof.</b> The first inequality gives E[L(S<sub>H</sub>)]&gt;=L(start). This expectation is at most the probability of success by H plus the probability of remaining nonterminal. Summing the drift inequality yields ε∑<sub>t&lt;H</sub>Pr(T&gt;t)&lt;=V(start), hence Pr(T&gt;H)&lt;=V(start)/(εH). Combine the bounds. A positive right-hand side is a valid SWC mass certificate."],
+        ["p", "A 33-state example for n=73 uses L(i)=(32-i)/32 and V(i)=i(32-i), starting at i=3, with success at 0 and rejection at 32. At H=192 the certified lower bound is 29/64; exact path counting gives about 82.8655%. Seven corrupted certificates are rejected. This example starts from a known terminal witness and is not a universal existence argument."],
+        ["h", "Reusable exact-arithmetic kernel"],
+        ["p", "The kernel checks normalized finite masses, same-target mixtures, integral witness transport, one- and two-variable polynomial identities, instantiation, and unions of verified case domains. It derives the conclusion's scope instead of trusting an input flag. Exact coefficient equality plus sufficient positivity conditions proves a family identity for every permitted parameter, rather than only testing selected values."],
+        ["p", "The 24 tests include incorrect targets, failed normalization, nonintegral transforms, cyclic proof dependencies, changed coefficients, and forged universal scope. These tests support the implementation; they do not prove that it contains no bugs. SHA-256 identifies checked bytes and does not replace mathematical verification."]
+      ]
+    },
+    {
+      "title": "What the combined families cover",
+      "label": "R6 / Single, double, and case induction",
+      "blocks": [
+        ["p", "For positive A,B,h with h|(A+B), let Q=(A+B)/h and S&gt;=1. Then n=4ABS-h has the exact witness (ABS,nAQS,nBQS). The identity follows from A+B=hQ. Induction on S preserves the formula and accepted point mass one."],
+        ["table", [["Residue mod 840", "Checked infinite subfamily, t&gt;=0"], ["1", "2521+24360t"], ["121", "1801+34440t"], ["169", "1009+19320t"], ["289", "1129+15960t"], ["361", "1201+14280t"], ["529", "3049+14280t"]]],
+        ["p", "The two-parameter family n=4(3u+2)(v+1)-3, u,v&gt;=0, is checked symbolically. Put B=3u+2, S=v+1, Q=u+1. Then B+1=3Q gives the same identity. Inner induction increases v; outer induction increases u. These quantifiers range over family parameters, not automatically over every prime."],
+        ["p", "The combined case certificate additionally includes three shift-7 families n=8(7u+r)(v+1)-7 for r=3,5,6, and the two filter families n=(4u+3)(4v+2)-1 and n=(4u+3)(4v+3)-4. Together with the six progressions and the double family, this is 12 infinite families; two direct instance certificates are also included."],
+        ["h", "Case induction and its boundary"],
+        ["p", "If each construction proves existence throughout Cᵢ, induction on the number of cases proves existence throughout their union. It does not prove that the union contains every prime. In particular, 806521 lies outside the symbolic families in this bundle, although earlier direct checks give it a witness."],
+        ["p", "A finite table of fixed A,B,h families cannot cover all hard primes. Let M be the least common multiple of 24 and their 4AB values. A prime p=1 mod M cannot be in a listed family: membership would require 4AB|(1+h), while 0&lt;1+h&lt;4AB. Dirichlet's theorem gives infinitely many such primes. This obstruction is specific to fixed tables; it does not exclude an adaptive construction with parameters depending on p."],
+        ["small", "The remaining theorem must establish coverage of the residual domain, or a sound reduction covering every residual prime. It is not supplied by adding another induction index."]
+      ]
+    },
+    {
+      "title": "Exact experiments and reproducibility",
+      "label": "R7 / Measurements kept separate from universal claims",
+      "blocks": [
+        ["p", "The original v3 experiment verifies 82,887 primes p=1 mod24 below 10⁷ with shifts through 127. Its observed maximum least shift is 107. The reproduced maxima below 10⁵,10⁶,10⁷ are 31,59,107. These three maxima establish no asymptotic growth law."],
+        ["h", "Proposal comparison on eight difficult cases"],
+        ["p", "Ten distributions, including a uniform baseline, were compared on the same 45 shifts through 179 and the same two acceptance targets. Weights included central triangular, edge, binomial, balanced-residue, inverse-shift and linear-shift proposals and mixtures. This was exploratory and retrospective, not a held-out benchmark."],
+        ["table", [["p=8803369, unordered 45-shift sampler", "Exact accepted mass"], ["Uniform baseline", "1469/820125"], ["Edge-weighted exponents", "3208/1134375"], ["Linear shift weights", "209723/74631375"], ["Half baseline / half linear shift", "171701/74631375"]]],
+        ["p", "Edge weighting gives about 1.579 times the baseline mass on this case but wins on only three of eight primes. Linear shift weighting wins on five of eight. No proposal dominates. There are 1,440 convolution-versus-enumeration comparisons and 848 accepted seed/mode occurrences reconstructed by exact arithmetic. Higher per-draw mass does not by itself establish lower total runtime."],
+        ["h", "Artifact status"],
+        ["p", "The supplied v3 archive is 5,543,858 bytes. Its SHA-256 is recorded in the accompanying manifest. It contains source, raw results and commands; six entries in its older internal checksum list are stale. Original bytes are retained. This revision ships the follow-up notes and small checkers as a separate, versioned research supplement."],
+        ["p", "The earlier exploration of 719,781 target primes below 10⁸ is retained in the development history. It was not rerun or elevated to a newly audited canonical result in this revision. No large prime sweep was performed for this release."],
+        ["h", "Review and responsibility"],
+        ["p", "Kenju Tomita remains sole author and accountable submitter, and operates Ephemerent Research. Historical Arbiter v23 and GPT-5.6 Pro contributions remain disclosed in the retained manuscript. Codex assisted the September 4-5 follow-up derivations, software, literature checks and presentation; the precise serving variant is not asserted. Neither assistant output nor passing tests constitutes independent peer review."],
+        ["small", "The original acceptance gates remain: source/build and checksum reconciliation, independent review, and accountable publication. This preprint does not receive an invented journal identifier or arXiv identifier."]
+      ]
+    },
+    {
+      "title": "Final literature audit and open obligation",
+      "label": "R8 / Research checkpoint, September 5, 2026",
+      "blocks": [
+        ["p", "The final pass inspected the following primary sources and revisited claimed closure routes. It did not identify a valid theorem establishing pointwise positive witness mass for every prime."],
+        ["p", "<b>[1] Elsholtz and Tao.</b> <a href='https://arxiv.org/abs/1107.1010'>Counting the number of solutions to the Erdős-Straus equation on unit fractions</a>. Type-I/Type-II structure and average counts. Average abundance is not a positive lower bound at each prime."],
+        ["p", "<b>[2] Dahan.</b> <a href='https://arxiv.org/abs/2608.24035'>Sieve dimension and search depth</a>, 2026. Exact divisor criteria and exceptional-set bounds; the conjecture is explicitly open. A fixed shift can have infinitely many failures."],
+        ["p", "<b>[3] Bello-Hernández, Benito and Fernández.</b> <a href='https://arxiv.org/abs/2606.10922'>A Divisor Parametrization</a>, 2026. Complete parametrization and certificate transport; no all-prime coverage result."],
+        ["p", "<b>[4] Elsholtz and Planitzer.</b> <a href='https://arxiv.org/abs/1805.02945'>The number of solutions of the Erdős-Straus equation</a>. Many representations for infinitely many primes in each reduced progression; not every prime."],
+        ["p", "<b>[5] Bright and Loughran.</b> <a href='https://arxiv.org/abs/1908.02526'>Brauer-Manin obstruction for Erdős-Straus surfaces</a>. Absence of a particular obstruction does not establish positive integer solutions."],
+        ["p", "<b>[6] Kötzing and Krejca.</b> <a href='https://arxiv.org/abs/1805.09415'>First-Hitting Times Under Additive Drift</a>. Supplies probabilistic termination tools when the drift hypotheses are proved; does not construct those hypotheses for this equation."],
+        ["p", "<b>[7] Pomerance and Weingartner.</b> <a href='https://arxiv.org/abs/2511.16817'>Exceptions to the Erdős-Straus-Schinzel conjecture</a>. Quantitative results for the generalized numerator problem; no closure of the numerator-four conjecture."],
+        ["p", "<b>Claimed proofs.</b> Bradford's <a href='https://arxiv.org/abs/2602.11774'>2026 note</a> leaves its final covering assertion unproved. The inspected version of Dyachenko's <a href='https://arxiv.org/abs/2511.07465'>2025 manuscript</a> uses a rectangle-hitting lemma refuted by the lattice u+v=0 mod2 and the rectangle [0,1)×[1,2). These routes were not accepted as proofs."],
+        ["h", "The remaining claim"],
+        ["eq", "For every prime p, some sound witness generator has proved accepted mass δ(p)&gt;0."],
+        ["p", "A direct identity, complete family cover, nonconstructive counting argument, or compatible descent could discharge this claim. The present work establishes useful pieces but not their universal coverage. The retained manuscript and this revision must be read with that boundary: SWC is a proof interface; this case study has not solved Erdős-Straus."],
+        ["small", "The original 34-page v3 manuscript follows. Its original page and theorem numbers are retained. This revision's statements supersede inconsistent follow-up wording, without silently rewriting the historical source."]
+      ]
+    }
+  ]
+}

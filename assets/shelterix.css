@@ -883,6 +883,7 @@ body.shelterix-page {
   font-family: var(--serif);
   font-size: 22px;
   font-weight: 400;
+  letter-spacing: -.02em;
   margin-bottom: 12px;
 }
 
@@ -933,6 +934,11 @@ body.shelterix-page {
   font-size: 12px;
   letter-spacing: 0.04em;
   line-height: 1.55;
+}
+
+.shelterix-close .shelterix-note {
+  font-size: 12px;
+  letter-spacing: .015em;
 }
 
 .shelterix-cta-row {

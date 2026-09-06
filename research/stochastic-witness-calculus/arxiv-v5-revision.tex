@@ -1,0 +1,148 @@
+\section{Post-Audit Exact Refinements}\label{sec:v5-refinements}
+
+This section integrates the September 2026 audit into the manuscript rather
+than treating it as evidence for a universal conclusion.  The corrected
+results sharpen the finite certificate search, add reusable exact-mass
+combinators, and isolate the remaining universal obligation.
+
+\subsection{Corrected arithmetic interface}
+
+Let $p\equiv1\pmod4$ be prime and let
+\[
+  0<c\le2p,\qquad c\equiv3\pmod4,\qquad
+  a=\frac{p+c}{4},\qquad M=ap.
+\]
+Then $a<p$ and $\gcd(c,M)=1$.  Call $p$ \emph{$c$-representable} when
+there is a positive divisor $e\mid M^2$ such that
+\[
+  c\mid M+e
+  \quad\text{and}\quad
+  c\mid M+M^2/e.
+\]
+The reconstruction
+\[
+  x=a,\qquad y=\frac{M+e}{c},\qquad
+  z=\frac{M+M^2/e}{c}
+\]
+is integral and satisfies $1/x+1/y+1/z=4/p$.  Conversely, ordering any
+solution $x\le y\le z$, taking $c=4x-p$, and completing the rectangle gives
+\[
+  (cy-M)(cz-M)=M^2,
+\]
+so $e=cy-M$ supplies the divisor certificate.  Thus the shift criterion is
+an exact reformulation, not merely a sufficient search heuristic.
+
+If $M=\prod_i q_i^{k_i}$, define the signed exponent box
+\[
+  B(M,c)=\left\{\prod_i q_i^{g_i}\bmod c:-k_i\le g_i\le k_i\right\}.
+\]
+Because $M$ is a unit modulo $c$, the shift is representable exactly when
+$-1\in B(M,c)$.  This statement uses the factorization of $M$, not only that
+of $a$; conflating those boxes loses a target congruence.
+
+\subsection{A smaller complete shift range}
+
+For $p>5$, every solution has a least denominator at most $(p-1)/2$.
+Indeed, reducing $4xyz=p(xy+xz+yz)$ modulo $p$ shows that some denominator
+is divisible by $p$.  If two are $pb$ and $pe$, the remaining denominator
+$x$ obeys $4=p/x+1/b+1/e\le p/x+2$, so $x<p/2$.  If exactly one is $pt$,
+then $p\mid4t-1$; writing $4t-1=kp$ gives $k\equiv3\pmod4$ and hence
+$t\ge(3p+1)/4$.  Were the other two denominators both larger than $p/2$,
+their reciprocal sum, including $1/(pt)$, would be at most
+\[
+  \frac4{p+1}+\frac4{p(3p+1)}<\frac4p,
+\]
+a contradiction.
+
+It follows that the least-denominator shift satisfies $c=4x-p\le p-2$.
+The endpoint $c=p-2$ is impossible for $p>5$ (a proof is given in
+\cref{app:v5-proofs}), leaving the complete range
+\[
+  c\le p-6.
+\]
+This removes shifts having provably zero ordered accepted mass.  For the
+specified sampler that chooses uniformly among $c=3,7,\ldots,2p$ and then
+uniformly among divisors of $M^2$, truncation to $c\le p-6$ multiplies its
+ordered accepted mass by
+\[
+  \frac{2(p-1)}{p-5}.
+\]
+The identity also holds when both masses are zero: it improves a sampler but
+does not prove that an accepting divisor exists.
+
+\subsection{Conditional character mass and recursive transport}
+
+For a state $(n,x)$ set $h=4x-n$ and factor $x=\prod_i r_i^{e_i}$.
+Choose independent signed exponents $-e_i\le z_i\le e_i$ and write
+$R=\prod_i r_i^{z_i}$.  With $\chi$ the Jacobi character modulo $h$, every
+Type-II target $R\equiv-1\pmod h$ lies in the event $\chi(R)=-1$.  If this
+conditioning event is nonempty, its probability is
+\[
+  Z=\frac{1-\eta}{2},\qquad
+  \eta=\prod_{\chi(r_i)=-1}\frac{(-1)^{e_i}}{2e_i+1},
+\]
+and $2/5\le Z\le2/3$.  Conditioning therefore preserves all accepted seeds
+and multiplies exact success mass by $1/Z$, between $3/2$ and $5/2$.
+When no negative-character factor exists, the event is null and the kernel
+rejects rather than conditioning on probability zero.
+
+This gain composes with the exact decreasing-state transport.  If $L\ge2$
+divides $x$, $y=x/L$, and $q=4y-h\ge2$, then a witness
+$(y,qb,qe)$ maps to $(Ly,Lnb,Lne)$.  Both $y<x$ and $q<n/2$, so induction is
+well founded.  Using identical branch weights before and after conditioning
+gives
+\[
+  \frac32 U(n,x)\le C(n,x)\le\frac52 U(n,x).
+\]
+In particular, $C(n,x)>0$ exactly when $U(n,x)>0$: conditioning amplifies
+existing mass and cannot manufacture the missing universal positivity
+premise.
+
+\subsection{Fail-closed reachability and case unions}
+
+Recursive SWC certificates may include failed terminals and cycles.  A
+finite-state certificate supplies $L(s)\in[0,1]$, a nonnegative potential
+$V(s)$, and $\varepsilon>0$ such that at nonterminal states
+\[
+  L(s)\le\mathbb E[L(S_{t+1})\mid S_t=s],\qquad
+  V(s)\ge\varepsilon+\mathbb E[V(S_{t+1})\mid S_t=s].
+\]
+With $L=1$ on success, $L=0$ on failure, and $V=0$ on both terminal types,
+\[
+  \Pr(\text{success by }H)
+  \ge L(s_0)-\frac{V(s_0)}{\varepsilon H}.
+\]
+Every successful terminal must still carry a checked witness for the original
+target.  The lower bound is useful only when its right-hand side is positive.
+
+The accompanying exact-arithmetic kernel checks finite masses, same-target
+mixtures, integral witness transport, one- and two-parameter polynomial
+families, instantiation, and finite unions of proved case domains.  The
+current case certificate contains twelve infinite families and two direct
+instances.  Induction over a finite case list proves the union of those cases;
+it does not prove that the union contains every prime.
+
+\subsection{Final literature audit and remaining obligation}
+
+The final audit compared these constructions with type-I/type-II average
+counts by Elsholtz and Tao
+(\href{https://arxiv.org/abs/1107.1010}{arXiv:1107.1010}), the exact divisor
+and sieve criteria of Dahan
+(\href{https://arxiv.org/abs/2608.24035}{arXiv:2608.24035}), the divisor
+parametrization of Bello-Hern\'andez, Benito, and Fern\'andez
+(\href{https://arxiv.org/abs/2606.10922}{arXiv:2606.10922}), and the
+Brauer--Manin analysis of Bright and Loughran
+(\href{https://arxiv.org/abs/1908.02526}{arXiv:1908.02526}).  These works
+provide strong structure, average abundance, and obstruction information, but
+none supplies positive accepted mass for each remaining prime.
+
+Consequently the unresolved statement is still pointwise:
+\[
+  \forall p\ \exists\text{ a sound SWC generator with proved mass }
+  \delta(p)>0.
+\]
+A complete family cover, direct identity, nonconstructive count, or compatible
+descent theorem could discharge it.  Finite verification, density-one
+solvability, average representation counts, and improved conditional mass do
+not discharge it by themselves.
+

@@ -16,7 +16,7 @@ import { chromium } from 'playwright';
 import { PNG } from 'pngjs';
 
 const BASE = process.env.BASE ?? 'http://localhost:3111';
-const PAGES = (process.env.PAGES ?? '/,/research,/orrery,/vellum,/shelterix,/news,/journal,/privacy').split(',');
+const PAGES = (process.env.PAGES ?? '/,/research,/orrery,/hearthrail,/vellum,/shelterix,/news,/journal,/privacy').split(',');
 const CAP = Number(process.env.CAP ?? 22);      // max acceptable mean chroma
 
 /* sRGB -> LAB, enough of it to get chroma. */

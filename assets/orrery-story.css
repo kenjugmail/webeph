@@ -140,6 +140,7 @@ body.orrery-page .swarm-card {
   font-size: clamp(18px, 2vw, 26px);
   font-weight: 560;
   line-height: 1.15;
+  letter-spacing: -.022em;
 }
 .orrery-boundary-sheet dl {
   display: grid;
@@ -230,7 +231,7 @@ body.orrery-page .swarm-card {
   gap: clamp(30px, 6vw, 74px);
 }
 .orrery-verify-title { display: grid; gap: 9px; }
-.orrery-verify-title strong { font-size: clamp(20px, 2.5vw, 34px); font-weight: 560; line-height: 1.12; }
+.orrery-verify-title strong { font-size: clamp(20px, 2.5vw, 34px); font-weight: 560; line-height: 1.12; letter-spacing: -.025em; }
 .orrery-verify-frame ul { list-style: none; display: grid; gap: 11px; }
 .orrery-verify-frame li {
   display: grid;
@@ -266,7 +267,7 @@ body.orrery-page .swarm-card {
   transform: translateX(-14px);
   transition: opacity var(--motion-glide), transform var(--motion-settle) var(--ease);
 }
-.orrery-selected-result strong { display: block; margin: 12px 0 7px; font-size: clamp(23px, 3vw, 38px); font-weight: 560; line-height: 1; }
+.orrery-selected-result strong { display: block; margin: 12px 0 7px; font-size: clamp(23px, 3vw, 38px); font-weight: 560; line-height: 1; letter-spacing: -.03em; }
 .orrery-human-gate {
   grid-column: 1 / -1;
   display: flex;

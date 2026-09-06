@@ -1,9 +1,18 @@
 {
   "schemaVersion": 1,
   "product": "hearthrail",
-  "status": "private-alpha",
-  "version": null,
-  "publishedAt": null,
-  "notesUrl": null,
-  "assets": []
+  "status": "released",
+  "channel": "community-alpha",
+  "version": "0.1.0-alpha.1",
+  "publishedAt": "2026-09-05T20:59:16Z",
+  "notesUrl": "https://github.com/kenjugmail/hearthrail-releases/releases/tag/v0.1.0-alpha.1-lan-preview",
+  "assets": [{
+    "platform": "macos-arm64",
+    "filename": "Hearthrail_0.1.0-alpha.1_aarch64.dmg",
+    "url": "https://github.com/kenjugmail/hearthrail-releases/releases/download/v0.1.0-alpha.1-lan-preview/Hearthrail_0.1.0-alpha.1_aarch64.dmg",
+    "sha256": "b5c1329e25e4c3e126931e82bb3e32f11e9ee07f9c16047efc2befe16f99c376",
+    "sizeBytes": 25342168,
+    "signing": "ad-hoc",
+    "notarized": false
+  }]
 }

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "version": "6",
+  "status": "public-preprint-not-peer-reviewed",
+  "filename": "stochastic-witness-calculus-arxiv-v6.pdf",
+  "pages": 40,
+  "sha256": "fa6bcab7ff8073f8369f3ffb3c8c575cb4e9ff7cc1e614c5aaa5555fea88702f",
+  "sourceArchive": {
+    "filename": "stochastic-witness-calculus-arxiv-v6-source.tar.gz",
+    "sha256": "bb341abaf6e4252412b13c8112638c0a621659f03f1f72028dadfe4b81bcd318",
+    "bytes": 167982
+  },
+  "parentPdf": {
+    "filename": "stochastic-witness-calculus-arxiv-v5.pdf",
+    "sha256": "bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2"
+  },
+  "dateModified": "2026-09-05",
+  "universalExistenceStatus": "unproved",
+  "physicalDeploymentValidated": false,
+  "finiteCoverage": 12673,
+  "freshTrials": 4603,
+  "freshFailures": 0,
+  "availabilityConfidence": "99/100",
+  "availabilityLowerBound": "999/1000",
+  "availabilityScope": "Uniform seven-element subsets of integers 1..60, frozen solver, stated IID assumptions.",
+  "buildEngine": "Tectonic 0.17.0 (XeTeX/BibTeX)",
+  "arxivServerValidated": false
+}

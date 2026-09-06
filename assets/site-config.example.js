@@ -6,12 +6,14 @@
  * See docs/CLOUD.md for Google Cloud Console + GitHub OAuth App setup.
  */
 window.ORRERY_CONFIG = {
-  DOWNLOAD_URL: 'https://github.com/kenjugmail/orrery-releases/releases/download/orrery-0.1.0-beta/Orrery-0.1.0-beta-win-x64-portable.zip',
-  RELEASE_VERSION: '0.1.0-beta',
-  RELEASE_CHANNEL: 'beta',
-  RELEASE_PAGE_URL: 'https://github.com/kenjugmail/orrery-releases/releases/tag/orrery-0.1.0-beta',
-  RELEASE_SHA256: '421cb012d7f0f9a390aabc3e108bdc180f5a8851b0b3fa207d348dc1127b8543',
-  UPDATE_MODE: 'manual-portable-beta',
+  DOWNLOAD_URL: '',
+  RELEASE_VERSION: '4.0.0-rc.3',
+  RELEASE_CHANNEL: 'test-beta',
+  RELEASE_PAGE_URL: '/download',
+  RELEASE_SHA256: '',
+  UPDATE_MODE: 'unsigned-test-beta-manual',
+  UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
+  RELEASE_AVAILABLE: false,
   /** Optional — POST JSON audit events here. Leave empty to keep logs on-device. */
   AUDIT_WEBHOOK_URL: '',
   /**

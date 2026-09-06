@@ -8,7 +8,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
 <title>Hearthrail — your games, kept on your machine · by Ephemerent</title>
-<meta name="description" content="Hearthrail is a local-first desktop library for games you already own, signed releases, and isolated offline web games. Private alpha; installers are not public yet.">
+<meta name="description" content="Hearthrail is a local-first game library. Download the experimental Apple Silicon Mac alpha with local LAN hosting. Not notarized; Windows is unavailable.">
 <link rel="canonical" href="https://ephemerent.com/hearthrail">
 <meta name="theme-color" content="#111114">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Hearthrail — your games, kept on your machine">
-<meta property="og:description" content="A local-first desktop library with no runtime lease. Private alpha; installers are not public yet.">
+<meta property="og:description" content="A local-first game library with no runtime lease. Experimental Mac alpha available; not notarized. Windows is unavailable.">
 <meta property="og:url" content="https://ephemerent.com/hearthrail">
 <meta property="og:image" content="https://ephemerent.com/assets/og-hearthrail.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hearthrail — your games, kept on your machine">
-<meta name="twitter:description" content="A local-first desktop library with no runtime lease. Private alpha; installers are not public yet.">
+<meta name="twitter:description" content="A local-first game library with no runtime lease. Experimental Mac alpha available; not notarized. Windows is unavailable.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-hearthrail.jpg">
 <meta name="twitter:image:alt" content="The real Hearthrail private-alpha library running with deterministic local fixtures.">
 <!-- include: head-theme -->
@@ -62,18 +62,19 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <!-- /include -->
 <link rel="stylesheet" href="/assets/base.css?v=20260801">
 <link rel="stylesheet" href="/assets/polish.css?v=20260811d">
-<link rel="stylesheet" href="/assets/hearthrail.css?v=20260828a">
+<link rel="stylesheet" href="/assets/hearthrail.css?v=20260905-lan1">
 <script src="/assets/motion.js?v=20260811d" defer></script>
-<script type="module" src="/assets/hearthrail.js?v=20260828a"></script>
+<script type="module" src="/assets/hearthrail.js?v=20260905-lan1"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Hearthrail",
   "applicationCategory": "GameApplication",
-  "operatingSystem": "macOS, Windows",
+  "operatingSystem": "macOS (Apple Silicon)",
+  "softwareVersion": "0.1.0-alpha.1",
   "url": "https://ephemerent.com/hearthrail",
-  "description": "A local-first desktop library for games you already own, signed Ephemerent releases, and isolated offline web games. Private alpha; installers are not public yet.",
+  "description": "Local-first game library. Experimental Apple Silicon Mac alpha; ad-hoc signed, not notarized. Windows unavailable.",
   "image": "https://ephemerent.com/assets/hearthrail-launcher-1280x800.jpg",
   "author": { "@type": "Organization", "name": "Ephemerent", "url": "https://ephemerent.com/" }
 }
@@ -107,7 +108,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <span class="menu-toggle-label">Menu</span><span class="menu-toggle-lines" aria-hidden="true"><i></i><i></i></span>
     </button>
     <nav class="enav" id="hearthrail-navigation" aria-label="Hearthrail">
-      <a href="#library">Library</a><a href="#boundary">Boundary</a><a href="#release">Release</a><a class="est-keep" href="/">by Ephemerent</a><span class="est">PRIVATE ALPHA</span>
+      <a href="#library">Library</a><a href="#boundary">Boundary</a><a href="#release">Release</a><a class="est-keep" href="/">by Ephemerent</a><span class="est">MAC ALPHA</span>
     </nav>
   </div>
 </div>
@@ -116,13 +117,17 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   <header class="hr-hero">
     <div class="hr-wrap">
       <div class="hr-hero-copy rv in">
-        <p class="hr-eyebrow">Local-first game library · Private alpha</p>
+        <p class="hr-eyebrow">Local-first game library · Mac alpha</p>
         <h1>Your games, kept on your machine.</h1>
         <p class="hr-deck">Hearthrail organizes games you already own, signed Ephemerent releases, and isolated offline web games. You do not need an account to add or launch local games.</p>
-        <div class="hr-release-card" id="release" data-hearthrail-release data-release-state="private-alpha" aria-live="polite">
-          <div><span class="hr-status">Private alpha</span><strong>Installers are not public yet.</strong></div>
-          <span class="hr-download-disabled" role="status" aria-disabled="true">Download coming after release checks</span>
-          <p class="hr-release-detail">The slot stays inert until a reviewed manifest names signed assets and their checksums.</p>
+        <div class="hr-release-card" id="release" data-hearthrail-release data-release-state="released" aria-live="polite">
+          <div><span class="hr-status">Version 0.1.0-alpha.1</span><strong>Experimental Mac LAN preview</strong></div>
+          <div class="hr-release-assets"><div class="hr-release-asset">
+            <a class="hr-download-link" href="https://github.com/kenjugmail/hearthrail-releases/releases/download/v0.1.0-alpha.1-lan-preview/Hearthrail_0.1.0-alpha.1_aarch64.dmg" rel="noopener" referrerpolicy="no-referrer">Download for macOS (Apple Silicon)</a>
+            <details><summary>File details · 25.3 MB</summary><div class="hr-release-asset-meta"><span>Hearthrail_0.1.0-alpha.1_aarch64.dmg</span><span>25.3 MB</span></div><code>SHA-256 b5c1329e25e4c3e126931e82bb3e32f11e9ee07f9c16047efc2befe16f99c376</code></details>
+          </div></div>
+          <p class="hr-release-detail">Not notarized by Apple; macOS may block opening. Windows is not available.</p>
+          <a class="hr-release-notes" href="https://github.com/kenjugmail/hearthrail-releases/releases/tag/v0.1.0-alpha.1-lan-preview" rel="noopener" referrerpolicy="no-referrer">Release notes and limits</a>
         </div>
       </div>
       <figure class="hr-product-shot rv in">
@@ -135,9 +140,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   <section class="hr-register" aria-label="Current release boundary">
     <div class="hr-wrap">
       <dl>
-        <div><dt>Current stage</dt><dd>Private alpha</dd></div>
-        <div><dt>macOS</dt><dd>Apple Silicon engineering build; signing and notarization pending</dd></div>
-        <div><dt>Windows</dt><dd>x64 build, CI, packaging, and hardware certification pending</dd></div>
+        <div><dt>Current stage</dt><dd>Experimental Mac alpha</dd></div>
+        <div><dt>macOS</dt><dd>Apple Silicon · ad-hoc signed · not notarized</dd></div>
+        <div><dt>Windows</dt><dd>Unavailable; build and hardware validation pending</dd></div>
         <div><dt>Runtime lease</dt><dd>None for local games</dd></div>
       </dl>
     </div>
@@ -173,13 +178,15 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <div class="hr-wrap hr-section-grid">
       <header class="rv">
         <p class="hr-eyebrow">Release discipline</p>
-        <h2 id="release-heading">No unsigned placeholder downloads.</h2>
+        <h2 id="release-heading">An early build, with clear limits.</h2>
+        <p class="hr-release-detail"><a href="https://github.com/kenjugmail/hearthrail-releases/releases/tag/v0.1.0-alpha.1-lan-preview" target="_blank" rel="noopener noreferrer">Release files and instructions</a></p>
       </header>
       <div class="hr-release-ledger rv">
-        <div><span>Built locally</span><strong>Apple Silicon app shape verified</strong><small>Engineering evidence only</small></div>
-        <div><span>Still required</span><strong>Signing, notarization, malware scan, and clean-machine smoke</strong><small>macOS release gate</small></div>
-        <div><span>Still required</span><strong>Green Windows CI and real Windows GPU/package certification</strong><small>Windows release gate</small></div>
-        <div><span>Activation</span><strong>Reviewed same-origin manifest with HTTPS assets and SHA-256</strong><small>No automatic GitHub promotion</small></div>
+        <div><span>Kart LAN</span><strong><a href="https://github.com/kenjugmail/hearthrail-releases/releases/download/v0.1.0-alpha.1-lan-preview/Kart-Royale-LAN-preview.zip" rel="noopener" referrerpolicy="no-referrer">Download the matching game ZIP</a></strong><small>Import through Add games</small></div>
+        <div><span>Host locally</span><strong>Two players, fixed track, no items. Node.js 22+ required.</strong><small>Settings → Local library → Local multiplayer</small></div>
+        <div><span>Testing</span><strong>Two browsers on one Mac passed. Two-computer, full-race, and Windows checks remain.</strong><small>No certified FPS claim</small></div>
+        <div><span>Installation</span><strong>Not notarized or verified by Apple. macOS may block this build.</strong><small>Do not disable system-wide security</small></div>
+        <div><span>Updates</span><strong>Manual downloads in this preview</strong><small>Automatic updates are inactive</small></div>
       </div>
     </div>
   </section>

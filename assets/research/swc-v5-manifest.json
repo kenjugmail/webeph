@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "version": "5",
+  "status": "public-reconstructed-preprint",
+  "filename": "stochastic-witness-calculus-v5.pdf",
+  "pages": 43,
+  "sha256": "6e40ad8eb00853217b4d0d2e24c3edaa2ad3c8f05a2656cd8bd3f10a8f91ca8d",
+  "revisionPages": 9,
+  "parentVersion": {
+    "filename": "stochastic-witness-calculus-v4-1.pdf",
+    "pages": 39,
+    "sha256": "2ce75cf7c681b466dd20a202e80e433d0e92a60016158995a60f7e489f2c9c71"
+  },
+  "constructionBase": {
+    "filename": "stochastic-witness-calculus-v3.pdf",
+    "pages": 34,
+    "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"
+  },
+  "revisionSource": {
+    "filename": "research/stochastic-witness-calculus/revision-v5.json",
+    "sha256": "b194f7aa654a47c99a06ab81a8b8c8f3e0642a552d8061e1c149594168632cd3"
+  },
+  "construction": "Nine new revision pages followed by the complete unmodified v3 manuscript.",
+  "sourceStatus": "Artifact received; source/build and original checksum reconciliation pending.",
+  "universalExistenceStatus": "unproved",
+  "dateModified": "2026-09-05"
+}

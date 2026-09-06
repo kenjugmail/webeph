@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "status": "public-preprint-assets",
+  "source": {
+    "filename": "stochastic_witness_calculus_arxiv_v3.pdf",
+    "pages": 34,
+    "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"
+  },
+  "publishedPdf": {
+    "filename": "stochastic-witness-calculus-v3.pdf",
+    "sha256": "17ff47c284b79207e2365d286c18aaa19915c63bf0af655a587066a5647b462a"
+  },
+  "figureCrops": [
+    {
+      "filename": "swc-architecture.webp",
+      "sourcePage": 14,
+      "description": "Trusted-boundary architecture and Figure 1 caption",
+      "width": 1286,
+      "height": 396,
+      "sha256": "9043b37e7230e3ebb9de3d3b104dc8b5d2f7810ea102d006c511c75babbbf205"
+    },
+    {
+      "filename": "swc-sat-mass.webp",
+      "sourcePage": 16,
+      "description": "SAT accepted-mass speedup and Figure 2 caption",
+      "width": 1224,
+      "height": 881,
+      "sha256": "e4e81dd2fef63b9b238a9958fad782ad99f28a2568beb2161abb44a1e9bc5a63"
+    },
+    {
+      "filename": "swc-path-mass.webp",
+      "sourcePage": 17,
+      "description": "Non-enumerative path-graph mass and Figure 3 caption",
+      "width": 1224,
+      "height": 911,
+      "sha256": "411ba0ef168be90e874e6a42ce7996c0b173a40585ba9937c764e2fdfb92b45c"
+    },
+    {
+      "filename": "swc-quantifier-audit.webp",
+      "sourcePage": 19,
+      "description": "Quantifier-audit Figures 5 and 6",
+      "width": 1254,
+      "height": 1802,
+      "sha256": "0ef0f3bb7cf944f81d147c96bbd768d91eeecf5ad708c1c38449e4c2dfc9003e"
+    },
+    {
+      "filename": "swc-erdos-finite.webp",
+      "sourcePage": 21,
+      "description": "Finite Erd\u0151s\u2013Straus Figures 7 and 8",
+      "width": 1254,
+      "height": 1802,
+      "sha256": "4f08b155bb23323a06f0c24f4d92c95620c263444c44031a8b50a9e8552ca534"
+    },
+    {
+      "filename": "swc-anytime-valid.webp",
+      "sourcePage": 23,
+      "description": "Optional-stopping Figures 9 and 10",
+      "width": 1254,
+      "height": 1861,
+      "sha256": "ecb4ed60a4ce73b1926f27df028bbad896ac7bccc1fe472da2bc3ef6c5215963"
+    }
+  ],
+  "notice": "The PDF is the canonical v3 preprint. Crops reproduce manuscript figures without changing their data."
+}
