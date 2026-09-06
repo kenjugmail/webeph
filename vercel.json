@@ -69,7 +69,7 @@
     { "source": "/terms", "destination": "/terms.html" },
     { "source": "/signin", "destination": "/login.html" },
     { "source": "/cloud", "destination": "/cloud.html" },
-    { "source": "/api", "destination": "/api.html" },
+    { "source": "/developers", "destination": "/api.html" },
     { "source": "/vellum/connect", "destination": "/vellum-connect.html" }
   ],
   "headers": [
