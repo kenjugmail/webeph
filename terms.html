@@ -112,7 +112,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <span class="lbl">Legal</span>
     <h1>Terms of Service</h1>
   </div>
-  <div class="legal-updated">Last updated: August 13, 2026 - Beta candidate</div>
+  <div class="legal-updated">Last updated: September 6, 2026</div>
 
   <div class="legal-layout">
   <nav class="legal-index" aria-label="Terms sections"><span>On this page</span><ol data-legal-index></ol></nav>
@@ -142,15 +142,17 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <h2>Subscriptions, tiers, and credits</h2>
     <p>Orrery does not sell permanent unlocks. Current paid tiers are monthly recurring subscriptions:</p>
     <ul>
-      <li><b>Pro - $40/month:</b> governed open-source model routes on your device, hosted Doubleword 200M credits/month, Arbiter 100M credits/month, estimated list-rate API usage value about $1,400/month under prompt caching and token-efficient context, Nexus operations, and managed connector features.</li>
-      <li><b>Max - $100/month:</b> everything in Pro with Doubleword 650M credits/month, Arbiter 400M credits/month, estimated API usage value about $4,800/month, and higher cloud-run capacity.</li>
-      <li><b>Ultra - $200/month:</b> everything in Max with Doubleword 1.5B credits/month, Arbiter 1.2B credits/month, estimated API usage value about $11,700/month, research runs, and proof vault capacity.</li>
+      <li><b>Pro - $40/month:</b> governed open-source model routes on your device, hosted Arbiter 27B 14M compute credits/month, Doubleword 6M credits/month, Nexus operations, and managed connector features.</li>
+      <li><b>Max - $100/month:</b> everything in Pro with Arbiter 27B 35M compute credits/month, Doubleword 15M credits/month, and higher cloud-run capacity.</li>
+      <li><b>Ultra - $200/month:</b> everything in Max with Arbiter 27B 70M compute credits/month, Doubleword 30M credits/month, research runs, and proof vault capacity.</li>
     </ul>
-    <p>Hosted-credit usage is metered and counts against your monthly quota. Credits reset at the start of each monthly billing period and do not roll over. Credits and estimated API usage values are marketing allotments for included capacity — not cash, stored value, guaranteed capacity, or a disclosure of our provider cost. Availability can depend on third-party providers, quotas, abuse controls, maintenance, and beta limits.</p>
+    <p>One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; Arbiter credits buy looped inference compute (three prefill passes plus decode) rather than billed reasoning tokens. Hosted-credit usage is metered and counts against your monthly quota. Pools reset at the start of each monthly billing period, do not roll over, and stop hard at the limit; automatic overage is not enabled. Credits are an allotment of included capacity — not cash, stored value, or guaranteed capacity. Availability can depend on third-party providers, quotas, abuse controls, maintenance, and capacity limits.</p>
+
+    <p>Arbiter route sessions are used to train and evaluate Arbiter by default, tied to an anonymous per-session id and never to your account or email; Doubleword turns are never captured. Zero data retention for Arbiter is a switch in Orrery settings, after which the Arbiter service keeps counts and an access-log line only. See the <a href="/privacy">Privacy Policy</a> for the full description.</p>
 
     <h2>Organization plans</h2>
-    <p>Business is offered at $500 per organization per month and includes up to 10 seats, 5 shared workspaces, one Slack workspace, 10 bound channels, 4 concurrent cloud runs, a shared pool of 5B credits per month (estimated list-rate API usage value about $25,000/month under prompt caching and token-efficient context), and 90-day metadata audit retention. Enterprise starts at $1,000 per organization per month and includes up to 25 seats, 25 shared workspaces, one Slack Enterprise Grid organization or up to five Slack workspaces, 100 bound channels, 10 concurrent cloud runs, a shared pool of 15B credits per month (estimated API usage value about $75,000/month), and 365-day metadata audit retention. Higher seat counts and different terms require a separate written agreement. Both plans may be purchased via Stripe or arranged with sales; setup help is available on request.</p>
-    <p>Organization limits are hard limits. Automatic overage is not enabled. Owners may purchase prepaid credit packs for the current billing period (+1B, +3B, or +8B credits). Unused organization credits expire at the end of the applicable billing period, do not roll over, have no cash value, and are not refundable except where required by law.</p>
+    <p>Business is offered at $500 per organization per month and includes up to 10 seats, 5 shared workspaces, one Slack workspace, 10 bound channels, 4 concurrent cloud runs, a shared monthly credit pool confirmed in writing at setup, and 90-day metadata audit retention. Enterprise starts at $1,000 per organization per month and includes up to 25 seats, 25 shared workspaces, one Slack Enterprise Grid organization or up to five Slack workspaces, 100 bound channels, 10 concurrent cloud runs, a larger shared monthly credit pool confirmed in writing at setup, and 365-day metadata audit retention. Higher seat counts and different terms require a separate written agreement. Both plans may be purchased via Stripe or arranged with sales; setup help is available on request.</p>
+    <p>Organization limits are hard limits. Automatic overage is not enabled. Owners may purchase prepaid credit packs for the current billing period at the sizes offered in Nexus. Unused organization credits expire at the end of the applicable billing period, do not roll over, have no cash value, and are not refundable except where required by law.</p>
     <p>Organization owners and administrators are responsible for membership, workspace and channel bindings, policy, identity configuration, approvals, and activity under service accounts or keys they authorize. Enterprise identity, retention, support, security, data-processing, or regulated-industry commitments apply only when stated in a signed agreement.</p>
 
     <h2>Slack and managed connectors</h2>

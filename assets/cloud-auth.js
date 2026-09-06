@@ -5,12 +5,10 @@ import {
   PLAN_LABELS,
   PLAN_PRICES,
   BUNDLED_QUOTAS,
-  ESTIMATED_API_VALUE_USD,
   planFromCloudProfile,
   isPaidPlan,
   checkoutUrlForTier,
   formatTokens,
-  formatEstimatedApiValue,
 } from './accountPlan.js';
 
 let client = null;
@@ -105,22 +103,22 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Paid agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 200M credits/month', 'Doubleword - 200M credits/month', 'Arbiter - 100M credits/month', 'Est. ~$2,400 API usage value/mo', 'Nexus + managed connector features'],
+      summary: 'Paid agent work with hosted Arbiter 27B and Doubleword credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'Arbiter 27B - 14M compute credits/month', 'Doubleword - 6M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'DeepSeek API - 600M credits/month', 'Doubleword - 650M credits/month', 'Arbiter - 400M credits/month', 'Est. ~$7,500 API usage value/mo', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'Arbiter 27B - 35M compute credits/month', 'Doubleword - 15M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'DeepSeek API - 1.5B credits/month', 'Doubleword - 1.5B credits/month', 'Arbiter - 1.2B credits/month', 'Est. ~$18,000 API usage value/mo', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'Arbiter 27B - 70M compute credits/month', 'Doubleword - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -177,7 +175,6 @@ function renderPlanSummary(root, profile) {
   const plan = catalog[planKey] || catalog.free;
   const portal = cfg().BILLING_PORTAL_URL;
   const paid = isPaidPlan(planKey);
-  const estValue = ESTIMATED_API_VALUE_USD[planKey];
 
   // Static monthly allowances for hosted credits; the live usage meter lives in the IDE.
   const quotas = BUNDLED_QUOTAS[planKey];
@@ -208,12 +205,8 @@ function renderPlanSummary(root, profile) {
       : '<span class="plan-note">Billing portal not connected yet.</span>');
   }
 
-  const estRow = estValue
-    ? `<div class="account-plan-meter">
-      <span>Est. API usage value</span>
-      <b>~${formatEstimatedApiValue(estValue)} / mo</b>
-    </div>
-    <p class="plan-note">Estimated list-rate API usage with prompt caching and token-efficient run context. Meters show credits/tokens — not provider cost.</p>`
+  const poolNote = quotas
+    ? `<p class="plan-note">One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at list rate; Arbiter credits buy looped inference compute. Pools reset monthly, stop at the limit, and never overage.</p>`
     : '';
 
   slot.innerHTML = `
@@ -226,7 +219,7 @@ function renderPlanSummary(root, profile) {
     </div>
     <p>${plan.summary}</p>
     ${quotaRows}
-    ${estRow}
+    ${poolNote}
     <div class="account-plan-meter">
       <span>Nexus cloud features</span>
       <b>${paid ? 'Enabled' : 'Subscription required'}</b>

@@ -40,22 +40,17 @@ No public no-cost local tier is offered. Preview users can inspect setup; active
 
 There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
 
-| Tier | Price | Doubleword | Arbiter (v23) | Est. API usage value |
-|------|-------|-----------------|---------|----------------------|
-| **Pro** | `$40/month` | 200M credits/mo | 100M credits/mo | ~$1,400/mo |
-| **Max** | `$100/month` | 650M credits/mo | 400M credits/mo | ~$4,800/mo |
-| **Ultra** | `$200/month` | 1.5B credits/mo | 1.2B credits/mo | ~$11,700/mo |
+| Tier | Price | Arbiter 27B | Doubleword |
+|------|-------|-------------|------------|
+| **Pro** | `$40/month` | 14M compute credits/mo | 6M credits/mo |
+| **Max** | `$100/month` | 35M compute credits/mo | 15M credits/mo |
+| **Ultra** | `$200/month` | 70M compute credits/mo | 30M credits/mo |
 
-Public allotments assume prompt caching and token-efficient run context. Estimated API usage value is a list-rate marketing figure, not provider COGS. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
+One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; Arbiter credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and bills no reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage. No estimated list-rate "API usage value" is published any more — a credit is already defined in provider dollars, and the second number only contradicted the first. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
 
-Organization plans (see `organizations.html`):
+Organization plans (see `organizations.html`): Business `$500/mo` and Enterprise `$1,000/mo`. The shared monthly pool is confirmed in writing at setup rather than published on the page; the old 5B/15B figures predate the provider-cost credit unit and were removed rather than rescaled by guess.
 
-| Plan | Price | Pooled credits | Est. API usage value |
-|------|-------|----------------|----------------------|
-| **Business** | `$500/mo` | 5B / org / mo | ~$25,000/mo |
-| **Enterprise** | `$1,000/mo` | 15B / org / mo | ~$75,000/mo |
-
-All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`, `ESTIMATED_API_VALUE_USD`, `ORG_POOLS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
+All paid tiers also get cloud identity, pairing, remote access, centralized audit logs, and billing/event records for Stripe or another merchant provider. The quota table lives in `assets/accountPlan.js` (`BUNDLED_QUOTAS`, `ORG_POOLS`); the dashboard at `cloud.html` shows the static allowances for each pool, while live usage metering lives in the IDE and Nexus.
 
 Payment collection is intentionally outside the static site. Put your Stripe Payment Links in `PRO_CHECKOUT_URL`, `MAX_CHECKOUT_URL`, `ULTRA_CHECKOUT_URL`, `BUSINESS_CHECKOUT_URL`, and `ENTERPRISE_CHECKOUT_URL` (Max/Ultra have built-in defaults in `assets/accountPlan.js`), and process Stripe webhooks with an Edge Function or server that updates `profiles.plan` (`'pro' | 'max' | 'ultra'`), `profiles.subscription_status`, credit counters, and `billing_events`. Never put Stripe secrets in `assets/`.
 

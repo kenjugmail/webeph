@@ -21,37 +21,25 @@ export const PLAN_PRICES = {
 };
 
 /**
- * Public monthly credit allotments (marketing). Inflated for prompt caching +
- * token-efficient run context. Server settlement stays in cents internally.
+ * Public monthly credit allotments. One credit is one millionth of a dollar of
+ * provider cost: Doubleword credits buy tokens at list rate, Arbiter credits buy
+ * looped inference compute (three prefill passes plus decode). These numbers are
+ * the same ones on /orrery#pricing; server settlement stays in cents internally.
  */
 export const BUNDLED_QUOTAS = {
-  pro: { 'DeepSeek API': 200_000_000, 'Doubleword': 200_000_000, 'Arbiter': 100_000_000 },
-  max: { 'DeepSeek API': 600_000_000, 'Doubleword': 650_000_000, 'Arbiter': 400_000_000 },
-  ultra: { 'DeepSeek API': 1_500_000_000, 'Doubleword': 1_500_000_000, 'Arbiter': 1_200_000_000 },
+  pro: { 'Arbiter 27B': 14_000_000, 'Doubleword': 6_000_000 },
+  max: { 'Arbiter 27B': 35_000_000, 'Doubleword': 15_000_000 },
+  ultra: { 'Arbiter 27B': 70_000_000, 'Doubleword': 30_000_000 },
 };
 
-/**
- * Estimated list-rate API usage value shown publicly (not provider cost / COGS).
- * Framed as full token-cost reduction from prompt caching + efficient context.
- */
-export const ESTIMATED_API_VALUE_USD = {
-  pro: 2400,
-  max: 7500,
-  ultra: 18000,
-};
+/* No estimated-dollar allotment is published any more. A credit is defined as
+   provider cost, so a second "list-rate API usage value" number only invited a
+   contradiction between the panel and the pricing page. */
 
-/** Shared org pooled credits + estimated API value (public marketing). */
+/** Organization tiers. The shared pool is confirmed in writing at setup. */
 export const ORG_POOLS = {
-  business: {
-    priceUsd: 500,
-    pooledCredits: 5_000_000_000,
-    estimatedApiValueUsd: 25000,
-  },
-  enterprise: {
-    priceUsd: 1000,
-    pooledCredits: 15_000_000_000,
-    estimatedApiValueUsd: 75000,
-  },
+  business: { priceUsd: 500 },
+  enterprise: { priceUsd: 1000 },
 };
 
 /** Built-in Stripe Payment Links; site-config.js keys override them. */
@@ -99,16 +87,6 @@ export function formatTokens(n) {
   if (value >= 1_000_000) return trimZero(value / 1_000_000) + 'M';
   if (value >= 1_000) return trimZero(value / 1_000) + 'K';
   return String(value);
-}
-
-/** Public marketing dollars for estimated API usage value (not COGS). */
-export function formatEstimatedApiValue(usd) {
-  const amount = Number(usd) || 0;
-  return amount.toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  });
 }
 
 function trimZero(n) {

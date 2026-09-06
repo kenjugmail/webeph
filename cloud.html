@@ -8,7 +8,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
 <title>Orrery Cloud</title>
-<meta name="description" content="Orrery Cloud account for paid beta access, hosted credits, and Nexus cloud features. Availability, quotas, and providers may change during beta.">
+<meta name="description" content="Orrery Cloud account for subscriber access, hosted Arbiter 27B and Doubleword credits, and Nexus cloud features. Availability, quotas, and providers may change.">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0b0b12">
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -79,7 +79,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <main class="auth-main" id="main" data-workflow-label="Account / Cloud operations">
   <div class="auth-card" style="max-width:560px;">
     <h1>Orrery Cloud</h1>
-    <p class="sub">Orrery Cloud is unlocked by Pro, Max, or Ultra. Sign in with Google, GitHub, or email for hosted credits, cloud runs, managed connectors, Nexus, proof vaults, and audit trails. Preview accounts cannot run agents. Cloud features are beta and may be limited, changed, unavailable, or provider-dependent.</p>
+    <p class="sub">Orrery Cloud is unlocked by Pro, Max, or Ultra. Sign in with Google, GitHub, or email for hosted credits, cloud runs, managed connectors, Nexus, proof vaults, and audit trails. Preview accounts cannot run agents. Cloud features may be limited, changed, unavailable, or provider-dependent.</p>
 
     <div class="cloud-features">
       <div class="cloud-feat"><b>Subscription access</b><span>Google, GitHub, and email accounts verify an active Pro, Max, or Ultra subscription.</span></div>
@@ -92,20 +92,20 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="mini-plan mini-plan-pro">
         <span class="mono">Pro</span>
         <b>$40/month</b>
-        <p>200M Doubleword + 100M Arbiter credits/month (~$1,400 est. API usage value), plus Nexus cloud operations.</p>
+        <p>14M Arbiter 27B compute credits + 6M Doubleword credits/month, plus Nexus cloud operations.</p>
       </div>
       <div class="mini-plan mini-plan-pro">
         <span class="mono">Max</span>
         <b>$100/month</b>
-        <p>650M Doubleword + 400M Arbiter credits/month (~$4,800 est. API usage value), plus more cloud-run capacity.</p>
+        <p>35M Arbiter 27B compute credits + 15M Doubleword credits/month, plus more cloud-run capacity.</p>
       </div>
       <div class="mini-plan mini-plan-pro">
         <span class="mono">Ultra</span>
         <b>$200/month</b>
-        <p>1.5B Doubleword + 1.2B Arbiter credits/month (~$11,700 est. API usage value), research runs, and proof vault capacity.</p>
+        <p>70M Arbiter 27B compute credits + 30M Doubleword credits/month, research runs, and proof vault capacity.</p>
       </div>
     </div>
-    <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. Credits reset each billing month, do not roll over, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
+    <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. One credit is one millionth of a dollar of provider cost; pools reset each billing month, do not roll over, stop hard at the limit, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
 
     <div id="cloud-auth-setup" class="hidden auth-optional">
       <p class="auth-msg" style="color:var(--muted);">Cloud sign-in is not enabled for this environment yet. Local preview setup remains available below.</p>
@@ -175,6 +175,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .cloud-feat em { color: var(--faint); font-style: normal; }
 .pair-code { font-family: var(--mono); font-size: 28px; letter-spacing: 0.35em; text-align: center; padding: 16px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); color: var(--teal-lt); }
 .mini-pricing { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 26px; }
+@media (max-width:480px){ .mini-pricing { grid-template-columns:1fr; } }
 .mini-plan { border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(255,255,255,0.02); padding:14px; }
 .mini-plan span { color:var(--faint); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
 .mini-plan b { display:block; margin:5px 0 6px; font-size:20px; color:var(--ink); }
