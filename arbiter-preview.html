@@ -7,22 +7,22 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
-<title>Previewing Arbiter 0.1 Beta - Ephemerent</title>
-<meta name="description" content="Arbiter 0.1 beta is an experimental hosted coding route for Orrery. Results vary by task, model, provider availability, and verification setup.">
+<title>Arbiter 27B - Ephemerent</title>
+<meta name="description" content="Arbiter 27B is the reasoning model behind Orrery's verified coding and research routes: a recurrent-depth Qwen3.8-27B whose extra passes were trained on verifier-checked operations. Measured, not promised.">
 <link rel="canonical" href="https://ephemerent.com/arbiter">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Previewing Arbiter 0.1 Beta">
+<meta property="og:title" content="Arbiter 27B">
 <meta property="og:description" content="An experimental Orrery coding route with verifier-backed evidence. Benchmarks and examples are limited beta signals, not guaranteed results.">
 <meta property="og:url" content="https://ephemerent.com/arbiter">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Previewing Arbiter 0.1 Beta">
+<meta name="twitter:title" content="Arbiter 27B">
 <meta name="twitter:description" content="An experimental Orrery coding route with beta evidence and no guaranteed outcome.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
 <!-- include: head-theme -->
@@ -104,8 +104,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <main id="main">
   <header class="ap-hero">
     <div class="ewrap">
-      <span class="lbl rv in">System preview - July 9, 2026</span>
-      <h1 class="rv in">Previewing Arbiter 0.1 beta.</h1>
+      <span class="lbl rv in">Model note - September 6, 2026</span>
+      <h1 class="rv in">Arbiter 27B thinks in place.</h1>
       <figure class="ap-hero-plate rv in" aria-labelledby="ap-plate-title">
         <figcaption><span>Route note · 001</span><span>Access boundary · named</span></figcaption>
         <div class="ap-plate-field">
@@ -120,9 +120,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
             <strong id="ap-plate-title">Useful output<br>still needs a decision.</strong>
           </div>
         </div>
-        <div class="ap-plate-foot"><span>Beta route · capacity can change</span><span>Keep · revise · discard</span></div>
+        <div class="ap-plate-foot"><span>Served route · capacity can change</span><span>Propose · verify · repair</span></div>
       </figure>
-      <p class="ap-lede rv in">Arbiter is an experimental hosted coding route for Orrery subscribers. It is built for coding agents that need clearer evidence, usage receipts, and review boundaries before a result is trusted.</p>
+      <p class="ap-lede rv in">Arbiter 27B starts from Qwen3.8-27B and adds recurrent depth: three windows of the network run three passes over the prompt, with small per-pass adapters trained on operations a verifier can check exactly. The base weights never change. Measured on sealed sets: 16-hop graph reasoning 31.5% for the base model, 86.3% for Arbiter; proposing, repairing, eliminating and verifying rules at 96, 90, 78 and 86 percent; as an autonomous research agent on the Erdős–Straus conjecture, exact coverage of hard primes from 39.9% to 91.2% in 80 turns, every rule machine-verified. It is the included Arbiter route in Orrery, with hosted fallback when capacity is busy.</p>
       <div class="ap-actions rv in">
         <a class="ebtn ebtn-fill" href="/orrery">See Orrery</a>
         <a class="ebtn" href="/download">Download Orrery</a>
