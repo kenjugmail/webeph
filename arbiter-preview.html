@@ -247,12 +247,13 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <strong>Capacity note:</strong> Arbiter is served from a small GPU pool and falls back to a hosted lane when busy; latency and availability vary. Results vary by task, context, tools, and provider availability.
         </div>
 
-        <h2 class="rv">Beta evidence</h2>
-        <p class="rv">Current evidence is internal, limited, and not presented here as a public benchmark. Matched evaluations will be published only with the task set, method, verifier configuration, and limitations needed to interpret them. Until then, the beta makes no leaderboard claim and guarantees no individual result.</p>
+        <h2 class="rv">Measured evidence</h2>
+        <p class="rv">Every number is a paired, same-day measurement on sealed sets built to be disjoint from training, with an executor or an exact verifier as the judge. Against the base Qwen3.8-27B: 16-hop graph reasoning 31.5% to 86.3% (n=600). The trained operations, versus the first served version: proposing a rule after refutation 78 to 96, repairing a refuted rule 72 to 90, eliminating candidates 52 to 78, denoising evidence 75 to 89; verifying a claim against evidence 86. Full held-out SuperGPQA (n=16,400, transfer across datasets): 36.25% to 45.48%, p=5e-79. As an autonomous research agent on the Erdős–Straus conjecture: exact coverage of hard primes from 39.9% to 91.2% in 80 turns, every rule machine-verified. The passes are the mechanism: with the pass adapters unreachable, accuracy drops 2.1 points (p=0.017); one adapter shared across passes is indistinguishable from a single pass.</p>
+        <p class="rv">Not measured yet, and therefore not claimed: Terminal-Bench 4.0 and Terminal-Bench Science, which are queued on the served model.</p>
 
         <h2 class="rv">Availability</h2>
-        <p class="rv">Arbiter access is available for Orrery Pro, Max, and Ultra subscriber testing through hosted credits when the beta route is online. Signed-out users, unsubscribed accounts, and canceled or unpaid accounts cannot use hosted Arbiter credits.</p>
-        <p class="rv">The exact capacity, latency, quotas, model mix, and availability may change during the beta.</p>
+        <p class="rv">Arbiter access is available for Orrery Pro, Max, and Ultra subscriber testing through hosted credits when the route is online. Signed-out users, unsubscribed accounts, and canceled or unpaid accounts cannot use hosted Arbiter credits.</p>
+        <p class="rv">The exact capacity, latency, quotas, model mix, and availability may change as capacity is added.</p>
 
         <h2 class="rv">Use safely</h2>
         <p class="rv">Treat Arbiter output like any other AI-generated code: inspect it, run tests, review security implications, and keep backups. Orrery can help organize evidence, but you remain responsible for what you accept, run, and ship.</p>
