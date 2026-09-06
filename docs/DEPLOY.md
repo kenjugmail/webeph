@@ -48,6 +48,7 @@ Porkbun -> domain -> **DNS Records**. Use values from Vercel's domain screen (ty
 | Type | Host | Answer / Value |
 |------|------|----------------|
 | A | @ | `76.76.21.21` |
+| A | api | `3.228.134.211` (Arbiter API, Elastic IP on the AWS box; Caddy issues TLS for api.ephemerent.com on first bring-up) |
 | CNAME | www | `cname.vercel-dns.com` |
 
 - Delete conflicting **A** records on `@` before adding Vercel's A record
