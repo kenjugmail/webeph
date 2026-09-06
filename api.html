@@ -126,8 +126,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </div>
       <div class="api-card">
         <span class="mono api-kicker">Where the credits come from</span>
-        <b>Your subscription pool</b>
-        <p>API keys draw from the same monthly Arbiter 27B pool as the desktop: 14M on Pro, 35M on Max, 70M on Ultra. Pools reset monthly, stop hard at the limit and never overage. <a href="/organizations">Organizations</a> share one pool across seats.</p>
+        <b>Subscription pool, then purchased credits</b>
+        <p>API keys draw first from the same monthly Arbiter 27B pool as the desktop: 14M on Pro, 35M on Max, 70M on Ultra. When a month's pool runs out, requests fall through to credits you have bought, which never expire and work across both models. Nothing overages: with neither balance the API answers 429 rather than billing you. <a href="/organizations">Organizations</a> share one pool across seats.</p>
       </div>
     </div>
 
@@ -152,6 +152,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="api-card">
         <span class="mono api-kicker">Keys</span>
         <p>Create and revoke keys on the account page. A key shows its prefix after creation; the full key is shown once. Revoking takes effect on the next request.</p>
+      </div>
+      <div class="api-card">
+        <span class="mono api-kicker">Buying credits</span>
+        <p>Credit packs are a one-time purchase on your <a href="/cloud">account page</a>: 10M for $20, 25M for $45, 60M for $100. They sit in a rollover balance the monthly pool is always spent before, so buying early never wastes them.</p>
       </div>
       <div class="api-card">
         <span class="mono api-kicker">Limits</span>

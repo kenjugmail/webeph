@@ -81,6 +81,16 @@ window.ORRERY_CONFIG = {
   BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/eVq14n1c77o2dT3gQm3Je06',
   ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/cNi5kD4ojbEibKVfMi3Je07',
   BILLING_PORTAL_URL: '',
+  /** Credit packs: one-time top-ups of the rollover wallet, spent only after the monthly pool.
+   *  `credits` must match CREDIT_PACKS in supabase/functions/stripe-webhook, and `url` is a Stripe
+   *  Payment Link; the account page appends ?client_reference_id=<user id> so the webhook knows who
+   *  bought it. Leave a url empty and that pack is hidden. */
+  CREDIT_PACKS: [
+    { id: 'credits-10', credits: 10_000_000, priceUsd: 20, url: '' },
+    { id: 'credits-25', credits: 25_000_000, priceUsd: 45, url: '' },
+    { id: 'credits-60', credits: 60_000_000, priceUsd: 100, url: '' },
+  ],
+
 
   /** Future - WebSocket relay for phone/remote. Leave empty until deployed. */
   CLOUD_RELAY_URL: '',

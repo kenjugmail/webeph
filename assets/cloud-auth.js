@@ -398,9 +398,10 @@ export async function renderUsageAndKeys(root, session) {
   if (!session?.access_token) return;
   const api = root.getElementById('cloud-api');
   if (api) api.hidden = false;
-  // 1) pool meters
+  // 1) pool meters + purchased-credit wallet
   try {
     const usage = await relayFetch(session, '/model-relay/usage');
+    renderCreditWallet(root, session, usage);
     for (const pool of usage.pools || []) {
       const slot = POOL_SLOTS[pool.poolId];
       const row = slot && root.querySelector(`.account-plan-meter-pool[data-credit-pool="${slot}"]`);
@@ -479,4 +480,34 @@ export async function renderUsageAndKeys(root, session) {
 
 function escapeHtml(v) {
   return String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/* Two sources of credit, one unit. The monthly pool above resets and does not roll over; the wallet
+ * below is bought once, never expires, and is only spent after the pool for that month is gone. */
+function renderCreditWallet(root, session, usage) {
+  const slot = root.getElementById('cloud-credit-wallet');
+  if (!slot) return;
+  if (usage.organization === true) {
+    slot.hidden = true;                        // organizations bill against their contract, not a wallet
+    return;
+  }
+  slot.hidden = false;
+  const balance = Math.max(0, Number(usage.purchasedCredits) || 0);
+  const packs = (cfg().CREDIT_PACKS || []).filter((pack) => pack && pack.url);
+  const buy = packs.map((pack) => {
+    const href = `${pack.url}${pack.url.includes('?') ? '&' : '?'}client_reference_id=${encodeURIComponent(session.user.id)}`;
+    return `<a class="btn btn-ghost credit-pack" href="${href}">
+      <b>${formatTokens(pack.credits)} credits</b><span>$${pack.priceUsd}</span></a>`;
+  }).join('');
+  slot.innerHTML = `
+    <div class="credit-wallet-head">
+      <div>
+        <span class="mono account-plan-kicker">Purchased credits</span>
+        <b>${formatTokens(balance)} credits</b>
+      </div>
+      <span class="plan-badge">${balance > 0 ? 'Available' : 'Empty'}</span>
+    </div>
+    <p class="plan-note">Bought once, never expires, and works across Arbiter 27B and Doubleword. Your monthly pool is always spent first, so buying early never wastes credits. Use them from the desktop or the <a href="/developers">API</a>.</p>
+    ${buy === '' ? '<p class="plan-note">Credit packs are not connected to checkout yet.</p>' : `<div class="credit-pack-row">${buy}</div>`}
+  `;
 }
