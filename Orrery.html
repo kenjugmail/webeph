@@ -367,11 +367,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <b>$40</b>
           <small>per month</small>
         </div>
-        <p>Paid individual agent work with hosted credits and Nexus operations.</p>
+        <p>Individual agent work on Arbiter 27B and Doubleword with hosted credits and Nexus operations. Zero data retention by default.</p>
         <ul>
-          <li>Doubleword - 200M credits/mo</li>
-          <li>Arbiter - 100M credits/mo</li>
-          <li>Est. ~$1,400 API usage value/mo</li>
+          <li>Arbiter 27B - 14M compute credits/mo (about 12M looped tokens)</li>
+          <li>Doubleword - 6M credits/mo (about 32M GLM 5.3 Flash / DeepSeek V4 Flash tokens)</li>
+          <li>Credits are vendor-cost units, so nothing is marked up and nothing is inflated</li>
           <li>Nexus, Discord/mobile oversight, proof receipts</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-pro" href="/signin">Start Pro</a>
@@ -382,11 +382,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <b>$100</b>
           <small>per month</small>
         </div>
-        <p>Bigger hosted-credit pools for daily multi-agent work.</p>
+        <p>Bigger pools for daily multi-agent work; the same routes, more headroom.</p>
         <ul>
-          <li>Doubleword - 650M credits/mo</li>
-          <li>Arbiter - 400M credits/mo</li>
-          <li>Est. ~$4,800 API usage value/mo</li>
+          <li>Arbiter 27B - 35M compute credits/mo (about 31M looped tokens)</li>
+          <li>Doubleword - 15M credits/mo (about 80M tokens)</li>
+          <li>2.5x Pro on both pools</li>
           <li>More cloud/background run capacity</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-max" href="https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02">Start Max</a>
@@ -397,17 +397,17 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <b>$200</b>
           <small>per month</small>
         </div>
-        <p>The largest hosted-credit pools and cloud automation capacity.</p>
+        <p>The largest pools plus cloud automation capacity for research runs.</p>
         <ul>
-          <li>Doubleword - 1.5B credits/mo</li>
-          <li>Arbiter - 1.2B credits/mo</li>
-          <li>Est. ~$11,700 API usage value/mo</li>
+          <li>Arbiter 27B - 70M compute credits/mo (about 61M looped tokens)</li>
+          <li>Doubleword - 30M credits/mo (about 160M tokens)</li>
+          <li>5x Pro on both pools</li>
           <li>Research runs and proof vault capacity</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-ultra" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Start Ultra</a>
       </div>
     </div>
-    <p class="pricing-efficiency mono reveal d1">Estimated API usage value assumes list-rate tokens with full prompt-caching and token-efficient context reduction. Public meters show credits/tokens and that estimate — not provider cost.</p>
+    <p class="pricing-efficiency mono reveal d1">One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; Arbiter credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and does not bill reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage.</p>
     <div class="organization-pricing reveal d2">
       <div>
         <div class="eyebrow">Organizations</div>
