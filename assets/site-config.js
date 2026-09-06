@@ -87,9 +87,9 @@ window.ORRERY_CONFIG = {
    *  Payment Link; the account page appends ?client_reference_id=<user id> so the webhook knows who
    *  bought it. Leave a url empty and that pack is hidden. */
   CREDIT_PACKS: [
-    { id: 'credits-10', credits: 10_000_000, priceUsd: 20, url: '' },
-    { id: 'credits-25', credits: 25_000_000, priceUsd: 45, url: '' },
-    { id: 'credits-60', credits: 60_000_000, priceUsd: 100, url: '' },
+    { id: 'credits-10', credits: 10_000_000, priceUsd: 20, url: 'https://buy.stripe.com/4gM5kDaMHaAe16heIe3Je0a' },
+    { id: 'credits-25', credits: 25_000_000, priceUsd: 45, url: 'https://buy.stripe.com/aFaaEX7Av7o27uF2Zw3Je0b' },
+    { id: 'credits-60', credits: 60_000_000, priceUsd: 100, url: 'https://buy.stripe.com/28EbJ14oj23I7uF57E3Je0c' },
   ],
 
 
