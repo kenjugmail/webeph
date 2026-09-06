@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "version": "5-arxiv",
+  "status": "public-preprint-not-peer-reviewed",
+  "filename": "stochastic-witness-calculus-arxiv-v5.pdf",
+  "pages": 38,
+  "sha256": "bd4b3a9ad3cdebf7265d6dec7e4823e6cafcd1fa0c854374bc151e9cf7f650d2",
+  "sourceArchive": {
+    "filename": "stochastic-witness-calculus-arxiv-v5-source.tar.gz",
+    "sha256": "b473614d11144a6800c44e4dcc85e78a4086ab5a43b13bb52c84d2d0aa8c5f98",
+    "bytes": 166326
+  },
+  "construction": "Cohesive recompilation of the v3 LaTeX source with integrated v5 exact refinements.",
+  "universalExistenceStatus": "unproved",
+  "dateModified": "2026-09-05"
+}

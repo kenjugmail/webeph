@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">What a checked answer can promise. — Ephemerent News</title>
+  <desc id="desc">An editorial diagram separates learned witness search from exact certification and deterministic theoremhood.</desc>
+  <rect width="1200" height="630" fill="#f4efe4"/>
+  <rect width="1200" height="18" fill="#2553d8"/>
+  <path d="M66 96H1134M66 552H1134" stroke="#bdb4a4"/>
+  <g transform="translate(66 38)">
+    <text x="0" y="33" fill="#11172a" font-family="Georgia,serif" font-size="38">Ephemerent</text>
+    <text x="240" y="33" fill="#e75845" font-family="Georgia,serif" font-size="38" font-style="italic">News</text>
+    <text x="1068" y="30" text-anchor="end" fill="#69695f" font-family="ui-monospace,monospace" font-size="10" letter-spacing="2">RESEARCH DISPATCH · 002</text>
+  </g>
+  <text x="66" y="145" fill="#c23f31" font-family="ui-monospace,monospace" font-size="11" letter-spacing="2">AUTOMATED REASONING</text>
+  <g fill="#11172a" font-family="Georgia,serif" font-size="59">
+    <text x="66" y="213">What a checked</text>
+    <text x="66" y="274">answer</text>
+    <text x="66" y="346" fill="#e75845">can promise.</text>
+  </g>
+  <text x="66" y="401" fill="#30364a" font-family="Arial,sans-serif" font-size="19">Exact answers. Explicit scope. Measured reliability.</text>
+
+  <g transform="translate(665 144)">
+    <rect width="469" height="330" fill="#11172a"/>
+    <text x="27" y="38" fill="#aeb6cd" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.7">THE TRUST BOUNDARY</text>
+    <g transform="translate(27 73)">
+      <rect width="120" height="98" fill="#181f35" stroke="#69728b"/>
+      <text x="15" y="25" fill="#aeb6cd" font-family="ui-monospace,monospace" font-size="8">01 · SEARCH</text>
+      <circle cx="27" cy="57" r="5" fill="#2553d8"/><circle cx="52" cy="48" r="8" fill="#7b62c7"/><circle cx="76" cy="66" r="11" fill="#e75845"/><circle cx="98" cy="44" r="4" fill="#2553d8"/>
+      <path d="M120 49H154" stroke="#91aaff" stroke-width="2"/><path d="M146 41L155 49L146 57" fill="none" stroke="#91aaff" stroke-width="2"/>
+      <rect x="155" width="145" height="98" fill="#f4efe4" stroke="#e75845" stroke-width="2"/>
+      <text x="227.5" y="38" text-anchor="middle" fill="#11172a" font-family="Georgia,serif" font-size="20">μ(A) ≥ δ &gt; 0</text>
+      <text x="227.5" y="63" text-anchor="middle" fill="#69695f" font-family="ui-monospace,monospace" font-size="7" letter-spacing="1">EXACT CERTIFICATE</text>
+      <path d="M300 49H334" stroke="#91aaff" stroke-width="2"/><path d="M326 41L335 49L326 57" fill="none" stroke="#91aaff" stroke-width="2"/>
+      <rect x="335" width="80" height="98" fill="#2553d8" stroke="#91aaff"/>
+      <text x="375" y="42" text-anchor="middle" fill="#f8f4ea" font-family="Georgia,serif" font-size="18">∃ w</text>
+      <text x="375" y="65" text-anchor="middle" fill="#dfe7ff" font-family="ui-monospace,monospace" font-size="7">THEOREM</text>
+    </g>
+    <path d="M27 210H442" stroke="#525b72"/>
+    <text x="27" y="238" fill="#f18472" font-family="ui-monospace,monospace" font-size="8" letter-spacing="1.4">EMPIRICAL CLAIMS · SEPARATE LANE</text>
+    <path d="M27 286C78 286 86 260 137 260S190 300 241 300S291 247 342 247S389 278 442 238" fill="none" stroke="#e75845" stroke-width="2"/>
+    <path d="M27 274H442" stroke="#aeb6cd" stroke-dasharray="5 7" opacity=".6"/>
+  </g>
+  <text x="66" y="516" fill="#11172a" font-family="Georgia,serif" font-size="20">Stochastic Witness Calculus, explained intuitively</text>
+  <text x="66" y="587" fill="#69695f" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.6">KENJU TOMITA · SEPTEMBER 2026</text>
+  <text x="1134" y="587" text-anchor="end" fill="#2553d8" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.6">EPHEMERENT.COM/NEWS</text>
+</svg>

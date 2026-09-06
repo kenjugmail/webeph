@@ -27,7 +27,7 @@ import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
 
 const PAGES = [
-  '/', '/research', '/journal', '/journal/policies', '/news', '/vespera',
+  '/', '/research', '/journal', '/journal/preprint/stochastic-witness-calculus', '/journal/policies', '/news', '/news/stochastic-witness-calculus', '/vespera',
   '/orrery', '/hearthrail', '/vellum', '/shelterix', '/download', '/cloud', '/signin',
   '/organizations', '/privacy', '/terms', '/security', '/slack',
 ];

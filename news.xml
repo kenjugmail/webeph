@@ -5,13 +5,28 @@
     <link>https://ephemerent.com/news</link>
     <description>Research briefings, technology, and evidence.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Aug 2026 12:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 12:00:00 -0400</lastBuildDate>
     <atom:link href="https://ephemerent.com/news.xml" rel="self" type="application/rss+xml"/>
     <image>
-      <url>https://ephemerent.com/assets/og-news-drfsp.png</url>
+      <url>https://ephemerent.com/assets/og-news-swc.png</url>
       <title>Ephemerent News</title>
       <link>https://ephemerent.com/news</link>
     </image>
+    <item>
+      <title>What a checked answer can promise.</title>
+      <link>https://ephemerent.com/news/stochastic-witness-calculus</link>
+      <guid isPermaLink="true">https://ephemerent.com/news/stochastic-witness-calculus</guid>
+      <pubDate>Fri, 04 Sep 2026 12:00:00 -0400</pubDate>
+      <author>kt@ephemerent.com (Kenju Tomita)</author>
+      <category>Research Dispatch</category>
+      <category>Automated reasoning</category>
+      <description>An intuitive guide to Stochastic Witness Calculus and the boundary between learned proof search, exact certificates, and empirical evidence.</description>
+      <content:encoded><![CDATA[
+        <p>A model can help search an enormous space for a proof witness. It should not get to certify its own work.</p>
+        <p><a href="https://ephemerent.com/news/stochastic-witness-calculus">Read the full Research Dispatch at Ephemerent News.</a></p>
+        <p><a href="https://ephemerent.com/journal/preprint/stochastic-witness-calculus">Read the public v6 preprint at Ephemerent Research.</a> Updated September 5: exact-output receipts, complete coverage of 12,673 declared inputs, and 4,603 fresh generated inputs with zero failures. The availability result is specific to the recorded IID model and frozen solver; no physical deployment was evaluated. The paper, LaTeX source, and full evidence are downloadable.</p>
+      ]]></content:encoded>
+    </item>
     <item>
       <title>A simpler rule beat the hierarchy on GPT-2. Here’s what that means.</title>
       <link>https://ephemerent.com/news/drfsp-robust-compression</link>

@@ -1,0 +1,11 @@
+/* Homepage entry to the company waitlist; inherits the site's light/dark palette. */
+.home-page .ecompany{padding:65px 0 70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--accent) 4%,transparent)}
+.home-page .ecompany-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:100px;align-items:center}
+.home-page .ecompany .lbl{margin-bottom:24px}.home-page .ecompany h2{font:400 clamp(38px,4.5vw,58px)/1.07 'Newsreader',Georgia,serif;letter-spacing:-1.4px;margin:0 0 23px;color:var(--ink)}
+.home-page .ecompany-intro>p:not(.lbl){max-width:520px;font-size:16px;line-height:1.8;color:var(--ink-2);margin-bottom:26px}
+.home-page .ecompany-scope>a{display:grid;grid-template-columns:28px 1fr 16px;gap:16px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.home-page .ecompany-scope>a>span{font:11px var(--mono);color:var(--accent)}.home-page .ecompany-scope strong{font-weight:400;font-size:19px}.home-page .ecompany-scope>a:hover strong{text-decoration:underline;text-underline-offset:5px}.home-page .ecompany-scope>p:last-child{font-size:12px;line-height:1.7;color:var(--ink-2);margin-top:20px}
+@media(max-width:1080px){.home-page .enav{gap:16px}.home-page .ecompany-grid{gap:50px}}
+@media(max-width:720px){.home-page .ecompany{padding:42px 0}.home-page .ecompany-grid{grid-template-columns:1fr;gap:35px}.home-page .ecompany-intro>p:not(.lbl){font-size:15px}.home-page .ecompany-scope>a{padding:18px 0}}
+.home-page .ecompany-scope>a.ecompany-image{display:block;border:0;padding:0;margin-bottom:24px;overflow:hidden}.home-page .ecompany-image img{width:100%;height:auto;aspect-ratio:2.1;object-fit:cover;display:block}.home-page .ecompany-scope>a:not(.ecompany-image){padding:16px 0}.home-page .ecompany-scope .lbl{margin-bottom:4px}
+.home-page .ecompany-image img{transition:opacity .16s ease}.home-page .ecompany-image:hover img{opacity:.86}.home-page .ecompany-image:focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(prefers-reduced-motion:reduce){.home-page .ecompany-image img{transition:none}}

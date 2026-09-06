@@ -1,6 +1,18 @@
 # Deploy webeph to Vercel + ephemerent.com
 
-Static site - no build step. Repo: [github.com/kenjugmail/webeph](https://github.com/kenjugmail/webeph).
+Static site with required release checks. Repo: [github.com/kenjugmail/webeph](https://github.com/kenjugmail/webeph).
+
+Production follows `main`. Merge release work into `main` before deploying;
+deploying an unmerged branch can appear successful and then be overwritten by
+the next automatic `main` deployment. This caused the SWC preprint, News story,
+and downloads to disappear on September 6, 2026 while their files remained on
+`polish/design-system`. Both histories are now integrated, including the API
+routes and the waitlist. Preserve both when resolving future merges.
+
+SWC is a static public preprint at `/journal/preprint/stochastic-witness-calculus`;
+its PDF, source, and evidence live under `/assets/research/`. It is not a
+published Supabase submission. DR-FSP is a published Supabase journal record.
+Check the correct storage system before concluding that a paper was deleted.
 
 ## 1. Vercel (after push to `main`)
 
@@ -9,7 +21,7 @@ Code is on GitHub. Import once:
 1. [vercel.com](https://vercel.com) -> Sign in with **GitHub**
 2. **Add New Project** -> Import `kenjugmail/webeph`
 3. Framework Preset: **Other**
-4. **Build Command:** leave empty
+4. **Build Command:** `npm run build` (required route, artifact, and release checks)
 5. **Output Directory:** `.`
 6. **Deploy**
 
@@ -23,6 +35,11 @@ Verify:
 - `/download.html` -> download
 - `/login.html` -> sign-in
 - `/cloud.html` -> cloud account, plan, and billing CTA
+- `/journal/preprint/stochastic-witness-calculus` -> current SWC preprint
+- `/news/stochastic-witness-calculus` -> SWC explainer
+- `/assets/research/stochastic-witness-calculus-arxiv-v6.pdf` -> PDF, with the manifest hash
+- `/waitlist` -> company waitlist
+- `/developers` -> API documentation
 
 ### CLI (optional)
 
@@ -88,17 +105,11 @@ Do not put Stripe secret keys in this repository's static files.
 
 ## 6. Download bundle and update channel
 
-`assets/site-config.js` has `RELEASE_AVAILABLE: true`, so `download.html` shows the current
-Windows beta packet and update metadata.
+Orrery uses locally built installers and website-owned URLs, not GitHub Releases or Actions.
+`RELEASE_AVAILABLE` is false until the explicitly unsigned Windows test beta is built, tested and
+approved. This beta uses manual ZIP downloads; the signed automatic-update channel is separate.
 
-For the current beta:
-
-1. Build it from `buddyide` and publish a **GitHub Release** in the binary-only
-   `kenjugmail/orrery-releases` repo with `Orrery-0.1.0-beta-win-x64-portable.zip`.
-2. Point `DOWNLOAD_URL` at that release asset.
-3. Keep `RELEASE_VERSION`, `RELEASE_PAGE_URL`, `RELEASE_SHA256`, and `UPDATE_MODE` in
-   `assets/site-config.js` synchronized with the binary release.
-4. The current public packet is a portable Windows beta, so updates are manual: users
-   download the newest zip from the website/release page. The desktop app has an
-   electron-updater feed configured for signed installer builds later.
-5. Grant testers access through Supabase billing/profile metadata for real agent runs.
+`/downloads/orrery/:path*` redirects to the public `orrery-releases` Supabase Storage bucket
+in the existing Ephemerent project. The bucket must contain approved binary/proof assets only.
+It has not been provisioned or populated by the configuration change. See
+[Orrery website distribution](./ORRERY-DISTRIBUTION.md) for the release order and update channel.

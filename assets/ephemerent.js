@@ -114,6 +114,9 @@
     let lastCameraProgress = -1;
     let lastDrawPosition = -1;
     let lastGlossaryProgress = -1;
+    let lastStoryProgress = -1;
+    let lastStoryLocal = -1;
+    let lastTimedDraw = 0;
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
@@ -441,17 +444,25 @@
       setStep(position.selected, reduced);
       updateFrameBlend(position.raw, position.selected, position.local, reduced);
       const total = clamp(position.raw / Math.max(1, steps.length - 1));
-      scene.style.setProperty('--story-progress', total.toFixed(4));
-      scene.style.setProperty('--story-local', position.local.toFixed(4));
+      if (Math.abs(total - lastStoryProgress) >= .0005) {
+        scene.style.setProperty('--story-progress', total.toFixed(4));
+        lastStoryProgress = total;
+      }
+      if (Math.abs(position.local - lastStoryLocal) >= .0005) {
+        scene.style.setProperty('--story-local', position.local.toFixed(4));
+        lastStoryLocal = position.local;
+      }
       if (glossaryMeter && Math.abs(total - lastGlossaryProgress) >= .0005) {
         glossaryMeter.style.transform = `scaleY(${total.toFixed(4)})`;
         lastGlossaryProgress = total;
       }
 
       const hasTimedSignal = position.selected === 0 && position.local > .34 && !reduced;
-      if (hasTimedSignal || Math.abs(position.raw - lastDrawPosition) >= .0005 || reduced) {
+      const timedDrawDue = hasTimedSignal && now - lastTimedDraw >= 33;
+      if (timedDrawDue || Math.abs(position.raw - lastDrawPosition) >= .0005 || reduced) {
         draw(now, position.local, reduced);
         lastDrawPosition = position.raw;
+        if (timedDrawDue) lastTimedDraw = now;
       }
     }
 

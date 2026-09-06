@@ -1,5 +1,10 @@
 # Releases
 
+**Historical quick-start archive only.** Current Orrery distribution uses locally built installers,
+website URLs and Supabase Storage; see [current distribution](../docs/ORRERY-DISTRIBUTION.md).
+The old zip below is retained locally but excluded from Vercel deployments. Do not publish it as the
+new desktop release or ask customers to clone private source.
+
 Attach `orrery-install.zip` to each [GitHub Release](https://github.com/kenjugmail/webeph/releases) as **`orrery-install.zip`** (exact filename — the download page expects this).
 
 Rebuild from buddyide:

@@ -1,0 +1,101 @@
+\section{Proof Details for the Post-Audit Refinements}\label{app:v5-proofs}
+
+\begin{proposition}[The shift $c=p-2$ is empty]
+For prime $p>5$ with $p\equiv1\pmod4$, the shift $c=p-2$ is not
+$c$-representable.
+\end{proposition}
+
+\begin{proof}
+Write $a=(p-1)/2$, so $a$ is even, $a>2$, $c=2a-1$, and $p=2a+1$.
+A two-unit-fraction decomposition of $c/(ap)$, after dividing the two
+denominators by their gcd, supplies coprime positive $u,v$ with $uv\mid ap$
+and $c\mid u+v$.  As $p$ is prime and $p\nmid a$, either $u,v$ both divide
+$a$, or one is $p$ times a divisor of $a$.
+
+In the first case $0<u+v<2c$, hence $u+v=c=2a-1$.  The only way two divisors
+of $a$ can have this sum would require $a$ and $a-1$, but $a-1\nmid a$ for
+$a>2$.  In the second case use $p\equiv2\pmod c$ to obtain
+$2d_1+d_2\equiv0\pmod c$ for divisors $d_1,d_2$ of $a$.  The size bound
+$2d_1+d_2\le3a<2c$ forces $2d_1+d_2=c$.  The choice $d_1=a$ is too large;
+otherwise $d_1\le a/2$ and divisibility forces the remaining endpoint choices
+$d_2\in\{a-1,a\}$.  The first does not divide $a$, while the second gives
+$2d_1=a-1$, impossible because $a$ is even.  Both cases contradict the
+required congruence.
+\end{proof}
+
+\begin{theorem}[Signed-box criterion]
+Under the standing assumptions of \cref{sec:v5-refinements}, $p$ is
+$c$-representable if and only if $-1\in B(M,c)$.
+\end{theorem}
+
+\begin{proof}
+Every divisor $e\mid M^2$ has the form $e=\prod_i q_i^{j_i}$ with
+$0\le j_i\le2k_i$.  Put $g_i=j_i-k_i$.  Then
+$e/M=\prod_i q_i^{g_i}$ in $(\mathbb Z/c\mathbb Z)^\times$, and
+$e\equiv-M\pmod c$ is equivalent to the box element $-1$.  If
+$e'=M^2/e$, then $ee'=M^2$ and $e\equiv-M\pmod c$ imply
+$(-M)e'\equiv M^2\pmod c$.  Since $M$ is a unit, $e'\equiv-M\pmod c$.
+Thus one congruence supplies both reconstruction divisibilities.  Reversing
+the exponent substitution proves the converse.
+\end{proof}
+
+\begin{theorem}[Character-conditioned recursive mass]
+For the fixed recursive sampler described in \cref{sec:v5-refinements}, let
+$U(n,x)$ be its exact success mass and let $C(n,x)$ be the mass after valid
+Jacobi conditioning.  Then
+\[
+  \frac32U(n,x)\le C(n,x)\le\frac52U(n,x),
+\]
+and $C(n,x)>0$ if and only if $U(n,x)>0$.
+\end{theorem}
+
+\begin{proof}
+Independence of the signed exponents gives
+$\mathbb E[\chi(R)]=\eta$ and hence
+$Z=\Pr[\chi(R)=-1]=(1-\eta)/2$.  If the conditioning event is nonempty,
+the parity and denominator bounds in \cref{sec:v5-refinements} give
+$2/5\le Z\le2/3$.  Every accepted target lies inside that event, so direct
+success mass is divided by $Z$.  At leaves this is the asserted inequality.
+For a recursive state, multiply each parent inequality by its unchanged
+nonnegative branch weight and add the direct contribution.  The state measure
+decreases under every recursive edge, so well-founded induction completes the
+proof.  Multiplication by a finite positive factor preserves zero versus
+positive mass.
+\end{proof}
+
+\begin{theorem}[Reachability lower bound]
+Suppose a finite Markov certificate satisfies the $L,V,\varepsilon$
+conditions in \cref{sec:v5-refinements}.  Then for every positive integer
+$H$,
+\[
+  \Pr(\text{success by }H)
+  \ge L(s_0)-\frac{V(s_0)}{\varepsilon H}.
+\]
+\end{theorem}
+
+\begin{proof}
+The first inequality makes $L(S_t)$ a submartingale until absorption, so
+$\mathbb E[L(S_H)]\ge L(s_0)$.  This expectation is at most the probability
+of success by time $H$ plus the probability of remaining nonterminal.  Summing
+the potential drift inequality over $t<H$ gives
+$\varepsilon\sum_{t<H}\Pr(T>t)\le V(s_0)$, and therefore
+$\Pr(T>H)\le V(s_0)/(\varepsilon H)$.  Combining the two inequalities proves
+the claim.
+\end{proof}
+
+\section{Version 5 Reproducibility Addendum}
+
+The version 5 supplement contains the exact kernel, 24 unit tests, 83 checked
+character-induction states, the reachability certificate, corrected finite
+regressions over 4,960 prime--shift states, twelve symbolic family
+certificates, proposal comparisons, and the final literature audit.  All
+rational claims are checked by integer cross multiplication or Python exact
+fractions.  Large historical prime sweeps are retained for provenance but are
+not required for the lightweight version 5 checks.
+
+The supplied version 3 artifact reproduces its exact certificate rows.  Six
+entries in its older internal checksum list are stale; the original bytes are
+preserved and the discrepancy is disclosed rather than silently replacing the
+manifest.  Version 5 therefore remains a research preprint pending independent
+source reconciliation and review.
+

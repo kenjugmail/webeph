@@ -953,6 +953,7 @@ body.vespera-page {
   font-family: var(--serif);
   font-size: 22px;
   font-weight: 400;
+  letter-spacing: -.02em;
   margin-bottom: 12px;
 }
 
@@ -1072,6 +1073,7 @@ body.vespera-page {
   font-family: var(--serif);
   font-size: 24px;
   font-weight: 400;
+  letter-spacing: -.02em;
   margin-bottom: 14px;
 }
 
@@ -1123,6 +1125,11 @@ body.vespera-page {
   font-size: 12px;
   letter-spacing: 0.04em;
   line-height: 1.55;
+}
+
+.vespera-close .vespera-note {
+  font-size: 12px;
+  letter-spacing: .015em;
 }
 
 .vespera-page .elink {
