@@ -365,8 +365,118 @@ export async function mountCloudAccount(root = document) {
   const emailEl = root.getElementById('cloud-user-email');
   if (emailEl) emailEl.textContent = session.user.email || 'Account';
   void logCloudActivity('cloud.open');
-  getCloudProfile().then((profile) => renderPlanSummary(root, profile));
+  getCloudProfile().then((profile) => renderPlanSummary(root, profile)).then(() => renderUsageAndKeys(root, session));
 
   root.getElementById('cloud-sign-out')?.addEventListener('click', () => signOutCloud());
   return session;
+}
+
+/* ---------------------------------------------------------------- usage + API keys
+ * Live balances come from the Orrery relay (GET /usage: this month's quota/used per pool) and API keys
+ * from relay-admin (GET/POST/DELETE /keys). Both take the Supabase session token. Everything here is
+ * metadata: credits and key prefixes, never prompts. Failures leave the static allowances in place. */
+const POOL_SLOTS = { 'arbiter-runpod': 'arbiter-27b', doubleword: 'doubleword' };
+
+function functionsBase() {
+  return String(cfg().CLOUD_AUTH_URL || '').replace(/\/+$/, '') + '/functions/v1';
+}
+
+async function relayFetch(session, path, init = {}) {
+  const res = await fetch(functionsBase() + path, {
+    ...init,
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}`, ...(init.headers || {}) },
+  });
+  let body = null;
+  try { body = await res.json(); } catch { body = null; }
+  if (!res.ok) throw new Error((body && body.error) || `HTTP ${res.status}`);
+  return body;
+}
+
+function fmtCredits(n) { return formatTokens(Math.max(0, Math.round(Number(n) || 0))); }
+
+export async function renderUsageAndKeys(root, session) {
+  if (!session?.access_token) return;
+  const api = root.getElementById('cloud-api');
+  if (api) api.hidden = false;
+  // 1) pool meters
+  try {
+    const usage = await relayFetch(session, '/model-relay/usage');
+    for (const pool of usage.pools || []) {
+      const slot = POOL_SLOTS[pool.poolId];
+      const row = slot && root.querySelector(`.account-plan-meter-pool[data-credit-pool="${slot}"]`);
+      if (!row) continue;
+      const quota = Number(pool.quotaCredits) || 0;
+      const used = Number(pool.usedCredits) || 0;
+      const pct = quota > 0 ? Math.min(100, Math.round((used / quota) * 100)) : 0;
+      const label = row.querySelector('b');
+      if (label) {
+        label.textContent = quota > 0 ? `${fmtCredits(used)} of ${fmtCredits(quota)} credits used this month` : 'No hosted credits on this plan';
+        let sub = row.querySelector('small');
+        if (!sub) { sub = document.createElement('small'); label.insertAdjacentElement('afterend', sub); }
+        sub.textContent = quota > 0 ? `${fmtCredits(quota - used)} left · resets ${usage.month ? 'after ' + usage.month : 'monthly'}${usage.organization ? ' · organization pool' : ''}` : '';
+      }
+      const bar = row.querySelector('.account-plan-quota-track i');
+      if (bar) bar.style.width = `${quota > 0 ? 100 - pct : 0}%`;
+    }
+  } catch (err) {
+    console.warn('usage', err.message);
+  }
+  // 2) keys
+  const list = root.getElementById('cloud-api-keys');
+  const msg = root.getElementById('cloud-api-msg');
+  const secretBox = root.getElementById('cloud-api-secret');
+  const say = (text, ok = true) => { if (msg) { msg.textContent = text; msg.style.color = ok ? '' : 'var(--danger, #e5484d)'; } };
+  const renderKeys = async () => {
+    if (!list) return;
+    try {
+      const data = await relayFetch(session, '/relay-admin/keys');
+      const keys = (data.keys || []).filter((k) => !k.revoked_at && !k.revokedAt);
+      list.innerHTML = keys.length === 0
+        ? '<p class="api-empty">No API keys yet. Create one to call api.ephemerent.com from your own code.</p>'
+        : keys.map((k) => {
+          const prefix = k.key_prefix || k.keyPrefix || '';
+          const created = (k.created_at || k.createdAt || '').slice(0, 10);
+          const last = k.last_used_at || k.lastUsedAt;
+          return `<div class="api-key-row" data-key-id="${k.id}">
+            <div><b>${escapeHtml(k.name || 'key')}</b><span>${escapeHtml(prefix)}… · created ${created}${last ? ' · last used ' + String(last).slice(0, 10) : ''}</span></div>
+            <button type="button" class="btn btn-ghost" data-revoke="${k.id}">Revoke</button>
+          </div>`;
+        }).join('');
+      list.querySelectorAll('[data-revoke]').forEach((btn) => btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        try {
+          await relayFetch(session, `/relay-admin/keys?id=${encodeURIComponent(btn.dataset.revoke)}`, { method: 'DELETE' });
+          say('Key revoked. Requests with it fail from now on.');
+          await renderKeys();
+        } catch (err) { say(err.message, false); btn.disabled = false; }
+      }));
+    } catch (err) {
+      list.innerHTML = `<p class="api-empty">API keys are unavailable right now (${escapeHtml(err.message)}).</p>`;
+    }
+  };
+  await renderKeys();
+  const nameEl = root.getElementById('cloud-api-key-name');
+  const createBtn = root.getElementById('cloud-api-key-create');
+  if (createBtn && !createBtn.dataset.bound) {
+    createBtn.dataset.bound = '1';
+    createBtn.addEventListener('click', async () => {
+      const name = (nameEl?.value || '').trim() || 'api key';
+      createBtn.disabled = true; say('');
+      try {
+        const out = await relayFetch(session, '/relay-admin/keys', { method: 'POST', body: JSON.stringify({ name }) });
+        if (secretBox) {
+          secretBox.hidden = false;
+          secretBox.innerHTML = `${escapeHtml(out.key || '')}<small>Shown once. Store it in a secret manager; the list below only keeps the prefix.</small>`;
+        }
+        if (nameEl) nameEl.value = '';
+        say('Key created.');
+        await renderKeys();
+      } catch (err) { say(err.message, false); }
+      createBtn.disabled = false;
+    });
+  }
+}
+
+function escapeHtml(v) {
+  return String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }

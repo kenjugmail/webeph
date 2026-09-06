@@ -30,6 +30,8 @@
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/v1/:path*", "has": [{ "type": "host", "value": "api.ephemerent.com" }], "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/functions/v1/model-relay/:path*" },
+    { "source": "/", "has": [{ "type": "host", "value": "api.ephemerent.com" }], "destination": "/api.html" },
     { "source": "/play", "destination": "https://web-five-amber-88.vercel.app/play" },
     { "source": "/play/:path*", "destination": "https://web-five-amber-88.vercel.app/play/:path*" },
     { "source": "/login", "destination": "https://web-five-amber-88.vercel.app/login" },
@@ -67,6 +69,7 @@
     { "source": "/terms", "destination": "/terms.html" },
     { "source": "/signin", "destination": "/login.html" },
     { "source": "/cloud", "destination": "/cloud.html" },
+    { "source": "/api", "destination": "/api.html" },
     { "source": "/vellum/connect", "destination": "/vellum-connect.html" }
   ],
   "headers": [

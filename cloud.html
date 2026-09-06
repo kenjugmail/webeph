@@ -139,6 +139,21 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         </div>
       </div>
 
+      <div class="auth-optional" id="cloud-api" hidden>
+        <div class="auth-optional-head">
+          <h2>API</h2>
+          <p class="sub">The same model and pools as the desktop, at <code class="mono">https://api.ephemerent.com/v1</code>. Keys draw from your monthly pools above; usage updates on every request. <a href="/api">Docs</a></p>
+        </div>
+        <div id="cloud-api-keys" class="api-keys" aria-live="polite"></div>
+        <div class="api-key-create">
+          <label class="sr-only" for="cloud-api-key-name">Key name</label>
+          <input type="text" class="auth-input" id="cloud-api-key-name" placeholder="Key name (e.g. laptop, CI)" maxlength="120">
+          <button type="button" class="btn btn-ghost" id="cloud-api-key-create">Create key</button>
+        </div>
+        <div id="cloud-api-secret" class="api-secret" hidden></div>
+        <p class="auth-msg" id="cloud-api-msg" role="status" aria-live="polite"></p>
+      </div>
+
       <!-- Shown only when SITE_CONFIG.CLOUD_RELAY_URL is set; see the guard at the end of this file. -->
       <div class="auth-optional" id="pairing-section" hidden>
         <div class="auth-optional-head">
@@ -183,6 +198,19 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .mini-plan-pro { border-color:rgba(45,212,191,0.35); background:rgba(45,212,191,0.05); }
 .billing-fineprint { margin:0 0 22px; font-size:11.5px; line-height:1.6; color:var(--faint); }
 .billing-fineprint a { color:var(--teal-lt); }
+.account-plan-meter-pool .account-plan-quota-track i { transition: width .4s ease; }
+.account-plan-meter-pool small { display:block; color:var(--faint); font-size:11.5px; margin-top:3px; }
+.api-keys { display:grid; gap:8px; margin:0 0 12px; }
+.api-key-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--bg-2); }
+.api-key-row b { font-size:13.5px; color:var(--ink-2); }
+.api-key-row span { display:block; color:var(--faint); font-size:11.5px; font-family:var(--mono); margin-top:2px; }
+.api-key-row button { flex:none; }
+.api-key-create { display:flex; gap:8px; }
+.api-key-create .auth-input { flex:1; }
+.api-secret { margin-top:12px; padding:12px 14px; border:1px dashed var(--line-strong); border-radius:var(--r-sm); background:var(--bg-2); font-family:var(--mono); font-size:12.5px; overflow-wrap:anywhere; }
+.api-secret small { display:block; font-family:var(--sans); color:var(--muted); margin-top:8px; }
+.api-empty { color:var(--muted); font-size:13px; }
+@media (max-width:480px){ .api-key-create { flex-direction:column; } }
 }
 </style>
 
