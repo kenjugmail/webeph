@@ -94,6 +94,12 @@ for(const paper of manifest.papers){
   const raw=fs.readFileSync(path.join(directory,paper.source));
   if(sha(raw)!==paper.source_sha256)throw Error('Source hash mismatch');
   const {meta,blocks,equations}=parse(raw.toString('utf8'));
+  // Matplotlib emits trailing spaces in SVG path data; line breaks retain the
+  // same SVG token separators after this lossless whitespace normalization.
+  for(const figure of paper.figures){
+    const file=path.join(directory,paper.id,'assets',figure);
+    fs.writeFileSync(file,fs.readFileSync(file,'utf8').replace(/[ \t]+$/gm,''));
+  }
   if(meta.title!==paper.title||meta.subtitle!==paper.subtitle)throw Error('Title mismatch');
   const isRH=paper.id==='rh_application';
   const companion=manifest.papers.find(x=>x.id!==paper.id);
