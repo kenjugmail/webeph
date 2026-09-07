@@ -20,7 +20,7 @@ window.ORRERY_CONFIG = {
   UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
 
   /** Enable only after the unsigned test ZIP, checksum, Windows tests and subscriber checks are approved. */
-  RELEASE_AVAILABLE: false,
+  RELEASE_AVAILABLE: true,
 
   AUDIT_WEBHOOK_URL: '',
 
