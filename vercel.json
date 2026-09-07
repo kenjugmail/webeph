@@ -3,6 +3,7 @@
   "outputDirectory": ".",
   "installCommand": "npm install --omit=dev",
   "redirects": [
+    { "source": "/glow.html", "destination": "/glow", "permanent": true },
     { "source": "/downloads/orrery/:path*", "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/orrery-releases/:path*", "permanent": false },
     { "source": "/waitlist/manage", "destination": "https://supabase.com/dashboard/project/wjjthkqwcyahamhjkeux/editor", "permanent": false },
     { "source": "/waitlist.html", "destination": "/waitlist", "permanent": true },
@@ -35,6 +36,7 @@
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/glow", "destination": "/glow.html" },
     { "source": "/v1/:path*", "has": [{ "type": "host", "value": "api.ephemerent.com" }], "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/functions/v1/model-relay/:path*" },
     { "source": "/", "has": [{ "type": "host", "value": "api.ephemerent.com" }], "destination": "/api.html" },
     { "source": "/waitlist", "destination": "/waitlist.html" },
