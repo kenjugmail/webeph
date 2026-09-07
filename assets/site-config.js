@@ -9,6 +9,9 @@
  */
 window.ORRERY_CONFIG = {
   DOWNLOAD_URL: '',
+  // Desktop builds live in the private Supabase Storage bucket `orrery-releases`; the release-download
+  // edge function returns the manifest and 10-minute signed URLs to signed-in subscribers only.
+  RELEASE_DOWNLOAD_FUNCTION: 'release-download',
   RELEASE_VERSION: '4.0.0-rc.3',
   RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
@@ -17,7 +20,7 @@ window.ORRERY_CONFIG = {
   UPDATE_FEED_URL: 'https://ephemerent.com/downloads/orrery/rc/',
 
   /** Enable only after the unsigned test ZIP, checksum, Windows tests and subscriber checks are approved. */
-  RELEASE_AVAILABLE: false,
+  RELEASE_AVAILABLE: true,
 
   AUDIT_WEBHOOK_URL: '',
 
@@ -82,6 +85,16 @@ window.ORRERY_CONFIG = {
   BUSINESS_CHECKOUT_URL: 'https://buy.stripe.com/eVq14n1c77o2dT3gQm3Je06',
   ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/cNi5kD4ojbEibKVfMi3Je07',
   BILLING_PORTAL_URL: '',
+  /** Credit packs: one-time top-ups of the rollover wallet, spent only after the monthly pool.
+   *  `credits` must match CREDIT_PACKS in supabase/functions/stripe-webhook, and `url` is a Stripe
+   *  Payment Link; the account page appends ?client_reference_id=<user id> so the webhook knows who
+   *  bought it. Leave a url empty and that pack is hidden. */
+  CREDIT_PACKS: [
+    { id: 'credits-10', credits: 10_000_000, priceUsd: 20, url: 'https://buy.stripe.com/4gM5kDaMHaAe16heIe3Je0a' },
+    { id: 'credits-25', credits: 25_000_000, priceUsd: 45, url: 'https://buy.stripe.com/aFaaEX7Av7o27uF2Zw3Je0b' },
+    { id: 'credits-60', credits: 60_000_000, priceUsd: 100, url: 'https://buy.stripe.com/28EbJ14oj23I7uF57E3Je0c' },
+  ],
+
 
   /** Future - WebSocket relay for phone/remote. Leave empty until deployed. */
   CLOUD_RELAY_URL: '',
