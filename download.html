@@ -123,6 +123,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <summary style="cursor:pointer;font-size:13px;color:var(--muted);">Other platforms</summary>
         <ul id="release-asset-list" style="list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;"></ul>
       </details>
+      <p class="sub" id="release-linux-note" style="font-size:13px;color:var(--muted);line-height:1.6;margin:-6px 0 14px;">Linux: the <code>.deb</code> installs cleanly on Ubuntu and Debian. The AppImage needs <code>libfuse2</code>, which Ubuntu 24.04 no longer ships (<code>sudo apt install libfuse2t64</code>), or run it once with <code>--appimage-extract-and-run</code>. Windows: unzip and run <code>Orrery.exe</code>; SmartScreen will warn because the preview is unsigned.</p>
       <p class="auth-msg hidden" id="release-gate-note" style="margin-bottom:10px;"></p>
       <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Downloads are for active subscribers and expire ten minutes after you request them. Preview builds are unsigned: on macOS right-click the app and choose Open the first time; on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
       <div class="release-status" id="release-status">
