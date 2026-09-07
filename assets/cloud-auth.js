@@ -365,7 +365,8 @@ export async function mountCloudAccount(root = document) {
   const emailEl = root.getElementById('cloud-user-email');
   if (emailEl) emailEl.textContent = session.user.email || 'Account';
   void logCloudActivity('cloud.open');
-  getCloudProfile().then((profile) => renderPlanSummary(root, profile)).then(() => renderUsageAndKeys(root, session));
+  getCloudProfile().then((profile) => renderPlanSummary(root, profile)).then(() => renderUsageAndKeys(root, session))
+    .then(() => watchPurchaseReturn(root, session));
 
   root.getElementById('cloud-sign-out')?.addEventListener('click', () => signOutCloud());
   return session;
@@ -480,6 +481,39 @@ export async function renderUsageAndKeys(root, session) {
 
 function escapeHtml(v) {
   return String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/* Stripe sends a buyer back to /cloud?credits=purchased (the payment links' after-payment redirect).
+ * The webhook that grants the pack runs a moment later, so poll the balance until it moves, then
+ * drop the parameter so a reload does not poll again. Nothing here trusts the parameter: the
+ * balance shown is always the relay's. */
+async function watchPurchaseReturn(root, session) {
+  const params = new URLSearchParams(location.search);
+  if (params.get('credits') !== 'purchased' || !session?.access_token) return;
+  const slot = root.getElementById('cloud-credit-wallet');
+  const note = document.createElement('p');
+  note.className = 'plan-note credit-return-note';
+  note.textContent = 'Payment received. Your credits land as soon as Stripe confirms the payment, usually within a minute.';
+  slot?.querySelector('.credit-wallet-head')?.insertAdjacentElement('afterend', note);
+  slot?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  let seen = null;
+  for (let i = 0; i < 24; i += 1) {
+    let usage;
+    try { usage = await relayFetch(session, '/model-relay/usage'); } catch { break; }
+    const balance = Math.max(0, Number(usage.purchasedCredits) || 0);
+    if (seen === null) seen = balance;
+    if (balance > seen) {
+      renderCreditWallet(root, session, usage);
+      const done = document.createElement('p');
+      done.className = 'plan-note credit-return-note';
+      done.textContent = `Credits added: ${formatTokens(balance - seen)}. They are spent after this month's pool.`;
+      root.getElementById('cloud-credit-wallet')?.querySelector('.credit-wallet-head')?.insertAdjacentElement('afterend', done);
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 5000));
+  }
+  params.delete('credits');
+  history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params.toString() : ''));
 }
 
 /* Two sources of credit, one unit. The monthly pool above resets and does not roll over; the wallet

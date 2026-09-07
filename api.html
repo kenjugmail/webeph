@@ -112,7 +112,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="api-card">
         <span class="mono api-kicker">Base URL</span>
         <b>https://api.ephemerent.com/v1</b>
-        <p>Chat completions at <code>/chat/completions</code>, streaming with <code>stream: true</code>, tool calls in the OpenAI schema. The model list at <code>/models</code> returns one entry.</p>
+        <p>Chat completions at <code>/chat/completions</code>, streaming with <code>stream: true</code>, tool calls in the OpenAI schema. <code>/models</code> lists <code>arbiter-flash-27b</code> alongside the Orrery routes (<code>orrery/fast</code>, <code>orrery/balanced</code>, <code>orrery/verified</code>, <code>orrery/research</code>), which pick a model per request.</p>
       </div>
       <div class="api-card">
         <span class="mono api-kicker">Model</span>
@@ -138,16 +138,34 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   -d '{
     "model": "arbiter-flash-27b",
     "messages": [{"role": "user", "content": "Find the rule: 2, 6, 12, 20, 30"}],
-    "max_tokens": 400,
-    "chat_template_kwargs": {"enable_thinking": false}
+    "max_tokens": 400
   }'</code></pre>
-    <p class="api-note">Python and JavaScript clients from OpenAI work as they are: set <code>base_url</code> to <code>https://api.ephemerent.com/v1</code> and <code>api_key</code> to your key. Keep <code>enable_thinking</code> off; the loop replaces visible chain-of-thought.</p>
+    <pre class="api-code"><code># Python (pip install openai)
+from openai import OpenAI
+client = OpenAI(base_url="https://api.ephemerent.com/v1", api_key=ARBITER_API_KEY)
+reply = client.chat.completions.create(
+    model="arbiter-flash-27b",
+    messages=[{"role": "user", "content": "Find the rule: 2, 6, 12, 20, 30"}],
+    max_tokens=400,
+)
+print(reply.choices[0].message.content)</code></pre>
+    <pre class="api-code"><code>// JavaScript (npm install openai)
+import OpenAI from "openai";
+const client = new OpenAI({ baseURL: "https://api.ephemerent.com/v1", apiKey: process.env.ARBITER_API_KEY });
+const reply = await client.chat.completions.create({
+  model: "arbiter-flash-27b",
+  messages: [{ role: "user", content: "Find the rule: 2, 6, 12, 20, 30" }],
+  max_tokens: 400,
+  stream: true,
+});
+for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.content ?? "");</code></pre>
+    <p class="api-note">The relay forwards <code>messages</code>, <code>temperature</code>, <code>top_p</code>, <code>stream</code>, <code>stop</code>, <code>presence_penalty</code>, <code>frequency_penalty</code>, <code>tools</code>, <code>tool_choice</code>, <code>response_format</code>, <code>logprobs</code> and <code>top_logprobs</code>; <code>max_tokens</code> is capped by your plan and anything else is dropped. Thinking is off on the server: Arbiter refines its answer in latent space during the loop, so there is no chain-of-thought to read or pay for.</p>
 
     <h2 style="margin-top:44px;">Usage, keys and limits</h2>
     <div class="api-grid api-grid-3">
       <div class="api-card">
         <span class="mono api-kicker">Usage</span>
-        <p><code>GET /v1/usage</code> with your key returns this month's compute units, the loop pass count and the retention mode. The same balance shows on your <a href="/cloud">account page</a> next to the desktop pool.</p>
+        <p><code>GET /v1/usage</code> with your key returns this month's pools (quota, used, remaining for Arbiter 27B and Doubleword) and your purchased-credit balance. The same numbers show on your <a href="/cloud">account page</a> next to the desktop pool; every request updates them.</p>
       </div>
       <div class="api-card">
         <span class="mono api-kicker">Keys</span>
@@ -159,9 +177,12 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </div>
       <div class="api-card">
         <span class="mono api-kicker">Limits</span>
-        <p>Per-key requests and tokens per minute scale with the plan, and every key is capped by the monthly pool. Over the limit the API answers <code>429</code> with a <code>budget_exhausted</code> error; nothing is billed beyond the pool.</p>
+        <p>Per-key requests and tokens per minute scale with the plan, and every key is capped by the monthly pool plus your purchased credits. Over either limit the API answers <code>429</code> with <code>{"error": {"message": …}}</code> saying which balance ran out; nothing is billed beyond what you hold.</p>
       </div>
     </div>
+
+    <h2 style="margin-top:44px;">Availability</h2>
+    <p style="max-width:62ch;">Arbiter 27B runs on a GPU box that parks itself after thirty idle minutes and wakes on the next request. While it is waking (a few minutes), a request for <code>arbiter-flash-27b</code> is answered by the fallback model and the response carries <code>x-orrery-fallback-product</code> with the model that served it, metered on the Doubleword pool; once the box is up, requests go to Arbiter. Every response names its route in <code>x-orrery-route-alias</code>.</p>
 
     <h2 style="margin-top:44px;">Data</h2>
     <p style="max-width:62ch;">API requests follow the same rule as the desktop: Arbiter learns from sessions by default under an anonymous session id, and <em>Zero data retention</em> is a switch on your account. With it on, the service keeps counts and an access-log line, never prompts or outputs. Details on the <a href="/privacy">privacy page</a>.</p>
