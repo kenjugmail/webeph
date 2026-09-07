@@ -129,6 +129,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <b>Subscription pool, then purchased credits</b>
         <p>API keys draw first from the same monthly Arbiter 27B pool as the desktop: 14M on Pro, 35M on Max, 70M on Ultra. When a month's pool runs out, requests fall through to credits you have bought, which never expire and work across both models. Nothing overages: with neither balance the API answers 429 rather than billing you. <a href="/organizations">Organizations</a> share one pool across seats.</p>
         <p>Create and revoke keys inside Orrery: open Nexus, then <b>Relay &rarr; API Keys</b>. A key is shown once; each key can be limited to specific routes and revoked on its own.</p>
+        <p>When the Arbiter box is asleep or busy, requests are answered by DeepSeek V4 Flash (Doubleword) and the response says so in <code>x-orrery-provider</code>; the model name you sent is echoed in <code>x-orrery-route-alias</code>. Send an <code>Idempotency-Key</code> header on non-streaming calls if you want retries to return the stored answer instead of running twice; it is optional.</p>
       </div>
     </div>
 
