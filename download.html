@@ -111,14 +111,19 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the Windows beta packet. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Beta software may change, fail, or produce incorrect output.</p>
+      <p class="sub">Download the preview for Windows, macOS or Linux. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
         <a class="btn btn-primary" href="/cloud" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download Windows test beta (ZIP) <span aria-hidden="true">↓</span></a>
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:10px;">Download Orrery <span aria-hidden="true">↓</span></a>
+      <details class="release-others" id="release-others" style="margin-bottom:16px;">
+        <summary style="cursor:pointer;font-size:13px;color:var(--muted);">Other platforms</summary>
+        <ul id="release-asset-list" style="list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;"></ul>
+      </details>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Preview builds are unsigned: on macOS right-click the app and choose Open the first time; on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
       <div class="release-status" id="release-status">
         <div><b>Release candidate</b><span id="release-version">Pending verification</span></div>
         <div><b>Update mode</b><span id="release-update-mode">Website-hosted updates</span></div>

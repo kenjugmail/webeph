@@ -9,6 +9,19 @@
  */
 window.ORRERY_CONFIG = {
   DOWNLOAD_URL: '',
+  // Per-platform preview assets on the public binary repo (kenjugmail/orrery-releases). Names follow the
+  // unsigned-preview workflow: Orrery-<version>-<platform>.<ext> under one tag. Unsigned builds:
+  // macOS needs right-click > Open the first time, Windows shows SmartScreen, Linux needs chmod +x.
+  RELEASE_TAG: 'v4.0.0-rc.3-unsigned-preview.1',
+  RELEASE_ASSETS: {
+    'win-x64': { label: 'Windows (x64) ZIP', file: 'Orrery-4.0.0-rc.3-win-x64.zip' },
+    'mac-universal': { label: 'macOS (Apple silicon + Intel) DMG', file: 'Orrery-4.0.0-rc.3-mac-universal.dmg' },
+    'linux-x64': { label: 'Linux (x64) AppImage', file: 'Orrery-4.0.0-rc.3-linux-x64.AppImage' },
+    'linux-x64-deb': { label: 'Linux (x64) .deb', file: 'Orrery-4.0.0-rc.3-linux-x64.deb' },
+    'linux-arm64': { label: 'Linux (arm64) AppImage', file: 'Orrery-4.0.0-rc.3-linux-arm64.AppImage' },
+    'linux-arm64-deb': { label: 'Linux (arm64) .deb', file: 'Orrery-4.0.0-rc.3-linux-arm64.deb' },
+  },
+  RELEASE_ASSET_BASE: 'https://github.com/kenjugmail/orrery-releases/releases/download/',
   RELEASE_VERSION: '4.0.0-rc.3',
   RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',

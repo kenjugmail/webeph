@@ -95,16 +95,56 @@ export function bindIdentityForm(root = document) {
   });
 }
 
+/* The visitor's platform from the UA (arm64 Linux from the UA is unreliable, so the list below always
+ * carries every asset). Returns a key of RELEASE_ASSETS or null. */
+function detectReleasePlatform() {
+  const ua = navigator.userAgent || '';
+  const plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+  if (/Windows/i.test(ua) || /Win/i.test(plat)) return 'win-x64';
+  if (/Macintosh|Mac OS X/i.test(ua) || /Mac/i.test(plat)) return 'mac-universal';
+  if (/Linux/i.test(ua) && !/Android/i.test(ua)) return /aarch64|arm64/i.test(ua) ? 'linux-arm64' : 'linux-x64';
+  return null;
+}
+
 function setupDownloadButton() {
   const dl = document.getElementById('orrery-download-btn');
-  const url = cfg().DOWNLOAD_URL || '#';
-  if (dl && cfg().RELEASE_AVAILABLE === true && url !== '#') {
-    dl.href = url;
-    dl.setAttribute('download', '');
-    dl.addEventListener('click', () => {
-      void logActivity('download.bundle', { url });
-    });
+  if (!dl || cfg().RELEASE_AVAILABLE !== true) return;
+  const assets = cfg().RELEASE_ASSETS || {};
+  const base = String(cfg().RELEASE_ASSET_BASE || '') + encodeURIComponent(cfg().RELEASE_TAG || '') + '/';
+  const keys = Object.keys(assets);
+  const wire = (el, url) => {
+    el.href = url;
+    el.setAttribute('download', '');
+    el.addEventListener('click', () => { void logActivity('download.bundle', { url }); });
+  };
+  if (keys.length === 0) {
+    const url = cfg().DOWNLOAD_URL || '#';
+    if (url !== '#') wire(dl, url);
+    return;
   }
+  const mine = detectReleasePlatform();
+  const primary = (mine && assets[mine]) ? mine : 'win-x64';
+  dl.textContent = '';
+  dl.append(`Download for ${assets[primary].label} `);
+  const arrow = document.createElement('span'); arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '↓'; dl.append(arrow);
+  wire(dl, base + assets[primary].file);
+  const list = document.getElementById('release-asset-list');
+  if (list) {
+    for (const key of keys) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.className = 'mono';
+      a.style.fontSize = '13px';
+      a.textContent = `${assets[key].label} — ${assets[key].file}`;
+      wire(a, base + assets[key].file);
+      li.append(a); list.append(li);
+    }
+    const sums = document.createElement('li');
+    const s = document.createElement('a'); s.className = 'mono'; s.style.fontSize = '13px'; s.textContent = 'SHA256SUMS.txt'; s.href = base + 'SHA256SUMS.txt';
+    sums.append(s); list.append(sums);
+  }
+  const page = document.getElementById('release-page-link');
+  if (page) page.href = 'https://github.com/kenjugmail/orrery-releases/releases/tag/' + encodeURIComponent(cfg().RELEASE_TAG || '');
 }
 
 function renderSignedIn(root, identity) {
