@@ -95,8 +95,8 @@ export function bindIdentityForm(root = document) {
   });
 }
 
-/* The visitor's platform from the UA (arm64 Linux from the UA is unreliable, so the list below always
- * carries every asset). Returns a key of RELEASE_ASSETS or null. */
+/* The visitor's platform from the UA (arm64 Linux is unreliable from the UA, so the list below always
+ * carries every asset). Returns a manifest key or null. */
 function detectReleasePlatform() {
   const ua = navigator.userAgent || '';
   const plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
@@ -106,45 +106,81 @@ function detectReleasePlatform() {
   return null;
 }
 
-function setupDownloadButton() {
+function fmtBytes(n) {
+  const mb = Number(n) / 1048576;
+  return mb >= 1024 ? `${(mb / 1024).toFixed(2)} GB` : `${mb.toFixed(0)} MB`;
+}
+
+/* Subscriber-only downloads. The page never holds a storage URL: it asks the release-download function
+ * for the manifest (keys, labels, sizes, hashes) and, on click, for a 10-minute signed URL. Anyone
+ * without a session or an active subscription sees the reason instead of a button. */
+async function setupDownloadButton() {
   const dl = document.getElementById('orrery-download-btn');
   if (!dl || cfg().RELEASE_AVAILABLE !== true) return;
-  const assets = cfg().RELEASE_ASSETS || {};
-  const base = String(cfg().RELEASE_ASSET_BASE || '') + encodeURIComponent(cfg().RELEASE_TAG || '') + '/';
-  const keys = Object.keys(assets);
-  const wire = (el, url) => {
-    el.href = url;
-    el.setAttribute('download', '');
-    el.addEventListener('click', () => { void logActivity('download.bundle', { url }); });
-  };
-  if (keys.length === 0) {
-    const url = cfg().DOWNLOAD_URL || '#';
-    if (url !== '#') wire(dl, url);
+  const fn = cfg().RELEASE_DOWNLOAD_FUNCTION || 'release-download';
+  const base = String(cfg().CLOUD_AUTH_URL || '').replace(/\/+$/, '') + '/functions/v1/' + fn;
+  const list = document.getElementById('release-asset-list');
+  const note = document.getElementById('release-gate-note');
+  const say = (text) => { if (note) { note.textContent = text; note.classList.remove('hidden'); } };
+  let session = null;
+  try {
+    const { getCloudSession } = await import('/assets/cloud-auth.js');
+    session = await getCloudSession();
+  } catch { session = null; }
+  if (!session?.access_token) {
+    dl.textContent = 'Sign in to download';
+    dl.href = '/signin?next=/download';
     return;
   }
+  const call = async (path) => {
+    const res = await fetch(base + path, { headers: { authorization: `Bearer ${session.access_token}` } });
+    let body = null; try { body = await res.json(); } catch { body = null; }
+    if (!res.ok) throw Object.assign(new Error((body && body.message) || `HTTP ${res.status}`), { code: body && body.error, status: res.status });
+    return body;
+  };
+  let manifest;
+  try {
+    manifest = await call('/manifest');
+  } catch (err) {
+    if (err.status === 402) { dl.textContent = 'Subscribe to download'; dl.href = '/orrery#pricing'; say(err.message); return; }
+    if (err.status === 401) { dl.textContent = 'Sign in to download'; dl.href = '/signin?next=/download'; return; }
+    dl.textContent = 'Downloads unavailable right now'; dl.removeAttribute('href'); say(err.message); return;
+  }
+  const assets = manifest.assets || {};
+  const keys = Object.keys(assets);
+  if (keys.length === 0) { dl.textContent = 'No build published yet'; dl.removeAttribute('href'); return; }
+  const fetchAndGo = async (key, el) => {
+    el.setAttribute('aria-busy', 'true');
+    try {
+      const out = await call(`/asset?key=${encodeURIComponent(key)}`);
+      void logActivity('download.bundle', { key, tag: manifest.tag });
+      location.href = out.url;
+    } catch (err) { say(err.message); }
+    el.removeAttribute('aria-busy');
+  };
   const mine = detectReleasePlatform();
-  const primary = (mine && assets[mine]) ? mine : 'win-x64';
+  const primary = (mine && assets[mine]) ? mine : keys[0];
   dl.textContent = '';
-  dl.append(`Download for ${assets[primary].label} `);
+  dl.append(`Download for ${assets[primary].label} (${fmtBytes(assets[primary].size)}) `);
   const arrow = document.createElement('span'); arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '↓'; dl.append(arrow);
-  wire(dl, base + assets[primary].file);
-  const list = document.getElementById('release-asset-list');
+  dl.href = '#'; dl.addEventListener('click', (e) => { e.preventDefault(); void fetchAndGo(primary, dl); });
   if (list) {
     for (const key of keys) {
       const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.className = 'mono';
-      a.style.fontSize = '13px';
-      a.textContent = `${assets[key].label} — ${assets[key].file}`;
-      wire(a, base + assets[key].file);
-      li.append(a); list.append(li);
+      const a = document.createElement('a'); a.className = 'mono'; a.style.fontSize = '13px'; a.href = '#';
+      a.textContent = `${assets[key].label} — ${assets[key].file} (${fmtBytes(assets[key].size)})`;
+      a.addEventListener('click', (e) => { e.preventDefault(); void fetchAndGo(key, a); });
+      li.append(a);
+      if (assets[key].sha256) { const h = document.createElement('div'); h.className = 'mono'; h.style.cssText = 'font-size:11px;color:var(--faint);overflow-wrap:anywhere;'; h.textContent = `sha256 ${assets[key].sha256}`; li.append(h); }
+      list.append(li);
     }
-    const sums = document.createElement('li');
-    const s = document.createElement('a'); s.className = 'mono'; s.style.fontSize = '13px'; s.textContent = 'SHA256SUMS.txt'; s.href = base + 'SHA256SUMS.txt';
-    sums.append(s); list.append(sums);
   }
+  const ver = document.getElementById('release-version');
+  if (ver && manifest.version) ver.textContent = `${manifest.version} (${manifest.tag})`;
+  const sha = document.getElementById('release-sha');
+  if (sha && assets[primary].sha256) sha.textContent = `SHA-256 ${assets[primary].sha256.slice(0, 16)}…`;
   const page = document.getElementById('release-page-link');
-  if (page) page.href = 'https://github.com/kenjugmail/orrery-releases/releases/tag/' + encodeURIComponent(cfg().RELEASE_TAG || '');
+  if (page) { page.textContent = 'Every platform and checksum is listed under Other platforms'; page.removeAttribute('href'); }
 }
 
 function renderSignedIn(root, identity) {
@@ -207,7 +243,7 @@ export function mountDownloadPage() {
   document.getElementById('beta-gate')?.classList.toggle('hidden', released);
 
   if (released) {
-    setupDownloadButton();
+    void setupDownloadButton();
   } else {
     void logActivity('beta.request_access_view');
   }
