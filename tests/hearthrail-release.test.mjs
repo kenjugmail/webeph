@@ -44,6 +44,15 @@ test("fetch failure fails closed", async () => {
   const value = await loadHearthrailRelease(async () => { throw new Error("offline"); });
   assert.equal(value, undefined);
 });
+
+test("Windows community downloads require an explicitly unsigned beta declaration", () => {
+  const windows = { platform: "windows-x64", filename: "Hearthrail_0.1.0-alpha.2_x64-setup.exe", url: "https://example.com/Hearthrail_0.1.0-alpha.2_x64-setup.exe", sha256: "b".repeat(64), sizeBytes: 25000000, signing: "unsigned", beta: true };
+  const value = { ...released, channel: "community-alpha", assets: [{ ...released.assets[0], signing: "ad-hoc", notarized: false }, windows] };
+  assert.equal(validateHearthrailRelease(value)?.assets.length, 2);
+  assert.equal(validateHearthrailRelease(value)?.assets[1].beta, true);
+  assert.equal(validateHearthrailRelease({ ...value, assets: [{ ...windows, beta: false }] }), undefined);
+  assert.equal(validateHearthrailRelease({ ...value, assets: [{ ...windows, signing: "verified" }] }), undefined);
+});
 test("invalid fetched JSON fails closed", async () => {
   const value = await loadHearthrailRelease(async () => ({ ok: true, json: async () => ({ status: "released" }) }));
   assert.equal(value, undefined);

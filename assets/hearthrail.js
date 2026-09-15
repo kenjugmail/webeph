@@ -35,7 +35,8 @@ export function validateHearthrailRelease(value) {
   for (const candidate of value.assets) {
     if (!isObject(candidate) || typeof candidate.platform !== "string" || !(candidate.platform in PLATFORMS) || seen.has(candidate.platform)) return undefined;
     const platform = PLATFORMS[candidate.platform];
-    if (community && (candidate.platform !== "macos-arm64" || candidate.signing !== "ad-hoc" || candidate.notarized !== false)) return undefined;
+    if (community && candidate.platform === "macos-arm64" && (candidate.signing !== "ad-hoc" || candidate.notarized !== false)) return undefined;
+    if (community && candidate.platform === "windows-x64" && (candidate.signing !== "unsigned" || candidate.beta !== true)) return undefined;
     if (typeof candidate.filename !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._+-]{7,159}$/.test(candidate.filename)) return undefined;
     if (!platform.extensions.some((extension) => candidate.filename.toLowerCase().endsWith(extension.toLowerCase()))) return undefined;
     if (!/^Hearthrail[-_.]/i.test(candidate.filename) || !candidate.filename.includes(value.version) || !platform.filenameToken.test(candidate.filename)) return undefined;
@@ -48,7 +49,7 @@ export function validateHearthrailRelease(value) {
       return undefined;
     }
     seen.add(candidate.platform);
-    assets.push({ platform: candidate.platform, filename: candidate.filename, url, sha256: candidate.sha256.toLowerCase(), sizeBytes: candidate.sizeBytes, ...(community ? { signing: "ad-hoc", notarized: false } : {}) });
+    assets.push({ platform: candidate.platform, filename: candidate.filename, url, sha256: candidate.sha256.toLowerCase(), sizeBytes: candidate.sizeBytes, ...(community ? candidate.platform === "macos-arm64" ? { signing: "ad-hoc", notarized: false } : { signing: "unsigned", beta: true } : {}) });
   }
   return { schemaVersion: 1, product: "hearthrail", status: "released", ...(community ? { channel: "community-alpha" } : {}), version: value.version, publishedAt: new Date(value.publishedAt).toISOString(), notesUrl, assets };
 }
@@ -70,16 +71,18 @@ function megabytes(sizeBytes) {
 export function renderHearthrailRelease(container, release) {
   release = validateHearthrailRelease(release);
   if (!(container instanceof HTMLElement) || release?.status !== "released") return false;
+  const hasWindows = release.assets.some((asset) => asset.platform === "windows-x64");
+  const hasMac = release.assets.some((asset) => asset.platform === "macos-arm64");
   const heading = document.createElement("div");
   const status = document.createElement("span");
   status.className = "hr-status";
   status.textContent = `Version ${release.version}`;
   const title = document.createElement("strong");
-  title.textContent = release.channel === "community-alpha" ? "Experimental Mac LAN preview" : "Release downloads";
+  title.textContent = release.channel === "community-alpha" ? hasWindows ? "Experimental preview" : "Experimental Mac LAN preview" : "Release downloads";
   heading.append(status, title);
 
   const list = document.createElement("div");
-  list.className = "hr-release-assets";
+  list.className = release.assets.length > 1 ? "hr-release-assets hr-release-assets--paired" : "hr-release-assets";
   for (const asset of release.assets) {
     const platform = PLATFORMS[asset.platform];
     const item = document.createElement("div");
@@ -114,7 +117,7 @@ export function renderHearthrailRelease(container, release) {
   notes.textContent = "Release notes and limits";
   const warning = document.createElement("p");
   warning.className = "hr-release-detail";
-  warning.textContent = "Not notarized by Apple; macOS may block opening. Windows is not available.";
+  warning.textContent = hasWindows ? hasMac ? "Not notarized by Apple (Mac). Unsigned beta (Windows)." : "Unsigned Windows beta. SmartScreen may warn." : "Not notarized by Apple; macOS may block opening. Windows is not available.";
   container.replaceChildren(heading, list, ...(release.channel === "community-alpha" ? [warning] : []), notes);
   container.dataset.releaseState = "released";
   return true;

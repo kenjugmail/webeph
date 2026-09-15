@@ -5,7 +5,7 @@
   "channel": "community-alpha",
   "version": "0.1.0-alpha.1",
   "publishedAt": "2026-09-05T20:59:16Z",
-  "notesUrl": "https://github.com/kenjugmail/hearthrail-releases/releases/tag/v0.1.0-alpha.1-lan-preview",
+  "notesUrl": "https://github.com/kenjugmail/hearthrail-releases/releases",
   "assets": [{
     "platform": "macos-arm64",
     "filename": "Hearthrail_0.1.0-alpha.1_aarch64.dmg",
@@ -14,5 +14,13 @@
     "sizeBytes": 25342168,
     "signing": "ad-hoc",
     "notarized": false
+  }, {
+    "platform": "windows-x64",
+    "filename": "Hearthrail_0.1.0-alpha.1_x64-setup.exe",
+    "url": "https://github.com/kenjugmail/hearthrail-releases/releases/download/v0.1.0-alpha.1-windows-beta/Hearthrail_0.1.0-alpha.1_x64-setup.exe",
+    "sha256": "1cc7c3c767b6fe30db3ed1ac5d334f369d4ca268b3481227af44eadfd15634e1",
+    "sizeBytes": 16733067,
+    "signing": "unsigned",
+    "beta": true
   }]
 }

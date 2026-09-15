@@ -32,8 +32,10 @@ await check("JavaScript-disabled fallback", async () => {
   const page = await context.newPage();
   await page.goto(`${base}/hearthrail`, { waitUntil: "load" });
   assert.match(await page.locator("[data-hearthrail-release]").innerText(), /Not notarized by Apple/);
-  assert.equal(await page.locator("[data-hearthrail-release] .hr-download-link[href]").count(), 1);
-  assert.match(await page.locator("[data-hearthrail-release] .hr-download-link").getAttribute("href"), /^https:\/\/github.com\/kenjugmail\/hearthrail-releases\/releases\/download\//);
+  assert.equal(await page.locator("[data-hearthrail-release] .hr-download-link[href]").count(), 2);
+  for (const link of await page.locator("[data-hearthrail-release] .hr-download-link").all()) {
+    assert.match(await link.getAttribute("href"), /^https:\/\/github.com\/kenjugmail\/hearthrail-releases\/releases\/download\//);
+  }
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 360);
   await context.close();
 });
@@ -66,6 +68,24 @@ await check("valid future release", async () => {
   await page.locator("[data-hearthrail-release] summary").click();
   assert.match(await page.locator("[data-hearthrail-release]").innerText(), /SHA-256 a{64}/);
   assert.equal(await page.locator("[data-hearthrail-release]").getAttribute("data-release-state"), "released");
+  await context.close();
+});
+
+await check("public Windows beta alongside Mac", async () => {
+  const context = await browser.newContext({ viewport: { width: 360, height: 800 } });
+  const page = await context.newPage();
+  const release = { ...futureRelease, channel: "community-alpha", assets: [
+    { ...futureRelease.assets[0], signing: "ad-hoc", notarized: false },
+    { platform: "windows-x64", filename: "Hearthrail_0.1.0-alpha.2_x64-setup.exe", url: "https://example.com/Hearthrail_0.1.0-alpha.2_x64-setup.exe", sha256: "b".repeat(64), sizeBytes: 25000000, signing: "unsigned", beta: true },
+  ] };
+  await page.route(manifestPattern, (request) => request.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(release) }));
+  await page.goto(`${base}/hearthrail`, { waitUntil: "load" });
+  await page.getByRole("link", { name: "Download for Windows (x64)" }).waitFor({ state: "visible" });
+  assert.equal(await page.locator("[data-hearthrail-release] .hr-download-link").count(), 2);
+  assert.match(await page.locator("[data-hearthrail-release]").innerText(), /Unsigned beta \(Windows\)/);
+  await page.locator("[data-hearthrail-release] summary").nth(1).click();
+  assert.match(await page.locator("[data-hearthrail-release]").innerText(), /SHA-256 b{64}/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 360);
   await context.close();
 });
 
@@ -130,7 +150,7 @@ for (const mode of ["dark", "light"]) {
         assert.ok(layout.headerHeight <= 70, `desktop header is ${layout.headerHeight}px tall`);
         assert.ok(layout.shotTop <= 650, `real product shot starts at ${layout.shotTop}px on desktop`);
       }
-      assert.equal(await page.locator("[data-hearthrail-release] .hr-download-link[href]").count(), 1);
+      assert.equal(await page.locator("[data-hearthrail-release] .hr-download-link[href]").count(), 2);
       assert.match(await page.locator("[data-hearthrail-release]").innerText(), /Not notarized by Apple/);
       assert.deepEqual(errors, []);
       assert.deepEqual(external, []);

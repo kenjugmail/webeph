@@ -93,9 +93,11 @@
   .hr-download-link:focus-visible { background: transparent; color: var(--hr-ember); }
   .hr-release-detail { margin: -4px 0 0; color: var(--hr-paper-soft); font-size: 13px; }
   .hr-release-assets { display: grid; gap: 12px; }
+  .hr-release-assets--paired { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hr-release-asset { display: grid; gap: 8px; min-width: 0; }
   .hr-release-asset code { overflow-wrap: anywhere; color: var(--hr-paper-soft); font: 400 10px/1.5 var(--hr-mono); }
   .hr-release-asset-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: var(--hr-paper-soft); font-size: 12px; }
+  .hr-release-asset-meta > span { max-width: 100%; overflow-wrap: anywhere; }
   .hr-release-asset summary { cursor: pointer; color: var(--hr-paper-soft); font-size: 13px; }
   .hr-release-asset summary:hover { color: var(--hr-paper); }
   .hr-release-asset summary:focus-visible { outline: 2px solid var(--hr-ember); outline-offset: 4px; }
@@ -178,7 +180,7 @@
     .hr-hero { padding-top: 40px; }
     .hr-hero h1 { font-size: clamp(42px, 14vw, 60px); }
     .hr-product-shot figcaption { display: grid; gap: 4px; }
-    .hr-product-shot { margin-top: 32px; }
+    .hr-product-shot { margin-top: 20px; }
     .hr-register dl { grid-template-columns: 1fr; }
     .hr-register dl > div,
     .hr-register dl > div:first-child,
