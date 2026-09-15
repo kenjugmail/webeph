@@ -38,7 +38,7 @@ for (const path of PAGES) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await ctx.newPage();
   const res = await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => null);
-  if (!res || res.status() >= 400) { await ctx.close(); continue; }
+  if (!res || res.status() >= 400) throw new Error('Page failed to load: ' + (res?.url() || 'network error'));
   await page.waitForTimeout(900);
   const buf = await page.screenshot();
   await ctx.close();

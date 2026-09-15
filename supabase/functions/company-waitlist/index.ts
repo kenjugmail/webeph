@@ -1,3 +1,4 @@
+import {issueChallenge,verifyChallenge} from './challenge.mjs';
 const allowedOrigins = new Set(['https://ephemerent.com', 'https://www.ephemerent.com']);
 Deno.serve(async (request: Request) => {
   const origin = request.headers.get('origin') || '';
@@ -16,7 +17,16 @@ Deno.serve(async (request: Request) => {
     const bytes = new Uint8Array(size); let offset = 0; for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
     let body;
     try { body = JSON.parse(new TextDecoder().decode(bytes)); } catch { return reply(400, 'Invalid submission'); }
-    if (!body || typeof body !== 'object' || !body.submission || typeof body.submission.email !== 'string') return reply(400, 'Invalid submission');
+    if (!body || typeof body !== 'object') return reply(400, 'Invalid submission');
+    const challengeSecret=Deno.env.get('WAITLIST_CHALLENGE_SECRET');
+    if(!challengeSecret)return reply(503,'Temporarily unavailable');
+    if(body.action==='challenge'){
+      const token=await issueChallenge(challengeSecret,body.submission_hash);
+      return new Response(JSON.stringify({token}),{status:200,headers});
+    }
+    if(!body.submission||typeof body.submission.email!=='string')return reply(400,'Invalid submission');
+    const challenge=await verifyChallenge(challengeSecret,body.challenge,body.proof,body.submission);
+    if(!challenge)return reply(400,'Please retry the submission check');
     const key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const api = Deno.env.get('SUPABASE_URL')!;
     const rpc = async (name: string, args: unknown) => fetch(`${api}/rest/v1/rpc/${name}`, { method: 'POST', headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: JSON.stringify(args), signal: AbortSignal.timeout(10000) });
@@ -27,7 +37,7 @@ Deno.serve(async (request: Request) => {
     const quota = await rpc('consume_company_waitlist_quota', { email_hash: emailHash });
     if (!quota.ok) return reply(503, 'Temporarily unavailable');
     if (await quota.json() !== true) return reply(429, 'Too many attempts. Please try later or email kt@ephemerent.com.');
-    const result = await rpc('join_company_waitlist', { submission: body.submission });
+    const result = await rpc('accept_company_waitlist', { submission: body.submission, challenge_id:challenge.id, submission_hash:challenge.hash });
     if (!result.ok) return reply(result.status >= 500 ? 503 : 400, 'Unable to accept submission');
     return reply(200);
   } catch { return reply(503, 'Temporarily unavailable'); }

@@ -34,8 +34,10 @@ export function getAuthRedirect() {
   const params = new URLSearchParams(location.search);
   const next = params.get('next');
   if (next && !/^https?:\/\//i.test(next) && !next.startsWith('//')) {
-    const candidate = new URL(next, location.origin);
-    if (candidate.origin === location.origin) return candidate.href;
+    try {
+      const candidate = new URL(next, location.origin);
+      if (candidate.origin === location.origin && ['http:', 'https:'].includes(candidate.protocol)) return candidate.href;
+    } catch { /* Invalid return paths fall back to the account page. */ }
   }
 
   if (params.get('context') === 'research') {

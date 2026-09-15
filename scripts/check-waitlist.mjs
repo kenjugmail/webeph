@@ -15,13 +15,15 @@ await page.locator('[name=consent]').check();
 await page.locator('button[type=submit]').click();
 assert.match(await page.locator('#waitlist-status').textContent(),/select at least one/);
 await page.locator('[name=interests]').first().check();
-await page.route('**/functions/v1/company-waitlist', route=>route.fulfill({status:503,body:'unavailable'}));
+await page.route('**/functions/v1/company-waitlist', route=>route.request().postDataJSON().action==='challenge'?route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({token:'browser-fixture'})}):route.fulfill({status:503,body:'unavailable'}));
 await page.locator('button[type=submit]').click();
 await page.waitForFunction(()=>document.querySelector('#waitlist-status').textContent.includes('couldn’t'));
 assert.equal(await page.locator('[name=email]').inputValue(),'waitlist-test@example.com');
 await page.unroute('**/functions/v1/company-waitlist');
 await page.route('**/functions/v1/company-waitlist', async route=>{
- const {submission}=route.request().postDataJSON();
+ const body=route.request().postDataJSON();
+ if(body.action==='challenge'){await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({token:'browser-fixture'})});return;}
+ const {submission}=body;
  assert.equal(submission.consent,true);assert.equal(submission.interests.length,1);
  await route.fulfill({status:204});
 });

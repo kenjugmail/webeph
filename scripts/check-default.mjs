@@ -28,7 +28,7 @@ for (const path of PAGES) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage();
   const res = await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => null);
-  if (!res || res.status() >= 400) { await ctx.close(); continue; }
+  if (!res || res.status() >= 400) throw new Error('Page failed to load: ' + (res?.url() || 'network error'));
   const got = await page.evaluate(() => {
     const d = document.documentElement;
     const cs = getComputedStyle(document.body);

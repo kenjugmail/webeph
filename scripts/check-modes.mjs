@@ -52,7 +52,7 @@ const read = async (mode, path) => {
   }, mode);
   const page = await ctx.newPage();
   const res = await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => null);
-  if (!res || res.status() >= 400) { await ctx.close(); return null; }
+  if (!res || res.status() >= 400) throw new Error('Page failed to load: ' + (res?.url() || 'network error'));
   await page.evaluate(() => document.querySelectorAll('.rv, .reveal').forEach((e) => e.classList.add('in')));
   await page.waitForTimeout(200);
   const v = await page.evaluate(`(${SAMPLE})()`);

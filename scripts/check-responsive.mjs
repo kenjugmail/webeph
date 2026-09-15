@@ -10,7 +10,7 @@
  */
 import { chromium } from 'playwright';
 const BASE = process.env.BASE ?? 'http://localhost:3111';
-const PAGES = ['/','/research','/orrery','/hearthrail','/vellum','/vespera','/shelterix','/genesis-fall','/arbiter','/news','/news/drfsp-robust-compression','/news/stochastic-witness-calculus','/journal','/journal/preprint/stochastic-witness-calculus','/journal/submit','/journal/policies','/journal/editor','/journal/article/x','/signin','/cloud','/vellum/connect','/download','/organizations','/security','/slack','/privacy','/terms','/404.html'];
+const PAGES = ['/waitlist', '/developers', '/glow','/','/research','/orrery','/hearthrail','/vellum','/vespera','/shelterix','/genesis-fall','/arbiter','/news','/news/drfsp-robust-compression','/news/stochastic-witness-calculus','/journal','/journal/preprint/stochastic-witness-calculus','/journal/submit','/journal/policies','/journal/editor','/journal/article/x','/signin','/cloud','/vellum/connect','/download','/organizations','/security','/slack','/privacy','/terms','/404.html'];
 const browser = await chromium.launch();
 const failures = [];
 for (const width of [375, 768]) {
@@ -19,7 +19,7 @@ for (const width of [375, 768]) {
   console.log(`\n=== ${width}px`);
   for (const p of PAGES) {
     const r = await page.goto(BASE + p, { waitUntil: 'load' }).catch(() => null);
-    if (!r || r.status() >= 400) { console.log(`  ?? ${p}`); continue; }
+    if (!r || (r.status() >= 400 && p !== '/404.html')) throw new Error('Page failed to load: ' + p);
     await page.waitForTimeout(120);
     const res = await page.evaluate((w) => {
       const de = document.documentElement;

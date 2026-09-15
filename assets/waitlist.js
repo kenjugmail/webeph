@@ -22,10 +22,25 @@
     status.textContent = 'Submitting…';
     try {
       const config = window.ORRERY_CONFIG;
-      const response = await fetch(`${config.CLOUD_AUTH_URL}/functions/v1/company-waitlist`, {
+      const endpoint = `${config.CLOUD_AUTH_URL}/functions/v1/company-waitlist`;
+      status.textContent = 'Checking your submission…';
+      const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(payload)));
+      const submissionHash = Array.from(new Uint8Array(bytes), x => x.toString(16).padStart(2, '0')).join('');
+      const challengeResponse = await fetch(endpoint, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action:'challenge',submission_hash:submissionHash}), signal:AbortSignal.timeout(15000) });
+      if(!challengeResponse.ok) throw new Error('Challenge unavailable');
+      const {token} = await challengeResponse.json();
+      const proof = await new Promise((resolve,reject) => {
+        const worker = new Worker('/assets/waitlist-proof.js');
+        const timer = setTimeout(() => {worker.terminate();reject(new Error('Check timed out'));},45000);
+        worker.onmessage = ({data}) => {clearTimeout(timer);worker.terminate();data===null?reject(new Error('Check failed')):resolve(data);};
+        worker.onerror = () => {clearTimeout(timer);worker.terminate();reject(new Error('Check failed'));};
+        worker.postMessage(token);
+      });
+      status.textContent = 'Submitting…';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { apikey: config.CLOUD_AUTH_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ submission: payload }),
+        body: JSON.stringify({ submission: payload, challenge:token, proof }),
         signal: AbortSignal.timeout(20000)
       });
       if (response.status === 429) throw new Error('rate-limit');

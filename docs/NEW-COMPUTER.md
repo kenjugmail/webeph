@@ -1,14 +1,14 @@
 # Continue from another computer
 
-The complete website is in https://github.com/kenjugmail/webeph on **polish/design-system**.
-Use this branch, not the older `main` branch, to retain the current pages, releases and waitlist.
+The complete website is in https://github.com/kenjugmail/webeph on **main**.
+Use main in both webeph and buddyide. See SPARK-HANDOFF-2026-09-15.md for current rollout status and unfinished acceptance checks.
 
 ## Get the project
 
 Install Git and a current Node.js LTS version, then run:
 
 ```sh
-git clone --branch polish/design-system https://github.com/kenjugmail/webeph.git
+git clone --branch main https://github.com/kenjugmail/webeph.git
 cd webeph
 npm ci
 npx playwright install chromium
@@ -25,7 +25,7 @@ The full visual suite also requires Python 3 with Pillow and NumPy (`python3 -m 
 ## Save and publish
 
 Review `git status` and `git diff`, add the intended files, then commit and push to
-`polish/design-system`. Publish the same checkout with `npx vercel --prod`.
+`main`. Publish the same checkout with `npx vercel --prod`.
 Always commit new pages, styles, scripts, images and route changes together. Deploying an
 older checkout can remove pages that were only published from another computer.
 

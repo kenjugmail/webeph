@@ -22,7 +22,7 @@ const findings = [];
 
 for (const path of PAGES) {
   const res = await page.goto(BASE+path,{waitUntil:'load'}).catch(()=>null);
-  if (!res || res.status()>=400) continue;
+  if (!res || res.status()>=400) throw new Error('Page failed to load: ' + (res?.url() || 'network error'));
   await page.evaluate(()=>document.querySelectorAll('.rv,.reveal').forEach(e=>e.classList.add('in')));
   await page.waitForTimeout(300);
 

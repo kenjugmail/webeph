@@ -3,7 +3,7 @@
 Static marketing site for **Ephemerent** (research lab) and **Orrery** (agentic code editor).
 
 **Moving computers?** Follow [the setup and publishing guide](docs/NEW-COMPUTER.md).
-The current complete site is on the `polish/design-system` branch.
+The current site and September 15 implementation checkpoint are on `main`. See [the Spark handoff](docs/SPARK-HANDOFF-2026-09-15.md) before continuing the gated companion release.
 Orrery is built on [buddyide](https://github.com/kenjugmail/buddyide): sidecar + web UI.
 
 ## Orrery access model

@@ -37,7 +37,7 @@ const rows = [];
 
 for (const path of PAGES) {
   const res = await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => null);
-  if (!res || res.status() >= 400) continue;
+  if (!res || (res.status() >= 400 && !res.url().endswith('/404.html'))) throw new Error('Page failed to load: ' + (res?.url() || 'network error'));
   await page.waitForTimeout(450);        // glass.css is appended, then applies
   const got = await page.evaluate(() => {
     const cv = document.createElement('canvas').getContext('2d', { willReadFrequently: true });

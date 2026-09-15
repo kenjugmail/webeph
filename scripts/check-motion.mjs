@@ -17,7 +17,7 @@ const problems = [];
 
 for (const p of PAGES) {
   const r = await page.goto(BASE + p, { waitUntil: 'load' }).catch(() => null);
-  if (!r || r.status() >= 400) continue;
+  if (!r || r.status() >= 400) throw new Error('Page failed to load: ' + (r?.url() || 'network error'));
   await page.waitForTimeout(200);
   const found = await page.evaluate(() => {
     const bad = [];
