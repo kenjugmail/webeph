@@ -1,0 +1,26 @@
+name: Glow delivery and retention
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '2-59/5 * * * *'
+permissions: {}
+concurrency:
+  group: glow-delivery
+  cancel-in-progress: false
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Resume approved Glow work
+        env:
+          GLOW_MAINTENANCE_SECRET: ${{ secrets.GLOW_MAINTENANCE_SECRET }}
+        shell: bash
+        run: |
+          test -n "$GLOW_MAINTENANCE_SECRET"
+          curl --fail --silent --show-error --max-time 240 \
+            --request POST \
+            --header "Authorization: Bearer $GLOW_MAINTENANCE_SECRET" \
+            --output /dev/null \
+            --write-out 'Glow maintenance HTTP %{http_code}\n' \
+            https://glow.ephemerent.com/api/maintenance

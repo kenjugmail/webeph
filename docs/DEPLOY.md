@@ -1,6 +1,18 @@
 # Deploy webeph to Vercel + ephemerent.com
 
-Static site - no build step. Repo: [github.com/kenjugmail/webeph](https://github.com/kenjugmail/webeph).
+Static site with required release checks. Repo: [github.com/kenjugmail/webeph](https://github.com/kenjugmail/webeph).
+
+Production follows `main`. Merge release work into `main` before deploying;
+deploying an unmerged branch can appear successful and then be overwritten by
+the next automatic `main` deployment. This caused the SWC preprint, News story,
+and downloads to disappear on September 6, 2026 while their files remained on
+`polish/design-system`. Both histories are now integrated, including the API
+routes and the waitlist. Preserve both when resolving future merges.
+
+SWC is a static public preprint at `/journal/preprint/stochastic-witness-calculus`;
+its PDF, source, and evidence live under `/assets/research/`. It is not a
+published Supabase submission. DR-FSP is a published Supabase journal record.
+Check the correct storage system before concluding that a paper was deleted.
 
 ## 1. Vercel (after push to `main`)
 
@@ -9,7 +21,7 @@ Code is on GitHub. Import once:
 1. [vercel.com](https://vercel.com) -> Sign in with **GitHub**
 2. **Add New Project** -> Import `kenjugmail/webeph`
 3. Framework Preset: **Other**
-4. **Build Command:** leave empty
+4. **Build Command:** `npm run build` (required route, artifact, and release checks)
 5. **Output Directory:** `.`
 6. **Deploy**
 
@@ -23,6 +35,11 @@ Verify:
 - `/download.html` -> download
 - `/login.html` -> sign-in
 - `/cloud.html` -> cloud account, plan, and billing CTA
+- `/journal/preprint/stochastic-witness-calculus` -> current SWC preprint
+- `/news/stochastic-witness-calculus` -> SWC explainer
+- `/assets/research/stochastic-witness-calculus-arxiv-v6.pdf` -> PDF, with the manifest hash
+- `/waitlist` -> company waitlist
+- `/developers` -> API documentation
 
 ### CLI (optional)
 
@@ -48,6 +65,8 @@ Porkbun -> domain -> **DNS Records**. Use values from Vercel's domain screen (ty
 | Type | Host | Answer / Value |
 |------|------|----------------|
 | A | @ | `76.76.21.21` |
+| CNAME | api | `cname.vercel-dns.com` (Arbiter API: this Vercel project rewrites `api.ephemerent.com/v1/*` to the Orrery relay, so it is always on; added 2026-09-06 to the `ephemerent` Vercel project, the one serving ephemerent.com) |
+| A | arbiter-1 | `3.228.134.211` (the GPU box behind the relay; Elastic IP; Caddy issues TLS for arbiter-1.ephemerent.com on first bring-up) |
 | CNAME | www | `cname.vercel-dns.com` |
 
 - Delete conflicting **A** records on `@` before adding Vercel's A record

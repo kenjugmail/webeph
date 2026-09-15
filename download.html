@@ -7,25 +7,25 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
-<title>Get Orrery beta</title>
-<meta name="description" content="Download the Orrery beta. Beta software may change, fail, or produce incorrect agent output; review changes and keep backups.">
+<title>Get Orrery</title>
+<meta name="description" content="Download Orrery, the agentic code editor built around Nexus. Preview setup is free; agent runs need a Pro, Max, or Ultra subscription with hosted Arbiter 27B and Doubleword credits.">
 <link rel="canonical" href="https://ephemerent.com/download">
 <meta name="theme-color" content="#0b0b12">
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Get Orrery beta">
-<meta property="og:description" content="Download the Orrery beta. Preview setup is available; real agent runs require an active subscription.">
+<meta property="og:title" content="Get Orrery">
+<meta property="og:description" content="Download Orrery. Preview setup is available; real agent runs require an active subscription.">
 <meta property="og:url" content="https://ephemerent.com/download">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Get Orrery beta">
+<meta property="og:image:alt" content="Get Orrery">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Get Orrery beta">
-<meta name="twitter:description" content="Download the Orrery beta. Preview setup is available; real agent runs require an active subscription.">
+<meta name="twitter:title" content="Get Orrery">
+<meta name="twitter:description" content="Download Orrery. Preview setup is available; real agent runs require an active subscription.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
 <!-- include: head-theme -->
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
@@ -101,7 +101,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <p class="sub" style="margin-bottom:20px;">An unsigned Windows test beta is being prepared for a small tester group, with manual downloads only. Downloads will appear after Windows installation and subscriber-access checks pass. An active subscription is required for agent execution; a subscription does not make an unpublished build available.</p>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
-        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run governed agents through hosted subscription routes. No free compute, public local-model execution, or provider-key setup.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run governed agents with open-source models on your device plus hosted Arbiter 27B and Doubleword credits and Orrery Cloud.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
@@ -111,14 +111,21 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the Windows beta packet. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Beta software may change, fail, or produce incorrect output.</p>
+      <p class="sub">Download the preview for Windows or Linux; macOS is next. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
         <a class="btn btn-primary" href="/cloud" style="width:100%;justify-content:center;">Open Pro cloud</a>
       </div>
 
-      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:16px;">Download Windows test beta (ZIP) <span aria-hidden="true">↓</span></a>
+      <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:10px;">Download Orrery <span aria-hidden="true">↓</span></a>
+      <details class="release-others" id="release-others" style="margin-bottom:16px;">
+        <summary style="cursor:pointer;font-size:13px;color:var(--muted);">Other platforms</summary>
+        <ul id="release-asset-list" style="list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;"></ul>
+      </details>
+      <p class="sub" id="release-linux-note" style="font-size:13px;color:var(--muted);line-height:1.6;margin:-6px 0 14px;">Linux: the <code>.deb</code> installs cleanly on Ubuntu and Debian. The AppImage needs <code>libfuse2</code>, which Ubuntu 24.04 no longer ships (<code>sudo apt install libfuse2t64</code>), or run it once with <code>--appimage-extract-and-run</code>. Windows: unzip and run <code>Orrery.exe</code>; SmartScreen will warn because the preview is unsigned.</p>
+      <p class="auth-msg hidden" id="release-gate-note" style="margin-bottom:10px;"></p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Downloads are for active subscribers and expire ten minutes after you request them. Preview builds are unsigned: on macOS right-click the app and choose Open the first time; on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
       <div class="release-status" id="release-status">
         <div><b>Release candidate</b><span id="release-version">Pending verification</span></div>
         <div><b>Update mode</b><span id="release-update-mode">Website-hosted updates</span></div>
@@ -127,7 +134,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </div>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
-        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted DeepSeek API, Doubleword, and Arbiter credits plus Orrery Cloud, subject to beta limits and provider availability.</span></div>
+        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted Arbiter 27B and Doubleword credits plus Orrery Cloud, subject to plan limits and provider availability.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <div class="download-steps">
@@ -135,7 +142,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <ol>
           <li>This test beta is unsigned: Windows may warn or block it, and its publisher is not authenticated. Compare the ZIP checksum before extracting it; do not disable operating-system protections.</li>
           <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
-          <li>Sign in from Settings -> Account and subscribe - hosted DeepSeek API, Doubleword, and Arbiter credits work with zero provider-key setup.</li>
+          <li>Sign in from Settings -> Account and subscribe - hosted Arbiter 27B and Doubleword credits work with zero provider-key setup.</li>
           <li>Use Nexus to open a workspace, pick a hosted route, send work, and review proof, boundary, and usage receipts.</li>
           <li>Release notes and checksums accompany the test ZIP. Updates are manual: close the app, preserve your work, and download a newly reviewed ZIP from this page. Automatic installation is disabled for this beta.</li>
         </ol>

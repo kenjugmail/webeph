@@ -5,12 +5,10 @@ import {
   PLAN_LABELS,
   PLAN_PRICES,
   BUNDLED_QUOTAS,
-  ESTIMATED_API_VALUE_USD,
   planFromCloudProfile,
   isPaidPlan,
   checkoutUrlForTier,
   formatTokens,
-  formatEstimatedApiValue,
 } from './accountPlan.js';
 
 let client = null;
@@ -105,22 +103,22 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Paid agent work with hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'DeepSeek API - 200M credits/month', 'Doubleword - 200M credits/month', 'Arbiter - 100M credits/month', 'Est. ~$2,400 API usage value/mo', 'Nexus + managed connector features'],
+      summary: 'Paid agent work with hosted Arbiter 27B and Doubleword credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'Arbiter 27B - 14M compute credits/month', 'Doubleword - 6M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'DeepSeek API - 600M credits/month', 'Doubleword - 650M credits/month', 'Arbiter - 400M credits/month', 'Est. ~$7,500 API usage value/mo', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'Arbiter 27B - 35M compute credits/month', 'Doubleword - 15M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'DeepSeek API - 1.5B credits/month', 'Doubleword - 1.5B credits/month', 'Arbiter - 1.2B credits/month', 'Est. ~$18,000 API usage value/mo', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'Arbiter 27B - 70M compute credits/month', 'Doubleword - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -177,7 +175,6 @@ function renderPlanSummary(root, profile) {
   const plan = catalog[planKey] || catalog.free;
   const portal = cfg().BILLING_PORTAL_URL;
   const paid = isPaidPlan(planKey);
-  const estValue = ESTIMATED_API_VALUE_USD[planKey];
 
   // Static monthly allowances for hosted credits; the live usage meter lives in the IDE.
   const quotas = BUNDLED_QUOTAS[planKey];
@@ -208,12 +205,8 @@ function renderPlanSummary(root, profile) {
       : '<span class="plan-note">Billing portal not connected yet.</span>');
   }
 
-  const estRow = estValue
-    ? `<div class="account-plan-meter">
-      <span>Est. API usage value</span>
-      <b>~${formatEstimatedApiValue(estValue)} / mo</b>
-    </div>
-    <p class="plan-note">Estimated list-rate API usage with prompt caching and token-efficient run context. Meters show credits/tokens — not provider cost.</p>`
+  const poolNote = quotas
+    ? `<p class="plan-note">One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at list rate; Arbiter credits buy looped inference compute. Pools reset monthly, stop at the limit, and never overage.</p>`
     : '';
 
   slot.innerHTML = `
@@ -226,7 +219,7 @@ function renderPlanSummary(root, profile) {
     </div>
     <p>${plan.summary}</p>
     ${quotaRows}
-    ${estRow}
+    ${poolNote}
     <div class="account-plan-meter">
       <span>Nexus cloud features</span>
       <b>${paid ? 'Enabled' : 'Subscription required'}</b>
@@ -372,8 +365,183 @@ export async function mountCloudAccount(root = document) {
   const emailEl = root.getElementById('cloud-user-email');
   if (emailEl) emailEl.textContent = session.user.email || 'Account';
   void logCloudActivity('cloud.open');
-  getCloudProfile().then((profile) => renderPlanSummary(root, profile));
+  getCloudProfile().then((profile) => renderPlanSummary(root, profile)).then(() => renderUsageAndKeys(root, session))
+    .then(() => watchPurchaseReturn(root, session));
 
   root.getElementById('cloud-sign-out')?.addEventListener('click', () => signOutCloud());
   return session;
+}
+
+/* ---------------------------------------------------------------- usage + API keys
+ * Live balances come from the Orrery relay (GET /usage: this month's quota/used per pool) and API keys
+ * from relay-admin (GET/POST/DELETE /keys). Both take the Supabase session token. Everything here is
+ * metadata: credits and key prefixes, never prompts. Failures leave the static allowances in place. */
+const POOL_SLOTS = { 'arbiter-runpod': 'arbiter-27b', doubleword: 'doubleword' };
+
+function functionsBase() {
+  return String(cfg().CLOUD_AUTH_URL || '').replace(/\/+$/, '') + '/functions/v1';
+}
+
+async function relayFetch(session, path, init = {}) {
+  const res = await fetch(functionsBase() + path, {
+    ...init,
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}`, ...(init.headers || {}) },
+  });
+  let body = null;
+  try { body = await res.json(); } catch { body = null; }
+  if (!res.ok) throw new Error((body && body.error) || `HTTP ${res.status}`);
+  return body;
+}
+
+function fmtCredits(n) { return formatTokens(Math.max(0, Math.round(Number(n) || 0))); }
+
+export async function renderUsageAndKeys(root, session) {
+  if (!session?.access_token) return;
+  const api = root.getElementById('cloud-api');
+  if (api) api.hidden = false;
+  // 1) pool meters + purchased-credit wallet
+  try {
+    const usage = await relayFetch(session, '/model-relay/usage');
+    renderCreditWallet(root, session, usage);
+    for (const pool of usage.pools || []) {
+      const slot = POOL_SLOTS[pool.poolId];
+      const row = slot && root.querySelector(`.account-plan-meter-pool[data-credit-pool="${slot}"]`);
+      if (!row) continue;
+      const quota = Number(pool.quotaCredits) || 0;
+      const used = Number(pool.usedCredits) || 0;
+      const pct = quota > 0 ? Math.min(100, Math.round((used / quota) * 100)) : 0;
+      const label = row.querySelector('b');
+      if (label) {
+        label.textContent = quota > 0 ? `${fmtCredits(used)} of ${fmtCredits(quota)} credits used this month` : 'No hosted credits on this plan';
+        let sub = row.querySelector('small');
+        if (!sub) { sub = document.createElement('small'); label.insertAdjacentElement('afterend', sub); }
+        sub.textContent = quota > 0 ? `${fmtCredits(quota - used)} left · resets ${usage.month ? 'after ' + usage.month : 'monthly'}${usage.organization ? ' · organization pool' : ''}` : '';
+      }
+      const bar = row.querySelector('.account-plan-quota-track i');
+      if (bar) bar.style.width = `${quota > 0 ? 100 - pct : 0}%`;
+    }
+  } catch (err) {
+    console.warn('usage', err.message);
+  }
+  // 2) keys
+  const list = root.getElementById('cloud-api-keys');
+  const msg = root.getElementById('cloud-api-msg');
+  const secretBox = root.getElementById('cloud-api-secret');
+  const say = (text, ok = true) => { if (msg) { msg.textContent = text; msg.style.color = ok ? '' : 'var(--danger, #e5484d)'; } };
+  const renderKeys = async () => {
+    if (!list) return;
+    try {
+      const data = await relayFetch(session, '/relay-admin/keys');
+      const keys = (data.keys || []).filter((k) => !k.revoked_at && !k.revokedAt);
+      list.innerHTML = keys.length === 0
+        ? '<p class="api-empty">No API keys yet. Create one to call api.ephemerent.com from your own code.</p>'
+        : keys.map((k) => {
+          const prefix = k.key_prefix || k.keyPrefix || '';
+          const created = (k.created_at || k.createdAt || '').slice(0, 10);
+          const last = k.last_used_at || k.lastUsedAt;
+          return `<div class="api-key-row" data-key-id="${k.id}">
+            <div><b>${escapeHtml(k.name || 'key')}</b><span>${escapeHtml(prefix)}… · created ${created}${last ? ' · last used ' + String(last).slice(0, 10) : ''}</span></div>
+            <button type="button" class="btn btn-ghost" data-revoke="${k.id}">Revoke</button>
+          </div>`;
+        }).join('');
+      list.querySelectorAll('[data-revoke]').forEach((btn) => btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        try {
+          await relayFetch(session, `/relay-admin/keys?id=${encodeURIComponent(btn.dataset.revoke)}`, { method: 'DELETE' });
+          say('Key revoked. Requests with it fail from now on.');
+          await renderKeys();
+        } catch (err) { say(err.message, false); btn.disabled = false; }
+      }));
+    } catch (err) {
+      list.innerHTML = `<p class="api-empty">API keys are unavailable right now (${escapeHtml(err.message)}).</p>`;
+    }
+  };
+  await renderKeys();
+  const nameEl = root.getElementById('cloud-api-key-name');
+  const createBtn = root.getElementById('cloud-api-key-create');
+  if (createBtn && !createBtn.dataset.bound) {
+    createBtn.dataset.bound = '1';
+    createBtn.addEventListener('click', async () => {
+      const name = (nameEl?.value || '').trim() || 'api key';
+      createBtn.disabled = true; say('');
+      try {
+        const out = await relayFetch(session, '/relay-admin/keys', { method: 'POST', body: JSON.stringify({ name }) });
+        if (secretBox) {
+          secretBox.hidden = false;
+          secretBox.innerHTML = `${escapeHtml(out.key || '')}<small>Shown once. Store it in a secret manager; the list below only keeps the prefix.</small>`;
+        }
+        if (nameEl) nameEl.value = '';
+        say('Key created.');
+        await renderKeys();
+      } catch (err) { say(err.message, false); }
+      createBtn.disabled = false;
+    });
+  }
+}
+
+function escapeHtml(v) {
+  return String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/* Stripe sends a buyer back to /cloud?credits=purchased (the payment links' after-payment redirect).
+ * The webhook that grants the pack runs a moment later, so poll the balance until it moves, then
+ * drop the parameter so a reload does not poll again. Nothing here trusts the parameter: the
+ * balance shown is always the relay's. */
+async function watchPurchaseReturn(root, session) {
+  const params = new URLSearchParams(location.search);
+  if (params.get('credits') !== 'purchased' || !session?.access_token) return;
+  const slot = root.getElementById('cloud-credit-wallet');
+  const note = document.createElement('p');
+  note.className = 'plan-note credit-return-note';
+  note.textContent = 'Payment received. Your credits land as soon as Stripe confirms the payment, usually within a minute.';
+  slot?.querySelector('.credit-wallet-head')?.insertAdjacentElement('afterend', note);
+  slot?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  let seen = null;
+  for (let i = 0; i < 24; i += 1) {
+    let usage;
+    try { usage = await relayFetch(session, '/model-relay/usage'); } catch { break; }
+    const balance = Math.max(0, Number(usage.purchasedCredits) || 0);
+    if (seen === null) seen = balance;
+    if (balance > seen) {
+      renderCreditWallet(root, session, usage);
+      const done = document.createElement('p');
+      done.className = 'plan-note credit-return-note';
+      done.textContent = `Credits added: ${formatTokens(balance - seen)}. They are spent after this month's pool.`;
+      root.getElementById('cloud-credit-wallet')?.querySelector('.credit-wallet-head')?.insertAdjacentElement('afterend', done);
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 5000));
+  }
+  params.delete('credits');
+  history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params.toString() : ''));
+}
+
+/* Two sources of credit, one unit. The monthly pool above resets and does not roll over; the wallet
+ * below is bought once, never expires, and is only spent after the pool for that month is gone. */
+function renderCreditWallet(root, session, usage) {
+  const slot = root.getElementById('cloud-credit-wallet');
+  if (!slot) return;
+  if (usage.organization === true) {
+    slot.hidden = true;                        // organizations bill against their contract, not a wallet
+    return;
+  }
+  slot.hidden = false;
+  const balance = Math.max(0, Number(usage.purchasedCredits) || 0);
+  const packs = (cfg().CREDIT_PACKS || []).filter((pack) => pack && pack.url);
+  const buy = packs.map((pack) => {
+    const href = `${pack.url}${pack.url.includes('?') ? '&' : '?'}client_reference_id=${encodeURIComponent(session.user.id)}`;
+    return `<a class="btn btn-ghost credit-pack" href="${href}">
+      <b>${formatTokens(pack.credits)} credits</b><span>$${pack.priceUsd}</span></a>`;
+  }).join('');
+  slot.innerHTML = `
+    <div class="credit-wallet-head">
+      <div>
+        <span class="mono account-plan-kicker">Purchased credits</span>
+        <b>${formatTokens(balance)} credits</b>
+      </div>
+      <span class="plan-badge">${balance > 0 ? 'Available' : 'Empty'}</span>
+    </div>
+    <p class="plan-note">Bought once, never expires, and works across Arbiter 27B and Doubleword. Your monthly pool is always spent first, so buying early never wastes credits. Use them from the desktop or the <a href="/developers">API</a>.</p>
+    ${buy === '' ? '<p class="plan-note">Credit packs are not connected to checkout yet.</p>' : `<div class="credit-pack-row">${buy}</div>`}
+  `;
 }

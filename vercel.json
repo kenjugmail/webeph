@@ -3,6 +3,7 @@
   "outputDirectory": ".",
   "installCommand": "npm install --omit=dev",
   "redirects": [
+    { "source": "/glow.html", "destination": "/glow", "permanent": true },
     { "source": "/downloads/orrery/:path*", "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/orrery-releases/:path*", "permanent": false },
     { "source": "/waitlist/manage", "destination": "https://supabase.com/dashboard/project/wjjthkqwcyahamhjkeux/editor", "permanent": false },
     { "source": "/waitlist.html", "destination": "/waitlist", "permanent": true },
@@ -27,6 +28,8 @@
     { "source": "/journal-submit.html", "destination": "/journal/submit", "permanent": true },
     { "source": "/journal-policies.html", "destination": "/journal/policies", "permanent": true },
     { "source": "/journal-swc.html", "destination": "/journal/preprint/stochastic-witness-calculus", "permanent": true },
+    { "source": "/journal-tel.html", "destination": "/journal/preprint/tomita-energy-logic", "permanent": true },
+    { "source": "/journal-tel-riemann.html", "destination": "/journal/preprint/tomita-energy-logic-riemann", "permanent": true },
     { "source": "/news.html", "destination": "/news", "permanent": true },
     { "source": "/news-drfsp.html", "destination": "/news/drfsp-robust-compression", "permanent": true },
     { "source": "/news-swc.html", "destination": "/news/stochastic-witness-calculus", "permanent": true },
@@ -35,6 +38,9 @@
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/glow", "destination": "/glow.html" },
+    { "source": "/v1/:path*", "has": [{ "type": "host", "value": "api.ephemerent.com" }], "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/functions/v1/model-relay/:path*" },
+    { "source": "/", "has": [{ "type": "host", "value": "api.ephemerent.com" }], "destination": "/api.html" },
     { "source": "/waitlist", "destination": "/waitlist.html" },
     { "source": "/play", "destination": "https://web-five-amber-88.vercel.app/play" },
     { "source": "/play/:path*", "destination": "https://web-five-amber-88.vercel.app/play/:path*" },
@@ -71,10 +77,13 @@
     { "source": "/journal/editor", "destination": "/journal-editor.html" },
     { "source": "/journal/policies", "destination": "/journal-policies.html" },
     { "source": "/journal/preprint/stochastic-witness-calculus", "destination": "/journal-swc.html" },
+    { "source": "/journal/preprint/tomita-energy-logic", "destination": "/journal-tel.html" },
+    { "source": "/journal/preprint/tomita-energy-logic-riemann", "destination": "/journal-tel-riemann.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
     { "source": "/signin", "destination": "/login.html" },
     { "source": "/cloud", "destination": "/cloud.html" },
+    { "source": "/developers", "destination": "/api.html" },
     { "source": "/vellum/connect", "destination": "/vellum-connect.html" }
   ],
   "headers": [

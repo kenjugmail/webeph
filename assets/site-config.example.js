@@ -36,8 +36,8 @@ window.ORRERY_CONFIG = {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Hosted DeepSeek API, Doubleword, and Arbiter credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email cloud sign-in', 'DeepSeek API - 200M credits/month', 'Doubleword - 200M credits/month', 'Arbiter - 100M credits/month', 'Est. ~$2,400 API usage value/mo', 'Nexus operations'],
+      summary: 'Hosted Arbiter 27B and Doubleword credits, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email cloud sign-in', 'Arbiter 27B - 14M compute credits/month', 'Doubleword - 6M credits/month', 'Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',
@@ -63,6 +63,16 @@ window.ORRERY_CONFIG = {
   ENTERPRISE_CHECKOUT_URL: 'https://buy.stripe.com/cNi5kD4ojbEibKVfMi3Je07',
   /** Optional Stripe customer portal URL once billing is active. */
   BILLING_PORTAL_URL: '',
+  /** Credit packs: one-time top-ups of the rollover wallet, spent only after the monthly pool.
+   *  `credits` must match CREDIT_PACKS in supabase/functions/stripe-webhook, and `url` is a Stripe
+   *  Payment Link; the account page appends ?client_reference_id=<user id> so the webhook knows who
+   *  bought it. Leave a url empty and that pack is hidden. */
+  CREDIT_PACKS: [
+    { id: 'credits-10', credits: 10_000_000, priceUsd: 20, url: '' },
+    { id: 'credits-25', credits: 25_000_000, priceUsd: 45, url: '' },
+    { id: 'credits-60', credits: 60_000_000, priceUsd: 100, url: '' },
+  ],
+
   /** Future — WebSocket relay for phone/remote. Leave empty until deployed. */
   CLOUD_RELAY_URL: '',
 };

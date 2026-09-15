@@ -8,7 +8,13 @@
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
 <title>Orrery Cloud</title>
-<meta name="description" content="Orrery Cloud account for paid beta access, hosted credits, and Nexus cloud features. Availability, quotas, and providers may change during beta.">
+<meta name="description" content="Orrery Cloud account for subscriber access, hosted Arbiter 27B and Doubleword credits, and Nexus cloud features. Availability, quotas, and providers may change.">
+<meta property="og:title" content="Orrery Cloud">
+<meta property="og:description" content="Your Orrery account: subscription, hosted Arbiter 27B and Doubleword credits, API keys, usage.">
+<meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0b0b12">
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -79,11 +85,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <main class="auth-main" id="main" data-workflow-label="Account / Cloud operations">
   <div class="auth-card" style="max-width:560px;">
     <h1>Orrery Cloud</h1>
-    <p class="sub">Orrery Cloud is unlocked by Pro, Max, or Ultra. Sign in with Google, GitHub, or email for hosted credits, cloud runs, managed connectors, Nexus, proof vaults, and audit trails. Preview accounts cannot run agents. Cloud features are beta and may be limited, changed, unavailable, or provider-dependent.</p>
+    <p class="sub">Orrery Cloud is unlocked by Pro, Max, or Ultra. Sign in with Google, GitHub, or email for hosted credits, cloud runs, managed connectors, Nexus, proof vaults, and audit trails. Preview accounts cannot run agents. Cloud features may be limited, changed, unavailable, or provider-dependent.</p>
 
     <div class="cloud-features">
       <div class="cloud-feat"><b>Subscription access</b><span>Google, GitHub, and email accounts verify an active Pro, Max, or Ultra subscription.</span></div>
-      <div class="cloud-feat"><b>Hosted credits</b><span>Use included DeepSeek API, Doubleword, and Arbiter credits for hosted model calls, subject to quota, provider availability, and abuse controls.</span></div>
+      <div class="cloud-feat"><b>Hosted credits</b><span>Use included Doubleword and Arbiter credits for hosted model calls, subject to quota, provider availability, and abuse controls.</span></div>
       <div class="cloud-feat"><b>Nexus operations</b><span>Managed Discord/mobile automation, proof receipts, and agent operations.</span></div>
       <div class="cloud-feat"><b>Proof and audit</b><span>Proof bundles and usage receipts are included with paid cloud.</span></div>
     </div>
@@ -92,20 +98,20 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="mini-plan mini-plan-pro">
         <span class="mono">Pro</span>
         <b>$40/month</b>
-        <p>200M DeepSeek API + 200M Doubleword + 100M Arbiter credits/month (~$2,400 est. API usage value), plus Nexus cloud operations.</p>
+        <p>14M Arbiter 27B compute credits + 6M Doubleword credits/month, plus Nexus cloud operations.</p>
       </div>
       <div class="mini-plan mini-plan-pro">
         <span class="mono">Max</span>
         <b>$100/month</b>
-        <p>600M DeepSeek API + 650M Doubleword + 400M Arbiter credits/month (~$7,500 est. API usage value), plus more cloud-run capacity.</p>
+        <p>35M Arbiter 27B compute credits + 15M Doubleword credits/month, plus more cloud-run capacity.</p>
       </div>
       <div class="mini-plan mini-plan-pro">
         <span class="mono">Ultra</span>
         <b>$200/month</b>
-        <p>1.5B DeepSeek API + 1.5B Doubleword + 1.2B Arbiter credits/month (~$18,000 est. API usage value), research runs, and proof vault capacity.</p>
+        <p>70M Arbiter 27B compute credits + 30M Doubleword credits/month, research runs, and proof vault capacity.</p>
       </div>
     </div>
-    <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. Credits reset each billing month, do not roll over, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
+    <p class="billing-fineprint mono">Paid tiers bill monthly via Stripe and auto-renew until canceled. One credit is one millionth of a dollar of provider cost; pools reset each billing month, do not roll over, stop hard at the limit, and are not guaranteed capacity. Agent output may be wrong or unsafe. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
 
     <div id="cloud-auth-setup" class="hidden auth-optional">
       <p class="auth-msg" style="color:var(--muted);">Cloud sign-in is not enabled for this environment yet. Local preview setup remains available below.</p>
@@ -137,6 +143,23 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
             <h2>Loading</h2>
           </div>
         </div>
+      </div>
+
+      <div class="auth-optional account-plan" id="cloud-credit-wallet" hidden></div>
+
+      <div class="auth-optional" id="cloud-api" hidden>
+        <div class="auth-optional-head">
+          <h2>API</h2>
+          <p class="sub">The same model and pools as the desktop, at <code class="mono">https://api.ephemerent.com/v1</code>. Keys draw from your monthly pools above; usage updates on every request. <a href="/developers">Docs</a></p>
+        </div>
+        <div id="cloud-api-keys" class="api-keys" aria-live="polite"></div>
+        <div class="api-key-create">
+          <label class="sr-only" for="cloud-api-key-name">Key name</label>
+          <input type="text" class="auth-input" id="cloud-api-key-name" placeholder="Key name (e.g. laptop, CI)" maxlength="120">
+          <button type="button" class="btn btn-ghost" id="cloud-api-key-create">Create key</button>
+        </div>
+        <div id="cloud-api-secret" class="api-secret" hidden></div>
+        <p class="auth-msg" id="cloud-api-msg" role="status" aria-live="polite"></p>
       </div>
 
       <!-- Shown only when SITE_CONFIG.CLOUD_RELAY_URL is set; see the guard at the end of this file. -->
@@ -175,6 +198,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .cloud-feat em { color: var(--faint); font-style: normal; }
 .pair-code { font-family: var(--mono); font-size: 28px; letter-spacing: 0.35em; text-align: center; padding: 16px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); color: var(--teal-lt); }
 .mini-pricing { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 26px; }
+@media (max-width:480px){ .mini-pricing { grid-template-columns:1fr; } }
 .mini-plan { border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(255,255,255,0.02); padding:14px; }
 .mini-plan span { color:var(--faint); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
 .mini-plan b { display:block; margin:5px 0 6px; font-size:20px; color:var(--ink); }
@@ -182,6 +206,26 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .mini-plan-pro { border-color:rgba(45,212,191,0.35); background:rgba(45,212,191,0.05); }
 .billing-fineprint { margin:0 0 22px; font-size:11.5px; line-height:1.6; color:var(--faint); }
 .billing-fineprint a { color:var(--teal-lt); }
+.account-plan-meter-pool .account-plan-quota-track i { transition: width .4s ease; }
+.account-plan-meter-pool small { display:block; color:var(--faint); font-size:11.5px; margin-top:3px; }
+.api-keys { display:grid; gap:8px; margin:0 0 12px; }
+.api-key-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--bg-2); }
+.api-key-row b { font-size:13.5px; color:var(--ink-2); }
+.api-key-row span { display:block; color:var(--faint); font-size:11.5px; font-family:var(--mono); margin-top:2px; }
+.api-key-row button { flex:none; }
+.api-key-create { display:flex; gap:8px; }
+.api-key-create .auth-input { flex:1; }
+.api-secret { margin-top:12px; padding:12px 14px; border:1px dashed var(--line-strong); border-radius:var(--r-sm); background:var(--bg-2); font-family:var(--mono); font-size:12.5px; overflow-wrap:anywhere; }
+.api-secret small { display:block; font-family:var(--sans); color:var(--muted); margin-top:8px; }
+.api-empty { color:var(--muted); font-size:13px; }
+.credit-wallet-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px; }
+.credit-wallet-head b { display:block; font-size:22px; margin-top:4px; color:var(--ink); }
+.credit-pack-row { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:14px; }
+@media (max-width:560px){ .credit-pack-row { grid-template-columns:1fr; } }
+.credit-pack { flex-direction:column; align-items:flex-start; gap:2px; padding:11px 13px; }
+.credit-pack b { font-size:13.5px; color:var(--ink-2); }
+.credit-pack span { font-size:12px; color:var(--faint); font-family:var(--mono); }
+@media (max-width:480px){ .api-key-create { flex-direction:column; } }
 }
 </style>
 
