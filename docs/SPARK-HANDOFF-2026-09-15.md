@@ -89,7 +89,11 @@ success/deduplication tests; its old no-proof submissions will now be rejected.
 - Challenge signature/digest/expiry tests passed.
 - Billing delivery claim → failed processing → retry → completion → duplicate checks passed inside a rolled-back transaction.
 - Companion frontend built; local browser sign-in screen loaded without console errors.
-- Full visual suite restarted after correcting the added /api test path to /developers. Inspect the latest run or rerun on Spark.
+- Full website visual suite completed successfully after correcting the added /api test path to /developers.
+- Updated waitlist browser failure/retry/success checks passed against a fresh preview.
+- Updated company-waitlist function is deployed. A live signed-challenge submission returned HTTP 200, was verified in storage, and was deleted.
+- Ephemerent website was deployed successfully from the September 15 main checkpoint.
+- Both repositories were pushed to main with clean working trees at handoff.
 - Finish the full end-to-end/security matrix, fix any resulting issues, finish visual review across all journeys,
   deploy verified billing changes, distribute a compatible desktop, verify DNS, then enable the companion.
 
