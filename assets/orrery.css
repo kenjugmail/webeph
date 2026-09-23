@@ -252,3 +252,12 @@ h3.display { font-size: clamp(24px, 3vw, 36px); }
   .orrery-discord:hover { color: var(--ink); }
 
 }
+
+/* ============ DEMOS ============ */
+.demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+.demo-card { margin: 0; padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.demo-card video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05070b; border-bottom: 1px solid var(--line); }
+.demo-card figcaption { padding: 20px 22px 24px; }
+.demo-card h3 { margin: 0 0 8px; }
+.demo-card p { margin: 0; color: var(--muted); line-height: 1.55; }
+@media (max-width: 900px) { .demo-grid { grid-template-columns: minmax(0, 1fr); } }

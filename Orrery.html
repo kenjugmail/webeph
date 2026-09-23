@@ -58,7 +58,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <link rel="stylesheet" href="/assets/glass.css?v=20260820">
 <script src="/assets/mode.js?v=20260822c" defer></script>
 <!-- /include -->
-<link rel="stylesheet" href="/assets/orrery.css?v=20260808c">
+<link rel="stylesheet" href="/assets/orrery.css?v=20260923a">
 <link rel="stylesheet" href="/assets/components.css?v=20260801">
 <link rel="stylesheet" href="/assets/auth.css?v=20260801">
 <link rel="stylesheet" href="/assets/base.css?v=20260801">
@@ -213,6 +213,40 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="pipe-step"><span class="pipe-n mono">05</span><b>Run</b><span>Watch progress and file activity.</span></div>
       <div class="pipe-step"><span class="pipe-n mono">06</span><b>Receipt</b><span>Review proof, boundary, and usage.</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ============ DEMOS ============ -->
+<section class="section demo-section" id="demos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">See it work</div>
+      <h2 class="display">One prompt. A finished, tested site.</h2>
+      <p class="lead">Two real runs in the Orrery desktop app on DeepSeek V4 Flash through Doubleword. No one touched the code: the agent wrote every file, ran its own tests, and checked the page in a real browser before it reported.</p>
+    </div>
+    <div class="demo-grid">
+      <figure class="card demo-card reveal d1">
+        <video controls playsinline preload="none" poster="/assets/video/orrery-one-prompt-website.jpg" aria-label="Orrery builds the Halcyon Observatory website from one prompt">
+          <source src="/assets/video/orrery-one-prompt-website.webm" type="video/webm">
+          <source src="/assets/video/orrery-one-prompt-website.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <h3>From an empty folder</h3>
+          <p>One prompt builds &ldquo;Halcyon Observatory&rdquo;: an animated orrery, show listings and a ticket selector. 18 tool calls, tests passing, browser-checked, in 60 seconds for an estimated $0.014.</p>
+        </figcaption>
+      </figure>
+      <figure class="card demo-card reveal d2">
+        <video controls playsinline preload="none" poster="/assets/video/orrery-memory-tidewave.jpg" aria-label="Orrery builds the Tidewave site, then a new chat continues it from workspace memory">
+          <source src="/assets/video/orrery-memory-tidewave.webm" type="video/webm">
+          <source src="/assets/video/orrery-memory-tidewave.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <h3>Then it remembers</h3>
+          <p>It builds &ldquo;Tidewave&rdquo;, then a brand-new chat with no history picks the site up from workspace memory and adds a theme toggle and a live buoy panel. Two runs, tests passing, an estimated $0.026 in total.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="artifact-note">Real recordings of Orrery, edited for length; sped-up segments are labeled in each video. Costs are list-price estimates from each run&rsquo;s token counts, not billed amounts.</p>
   </div>
 </section>
 
@@ -421,7 +455,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <a class="btn btn-ghost" href="mailto:kt@ephemerent.com?subject=Orrery%20organization%20setup%20help">Contact + setup help</a>
       </div>
     </div>
-    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Routes, quotas, capacity, and providers may change or be unavailable. Agent output is not guaranteed. Legacy local access is honored for existing buyers, but it is no longer sold and does not include hosted credits or cloud features. See <a href="/terms">Terms</a> and <a href="/privacy">Privacy</a>.</p>
+    <p class="pricing-fineprint mono reveal d2">Paid tiers are monthly subscriptions billed in advance via Stripe and renew automatically until canceled. Credits reset each billing month and do not roll over. Hosted model prompts are proxied through Orrery Cloud to provider APIs. Routes, quotas, capacity, and providers may change or be unavailable. Agent output is not guaranteed. See <a href="/terms">Terms</a> and <a href="/privacy">Privacy</a>.</p>
   </div>
 </section>
 
@@ -434,8 +468,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     </div>
     <div class="faq-list reveal d1">
       <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a hosted route, the prompt and code context needed for that completion pass through Orrery Cloud to the configured provider. Usage counters store totals and timestamps; Ephemerent does not retain relay content beyond fulfilling the request or use it to train its own models. See the privacy policy for the full boundary.</div></details>
-      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">The current desktop packet targets Windows. macOS and Linux are on the roadmap; availability and update delivery may change.</div></details>
-      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and configure routes. Real agent runs require a trial, subscription, or invite grant. Legacy local access remains honored for existing buyers but is no longer sold.</div></details>
+      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">The current desktop packet targets Windows and Linux. macOS is next; availability and update delivery may change.</div></details>
+      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and configure routes. Real agent runs require a trial, subscription, or invite grant.</div></details>
       <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly <a href="/arbiter">Arbiter 27B</a> and Doubleword credits at the amounts shown above. Routes and capacity remain subject to provider availability.</div></details>
       <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
       <details class="faq"><summary>Can I cancel anytime?</summary><div class="faq-body">Yes. Paid tiers are monthly via Stripe and cancel anytime — access runs to the end of the paid period. Token quotas reset each billing month and don't roll over.</div></details>
