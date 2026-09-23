@@ -168,3 +168,8 @@ a.eprodrow:hover .arr { color: var(--accent); transform: translateX(4px); }
 
 /* skip link */
 }
+
+/* Orrery demo on the home page */
+.ework-demo { margin: 0 0 36px; }
+.ework-demo video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05070b; border: 1px solid var(--rule); border-radius: 10px; }
+.ework-demo figcaption { margin-top: 12px; font-size: 14px; line-height: 1.55; color: var(--ink-2, var(--muted, inherit)); }
