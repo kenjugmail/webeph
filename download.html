@@ -114,8 +114,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <p class="sub">Download the preview for Windows (x64) or Linux (ARM64); Linux x64 and macOS are next. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
-        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
-        <a class="btn btn-primary" href="/cloud" style="width:100%;justify-content:center;">Open Pro cloud</a>
+        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;"><b style="color:var(--ink);">New to Orrery?</b> Start the 5-day free trial and downloads unlock right away. $0 today, then $40/month; cancel anytime.</p>
+        <a class="btn btn-primary" href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="width:100%;justify-content:center;">Start free trial</a>
       </div>
 
       <a class="btn btn-primary" id="orrery-download-btn" href="#" style="width:100%;justify-content:center;margin-bottom:10px;">Download Orrery <span aria-hidden="true">↓</span></a>
@@ -134,17 +134,17 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </div>
       <div class="plan-strip">
         <div><b>Preview setup</b><span>Open Nexus, prepare a workspace, and configure model routes before subscribing.</span></div>
-        <div><b>Pro $40 / Max $100 / Ultra $200 /mo</b><span>Run agents with hosted Arbiter 27B and Doubleword credits plus Orrery Cloud, subject to plan limits and provider availability.</span></div>
+        <div><b>Pro free for 5 days, then $40/mo</b><span>Max $100 and Ultra $200 add bigger pools. Every plan runs agents and research on hosted Arbiter 27B and Doubleword credits, subject to plan limits and provider availability.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <div class="download-steps">
         <h2>Quick start</h2>
         <ol>
-          <li>This test beta is unsigned: Windows may warn or block it, and its publisher is not authenticated. Compare the ZIP checksum before extracting it; do not disable operating-system protections.</li>
-          <li>Orrery opens the Agents/Nexus desktop shell with a seeded sandbox workspace — no other installs required.</li>
-          <li>Sign in from Settings -> Account and subscribe - hosted Arbiter 27B and Doubleword credits work with zero provider-key setup.</li>
-          <li>Use Nexus to open a workspace, pick a hosted route, send work, and review proof, boundary, and usage receipts.</li>
-          <li>Release notes and checksums accompany the test ZIP. Updates are manual: close the app, preserve your work, and download a newly reviewed ZIP from this page. Automatic installation is disabled for this beta.</li>
+          <li>Download for your platform and open it. The preview is not code-signed yet: on Windows choose <b>More info</b>, then <b>Run anyway</b>; compare the checksum if you want to be sure, and never turn off your system's protections.</li>
+          <li>Sign in with the same account you used here. Your trial or plan unlocks agent runs and research; hosted models need no API keys.</li>
+          <li>Open a project folder (or the built-in sample), describe a task in plain words, and watch it plan, edit, and run your tests.</li>
+          <li>Read the diff and the receipt before you keep anything: what changed, what passed, and what it cost.</li>
+          <li>Linux installs update themselves. On Windows, close the app and download the newest zip from this page when a release notes a fix you want.</li>
         </ol>
         <p class="sub download-help" style="margin-top:14px;font-size:13px;">Need help or want to share feedback? <a href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord</a>.</p>
       </div>
@@ -218,7 +218,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   if (releaseMode) {
     releaseMode.textContent = releaseConfig.UPDATE_MODE === 'manual-portable-beta'
       ? 'Manual portable update - download the newest beta zip'
-      : releaseConfig.UPDATE_MODE === 'unsigned-test-beta-manual' ? 'Unsigned test beta — manual downloads only' : releaseConfig.UPDATE_MODE === 'website-feed' ? 'Website updates — confirm a safe restart to install' : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
+      : releaseConfig.UPDATE_MODE === 'subscriber-feed' ? 'Linux updates itself; on Windows, download the newest zip' : releaseConfig.UPDATE_MODE === 'unsigned-test-beta-manual' ? 'Unsigned test beta — manual downloads only' : releaseConfig.UPDATE_MODE === 'website-feed' ? 'Website updates — confirm a safe restart to install' : String(releaseConfig.UPDATE_MODE || 'Update from the latest release');
   }
   const releaseSha = document.getElementById('release-sha');
   if (releaseSha && releaseConfig.RELEASE_SHA256) releaseSha.textContent = `SHA-256 ${String(releaseConfig.RELEASE_SHA256)}`;
