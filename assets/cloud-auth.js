@@ -10,6 +10,8 @@ import {
   isPaidPlan,
   checkoutUrlForTier,
   formatTokens,
+  PRO_TRIAL_DAYS,
+  withAccount,
 } from './accountPlan.js';
 
 let client = null;
@@ -169,7 +171,12 @@ export async function getResearchProfile() {
   return data;
 }
 
-function renderPlanSummary(root, profile) {
+/** A subscription checkout for this account: referral code, account id and email all attached. */
+function subscriptionCheckout(tier, session) {
+  return withAccount(withReferral(checkoutUrlForTier(tier, cfg())), session?.user);
+}
+
+function renderPlanSummary(root, profile, session) {
   const slot = root.getElementById('cloud-plan-summary');
   if (!slot) return;
 
@@ -195,8 +202,11 @@ function renderPlanSummary(root, profile) {
   // Upgrade buttons for every tier above the current one; manage billing once paid.
   const higherTiers = PLAN_ORDER.slice(PLAN_ORDER.indexOf(planKey) + 1);
   const upgrades = higherTiers.map((tier) => {
-    const url = withReferral(checkoutUrlForTier(tier, cfg()));
-    const label = `Upgrade to ${PLAN_LABELS[tier]} — $${PLAN_PRICES[tier]}/mo`;
+    const url = subscriptionCheckout(tier, session);
+    // A free account's first step is Pro's free trial; say so on the button, not only on the checkout page.
+    const label = !paid && tier === 'pro'
+      ? `Start ${PRO_TRIAL_DAYS}-day free trial`
+      : `Upgrade to ${PLAN_LABELS[tier]} — $${PLAN_PRICES[tier]}/mo`;
     const cls = tier === higherTiers[0] ? 'btn btn-primary' : 'btn btn-ghost';
     return url
       ? `<a class="${cls}" href="${url}">${label}</a>`
@@ -228,6 +238,7 @@ function renderPlanSummary(root, profile) {
       <b>${paid ? 'Enabled' : 'Subscription required'}</b>
     </div>
     <div class="account-plan-actions">${upgrades.join('')}</div>
+    ${paid ? '' : `<p class="plan-note plan-trial-note">Pro is free for ${PRO_TRIAL_DAYS} days, then $${PLAN_PRICES.pro}/month. Cancel before the trial ends and you are not charged.</p>`}
   `;
 }
 
@@ -368,7 +379,17 @@ export async function mountCloudAccount(root = document) {
   const emailEl = root.getElementById('cloud-user-email');
   if (emailEl) emailEl.textContent = session.user.email || 'Account';
   void logCloudActivity('cloud.open');
-  getCloudProfile().then((profile) => renderPlanSummary(root, profile)).then(() => renderUsageAndKeys(root, session))
+  getCloudProfile().then((profile) => {
+    // Pricing buttons sign in with next=/cloud?start=<tier>; an account below that tier then goes straight to
+    // its checkout (Pro's is the free trial) instead of hunting for the button on the account page.
+    const start = new URLSearchParams(location.search).get('start');
+    const current = planFromCloudProfile(profile);
+    if (['pro', 'max', 'ultra'].includes(start) && PLAN_ORDER.indexOf(start) > PLAN_ORDER.indexOf(current)) {
+      const url = subscriptionCheckout(start, session);
+      if (url) { location.assign(url); return; }
+    }
+    renderPlanSummary(root, profile, session);
+  }).then(() => renderUsageAndKeys(root, session))
     .then(() => watchPurchaseReturn(root, session));
 
   root.getElementById('cloud-sign-out')?.addEventListener('click', () => signOutCloud());

@@ -288,6 +288,11 @@
   margin-top: 14px;
 }
 
+.plan-trial-note {
+  margin-top: 10px;
+  color: var(--ink-2, #c3c8d4);
+}
+
 .plan-note {
   color: var(--faint);
   font-size: 13px;

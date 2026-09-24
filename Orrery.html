@@ -7,15 +7,15 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
-<title>Orrery Nexus — agent runs you can supervise · by Ephemerent</title>
-<meta name="description" content="Orrery is an agentic code editor built around Nexus: open a workspace, choose a model route — Arbiter 27B or Doubleword — run agents, and review progress, usage, and proof before you accept work.">
+<title>Orrery: AI that shows its work · Try it free for 5 days · by Ephemerent</title>
+<meta name="description" content="Orrery writes and tests your code, checks it in a real browser, remembers your projects, and researches with sources it can quote. Every run ends with a receipt. Try Pro free for 5 days.">
 <link rel="canonical" href="https://ephemerent.com/orrery">
 <meta name="theme-color" content="#0b0b12">
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Orrery Nexus — agent runs you can supervise">
-<meta property="og:description" content="An agentic code editor where Nexus helps you open a workspace, run agents, and review evidence while you stay in control.">
+<meta property="og:title" content="Orrery: AI that shows its work. Try it free for 5 days.">
+<meta property="og:description" content="Build, remember, research: tested code, browser-checked pages, and research claims quoted from their sources, with a receipt for every run. 5 days free, then $40/month.">
 <meta property="og:url" content="https://ephemerent.com/orrery">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:type" content="image/png">
@@ -24,8 +24,8 @@
 <meta property="og:image:alt" content="Orrery Nexus — agent runs you can supervise">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Orrery Nexus — agent runs you can supervise">
-<meta name="twitter:description" content="An agentic code editor where Nexus keeps agent work visible, scoped, and reviewable.">
+<meta name="twitter:title" content="Orrery: AI that shows its work. Try it free for 5 days.">
+<meta name="twitter:description" content="Tested code, browser-checked pages, and research you can check, with a receipt for every run. 5 days free.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
 <!-- include: head-theme -->
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
@@ -109,14 +109,15 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <a class="brand-by mono" href="/" style="font-size:11px;color:var(--muted);letter-spacing:var(--ls-xs);transition:color .2s;">by Ephemerent</a>
     </div>
     <div class="nav-links">
+      <a href="#demos">Demos</a>
+      <a href="#research">Research</a>
       <a href="#nexus">Nexus</a>
-      <a href="#run-loop">Run loop</a>
-      <a href="#models">Models</a>
       <a href="#pricing">Pricing</a>
       <a href="/organizations">Organizations</a>
       <a href="#safety">Safety</a>
     </div>
     <div class="nav-spacer"></div>
+    <a class="btn btn-primary nav-trial" href="/signin?next=%2Fcloud%3Fstart%3Dpro">Free trial</a>
     <div class="auth-nav-slot" id="auth-nav-slot"></div>
   </div>
 </nav>
@@ -126,13 +127,14 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <header class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <div class="eyebrow reveal in">Orrery Nexus by Ephemerent</div>
-      <h1 class="display hero-h1 reveal in d1">Agent runs,<br><span>under control.</span></h1>
-      <p class="lead reveal in d2">Orrery is an agentic code editor centered on Nexus: open a workspace, pick a model route, send a task, watch the run stream, then review usage, proof, and safety receipts before you accept anything.</p>
+      <div class="eyebrow reveal in">Orrery by Ephemerent</div>
+      <h1 class="display hero-h1 reveal in d1">AI that shows<br><span>its work.</span></h1>
+      <p class="lead reveal in d2">Orrery writes and tests your code, checks it in a real browser, remembers your projects across chats, and researches with sources it can quote. Every run ends with a receipt: what changed, what passed, and what it cost.</p>
       <div class="hero-cta reveal in d3">
-        <a class="btn btn-primary" href="/download">Get started <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#nexus">See Nexus</a>
+        <a class="btn btn-primary" href="/signin?next=%2Fcloud%3Fstart%3Dpro">Start your 5-day free trial <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#demos">Watch it work</a>
       </div>
+      <p class="hero-trial reveal in d3"><b>5 days free</b>, then $40/month. Cancel anytime. Windows &amp; Linux (ARM64) today; Mac next.</p>
       <div class="hero-providers reveal in d4">
         <span class="mono">works with</span>
         <span class="prov prov-local">Arbiter 27B</span><span class="prov">Doubleword</span><span class="prov">Nexus Cloud</span><span class="prov">Proof Vault</span><span class="prov">Managed Connectors</span>
@@ -221,8 +223,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">See it work</div>
-      <h2 class="display">One prompt. A finished, tested site.</h2>
-      <p class="lead">Two real runs in the Orrery desktop app on DeepSeek V4 Flash through Doubleword. No one touched the code: the agent wrote every file, ran its own tests, and checked the page in a real browser before it reported.</p>
+      <h2 class="display">Build. Remember. Research.</h2>
+      <p class="lead">Three real runs in the Orrery desktop app on DeepSeek V4 Flash through Doubleword. No one touched the code or the evidence: the agent wrote every file, ran its own tests and checked the page in a real browser, and every research claim is quoted from its source.</p>
     </div>
     <div class="demo-grid">
       <figure class="card demo-card reveal d1">
@@ -245,8 +247,37 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <p>It builds &ldquo;Tidewave&rdquo;, then a brand-new chat with no history picks the site up from workspace memory and adds a theme toggle and a live buoy panel. Two runs, tests passing, an estimated $0.026 in total.</p>
         </figcaption>
       </figure>
+      <figure class="card demo-card demo-card-wide reveal d3">
+        <video controls playsinline preload="none" poster="/assets/video/orrery-research.jpg" aria-label="Orrery Research searches medical literature, runs verified deep research, and hands the result to the chat">
+          <source src="/assets/video/orrery-research.webm" type="video/webm">
+          <source src="/assets/video/orrery-research.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <h3>And researches with sources you can check</h3>
+          <p>&ldquo;Does intermittent fasting lead to more weight loss than daily calorie restriction?&rdquo; The Medicine field searches PubMed, ClinicalTrials.gov, medRxiv and more; deep research keeps 8 claims it could quote and verify, passes the evidence gate, and one click hands the run to the chat, which answers with citations. $0.03 of a $0.50 cap.</p>
+        </figcaption>
+      </figure>
     </div>
     <p class="artifact-note">Real recordings of Orrery, edited for length; sped-up segments are labeled in each video. Costs are list-price estimates from each run&rsquo;s token counts, not billed amounts.</p>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section class="section research-section" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Research</div>
+      <h2 class="display">Answers you can check, not just read.</h2>
+      <p class="lead">Ask a real question. Orrery searches the scholarly indexes for your field, keeps only claims it can quote from a source it found, and tells you plainly what the evidence does not settle.</p>
+    </div>
+    <div class="cap-grid cap-grid-3">
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Every field, 14 free indexes</h3><p>Pick a field (medicine, physics, mathematics, education, law, the humanities and more) and Orrery searches the right sources: PubMed/Europe PMC, ClinicalTrials.gov, arXiv, INSPIRE-HEP, zbMATH, ERIC, DOAJ, HAL, OSF preprints, DataCite, OpenAlex, Crossref and others.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Quoted, checked claims</h3><p>Deep research extracts findings with a verbatim quote, confirms the paper exists, and judges whether the quote supports the claim. The written report cites only verified claims.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>An evidence gate</h3><p>Each report shows whether its evidence passes: verified claims, contradictions, and the checks your field needs, such as trial registration and risk of bias for medicine.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">04</div><h3>A budget you set</h3><p>Every run has a spending cap and a receipt. A typical deep run costs a few cents of its $0.50 default cap.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">05</div><h3>Connected to your work</h3><p>Send any paper or report to the chat in one click, or ask the chat to run the research itself. Answers link back to the run, and findings save to your Notebook.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">06</div><h3>Honest about gaps</h3><p>When the literature does not answer the question, the report says so instead of filling the gap. A run the model could not finish is marked as failed, not as done.</p></div>
+    </div>
   </div>
 </section>
 
@@ -390,17 +421,17 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
-      <h2 class="display">Subscribe to run Orrery.</h2>
-      <p class="lead">Orrery is a paid product. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credit pools, cloud features, managed connectors, proof vaults, and usage receipts, subject to capacity and provider limits. Hosted routes use prompt caching and token-efficient run context, so a pool of provider-cost credits goes further than the raw number suggests.</p>
+      <h2 class="display">Try Pro free for 5 days.</h2>
+      <p class="lead">Every plan runs agents and deep research on hosted credits, with a receipt for every run. Start Pro with a 5-day free trial: no charge until it ends, cancel anytime. Hosted routes use prompt caching and token-efficient run context, so a pool of provider-cost credits goes further than the raw number suggests.</p>
     </div>
     <p class="pricing-referral" id="pricing-referral" hidden></p>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro price-card-featured">
-        <span class="price-badge mono">Most popular</span>
+        <span class="price-badge mono">5 days free</span>
         <div class="price-top">
           <span class="mono">Pro</span>
           <b>$40</b>
-          <small>per month</small>
+          <small>per month after a 5-day free trial</small>
         </div>
         <p>Individual agent work on Arbiter 27B and Doubleword with hosted credits and Nexus operations. Zero data retention for Arbiter in one switch.</p>
         <ul>
@@ -409,7 +440,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <li>Credits are vendor-cost units, so nothing is marked up and nothing is inflated</li>
           <li>Nexus, Discord/mobile oversight, proof receipts</li>
         </ul>
-        <a class="btn btn-primary" id="pricing-cta-pro" href="/signin">Start Pro</a>
+        <a class="btn btn-primary" id="pricing-cta-pro" href="/signin?next=%2Fcloud%3Fstart%3Dpro">Start free trial</a>
+        <small class="price-trial-note">$0 today. Cancel before day 5 and you are not charged.</small>
       </div>
       <div class="price-card price-card-pro">
         <div class="price-top">
@@ -424,7 +456,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <li>2.5x Pro on both pools</li>
           <li>More cloud/background run capacity</li>
         </ul>
-        <a class="btn btn-primary" id="pricing-cta-max" href="https://buy.stripe.com/4gM3cvf2XdMq3epgQm3Je02">Start Max</a>
+        <a class="btn btn-primary" id="pricing-cta-max" href="/signin?next=%2Fcloud%3Fstart%3Dmax">Start Max</a>
       </div>
       <div class="price-card price-card-pro">
         <div class="price-top">
@@ -439,7 +471,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <li>5x Pro on both pools</li>
           <li>Research runs and proof vault capacity</li>
         </ul>
-        <a class="btn btn-primary" id="pricing-cta-ultra" href="https://buy.stripe.com/cNiaEX6wr8s616hgQm3Je03">Start Ultra</a>
+        <a class="btn btn-primary" id="pricing-cta-ultra" href="/signin?next=%2Fcloud%3Fstart%3Dultra">Start Ultra</a>
       </div>
     </div>
     <p class="pricing-efficiency mono reveal d1">One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; <a href="/arbiter">Arbiter</a> credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and does not bill reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage. Arbiter learns from your coding and research sessions by default (anonymous session ids, never your account); switch on zero data retention in Orrery settings and it keeps counts only. See <a href="/privacy">Privacy</a>.</p>
@@ -469,8 +501,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     </div>
     <div class="faq-list reveal d1">
       <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a hosted route, the prompt and code context needed for that completion pass through Orrery Cloud to the configured provider. Usage counters store totals and timestamps; Ephemerent does not retain relay content beyond fulfilling the request or use it to train its own models. See the privacy policy for the full boundary.</div></details>
-      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">The current desktop packet targets Windows and Linux. macOS is next; availability and update delivery may change.</div></details>
-      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and configure routes. Real agent runs require a trial, subscription, or invite grant.</div></details>
+      <details class="faq"><summary>Is there a free trial?</summary><div class="faq-body">Yes. Pro is free for 5 days, with its hosted credits, agent runs, and deep research. Checkout asks for a card but charges $0 today; cancel before the trial ends and you are not charged. After 5 days it becomes $40/month.</div></details>
+      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">Windows (x64) and Linux (ARM64) today; Linux x64 and macOS are next. Linux installs update themselves. The Windows build is not code-signed yet, so Windows may show &ldquo;Windows protected your PC&rdquo; the first time: choose <b>More info</b>, then <b>Run anyway</b>.</div></details>
+      <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">You can inspect preview setup, open Nexus, prepare a workspace, and configure routes. Agent runs and research need the free trial, a subscription, or an invite.</div></details>
       <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly <a href="/arbiter">Arbiter 27B</a> and Doubleword credits at the amounts shown above. Routes and capacity remain subject to provider availability.</div></details>
       <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
       <details class="faq"><summary>Can I cancel anytime?</summary><div class="faq-body">Yes. Paid tiers are monthly via Stripe and cancel anytime — access runs to the end of the paid period. Token quotas reset each billing month and don't roll over.</div></details>
@@ -482,12 +515,12 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <section class="section start-section" id="start">
   <div class="wrap start-inner">
     <div class="reveal">
-      <div class="eyebrow center" style="justify-content:center;">Start in Nexus</div>
+      <div class="eyebrow center" style="justify-content:center;">Start free</div>
       <h2 class="display start-h">Open a workspace.<br>Send one task.</h2>
-      <p class="lead" style="margin:0 auto 32px;text-align:center;">Get Orrery, choose a route, and keep the run reviewable from the first prompt.</p>
+      <p class="lead" style="margin:0 auto 32px;text-align:center;">Try Pro free for 5 days: build, research, and see a receipt for every run before you pay anything.</p>
       <div class="hero-cta center" style="justify-content:center;">
-        <a class="btn btn-primary" href="/download">Download <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="/cloud">Pro cloud sign in</a>
+        <a class="btn btn-primary" href="/signin?next=%2Fcloud%3Fstart%3Dpro">Start your 5-day free trial <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="/download">Download</a>
       </div>
     </div>
   </div>
@@ -550,6 +583,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 </script>
 
 <style>
+/* The one accent in the nav: the free trial. Unlayered on purpose, since shared button styles win inside layers. */
+.nav .nav-trial.btn-primary { background: var(--teal); color: #041512; }
+.nav .nav-trial.btn-primary:hover { background: var(--teal-lt); }
+</style>
+<style>
 /* Layered so polish.css still has the last word; unlayered CSS
    outranks every cascade layer. */
 @layer page {
@@ -564,6 +602,16 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .prov { font-family: var(--mono); font-size: 12px; color: var(--ink-2); padding: 5px 11px; border: 1px solid var(--line); border-radius: var(--r-sm); background: rgba(255,255,255,0.02); }
 .prov-local { color: var(--teal-lt); border-color: rgba(45,212,191,0.35); background: rgba(45,212,191,0.06); }
 .hero-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); letter-spacing: 0.01em; }
+/* Free trial: said once in the hero, once on the Pro card, and in the nav. */
+.hero-trial { margin: 14px 0 0; font-size: 14px; color: var(--ink-2); }
+.hero-trial b { color: var(--teal-lt); font-weight: 600; }
+.nav-trial { padding: 8px 14px; font-size: 12.5px; margin-right: 10px; white-space: nowrap; }
+@media (max-width: 720px) { .nav-trial { display: none; } }
+.price-card-featured .price-badge { background: rgba(45,212,191,0.12); color: var(--teal-lt); border-color: rgba(45,212,191,0.4); }
+.price-top small { max-width: 18ch; line-height: 1.35; }
+.price-trial-note { display: block; margin-top: 10px; font-size: 12.5px; color: var(--muted); text-align: center; }
+/* The Research demo spans the full row under the two build demos. */
+.demo-card-wide { grid-column: 1 / -1; }
 @media (max-width: 1120px){ .brand-by { display: none; } }
 .brand-by:hover { color: var(--teal-lt) !important; }
 @media (max-width: 980px){ .nav .btn-ghost { display: none; } }
@@ -654,6 +702,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 @media (max-width: 760px){ .organization-pricing { grid-template-columns: 1fr; padding: 22px; } }
 
 .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.cap-grid-3 { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 980px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .cap-grid { grid-template-columns: 1fr; } }
 .cap-ic { font: 500 11px/1 var(--mono); letter-spacing: .14em; color: var(--signal); margin-bottom: 18px; }

@@ -142,7 +142,8 @@ async function setupDownloadButton() {
   try {
     manifest = await call('/manifest');
   } catch (err) {
-    if (err.status === 402) { dl.textContent = 'Subscribe to download'; dl.href = '/orrery#pricing'; say(err.message); return; }
+    // Not subscribed yet: the next step is Pro's free trial, which unlocks downloads the moment it starts.
+    if (err.status === 402) { dl.textContent = 'Start your 5-day free trial to download'; dl.href = '/cloud?start=pro'; say('Downloads unlock with any plan, including the Pro trial: 5 days free, then $40/month, cancel anytime.'); return; }
     if (err.status === 401) { dl.textContent = 'Sign in to download'; dl.href = '/signin?next=/download'; return; }
     dl.textContent = 'Downloads unavailable right now'; dl.removeAttribute('href'); say(err.message); return;
   }

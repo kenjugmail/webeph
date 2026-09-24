@@ -80,6 +80,25 @@ export function checkoutUrlForTier(tier, config = window.ORRERY_CONFIG || {}) {
   return DEFAULT_CHECKOUT_URLS[plan] || null;
 }
 
+/** Pro starts with a free trial on its Stripe payment link (card required, no charge until it ends). */
+export const PRO_TRIAL_DAYS = 5;
+
+/**
+ * Tie a subscription payment link to the signed-in account: `client_reference_id` is how the Stripe webhook
+ * finds the account (it only falls back to matching the checkout email), and the email is prefilled so the
+ * two agree. Non-Stripe URLs and signed-out visitors pass through unchanged.
+ */
+export function withAccount(url, user) {
+  if (!url || !user?.id) return url;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname !== 'buy.stripe.com') return url;
+    parsed.searchParams.set('client_reference_id', user.id);
+    if (user.email) parsed.searchParams.set('prefilled_email', user.email);
+    return parsed.toString();
+  } catch { return url; }
+}
+
 /** 100_000_000 → "100M", 1_000_000_000 → "1B". */
 export function formatTokens(n) {
   const value = Number(n) || 0;

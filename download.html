@@ -59,7 +59,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <script src="/assets/mode.js?v=20260822c" defer></script>
 <!-- /include -->
 <link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
-<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/auth.css?v=20260924">
 <link rel="stylesheet" href="/assets/base.css?v=20260801">
 <link rel="stylesheet" href="/assets/polish.css?v=20260811d">
 <script src="/assets/motion.js?v=20260811d" defer></script>
@@ -106,12 +106,12 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
       <a class="btn btn-primary" href="/signin" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">No permanent unpaid tier or public trial is offered at launch. Preview users can inspect setup; active subscribers can run agents. For beta questions, email <a href="mailto:kt@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">kt@ephemerent.com</a>.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Pro starts with a <a href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="color:var(--teal-lt);">5-day free trial</a>: no charge until it ends, cancel anytime. Preview users can inspect setup; trial and paid subscribers can download and run agents. For beta questions, email <a href="mailto:kt@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">kt@ephemerent.com</a>.</p>
     </div>
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the preview for Windows or Linux; macOS is next. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
+      <p class="sub">Download the preview for Windows (x64) or Linux (ARM64); Linux x64 and macOS are next. Sign in to preview setup; subscribe to run agents and unlock Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;">Want hosted credits, managed connectors, mobile/Discord oversight, and cloud proof? Use Pro cloud.</p>
@@ -125,7 +125,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </details>
       <p class="sub" id="release-linux-note" style="font-size:13px;color:var(--muted);line-height:1.6;margin:-6px 0 14px;">Linux: the <code>.deb</code> installs cleanly on Ubuntu and Debian. The AppImage needs <code>libfuse2</code>, which Ubuntu 24.04 no longer ships (<code>sudo apt install libfuse2t64</code>), or run it once with <code>--appimage-extract-and-run</code>. Windows: unzip and run <code>Orrery Test Beta.exe</code>; SmartScreen will warn because the preview is unsigned.</p>
       <p class="auth-msg hidden" id="release-gate-note" style="margin-bottom:10px;"></p>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Downloads are for active subscribers and expire ten minutes after you request them. Preview builds are unsigned: on macOS right-click the app and choose Open the first time; on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Downloads are for subscribers, including the 5-day Pro trial, and each link expires ten minutes after you request it. Preview builds are unsigned: on macOS right-click the app and choose Open the first time; on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
       <div class="release-status" id="release-status">
         <div><b>Release candidate</b><span id="release-version">Pending verification</span></div>
         <div><b>Update mode</b><span id="release-update-mode">Website-hosted updates</span></div>
