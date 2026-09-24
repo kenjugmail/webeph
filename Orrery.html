@@ -526,13 +526,15 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <script type="module">
   import { mountNavAccount } from '/assets/account.js';
   import { checkoutUrlForTier } from '/assets/accountPlan.js';
+  import { captureReferral, withReferral } from '/assets/referral.js';
   mountNavAccount();
+  captureReferral(); // /orrery?ref=ORRERY-XXXXXXXX: a friend's referral, prefilled at checkout
 
   // Pricing CTAs — config-driven checkout links; Pro falls back to login.html until configured.
   for (const tier of ['pro', 'max', 'ultra']) {
     const cta = document.getElementById(`pricing-cta-${tier}`);
     const url = checkoutUrlForTier(tier);
-    if (cta && url) cta.href = url;
+    if (cta && url) cta.href = withReferral(url);
   }
 </script>
 <script src="/assets/swarm.js?v=20260808a"></script>

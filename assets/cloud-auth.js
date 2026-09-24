@@ -1,5 +1,6 @@
 /** Pro cloud account — Supabase OAuth when CLOUD_AUTH_* is set in site-config.js. */
 
+import { renderReferralCard, withReferral } from './referral.js';
 import {
   PLAN_ORDER,
   PLAN_LABELS,
@@ -194,7 +195,7 @@ function renderPlanSummary(root, profile) {
   // Upgrade buttons for every tier above the current one; manage billing once paid.
   const higherTiers = PLAN_ORDER.slice(PLAN_ORDER.indexOf(planKey) + 1);
   const upgrades = higherTiers.map((tier) => {
-    const url = checkoutUrlForTier(tier, cfg());
+    const url = withReferral(checkoutUrlForTier(tier, cfg()));
     const label = `Upgrade to ${PLAN_LABELS[tier]} — $${PLAN_PRICES[tier]}/mo`;
     const cls = tier === higherTiers[0] ? 'btn btn-primary' : 'btn btn-ghost';
     return url
@@ -405,6 +406,7 @@ export async function renderUsageAndKeys(root, session) {
   try {
     const usage = await relayFetch(session, '/model-relay/usage');
     renderCreditWallet(root, session, usage);
+    void renderReferralCard(root.getElementById('cloud-referral'), () => relayFetch(session, '/referral'));
     for (const pool of usage.pools || []) {
       const slot = POOL_SLOTS[pool.poolId];
       const row = slot && root.querySelector(`.account-plan-meter-pool[data-credit-pool="${slot}"]`);

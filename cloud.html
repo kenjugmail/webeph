@@ -147,6 +147,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
       <div class="auth-optional account-plan" id="cloud-credit-wallet" hidden></div>
 
+      <div class="auth-optional account-plan" id="cloud-referral" hidden></div>
+
       <div class="auth-optional" id="cloud-api" hidden>
         <div class="auth-optional-head">
           <h2>API</h2>
@@ -226,6 +228,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .credit-pack b { font-size:13.5px; color:var(--ink-2); }
 .credit-pack span { font-size:12px; color:var(--faint); font-family:var(--mono); }
 @media (max-width:480px){ .api-key-create { flex-direction:column; } }
+.referral-row { display:flex; gap:10px; margin:12px 0 4px; }
+.referral-link { flex:1; min-width:0; font:13px var(--mono, ui-monospace, monospace); padding:10px 12px; border-radius:8px;
+  border:1px solid var(--line, rgba(255,255,255,.14)); background:transparent; color:inherit; }
+@media (max-width:480px){ .referral-row { flex-direction:column; } }
 }
 </style>
 
