@@ -99,6 +99,31 @@ export function withAccount(url, user) {
   } catch { return url; }
 }
 
+/**
+ * The account page's plan buttons: one per tier above the current plan, the first one primary. A free
+ * account's first step is Pro's free trial, so that button says so. `checkoutFor(tier)` returns the
+ * account-tagged checkout URL, or null when that tier has no payment link (the button then emails us).
+ */
+export function planUpgradeActions(planKey, checkoutFor) {
+  const current = parsePlan(planKey);
+  const higher = PLAN_ORDER.slice(PLAN_ORDER.indexOf(current) + 1);
+  return higher.map((tier, index) => ({
+    tier,
+    primary: index === 0,
+    label: current === 'free' && tier === 'pro'
+      ? `Start ${PRO_TRIAL_DAYS}-day free trial`
+      : `Upgrade to ${PLAN_LABELS[tier]} — $${PLAN_PRICES[tier]}/mo`,
+    href: checkoutFor(tier) || `mailto:kt@ephemerent.com?subject=Orrery%20${PLAN_LABELS[tier]}%20access`,
+  }));
+}
+
+/** `?start=<tier>` from a pricing button: the tier to send this account to checkout for, or null (unknown
+ *  tier, or the account already has that tier or better). */
+export function startCheckoutTier(start, planKey) {
+  if (!['pro', 'max', 'ultra'].includes(start)) return null;
+  return PLAN_ORDER.indexOf(start) > PLAN_ORDER.indexOf(parsePlan(planKey)) ? start : null;
+}
+
 /** 100_000_000 → "100M", 1_000_000_000 → "1B". */
 export function formatTokens(n) {
   const value = Number(n) || 0;

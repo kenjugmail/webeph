@@ -2,8 +2,6 @@
 
 import { renderReferralCard, withReferral } from './referral.js';
 import {
-  PLAN_ORDER,
-  PLAN_LABELS,
   PLAN_PRICES,
   BUNDLED_QUOTAS,
   planFromCloudProfile,
@@ -11,6 +9,8 @@ import {
   checkoutUrlForTier,
   formatTokens,
   PRO_TRIAL_DAYS,
+  planUpgradeActions,
+  startCheckoutTier,
   withAccount,
 } from './accountPlan.js';
 
@@ -200,18 +200,8 @@ function renderPlanSummary(root, profile, session) {
     : '';
 
   // Upgrade buttons for every tier above the current one; manage billing once paid.
-  const higherTiers = PLAN_ORDER.slice(PLAN_ORDER.indexOf(planKey) + 1);
-  const upgrades = higherTiers.map((tier) => {
-    const url = subscriptionCheckout(tier, session);
-    // A free account's first step is Pro's free trial; say so on the button, not only on the checkout page.
-    const label = !paid && tier === 'pro'
-      ? `Start ${PRO_TRIAL_DAYS}-day free trial`
-      : `Upgrade to ${PLAN_LABELS[tier]} — $${PLAN_PRICES[tier]}/mo`;
-    const cls = tier === higherTiers[0] ? 'btn btn-primary' : 'btn btn-ghost';
-    return url
-      ? `<a class="${cls}" href="${url}">${label}</a>`
-      : `<a class="${cls}" href="mailto:kt@ephemerent.com?subject=Orrery%20${PLAN_LABELS[tier]}%20access">${label}</a>`;
-  });
+  const upgrades = planUpgradeActions(planKey, (tier) => subscriptionCheckout(tier, session))
+    .map((action) => `<a class="btn ${action.primary ? 'btn-primary' : 'btn-ghost'}" href="${escapeHtml(action.href)}">${escapeHtml(action.label)}</a>`);
   if (paid) {
     upgrades.push(portal
       ? `<a class="btn btn-ghost" href="${portal}">Manage billing</a>`
@@ -382,12 +372,9 @@ export async function mountCloudAccount(root = document) {
   getCloudProfile().then((profile) => {
     // Pricing buttons sign in with next=/cloud?start=<tier>; an account below that tier then goes straight to
     // its checkout (Pro's is the free trial) instead of hunting for the button on the account page.
-    const start = new URLSearchParams(location.search).get('start');
-    const current = planFromCloudProfile(profile);
-    if (['pro', 'max', 'ultra'].includes(start) && PLAN_ORDER.indexOf(start) > PLAN_ORDER.indexOf(current)) {
-      const url = subscriptionCheckout(start, session);
-      if (url) { location.assign(url); return; }
-    }
+    const tier = startCheckoutTier(new URLSearchParams(location.search).get('start'), planFromCloudProfile(profile));
+    const url = tier === null ? null : subscriptionCheckout(tier, session);
+    if (url) { location.assign(url); return; }
     renderPlanSummary(root, profile, session);
   }).then(() => renderUsageAndKeys(root, session))
     .then(() => watchPurchaseReturn(root, session));

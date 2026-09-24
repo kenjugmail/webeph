@@ -111,7 +111,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <div class="nav-links">
       <a href="#demos">Demos</a>
       <a href="#research">Research</a>
-      <a href="#nexus">Nexus</a>
+      <a href="#nexus">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="/organizations">Organizations</a>
       <a href="#safety">Safety</a>
@@ -183,37 +183,14 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <section class="section-sm loop-section">
   <div class="wrap">
     <div class="loop-rail reveal">
-      <div class="loop-step"><span class="loop-num mono">01</span><b>open</b><span>choose a workspace</span></div>
+      <div class="loop-step"><span class="loop-num mono">01</span><b>open</b><span>pick a folder</span></div>
       <div class="loop-arrow">→</div>
-      <div class="loop-step"><span class="loop-num mono">02</span><b>route</b><span>pick a model</span></div>
+      <div class="loop-step"><span class="loop-num mono">02</span><b>ask</b><span>in plain words</span></div>
       <div class="loop-arrow">→</div>
-      <div class="loop-step"><span class="loop-num mono">03</span><b>send</b><span>run the agent</span></div>
+      <div class="loop-step"><span class="loop-num mono">03</span><b>watch</b><span>it edits, tests, checks</span></div>
       <div class="loop-arrow">→</div>
-      <div class="loop-step"><span class="loop-num mono">04</span><b>review</b><span>proof and usage</span></div>
-      <div class="loop-loopback mono">Approval gates available · review every change · keep your own backups</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ NEXUS ============ -->
-<section class="section" id="nexus">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Orrery Nexus</div>
-      <h2 class="display">One console for workspaces, agents, routes, and receipts.</h2>
-      <p class="lead">Nexus is the daily control surface: recent workspaces on the left, the active run in the center, and files, model route, agent details, proof, and usage on the right. It is built to make the common path obvious without hiding the review trail.</p>
-    </div>
-    <div class="card card-pad reveal d1 swarm-card">
-      <div id="swarm"></div>
-    </div>
-    <p class="artifact-note">Illustrative lifecycle only. The sequence explains the product contract without presenting a fabricated interface or a simulated successful run.</p>
-    <div class="pipe reveal d2">
-      <div class="pipe-step"><span class="pipe-n mono">01</span><b>Workspace</b><span>Open a folder and initialize Nexus.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Route</b><span>Pick a hosted credit route.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Agent</b><span>Choose an eligible cloud or connected agent.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">04</span><b>Safety</b><span>Check scope and permissions.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">05</span><b>Run</b><span>Watch progress and file activity.</span></div>
-      <div class="pipe-step"><span class="pipe-n mono">06</span><b>Receipt</b><span>Review proof, boundary, and usage.</span></div>
+      <div class="loop-step"><span class="loop-num mono">04</span><b>decide</b><span>keep, revise, or undo</span></div>
+      <div class="loop-loopback mono">Every edit is a reviewable diff · tests run before it reports · keep your own backups</div>
     </div>
   </div>
 </section>
@@ -281,19 +258,39 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   </div>
 </section>
 
-<!-- ============ RUN LOOP ============ -->
-<section class="section" id="run-loop">
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="nexus">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Daily run loop</div>
-      <h2 class="display">Send work from one place, then decide what to trust.</h2>
-      <p class="lead">The default flow is deliberately small: open a workspace, choose a route, send a prompt, watch the visible progress stream, then inspect summary, changed-file metadata, usage, and safety receipts. Deeper controls live in Nexus Settings.</p>
+      <div class="eyebrow">How it works</div>
+      <h2 class="display">You ask. It works in the open. You decide.</h2>
+      <p class="lead">Orrery works in a project folder on your computer. Describe the task and it plans, edits files, and runs your tests, with every step visible as it happens. Nothing is final until you accept it.</p>
     </div>
-    <div class="cap-grid cap-grid-4">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Open folder</h3><p>Start from the project folder you want Orrery to work in. Empty folders can be initialized as new workspaces.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Pick a route</h3><p>Use subscription-hosted Doubleword or Arbiter routes. <a href="/arbiter">Arbiter 27B</a> is the looped reasoning model, served as a hosted coding route for subscribers.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Run an agent</h3><p>Nexus prepares workspace metadata, runs a safety check, and starts a registered agent when the route is ready.</p></div>
-      <div class="card card-pad card-hover reveal d3"><div class="cap-ic">04</div><h3>Review receipts</h3><p>Use proof, boundary, usage, and final summaries to decide whether to keep, revise, or discard the result.</p></div>
+    <div class="pipe reveal d2">
+      <div class="pipe-step"><span class="pipe-n mono">01</span><b>Open a folder</b><span>Any project, or an empty folder for something new.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">02</span><b>Describe the task</b><span>In plain words, like you would to a colleague.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">03</span><b>Watch it work</b><span>Plans, file edits, tools, and test output stream live.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">04</span><b>It checks itself</b><span>Runs your tests, and opens web pages in a real browser, before it reports.</span></div>
+      <div class="pipe-step"><span class="pipe-n mono">05</span><b>You decide</b><span>Read the diff and the receipt: what changed, what passed, what it cost.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Built for real projects</div>
+      <h2 class="display">Everything it does stays in view.</h2>
+      <p class="lead">Plans, edits, test output, and costs in one place. The record helps you check the work; it does not replace your own review and backups.</p>
+    </div>
+    <div class="cap-grid cap-grid-3">
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Reviewable edits</h3><p>Every change arrives as a diff, with a checkpoint after each applied step, so you can see exactly what moved and rewind a step.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Tests and browser checks</h3><p>After editing it runs your tests and fixes what it broke, and it checks web pages in a real browser before it says it is done.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Remembers your project</h3><p>Workspace memory carries decisions from one chat to the next, and you can see and edit what it keeps.</p></div>
+      <div class="card card-pad card-hover reveal"><div class="cap-ic">04</div><h3>Knows your codebase</h3><p>Ask about the project and it searches code by meaning, not just keywords, with <code>@codebase</code>.</p></div>
+      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">05</div><h3>Works with your tools</h3><p>Use MCP servers and local tools, and connect other editors and agents through open, standard protocols.</p></div>
+      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">06</div><h3>Costs you can see</h3><p>Every run shows the model, usage, and cost. Effort presets and budgets keep routine work cheap and deeper work deliberate.</p></div>
     </div>
   </div>
 </section>
@@ -312,90 +309,6 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="chip"><span class="chip-ic" aria-hidden="true">03</span><b>Keep backups</b><span>Use source control and inspect changes before relying on them.</span></div>
       <div class="chip"><span class="chip-ic" aria-hidden="true">04</span><b>Cloud varies</b><span>Hosted routes, quotas, latency, and providers may change or pause.</span></div>
     </div>
-  </div>
-</section>
-
-<!-- ============ MODELS / DEVELOP ============ -->
-<section class="section models-section" id="models">
-  <div class="wrap">
-    <div class="models-grid">
-      <div class="reveal">
-        <div class="eyebrow">Model-agnostic</div>
-        <h2 class="display" style="margin:18px 0 22px;">Preview the setup.<br>Subscribe for hosted runs.</h2>
-        <p class="lead" style="margin-bottom:28px;">Preview setup before subscribing, then run agents through Orrery Cloud. Pro, Max, and Ultra add hosted <a href="/arbiter">Arbiter 27B</a> and Doubleword credits plus managed connector automation. Pools are per plan, in the order Pro / Max / Ultra.</p>
-        <div class="prov-table">
-          <div class="prov-row"><span>Arbiter 27B</span><span class="mono">subscription hosted</span><span class="muted">14M / 35M / 70M compute credits per month</span></div>
-          <div class="prov-row"><span>Doubleword</span><span class="mono">subscription hosted</span><span class="muted">6M / 15M / 30M credits per month</span></div>
-          <div class="prov-row"><span>Nexus Cloud</span><span class="mono">managed operations</span><span class="muted">connectors, proof vaults, and usage receipts</span></div>
-          <div class="prov-row"><span>Research runs</span><span class="mono">subscription hosted</span><span class="muted">available by plan and capacity</span></div>
-        </div>
-      </div>
-      <div class="reveal d1" id="develop">
-        <div class="proof-contract">
-          <div class="proof-contract-head"><span>Run contract</span><span>Receipt fields · stated before execution</span></div>
-          <div><span>Scope</span><b>Workspace, route, permissions, and review boundary are named before work begins.</b></div>
-          <div><span>Activity</span><b>File and tool events remain visible while a connected agent is working.</b></div>
-          <div><span>Evidence</span><b>Tests, diagnostics, usage, and boundary notes stay distinct from generated prose.</b></div>
-          <div><span>Decision</span><b>The run ends at human review: keep, revise, or discard.</b></div>
-          <p>This document describes the product contract. It is not a fabricated terminal session or a claim that a sample run succeeded.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CAPABILITY GRID ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Built for trust</div>
-      <h2 class="display">Everything it does stays in view.</h2>
-      <p class="lead">Orrery shows plans, tool activity, test output, review receipts, and usage data in one place. The log helps you audit the work, but it is not a substitute for your own review and backups.</p>
-    </div>
-    <div class="cap-grid">
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">01</div><h3>Safety check first</h3><p>Launches can record workspace scope, route state, permissions, and basic setup risk before work starts.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">02</div><h3>Searches your codebase</h3><p>Ask about the project and Orrery can search code by meaning, not just keywords, with <span class="mono">@codebase</span>.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">03</div><h3>Scoped memory</h3><p>Workspace memory is explicit and editable, so past decisions can be reused without turning every chat into hidden context.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">04</div><h3>Connected agents</h3><p>Register local agents and connector-backed agents, then keep daily controls in Nexus and deeper setup in Settings.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">05</div><h3>Tool-aware runs</h3><p>Use MCP and local tools where configured, while keeping raw source and keys out of cloud metadata by default.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">06</div><h3>Measure it over time</h3><p>Track proof quality, usage, failures, and route behavior as tasks and models change.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">07</div><h3>Works with other editors</h3><p>Plugs into other editors and agents through open, standard protocols.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">08</div><h3>Set the pace</h3><p>Use model-aware effort and cost presets to keep routine work lean and deeper work deliberate.</p></div>
-      <div class="card card-pad card-hover reveal d2"><div class="cap-ic">09</div><h3>See usage</h3><p>Runs can show model route, usage, and credit receipts so hosted allotments are easier to track.</p></div>
-      <div class="card card-pad card-hover reveal"><div class="cap-ic">10</div><h3>Cost-aware routing</h3><p>Budget presets and route labels help you choose the right hosted-credit path for the job.</p></div>
-      <div class="card card-pad card-hover reveal d1"><div class="cap-ic">11</div><h3>Nexus rooms</h3><p>Group workspaces, agents, routes, runbooks, and approvals into reusable operating contexts.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COMPARE ============ -->
-<section class="section compare-section" id="compare">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">How it compares</div>
-      <h2 class="display">What a supervised run must show.</h2>
-      <p class="lead">Orrery keeps the operating contract concrete: each stage has visible evidence, a bounded action, and a decision that remains with you.</p>
-    </div>
-    <div class="compare-wrap reveal d1">
-      <table class="compare">
-        <thead>
-          <tr>
-            <th scope="col">Run stage</th>
-            <th scope="col" class="col-us">Visible evidence</th>
-            <th scope="col">System action</th>
-            <th scope="col">Your decision</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td data-label="Run stage">Scope</td><td class="col-us" data-label="Visible evidence">Workspace and permission boundary</td><td data-label="System action">Prepare the run</td><td data-label="Your decision">Approve or revise</td></tr>
-          <tr><td data-label="Run stage">Route</td><td class="col-us" data-label="Visible evidence">Provider label and credit pool</td><td data-label="System action">Select hosted capacity</td><td data-label="Your decision">Confirm cost posture</td></tr>
-          <tr><td data-label="Run stage">Work</td><td class="col-us" data-label="Visible evidence">Progress, tools, and changed-file activity</td><td data-label="System action">Attempt the task</td><td data-label="Your decision">Observe or interrupt</td></tr>
-          <tr><td data-label="Run stage">Verification</td><td class="col-us" data-label="Visible evidence">Tests, diagnostics, and proof summary</td><td data-label="System action">Check the result</td><td data-label="Your decision">Inspect the evidence</td></tr>
-          <tr><td data-label="Run stage">Receipt</td><td class="col-us" data-label="Visible evidence">Usage and boundary record</td><td data-label="System action">Close the run</td><td data-label="Your decision">Keep, revise, or discard</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="compare-note mono reveal d2">The interface will keep evolving; these review boundaries are the stable product intent.</p>
   </div>
 </section>
 
@@ -422,7 +335,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <div class="sec-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="display">Try Pro free for 5 days.</h2>
-      <p class="lead">Every plan runs agents and deep research on hosted credits, with a receipt for every run. Start Pro with a 5-day free trial: no charge until it ends, cancel anytime. Hosted routes use prompt caching and token-efficient run context, so a pool of provider-cost credits goes further than the raw number suggests.</p>
+      <p class="lead">Every plan runs agents and deep research on hosted credits, with a receipt for every run. Start Pro with a 5-day free trial: no charge until it ends, cancel anytime.</p>
     </div>
     <p class="pricing-referral" id="pricing-referral" hidden></p>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
@@ -474,7 +387,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <a class="btn btn-primary" id="pricing-cta-ultra" href="/signin?next=%2Fcloud%3Fstart%3Dultra">Start Ultra</a>
       </div>
     </div>
-    <p class="pricing-efficiency mono reveal d1">One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; <a href="/arbiter">Arbiter</a> credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and does not bill reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage. Arbiter learns from your coding and research sessions by default (anonymous session ids, never your account); switch on zero data retention in Orrery settings and it keeps counts only. See <a href="/privacy">Privacy</a>.</p>
+    <p class="pricing-efficiency mono reveal d1">Hosted routes use prompt caching and compact run context, so a pool of provider-cost credits goes further than the raw number suggests. One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; <a href="/arbiter">Arbiter</a> credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and does not bill reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage. Arbiter learns from your coding and research sessions by default (anonymous session ids, never your account); switch on zero data retention in Orrery settings and it keeps counts only. See <a href="/privacy">Privacy</a>.</p>
     <div class="organization-pricing reveal d2">
       <div>
         <div class="eyebrow">Organizations</div>
@@ -526,7 +439,6 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
 </main>
 
 <footer class="footer">
@@ -542,9 +454,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           </svg>
           <span>Orrery</span>
         </a>
-        <p class="muted" style="font-size:14px;max-width:32ch;">Agent runs you can supervise. Made by <a href="/" style="color:var(--teal-lt);">Ephemerent</a>.</p>
+        <p class="muted" style="font-size:14px;max-width:32ch;">AI that shows its work. Made by <a href="/" style="color:var(--teal-lt);">Ephemerent</a>.</p>
       </div>
-      <div><h3 class="footer-heading">Product</h3><ul><li><a href="#nexus">Nexus</a></li><li><a href="#run-loop">Run loop</a></li><li><a href="#models">Models</a></li><li><a href="#pricing">Individual pricing</a></li><li><a href="/download">Download</a></li></ul></div>
+      <div><h3 class="footer-heading">Product</h3><ul><li><a href="#nexus">How it works</a></li><li><a href="#research">Research</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="/download">Download</a></li></ul></div>
       <div><h3 class="footer-heading">Teams</h3><ul><li><a href="/organizations">Business &amp; Enterprise</a></li><li><a href="/slack">Slack</a></li><li><a href="/security">Security</a></li><li><a href="mailto:kt@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
       <div><h3 class="footer-heading">Company</h3><ul><li><a href="/">About Ephemerent</a></li><li><a href="/shelterix">Shelterix</a></li><li><a href="/arbiter">Arbiter 27B</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:kt@ephemerent.com">Contact</a></li></ul></div>
     </div>
@@ -576,10 +488,6 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     const url = checkoutUrlForTier(tier);
     if (cta && url) cta.href = withReferral(url);
   }
-</script>
-<script src="/assets/swarm.js?v=20260808a"></script>
-<script>
-  addEventListener('load', () => mountSwarm(document.getElementById('swarm')), { once: true });
 </script>
 
 <style>
@@ -630,7 +538,6 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .sec-head { max-width: 760px; margin-bottom: 44px; }
 .sec-head h2 { margin: 16px 0 18px; }
 .sec-foot { margin-top: 28px; }
-.swarm-card { background: var(--panel); }
 
 .pipe { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 26px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
 .pipe-step { background: var(--bg-2); padding: 18px 16px; display: flex; flex-direction: column; gap: 5px; }
