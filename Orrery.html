@@ -393,6 +393,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <h2 class="display">Subscribe to run Orrery.</h2>
       <p class="lead">Orrery is a paid product. Preview Nexus, open a workspace, and configure routes before subscribing; Pro, Max, and Ultra unlock agent runs, hosted credit pools, cloud features, managed connectors, proof vaults, and usage receipts, subject to capacity and provider limits. Hosted routes use prompt caching and token-efficient run context, so a pool of provider-cost credits goes further than the raw number suggests.</p>
     </div>
+    <p class="pricing-referral" id="pricing-referral" hidden></p>
     <div class="pricing-grid pricing-grid-subscriptions reveal d1">
       <div class="price-card price-card-pro price-card-featured">
         <span class="price-badge mono">Most popular</span>
@@ -526,9 +527,15 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <script type="module">
   import { mountNavAccount } from '/assets/account.js';
   import { checkoutUrlForTier } from '/assets/accountPlan.js';
-  import { captureReferral, withReferral } from '/assets/referral.js';
+  import { captureReferral, storedReferral, withReferral } from '/assets/referral.js';
   mountNavAccount();
   captureReferral(); // /orrery?ref=ORRERY-XXXXXXXX: a friend's referral, prefilled at checkout
+  const referralCode = storedReferral();
+  const referralNote = document.getElementById('pricing-referral');
+  if (referralCode && referralNote) {
+    referralNote.textContent = `A friend invited you: 50% off your first month is applied at checkout (code ${referralCode}).`;
+    referralNote.hidden = false;
+  }
 
   // Pricing CTAs — config-driven checkout links; Pro falls back to login.html until configured.
   for (const tier of ['pro', 'max', 'ultra']) {
@@ -608,6 +615,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 }
 
 .pricing-section { border-top: 1px solid var(--line); background: rgba(255,255,255,0.015); }
+.pricing-referral { margin: 0 auto 18px; max-width: 640px; padding: 10px 14px; border-radius: 10px; text-align: center;
+  border: 1px solid color-mix(in srgb, var(--teal, #7aa2f7) 45%, transparent); background: color-mix(in srgb, var(--teal, #7aa2f7) 10%, transparent); }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 @media (max-width: 980px){ .pricing-grid { grid-template-columns: 1fr; } }
 .price-card {
