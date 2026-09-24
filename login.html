@@ -46,7 +46,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <link rel="stylesheet" href="/assets/orrery.css?v=20260801b">
 <link rel="stylesheet" href="/assets/auth.css?v=20260924">
 <link rel="stylesheet" href="/assets/base.css?v=20260801">
-<link rel="stylesheet" href="/assets/polish.css?v=20260811d">
+<link rel="stylesheet" href="/assets/polish.css?v=20260924b">
 <link rel="stylesheet" href="/assets/journal.css?v=20260904a">
 <script src="/assets/motion.js?v=20260811d" defer></script>
 <noscript><style>
@@ -160,8 +160,22 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     document.getElementById('local-auth-section')?.classList.add('hidden');
   }
 
+  // Arriving from a pricing button (next=/cloud?start=<tier>): say what happens next and keep only the sign-in.
+  const startTier = (() => { try { return new URL(loginParams.get('next') || '', location.origin).searchParams.get('start'); } catch { return null; } })();
+  if (!researchContext && ['pro', 'max', 'ultra'].includes(startTier)) {
+    document.title = startTier === 'pro' ? 'Start your free trial — Orrery' : 'Sign in to subscribe — Orrery';
+    document.getElementById('login-title').textContent = startTier === 'pro' ? 'Start your 5\u2011day free trial' : 'Sign in to subscribe';
+    document.getElementById('login-sub').textContent = startTier === 'pro'
+      ? 'Create your account with Google, GitHub, or email. Next you confirm the trial on Stripe: $0 today, then $40/month after 5 days, cancel anytime.'
+      : 'Sign in or create your account with Google, GitHub, or email. Next you confirm your plan on Stripe.';
+  }
+
   mountIdentityPanel();
   bindCloudAuthForm(document);
+  // After the identity panel mounts (it re-shows its own sections): a pricing visitor sees only the sign-in.
+  if (!researchContext && ['pro', 'max', 'ultra'].includes(startTier)) {
+    for (const id of ['login-cloud-link', 'cloud-local-divider', 'local-auth-section']) document.getElementById(id)?.classList.add('hidden');
+  }
   if (researchContext) document.getElementById('cloud-local-divider')?.classList.add('hidden');
 
   waitForCloudSession().then((s) => {

@@ -945,6 +945,10 @@ body.utility-page .auth-card {
   background: transparent;
   box-shadow: none;
 }
+/* Under the glass material the card becomes a panel, so its content needs an inset instead of the flat
+   page's zero padding (otherwise every line sits against the panel edge). */
+:root[data-material="glass"] body.utility-page .auth-card { padding: 30px 32px 44px; }
+@media (max-width: 560px) { :root[data-material="glass"] body.utility-page .auth-card { padding: 22px 18px 32px; } }
 body.utility-page .auth-card h1 { font-size: clamp(34px, 4vw, 54px); margin: 26px 0 12px; }
 body.utility-page .auth-card .sub { max-width: 52ch; }
 body.utility-page .auth-input { background: var(--panel); }
