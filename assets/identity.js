@@ -179,7 +179,8 @@ async function setupDownloadButton() {
     }
   }
   const ver = document.getElementById('release-version');
-  if (ver && manifest.version) ver.textContent = `${manifest.version} (${manifest.tag})`;
+  const releaseName = manifest.releaseName || (manifest.version === cfg().RELEASE_VERSION ? cfg().RELEASE_NAME : '');
+  if (ver && manifest.version) ver.textContent = [releaseName, `${manifest.version} (${manifest.tag})`].filter(Boolean).join(' · ');
   const sha = document.getElementById('release-sha');
   if (sha && assets[primary].sha256) sha.textContent = `SHA-256 ${assets[primary].sha256.slice(0, 16)}…`;
   const page = document.getElementById('release-page-link');

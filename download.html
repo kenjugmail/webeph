@@ -213,7 +213,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   mountNavAccount();
   const releaseConfig = window.ORRERY_CONFIG || {};
   const releaseVersion = document.getElementById('release-version');
-  if (releaseVersion && releaseConfig.RELEASE_VERSION) releaseVersion.textContent = String(releaseConfig.RELEASE_VERSION);
+  if (releaseVersion && releaseConfig.RELEASE_VERSION) releaseVersion.textContent = [releaseConfig.RELEASE_NAME, releaseConfig.RELEASE_VERSION].filter(Boolean).join(' · ');
   const releaseMode = document.getElementById('release-update-mode');
   if (releaseMode) {
     releaseMode.textContent = releaseConfig.UPDATE_MODE === 'manual-portable-beta'
