@@ -134,7 +134,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         <a class="btn btn-primary" href="/download">Download free <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#demos">Watch it work</a>
       </div>
-      <p class="hero-trial reveal in d3"><b>Free</b> with models on your own hardware (Ollama, LM Studio, vLLM). <a href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Pro</a>: 5 days free, then $40/month for hosted models and any provider. Windows &amp; Linux (ARM64) today; <a href="mailto:kt@ephemerent.com?subject=Tell%20me%20when%20Orrery%20is%20on%20Mac&amp;body=Please%20email%20me%20when%20Orrery%20for%20Mac%20is%20ready." style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Mac next (get notified)</a>.</p>
+      <p class="hero-trial reveal in d3"><b>Free</b> with models on your own hardware (Ollama, LM Studio, vLLM). <a href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Pro</a>: 5 days free, then $40/month for hosted models and any provider. Windows, Linux (ARM64) and macOS (Apple silicon, preview).</p>
       <div class="hero-providers reveal in d4">
         <span class="mono">works with</span>
         <span class="prov prov-local">Arbiter 27B</span><span class="prov">Doubleword</span><span class="prov">Nexus Cloud</span><span class="prov">Proof Vault</span><span class="prov">Managed Connectors</span>
@@ -201,9 +201,19 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <div class="sec-head reveal">
       <div class="eyebrow">See it work</div>
       <h2 class="display">Build. Remember. Research.</h2>
-      <p class="lead">Three real runs in the Orrery desktop app on DeepSeek V4 Flash through Doubleword. No one touched the code or the evidence: the agent wrote every file, ran its own tests and checked the page in a real browser, and every research claim is quoted from its source.</p>
+      <p class="lead">Real runs in the Orrery desktop app: one on a local model on my own GPU (the free tier), three on DeepSeek V4 Flash through Doubleword. No one touched the code or the evidence: the agent wrote every file, ran its own tests and checked the page in a real browser, and every research claim is quoted from its source.</p>
     </div>
     <div class="demo-grid">
+      <figure class="card demo-card demo-card-wide reveal d1" id="local-demo">
+        <video controls playsinline preload="none" poster="/assets/video/orrery-local-flappy.jpg" aria-label="Orrery on a local 27B model builds a playable flappy bird clone from one prompt, checks it in a browser, then the game is played">
+          <source src="/assets/video/orrery-local-flappy.webm" type="video/webm">
+          <source src="/assets/video/orrery-local-flappy.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <h3>Free, on your own GPU</h3>
+          <p>&ldquo;Make a small flappy bird clone I can play in the browser.&rdquo; A 27B model served by vLLM on my own machine writes the game, serves it, checks it in a headless browser and looks at the screenshot, then you play it. 16 real minutes, sped up 30&times;, $0 in model costs.</p>
+        </figcaption>
+      </figure>
       <figure class="card demo-card reveal d1">
         <video controls playsinline preload="none" poster="/assets/video/orrery-one-prompt-website-v2.jpg" aria-label="Orrery builds the Halcyon Observatory website from one prompt">
           <source src="/assets/video/orrery-one-prompt-website-v2.webm" type="video/webm">
@@ -426,7 +436,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a hosted route, the prompt and code context needed for that completion pass through Orrery Cloud to the configured provider. Usage counters store totals and timestamps, and Ephemerent keeps no relay content beyond fulfilling the request. See the <a href="/privacy">privacy policy</a> for the full boundary.</div></details>
       <details class="faq"><summary>Does Orrery learn from my code?</summary><div class="faq-body">Arbiter does, by default, so each version gets better at the work people actually do: its coding and research sessions (the prompt, the response, and whether the tests passed) are used to train and evaluate the next Arbiter. They are tied to an anonymous session id, never to your account or email, and are never sold or shared. Doubleword requests are never used. Turn on <b>Zero data retention for Arbiter</b> in settings and it keeps only counts from the next request on.</div></details>
       <details class="faq"><summary>Is there a free trial?</summary><div class="faq-body">Orrery itself is free with models on your own hardware. Pro is free for 5 days, with its hosted credits, agent runs, and deep research. Checkout asks for a card but charges $0 today; cancel before the trial ends and you are not charged. After 5 days it becomes $40/month.</div></details>
-      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">Windows (x64) and Linux (ARM64) today; Linux x64 and macOS are next (<a href="mailto:kt@ephemerent.com?subject=Tell%20me%20when%20Orrery%20is%20on%20Mac">email me to be told when Mac is ready</a>). Linux installs update themselves. The Windows build is not code-signed yet, so Windows may show &ldquo;Windows protected your PC&rdquo; the first time: choose <b>More info</b>, then <b>Run anyway</b>.</div></details>
+      <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">Windows (x64), Linux (ARM64) and macOS on Apple silicon (preview); Linux x64 is next. Linux installs update themselves; on Windows and Mac, download the new version from this site. The Mac preview is not notarized yet: open it once, then choose <b>Open Anyway</b> in System Settings, Privacy &amp; Security. The Windows build is not code-signed yet, so Windows may show &ldquo;Windows protected your PC&rdquo; the first time: choose <b>More info</b>, then <b>Run anyway</b>.</div></details>
       <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">Yes. With a model server you run yourself (Ollama, LM Studio, vLLM or llama.cpp, on this computer or your local network) the agent is free: pick <b>Your own server</b> in the model menu, no subscription and no API key. Hosted models, deep research on hosted credits, and other providers come with Pro.</div></details>
       <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly <a href="/arbiter">Arbiter 27B</a> and Doubleword credits at the amounts shown above. Routes and capacity remain subject to provider availability.</div></details>
       <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
