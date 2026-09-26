@@ -194,6 +194,55 @@ export function relativeTime(at, now = Date.now()) {
   return `${Math.round(s / 86_400)} d ago`;
 }
 
+/** What the plan allows and whether another key fits. Pro allows one key, which the first-visit key uses. */
+export function keyLimitState(activeCount, plan, limits) {
+  const keyCount = Number(limits?.keyCount);
+  const known = Number.isFinite(keyCount) && keyCount > 0;
+  const planName = typeof plan === 'string' && plan !== '' ? plan[0].toUpperCase() + plan.slice(1) : 'Your plan';
+  const parts = known ? [`${keyCount} key${keyCount === 1 ? '' : 's'}`] : [];
+  if (Number(limits?.requestsPerMinute) > 0) parts.push(`${limits.requestsPerMinute} requests/min`);
+  if (Number(limits?.tokensPerMinute) > 0) parts.push(`${formatTokens(limits.tokensPerMinute)} tokens/min per key`);
+  return { atLimit: known && activeCount >= keyCount, summary: parts.length === 0 ? '' : `${planName}: ${parts.join(' · ')}` };
+}
+
+/** The useful parts of a chat completion reply and its x-orrery headers, for the test-request panel. */
+export function summarizeTestReply(body, headers, status, ms) {
+  const get = (name) => (typeof headers?.get === 'function' ? headers.get(name) : headers?.[name]) ?? undefined;
+  const error = body?.error?.message ?? (status >= 400 ? `HTTP ${status}` : undefined);
+  const message = body?.choices?.[0]?.message ?? {};
+  const toolCalls = Array.isArray(message.tool_calls) ? message.tool_calls.map((call) => `${call.function?.name ?? 'tool'}(${call.function?.arguments ?? ''})`) : [];
+  const fallback = get('x-orrery-fallback-product');
+  return {
+    ok: status < 400 && error === undefined,
+    status,
+    ms: Math.round(ms),
+    error: error === undefined ? undefined : status === 401 ? 'This key was not accepted. Check it, or create a new one below.' : status === 429 ? `${error} (your monthly pool and purchased credits are used up, or you hit the per-minute limit).` : error,
+    text: typeof message.content === 'string' ? message.content : '',
+    toolCalls,
+    model: get('x-orrery-model') ?? body?.model,
+    provider: get('x-orrery-provider'),
+    fallback,
+    tokens: body?.usage === undefined ? undefined : { input: Number(body.usage.prompt_tokens) || 0, output: Number(body.usage.completion_tokens) || 0 },
+  };
+}
+
+/** Send one example to the API with a key, from the browser (the API allows cross-origin calls). */
+export async function runTestRequest(key, exampleId, fetchImpl = fetch) {
+  const started = performance.now();
+  try {
+    const res = await fetchImpl(`${API_BASE_URL}/chat/completions`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
+      body: JSON.stringify(exampleById(exampleId).body),
+    });
+    let body = null;
+    try { body = await res.json(); } catch { body = null; }
+    return summarizeTestReply(body, res.headers, res.status, performance.now() - started);
+  } catch (err) {
+    return { ok: false, status: 0, ms: Math.round(performance.now() - started), error: `The request did not reach the API (${err instanceof Error ? err.message : String(err)}).`, text: '', toolCalls: [] };
+  }
+}
+
 /* ---------------------------------------------------------------- DOM */
 
 function esc(v) {
@@ -209,6 +258,13 @@ async function copyText(button, text, done = 'Copied') {
     button.textContent = 'Copy failed: select and copy';
   }
   setTimeout(() => { button.textContent = label; }, 1800);
+}
+
+function renderTestResult(result) {
+  const meta = [result.status ? `HTTP ${result.status}` : '', `${result.ms} ms`, result.model ?? '', result.provider ? `via ${result.provider}` : '', result.tokens ? `${result.tokens.input} in / ${result.tokens.output} out tokens` : ''].filter(Boolean).join(' · ');
+  if (!result.ok) return `<p class="api-run-error">${esc(result.error ?? 'The request failed.')}</p>${result.status ? `<p class="api-run-meta">${esc(meta)}</p>` : ''}`;
+  const output = result.toolCalls.length > 0 ? `Tool call: ${result.toolCalls.join('\n')}` : result.text || '(empty reply)';
+  return `<pre class="api-run-output">${esc(output)}</pre><p class="api-run-meta">${esc(meta)}${result.fallback ? ` · answered by the fallback model (${esc(result.fallback)}) while Arbiter wakes up` : ''}</p>`;
 }
 
 function autoCreatedKey(userId) {
@@ -235,6 +291,10 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
   let requests = [];
   let keysError;
   let plan;
+  let limits;
+  let testKey = '';       // a key pasted for the test request: kept in this tab's memory only
+  let testResult;
+  let testRunning = false;
   let poll;
   let landedHere = false; // the first request arrived while this page was open: keep showing the confirmation
 
@@ -243,6 +303,7 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
       const data = await relayFetch('/relay-admin/keys');
       keys = Array.isArray(data?.keys) ? data.keys : [];
       plan = data?.plan;
+      limits = data?.limits;
       keysError = undefined;
     } catch (err) {
       keysError = err instanceof Error ? err.message : String(err);
@@ -277,6 +338,7 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
     const noAccess = keysError !== undefined && /subscription|402/i.test(keysError);
     // Onboarding steps aside once the account is in use, unless a key was just created or the first call just landed.
     const onboarding = freshKey !== undefined || landedHere || !hasRequest();
+    const limit = keyLimitState(activeKeys().length, plan, limits);
 
     host.innerHTML = `
       <div class="auth-optional-head api-head">
@@ -289,6 +351,7 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
         <h3>Your API key</h3>
         <p class="api-note">We created this key for you. Copy it now; it is shown once.</p>
         <div class="api-secret-row"><code class="api-secret-value">${esc(freshKey)}</code><button type="button" class="btn btn-ghost" data-copy="key">Copy</button></div>
+        <button type="button" class="api-link-button" data-dismiss-key>Done, I saved it</button>
       </section>` : ''}
       ${noAccess ? '' : `
       <section class="api-card api-agent">
@@ -343,14 +406,23 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
       </section>
       <section class="api-card api-examples-card">
         <h3>Try an example</h3>
-        <p class="api-note">Swaps the first call and the quickstart to a ready-made request.</p>
+        <p class="api-note">Pick a ready-made request: it fills the first call and the quickstart, and you can send it from here.</p>
         <div class="api-examples">
           ${API_EXAMPLES.map((example) => `<button type="button" class="api-example ${example.id === exampleId ? 'is-active' : ''}" data-example="${example.id}" aria-pressed="${example.id === exampleId}">
             <b>${esc(example.title)}</b><span>${esc(example.blurb)}</span><em>${example.tags.map(esc).join(' · ')}</em></button>`).join('')}
         </div>
+        ${noAccess ? '' : `<div class="api-run">
+          ${freshKey ? '' : `<label class="api-run-key"><span>Key for this test</span><input type="password" class="auth-input" id="api-test-key" placeholder="Paste a key (kept in this tab only)" autocomplete="off" spellcheck="false"></label>`}
+          <div class="api-run-actions">
+            <button type="button" class="btn btn-primary" data-run ${testRunning ? 'disabled' : ''}>${testRunning ? 'Sending…' : `Send “${esc(exampleById(exampleId).title)}”`}</button>
+            <span class="api-note">A real request: it spends a little credit, typically well under a cent.</span>
+          </div>
+          <div class="api-run-result" role="status" aria-live="polite">${testResult === undefined ? '' : renderTestResult(testResult)}</div>
+        </div>`}
       </section>
       <section class="api-card api-keys-card">
         <h3>API keys</h3>
+        ${limit.summary === '' ? '' : `<p class="api-note">${esc(limit.summary)}</p>`}
         <div class="api-keys" id="cloud-api-keys">${keysError !== undefined && !noAccess
           ? `<p class="api-empty">API keys are unavailable right now (${esc(keysError)}).</p>`
           : activeKeys().length === 0 ? '<p class="api-empty">No active keys.</p>'
@@ -359,13 +431,15 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
               const created = String(k.createdAt ?? k.created_at ?? '').slice(0, 10);
               const last = k.lastUsedAt ?? k.last_used_at;
               return `<div class="api-key-row"><div><b>${esc(k.name || 'key')}</b><span>${esc(prefix)}… · created ${esc(created)} · ${last ? `last used ${esc(relativeTime(Date.parse(last)))}` : 'never used'}</span></div>
-                <button type="button" class="btn btn-ghost" data-revoke="${esc(k.id)}">Revoke</button></div>`;
+                <div class="api-key-actions"><button type="button" class="btn btn-ghost" data-replace="${esc(k.id)}" data-name="${esc(k.name || 'api key')}" title="Revoke this key and create a new one with the same name">Replace</button>
+                <button type="button" class="btn btn-ghost" data-revoke="${esc(k.id)}">Revoke</button></div></div>`;
             }).join('')}</div>
         ${noAccess ? '' : `<div class="api-key-create">
           <label class="sr-only" for="cloud-api-key-name">Key name</label>
           <input type="text" class="auth-input" id="cloud-api-key-name" placeholder="Key name (e.g. laptop, CI)" maxlength="120">
-          <button type="button" class="btn btn-ghost" id="cloud-api-key-create">Create key</button>
-        </div>`}
+          <button type="button" class="btn btn-ghost" id="cloud-api-key-create" ${limit.atLimit ? 'disabled' : ''}>Create key</button>
+        </div>
+        ${limit.atLimit ? `<p class="api-note">Your plan's key limit is reached. Use Replace to get a new secret for a key, revoke one, or <a href="/cloud#plans">upgrade</a> for more keys.</p>` : ''}`}
         <p class="auth-msg" id="cloud-api-msg" role="status" aria-live="polite"></p>
       </section>
       <section class="api-card api-grants">
@@ -393,7 +467,41 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
             : apiSnippets(exampleId)[lang];
       void copyText(button, text ?? '', which === 'agent' ? 'Prompt copied' : 'Copied');
     }));
-    host.querySelectorAll('[data-lang]').forEach((tab) => tab.addEventListener('click', () => { lang = tab.dataset.lang; render(); host.querySelector(`[data-lang="${lang}"]`)?.focus(); }));
+    host.querySelectorAll('[data-lang]').forEach((tab) => {
+      tab.tabIndex = tab.dataset.lang === lang ? 0 : -1;
+      tab.addEventListener('click', () => { lang = tab.dataset.lang; render(); host.querySelector(`[data-lang="${lang}"]`)?.focus(); });
+      // Arrow keys move between tabs, as in any tab list.
+      tab.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+        const order = ['curl', 'typescript', 'python'];
+        lang = order[(order.indexOf(lang) + (event.key === 'ArrowRight' ? 1 : order.length - 1)) % order.length];
+        event.preventDefault(); render(); host.querySelector(`[data-lang="${lang}"]`)?.focus();
+      });
+    });
+    host.querySelector('[data-dismiss-key]')?.addEventListener('click', () => { freshKey = undefined; freshKeyId = undefined; render(); });
+    const testInput = root.getElementById('api-test-key');
+    if (testInput) { testInput.value = testKey; testInput.addEventListener('input', () => { testKey = testInput.value.trim(); }); }
+    host.querySelector('[data-run]')?.addEventListener('click', async () => {
+      const key = freshKey ?? testKey;
+      if (!key) { testResult = { ok: false, status: 0, ms: 0, error: 'Paste one of your keys above to send a test request.', toolCalls: [], text: '' }; render(); root.getElementById('api-test-key')?.focus(); return; }
+      testRunning = true; testResult = undefined; render();
+      testResult = await runTestRequest(key, exampleId);
+      testRunning = false;
+      if (testResult.ok) { await loadRequests(); if (hasRequest()) landedHere = true; }
+      render();
+    });
+    host.querySelectorAll('[data-replace]').forEach((button) => button.addEventListener('click', async () => {
+      button.disabled = true; say('');
+      try {
+        // Revoke first: on a one-key plan a new key only fits once the old one is gone.
+        await relayFetch(`/relay-admin/keys?id=${encodeURIComponent(button.dataset.replace)}`, { method: 'DELETE' });
+        const out = await relayFetch('/relay-admin/keys', { method: 'POST', body: JSON.stringify({ name: button.dataset.name || 'api key' }) });
+        freshKey = out?.key; freshKeyId = out?.record?.id;
+        await loadKeys(); render();
+        root.querySelector('.api-newkey')?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        say('Key replaced. The old secret stops working now; copy the new one above.');
+      } catch (err) { await loadKeys(); render(); say(`${err.message} The old key may already be revoked: create a new one below.`, false); }
+    }));
     host.querySelectorAll('[data-example]').forEach((button) => button.addEventListener('click', () => { exampleId = button.dataset.example; render(); host.querySelector(`[data-example="${exampleId}"]`)?.focus(); }));
     host.querySelectorAll('[data-revoke]').forEach((button) => button.addEventListener('click', async () => {
       button.disabled = true;
