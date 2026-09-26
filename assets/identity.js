@@ -128,7 +128,7 @@ async function setupDownloadButton() {
     session = await getCloudSession();
   } catch { session = null; }
   if (!session?.access_token) {
-    dl.textContent = 'Sign in to download';
+    dl.textContent = 'Sign in to download (free)';
     dl.href = '/signin?next=/download';
     return;
   }
@@ -142,7 +142,7 @@ async function setupDownloadButton() {
   try {
     manifest = await call('/manifest');
   } catch (err) {
-    // Not subscribed yet: the next step is Pro's free trial, which unlocks downloads the moment it starts.
+    // Downloads need only a signed-in account now; a 402 means an older release service still asks for a plan.
     if (err.status === 402) { dl.textContent = 'Start your 5-day free trial to download'; dl.href = '/cloud?start=pro'; say('Downloads unlock with any plan, including the Pro trial: 5 days free, then $40/month, cancel anytime.'); return; }
     if (err.status === 401) { dl.textContent = 'Sign in to download'; dl.href = '/signin?next=/download'; return; }
     dl.textContent = 'Downloads unavailable right now'; dl.removeAttribute('href'); say(err.message); return;
