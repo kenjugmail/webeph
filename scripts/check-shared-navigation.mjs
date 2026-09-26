@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { chromium } from "playwright";
 
 const base = process.env.BASE ?? "http://127.0.0.1:3111";
-const routes = ["/", "/research", "/orrery", "/hearthrail", "/vellum", "/vespera", "/shelterix", "/arbiter", "/organizations", "/privacy", "/journal", "/news"];
+const routes = ["/", "/research", "/orrery", "/hearthrail", "/vellum", "/vespera", "/shelterix", "/arbiter", "/sentinel", "/organizations", "/privacy", "/journal", "/news"];
 const browser = await chromium.launch();
 const failures = [];
 
