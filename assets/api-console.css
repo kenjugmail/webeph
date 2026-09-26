@@ -1,0 +1,77 @@
+/* Orrery API console on /cloud (assets/api-console.js). Uses the site tokens so light and dark follow the page. */
+@layer page {
+.auth-card.has-api-console { max-width: 860px !important; }
+/* The utility pages place the card in columns 5-10 of a 12-column grid (1-4 hold the decoration); widen it to 5-12. */
+@media (min-width: 1000px) { .auth-card.has-api-console { grid-column: 5 / span 8 !important; } }
+#cloud-api { display: grid; gap: 14px; }
+#cloud-api h3 { margin: 0 0 4px; font-size: 15px; color: var(--ink); }
+.api-head .sub { max-width: 64ch; }
+.api-head .sub .mono { font-size: 12px; color: var(--ink-2); }
+.api-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--bg-2); min-width: 0; }
+.api-note { margin: 0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.api-warn { color: var(--ink-2); }
+.api-newkey { border-color: rgba(45, 212, 191, 0.45); background: rgba(45, 212, 191, 0.06); }
+.api-secret-row { display: flex; gap: 8px; align-items: center; }
+.api-secret-value { flex: 1; min-width: 0; padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); font: 12.5px var(--mono); overflow-wrap: anywhere; user-select: all; }
+.api-agent { display: flex; gap: 14px; align-items: center; justify-content: space-between; }
+.api-agent > div { flex: 1; min-width: 0; }
+.api-agent .api-note { margin-bottom: 4px; }
+.api-agent .btn { flex: none; }
+.api-code { position: relative; }
+.api-code pre { margin: 0; padding: 12px 14px; border-radius: var(--r-sm); background: rgba(0, 0, 0, 0.28); border: 1px solid var(--line); overflow-x: auto; font: 12px/1.55 var(--mono); color: var(--ink-2); max-height: 360px; }
+:root[data-theme="light"] .api-code pre { background: rgba(0, 0, 0, 0.04); }
+.api-code-copy { position: absolute; top: 8px; right: 8px; padding: 4px 10px !important; font-size: 12px !important; }
+.api-first-request { display: flex; gap: 8px; align-items: center; margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+.api-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); animation: api-pulse 1.6s ease-in-out infinite; }
+.api-first-request.is-done { color: var(--teal-lt); }
+.api-first-request.is-done .api-dot { background: var(--teal); animation: none; }
+@keyframes api-pulse { 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .api-dot { animation: none; } }
+.api-steps-head { display: flex; justify-content: space-between; align-items: baseline; }
+.api-steps-head .mono { font-size: 12px; color: var(--faint); }
+.api-steps ol { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; counter-reset: step; }
+.api-steps li { counter-increment: step; display: grid; grid-template-columns: 24px 1fr; column-gap: 10px; }
+.api-steps li::before { content: counter(step); grid-row: span 2; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; font: 11.5px var(--mono); color: var(--muted); }
+.api-steps li.done::before { content: "✓"; border-color: var(--teal); color: var(--teal-lt); }
+.api-steps li b { font-size: 13.5px; color: var(--ink-2); }
+.api-steps li span { font-size: 12.5px; color: var(--muted); }
+.api-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.api-stat { padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--bg-2); min-width: 0; }
+.api-stat-label { display: block; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+.api-stat b { display: block; margin: 4px 0 2px; font-size: 22px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.api-stat small { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+.api-quick-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.api-tabs { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; }
+.api-tab { padding: 5px 12px; font-size: 12.5px; background: transparent; border: 0; color: var(--muted); cursor: pointer; }
+.api-tab + .api-tab { border-left: 1px solid var(--line); }
+.api-tab[aria-selected="true"] { background: rgba(45, 212, 191, 0.1); color: var(--ink); }
+.api-tab:focus-visible, .api-example:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.api-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.api-example { display: grid; gap: 3px; text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); background: transparent; color: inherit; cursor: pointer; }
+.api-example:hover { border-color: var(--line-strong); }
+.api-example.is-active { border-color: rgba(45, 212, 191, 0.55); background: rgba(45, 212, 191, 0.05); }
+.api-example b { font-size: 13.5px; color: var(--ink-2); }
+.api-example span { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+.api-example em { font-style: normal; font: 11px var(--mono); color: var(--faint); }
+.api-keys { display: grid; gap: 8px; margin: 8px 0 12px; }
+.api-key-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); }
+.api-key-row b { font-size: 13.5px; color: var(--ink-2); }
+.api-key-row span { display: block; color: var(--faint); font-size: 11.5px; font-family: var(--mono); margin-top: 2px; }
+.api-key-row button { flex: none; }
+.api-key-create { display: flex; gap: 8px; }
+.api-key-create .auth-input { flex: 1; }
+.api-empty { color: var(--muted); font-size: 13px; margin: 0; }
+.api-table-wrap { overflow-x: auto; }
+.api-grants table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.api-grants th { text-align: left; font-weight: 500; color: var(--faint); font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.api-grants td { padding: 8px; border-bottom: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+.api-grants td small { color: var(--faint); }
+@media (max-width: 720px) { .api-agent { flex-direction: column; align-items: stretch; } }
+@media (max-width: 640px) {
+  .api-stats { grid-template-columns: 1fr; }
+  .api-examples { grid-template-columns: 1fr; }
+  .api-agent { flex-direction: column; align-items: stretch; }
+  .api-key-create, .api-secret-row { flex-direction: column; align-items: stretch; }
+  .api-quick-head { flex-direction: column; align-items: flex-start; }
+}
+}

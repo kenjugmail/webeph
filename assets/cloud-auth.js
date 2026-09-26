@@ -1,6 +1,7 @@
 /** Pro cloud account — Supabase OAuth when CLOUD_AUTH_* is set in site-config.js. */
 
 import { renderReferralCard, withReferral } from './referral.js';
+import { mountApiConsole } from './api-console.js';
 import {
   PLAN_PRICES,
   BUNDLED_QUOTAS,
@@ -411,8 +412,9 @@ export async function renderUsageAndKeys(root, session) {
   const api = root.getElementById('cloud-api');
   if (api) api.hidden = false;
   // 1) pool meters + purchased-credit wallet
+  let usage;
   try {
-    const usage = await relayFetch(session, '/model-relay/usage');
+    usage = await relayFetch(session, '/model-relay/usage');
     renderCreditWallet(root, session, usage);
     void renderReferralCard(root.getElementById('cloud-referral'), () => relayFetch(session, '/referral'));
     for (const pool of usage.pools || []) {
@@ -435,60 +437,9 @@ export async function renderUsageAndKeys(root, session) {
   } catch (err) {
     console.warn('usage', err.message);
   }
-  // 2) keys
-  const list = root.getElementById('cloud-api-keys');
-  const msg = root.getElementById('cloud-api-msg');
-  const secretBox = root.getElementById('cloud-api-secret');
-  const say = (text, ok = true) => { if (msg) { msg.textContent = text; msg.style.color = ok ? '' : 'var(--danger, #e5484d)'; } };
-  const renderKeys = async () => {
-    if (!list) return;
-    try {
-      const data = await relayFetch(session, '/relay-admin/keys');
-      const keys = (data.keys || []).filter((k) => !k.revoked_at && !k.revokedAt);
-      list.innerHTML = keys.length === 0
-        ? '<p class="api-empty">No API keys yet. Create one to call api.ephemerent.com from your own code.</p>'
-        : keys.map((k) => {
-          const prefix = k.key_prefix || k.keyPrefix || '';
-          const created = (k.created_at || k.createdAt || '').slice(0, 10);
-          const last = k.last_used_at || k.lastUsedAt;
-          return `<div class="api-key-row" data-key-id="${k.id}">
-            <div><b>${escapeHtml(k.name || 'key')}</b><span>${escapeHtml(prefix)}… · created ${created}${last ? ' · last used ' + String(last).slice(0, 10) : ''}</span></div>
-            <button type="button" class="btn btn-ghost" data-revoke="${k.id}">Revoke</button>
-          </div>`;
-        }).join('');
-      list.querySelectorAll('[data-revoke]').forEach((btn) => btn.addEventListener('click', async () => {
-        btn.disabled = true;
-        try {
-          await relayFetch(session, `/relay-admin/keys?id=${encodeURIComponent(btn.dataset.revoke)}`, { method: 'DELETE' });
-          say('Key revoked. Requests with it fail from now on.');
-          await renderKeys();
-        } catch (err) { say(err.message, false); btn.disabled = false; }
-      }));
-    } catch (err) {
-      list.innerHTML = `<p class="api-empty">API keys are unavailable right now (${escapeHtml(err.message)}).</p>`;
-    }
-  };
-  await renderKeys();
-  const nameEl = root.getElementById('cloud-api-key-name');
-  const createBtn = root.getElementById('cloud-api-key-create');
-  if (createBtn && !createBtn.dataset.bound) {
-    createBtn.dataset.bound = '1';
-    createBtn.addEventListener('click', async () => {
-      const name = (nameEl?.value || '').trim() || 'api key';
-      createBtn.disabled = true; say('');
-      try {
-        const out = await relayFetch(session, '/relay-admin/keys', { method: 'POST', body: JSON.stringify({ name }) });
-        if (secretBox) {
-          secretBox.hidden = false;
-          secretBox.innerHTML = `${escapeHtml(out.key || '')}<small>Shown once. Store it in a secret manager; the list below only keeps the prefix.</small>`;
-        }
-        if (nameEl) nameEl.value = '';
-        say('Key created.');
-        await renderKeys();
-      } catch (err) { say(err.message, false); }
-      createBtn.disabled = false;
-    });
-  }
+  // 2) the API console: key, first call, usage, quickstart, keys and credits
+  root.querySelector('.auth-card')?.classList.add('has-api-console');
+  await mountApiConsole(root, { session, usage, relayFetch: (path, init) => relayFetch(session, path, init) });
 }
 
 function escapeHtml(v) {
