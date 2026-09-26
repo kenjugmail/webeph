@@ -201,9 +201,19 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <div class="sec-head reveal">
       <div class="eyebrow">See it work</div>
       <h2 class="display">Build. Remember. Research.</h2>
-      <p class="lead">Three real runs in the Orrery desktop app on DeepSeek V4 Flash through Doubleword. No one touched the code or the evidence: the agent wrote every file, ran its own tests and checked the page in a real browser, and every research claim is quoted from its source.</p>
+      <p class="lead">Real runs in the Orrery desktop app: one on a local model on my own GPU (the free tier), three on DeepSeek V4 Flash through Doubleword. No one touched the code or the evidence: the agent wrote every file, ran its own tests and checked the page in a real browser, and every research claim is quoted from its source.</p>
     </div>
     <div class="demo-grid">
+      <figure class="card demo-card demo-card-wide reveal d1" id="local-demo">
+        <video controls playsinline preload="none" poster="/assets/video/orrery-local-flappy.jpg" aria-label="Orrery on a local 27B model builds a playable flappy bird clone from one prompt, checks it in a browser, then the game is played">
+          <source src="/assets/video/orrery-local-flappy.webm" type="video/webm">
+          <source src="/assets/video/orrery-local-flappy.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <h3>Free, on your own GPU</h3>
+          <p>&ldquo;Make a small flappy bird clone I can play in the browser.&rdquo; A 27B model served by vLLM on my own machine writes the game, serves it, checks it in a headless browser and looks at the screenshot, then you play it. 16 real minutes, sped up 30&times;, $0 in model costs.</p>
+        </figcaption>
+      </figure>
       <figure class="card demo-card reveal d1">
         <video controls playsinline preload="none" poster="/assets/video/orrery-one-prompt-website-v2.jpg" aria-label="Orrery builds the Halcyon Observatory website from one prompt">
           <source src="/assets/video/orrery-one-prompt-website-v2.webm" type="video/webm">
