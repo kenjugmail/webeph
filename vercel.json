@@ -34,6 +34,7 @@
     { "source": "/news-drfsp.html", "destination": "/news/drfsp-robust-compression", "permanent": true },
     { "source": "/news-swc.html", "destination": "/news/stochastic-witness-calculus", "permanent": true },
     { "source": "/arbiter-preview.html", "destination": "/arbiter", "permanent": true },
+    { "source": "/sentinel.html", "destination": "/sentinel", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
@@ -60,6 +61,7 @@
     { "source": "/news/stochastic-witness-calculus", "destination": "/news-swc.html" },
     { "source": "/arbiter", "destination": "/arbiter-preview.html" },
     { "source": "/arbiter-preview", "destination": "/arbiter-preview.html" },
+    { "source": "/sentinel", "destination": "/sentinel.html" },
     { "source": "/orrery", "destination": "/Orrery.html" },
     { "source": "/hearthrail", "destination": "/Hearthrail.html" },
     { "source": "/vellum", "destination": "/Vellum.html" },

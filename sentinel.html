@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- include: head-meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<!-- /include -->
+<title>Sentinel - Ephemerent</title>
+<meta name="description" content="Sentinel is Ephemerent's decision model for coding agents: fast, calibrated yes/no answers, choices and rankings with a probability attached, in Orrery, in any MCP agent, and through the Ephemerent API. Early access.">
+<link rel="canonical" href="https://ephemerent.com/sentinel">
+<meta name="theme-color" content="#f3f0e8">
+<link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ephemerent">
+<meta property="og:title" content="Sentinel">
+<meta property="og:description" content="The quick calls, made quickly. Sentinel answers short questions for coding agents in a fraction of a second, with a probability you can trust. Early access.">
+<meta property="og:url" content="https://ephemerent.com/sentinel">
+<meta property="og:image" content="https://ephemerent.com/assets/og-ephemerent.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sentinel">
+<meta name="twitter:description" content="Fast, calibrated judgement calls for coding agents: decide, choose, rank. Early access.">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
+<!-- include: head-theme -->
+<!-- Blocking and inline on purpose: the stored face has to be on <html>
+     before the first stylesheet, or the page paints the wrong one first. -->
+<script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode"),g=localStorage.getItem("eph-material");
+/* Dark glass is the default look, so the absence of a stored choice
+   means dark glass rather than "whatever the stylesheet says". The
+   material key is written as "flat" rather than removed when someone
+   turns glass off -- once glass is the default, an absent key cannot
+   mean both "never chose" and "chose flat". */
+d.dataset.mode=m||"dark";if((g||"glass")==="glass")d.dataset.material="glass";
+/* Set before the first paint so the hero never renders at rest and
+   then jumps back to animate. Gated on the motion preference here
+   rather than in CSS so that a reader who wants no motion never gets
+   the hidden start state at all. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive"}catch(e){}</script>
+<link rel="stylesheet" href="/assets/tokens.css?v=20260822a">
+<!-- Deliberately AFTER tokens.css. Cascade layers take their order from
+     where a name FIRST appears, so a glass.css loaded ahead of
+     tokens.css would create @layer utilities before tokens.css declares
+     the full order -- and utilities would keep that first position,
+     which is the LOWEST priority, the exact opposite of what it is for.
+     Here, tokens.css establishes the order and glass.css joins its end.
+
+     A plain link now rather than a conditional script append: glass is
+     the default material, so this is the common path, and a real link
+     is visible to the preload scanner where an appended one is not.
+     Every rule inside is scoped to :root[data-material="glass"], so a
+     reader who switches it off pays for the file and nothing else. -->
+<link rel="stylesheet" href="/assets/glass.css?v=20260820">
+<script src="/assets/mode.js?v=20260822c" defer></script>
+<!-- /include -->
+<link rel="stylesheet" href="/assets/ephemerent.css?v=20260802">
+<link rel="stylesheet" href="/assets/polish.css?v=20260924b">
+<link rel="stylesheet" href="/assets/arbiter.css?v=20260830a">
+<script src="/assets/motion.js?v=20260811d" defer></script>
+<style>
+@layer page {
+.sn-plate .sn-field { position: relative; border: 1px solid var(--rule); background: var(--paper-2); padding: clamp(22px, 3.4vw, 36px); }
+.sn-field::before { content: ''; position: absolute; inset: 12px; border: 1px solid var(--rule-2); pointer-events: none; }
+.sn-q { position: relative; color: var(--ink); font: 400 clamp(22px, 2.4vw, 30px)/1.12 var(--serif); letter-spacing: -.02em; max-width: 20ch; }
+.sn-opts { position: relative; list-style: none; margin-top: 26px; display: grid; gap: 14px; }
+.sn-opts li { display: grid; grid-template-columns: 64px minmax(0, 1fr) 44px; gap: 12px; align-items: center; }
+.sn-opts .nm { font: 500 12px/1.2 var(--mono); color: var(--ink); letter-spacing: .04em; }
+.sn-opts .bar { position: relative; height: 6px; background: var(--rule-2); overflow: hidden; }
+.sn-opts .bar i { position: absolute; inset: 0 auto 0 0; background: var(--accent); }
+.sn-opts li:not(:first-child) .bar i { opacity: .45; }
+.sn-opts .p { font: 500 12px/1 var(--mono); color: var(--muted); text-align: right; }
+.sn-opts li:first-child .p { color: var(--accent); }
+.sn-answer { position: relative; margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font: 500 10px/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.sn-answer b { color: var(--ink); font-weight: 500; }
+
+.sn-does { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 28px 0 10px; }
+.sn-card { border: 1px solid var(--rule); background: var(--card); padding: 18px 18px 20px; display: flex; flex-direction: column; }
+.sn-card .k { font: 500 10px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.sn-card h3 { margin-top: 10px; font: 400 24px/1.1 var(--serif); letter-spacing: -.015em; color: var(--ink); }
+.ap-article .sn-card p { margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.sn-ex { margin-top: auto; padding-top: 16px; }
+.sn-ex .q { display: block; padding-top: 14px; border-top: 1px solid var(--rule-2); font: 400 17px/1.3 var(--serif); color: var(--ink-2); }
+.sn-ex .a { display: block; margin-top: 10px; font: 500 12px/1.5 var(--mono); color: var(--accent); overflow-wrap: anywhere; }
+
+.sn-list { list-style: none; margin: 22px 0 8px; border-top: 1px solid var(--rule); }
+.sn-list li { display: grid; grid-template-columns: minmax(150px, 2fr) minmax(0, 5fr); gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.sn-list b { font: 400 21px/1.2 var(--serif); color: var(--ink); letter-spacing: -.01em; }
+.sn-list span { color: var(--ink-2); font-size: 16px; line-height: 1.6; }
+
+.sn-endpoints { margin: 22px 0 8px; border: 1px solid var(--rule); background: var(--card); }
+.sn-endpoints div { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--rule-2); align-items: baseline; }
+.sn-endpoints div:last-child { border-bottom: 0; }
+.sn-endpoints .m { font: 500 11px/1.4 var(--mono); letter-spacing: .08em; color: var(--accent); }
+.sn-endpoints code { background: none !important; padding: 0 !important; overflow-wrap: anywhere; }
+.sn-endpoints small { grid-column: 2; display: block; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.ap-article .ap-code { font-size: 12.5px; }
+.ap-article .ap-code code { background: none; padding: 0; font-size: inherit; border-radius: 0; }
+.ap-article .ap-code + .ap-code { margin-top: 12px; }
+.sn-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+@media (max-width: 760px) {
+  .sn-does { grid-template-columns: 1fr; }
+  .sn-list li { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 420px) {
+  .sn-opts li { grid-template-columns: 52px minmax(0, 1fr) 38px; gap: 10px; }
+}
+}
+</style>
+</head>
+<body class="lab-page">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="emk" viewBox="0 0 24 24">
+    <line x1="6" y1="6" x2="18" y2="9" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <line x1="6" y1="6" x2="9" y2="18" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <line x1="18" y1="9" x2="9" y2="18" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <circle cx="6" cy="6" r="2.1" fill="currentColor"/>
+    <circle cx="18" cy="9" r="2.1" fill="currentColor"/>
+    <circle cx="9" cy="18" r="2.1" fill="currentColor"/>
+  </symbol>
+</defs></svg>
+
+<div class="ebar">
+  <div class="ebar-in">
+    <a class="ebrand" href="/">
+      <svg class="mk accent"><use href="#emk"/></svg>
+      <span class="brandcol">
+        <span class="nm">Ephemerent</span>
+        <span class="motto">Ephemeral - Emergent</span>
+      </span>
+    </a>
+    <nav class="enav">
+      <a href="/research">Research</a>
+      <a href="/#work">Work</a>
+      <a href="/arbiter">Arbiter</a>
+      <a href="/sentinel" aria-current="page">Sentinel</a>
+      <a class="est-keep" href="/orrery">Orrery -></a>
+      <span class="est">EST. 2026</span>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+  <header class="ap-hero">
+    <div class="ewrap">
+      <span class="lbl rv in">Decision model - early access</span>
+      <h1 class="rv in">Sentinel makes the quick calls.</h1>
+      <figure class="ap-hero-plate sn-plate rv in" aria-labelledby="sn-plate-q">
+        <figcaption><span>Example decision</span><span>sentinel-1</span></figcaption>
+        <div class="sn-field">
+          <p class="sn-q" id="sn-plate-q">Which of these should the agent do next?</p>
+          <ol class="sn-opts" aria-label="Options with Sentinel's probabilities">
+            <li><span class="nm">edit</span><span class="bar" aria-hidden="true"><i style="width:84%"></i></span><span class="p">0.84</span></li>
+            <li><span class="nm">read</span><span class="bar" aria-hidden="true"><i style="width:12%"></i></span><span class="p">0.12</span></li>
+            <li><span class="nm">run</span><span class="bar" aria-hidden="true"><i style="width:4%"></i></span><span class="p">0.04</span></li>
+          </ol>
+          <div class="sn-answer"><span>Answer <b>edit</b></span><span>Confidence <b>0.84</b></span></div>
+        </div>
+        <div class="ap-plate-foot"><span>One question · one answer · one probability</span><span>A fraction of a second</span></div>
+      </figure>
+      <p class="ap-lede rv in">Coding agents spend a long reasoning pass on questions that have short answers: will this patch pass, which file comes first, is it time to run the tests. Sentinel is Ephemerent's decision model, a fast "System One" for those moments. It answers yes or no, picks among named options, or ranks candidates, in about a fifth to a third of a second, and every answer carries a calibrated probability.</p>
+      <div class="ap-actions rv in">
+        <a class="ebtn ebtn-fill" href="#api">Use the API</a>
+        <a class="ebtn" href="/orrery">See Orrery</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="esec">
+    <div class="ewrap ap-article">
+      <div class="ap-meta rv">
+        <div><span class="k">Model</span><span class="v">sentinel-1</span></div>
+        <div><span class="k">Answers</span><span class="v">Yes/no, a choice, or a ranking</span></div>
+        <div><span class="k">Speed</span><span class="v">About 0.2 to 0.3 s per decision</span></div>
+        <div><span class="k">Status</span><span class="v">Early access</span></div>
+      </div>
+
+      <article>
+        <p class="ap-drop rv">Sentinel does not write code or prose. It reads the facts you give it, answers the one question you ask, and tells you how sure it is, so an agent can keep its long thinking for the work that needs it.</p>
+
+        <h2 class="rv">What it does</h2>
+        <p class="rv">Three kinds of call cover most of the small judgements an agent makes between real steps.</p>
+        <div class="sn-does rv">
+          <div class="sn-card">
+            <span class="k">Decide</span>
+            <h3>Yes or no</h3>
+            <p>A direct question about the current state, answered with the probability that the answer is yes.</p>
+            <div class="sn-ex"><span class="q">Will this patch make the failing test pass?</span><span class="a">yes · p_yes 0.91</span></div>
+          </div>
+          <div class="sn-card">
+            <span class="k">Choose</span>
+            <h3>One of several</h3>
+            <p>Name the options and describe each in a line. Sentinel picks one and gives a probability for every option.</p>
+            <div class="sn-ex"><span class="q">Which of these should the agent do next: edit, read, or run?</span><span class="a">edit · 0.84</span></div>
+          </div>
+          <div class="sn-card">
+            <span class="k">Rank</span>
+            <h3>In order</h3>
+            <p>Hand it a list of candidates and get them back best first, each with its share of the probability.</p>
+            <div class="sn-ex"><span class="q">Which fix should we try first?</span><span class="a">fix the parser 0.78 · fix the test 0.22</span></div>
+          </div>
+        </div>
+
+        <h2 class="rv">Why use it</h2>
+        <ul class="sn-list rv">
+          <li><b>Fast</b><span>A decision comes back in about a fifth to a third of a second, quick enough to ask at every step instead of reasoning the question out at length.</span></li>
+          <li><b>Calibrated</b><span>Every answer carries a probability, and the probabilities mean what they say: on held-out checks, answers given at 80 % are right about 80 % of the time. Below about 0.7, treat an answer as uncertain and let the agent think it through.</span></li>
+          <li><b>Fails fast</b><span>If Sentinel is unreachable, the tools return straight away and the agent decides on its own. Sentinel can make an agent quicker; it is built never to make one slower.</span></li>
+        </ul>
+
+        <h2 class="rv">Where it works</h2>
+        <ul class="sn-list rv">
+          <li><b>Orrery</b><span>Sentinel runs inside <a href="/orrery">Orrery</a>, where the agent consults it for the quick calls during a run.</span></li>
+          <li><b>MCP agents</b><span>Add the Sentinel MCP server to any agent that speaks the Model Context Protocol: Claude Code, OpenCode, Cursor, Codex CLI, Gemini CLI or VS Code. The agent gets three tools, <code>sentinel_decide</code>, <code>sentinel_rank</code> and <code>sentinel_status</code>, with descriptions that tell it when to ask.</span></li>
+          <li><b>Function calling</b><span>For your own agent loop, register <code>sentinel_decide</code> as a tool in the OpenAI or Anthropic format and forward the call to the API.</span></li>
+          <li><b>Shell</b><span>A small command-line client answers in its exit code, for scripts and shell-driven agents.</span></li>
+          <li><b>API</b><span>Two HTTP endpoints on <code>api.ephemerent.com</code>, with the same key as the <a href="/developers">Arbiter API</a>.</span></li>
+        </ul>
+
+        <h2 class="rv" id="api">API quickstart</h2>
+        <p class="rv">Sentinel uses the API key from your <a href="/cloud">account page</a>, sent as a bearer token. Give it the facts in <code>state</code> (code, a diff, an error message), ask one question, and add <code>options</code> when there are more than two answers.</p>
+        <div class="sn-endpoints rv">
+          <div><span class="m">POST</span><code>/v1/sentinel/decide</code><small>A yes/no answer with <code>p_yes</code>, or with <code>options</code>, the chosen option, its confidence and a probability for each.</small></div>
+          <div><span class="m">POST</span><code>/v1/sentinel/rank</code><small>Candidates in order, best first, each with its probability.</small></div>
+          <div><span class="m">GET</span><code>/v1/sentinel/status</code><small>Whether Sentinel is up right now.</small></div>
+        </div>
+
+        <pre class="ap-code rv"><code>curl https://api.ephemerent.com/v1/sentinel/decide \
+  -H "Authorization: Bearer $ARBITER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "state": "test_parse_date fails: ValueError on \"2026-09-26T10:00Z\". The patch adds a branch for a trailing Z in parse_date.",
+    "question": "Will this patch make the failing test pass?"
+  }'
+
+# {"answer": "yes", "p_yes": 0.91, "model": "sentinel-1"}</code></pre>
+
+        <pre class="ap-code rv"><code># Python (pip install requests)
+import os, requests
+
+r = requests.post(
+    "https://api.ephemerent.com/v1/sentinel/decide",
+    headers={"Authorization": f"Bearer {os.environ['ARBITER_API_KEY']}"},
+    json={
+        "state": diff + "\n\n" + test_output,
+        "question": "Which of these should the agent do next?",
+        "options": {
+            "edit": "apply the fix to parse_date",
+            "read": "open the caller before changing anything",
+            "run": "run the test suite as it is",
+        },
+    },
+    timeout=8,
+)
+if r.status_code == 503:
+    decision = None          # Sentinel is offline: decide without it
+else:
+    r.raise_for_status()
+    decision = r.json()
+    # {"answer": "edit", "confidence": 0.84,
+    #  "p": {"edit": 0.84, "read": 0.12, "run": 0.04}, "model": "sentinel-1"}</code></pre>
+
+        <pre class="ap-code rv"><code>// JavaScript (fetch)
+const res = await fetch("https://api.ephemerent.com/v1/sentinel/rank", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${process.env.ARBITER_API_KEY}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    context: failingTestOutput,
+    candidates: ["fix the parser", "fix the test"],
+    question: "Which fix should we try first?",
+  }),
+  signal: AbortSignal.timeout(8000),
+});
+const ranked = res.ok ? (await res.json()).ranked : null; // null: go on without it
+// [["fix the parser", 0.78], ["fix the test", 0.22]]</code></pre>
+
+        <p class="rv">For your own agent loop, this is the tool definition to register. Forward its arguments to <code>/v1/sentinel/decide</code> and return the answer to the model.</p>
+        <pre class="ap-code rv"><code>{
+  "name": "sentinel_decide",
+  "description": "Ask Sentinel for a fast, calibrated judgement on a short question about the current task. Returns an answer with a probability; below 0.7, treat the answer as uncertain and reason it through.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "state":    { "type": "string", "description": "The facts the decision depends on: code, a diff, error output." },
+      "question": { "type": "string", "description": "One question with a short answer." },
+      "options":  { "type": "object", "additionalProperties": { "type": "string" },
+                    "description": "Named options, each with a one-line description. Omit for a yes/no question." }
+    },
+    "required": ["state", "question"]
+  }
+}</code></pre>
+
+        <h2 class="rv">Limits and pricing</h2>
+        <p class="rv">Each decision costs a fraction of a cent, metered in the same compute credits as the rest of the API and drawn from the same balance. <code>sentinel-1</code> is listed in <code>/v1/models</code>, but it is not a chat model: sending it to <code>/chat/completions</code> returns <code>400</code>. When Sentinel is offline the API answers <code>503</code> with a <code>Retry-After</code> header; clients should carry on without it rather than wait.</p>
+
+        <h2 class="rv">An honest note</h2>
+        <div class="ap-callout rv">
+          <strong>Sentinel is in early access.</strong> Capacity is limited, and availability, latency and pricing can change. Treat it as a quick second opinion, not ground truth: the probability tells you how much weight an answer deserves, and a low one is a reason to look closer. You remain responsible for what your agent runs and ships.
+        </div>
+
+        <div class="sn-actions rv">
+          <a class="ebtn ebtn-fill" href="/cloud">Get an API key</a>
+          <a class="ebtn" href="/developers">API documentation</a>
+          <a class="ebtn" href="mailto:kt@ephemerent.com?subject=Sentinel%20early%20access">Ask about early access</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="efoot" id="contact">
+  <div class="ewrap">
+    <div class="efoot-grid">
+      <div>
+        <div class="lbl" style="margin-bottom:18px;color:var(--accent);">Ephemeral - Emergent</div>
+        <div class="big serif">Building systems that let intelligence emerge, then step back.</div>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="ebtn ebtn-fill" href="/orrery">Try Orrery -></a>
+          <a class="ebtn" href="/">Back to lab</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="efoot-heading">Lab</h2>
+        <ul>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#approach">Approach</a></li>
+          <li><a href="/arbiter">Arbiter</a></li>
+          <li><a href="/sentinel">Sentinel</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="efoot-heading">Work</h2>
+        <ul>
+          <li><a href="/orrery">Orrery</a></li>
+          <li><a href="/#work">Seed</a></li>
+          <li><a href="/#work">Colony</a></li>
+          <li><a href="mailto:kt@ephemerent.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="efoot-base">
+      <span>(c) 2026 Ephemerent - Independent research lab</span>
+      <span>kt@ephemerent.com</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

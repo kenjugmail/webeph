@@ -95,6 +95,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <a href="/research">Research</a>
       <a href="/#work">Work</a>
       <a href="/arbiter" aria-current="page">Arbiter</a>
+      <a href="/sentinel">Sentinel</a>
       <a class="est-keep" href="/orrery">Orrery -></a>
       <span class="est">EST. 2026</span>
     </nav>
@@ -183,6 +184,32 @@ for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.c
       </div>
     </div>
 
+    <h2 style="margin-top:44px;" id="sentinel">Sentinel decisions</h2>
+    <p style="max-width:62ch;"><a href="/sentinel">Sentinel</a> is Ephemerent's decision model: it answers a short question about the facts you send, a yes/no, a choice among named options, or a ranking, in a fraction of a second, with a calibrated probability. Same key, same base URL. It is in early access.</p>
+    <div class="api-grid api-grid-3">
+      <div class="api-card">
+        <span class="mono api-kicker">POST /v1/sentinel/decide</span>
+        <p>Send <code>state</code> and <code>question</code> for a yes/no answer with <code>p_yes</code>. Add <code>options</code> (name to one-line description) and it returns the chosen option, its <code>confidence</code>, and <code>p</code> for every option.</p>
+      </div>
+      <div class="api-card">
+        <span class="mono api-kicker">POST /v1/sentinel/rank</span>
+        <p>Send <code>context</code>, a list of <code>candidates</code> and an optional <code>question</code>; <code>ranked</code> comes back best first as <code>[candidate, probability]</code> pairs.</p>
+      </div>
+      <div class="api-card">
+        <span class="mono api-kicker">GET /v1/sentinel/status</span>
+        <p>Whether Sentinel is up. When it is not, the endpoints answer <code>503</code> with <code>Retry-After</code>: carry on without it rather than wait.</p>
+      </div>
+    </div>
+    <pre class="api-code"><code>curl https://api.ephemerent.com/v1/sentinel/decide \
+  -H "Authorization: Bearer $ARBITER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "state": "test_parse_date fails on \"2026-09-26T10:00Z\"; the patch handles a trailing Z in parse_date.",
+    "question": "Will this patch make the failing test pass?"
+  }'
+# {"answer": "yes", "p_yes": 0.91, "model": "sentinel-1"}</code></pre>
+    <p class="api-note">Each decision costs a fraction of a cent, metered in the same credits as chat completions. <code>sentinel-1</code> appears in <code>/v1/models</code> but is not a chat model; <code>/chat/completions</code> with it returns <code>400</code>. Python, JavaScript, MCP and function-calling examples are on the <a href="/sentinel#api">Sentinel page</a>.</p>
+
     <h2 style="margin-top:44px;">Availability</h2>
     <p style="max-width:62ch;">Arbiter 27B runs on a GPU box that parks itself after thirty idle minutes and wakes on the next request. While it is waking (a few minutes), a request for <code>arbiter-flash-27b</code> is answered by the fallback model and the response carries <code>x-orrery-fallback-product</code> with the model that served it, metered on the Doubleword pool; once the box is up, requests go to Arbiter. Every response names its route in <code>x-orrery-route-alias</code>.</p>
 
@@ -192,6 +219,7 @@ for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.c
     <div class="api-actions">
       <a class="ebtn ebtn-fill" href="/cloud">Open your account</a>
       <a class="ebtn" href="/arbiter">About Arbiter 27B</a>
+      <a class="ebtn" href="/sentinel">About Sentinel</a>
       <a class="ebtn" href="/orrery#pricing">Plans</a>
     </div>
   </div>
@@ -230,6 +258,7 @@ for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.c
           <li><a href="/#research">Research</a></li>
           <li><a href="/#approach">Approach</a></li>
           <li><a href="/arbiter">Arbiter</a></li>
+          <li><a href="/sentinel">Sentinel</a></li>
           <li><a href="/privacy">Privacy</a></li>
           <li><a href="/terms">Terms</a></li>
         </ul>
