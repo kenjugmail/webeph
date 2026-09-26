@@ -299,7 +299,7 @@ const ranked = res.ok ? (await res.json()).ranked : null; // null: go on without
 }</code></pre>
 
         <h2 class="rv">Limits and pricing</h2>
-        <p class="rv">Each decision costs a fraction of a cent, metered in the same compute credits as the rest of the API and drawn from the same balance. <code>sentinel-1</code> is listed in <code>/v1/models</code>, but it is not a chat model: sending it to <code>/chat/completions</code> returns <code>400</code>. When Sentinel is offline the API answers <code>503</code> with a <code>Retry-After</code> header; clients should carry on without it rather than wait.</p>
+        <p class="rv">Each decision costs a fraction of a cent, metered in the same compute credits as the rest of the API and drawn from the same balance. <code>sentinel-1</code> is listed in <code>/v1/models</code>, but it is not a chat model: sending it to <code>/chat/completions</code> returns <code>400</code>. When Sentinel is offline the API answers <code>503</code> with a <code>Retry-After</code> header; clients should carry on without it rather than wait. Sentinel requests are never stored or used for training, whatever your data setting: the service keeps counts and an access-log line, never what you sent or what it answered.</p>
 
         <h2 class="rv">An honest note</h2>
         <div class="ap-callout rv">

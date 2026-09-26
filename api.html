@@ -208,7 +208,7 @@ for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.c
     "question": "Will this patch make the failing test pass?"
   }'
 # {"answer": "yes", "p_yes": 0.91, "model": "sentinel-1"}</code></pre>
-    <p class="api-note">Each decision costs a fraction of a cent, metered in the same credits as chat completions. <code>sentinel-1</code> appears in <code>/v1/models</code> but is not a chat model; <code>/chat/completions</code> with it returns <code>400</code>. Python, JavaScript, MCP and function-calling examples are on the <a href="/sentinel#api">Sentinel page</a>.</p>
+    <p class="api-note">Each decision costs a fraction of a cent, metered in the same credits as chat completions. <code>sentinel-1</code> appears in <code>/v1/models</code> but is not a chat model; <code>/chat/completions</code> with it returns <code>400</code>. Sentinel requests are never stored or used for training. Python, JavaScript, MCP and function-calling examples are on the <a href="/sentinel#api">Sentinel page</a>.</p>
 
     <h2 style="margin-top:44px;">Availability</h2>
     <p style="max-width:62ch;">Arbiter 27B runs on a GPU box that parks itself after thirty idle minutes and wakes on the next request. While it is waking (a few minutes), a request for <code>arbiter-flash-27b</code> is answered by the fallback model and the response carries <code>x-orrery-fallback-product</code> with the model that served it, metered on the Doubleword pool; once the box is up, requests go to Arbiter. Every response names its route in <code>x-orrery-route-alias</code>.</p>
