@@ -111,7 +111,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
     <div id="release-block" class="hidden">
-      <p class="sub">Download the preview for Windows (x64) or Linux (ARM64); Linux x64 and macOS are next. Sign in (free) to download. It runs your local models for free; Pro adds hosted models, any provider with your own key, and Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
+      <p class="sub">Download the preview for Windows (x64), Linux (ARM64) or macOS (Apple silicon); Linux x64 is next. Sign in (free) to download. It runs your local models for free; Pro adds hosted models, any provider with your own key, and Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
         <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;"><b style="color:var(--ink);">New to Orrery?</b> Create a free account to download. Use your own models for free; try Pro free for 5 days when you want hosted models.</p>
@@ -125,7 +125,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </details>
       <p class="sub" id="release-linux-note" style="font-size:13px;color:var(--muted);line-height:1.6;margin:-6px 0 14px;">Linux: the <code>.deb</code> installs cleanly on Ubuntu and Debian. The AppImage needs <code>libfuse2</code>, which Ubuntu 24.04 no longer ships (<code>sudo apt install libfuse2t64</code>), or run it once with <code>--appimage-extract-and-run</code>. Windows: unzip and run <code>Orrery Test Beta.exe</code>; SmartScreen will warn because the preview is unsigned.</p>
       <p class="auth-msg hidden" id="release-gate-note" style="margin-bottom:10px;"></p>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Downloads need a free account, and each link expires ten minutes after you request it. Preview builds are unsigned: on macOS right-click the app and choose Open the first time; on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Downloads need a free account, and each link expires ten minutes after you request it. Preview builds are unsigned: on macOS move Orrery to Applications, open it once, then choose Open Anyway in System Settings, Privacy &amp; Security (if macOS calls it damaged, run <code>xattr -dr com.apple.quarantine /Applications/Orrery.app</code> in Terminal); on Windows choose More info → Run anyway; on Linux <code>chmod +x</code> the AppImage.</p>
       <div class="release-status" id="release-status">
         <div><b>Release candidate</b><span id="release-version">Pending verification</span></div>
         <div><b>Update mode</b><span id="release-update-mode">Website-hosted updates</span></div>
