@@ -1,0 +1,62 @@
+{
+  "scope": "Real recorded outputs for illustrative synthetic scenarios; not a benchmark. All four scenarios retained, including mistakes.",
+  "checkpoint": "d824c68aa1d8416a8efa2a8d9faf1dc52407cfd2e0885894bd8c7359dc46e8e9",
+  "recordings": {
+    "restore": {
+      "response": {
+        "answer": "rollback",
+        "confidence": 0.918,
+        "p": {
+          "rollback": 0.945,
+          "scale": 0.055,
+          "wait": 0.0
+        },
+        "model": "sentinel-cross"
+      },
+      "latencyMs": 757.58,
+      "recordedAt": "2026-09-28T20:09:27.498337+00:00"
+    },
+    "repair": {
+      "response": {
+        "answer": "parser",
+        "confidence": 0.857,
+        "p": {
+          "parser": 0.905,
+          "test": 0.095,
+          "network": 0.0
+        },
+        "model": "sentinel-cross"
+      },
+      "latencyMs": 656.12,
+      "recordedAt": "2026-09-28T20:09:28.154484+00:00"
+    },
+    "verify": {
+      "response": {
+        "answer": "test",
+        "confidence": 0.999,
+        "p": {
+          "test": 0.999,
+          "deploy": 0.001,
+          "delete": 0.0
+        },
+        "model": "sentinel-cross"
+      },
+      "latencyMs": 776.18,
+      "recordedAt": "2026-09-28T20:09:28.930684+00:00"
+    },
+    "classify": {
+      "response": {
+        "answer": "sales",
+        "confidence": 0.571,
+        "p": {
+          "billing": 0.281,
+          "technical": 0.005,
+          "sales": 0.714
+        },
+        "model": "sentinel-cross"
+      },
+      "latencyMs": 655.04,
+      "recordedAt": "2026-09-28T20:09:29.585750+00:00"
+    }
+  }
+}

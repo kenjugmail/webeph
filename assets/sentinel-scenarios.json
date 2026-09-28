@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "scenarios": [
+    {
+      "id": "restore",
+      "title": "Restore service",
+      "category": "Incident response",
+      "headline": "A release goes wrong. What happens next?",
+      "state": "Deployment v42 was released 4 minutes ago. HTTP 500 errors rose from 0.1% to 24%. Previous v41 was healthy. Rollback to v41 is available and database schema is backwards compatible.",
+      "question": "Which action best restores service now?",
+      "options": {"rollback": "Roll back to healthy v41 and verify errors recover.", "scale": "Add more replicas of the failing v42.", "wait": "Wait 30 minutes without changes."},
+      "expected": "rollback",
+      "outcome": "Simulation: the previous release is restored. Error rate returns to 0.1%. Now investigate the regression.",
+      "metric": "24% → 0.1%",
+      "metricLabel": "Simulated error rate",
+      "wrongOutcome": "Simulation paused: this action does not address the faulty release. Review the evidence before proceeding."
+    },
+    {
+      "id": "repair",
+      "title": "Find the fix",
+      "category": "Coding decisions",
+      "headline": "Turn a failing test into a focused next step.",
+      "state": "Test fails with ValueError on timestamp 2026-09-28T10:00Z. parse_date only accepts timestamps ending +00:00. Input contract explicitly allows ISO timestamps ending Z.",
+      "question": "Which fix best matches the evidence?",
+      "options": {"parser": "Normalize the supported Z suffix to +00:00 before parsing.", "test": "Delete the failing test.", "network": "Increase network timeout."},
+      "expected": "parser",
+      "outcome": "Simulation: the parser now accepts the documented timestamp format. The patch is ready for verification.",
+      "metric": "Patch prepared",
+      "metricLabel": "Simulated workflow",
+      "wrongOutcome": "Simulation paused: the selected action leaves the documented parsing behavior unresolved."
+    },
+    {
+      "id": "verify",
+      "title": "Verify before shipping",
+      "category": "Release decisions",
+      "headline": "A patch is only the beginning.",
+      "state": "The parser fix is applied but no tests have been run. Release policy requires the regression test and full suite to pass before deployment.",
+      "question": "What should the agent do next?",
+      "options": {"test": "Run the regression test and full suite.", "deploy": "Deploy immediately without testing.", "delete": "Delete the regression test."},
+      "expected": "test",
+      "outcome": "Simulation: verification is requested. A real agent would run the tests and inspect their results before releasing.",
+      "metric": "Verification queued",
+      "metricLabel": "Simulated workflow",
+      "wrongOutcome": "Simulation paused: the selected action does not meet the stated release policy."
+    },
+    {
+      "id": "classify",
+      "title": "Route a customer request",
+      "category": "Classification challenge",
+      "headline": "Test the boundaries. Keep the result honest.",
+      "state": "Customer message: I was charged twice for the same order yesterday. Please refund the duplicate payment.",
+      "question": "Which team should handle this request?",
+      "options": {"billing": "Billing: charges, invoices, refunds.", "technical": "Technical support: application errors and crashes.", "sales": "Sales: new purchases and product demonstrations."},
+      "expected": "billing",
+      "outcome": "The model agrees with the scenario's billing label. This is one illustrative example, not an accuracy benchmark.",
+      "metric": "Billing",
+      "metricLabel": "Scenario reference label",
+      "wrongOutcome": "The model disagrees with the scenario's billing label. This is a visible failure case: keep human review for unsupported task families."
+    }
+  ]
+}

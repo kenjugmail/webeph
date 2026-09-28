@@ -8,7 +8,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
 <title>Sentinel - Ephemerent</title>
-<meta name="description" content="Sentinel is Ephemerent's decision model for coding agents: fast, calibrated yes/no answers, choices and rankings with a probability attached, in Orrery, in any MCP agent, and through the Ephemerent API. Early access.">
+<meta name="description" content="Sentinel is Ephemerent's decision model for coding agents: energy-based scoring for yes/no questions, choices and rankings, in Orrery, in any MCP agent, and through the Ephemerent API. Early access.">
 <link rel="canonical" href="https://ephemerent.com/sentinel">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -16,14 +16,14 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ephemerent">
 <meta property="og:title" content="Sentinel">
-<meta property="og:description" content="The quick calls, made quickly. Sentinel answers short questions for coding agents in a fraction of a second, with a probability you can trust. Early access.">
+<meta property="og:description" content="An energy-based CLM for agent decisions. Explore live examples in the Decision Lab and integrate through the Orrery API.">
 <meta property="og:url" content="https://ephemerent.com/sentinel">
 <meta property="og:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sentinel">
-<meta name="twitter:description" content="Fast, calibrated judgement calls for coding agents: decide, choose, rank. Early access.">
+<meta name="twitter:description" content="Energy-based decisions for agents: decide, choose, rank. Try the Decision Lab.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-ephemerent.png">
 <!-- include: head-theme -->
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
@@ -110,8 +110,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 }
 }
 </style>
+<link rel="stylesheet" href="/assets/sentinel-product.css">
 </head>
-<body class="lab-page">
+<body class="lab-page sentinel-product">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -148,25 +149,19 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <main id="main">
   <header class="ap-hero">
     <div class="ewrap">
-      <span class="lbl rv in">Decision model - early access</span>
-      <h1 class="rv in">Sentinel makes the quick calls.</h1>
-      <figure class="ap-hero-plate sn-plate rv in" aria-labelledby="sn-plate-q">
-        <figcaption><span>Example decision</span><span>sentinel-1</span></figcaption>
-        <div class="sn-field">
-          <p class="sn-q" id="sn-plate-q">Which of these should the agent do next?</p>
-          <ol class="sn-opts" aria-label="Options with Sentinel's probabilities">
-            <li><span class="nm">edit</span><span class="bar" aria-hidden="true"><i style="width:84%"></i></span><span class="p">0.84</span></li>
-            <li><span class="nm">read</span><span class="bar" aria-hidden="true"><i style="width:12%"></i></span><span class="p">0.12</span></li>
-            <li><span class="nm">run</span><span class="bar" aria-hidden="true"><i style="width:4%"></i></span><span class="p">0.04</span></li>
-          </ol>
-          <div class="sn-answer"><span>Answer <b>edit</b></span><span>Confidence <b>0.84</b></span></div>
+      <div class="sp-hero-grid">
+        <div><span class="sp-eyebrow">SENTINEL / ENERGY-BASED CLM</span>
+          <h1>Give your agent<br>a next step.</h1>
+          <p class="sp-lede">A dedicated decision layer for AI workflows. Turn context and candidate actions into structured scores—alongside the language model you already use.</p>
+          <div class="sp-actions"><a class="ebtn ebtn-fill" href="/sentinel-demo">Open the Decision Lab ↗</a><a class="ebtn" href="#api">Build with the API</a></div>
+          <p class="sp-caption">Interactive examples · Live inference · Inspectable responses</p>
         </div>
-        <div class="ap-plate-foot"><span>One question · one answer · one probability</span><span>A fraction of a second</span></div>
-      </figure>
-      <p class="ap-lede rv in">Coding agents spend a long reasoning pass on questions that have short answers: will this patch pass, which file comes first, is it time to run the tests. Sentinel is Ephemerent's decision model, a fast "System One" for those moments. It answers yes or no, picks among named options, or ranks candidates, in about a fifth to a third of a second, and every answer carries a calibrated probability.</p>
-      <div class="ap-actions rv in">
-        <a class="ebtn ebtn-fill" href="#api">Use the API</a>
-        <a class="ebtn" href="/orrery">See Orrery</a>
+        <a class="sp-visual" href="/sentinel-demo" aria-label="Explore the Sentinel Decision Lab">
+          <div class="sp-visual-top"><span>THE MOMENT BETWEEN ACTIONS</span><span>↗</span></div>
+          <div class="sp-orbit" aria-hidden="true"><i></i><b>✳</b></div>
+          <div class="sp-flow"><span>Context</span><i>→</i><strong>Sentinel</strong><i>→</i><span>Next step</span></div>
+          <div class="sp-visual-bottom">See the options. Inspect the scores. Make the call.</div>
+        </a>
       </div>
     </div>
   </header>
@@ -176,15 +171,16 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <div class="ap-meta rv">
         <div><span class="k">Model</span><span class="v">sentinel-1</span></div>
         <div><span class="k">Answers</span><span class="v">Yes/no, a choice, or a ranking</span></div>
-        <div><span class="k">Speed</span><span class="v">About 0.2 to 0.3 s per decision</span></div>
+        <div><span class="k">Speed</span><span class="v">0.73 s median¹</span></div>
         <div><span class="k">Status</span><span class="v">Early access</span></div>
       </div>
 
       <article>
-        <p class="ap-drop rv">Sentinel does not write code or prose. It reads the facts you give it, answers the one question you ask, and tells you how sure it is, so an agent can keep its long thinking for the work that needs it.</p>
+        <p class="ap-drop rv">Sentinel does not write code or prose. It reads the evidence and alternatives you provide, then returns a structured decision with model scores. Your agent retains control of execution and verification.</p>
 
+        <p class="sp-caption">¹ Local RTX 5060 Ti deployment smoke, 12 synthetic requests, September 28, 2026. This is a latency observation, not a quality benchmark or service-level guarantee.</p>
         <h2 class="rv">What it does</h2>
-        <p class="rv">Three kinds of call cover most of the small judgements an agent makes between real steps.</p>
+        <p class="rv">Three structured interfaces for decisions between agent steps. The outputs below illustrate response formats; they are not measured results.</p>
         <div class="sn-does rv">
           <div class="sn-card">
             <span class="k">Decide</span>
@@ -208,9 +204,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 
         <h2 class="rv">Why use it</h2>
         <ul class="sn-list rv">
-          <li><b>Fast</b><span>A decision comes back in about a fifth to a third of a second, quick enough to ask at every step instead of reasoning the question out at length.</span></li>
-          <li><b>Calibrated</b><span>Every answer carries a probability, and the probabilities mean what they say: on held-out checks, answers given at 80 % are right about 80 % of the time. Below about 0.7, treat an answer as uncertain and let the agent think it through.</span></li>
-          <li><b>Fails fast</b><span>If Sentinel is unreachable, the tools return straight away and the agent decides on its own. Sentinel can make an agent quicker; it is built never to make one slower.</span></li>
+          <li><b>Fast</b><span>A small 12-request deployment smoke measured a 0.73-second median round trip. Actual latency depends on input length, load and connection.¹</span></li>
+          <li><b>Inspectable</b><span>Compare scores across the options you supply. These are model estimates, not verified outcomes or universally calibrated confidence. Check consequential choices against evidence.</span></li>
+          <li><b>Fails fast</b><span>Bounded timeouts and circuit breakers let your agent continue when Sentinel is unavailable. Handle busy or offline responses explicitly in your workflow.</span></li>
         </ul>
 
         <h2 class="rv">Where it works</h2>
@@ -285,7 +281,7 @@ const ranked = res.ok ? (await res.json()).ranked : null; // null: go on without
         <p class="rv">For your own agent loop, this is the tool definition to register. Forward its arguments to <code>/v1/sentinel/decide</code> and return the answer to the model.</p>
         <pre class="ap-code rv"><code>{
   "name": "sentinel_decide",
-  "description": "Ask Sentinel for a fast, calibrated judgement on a short question about the current task. Returns an answer with a probability; below 0.7, treat the answer as uncertain and reason it through.",
+  "description": "Ask Sentinel to compare concrete next actions using the supplied evidence. Returns model scores; verify consequential choices independently.",
   "parameters": {
     "type": "object",
     "properties": {
@@ -303,7 +299,7 @@ const ranked = res.ok ? (await res.json()).ranked : null; // null: go on without
 
         <h2 class="rv">An honest note</h2>
         <div class="ap-callout rv">
-          <strong>Sentinel is in early access.</strong> Capacity is limited, and availability, latency and pricing can change. Treat it as a quick second opinion, not ground truth: the probability tells you how much weight an answer deserves, and a low one is a reason to look closer. You remain responsible for what your agent runs and ships.
+          <strong>Sentinel is in early access.</strong> Capacity is limited, and availability, latency and pricing can change. Treat it as a quick second opinion, not ground truth: scores can be wrong, even when strongly separated. You remain responsible for what your agent runs and ships.
         </div>
 
         <div class="sn-actions rv">

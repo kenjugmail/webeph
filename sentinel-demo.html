@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sentinel Decision Lab — Orrery</title>
+  <meta name="description" content="Explore Sentinel, an energy-based CLM, in an interactive decision mission. Inspect real model scores, try your own context, and connect the Orrery API.">
+  <link rel="canonical" href="https://ephemerent.com/sentinel-demo">
+  <meta property="og:title" content="Sentinel Decision Lab"><meta property="og:description" content="From context to next action. Explore an energy-based decision model.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
+  <link rel="stylesheet" href="/assets/sentinel-lab.css">
+  <script type="module" src="/assets/sentinel-lab.js"></script>
+</head>
+<body>
+<a class="skip" href="#lab">Skip to the demo</a>
+<header class="lab-nav"><a class="wordmark" href="/sentinel"><span class="brand-mark" aria-hidden="true">✳</span> sentinel<span class="brand-by">by Orrery</span></a><nav aria-label="Main navigation"><a href="/developers">API docs ↗</a><a href="/orrery">Explore Orrery</a><button id="present" class="quiet">Present ⤢</button></nav></header>
+<main>
+  <section class="lab-hero">
+    <div><p class="eyebrow"><span class="signal"></span> THE DECISION LAB</p><h1>Context in.<br><em>Next step out.</em></h1><p class="intro">An energy-based CLM for the moments between actions. <br>Give Sentinel the evidence. See how it scores the options.</p></div>
+    <div class="hero-aside"><span class="tiny">A DIFFERENT KIND OF MODEL</span><p>Language models write.<br>Sentinel helps choose.</p><div class="mini-flow"><span>Observe</span><i>→</i><span class="accent">Score</span><i>→</i><span>Act</span></div></div>
+  </section>
+  <section class="lab-shell" id="lab" aria-label="Interactive Sentinel demo">
+    <div class="lab-toolbar"><div><span class="tiny">WORKSPACE /</span> <strong>Decision mission</strong></div><div class="connection"><span id="mode-badge" class="badge">Recorded example</span><button id="connection-toggle" class="quiet" aria-expanded="false" aria-controls="connection-panel">Connection settings ⚙</button></div></div>
+    <div id="connection-panel" class="connection-panel" hidden>
+      <label>Inference source<select id="mode"><option value="public">Live public demo — fixed scenarios, rate limited</option><option value="recorded">Recorded model responses — no API key</option><option value="hosted">Live Orrery API — uses account credits</option><option value="local" disabled>Live local Sentinel — presenter only</option></select></label>
+      <label id="key-label">Orrery API key<input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="Your API key stays in this tab"></label>
+      <p>Live API calls use your account credits. Keys are held in memory only and sent directly to api.ephemerent.com. Recorded responses are never presented as live.</p>
+    </div>
+    <div class="lab-grid">
+      <aside class="scenarios"><span class="tiny">01 / CHOOSE A SCENARIO</span><div id="scenario-list"></div><div class="sidebar-note"><span class="small-orbit" aria-hidden="true">◎</span><strong>A mission, not a benchmark.</strong><p>Three decision checkpoints, plus a classification challenge. Simulated outcomes; real model responses.</p></div></aside>
+      <section class="evidence-pane"><div class="pane-heading"><span class="tiny">02 / THE EVIDENCE</span><span id="scenario-category" class="soft-pill"></span></div><h2 id="scenario-title">Loading scenarios…</h2><label for="context">Observed context</label><textarea id="context" rows="6" maxlength="8000" spellcheck="false"></textarea><label for="question">Decision question</label><input id="question" maxlength="500"><div class="options-heading"><label>Candidate actions</label><span class="tiny">EDIT IN LIVE MODE</span></div><div id="options"></div><div class="run-row"><button id="run" class="primary" disabled>Score the options <span>↗</span></button><button id="reset" class="quiet">Reset inputs</button></div><p id="input-note" class="fine">Recorded mode uses the exact inputs shown here. Connect live inference to try your own.</p></section>
+      <section class="results-pane" aria-label="Model result"><div class="pane-heading"><span class="tiny">03 / THE DECISION</span><span id="result-source" class="tiny">AWAITING REQUEST</span></div><div id="result-empty" class="empty"><div class="orb" aria-hidden="true"><div></div><span>✳</span></div><h3>Every next step<br>starts with a choice.</h3><p>Run a decision to reveal how<br>Sentinel ranks these actions.</p></div><div id="results" hidden><div class="result-header"><span class="tiny">TOP-RANKED OPTION</span><h3 id="winner"></h3><p id="winner-description"></p></div><div id="bars"></div><div class="result-stats"><div><span id="latency">—</span><small id="latency-label">Round trip</small></div><div><span id="option-count">3</span><small>Options scored</small></div></div><p class="fine">Scores compare the supplied options. They are not guarantees of correctness.</p><button id="apply" class="secondary">Apply in simulation →</button></div><p id="status" role="status" aria-live="polite"></p></section>
+    </div>
+    <div class="mission-strip"><div><span class="tiny">MISSION PROGRESS</span><strong id="mission-summary">Restore → repair → verify</strong></div><ol id="mission-steps"><li data-step="restore">01 <span>Restore</span></li><li data-step="repair">02 <span>Repair</span></li><li data-step="verify">03 <span>Verify</span></li></ol><button id="restart" class="quiet">Restart mission ↺</button></div>
+    <div id="outcome" class="outcome" hidden><div><span id="outcome-label" class="tiny">SIMULATION OUTCOME</span><h3 id="outcome-metric"></h3></div><p id="outcome-text"></p><button id="next" class="secondary">Next checkpoint →</button></div>
+  </section>
+  <section class="under-lab"><div><span class="tiny">THE TRACE</span><h2>See the decision trail.</h2><p>Each run records the source, selected option, and measured latency. Download a receipt to inspect the inputs and response.</p></div><div class="trace-panel"><div class="trace-heading"><span>Session activity</span><button id="download" class="quiet" disabled>Download receipt ↓</button></div><ol id="history"><li class="muted">Your first decision will appear here.</li></ol></div></section>
+  <section class="build-cta"><div><span class="tiny">BRING YOUR OWN WORKFLOW</span><h2>A decision layer.<br>A straightforward API.</h2><p>Send context and candidate actions. Receive structured scores.<br>Keep your existing agent and execution controls.</p><a class="primary" href="/developers">Build with Orrery ↗</a></div><pre><span>POST</span> /v1/sentinel/decide
+
+{
+  "state": "What the agent knows",
+  "question": "What should happen next?",
+  "options": {
+    "inspect": "Read the relevant evidence",
+    "test": "Run the regression test"
+  }
+}</pre></section>
+</main>
+<footer class="lab-footer"><span>Sentinel / Ephemerent</span><span>Early access · Decision support · Human oversight</span><a href="/privacy">Privacy</a></footer>
+</body></html>

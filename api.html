@@ -7,7 +7,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
-<title>Arbiter API - Ephemerent</title>
+<title>Orrery API — Models for agent workflows</title>
 <meta name="description" content="The Arbiter 27B API: an OpenAI-compatible chat completions endpoint at api.ephemerent.com, metered in compute credits from your Ephemerent subscription, with usage and keys on your account page.">
 <link rel="canonical" href="https://api.ephemerent.com/">
 <meta name="theme-color" content="#f3f0e8">
@@ -62,8 +62,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <script src="/assets/motion.js?v=20260811d" defer></script>
 <script src="/assets/branch-field.js?v=20260802c" defer></script>
 <script src="/assets/arbiter.js?v=20260811c" defer></script>
+<link rel="stylesheet" href="/assets/sentinel-product.css">
 </head>
-<body class="lab-page">
+<body class="lab-page api-product">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -105,9 +106,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <main id="main">
   <section class="esec">
   <div class="ewrap">
-    <p class="mono" style="color:var(--muted);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;">Arbiter 27B · API</p>
-    <h1 style="text-wrap:balance;max-width:16ch;">One endpoint, the same model Orrery runs on.</h1>
-    <p class="lead" style="max-width:62ch;">The Arbiter API is an OpenAI-compatible chat completions endpoint. Any client that speaks the OpenAI format works unchanged: point it at <code>https://api.ephemerent.com/v1</code>, use <code>arbiter-flash-27b</code> as the model, and authenticate with a key from your <a href="/cloud">account page</a>.</p>
+    <div class="sp-api-hero"><div><span class="sp-eyebrow">ORRERY / DEVELOPER PLATFORM</span><h1>Build the agent.<br>Connect the intelligence.</h1><p class="sp-lede">Language generation and structured decisions, through one API platform. Choose the right interface for each step of your workflow.</p><div class="sp-actions"><a class="ebtn ebtn-fill" href="/cloud">Get your API key ↗</a><a class="ebtn" href="/sentinel-demo">Try Sentinel live</a></div></div><div class="sp-api-terminal"><div><span class="sp-dot"></span> api.ephemerent.com/v1</div><p><span>GENERATE</span><br>POST /chat/completions</p><p><span>DECIDE</span><br>POST /sentinel/decide</p><p><span>RANK</span><br>POST /sentinel/rank</p><small>Bearer authentication · Structured responses</small></div></div>
+    <div class="sp-product-cards"><a href="#quickstart"><span class="sp-eyebrow">01 / GENERATION</span><h2>Arbiter &amp; Orrery routes</h2><p>OpenAI-compatible chat, streaming and tool calls for your existing applications.</p><span>Explore chat completions →</span></a><a href="/sentinel-demo"><span class="sp-eyebrow">02 / DECISIONS</span><h2>Sentinel</h2><p>An energy-based CLM that scores alternatives and helps an agent choose its next step.</p><span>Open the interactive Decision Lab →</span></a></div>
+    <h2 id="quickstart" class="sp-section-heading">One base URL. Familiar tools.</h2>
+    <p class="lead" style="max-width:62ch;">Use <code>https://api.ephemerent.com/v1</code> with your Orrery API key. Chat routes support OpenAI-compatible clients; Sentinel uses dedicated decision and ranking endpoints.</p>
 
     <div class="api-grid">
       <div class="api-card">
@@ -185,7 +187,7 @@ for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.c
     </div>
 
     <h2 style="margin-top:44px;" id="sentinel">Sentinel decisions</h2>
-    <p style="max-width:62ch;"><a href="/sentinel">Sentinel</a> is Ephemerent's decision model: it answers a short question about the facts you send, a yes/no, a choice among named options, or a ranking, in a fraction of a second, with a calibrated probability. Same key, same base URL. It is in early access.</p>
+    <p style="max-width:62ch;"><a href="/sentinel">Sentinel</a> is an energy-based CLM for structured decisions: yes/no questions, named choices and candidate rankings. Responses include model scores; verify consequential choices against your own evidence. Same key, same base URL. <a href="/sentinel-demo">Try the live Decision Lab</a>.</p>
     <div class="api-grid api-grid-3">
       <div class="api-card">
         <span class="mono api-kicker">POST /v1/sentinel/decide</span>
