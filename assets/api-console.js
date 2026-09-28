@@ -133,13 +133,17 @@ print(reply.choices[0].message)`;
 }
 
 /** JSON is valid Python except for true/false/null. */
-function pythonLiteral(value) {
-  return compactJson(value).replace(/([:,[]\s*)true\b/g, '$1True').replace(/([:,[]\s*)false\b/g, '$1False').replace(/([:,[]\s*)null\b/g, '$1None');
+export function pythonLiteral(value) {
+  if (value === null) return 'None';
+  if (typeof value === 'boolean') return value ? 'True' : 'False';
+  if (Array.isArray(value)) return `[${value.map(pythonLiteral).join(', ')}]`;
+  if (typeof value === 'object') return `{${Object.entries(value).map(([key, item]) => `${JSON.stringify(key)}: ${pythonLiteral(item)}`).join(', ')}}`;
+  return JSON.stringify(value);
 }
 
 /** The first call to paste into a terminal: the key export (when we have the secret) and the curl. */
 export function firstCallSnippet(key, exampleId = 'rule') {
-  const exportLine = key ? `export ${API_KEY_ENV}=${key}` : `export ${API_KEY_ENV}=<your key>`;
+  const exportLine = `export ${API_KEY_ENV}='${shellSingleQuote(key || 'YOUR_API_KEY')}'`;
   return `${exportLine}\n\n${apiSnippets(exampleId).curl}`;
 }
 
@@ -156,7 +160,7 @@ export function agentPrompt(key) {
     `Put the key in an environment variable named ${API_KEY_ENV} (for example in a .env file that is git-ignored) and read it from there.`,
     'Never commit the key, print it, log it, or ship it in browser code.',
     'Use the official OpenAI SDK with the base URL above instead of hand-written HTTP calls.',
-    'GET /v1/usage shows the remaining credits; an HTTP 429 means the monthly pool and purchased credits ran out.',
+    'GET /v1/usage shows the remaining credits. For HTTP 429, inspect the error: a rate limit or exhausted balance may apply. Respect Retry-After when supplied.',
   ].join('\n');
 }
 
@@ -208,7 +212,7 @@ export function keyLimitState(activeCount, plan, limits) {
 /** The useful parts of a chat completion reply and its x-orrery headers, for the test-request panel. */
 export function summarizeTestReply(body, headers, status, ms) {
   const get = (name) => (typeof headers?.get === 'function' ? headers.get(name) : headers?.[name]) ?? undefined;
-  const error = body?.error?.message ?? (status >= 400 ? `HTTP ${status}` : undefined);
+  const error = body?.error?.message ?? (status >= 400 ? `HTTP ${status}` : !body?.choices?.[0]?.message ? 'The API returned an unexpected response. No completion was received.' : undefined);
   const message = body?.choices?.[0]?.message ?? {};
   const toolCalls = Array.isArray(message.tool_calls) ? message.tool_calls.map((call) => `${call.function?.name ?? 'tool'}(${call.function?.arguments ?? ''})`) : [];
   const fallback = get('x-orrery-fallback-product');
@@ -234,11 +238,13 @@ export async function runTestRequest(key, exampleId, fetchImpl = fetch) {
       method: 'POST',
       headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
       body: JSON.stringify(exampleById(exampleId).body),
+      signal: AbortSignal.timeout(45_000),
     });
     let body = null;
     try { body = await res.json(); } catch { body = null; }
     return summarizeTestReply(body, res.headers, res.status, performance.now() - started);
   } catch (err) {
+    if (err?.name === 'TimeoutError' || err?.name === 'AbortError') return { ok: false, status: 0, ms: Math.round(performance.now() - started), error: 'The request timed out after 45 seconds. Check your request receipts before retrying; the server may still have processed it.', text: '', toolCalls: [] };
     return { ok: false, status: 0, ms: Math.round(performance.now() - started), error: `The request did not reach the API (${err instanceof Error ? err.message : String(err)}).`, text: '', toolCalls: [] };
   }
 }

@@ -7,23 +7,23 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/site.webmanifest">
 <!-- /include -->
-<title>Orrery API — Models for agent workflows</title>
-<meta name="description" content="The Arbiter 27B API: an OpenAI-compatible chat completions endpoint at api.ephemerent.com, metered in compute credits from your Ephemerent subscription, with usage and keys on your account page.">
-<link rel="canonical" href="https://api.ephemerent.com/">
+<title>Orrery API — Inference for agents and applications</title>
+<meta name="description" content="Build with Orrery: OpenAI-compatible generation, Sentinel decisions, API keys and usage controls. Explore models and copy your first request.">
+<link rel="canonical" href="https://ephemerent.com/developers">
 <meta name="theme-color" content="#f3f0e8">
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ephemerent">
-<meta property="og:title" content="Arbiter API">
-<meta property="og:description" content="OpenAI-compatible access to Arbiter 27B at api.ephemerent.com. Compute-metered credits, usage on your account page, zero data retention in one switch.">
-<meta property="og:url" content="https://api.ephemerent.com/">
+<meta property="og:title" content="Orrery API — Inference for agents and applications">
+<meta property="og:description" content="Build with Orrery: OpenAI-compatible generation, Sentinel decisions, API keys and usage controls. Explore models and copy your first request.">
+<meta property="og:url" content="https://ephemerent.com/developers">
 <meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Arbiter API">
-<meta name="twitter:description" content="OpenAI-compatible access to Arbiter 27B, metered in compute credits.">
+<meta name="twitter:title" content="Orrery API — Inference for agents and applications">
+<meta name="twitter:description" content="Build with Orrery: OpenAI-compatible generation, Sentinel decisions, API keys and usage controls. Explore models and copy your first request.">
 <meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png">
 <!-- include: head-theme -->
 <!-- Blocking and inline on purpose: the stored face has to be on <html>
@@ -62,7 +62,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <script src="/assets/motion.js?v=20260811d" defer></script>
 <script src="/assets/branch-field.js?v=20260802c" defer></script>
 <script src="/assets/arbiter.js?v=20260811c" defer></script>
-<link rel="stylesheet" href="/assets/sentinel-product.css">
+<link rel="stylesheet" href="/assets/orrery-developers.css">
+<script type="module" src="/assets/orrery-developers.js"></script>
 </head>
 <body class="lab-page api-product">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -95,7 +96,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <nav class="enav">
       <a href="/research">Research</a>
       <a href="/#work">Work</a>
-      <a href="/arbiter" aria-current="page">Arbiter</a>
+      <a href="/arbiter">Arbiter</a>
       <a href="/sentinel">Sentinel</a>
       <a class="est-keep" href="/orrery">Orrery -></a>
       <span class="est">EST. 2026</span>
@@ -103,147 +104,33 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   </div>
 </div>
 
-<main id="main">
-  <section class="esec">
-  <div class="ewrap">
-    <div class="sp-api-hero"><div><span class="sp-eyebrow">ORRERY / DEVELOPER PLATFORM</span><h1>Build the agent.<br>Connect the intelligence.</h1><p class="sp-lede">Language generation and structured decisions, through one API platform. Choose the right interface for each step of your workflow.</p><div class="sp-actions"><a class="ebtn ebtn-fill" href="/cloud">Get your API key ↗</a><a class="ebtn" href="/sentinel-demo">Try Sentinel live</a><a class="ebtn" href="/sentinel-game">Game Lab</a></div></div><div class="sp-api-terminal"><div><span class="sp-dot"></span> api.ephemerent.com/v1</div><p><span>GENERATE</span><br>POST /chat/completions</p><p><span>DECIDE</span><br>POST /sentinel/decide</p><p><span>RANK</span><br>POST /sentinel/rank</p><small>Bearer authentication · Structured responses</small></div></div>
-    <div class="sp-product-cards"><a href="#quickstart"><span class="sp-eyebrow">01 / GENERATION</span><h2>Arbiter &amp; Orrery routes</h2><p>OpenAI-compatible chat, streaming and tool calls for your existing applications.</p><span>Explore chat completions →</span></a><a href="/sentinel-demo"><span class="sp-eyebrow">02 / DECISIONS</span><h2>Sentinel</h2><p>An energy-based CLM that scores alternatives and helps an agent choose its next step.</p><span>Open the interactive Decision Lab →</span></a></div>
-    <p class="sp-caption"><a href="/sentinel-demo#economics">Explore decision-call costs →</a> · Editable assumptions, including fallbacks and repairs.</p>
-    <h2 id="quickstart" class="sp-section-heading">One base URL. Familiar tools.</h2>
-    <p class="lead" style="max-width:62ch;">Use <code>https://api.ephemerent.com/v1</code> with your Orrery API key. Chat routes support OpenAI-compatible clients; Sentinel uses dedicated decision and ranking endpoints.</p>
+<main id="main" class="dev-page">
+<nav class="dev-nav" aria-label="Developer navigation"><a class="dev-brand" href="/developers" aria-current="page">orrery <span>/ API</span></a><div><a href="#models">Models</a><a href="#quickstart">Quickstart</a><a href="#reference">Reference</a><a href="#usage">Usage &amp; pricing</a></div><a class="dev-button dev-small" href="/cloud">Open console ↗</a></nav>
+<section class="dev-hero dev-wrap"><div class="dev-hero-copy"><p class="dev-label">THE ORRERY DEVELOPER PLATFORM</p><h1>Intelligence for<br>the next step.</h1><p class="dev-lead">Generate with Arbiter. Decide with Sentinel.<br>Build both into your application through one API platform.</p><div class="dev-actions"><a class="dev-button" href="/cloud">Get an API key <span>↗</span></a><a class="dev-link" href="#quickstart">Read the quickstart →</a></div><p class="dev-subtle">OpenAI-compatible chat · Structured decisions · Usage controls</p></div><div class="dev-terminal"><div class="dev-terminal-head"><span>YOUR APPLICATION</span><span>→ ORRERY API</span></div><pre><code><span class="code-dim">import</span> os
+<span class="code-dim">from</span> openai <span class="code-dim">import</span> OpenAI
 
-    <div class="api-grid">
-      <div class="api-card">
-        <span class="mono api-kicker">Base URL</span>
-        <b>https://api.ephemerent.com/v1</b>
-        <p>Chat completions at <code>/chat/completions</code>, streaming with <code>stream: true</code>, tool calls in the OpenAI schema. <code>/models</code> lists <code>arbiter-flash-27b</code> alongside the Orrery routes (<code>orrery/fast</code>, <code>orrery/balanced</code>, <code>orrery/verified</code>, <code>orrery/research</code>), which pick a model per request.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">Model</span>
-        <b>arbiter-flash-27b</b>
-        <p>Arbiter 27B: a recurrent-depth Qwen3.8-27B that runs three looped passes at prefill and decodes in a single pass. Read <a href="/arbiter">how it is built and measured</a>.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">Metering</span>
-        <b>Compute credits</b>
-        <p>Each request costs prompt tokens times the three loop passes plus completion tokens, priced at provider cost. One credit is one millionth of a dollar. There are no billed reasoning tokens: Arbiter reasons in latent space.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">Where the credits come from</span>
-        <b>Subscription pool, then purchased credits</b>
-        <p>API keys draw first from the same monthly Arbiter 27B pool as the desktop: 14M on Pro, 35M on Max, 70M on Ultra. When a month's pool runs out, requests fall through to credits you have bought, which never expire and work across both models. Nothing overages: with neither balance the API answers 429 rather than billing you. <a href="/organizations">Organizations</a> share one pool across seats.</p>
-        <p>Your account page creates your first key on your first visit, with a prompt to hand your coding agent and a first call to paste. Create more keys and revoke them there; a key is shown once, and each can be limited to specific routes and revoked on its own. <a href="/cloud">Open your account</a>.</p>
-        <p>When the Arbiter box is asleep or busy, requests are answered by DeepSeek V4 Flash (Doubleword) and the response says so in <code>x-orrery-provider</code>; the model name you sent is echoed in <code>x-orrery-route-alias</code>. Send an <code>Idempotency-Key</code> header on non-streaming calls if you want retries to return the stored answer instead of running twice; it is optional.</p>
-      </div>
-    </div>
-
-    <h2 style="margin-top:44px;">Your first request</h2>
-    <pre class="api-code"><code>curl https://api.ephemerent.com/v1/chat/completions \
-  -H "Authorization: Bearer $ARBITER_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "arbiter-flash-27b",
-    "messages": [{"role": "user", "content": "Find the rule: 2, 6, 12, 20, 30"}],
-    "max_tokens": 400
-  }'</code></pre>
-    <pre class="api-code"><code># Python (pip install openai)
-from openai import OpenAI
-client = OpenAI(base_url="https://api.ephemerent.com/v1", api_key=ARBITER_API_KEY)
-reply = client.chat.completions.create(
-    model="arbiter-flash-27b",
-    messages=[{"role": "user", "content": "Find the rule: 2, 6, 12, 20, 30"}],
-    max_tokens=400,
+client = OpenAI(
+    base_url=<span class="code-green">"https://api.ephemerent.com/v1"</span>,
+    api_key=os.environ[<span class="code-green">"ARBITER_API_KEY"</span>],
 )
-print(reply.choices[0].message.content)</code></pre>
-    <pre class="api-code"><code>// JavaScript (npm install openai)
-import OpenAI from "openai";
-const client = new OpenAI({ baseURL: "https://api.ephemerent.com/v1", apiKey: process.env.ARBITER_API_KEY });
-const reply = await client.chat.completions.create({
-  model: "arbiter-flash-27b",
-  messages: [{ role: "user", content: "Find the rule: 2, 6, 12, 20, 30" }],
-  max_tokens: 400,
-  stream: true,
-});
-for await (const chunk of reply) process.stdout.write(chunk.choices[0]?.delta?.content ?? "");</code></pre>
-    <p class="api-note">The relay forwards <code>messages</code>, <code>temperature</code>, <code>top_p</code>, <code>stream</code>, <code>stop</code>, <code>presence_penalty</code>, <code>frequency_penalty</code>, <code>tools</code>, <code>tool_choice</code>, <code>response_format</code>, <code>logprobs</code> and <code>top_logprobs</code>; <code>max_tokens</code> is capped by your plan and anything else is dropped. Thinking is off on the server: Arbiter refines its answer in latent space during the loop, so there is no chain-of-thought to read or pay for.</p>
 
-    <h2 style="margin-top:44px;">Usage, keys and limits</h2>
-    <div class="api-grid api-grid-3">
-      <div class="api-card">
-        <span class="mono api-kicker">Usage</span>
-        <p><code>GET /v1/usage</code> with your key returns this month's pools (quota, used, remaining for Arbiter 27B and Doubleword) and your purchased-credit balance. The same numbers show on your <a href="/cloud">account page</a> next to the desktop pool; every request updates them.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">Keys</span>
-        <p>Create and revoke keys on the account page. A key shows its prefix after creation; the full key is shown once. Revoking takes effect on the next request.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">Buying credits</span>
-        <p>Credit packs are a one-time purchase on your <a href="/cloud">account page</a>: 10M for $20, 25M for $45, 60M for $100. They sit in a rollover balance the monthly pool is always spent before, so buying early never wastes them.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">Limits</span>
-        <p>Per-key requests and tokens per minute scale with the plan, and every key is capped by the monthly pool plus your purchased credits. Over either limit the API answers <code>429</code> with <code>{"error": {"message": …}}</code> saying which balance ran out; nothing is billed beyond what you hold.</p>
-      </div>
-    </div>
-
-    <h2 style="margin-top:44px;" id="sentinel">Sentinel decisions</h2>
-    <p style="max-width:62ch;"><a href="/sentinel">Sentinel</a> is an energy-based CLM for structured decisions: yes/no questions, named choices and candidate rankings. Responses include model scores; verify consequential choices against your own evidence. Same key, same base URL. <a href="/sentinel-demo">Try the live Decision Lab</a>.</p>
-    <div class="api-grid api-grid-3">
-      <div class="api-card">
-        <span class="mono api-kicker">POST /v1/sentinel/decide</span>
-        <p>Send <code>state</code> and <code>question</code> for a yes/no answer with <code>p_yes</code>. Add <code>options</code> (name to one-line description) and it returns the chosen option, its <code>confidence</code>, and <code>p</code> for every option.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">POST /v1/sentinel/rank</span>
-        <p>Send <code>context</code>, a list of <code>candidates</code> and an optional <code>question</code>; <code>ranked</code> comes back best first as <code>[candidate, probability]</code> pairs.</p>
-      </div>
-      <div class="api-card">
-        <span class="mono api-kicker">GET /v1/sentinel/status</span>
-        <p>Whether Sentinel is up. When it is not, the endpoints answer <code>503</code> with <code>Retry-After</code>: carry on without it rather than wait.</p>
-      </div>
-    </div>
-    <pre class="api-code"><code>curl https://api.ephemerent.com/v1/sentinel/decide \
-  -H "Authorization: Bearer $ARBITER_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "state": "test_parse_date fails on \"2026-09-26T10:00Z\"; the patch handles a trailing Z in parse_date.",
-    "question": "Will this patch make the failing test pass?"
-  }'
-# {"answer": "yes", "p_yes": 0.91, "model": "sentinel-1"}</code></pre>
-    <p class="api-note">Each decision costs a fraction of a cent, metered in the same credits as chat completions. <code>sentinel-1</code> appears in <code>/v1/models</code> but is not a chat model; <code>/chat/completions</code> with it returns <code>400</code>. Sentinel requests are never stored or used for training. Python, JavaScript, MCP and function-calling examples are on the <a href="/sentinel#api">Sentinel page</a>.</p>
-
-    <h2 style="margin-top:44px;">Availability</h2>
-    <p style="max-width:62ch;">Arbiter 27B runs on a GPU box that parks itself after thirty idle minutes and wakes on the next request. While it is waking (a few minutes), a request for <code>arbiter-flash-27b</code> is answered by the fallback model and the response carries <code>x-orrery-fallback-product</code> with the model that served it, metered on the Doubleword pool; once the box is up, requests go to Arbiter. Every response names its route in <code>x-orrery-route-alias</code>.</p>
-
-    <h2 style="margin-top:44px;">Data</h2>
-    <p style="max-width:62ch;">API requests follow the same rule as the desktop: Arbiter learns from sessions by default under an anonymous session id, and <em>Zero data retention</em> is a switch on your account. With it on, the service keeps counts and an access-log line, never prompts or outputs. Details on the <a href="/privacy">privacy page</a>.</p>
-
-    <div class="api-actions">
-      <a class="ebtn ebtn-fill" href="/cloud">Open your account</a>
-      <a class="ebtn" href="/arbiter">About Arbiter 27B</a>
-      <a class="ebtn" href="/sentinel">About Sentinel</a>
-      <a class="ebtn" href="/orrery#pricing">Plans</a>
-    </div>
-  </div>
-  </section>
+reply = client.chat.completions.create(
+    model=<span class="code-green">"arbiter-flash-27b"</span>,
+    messages=messages,
+)</code></pre><div class="dev-terminal-foot">Python preview <a href="#quickstart">Get the complete example ↗</a></div></div></section>
+<div class="dev-rail dev-wrap"><div><span>01</span><strong>Generate</strong><p>Chat, code and tool calls</p></div><div><span>02</span><strong>Decide</strong><p>Score the available actions</p></div><div><span>03</span><strong>Observe</strong><p>Track requests and credits</p></div></div>
+<section id="models" class="dev-section dev-wrap"><div class="dev-section-title"><div><p class="dev-label">MODELS &amp; ROUTES</p><h2>The right interface for the job.</h2></div><a class="dev-link" href="#reference">Explore the endpoints ↗</a></div><div class="dev-model-grid"><article class="dev-model"><div class="dev-model-top"><span class="dev-icon">A</span><span class="dev-tag">GENERATION</span></div><h3>Arbiter 27B</h3><code>arbiter-flash-27b</code><p>Language and code generation for your applications. Use familiar chat completions, streaming and tool-call formats.</p><ul><li>OpenAI-compatible clients</li><li>Streaming responses</li><li>Tool calls and JSON output requests</li></ul><a href="#quickstart" data-example="chat">Start generating →</a></article><article class="dev-model dev-model-featured"><div class="dev-model-top"><span class="dev-icon">✳</span><span class="dev-tag">DECISIONS</span></div><h3>Sentinel</h3><code>sentinel-1</code><p>An energy-based CLM for choosing between actions. Send context and candidate options; receive a structured decision.</p><ul><li>Yes/no and named choices</li><li>Candidate ranking</li><li>Dedicated decision endpoints</li></ul><a href="#quickstart" data-example="decide">Make a decision →</a></article><article class="dev-model"><div class="dev-model-top"><span class="dev-icon">◎</span><span class="dev-tag">ROUTING</span></div><h3>Orrery routes</h3><code>orrery/fast · orrery/balanced</code><p>Use a route alias to let Orrery select the serving model. Inspect response headers to see the provider and any fallback.</p><ul><li>Fast and balanced routes</li><li>Verified and research routes</li><li>Shared chat interface</li></ul><a href="#reference">Understand routing →</a></article></div><p class="dev-note">Model and route access depends on your account. Query <code>GET /v1/models</code> for the catalogue. A route name is not a guarantee of answer quality.</p></section>
+<section id="quickstart" class="dev-section dev-wrap"><div class="dev-section-title"><div><p class="dev-label">QUICKSTART</p><h2>Your first request.</h2></div><p>Choose a task. Copy an example.<br>Keep your API key on the server.</p></div><div class="dev-quickstart"><aside class="dev-steps"><div><b>1</b><section><h3>Create your key</h3><p>Sign in to the console and create an API key. Copy it when it is shown.</p><a href="/cloud">Open console ↗</a></section></div><div><b>2</b><section><h3>Set an environment variable</h3><p>Store your key as <code>ARBITER_API_KEY</code>. Never commit it or include it in browser code.</p></section></div><div><b>3</b><section><h3>Send a request</h3><p>Run the example, then inspect your usage and request receipts in the console.</p></section></div></aside><div class="dev-code-panel"><div class="dev-code-controls"><label>Task<select id="dev-task"><option value="chat">Chat completion</option><option value="decide">Sentinel decision</option><option value="rank">Sentinel ranking</option></select></label><span id="dev-endpoint">POST /v1/chat/completions</span></div><div class="dev-code-toolbar"><div role="tablist" aria-label="Example language"><button role="tab" aria-selected="true" aria-controls="dev-code" id="dev-tab-curl" data-lang="curl">cURL</button><button role="tab" aria-selected="false" aria-controls="dev-code" id="dev-tab-python" tabindex="-1" data-lang="python">Python</button><button role="tab" aria-selected="false" aria-controls="dev-code" id="dev-tab-javascript" tabindex="-1" data-lang="javascript">JavaScript</button></div><button id="dev-copy" type="button">Copy code</button></div><pre id="dev-code" role="tabpanel" aria-labelledby="dev-tab-curl" tabindex="0"><code id="dev-code-text">Loading example…</code></pre><p id="dev-copy-status" role="status" aria-live="polite"></p><noscript><p>Enable JavaScript for language tabs, or <a href="/assets/orrery-api-examples.json">download the request examples</a>.</p></noscript></div></div></section>
+<section id="reference" class="dev-section dev-wrap"><div class="dev-section-title"><div><p class="dev-label">API REFERENCE</p><h2>Predictable requests.<br>Inspectable responses.</h2></div><a class="dev-link" href="/assets/orrery-api-examples.json" download>Download request examples ↓</a></div><div class="dev-base"><span>BASE URL</span><code>https://api.ephemerent.com/v1</code><span>Authorization: Bearer &lt;key&gt;</span></div><div class="dev-endpoints">
+<details open><summary><span class="dev-method">POST</span><code>/chat/completions</code><span>Generate a response</span></summary><div><p>Send <code>model</code>, <code>messages</code> and <code>max_tokens</code>. Set <code>stream: true</code> for incremental output. Tools use the OpenAI function-calling schema; supported behavior depends on the serving model.</p><p>Returns <code>choices</code> and token <code>usage</code>. Inspect <code>x-orrery-provider</code>, <code>x-orrery-route-alias</code> and, when present, <code>x-orrery-fallback-product</code>. Optional <code>Idempotency-Key</code> supports replaying non-streaming requests.</p></div></details>
+<details><summary><span class="dev-method">POST</span><code>/sentinel/decide</code><span>Choose an action</span></summary><div><p>Required: <code>state</code> and <code>question</code>. Add <code>options</code>, a map of 2–16 names to descriptions, for multiple choice. Without options, the request is yes/no.</p><p>Named choices return <code>answer</code>, <code>confidence</code> and per-option <code>p</code>. Yes/no returns <code>answer</code> and <code>p_yes</code>. Scores compare the supplied options; verify important decisions against evidence. Sentinel is not a chat model.</p></div></details>
+<details><summary><span class="dev-method">POST</span><code>/sentinel/rank</code><span>Rank candidates</span></summary><div><p>Send <code>context</code> and 2–32 <code>candidates</code>, with an optional <code>question</code>. The response contains <code>ranked</code> pairs of candidate and score, best first.</p></div></details>
+<details><summary><span class="dev-method dev-get">GET</span><code>/models</code><span>Discover models and routes</span></summary><div><p>List the catalogue using your API key. Use chat models with chat completions and <code>sentinel-1</code> with its dedicated endpoints.</p></div></details>
+<details><summary><span class="dev-method dev-get">GET</span><code>/usage</code><span>Check your credits</span></summary><div><p>Inspect monthly pools, used and remaining credits, and your purchased balance. The console provides the same account view.</p></div></details>
+<details><summary><span class="dev-method dev-get">GET</span><code>/sentinel/status</code><span>Check Sentinel availability</span></summary><div><p>Check availability with your API key. If a decision endpoint returns <code>503</code>, respect <code>Retry-After</code> and use your application's fallback behavior.</p></div></details></div></section>
+<section id="usage" class="dev-section dev-wrap"><div class="dev-section-title"><div><p class="dev-label">USAGE &amp; CONTROLS</p><h2>Know what your application uses.</h2></div><a class="dev-link" href="/orrery#pricing">Compare plans ↗</a></div><div class="dev-control-grid"><article><span>01 / BILLING</span><h3>One account. Visible usage.</h3><p>Requests draw from eligible monthly pools, then purchased credits. Review your balance, current plan and credit packs in the console before sending paid requests.</p><a href="/cloud">View usage &amp; credits →</a></article><article><span>02 / ACCESS</span><h3>Keys you can manage.</h3><p>Create and revoke keys, restrict their routes, and review request receipts. Rate and token limits depend on your plan and key permissions.</p><a href="/cloud">Manage API keys →</a></article><article><span>03 / DATA</span><h3>Choose your data settings.</h3><p>Review your account's zero data retention setting for generation. Sentinel request and response bodies are not retained for training; usage metadata is recorded.</p><a href="/privacy">Read the data policy →</a></article></div><div class="dev-errors"><h3>Handle errors explicitly.</h3><dl><div><dt>400 / 413</dt><dd>Check the payload, model interface and request size.</dd></div><div><dt>401 / 403</dt><dd>Check the key, account access and route permissions.</dd></div><div><dt>429</dt><dd>Check the error message: a rate limit or exhausted balance may apply.</dd></div><div><dt>503</dt><dd>Service unavailable. Respect Retry-After when supplied.</dd></div></dl></div></section>
+<section class="dev-bottom dev-wrap"><div><p class="dev-label">BUILD SOMETHING THAT MOVES FORWARD</p><h2>From first request<br>to your next release.</h2><div class="dev-actions"><a class="dev-button" href="/cloud">Open the console ↗</a><a class="dev-link" href="/sentinel-demo">Try a live decision →</a></div></div><div class="dev-resources"><a href="/sentinel">Sentinel <span>Model overview ↗</span></a><a href="/arbiter">Arbiter <span>Generation model ↗</span></a><a href="/sentinel-game">Game Lab <span>Build and evaluation demo ↗</span></a><a href="/sentinel-demo#economics">Cost calculator <span>Explore your assumptions ↗</span></a></div></section>
 </main>
-
-<style>
-@layer page {
-.api-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:28px; }
-.api-grid-3 { grid-template-columns:1fr 1fr 1fr; }
-@media (max-width:760px){ .api-grid, .api-grid-3 { grid-template-columns:1fr; } }
-.api-card { border:1px solid var(--line); border-radius:var(--r-sm); background:var(--bg-2); padding:16px 18px; }
-.api-card b { display:block; font-size:17px; margin:6px 0 8px; color:var(--ink); overflow-wrap:anywhere; }
-.api-card p { margin:0; color:var(--muted); font-size:13.5px; line-height:1.55; }
-.api-kicker { color:var(--faint); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
-.api-code { margin:18px 0 10px; padding:16px 18px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--bg-2); overflow-x:auto; font-family:var(--mono); font-size:12.5px; line-height:1.6; color:var(--ink-2); }
-.api-note { color:var(--muted); font-size:13.5px; max-width:62ch; }
-.api-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
-}
-</style>
-
 <footer class="efoot" id="contact">
   <div class="ewrap">
     <div class="efoot-grid">

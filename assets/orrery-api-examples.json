@@ -1,0 +1,42 @@
+{
+  "base_url": "https://api.ephemerent.com/v1",
+  "authentication": "Authorization: Bearer <your API key>",
+  "examples": {
+    "chat": {
+      "path": "/chat/completions",
+      "body": {
+        "model": "arbiter-flash-27b",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Write a Python function that validates an ISO date."
+          }
+        ],
+        "max_tokens": 400
+      }
+    },
+    "decide": {
+      "path": "/sentinel/decide",
+      "body": {
+        "state": "A parser patch is applied. No tests have run. Release policy requires passing tests.",
+        "question": "What should the agent do next?",
+        "options": {
+          "test": "Run the regression test and full suite.",
+          "deploy": "Deploy immediately without testing."
+        }
+      }
+    },
+    "rank": {
+      "path": "/sentinel/rank",
+      "body": {
+        "context": "An ISO date parser fails on timestamps ending in Z.",
+        "candidates": [
+          "Inspect timezone handling in the parser.",
+          "Increase the network timeout.",
+          "Remove the failing regression test."
+        ],
+        "question": "Which next step is most useful?"
+      }
+    }
+  }
+}

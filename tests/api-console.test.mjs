@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { agentPrompt, apiSnippets, API_EXAMPLES, creditRows, creditsToUsd, firstCallSnippet, formatUsd, keyLimitState, runTestRequest, summarizeTestReply, weekStats } from '../assets/api-console.js';
+import { agentPrompt, apiSnippets, API_EXAMPLES, creditRows, creditsToUsd, firstCallSnippet, pythonLiteral, formatUsd, keyLimitState, runTestRequest, summarizeTestReply, weekStats } from '../assets/api-console.js';
 
 test('credits are millionths of a dollar and small spend never shows as $0.00', () => {
   assert.equal(creditsToUsd(14_000_000), 14);
@@ -21,8 +21,8 @@ test('every example is valid JSON in curl, and the first call exports the key on
     assert.match(python, /os\.environ\["ARBITER_API_KEY"\]/);
     assert.doesNotMatch(python, /: (true|false|null)\b/);
   }
-  assert.match(firstCallSnippet('ork_live_abc'), /^export ARBITER_API_KEY=ork_live_abc\n/);
-  assert.match(firstCallSnippet(undefined), /^export ARBITER_API_KEY=<your key>\n/);
+  assert.match(firstCallSnippet('ork_live_abc'), /^export ARBITER_API_KEY='ork_live_abc'\n/);
+  assert.match(firstCallSnippet(undefined), /^export ARBITER_API_KEY='YOUR_API_KEY'\n/);
 });
 
 test('the agent prompt carries the base URL, docs and key-handling rules', () => {
@@ -73,4 +73,25 @@ test('the test request sends the example with the key, and a network failure rea
   assert.equal(JSON.parse(sent.init.body).model, 'arbiter-flash-27b');
   const offline = await runTestRequest('k', 'rule', async () => { throw new TypeError('Failed to fetch'); });
   assert.match(offline.error, /did not reach the API/);
+});
+
+ test('Python serialization preserves boolean-like text and shell exports preserve literal key characters', () => {
+ const input = { text: 'Keep: true, false, null unchanged', enabled: true, missing: null, values: [false, 'true'] };
+ const py = pythonLiteral(input);
+ const roundTrip = execFileSync('python3', ['-c', 'import json; print(json.dumps(' + py + '))'], {encoding:'utf8'});
+ assert.deepEqual(JSON.parse(roundTrip), input);
+ const line = firstCallSnippet("literal'$(not_a_command)").split('\n')[0];
+ const value = execFileSync('sh', ['-c', line + '\nprintf %s "$ARBITER_API_KEY"'], {encoding:'utf8'});
+ assert.equal(value, "literal'$(not_a_command)");
+ });
+
+test('test calls reject malformed success responses and distinguish timeouts', async () => {
+ assert.equal(summarizeTestReply(null,new Map(),200,50).ok,false);
+ assert.match(summarizeTestReply(null,new Map(),200,50).error,/unexpected response/);
+ const out=await runTestRequest('key','rule',async (_url,options)=>{
+  assert.ok(options.signal instanceof AbortSignal);
+  throw new DOMException('Timed out','TimeoutError');
+ });
+ assert.equal(out.ok,false);
+ assert.match(out.error,/receipts before retrying/);
 });
