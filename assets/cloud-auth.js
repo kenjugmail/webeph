@@ -99,11 +99,11 @@ export function getPlanCatalog() {
   const plans = cfg().PLANS || {};
   return {
     free: plans.free || {
-      name: 'No active subscription',
+      name: 'Free',
       price: '-',
       cadence: '',
-      summary: 'Preview the app and set up your workspace. Subscribe to run real agents.',
-      features: ['Preview Nexus and workspace setup', 'Start Pro / Max / Ultra for agent runs and Orrery Cloud'],
+      summary: 'Run the full agent free on models you host. Pro adds hosted models; 5 days free.',
+      features: ['Full agent on your own models (Ollama, LM Studio, vLLM, llama.cpp)', 'Pro: hosted models and any provider with your own key'],
     },
     pro: plans.pro || {
       name: 'Pro',

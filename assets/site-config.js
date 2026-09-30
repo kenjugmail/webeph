@@ -12,7 +12,7 @@ window.ORRERY_CONFIG = {
   // Desktop builds live in the private Supabase Storage bucket `orrery-releases`; the release-download
   // edge function returns the manifest and 10-minute signed URLs to signed-in subscribers only.
   RELEASE_DOWNLOAD_FUNCTION: 'release-download',
-  RELEASE_VERSION: '4.0.0-rc.37',
+  RELEASE_VERSION: '4.0.0-rc.38',
   RELEASE_NAME: 'Sentinel Release',
   RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
@@ -39,13 +39,13 @@ window.ORRERY_CONFIG = {
   /** Pricing + entitlements. */
   PLANS: {
     free: {
-      name: 'No active subscription',
+      name: 'Free',
       price: '-',
       cadence: '',
-      summary: 'Preview Nexus and prepare a workspace. Subscribe to run real agents.',
+      summary: 'Run the full agent free on models you host. Pro adds hosted models; 5 days free.',
       features: [
-        'Preview workspace and model setup',
-        'Subscribe to run agents and cloud features',
+        'Full agent on your own models (Ollama, LM Studio, vLLM, llama.cpp)',
+        'Pro: hosted models and any provider with your own key',
       ],
     },
     pro: {

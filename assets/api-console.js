@@ -351,7 +351,7 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
         <h2>API</h2>
         <p class="sub">OpenAI-compatible, the same model and credit pools as the desktop. <span class="mono">${esc(API_BASE_URL)}</span> · <span class="mono">${esc(API_MODEL)}</span> · <a href="/developers">Docs</a></p>
       </div>
-      ${noAccess ? `<p class="api-empty">API keys come with Pro, Max and Ultra. <a href="/cloud#plans">See plans</a>.</p>` : ''}
+      ${noAccess ? `<p class="api-empty">API keys come with Pro, Max and Ultra. <a href="/orrery#pricing">See plans</a>.</p>` : ''}
       ${freshKey ? `
       <section class="api-card api-newkey" aria-label="Your new API key">
         <h3>Your API key</h3>
@@ -445,7 +445,7 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
           <input type="text" class="auth-input" id="cloud-api-key-name" placeholder="Key name (e.g. laptop, CI)" maxlength="120">
           <button type="button" class="btn btn-ghost" id="cloud-api-key-create" ${limit.atLimit ? 'disabled' : ''}>Create key</button>
         </div>
-        ${limit.atLimit ? `<p class="api-note">Your plan's key limit is reached. Use Replace to get a new secret for a key, revoke one, or <a href="/cloud#plans">upgrade</a> for more keys.</p>` : ''}`}
+        ${limit.atLimit ? `<p class="api-note">Your plan's key limit is reached. Use Replace to get a new secret for a key, revoke one, or <a href="/orrery#pricing">upgrade</a> for more keys.</p>` : ''}`}
         <p class="auth-msg" id="cloud-api-msg" role="status" aria-live="polite"></p>
       </section>
       <section class="api-card api-grants">

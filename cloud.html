@@ -86,7 +86,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 <main class="auth-main" id="main" data-workflow-label="Account / Cloud operations">
   <div class="auth-card" style="max-width:560px;">
     <h1>Orrery Cloud</h1>
-    <p class="sub">Orrery Cloud is unlocked by Pro, Max, or Ultra. Sign in with Google, GitHub, or email for hosted credits, cloud runs, managed connectors, Nexus, proof vaults, and audit trails. Preview accounts cannot run agents. Cloud features may be limited, changed, unavailable, or provider-dependent.</p>
+    <p class="sub">Orrery Cloud is unlocked by Pro, Max, or Ultra. Sign in with Google, GitHub, or email for hosted credits, cloud runs, managed connectors, Nexus, proof vaults, and audit trails. Free accounts run agents on your own models; hosted credits need Pro (5 days free). Cloud features may be limited, changed, unavailable, or provider-dependent.</p>
 
     <div class="cloud-features">
       <div class="cloud-feat"><b>Subscription access</b><span>Google, GitHub, and email accounts verify an active Pro, Max, or Ultra subscription.</span></div>
@@ -188,7 +188,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 .cloud-feat span { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .cloud-feat em { color: var(--faint); font-style: normal; }
 .pair-code { font-family: var(--mono); font-size: 28px; letter-spacing: 0.35em; text-align: center; padding: 16px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); color: var(--teal-lt); }
-.mini-pricing { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 26px; }
+.mini-pricing { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0 0 26px; }
 @media (max-width:480px){ .mini-pricing { grid-template-columns:1fr; } }
 .mini-plan { border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(255,255,255,0.02); padding:14px; }
 .mini-plan span { color:var(--faint); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }

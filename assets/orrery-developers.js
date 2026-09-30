@@ -14,8 +14,8 @@ export function snippet(task = 'chat', language = 'curl') {
     return `# pip install requests\nimport os\nimport requests\n\nresponse = requests.post(\n    "${BASE}${e.path}",\n    headers={"Authorization": "Bearer " + os.environ["ARBITER_API_KEY"]},\n    json=${json},\n    timeout=30,\n)\nresponse.raise_for_status()\nprint(response.json())`;
   }
   if (language === 'javascript') {
-    if (task === 'chat') return `// Node.js · npm install openai\nimport OpenAI from "openai";\n\nconst client = new OpenAI({\n  baseURL: "${BASE}",\n  apiKey: process.env.ARBITER_API_KEY,\n});\nconst reply = await client.chat.completions.create(${json});\nconsole.log(reply.choices[0].message.content);`;
-    return `// Node.js 18+ · run on your server\nconst response = await fetch("${BASE}${e.path}", {\n  method: "POST",\n  headers: {\n    Authorization: \`Bearer \${process.env.ARBITER_API_KEY}\`,\n    "Content-Type": "application/json",\n  },\n  body: JSON.stringify(${json}),\n  signal: AbortSignal.timeout(30000),\n});\nif (!response.ok) throw new Error(await response.text());\nconsole.log(await response.json());`;
+    if (task === 'chat') return `// Node.js 18+ · npm install openai · save as example.mjs\nimport OpenAI from "openai";\n\nconst client = new OpenAI({\n  baseURL: "${BASE}",\n  apiKey: process.env.ARBITER_API_KEY,\n});\nconst reply = await client.chat.completions.create(${json});\nconsole.log(reply.choices[0].message.content);`;
+    return `// Node.js 18+ · save as example.mjs and run on your server\nconst response = await fetch("${BASE}${e.path}", {\n  method: "POST",\n  headers: {\n    Authorization: \`Bearer \${process.env.ARBITER_API_KEY}\`,\n    "Content-Type": "application/json",\n  },\n  body: JSON.stringify(${json}),\n  signal: AbortSignal.timeout(30000),\n});\nif (!response.ok) throw new Error(await response.text());\nconsole.log(await response.json());`;
   }
   throw new Error('Unknown language');
 }

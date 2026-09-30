@@ -24,7 +24,7 @@ The grant change lives in https://github.com/kenjugmail/buddyide/pull/11: migrat
 (`node --test scripts/founding-grants-postgres.test.mjs`). The SQL is copied below for reference.
 
 **Applied to production 2026-09-30** (recorded as migration `20260930000000`); `orrery_founding_seats()` returned
-`{"total": 100, "claimed": 0}` at launch. Merge the PR so the repo matches the database.
+`{"total": 100, "claimed": 0}` at launch. PR #11 is merged, so the repo matches the database.
 
 Also create a `#founding` channel in the Discord (discord.gg/CPPhk3GNjz) and a booking link for the sessions.
 

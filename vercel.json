@@ -3,6 +3,7 @@
   "outputDirectory": ".",
   "installCommand": "npm install --omit=dev",
   "redirects": [
+    { "source": "/api", "destination": "/developers", "permanent": false },
     { "source": "/glow.html", "destination": "/glow", "permanent": true },
     { "source": "/downloads/orrery/:path*", "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/orrery-releases/:path*", "permanent": false },
     { "source": "/waitlist/manage", "destination": "https://supabase.com/dashboard/project/wjjthkqwcyahamhjkeux/editor", "permanent": false },
