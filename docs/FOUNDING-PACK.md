@@ -23,14 +23,9 @@ The grant change lives in https://github.com/kenjugmail/buddyide/pull/11: migrat
 `20260930000000_founding_100_grants.sql`, the `--cohort founding-100` CLI change, and a Docker Postgres test
 (`node --test scripts/founding-grants-postgres.test.mjs`). The SQL is copied below for reference.
 
-Until the migration is applied, `rpc/orrery_founding_seats` returns 404 and the page hides the counter; granting
-non-RIT emails fails. To apply it, sign in to Supabase once and run from this repo:
+**Applied to production 2026-09-30** (recorded as migration `20260930000000`); `orrery_founding_seats()` returned
+`{"total": 100, "claimed": 0}` at launch. Merge the PR so the repo matches the database.
 
-```bash
-SUPABASE_ACCESS_TOKEN=<personal access token> node scripts/apply-reviewed-migration.mjs ../buddyide-founding/supabase/migrations/20260930000000_founding_100_grants.sql --apply
-```
-
-Then `select public.orrery_founding_seats();` should return `{"total": 100, "claimed": 0}`.
 Also create a `#founding` channel in the Discord (discord.gg/CPPhk3GNjz) and a booking link for the sessions.
 
 ## Granting
