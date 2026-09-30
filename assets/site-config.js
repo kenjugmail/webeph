@@ -12,7 +12,7 @@ window.ORRERY_CONFIG = {
   // Desktop builds live in the private Supabase Storage bucket `orrery-releases`; the release-download
   // edge function returns the manifest and 10-minute signed URLs to signed-in subscribers only.
   RELEASE_DOWNLOAD_FUNCTION: 'release-download',
-  RELEASE_VERSION: '4.0.0-rc.39',
+  RELEASE_VERSION: '4.0.0-rc.40',
   RELEASE_NAME: 'Sentinel Release',
   RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
