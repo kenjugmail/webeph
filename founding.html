@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- include: head-meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<!-- /include -->
+<title>Orrery Founding 100 · A month of Pro free, a direct line to the founder</title>
+<meta name="description" content="The first 100 developers get a month of Orrery Pro free, no card required, plus direct feedback from the founder on their real workflow.">
+<link rel="canonical" href="https://ephemerent.com/orrery/founding">
+<meta name="theme-color" content="#0b0b12">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ephemerent">
+<meta property="og:title" content="Orrery Founding 100: a month of Pro free, a direct line to the founder">
+<meta property="og:description" content="The first 100 developers get a month of Orrery Pro free, no card. Codex, Claude Code, local models and Arbiter in one place.">
+<meta property="og:url" content="https://ephemerent.com/orrery/founding">
+<meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png?v=20260924">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png?v=20260924">
+<!-- include: head-theme -->
+<!-- Blocking and inline on purpose: the stored face has to be on <html>
+     before the first stylesheet, or the page paints the wrong one first. -->
+<script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode"),g=localStorage.getItem("eph-material");
+/* Dark glass is the default look, so the absence of a stored choice
+   means dark glass rather than "whatever the stylesheet says". The
+   material key is written as "flat" rather than removed when someone
+   turns glass off -- once glass is the default, an absent key cannot
+   mean both "never chose" and "chose flat". */
+d.dataset.mode=m||"dark";if((g||"glass")==="glass")d.dataset.material="glass";
+/* Set before the first paint so the hero never renders at rest and
+   then jumps back to animate. Gated on the motion preference here
+   rather than in CSS so that a reader who wants no motion never gets
+   the hidden start state at all. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive"}catch(e){}</script>
+<link rel="stylesheet" href="/assets/tokens.css?v=20260822a">
+<!-- Deliberately AFTER tokens.css. Cascade layers take their order from
+     where a name FIRST appears, so a glass.css loaded ahead of
+     tokens.css would create @layer utilities before tokens.css declares
+     the full order -- and utilities would keep that first position,
+     which is the LOWEST priority, the exact opposite of what it is for.
+     Here, tokens.css establishes the order and glass.css joins its end.
+
+     A plain link now rather than a conditional script append: glass is
+     the default material, so this is the common path, and a real link
+     is visible to the preload scanner where an appended one is not.
+     Every rule inside is scoped to :root[data-material="glass"], so a
+     reader who switches it off pays for the file and nothing else. -->
+<link rel="stylesheet" href="/assets/glass.css?v=20260820">
+<script src="/assets/mode.js?v=20260822c" defer></script>
+<!-- /include -->
+<link rel="stylesheet" href="/assets/orrery.css?v=20260923a">
+<link rel="stylesheet" href="/assets/components.css?v=20260801">
+<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/base.css?v=20260801">
+<link rel="stylesheet" href="/assets/polish.css?v=20260924b">
+</head>
+<body class="space-bg orrery-page founding-page">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="brand-wrap" style="display:flex;align-items:center;gap:10px;">
+      <a class="brand" href="/orrery">
+        <svg class="mark" viewBox="0 0 26 26" fill="none">
+          <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+          <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+          <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+          <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+          <circle cx="24" cy="16" r="1.7" fill="var(--violet-lt)"/>
+          <circle cx="4" cy="18" r="1.5" fill="var(--teal-lt)"/>
+        </svg>
+        <span>Orrery</span>
+      </a>
+      <a class="brand-by mono" href="/" style="font-size:11px;color:var(--muted);letter-spacing:var(--ls-xs);">by Ephemerent</a>
+    </div>
+    <div class="nav-links">
+      <a href="/orrery">Product</a>
+      <a href="/orrery#pricing">Pricing</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="auth-nav-slot" id="auth-nav-slot"></div>
+  </div>
+</nav>
+
+<main id="main">
+<header class="section fp-hero">
+  <div class="wrap">
+    <div class="eyebrow">Orrery Founding 100</div>
+    <h1 class="display fp-h1">Use Orrery on real work.<br><span>Tell me what breaks.</span></h1>
+    <p class="lead">The first 100 developers get a month of Orrery Pro free, with no card, and a direct line to me, the person building it. Run Codex, Claude Code, local models and Arbiter from one place. Send me a run, a receipt, or a frustration, and you get specific notes on your workflow back, not a ticket number.</p>
+    <div class="hero-cta" id="claim">
+      <a class="btn btn-primary" data-founding-cta href="/signin?next=%2Forrery%2Ffounding">Create your free account <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="#included">What's included</a>
+    </div>
+    <p class="fp-note mono"><span class="fp-seats" data-founding-seats hidden></span>No card · 30 days of Pro · then back to free unless you choose to subscribe</p>
+  </div>
+</header>
+
+<section class="section fp-section" id="included">
+  <div class="wrap">
+    <div class="fp-head">
+      <div class="eyebrow">What's included</div>
+      <h2 class="display">Two things: the product, and the person who builds it.</h2>
+    </div>
+    <div class="fp-grid">
+      <article class="fp-card fp-card-lead">
+        <span class="fp-badge mono">30 days · no card</span>
+        <h3>Orrery Pro for a month</h3>
+        <ul>
+          <li>Hosted Arbiter 27B: 14M compute credits</li>
+          <li>Doubleword: 6M credits</li>
+          <li>Codex, Claude Code and any provider with your own key</li>
+          <li>Deep research, Nexus, Discord/mobile oversight</li>
+          <li>A receipt for every run</li>
+        </ul>
+        <p class="fp-fine">The full Pro plan with its normal monthly limits. It simply ends after 30 days: nothing renews and nothing is charged.</p>
+      </article>
+      <article class="fp-card">
+        <span class="fp-badge mono">Founder line</span>
+        <h3>Feedback on your workflow</h3>
+        <ul>
+          <li>A private founders channel on Discord, answered by me</li>
+          <li>Share a run receipt, get written notes on how to set up the task, tests and model route</li>
+          <li>A 30-minute workflow session in your first week, screen-shared on your own repo</li>
+          <li>Your bug reports jump the queue</li>
+        </ul>
+        <p class="fp-fine">With 100 seats, I can reply to every one of you myself, usually the same day.</p>
+      </article>
+      <article class="fp-card">
+        <span class="fp-badge mono">What I ask</span>
+        <h3>Honest use, honest notes</h3>
+        <ul>
+          <li>Point Orrery at work you actually need done</li>
+          <li>Tell me where it was slow, wrong, or confusing</li>
+          <li>One short check-in at the end of the month</li>
+        </ul>
+        <p class="fp-fine">Nothing to post, no testimonial required. Founding feedback decides what ships next.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section fp-section">
+  <div class="wrap">
+    <div class="fp-head">
+      <div class="eyebrow">How it works</div>
+      <h2 class="display">Three steps.</h2>
+    </div>
+    <ol class="fp-steps">
+      <li><b>Create a free account.</b> <span>Sign up with Google, GitHub or email and confirm it. A seat is tied to a real account, so the 100 go to people who will use them.</span></li>
+      <li><b>Request your seat.</b> <span>Come back here signed in and send the request. I turn on Pro for your account myself, usually the same day, and send the founders channel invite and a link to book your session.</span></li>
+      <li><b>Give it real work.</b> <span>After 30 days your account goes back to free, which still runs the full agent on models you host. Subscribe only if Pro earned it.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section fp-section" id="faq">
+  <div class="wrap">
+    <div class="fp-head">
+      <div class="eyebrow">Questions</div>
+      <h2 class="display">Before you sign up.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq"><summary>Why this instead of the normal trial?</summary><div class="faq-body">Five days is enough to try Orrery, not enough to change how you work. A month with direct feedback is how I find out what actually needs fixing, and how you get a setup that fits your repo.</div></details>
+      <details class="faq"><summary>Do I need a card?</summary><div class="faq-body">No. The founding month is granted to your account directly, with no checkout and no automatic renewal. If you want to keep Pro afterwards, you subscribe like anyone else.</div></details>
+      <details class="faq"><summary>I already subscribe to Pro.</summary><div class="faq-body">Email me and I'll add you to the founders channel. The feedback line is yours anyway; your billing stays as it is, and you don't use up one of the 100 seats.</div></details>
+      <details class="faq"><summary>What happens to my code?</summary><div class="faq-body">The same as any Pro run: see <a href="/privacy">Privacy</a>. I only see what you choose to share with me, and you can turn on zero data retention for Arbiter in Orrery settings.</div></details>
+      <details class="faq"><summary>What happens at 100?</summary><div class="faq-body">It closes. The count above is live, and when it reaches zero there are no more founding seats. The normal 5-day Pro trial stays available.</div></details>
+    </div>
+    <p class="fp-fine mono fp-legal">Founding 100 is complimentary Pro access for 30 days on one confirmed account per person, limited to 100 seats and granted at Ephemerent's discretion. It does not renew and needs no payment method; normal Pro monthly limits apply, and access may be revoked for abuse. Feedback and sessions are offered on a best-effort basis and are not a service-level agreement. See <a href="/terms">Terms</a> and <a href="/privacy">Privacy</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/orrery" style="margin-bottom:14px;">
+          <svg class="mark" viewBox="0 0 26 26" fill="none">
+            <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+            <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+            <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+            <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+          </svg>
+          <span>Orrery</span>
+        </a>
+        <p class="muted" style="font-size:14px;max-width:32ch;">AI that shows its work. Made by <a href="/" style="color:var(--teal-lt);">Ephemerent</a>.</p>
+      </div>
+      <div><h3 class="footer-heading">Product</h3><ul><li><a href="/orrery#nexus">How it works</a></li><li><a href="/orrery#research">Research</a></li><li><a href="/orrery#features">Features</a></li><li><a href="/orrery#pricing">Pricing</a></li><li><a href="/download">Download</a></li><li><a href="/developers">Developer API</a></li></ul></div>
+      <div><h3 class="footer-heading">Teams</h3><ul><li><a href="/organizations">Business &amp; Enterprise</a></li><li><a href="/slack">Slack</a></li><li><a href="/security">Security</a></li><li><a href="mailto:kt@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
+      <div><h3 class="footer-heading">Company</h3><ul><li><a href="/">About Ephemerent</a></li><li><a href="/shelterix">Shelterix</a></li><li><a href="/arbiter">Arbiter 27B</a></li><li><a href="/sentinel">Sentinel</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:kt@ephemerent.com">Contact</a></li></ul></div>
+    </div>
+    <hr class="divider" style="margin:44px 0 24px;">
+    <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <span class="mono" style="font-size:12px;color:var(--faint);">© 2026 Ephemerent</span>
+      <a class="mono orrery-discord" href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site-config.js"></script>
+<script type="module">
+  import { mountNavAccount } from '/assets/account.js';
+  import { getCloudSession, cloudConfigured } from '/assets/cloud-auth.js';
+  import { foundingCta, fetchSeats, seatsLabel } from '/assets/founding.js';
+  mountNavAccount();
+  const session = cloudConfigured() ? await getCloudSession().catch(() => null) : null;
+  const cta = foundingCta(session?.user?.email);
+  for (const link of document.querySelectorAll('[data-founding-cta]')) {
+    link.href = cta.href;
+    link.firstChild.textContent = cta.label + (link.children.length ? ' ' : '');
+  }
+  const label = seatsLabel(await fetchSeats(window.ORRERY_CONFIG));
+  const seats = document.querySelector('[data-founding-seats]');
+  if (label && seats) { seats.textContent = label + ' · '; seats.hidden = false; }
+</script>
+
+<style>
+@layer page {
+.fp-hero { padding-top: 170px; padding-bottom: 90px; }
+.fp-h1 { margin: 20px 0 24px; }
+.fp-h1 span { color: var(--teal-lt); }
+.fp-note { margin-top: 18px; font-size: 12px; color: var(--faint); letter-spacing: .04em; }
+.fp-section { border-top: 1px solid var(--line); padding: 96px 0; }
+.fp-head { max-width: 760px; margin-bottom: 40px; }
+.fp-head h2 { margin: 16px 0 0; }
+.fp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 980px) { .fp-grid { grid-template-columns: 1fr; } }
+.fp-card { border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.fp-card-lead { border-color: var(--teal); }
+.fp-card h3 { margin: 0; font-size: 22px; }
+.fp-card ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--ink-2); line-height: 1.5; }
+.fp-badge { align-self: flex-start; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-lt); border: 1px solid var(--teal); padding: 4px 10px; border-radius: 2px; font-weight: 600; }
+.fp-fine { margin: auto 0 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
+.fp-seats { color: var(--teal-lt); font-weight: 600; }
+.fp-steps { list-style: none; counter-reset: fp; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 840px; }
+.fp-steps li { counter-increment: fp; display: grid; grid-template-columns: 44px 1fr; column-gap: 12px; padding: 18px 0; border-top: 1px solid var(--line); }
+.fp-steps li::before { content: "0" counter(fp); grid-row: span 2; font-family: var(--mono); color: var(--teal-lt); font-size: 13px; padding-top: 3px; }
+.fp-steps b { font-size: 18px; }
+.fp-steps span { color: var(--ink-2); line-height: 1.55; }
+.faq-list { max-width: 840px; border-top: 1px solid var(--line); }
+.fp-legal { margin-top: 28px; max-width: 80ch; font-size: 12px; color: var(--faint); }
+.fp-legal a, .faq-body a { color: var(--teal-lt); }
+@media (max-width: 640px) { .fp-hero { padding-top: 130px; } .fp-section { padding: 64px 0; } }
+}
+</style>
+</body>
+</html>

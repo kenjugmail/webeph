@@ -25,6 +25,7 @@ index.html               Redirect -> Ephemerent.html (the "/" landing)
 Ephemerent.html          Lab page (research, work, approach, 10% pledge)
 arbiter-preview.html     Arbiter 0.1 beta blog/system preview + RunPod budget plan
 Orrery.html              Orrery product page
+founding.html            Orrery Founding 100 offer (/orrery/founding)
 Vespera.html             Vespera creative studio + playable project (informational)
 Shelterix.html           Shelterix poverty-to-productivity platform (preview)
 Vellum.html              Vellum (3D) product page
@@ -41,6 +42,7 @@ assets/
   cloud-auth.js          Cloud OAuth when configured
   favicon.svg / og.svg   Brand icon + social card
 docs/CLOUD.md            Architecture: relay, phone, pairing
+docs/FOUNDING-PACK.md     Founding 100 offer: seat flow, grant runbook, pending migration
 docs/DEPLOY.md           Vercel/domain/download/update release steps
 ```
 

@@ -4,8 +4,26 @@
     {
       "name": "webeph",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["-y", "vercel", "dev", "--yes", "--listen", "3111"],
+      "runtimeArgs": [
+        "-y",
+        "vercel",
+        "dev",
+        "--yes",
+        "--listen",
+        "3111"
+      ],
       "port": 3111,
+      "autoPort": false
+    },
+    {
+      "name": "webeph-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8080"
+      ],
+      "port": 8080,
       "autoPort": false
     }
   ]
