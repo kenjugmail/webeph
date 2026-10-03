@@ -1,9 +1,14 @@
-# Free volunteer swarm
+# Common Compute
 
-`/swarm` is the no-login community inference playground. It is separate from
+Common Compute is Ephemerent's free, no-login community inference playground at
+`/swarm`. It is separate from
 Orrery subscriptions and the paid `api.ephemerent.com/v1/*` relay. Opening the
 page never starts local compute. Generation is disabled unless the coordinator
 reports ready workers for an approved model; there is no simulated or paid fallback.
+
+The public product name is Common Compute. Existing `/swarm` URLs, API paths,
+source filenames and `SWARM_*` / `IDN_SWARM_*` configuration names stay unchanged
+for compatibility; they are implementation identifiers, not public branding.
 
 ## Request path
 

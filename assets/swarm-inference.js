@@ -1,4 +1,4 @@
-// The free, opt-in volunteer inference playground. No paid fallback or persistence.
+// Common Compute: free, opt-in volunteer inference. No paid fallback or persistence.
 export const SWARM_MAX_PROMPT_CHARS = 2000;
 export const SWARM_MAX_PROMPT_BYTES = 6000;
 export const SWARM_MAX_TOKENS = 256;
@@ -53,7 +53,7 @@ export async function requestSwarmCompletion(payload, fetchImpl = globalThis.fet
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload),
       });
       if (!response.ok) {
-        if (response.status === 429) return { ok: false, unavailable: false, message: 'The free request limit has been reached or the swarm is busy. Please wait before trying again.' };
+        if (response.status === 429) return { ok: false, unavailable: false, message: 'The free request limit has been reached or Common Compute is busy. Please wait before trying again.' };
         if ([502, 503, 504].includes(response.status)) return { ok: false, unavailable: true, message: 'Volunteer capacity is unavailable or the worker did not respond. Refresh capacity before trying again.' };
         if (response.status === 400 || response.status === 413 || response.status === 422) return { ok: false, unavailable: false, message: 'The request was not accepted. Check the model and shorten your prompt, then try again.' };
         return { ok: false, unavailable: false, message: 'The request could not be completed. Please try again later.' };
@@ -124,7 +124,7 @@ export function mountSwarmInference(root) {
       model.replaceChildren(...(status.available ? status.models.map((id) => new Option(id, id)) : [new Option('No model currently available', '')]));
       if (status.available && status.models.includes(previousModel)) model.value = previousModel;
       const description = status.available
-        ? 'Volunteer capacity is available. It can change at any time; short requests help keep the swarm shared.'
+        ? 'Volunteer capacity is available. It can change at any time; short requests help keep Common Compute shared.'
         : status.reason || 'No volunteer inference capacity is available right now. The preview is waiting for contributors. Refresh later or request an invitation below.';
       setCapacity(status.available, status.available ? 'Ready when you are' : 'Waiting for capacity', description);
       find('limits').textContent = `Responses are capped at ${status.maxTokens} tokens.${status.requestsPerHour ? ` Limit: ${status.requestsPerHour} requests per hour.` : ' Capacity and request limits may apply.'}`;
@@ -162,7 +162,7 @@ export function mountSwarmInference(root) {
       find('response-text').textContent = result.content;
       find('response-text').hidden = false;
       find('response-label').textContent = 'COMPLETE';
-      find('request-status').textContent = result.truncated ? 'Response received. The output token limit was reached.' : 'Response received from the swarm.';
+      find('request-status').textContent = result.truncated ? 'Response received. The output token limit was reached.' : 'Response received from Common Compute.';
     } else {
       find('response-label').textContent = 'NOT COMPLETED';
       find('request-status').textContent = result.message;
