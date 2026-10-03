@@ -58,3 +58,8 @@ An empty worker count is
 a functioning coordinator with no capacity, not a successful inference test.
 Only claim real GPU inference after a separately enrolled real worker completes
 the browser → proxy → coordinator → GPU → response path.
+
+Keep the proxy credential server-only. After deploying edge log redaction, rotate
+the shared credential in the protected coordinator environment and Vercel, then
+publish a new deployment so the function receives the updated value. Do not
+print either credential or place it in source, browser code, or public logs.
