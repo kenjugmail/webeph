@@ -42,6 +42,10 @@
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/swarm", "destination": "/swarm.html" },
+    { "source": "/swarm-api/status", "destination": "/api/swarm?operation=status" },
+    { "source": "/swarm-api/chat", "destination": "/api/swarm?operation=chat" },
+    { "source": "/api/swarm", "destination": "/api/swarm" },
     { "source": "/sentinel-game", "destination": "/sentinel-game.html" },
     { "source": "/sentinel-demo", "destination": "/sentinel-demo.html" },
     { "source": "/glow", "destination": "/glow.html" },

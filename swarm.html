@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ephemerent Swarm — Free community inference</title>
+  <meta name="description" content="A free community inference preview powered by volunteer GPUs. Check available capacity, try a prompt, or request an invitation to contribute compute.">
+  <link rel="canonical" href="https://ephemerent.com/swarm">
+  <meta property="og:title" content="Ephemerent Swarm — Free community inference">
+  <meta property="og:description" content="Shared compute. Open possibilities. A volunteer-powered inference preview from Ephemerent.">
+  <meta property="og:image" content="https://ephemerent.com/assets/og-ephemerent.png">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/assets/tokens.css">
+  <link rel="stylesheet" href="/assets/swarm-inference.css">
+  <script type="module" src="/assets/swarm-inference.js"></script>
+</head>
+<body>
+  <a class="swarm-skip" href="#try-swarm">Skip to inference</a>
+  <header class="swarm-nav">
+    <a class="swarm-brand" href="/" aria-label="Ephemerent home"><span aria-hidden="true">✳</span> Ephemerent <span class="swarm-brand-divider">/</span> <span class="swarm-brand-product">Swarm</span></a>
+    <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#contribute">Contribute a GPU <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main data-swarm-inference>
+    <section class="swarm-hero" aria-labelledby="swarm-title">
+      <div class="swarm-hero-copy">
+        <p class="swarm-eyebrow"><span aria-hidden="true"></span> FREE COMMUNITY INFERENCE · PREVIEW</p>
+        <h1 id="swarm-title">Small contributions.<br><em>Shared intelligence.</em></h1>
+        <p class="swarm-intro">A place for spare GPU capacity to become something useful. Try a model for free when contributors are online—or help bring the next one online.</p>
+        <div class="swarm-hero-actions"><a class="swarm-button swarm-button-primary" href="#try-swarm">Try the swarm <span aria-hidden="true">↓</span></a><a class="swarm-text-link" href="#contribute">Bring your GPU <span aria-hidden="true">↗</span></a></div>
+        <p class="swarm-fine">No paid fallback. Availability follows the community.</p>
+      </div>
+      <aside class="swarm-capacity" aria-label="Current swarm capacity">
+        <div class="swarm-capacity-heading"><span class="swarm-eyebrow">NETWORK CAPACITY</span><span class="swarm-preview-label">EARLY PREVIEW</span></div>
+        <div class="swarm-capacity-icon" aria-hidden="true"><i></i><i></i><i></i><b>✳</b></div>
+        <div class="swarm-capacity-state" data-capacity-state="checking"><span class="swarm-status-dot" aria-hidden="true"></span><strong data-capacity-title>Checking capacity</strong></div>
+        <p data-capacity-description>Contacting the coordinator. No prompts are sent during this check.</p>
+        <dl class="swarm-capacity-stats"><div><dt>Connected workers</dt><dd data-worker-count>—</dd></div><div><dt>Available models</dt><dd data-model-count>—</dd></div></dl>
+        <div class="swarm-capacity-footer"><span data-last-checked>Not checked yet</span><button class="swarm-text-button" type="button" data-refresh>Refresh <span aria-hidden="true">↻</span></button></div>
+      </aside>
+    </section>
+
+    <section id="try-swarm" class="swarm-workspace" aria-labelledby="workspace-title">
+      <div class="swarm-workspace-heading"><div><p class="swarm-eyebrow">01 / THE PLAYGROUND</p><h2 id="workspace-title">One prompt. Shared compute.</h2></div><span class="swarm-free-badge">Free · capacity limited</span></div>
+      <div class="swarm-workspace-grid">
+        <form class="swarm-prompt-pane" data-prompt-form>
+          <div class="swarm-field"><label for="swarm-model">Model</label><select id="swarm-model" data-model disabled><option value="">Checking available models…</option></select></div>
+          <div class="swarm-field"><div class="swarm-label-row"><label for="swarm-prompt">Your prompt</label><span class="swarm-counter" data-prompt-count>0 / 2,000</span></div><textarea id="swarm-prompt" data-prompt maxlength="2000" rows="7" aria-describedby="swarm-prompt-help swarm-privacy swarm-input-error" placeholder="Explain a useful idea, brainstorm a project, or ask a question…" autocomplete="off" spellcheck="true"></textarea><p id="swarm-prompt-help" class="swarm-fine">One request at a time. Up to 2,000 characters and 6,000 UTF-8 bytes. No conversation history is sent.</p></div>
+          <div id="swarm-privacy" class="swarm-privacy"><strong>A public experiment, not a private workspace.</strong><p>Volunteer GPU operators can see your prompts and responses. Never send passwords, API keys, personal data, or confidential information. We cannot guarantee what volunteer operators retain.</p></div>
+          <label class="swarm-consent" for="swarm-consent"><input id="swarm-consent" data-consent type="checkbox" required><span>I understand my prompt will be processed on volunteer machines.</span></label>
+          <p id="swarm-input-error" class="swarm-input-error" data-input-error role="status"></p>
+          <div class="swarm-submit-row"><button type="submit" class="swarm-button swarm-button-primary" data-generate disabled>Generate <span aria-hidden="true">↗</span></button><button type="button" class="swarm-text-button" data-clear>Clear</button></div>
+          <p class="swarm-fine swarm-request-limits" data-limits>Responses are capped at 256 tokens. Capacity and request limits may apply.</p>
+        </form>
+        <section class="swarm-response-pane" aria-labelledby="response-title" aria-busy="false" data-response-pane>
+          <div class="swarm-response-heading"><h3 id="response-title">Response</h3><span data-response-label>NOT STARTED</span></div>
+          <div class="swarm-response-empty" data-response-empty><span aria-hidden="true">✳</span><h4>Room for an idea.</h4><p>Your model’s response will appear here.<br>Nothing is generated until you send a prompt.</p></div>
+          <div class="swarm-response-text" data-response-text hidden></div>
+          <p class="swarm-request-status" data-request-status role="status" aria-live="polite"></p>
+          <div class="swarm-response-footer"><span>Generated answers can be wrong. Check important details.</span><span>No conversation saved in browser storage.</span></div>
+        </section>
+      </div>
+      <noscript><p class="swarm-noscript">JavaScript is required to check capacity and send a prompt. No inference is available without it. You can still contact us below to contribute.</p></noscript>
+      <p class="swarm-availability-note" data-availability-note role="status" aria-live="polite">Checking whether volunteer capacity is available…</p>
+    </section>
+
+    <section id="how-it-works" class="swarm-how" aria-labelledby="how-title">
+      <div class="swarm-section-intro"><p class="swarm-eyebrow">02 / A COMMUNITY RESOURCE</p><h2 id="how-title">Many machines.<br>A common purpose.</h2><p>The preview connects requests to available contributor capacity. When the swarm is full or offline, requests stop—not switch to a paid service.</p></div>
+      <ol class="swarm-steps"><li><span>01</span><div><h3>Contributors opt in</h3><p>People choose to offer GPU time. They control their machines and when they participate.</p></div></li><li><span>02</span><div><h3>Capacity becomes available</h3><p>The coordinator reports connected workers and models. The playground only enables requests when capacity is reported.</p></div></li><li><span>03</span><div><h3>You send a single prompt</h3><p>A volunteer-backed model returns a short response. Capacity can change mid-request; there is no uptime guarantee.</p></div></li></ol>
+    </section>
+
+    <section id="contribute" class="swarm-contribute" aria-labelledby="contribute-title">
+      <div><p class="swarm-eyebrow">03 / BUILD IT WITH US</p><h2 id="contribute-title">Your spare GPU.<br><em>Someone’s next idea.</em></h2><p>Contributor onboarding is invite-only during the preview. Tell us your GPU model, VRAM, and when you’d like to help.</p><a class="swarm-button swarm-button-light" href="mailto:kt@ephemerent.com?subject=Swarm%20GPU%20contributor">Request a contributor invitation <span aria-hidden="true">↗</span></a></div>
+      <div class="swarm-contributor-note"><span aria-hidden="true">↗</span><h3>Always an explicit choice.</h3><p>Opening this page does not install software or use your GPU. Participation requires a separate setup and your agreement.</p><p>Inference is free to users. Contributors cover their own electricity, hardware, and bandwidth. No payment or compensation is promised.</p></div>
+    </section>
+  </main>
+  <footer class="swarm-footer"><a class="swarm-brand" href="/">Ephemerent <span class="swarm-brand-divider">/</span> <span class="swarm-brand-product">Swarm</span></a><span>A community-powered preview.</span><nav aria-label="Legal navigation"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></footer>
+</body>
+</html>
