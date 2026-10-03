@@ -1,14 +1,16 @@
-# Common Compute
+# Colony
 
-Common Compute is Ephemerent's free, no-login community inference playground at
-`/swarm`. It is separate from
+Colony is Ephemerent's free, no-login community inference playground at
+`/colony`. It is separate from
 Orrery subscriptions and the paid `api.ephemerent.com/v1/*` relay. Opening the
 page never starts local compute. Generation is disabled unless the coordinator
 reports ready workers for an approved model; there is no simulated or paid fallback.
 
-The public product name is Common Compute. Existing `/swarm` URLs, API paths,
-source filenames and `SWARM_*` / `IDN_SWARM_*` configuration names stay unchanged
-for compatibility; they are implementation identifiers, not public branding.
+The public product name and canonical address are Colony and `/colony`.
+Legacy `/swarm` and `/swarm.html` URLs permanently redirect to `/colony`.
+API paths, source filenames and `SWARM_*` / `IDN_SWARM_*` configuration names
+stay unchanged for compatibility; they are implementation identifiers, not
+public branding. The existing Colony product listing links directly to `/colony`.
 
 ## Request path
 
@@ -50,8 +52,9 @@ persist prompts or responses; this cannot guarantee a volunteer's retention poli
 
 ## Release checks
 
-Run `npm run build`; `swarm:check` is part of that gate. Verify `/swarm` and both
-API rewrites on Vercel before calling the release live. An empty worker count is
+Run `npm run build`; `swarm:check` is part of that gate. Verify `/colony`, the
+legacy redirects and both API rewrites on Vercel before calling the release live.
+An empty worker count is
 a functioning coordinator with no capacity, not a successful inference test.
 Only claim real GPU inference after a separately enrolled real worker completes
 the browser → proxy → coordinator → GPU → response path.

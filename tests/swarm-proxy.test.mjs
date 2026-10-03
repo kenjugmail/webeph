@@ -12,7 +12,7 @@ test('unconfigured deployment is honestly offline and never calls a provider', a
   const opts = { env: {}, fetcher: () => { throw Error('must not fetch'); } };
   const state = await call(request(), opts);
   assert.equal(state.code, 200); assert.equal(state.body.available, false); assert.equal(state.body.workers, 0);
-  assert.match(state.body.reason, /^Common Compute is being prepared\./);
+  assert.match(state.body.reason, /^Colony is being prepared\./);
   assert.equal((await call(request('chat'), opts)).code, 503);
 });
 test('configuration rejects insecure or credential-bearing URLs', () => {
@@ -53,7 +53,7 @@ test('upstream failures are sanitized and rate limit stays actionable', async ()
   assert.equal(limited.code, 429); assert.equal(limited.headers['Retry-After'], '3600');
   const unavailable = await call(request(), { env, fetcher: async () => { throw Error('private host details'); } });
   assert.equal(unavailable.body.available, false); assert.ok(!JSON.stringify(unavailable.body).includes('private host'));
-  assert.match(unavailable.body.reason, /^Common Compute is temporarily unavailable\./);
+  assert.match(unavailable.body.reason, /^Colony is temporarily unavailable\./);
 });
 test('does not present partial errored generations as success', async () => {
   const result = await call(request('chat'), { env, fetcher: async () => Response.json({ choices: [{ message: { content: 'partial' }, finish_reason: 'error' }] }) });
@@ -64,4 +64,13 @@ test('swarm routes precede generic game API proxy and paid model routes are unch
   assert.ok(rewrites.findIndex(r => r.source === '/api/swarm') < rewrites.findIndex(r => r.source === '/api/:path*'));
   assert.equal(rewrites.find(r => r.source === '/swarm-api/chat').destination, '/api/swarm?operation=chat');
   assert.match(rewrites.find(r => r.source === '/v1/:path*').destination, /\/model-relay\//);
+});
+
+test('Colony is canonical and both legacy page URLs permanently redirect', () => {
+  const { rewrites, redirects } = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url)));
+  assert.equal(rewrites.find(r => r.source === '/colony').destination, '/swarm.html');
+  assert.equal(rewrites.some(r => r.source === '/swarm'), false);
+  for (const source of ['/swarm', '/swarm.html']) {
+    assert.deepEqual(redirects.find(r => r.source === source), { source, destination: '/colony', permanent: true });
+  }
 });

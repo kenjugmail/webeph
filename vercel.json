@@ -3,6 +3,8 @@
   "outputDirectory": ".",
   "installCommand": "npm install --omit=dev",
   "redirects": [
+    { "source": "/swarm", "destination": "/colony", "permanent": true },
+    { "source": "/swarm.html", "destination": "/colony", "permanent": true },
     { "source": "/api", "destination": "/developers", "permanent": false },
     { "source": "/glow.html", "destination": "/glow", "permanent": true },
     { "source": "/downloads/orrery/:path*", "destination": "https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/orrery-releases/:path*", "permanent": false },
@@ -42,7 +44,7 @@
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/swarm", "destination": "/swarm.html" },
+    { "source": "/colony", "destination": "/swarm.html" },
     { "source": "/swarm-api/status", "destination": "/api/swarm?operation=status" },
     { "source": "/swarm-api/chat", "destination": "/api/swarm?operation=chat" },
     { "source": "/api/swarm", "destination": "/api/swarm" },

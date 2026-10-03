@@ -4,7 +4,7 @@ import { isIP } from 'node:net';
 // This proxy never knows a provider/billing API key. The coordinator owns the
 // sponsored account and enforces durable fair-use quotas before dispatch.
 export const config = { maxDuration: 100 };
-const offline = { available: false, workers: 0, models: [], reason: 'Common Compute is being prepared. Free inference is not live yet.' };
+const offline = { available: false, workers: 0, models: [], reason: 'Colony is being prepared. Free inference is not live yet.' };
 const fail = (message, code = 'swarm_unavailable') => ({ error: { message, code } });
 
 export function gatewayConfig(env) {
@@ -21,7 +21,7 @@ export function createHandler({ env = process.env, fetcher = fetch } = {}) {
   return async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store');
     const operation = req.query?.operation;
-    if (!['status', 'chat'].includes(operation)) return res.status(404).json(fail('Unknown Common Compute endpoint.', 'not_found'));
+    if (!['status', 'chat'].includes(operation)) return res.status(404).json(fail('Unknown Colony endpoint.', 'not_found'));
     const method = operation === 'status' ? 'GET' : 'POST';
     if (req.method !== method) { res.setHeader('Allow', method); return res.status(405).json(fail('Method not allowed.', 'method_not_allowed')); }
     const settings = gatewayConfig(env);
@@ -30,7 +30,7 @@ export function createHandler({ env = process.env, fetcher = fetch } = {}) {
     let body;
     if (operation === 'chat') {
       const origin = req.headers.origin;
-      if (origin && !['https://ephemerent.com', 'https://www.ephemerent.com'].includes(origin)) return res.status(403).json(fail('Use the Common Compute page on ephemerent.com.', 'invalid_origin'));
+      if (origin && !['https://ephemerent.com', 'https://www.ephemerent.com'].includes(origin)) return res.status(403).json(fail('Use the Colony page on ephemerent.com.', 'invalid_origin'));
       if (!String(req.headers['content-type'] || '').toLowerCase().startsWith('application/json')) return res.status(415).json(fail('Send application/json.', 'invalid_request'));
       // Only the platform-owned IP header is trusted; client-supplied identity
       // and forwarding headers are never passed through to the coordinator.
@@ -66,8 +66,8 @@ export function createHandler({ env = process.env, fetcher = fetch } = {}) {
       return res.status(200).json({ model: data.model, choices: [{ message: { role: 'assistant', content: choice.message.content }, finish_reason: choice.finish_reason }] });
     } catch {
       return operation === 'status'
-        ? res.status(200).json({ ...offline, reason: 'Common Compute is temporarily unavailable. Please retry later.' })
-        : res.status(503).json(fail('Common Compute did not finish the request. Please retry later.'));
+        ? res.status(200).json({ ...offline, reason: 'Colony is temporarily unavailable. Please retry later.' })
+        : res.status(503).json(fail('Colony did not finish the request. Please retry later.'));
     }
   };
 }

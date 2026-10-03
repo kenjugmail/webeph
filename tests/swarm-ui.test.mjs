@@ -109,7 +109,7 @@ test('page contract includes privacy consent, offline defaults, contribution dis
   assert.match(html, /invite-only/);
   assert.match(html, /does not install software or use your GPU/);
   assert.match(html, /Contributors cover their own electricity, hardware, and bandwidth/);
-  assert.match(html, /mailto:kt@ephemerent.com\?subject=Common%20Compute%20GPU%20contributor/);
+  assert.match(html, /mailto:kt@ephemerent.com\?subject=Colony%20GPU%20contributor/);
   assert.match(html, /<noscript>/);
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /maxlength="2000"/);
@@ -118,20 +118,34 @@ test('page contract includes privacy consent, offline defaults, contribution dis
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
 });
 
-test('Common Compute branding preserves existing public and API routes', () => {
+test('Colony is the public name and canonical route, with one existing product listing', () => {
   const html = readFileSync(new URL('../swarm.html', import.meta.url), 'utf8');
   const home = readFileSync(new URL('../Ephemerent.html', import.meta.url), 'utf8');
   const js = readFileSync(new URL('../assets/swarm-inference.js', import.meta.url), 'utf8');
   const docs = readFileSync(new URL('../docs/SWARM.md', import.meta.url), 'utf8');
-  assert.match(html, /<title>Common Compute — Free community inference by Ephemerent<\/title>/);
-  assert.match(html, /property="og:title" content="Common Compute/);
-  assert.equal((html.match(/class="swarm-brand-product">Common Compute/g) || []).length, 2);
-  assert.match(html, /rel="canonical" href="https:\/\/ephemerent.com\/swarm"/);
-  assert.match(home, /href="\/swarm">Common Compute · free inference/);
-  assert.match(home, /class="nm">Common Compute<\/span>/);
-  assert.match(home, /href="\/swarm">Common Compute<\/a>/);
+  assert.match(html, /<title>Colony — Free community inference by Ephemerent<\/title>/);
+  assert.match(html, /property="og:title" content="Colony/);
+  assert.equal((html.match(/class="swarm-brand-product">Colony/g) || []).length, 2);
+  assert.match(html, /rel="canonical" href="https:\/\/ephemerent.com\/colony"/);
+  assert.match(html, /property="og:url" content="https:\/\/ephemerent.com\/colony"/);
+  assert.match(html, /href="#try-colony"/);
+  assert.match(home, /href="\/colony">Colony · free inference/);
+  assert.equal((home.match(/class="nm">Colony<\/span>/g) || []).length, 1);
+  assert.match(home, /class="eprodrow" href="\/colony"/);
+  assert.match(home, /href="\/colony">Colony<\/a>/);
   assert.match(js, /fetchImpl\('\/swarm-api\/status'/);
   assert.match(js, /fetchImpl\('\/swarm-api\/chat'/);
-  assert.match(docs, /^# Common Compute\n/);
-  for (const text of [html, home, js, docs]) assert.doesNotMatch(text, /Ephemerent Swarm|Free inference swarm|Try the swarm|from the swarm|Free volunteer swarm/);
+  assert.match(docs, /^# Colony\n/);
+  for (const text of [html, home, js, docs]) assert.doesNotMatch(text, /Common Compute|Ephemerent Swarm|Free inference swarm|Try the swarm|from the swarm|Free volunteer swarm/);
+  for (const file of ['Ephemerent.html', 'api.html', 'arbiter-preview.html', 'sentinel.html', 'research.html']) {
+    const page = readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+    assert.match(page, /href="\/colony">Colony<\/a>/);
+    assert.doesNotMatch(page, /href="\/(?:#work|swarm)">Colony<\/a>/);
+    assert.doesNotMatch(page, /href="\/swarm(?:["#?])/);
+  }
+  const research = readFileSync(new URL('../research.html', import.meta.url), 'utf8');
+  assert.match(research, /href="\/colony" data-graph-node><b>Colony<\/b>/);
+  const sitemap = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
+  assert.match(sitemap, /<loc>https:\/\/ephemerent.com\/colony<\/loc>/);
+  assert.doesNotMatch(sitemap, /<loc>https:\/\/ephemerent.com\/swarm<\/loc>/);
 });
