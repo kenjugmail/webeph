@@ -12,7 +12,7 @@ window.ORRERY_CONFIG = {
   // Desktop builds live in private release storage; the release-download edge function
   // returns the manifest and short-lived signed URLs to signed-in accounts.
   RELEASE_DOWNLOAD_FUNCTION: 'release-download',
-  RELEASE_VERSION: '4.0.0-rc.47',
+  RELEASE_VERSION: '4.0.0-rc.49',
   RELEASE_NAME: 'Sentinel Release',
   RELEASE_CHANNEL: 'test-beta',
   RELEASE_PAGE_URL: '/download',
