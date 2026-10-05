@@ -111,9 +111,9 @@ function fmtBytes(n) {
   return mb >= 1024 ? `${(mb / 1024).toFixed(2)} GB` : `${mb.toFixed(0)} MB`;
 }
 
-/* Subscriber-only downloads. The page never holds a storage URL: it asks the release-download function
- * for the manifest (keys, labels, sizes, hashes) and, on click, for a 10-minute signed URL. Anyone
- * without a session or an active subscription sees the reason instead of a button. */
+/* Account downloads. The page asks the release-download function for the manifest
+ * (keys, labels, sizes, hashes) and, on click, for a short-lived signed URL.
+ * Visitors without a session sign in first. */
 async function setupDownloadButton() {
   const dl = document.getElementById('orrery-download-btn');
   if (!dl || cfg().RELEASE_AVAILABLE !== true) return;
@@ -143,7 +143,7 @@ async function setupDownloadButton() {
     manifest = await call('/manifest');
   } catch (err) {
     // Downloads need only a signed-in account now; a 402 means an older release service still asks for a plan.
-    if (err.status === 402) { dl.textContent = 'Start your 5-day free trial to download'; dl.href = '/cloud?start=pro'; say('Downloads unlock with any plan, including the Pro trial: 5 days free, then $40/month, cancel anytime.'); return; }
+    if (err.status === 402) { dl.textContent = 'View plans to download'; dl.href = '/cloud?start=pro'; say('This download service requires a paid plan. Pro is $40/month, billed monthly. Cancel anytime.'); return; }
     if (err.status === 401) { dl.textContent = 'Sign in to download'; dl.href = '/signin?next=/download'; return; }
     dl.textContent = 'Downloads unavailable right now'; dl.removeAttribute('href'); say(err.message); return;
   }

@@ -163,10 +163,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
   // Arriving from a pricing button (next=/cloud?start=<tier>): say what happens next and keep only the sign-in.
   const startTier = (() => { try { return new URL(loginParams.get('next') || '', location.origin).searchParams.get('start'); } catch { return null; } })();
   if (!researchContext && ['pro', 'max', 'ultra'].includes(startTier)) {
-    document.title = startTier === 'pro' ? 'Start your free trial — Orrery' : 'Sign in to subscribe — Orrery';
-    document.getElementById('login-title').textContent = startTier === 'pro' ? 'Start your 5\u2011day free trial' : 'Sign in to subscribe';
+    document.title = 'Sign in to subscribe — Orrery';
+    document.getElementById('login-title').textContent = 'Sign in to subscribe';
     document.getElementById('login-sub').textContent = startTier === 'pro'
-      ? 'Create your account with Google, GitHub, or email. Next you confirm the trial on Stripe: $0 today, then $40/month after 5 days, cancel anytime.'
+      ? 'Create your account with Google, GitHub, or email. Next you confirm Pro on Stripe: $40/month, billed at checkout. Cancel anytime.'
       : 'Sign in or create your account with Google, GitHub, or email. Next you confirm your plan on Stripe.';
   }
 

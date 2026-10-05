@@ -9,7 +9,6 @@ import {
   isPaidPlan,
   checkoutUrlForTier,
   formatTokens,
-  PRO_TRIAL_DAYS,
   planUpgradeActions,
   startCheckoutTier,
   withAccount,
@@ -102,7 +101,7 @@ export function getPlanCatalog() {
       name: 'Free',
       price: '-',
       cadence: '',
-      summary: 'Run the full agent free on models you host. Pro adds hosted models; 5 days free.',
+      summary: 'Run the full agent free on models you host. Pro adds hosted models for $40/month.',
       features: ['Full agent on your own models (Ollama, LM Studio, vLLM, llama.cpp)', 'Pro: hosted models and any provider with your own key'],
     },
     pro: plans.pro || {
@@ -229,7 +228,7 @@ function renderPlanSummary(root, profile, session) {
       <b>${paid ? 'Enabled' : 'Subscription required'}</b>
     </div>
     <div class="account-plan-actions">${upgrades.join('')}</div>
-    ${paid ? '' : `<p class="plan-note plan-trial-note">Pro is free for ${PRO_TRIAL_DAYS} days, then $${PLAN_PRICES.pro}/month. Cancel before the trial ends and you are not charged.</p>`}
+    ${paid ? '' : `<p class="plan-note plan-pricing-note">Pro is $${PLAN_PRICES.pro}/month, billed monthly. Cancel anytime.</p>`}
   `;
 }
 
@@ -372,7 +371,7 @@ export async function mountCloudAccount(root = document) {
   void logCloudActivity('cloud.open');
   getCloudProfile().then((profile) => {
     // Pricing buttons sign in with next=/cloud?start=<tier>; an account below that tier then goes straight to
-    // its checkout (Pro's is the free trial) instead of hunting for the button on the account page.
+    // its checkout instead of hunting for the button on the account page.
     const tier = startCheckoutTier(new URLSearchParams(location.search).get('start'), planFromCloudProfile(profile));
     const url = tier === null ? null : subscriptionCheckout(tier, session);
     if (url) { location.assign(url); return; }

@@ -1,10 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-const { PRO_TRIAL_DAYS, withAccount } = await import('../assets/accountPlan.js');
+const { withAccount } = await import('../assets/accountPlan.js');
 
-test('a subscription link carries the account so the webhook can grant the trial', () => {
-  assert.equal(PRO_TRIAL_DAYS, 5);
+test('a subscription link carries the account so the webhook can grant the subscription', () => {
   const url = withAccount('https://buy.stripe.com/abc?prefilled_promo_code=ORRERY-7KQ2MX4P', { id: 'u-1', email: 'a@b.co' });
   const parsed = new URL(url);
   assert.equal(parsed.searchParams.get('client_reference_id'), 'u-1');
@@ -20,11 +19,11 @@ test('signed-out visitors and non-Stripe links pass through unchanged', () => {
 
 const { planUpgradeActions, startCheckoutTier } = await import('../assets/accountPlan.js');
 
-test('a free account is offered the Pro trial first, then the bigger plans', () => {
+test('a free account is offered the paid Pro subscription first, then the bigger plans', () => {
   const links = { pro: 'https://buy.stripe.com/pro', max: 'https://buy.stripe.com/max', ultra: null };
   const actions = planUpgradeActions('free', (tier) => links[tier]);
   assert.deepEqual(actions.map((a) => [a.tier, a.label, a.primary]), [
-    ['pro', 'Start 5-day free trial', true],
+    ['pro', 'Subscribe to Pro — $40/mo', true],
     ['max', 'Upgrade to Max — $100/mo', false],
     ['ultra', 'Upgrade to Ultra — $200/mo', false],
   ]);

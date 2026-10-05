@@ -16,12 +16,17 @@ test('website feed resolves to the designated public binary bucket', () => {
   assert.equal(route.destination, 'https://wjjthkqwcyahamhjkeux.supabase.co/storage/v1/object/public/orrery-releases/:path*');
   assert.equal(route.permanent, false);
 });
-test('availability requires website asset URLs and a checksum; pending states advertise no artifact', () => {
+test('available downloads use the account-gated manifest; pending states advertise no artifact', () => {
   for (const name of ['assets/site-config.js', 'assets/site-config.example.js', 'assets/supabase-config.example.js']) {
     const cfg = config(name);
     if (cfg.RELEASE_AVAILABLE === true) {
-      assert.match(cfg.DOWNLOAD_URL, /^https:\/\/ephemerent\.com\/downloads\/orrery\//);
-      assert.match(cfg.RELEASE_SHA256, /^[a-f0-9]{64}$/i);
+      assert.equal(cfg.RELEASE_DOWNLOAD_FUNCTION, 'release-download');
+      assert.match(cfg.CLOUD_AUTH_URL, /^https:\/\/[a-z0-9]+\.supabase\.co$/);
+      assert.doesNotMatch(cfg.CLOUD_AUTH_URL, /YOUR_/);
+      assert.match(cfg.RELEASE_VERSION, /^\d+\.\d+\.\d+(?:-[\w.]+)?$/);
+      assert.equal(cfg.UPDATE_MODE, 'subscriber-feed');
+      assert.equal(cfg.DOWNLOAD_URL, '');
+      assert.equal(cfg.RELEASE_SHA256, '');
     } else {
       assert.equal(cfg.DOWNLOAD_URL, '');
       assert.equal(cfg.RELEASE_SHA256, '');

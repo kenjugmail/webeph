@@ -106,7 +106,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Hosted-model prompts are proxied through Orrery Cloud. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <p class="auth-msg ok hidden" id="beta-entitled" style="margin-bottom:14px;"></p>
       <a class="btn btn-primary" href="/signin" id="beta-request" style="width:100%;justify-content:center;margin-bottom:14px;">Request access <span aria-hidden="true">→</span></a>
-      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;">Pro starts with a <a href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="color:var(--teal-lt);">5-day free trial</a>: no charge until it ends, cancel anytime. Anyone with a free account can download and run agents on their own models; the trial or a paid plan adds hosted models. For beta questions, email <a href="mailto:kt@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">kt@ephemerent.com</a>.</p>
+      <p class="sub" style="font-size:13px;color:var(--muted);line-height:1.6;"><a href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="color:var(--teal-lt);">Pro is $40/month</a>, cancel anytime. Anyone with a free account can download and run agents on their own models; a paid plan adds hosted models. For beta questions, email <a href="mailto:kt@ephemerent.com?subject=Orrery%20beta%20access" style="color:var(--teal-lt);">kt@ephemerent.com</a>.</p>
     </div>
 
     <!-- Shown once RELEASE_AVAILABLE = true -->
@@ -114,7 +114,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <p class="sub">Download the preview for Windows (x64), Linux (x64 or ARM64) or macOS (Apple silicon). Sign in (free) to download. It runs your local models for free; Pro adds hosted models, any provider with your own key, and Orrery Cloud. Preview software may change, fail, or produce incorrect output.</p>
 
       <div id="cloud-signin-cta" class="hidden" style="margin:16px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-2);">
-        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;"><b style="color:var(--ink);">New to Orrery?</b> Create a free account to download. Use your own models for free; try Pro free for 5 days when you want hosted models.</p>
+        <p style="font-size:14px;color:var(--muted);margin:0 0 10px;line-height:1.5;"><b style="color:var(--ink);">New to Orrery?</b> Create a free account to download. Use your own models for free; subscribe to Pro for $40/month when you want hosted models. Cancel anytime.</p>
         <a class="btn btn-primary" href="/signin?next=%2Fdownload" style="width:100%;justify-content:center;">Sign in to download</a>
       </div>
 
@@ -134,14 +134,14 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </div>
       <div class="plan-strip">
         <div><b>Free with your own models</b><span>Run the agent on Ollama, LM Studio, vLLM or llama.cpp on your computer or local network. No subscription, no API key.</span></div>
-        <div><b>Pro: 5 days free, then $40/mo</b><span>Hosted Arbiter 27B and Doubleword credits, any provider with your own key (OpenRouter, OpenAI, Anthropic…), and Orrery Cloud. Max $100 and Ultra $200 add bigger pools.</span></div>
+        <div><b>Pro: $40/mo</b><span>Hosted Arbiter 27B and Doubleword credits, any provider with your own key (OpenRouter, OpenAI, Anthropic…), and Orrery Cloud. Max $100 and Ultra $200 add bigger pools.</span></div>
       </div>
       <p class="plan-fineprint mono">Paid tiers auto-renew monthly via Stripe; cancel anytime. Credits reset monthly and do not roll over. Hosted-model prompts are proxied through Orrery Cloud. Agent output is not guaranteed; keep backups and review changes before use. <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a>.</p>
       <div class="download-steps">
         <h2>Quick start</h2>
         <ol>
           <li>Download for your platform and open it. The preview is not code-signed yet: on Windows choose <b>More info</b>, then <b>Run anyway</b>; compare the checksum if you want to be sure, and never turn off your system's protections. On macOS, open it once, then choose <b>Open Anyway</b> in System Settings, Privacy &amp; Security.</li>
-          <li>Sign in with the same account you used here, or skip sign-in and pick a local model. A paid plan or trial unlocks hosted models; they need no API keys.</li>
+          <li>Sign in with the same account you used here, or skip sign-in and pick a local model. A paid plan or complimentary access unlocks hosted models; they need no API keys.</li>
           <li>Open a project folder (or the built-in sample), describe a task in plain words, and watch it plan, edit, and run your tests.</li>
           <li>Read the diff and the receipt before you keep anything: what changed, what passed, and what it cost.</li>
           <li>Linux installs update themselves. On Windows and macOS, close the app and download the newest zip from this page when a release notes a fix you want.</li>

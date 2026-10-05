@@ -1,6 +1,6 @@
 /**
- * Public site config. Orrery is premium from first start: visitors can preview setup,
- * while real agent work requires an active subscription.
+ * Public site config. Orrery works free with your own models; hosted models require
+ * an active subscription.
  *
  * SAFE TO COMMIT: only publishable browser keys belong here:
  * - Supabase publishable / anon key in CLOUD_AUTH_KEY
@@ -9,8 +9,8 @@
  */
 window.ORRERY_CONFIG = {
   DOWNLOAD_URL: '',
-  // Desktop builds live in the private Supabase Storage bucket `orrery-releases`; the release-download
-  // edge function returns the manifest and 10-minute signed URLs to signed-in subscribers only.
+  // Desktop builds live in private release storage; the release-download edge function
+  // returns the manifest and short-lived signed URLs to signed-in accounts.
   RELEASE_DOWNLOAD_FUNCTION: 'release-download',
   RELEASE_VERSION: '4.0.0-rc.47',
   RELEASE_NAME: 'Sentinel Release',
@@ -42,7 +42,7 @@ window.ORRERY_CONFIG = {
       name: 'Free',
       price: '-',
       cadence: '',
-      summary: 'Run the full agent free on models you host. Pro adds hosted models; 5 days free.',
+      summary: 'Run the full agent free on models you host. Pro adds hosted models for $40/month.',
       features: [
         'Full agent on your own models (Ollama, LM Studio, vLLM, llama.cpp)',
         'Pro: hosted models and any provider with your own key',
