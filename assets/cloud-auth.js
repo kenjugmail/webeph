@@ -109,21 +109,21 @@ export function getPlanCatalog() {
       price: '$40',
       cadence: 'per month',
       summary: 'Paid agent work with hosted models (DeepSeek, GLM and others) and credits included, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'Hosted models - 6M credits/month', 'Nexus + managed connector features'],
+      features: ['Google, GitHub, and email sign-in', 'Hosted models - 20M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'Hosted models - 15M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'Hosted models - 50M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'Hosted models - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'Hosted models - 100M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }

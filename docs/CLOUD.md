@@ -42,9 +42,9 @@ There are three paid tiers. Every paid tier includes cloud sign-in (Google / Git
 
 | Tier | Price | Hosted models (DeepSeek, GLM and others via Doubleword) |
 |------|-------|-------------|
-| **Pro** | `$40/month` | 6M credits/mo |
-| **Max** | `$100/month` | 15M credits/mo |
-| **Ultra** | `$200/month` | 30M credits/mo |
+| **Pro** | `$40/month` | 20M credits/mo |
+| **Max** | `$100/month` | 50M credits/mo |
+| **Ultra** | `$200/month` | 100M credits/mo |
 
 One credit is one millionth of a dollar of provider cost. Hosted-model credits buy tokens at the provider's list rate. Arbiter is not included in any plan (the self-hosted Arbiter server is shut down); it is available on request via kt@ephemerent.com. Pools reset monthly, stop hard at the limit, and never overage. No estimated list-rate "API usage value" is published any more — a credit is already defined in provider dollars, and the second number only contradicted the first. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
 

@@ -28,9 +28,9 @@ export const PLAN_PRICES = {
  * the same ones on /orrery#pricing; server settlement stays in cents internally.
  */
 export const BUNDLED_QUOTAS = {
-  pro: { 'Hosted models': 6_000_000 },
-  max: { 'Hosted models': 15_000_000 },
-  ultra: { 'Hosted models': 30_000_000 },
+  pro: { 'Hosted models': 20_000_000 },
+  max: { 'Hosted models': 50_000_000 },
+  ultra: { 'Hosted models': 100_000_000 },
 };
 
 /* No estimated-dollar allotment is published any more. A credit is defined as

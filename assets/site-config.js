@@ -55,7 +55,7 @@ window.ORRERY_CONFIG = {
       summary: 'Hosted models (DeepSeek, GLM and others) with credits included, Nexus, and managed cloud features.',
       features: [
         'Google, GitHub, and email cloud sign-in',
-        'Hosted models - 6M credits/month',
+        'Hosted models - 20M credits/month',
         'Nexus agent operations',
         'Managed Discord/mobile automation',
       ],

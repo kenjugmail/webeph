@@ -26,7 +26,7 @@ window.ORRERY_CONFIG = {
       price: '$40',
       cadence: 'per month',
       summary: 'Hosted models (DeepSeek, GLM and others) with credits included, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email cloud sign-in', 'Hosted models - 6M credits/month', 'Nexus operations'],
+      features: ['Google, GitHub, and email cloud sign-in', 'Hosted models - 20M credits/month', 'Nexus operations'],
     },
   },
   DEFAULT_PLAN: 'free',
