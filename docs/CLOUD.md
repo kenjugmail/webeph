@@ -40,13 +40,13 @@ No public no-cost local tier is offered. Preview users can inspect setup; active
 
 There are three paid tiers. Every paid tier includes cloud sign-in (Google / GitHub / email), Nexus cloud features, managed connector capabilities, and hosted credit pools:
 
-| Tier | Price | Arbiter 27B | Doubleword |
-|------|-------|-------------|------------|
-| **Pro** | `$40/month` | 14M compute credits/mo | 6M credits/mo |
-| **Max** | `$100/month` | 35M compute credits/mo | 15M credits/mo |
-| **Ultra** | `$200/month` | 70M compute credits/mo | 30M credits/mo |
+| Tier | Price | Hosted models (DeepSeek, GLM and others via Doubleword) |
+|------|-------|-------------|
+| **Pro** | `$40/month` | 6M credits/mo |
+| **Max** | `$100/month` | 15M credits/mo |
+| **Ultra** | `$200/month` | 30M credits/mo |
 
-One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; Arbiter credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and bills no reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage. No estimated list-rate "API usage value" is published any more — a credit is already defined in provider dollars, and the second number only contradicted the first. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
+One credit is one millionth of a dollar of provider cost. Hosted-model credits buy tokens at the provider's list rate. Arbiter is not included in any plan (the self-hosted Arbiter server is shut down); it is available on request via kt@ephemerent.com. Pools reset monthly, stop hard at the limit, and never overage. No estimated list-rate "API usage value" is published any more — a credit is already defined in provider dollars, and the second number only contradicted the first. Server settlement still uses internal cents columns (`cloud_credit_*_cents`) — do not expose those as public dollars.
 
 Organization plans (see `organizations.html`): Business `$500/mo` and Enterprise `$1,000/mo`. The shared monthly pool is confirmed in writing at setup rather than published on the page; the old 5B/15B figures predate the provider-cost credit unit and were removed rather than rescaled by guess.
 

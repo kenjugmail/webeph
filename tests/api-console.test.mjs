@@ -17,17 +17,17 @@ test('every example is valid JSON in curl, and the first call exports the key on
     const body = curl.slice(curl.indexOf("-d '") + 3);
     const received = execFileSync('sh', ['-c', `printf '%s' ${body}`], { encoding: 'utf8' });
     assert.deepEqual(JSON.parse(received), example.body);
-    assert.match(typescript, /process\.env\.ARBITER_API_KEY/);
-    assert.match(python, /os\.environ\["ARBITER_API_KEY"\]/);
+    assert.match(typescript, /process\.env\.ORRERY_API_KEY/);
+    assert.match(python, /os\.environ\["ORRERY_API_KEY"\]/);
     assert.doesNotMatch(python, /: (true|false|null)\b/);
   }
-  assert.match(firstCallSnippet('ork_live_abc'), /^export ARBITER_API_KEY='ork_live_abc'\n/);
-  assert.match(firstCallSnippet(undefined), /^export ARBITER_API_KEY='YOUR_API_KEY'\n/);
+  assert.match(firstCallSnippet('ork_live_abc'), /^export ORRERY_API_KEY='ork_live_abc'\n/);
+  assert.match(firstCallSnippet(undefined), /^export ORRERY_API_KEY='YOUR_API_KEY'\n/);
 });
 
 test('the agent prompt carries the base URL, docs and key-handling rules', () => {
   const prompt = agentPrompt('ork_live_abc');
-  for (const part of ['https://api.ephemerent.com/v1', 'arbiter-flash-27b', 'https://ephemerent.com/developers', 'ork_live_abc', 'ARBITER_API_KEY', 'Never commit the key']) assert.ok(prompt.includes(part), part);
+  for (const part of ['https://api.ephemerent.com/v1', 'doubleword-deepseek-v4-flash', 'https://ephemerent.com/developers', 'ork_live_abc', 'ORRERY_API_KEY', 'Never commit the key']) assert.ok(prompt.includes(part), part);
   assert.ok(agentPrompt(undefined).includes('<paste your key>'));
 });
 
@@ -70,7 +70,7 @@ test('the test request sends the example with the key, and a network failure rea
   assert.equal(result.ok, true);
   assert.equal(sent.url, 'https://api.ephemerent.com/v1/chat/completions');
   assert.equal(sent.init.headers.authorization, 'Bearer ork_live_abc');
-  assert.equal(JSON.parse(sent.init.body).model, 'arbiter-flash-27b');
+  assert.equal(JSON.parse(sent.init.body).model, 'doubleword-deepseek-v4-flash');
   const offline = await runTestRequest('k', 'rule', async () => { throw new TypeError('Failed to fetch'); });
   assert.match(offline.error, /did not reach the API/);
 });
@@ -81,7 +81,7 @@ test('the test request sends the example with the key, and a network failure rea
  const roundTrip = execFileSync('python3', ['-c', 'import json; print(json.dumps(' + py + '))'], {encoding:'utf8'});
  assert.deepEqual(JSON.parse(roundTrip), input);
  const line = firstCallSnippet("literal'$(not_a_command)").split('\n')[0];
- const value = execFileSync('sh', ['-c', line + '\nprintf %s "$ARBITER_API_KEY"'], {encoding:'utf8'});
+ const value = execFileSync('sh', ['-c', line + '\nprintf %s "$ORRERY_API_KEY"'], {encoding:'utf8'});
  assert.equal(value, "literal'$(not_a_command)");
  });
 

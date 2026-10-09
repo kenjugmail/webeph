@@ -108,22 +108,22 @@ export function getPlanCatalog() {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Paid agent work with hosted Arbiter 27B and Doubleword credits, Nexus, and managed cloud features.',
-      features: ['Google, GitHub, and email sign-in', 'Arbiter 27B - 14M compute credits/month', 'Doubleword - 6M credits/month', 'Nexus + managed connector features'],
+      summary: 'Paid agent work with hosted models (DeepSeek, GLM and others) and credits included, Nexus, and managed cloud features.',
+      features: ['Google, GitHub, and email sign-in', 'Hosted models - 6M credits/month', 'Nexus + managed connector features'],
     },
     max: plans.max || {
       name: 'Max',
       price: '$100',
       cadence: 'per month',
       summary: 'Bigger hosted-credit pools for daily multi-agent work.',
-      features: ['Everything in Pro', 'Arbiter 27B - 35M compute credits/month', 'Doubleword - 15M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
+      features: ['Everything in Pro', 'Hosted models - 15M credits/month', 'Higher cloud-run capacity', 'Managed connector automation'],
     },
     ultra: plans.ultra || {
       name: 'Ultra',
       price: '$200',
       cadence: 'per month',
       summary: 'The largest hosted-credit pools and cloud automation capacity.',
-      features: ['Everything in Max', 'Arbiter 27B - 70M compute credits/month', 'Doubleword - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
+      features: ['Everything in Max', 'Hosted models - 30M credits/month', 'Research runs and proof vault capacity', 'Priority cloud automation'],
     },
   };
 }
@@ -209,7 +209,7 @@ function renderPlanSummary(root, profile, session) {
   }
 
   const poolNote = quotas
-    ? `<p class="plan-note">One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at list rate; Arbiter credits buy looped inference compute. Pools reset monthly, stop at the limit, and never overage.</p>`
+    ? `<p class="plan-note">One credit is one millionth of a dollar of provider cost. Hosted-model credits buy tokens at the provider's list rate. Pools reset monthly, stop at the limit, and never overage.</p>`
     : '';
 
   slot.innerHTML = `
@@ -387,7 +387,8 @@ export async function mountCloudAccount(root = document) {
  * Live balances come from the Orrery relay (GET /usage: this month's quota/used per pool) and API keys
  * from relay-admin (GET/POST/DELETE /keys). Both take the Supabase session token. Everything here is
  * metadata: credits and key prefixes, never prompts. Failures leave the static allowances in place. */
-const POOL_SLOTS = { 'arbiter-runpod': 'arbiter-27b', doubleword: 'doubleword' };
+// Plans include hosted models (the Doubleword pool); Arbiter is available on request, not a plan pool.
+const POOL_SLOTS = { doubleword: 'hosted-models' };
 
 function functionsBase() {
   return String(cfg().CLOUD_AUTH_URL || '').replace(/\/+$/, '') + '/functions/v1';
@@ -503,7 +504,7 @@ function renderCreditWallet(root, session, usage) {
       </div>
       <span class="plan-badge">${balance > 0 ? 'Available' : 'Empty'}</span>
     </div>
-    <p class="plan-note">Bought once, never expires, and works across Arbiter 27B and Doubleword. Your monthly pool is always spent first, so buying early never wastes credits. Use them from the desktop or the <a href="/developers">API</a>.</p>
+    <p class="plan-note">Bought once, never expires, and works across hosted models. Your monthly pool is always spent first, so buying early never wastes credits. Use them from the desktop or the <a href="/developers">API</a>.</p>
     ${buy === '' ? '<p class="plan-note">Credit packs are not connected to checkout yet.</p>' : `<div class="credit-pack-row">${buy}</div>`}
   `;
 }

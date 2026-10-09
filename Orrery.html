@@ -138,7 +138,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       <p class="hero-pricing reveal in d3"><b>Free</b> with models on your own hardware (Ollama, LM Studio, vLLM). <a href="/signin?next=%2Fcloud%3Fstart%3Dpro" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Pro</a>: $40/month for hosted models and any provider, cancel anytime. Windows, Linux (x64 and ARM64) and macOS (Apple silicon, preview).</p>
       <div class="hero-providers reveal in d4">
         <span class="mono">works with</span>
-        <span class="prov prov-local">Ollama</span><span class="prov prov-local">LM Studio</span><span class="prov prov-local">vLLM</span><span class="prov">Arbiter 27B</span><span class="prov">OpenRouter</span><span class="prov">Codex</span><span class="prov">Claude Code</span>
+        <span class="prov prov-local">Ollama</span><span class="prov prov-local">LM Studio</span><span class="prov prov-local">vLLM</span><span class="prov">DeepSeek</span><span class="prov">GLM</span><span class="prov">OpenRouter</span><span class="prov">Codex</span><span class="prov">Claude Code</span>
       </div>
       <p class="hero-note mono reveal in d4">Agent output can be wrong or unsafe; keep backups and review changes before running or shipping them.</p>
     </div>
@@ -330,10 +330,10 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     <div class="sec-head reveal">
       <div class="eyebrow">Data and account boundaries</div>
       <h2 class="display">Clear about what crosses the network.</h2>
-      <p class="lead">Hosted routes send the prompt and code context needed for a completion through Orrery Cloud to the configured provider, and Ephemerent keeps no relay content beyond fulfilling the request. Your Arbiter sessions help make the next Arbiter better at real coding work: anonymously, never tied to your account, and never sold. Prefer not to share? Zero data retention is one switch in settings.</p>
+      <p class="lead">Hosted routes send the prompt and code context needed for a completion through Orrery Cloud to the configured provider, and Ephemerent keeps no relay content beyond fulfilling the request. Hosted-model requests are relayed to fulfill the request, not captured for training.</p>
     </div>
     <div class="cap-grid reveal d1">
-      <div class="card card-pad"><div class="cap-ic">01</div><h3>Explicit hosted route</h3><p>Nexus labels the selected Doubleword or Arbiter route before a run starts.</p></div>
+      <div class="card card-pad"><div class="cap-ic">01</div><h3>Explicit hosted route</h3><p>Nexus labels the selected hosted route before a run starts.</p></div>
       <div class="card card-pad"><div class="cap-ic">02</div><h3>Purpose-limited relay</h3><p>Only the prompt and context needed for the completion are relayed to the configured provider.</p></div>
       <div class="card card-pad"><div class="cap-ic">03</div><h3>Content is not metering</h3><p>Stored usage counters are token totals and timestamps, not copies of prompt content.</p></div>
       <div class="card card-pad"><div class="cap-ic">04</div><h3>Your review remains final</h3><p>Keep source-control backups and inspect changes before accepting, running, or shipping output.</p></div>
@@ -342,7 +342,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
 </section>
 
 <!-- ============ PRICING ============ -->
-<section class="sp-orrery-feature" aria-labelledby="orrery-api-title"><div class="wrap sp-orrery-grid"><div><span class="sp-eyebrow">FOR DEVELOPERS</span><h2 id="orrery-api-title">Your application.<br>The Orrery API.</h2><p>Bring Arbiter generation and Sentinel decisions into your own tools. Start with familiar chat completions, explore structured decision endpoints, and manage keys and usage in one console.</p><div class="sp-actions"><a class="btn btn-primary" href="/developers">Explore the API ↗</a><a class="btn btn-ghost" href="/cloud">Open console</a></div></div><a class="sp-orrery-path" href="/developers#quickstart" aria-label="Read the Orrery API quickstart"><div><span>01</span><strong>Create an API key</strong><i>↗</i></div><div><span>02</span><strong>Copy your first request</strong><i>↗</i></div><div><span>03</span><strong>Inspect usage and results</strong><i>↗</i></div><p>cURL, Python and JavaScript examples.</p></a></div></section>
+<section class="sp-orrery-feature" aria-labelledby="orrery-api-title"><div class="wrap sp-orrery-grid"><div><span class="sp-eyebrow">FOR DEVELOPERS</span><h2 id="orrery-api-title">Your application.<br>The Orrery API.</h2><p>Bring hosted-model generation and Sentinel decisions into your own tools. Start with familiar chat completions, explore structured decision endpoints, and manage keys and usage in one console.</p><div class="sp-actions"><a class="btn btn-primary" href="/developers">Explore the API ↗</a><a class="btn btn-ghost" href="/cloud">Open console</a></div></div><a class="sp-orrery-path" href="/developers#quickstart" aria-label="Read the Orrery API quickstart"><div><span>01</span><strong>Create an API key</strong><i>↗</i></div><div><span>02</span><strong>Copy your first request</strong><i>↗</i></div><div><span>03</span><strong>Inspect usage and results</strong><i>↗</i></div><p>cURL, Python and JavaScript examples.</p></a></div></section>
 
 <section class="section pricing-section" id="pricing">
   <div class="wrap">
@@ -370,10 +370,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <b>$40</b>
           <small>per month, cancel anytime</small>
         </div>
-        <p>Individual agent work on Arbiter 27B and Doubleword with hosted credits and Nexus operations. Zero data retention for Arbiter in one switch.</p>
+        <p>Individual agent work on hosted models (DeepSeek, GLM and others, served via Doubleword through Orrery Relay) with credits included and Nexus operations.</p>
         <ul>
-          <li>Arbiter 27B - 14M compute credits/mo (about 12M looped tokens)</li>
-          <li>Doubleword - 6M credits/mo (about 32M tokens at list rate)</li>
+          <li>Hosted models - 6M credits/mo (about 32M tokens at list rate)</li>
           <li>Credits are vendor-cost units, so nothing is marked up and nothing is inflated</li>
           <li>Codex, Claude Code, and other providers with your own key: OpenRouter, OpenAI, Anthropic, Gemini, DeepSeek</li>
           <li>Nexus, Discord/mobile oversight, proof receipts</li>
@@ -389,9 +388,8 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         </div>
         <p>Bigger pools for daily multi-agent work; the same routes, more headroom.</p>
         <ul>
-          <li>Arbiter 27B - 35M compute credits/mo (about 31M looped tokens)</li>
-          <li>Doubleword - 15M credits/mo (about 80M tokens)</li>
-          <li>2.5x Pro on both pools</li>
+          <li>Hosted models - 15M credits/mo (about 80M tokens)</li>
+          <li>2.5x the Pro pool</li>
           <li>More cloud/background run capacity</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-max" href="/signin?next=%2Fcloud%3Fstart%3Dmax">Start Max</a>
@@ -404,15 +402,15 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         </div>
         <p>The largest pools plus cloud automation capacity for research runs.</p>
         <ul>
-          <li>Arbiter 27B - 70M compute credits/mo (about 61M looped tokens)</li>
-          <li>Doubleword - 30M credits/mo (about 160M tokens)</li>
-          <li>5x Pro on both pools</li>
+          <li>Hosted models - 30M credits/mo (about 160M tokens)</li>
+          <li>5x the Pro pool</li>
           <li>Research runs and proof vault capacity</li>
         </ul>
         <a class="btn btn-primary" id="pricing-cta-ultra" href="/signin?next=%2Fcloud%3Fstart%3Dultra">Start Ultra</a>
       </div>
     </div>
-    <p class="pricing-efficiency mono reveal d1">Hosted routes use prompt caching and compact run context, so a pool of provider-cost credits goes further than the raw number suggests. One credit is one millionth of a dollar of provider cost. Doubleword credits buy tokens at the provider's list rate; <a href="/arbiter">Arbiter</a> credits buy looped inference compute (three prefill passes plus decode), because Arbiter reasons in latent space and does not bill reasoning tokens. Pools reset monthly, stop hard at the limit, and never overage. Arbiter learns from your coding and research sessions by default (anonymous session ids, never your account); switch on zero data retention in Orrery settings and it keeps counts only. See <a href="/privacy">Privacy</a>.</p>
+    <p class="pricing-efficiency mono reveal d1">Hosted routes use prompt caching and compact run context, so a pool of provider-cost credits goes further than the raw number suggests. One credit is one millionth of a dollar of provider cost. Hosted-model credits buy tokens at the provider's list rate. Pools reset monthly, stop hard at the limit, and never overage. See <a href="/privacy">Privacy</a>.</p>
+    <p class="pricing-efficiency mono reveal d1"><a href="/arbiter">Arbiter</a>: available on request. Contact <a href="mailto:kt@ephemerent.com">kt@ephemerent.com</a>.</p>
     <div class="organization-pricing reveal d2">
       <div>
         <div class="eyebrow">Organizations</div>
@@ -439,11 +437,11 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
     </div>
     <div class="faq-list reveal d1">
       <details class="faq"><summary>What leaves my machine?</summary><div class="faq-body">When you run a hosted route, the prompt and code context needed for that completion pass through Orrery Cloud to the configured provider. Usage counters store totals and timestamps, and Ephemerent keeps no relay content beyond fulfilling the request. See the <a href="/privacy">privacy policy</a> for the full boundary.</div></details>
-      <details class="faq"><summary>Does Orrery learn from my code?</summary><div class="faq-body">Arbiter does, by default, so each version gets better at the work people actually do: its coding and research sessions (the prompt, the response, and whether the tests passed) are used to train and evaluate the next Arbiter. They are tied to an anonymous session id, never to your account or email, and are never sold or shared. Doubleword requests are never used. Turn on <b>Zero data retention for Arbiter</b> in settings and it keeps only counts from the next request on.</div></details>
+      <details class="faq"><summary>Does Orrery learn from my code?</summary><div class="faq-body">No. Hosted-model requests are relayed to the provider to fulfill the request and are not captured for training. Local models never leave your machine or network. See the <a href="/privacy">privacy policy</a> for the full boundary.</div></details>
       <details class="faq"><summary>What can I use for free?</summary><div class="faq-body">Orrery is free with models on your own hardware or local network, including agent runs, diffs you approve, tests, and receipts. A free account is only needed to download. Pro adds hosted models and credits for $40/month, cancel anytime.</div></details>
       <details class="faq"><summary>Which platforms are supported?</summary><div class="faq-body">Windows (x64), Linux (x64 and ARM64) and macOS on Apple silicon (preview). Linux installs update themselves; on Windows and Mac, download the new version from this site. The Mac preview is not notarized yet: open it once, then choose <b>Open Anyway</b> in System Settings, Privacy &amp; Security. The Windows build is not code-signed yet, so Windows may show &ldquo;Windows protected your PC&rdquo; the first time: choose <b>More info</b>, then <b>Run anyway</b>.</div></details>
       <details class="faq"><summary>Can I use Orrery without subscribing?</summary><div class="faq-body">Yes. With a model server you run yourself (Ollama, LM Studio, vLLM or llama.cpp, on this computer or your local network) the agent is free: pick <b>Your own server</b> in the model menu, no subscription and no API key. Hosted models, deep research on hosted credits, and other providers come with Pro.</div></details>
-      <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly <a href="/arbiter">Arbiter 27B</a> and Doubleword credits at the amounts shown above. Routes and capacity remain subject to provider availability.</div></details>
+      <details class="faq"><summary>Which hosted routes are included?</summary><div class="faq-body">Pro, Max, and Ultra include monthly credits for hosted models (DeepSeek, GLM and others, served via Doubleword through Orrery Relay) at the amounts shown above. Routes and capacity remain subject to provider availability. Arbiter is not included in plans; it is available on request: contact <a href="mailto:kt@ephemerent.com">kt@ephemerent.com</a>.</div></details>
       <details class="faq"><summary>How is the winning attempt chosen?</summary><div class="faq-body">By execution, not impression. Each attempt is run against your tests, type-checks, and lint; an automatic reviewer scores them and keeps the winner before merging it back.</div></details>
       <details class="faq"><summary>Can I cancel anytime?</summary><div class="faq-body">Yes. Paid tiers are monthly via Stripe and cancel anytime — access runs to the end of the paid period. Credits reset each billing month and don't roll over.</div></details>
     </div>
@@ -484,7 +482,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
       </div>
       <div><h3 class="footer-heading">Product</h3><ul><li><a href="#nexus">How it works</a></li><li><a href="#research">Research</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="/download">Download</a></li><li><a href="/developers">Developer API</a></li></ul></div>
       <div><h3 class="footer-heading">Teams</h3><ul><li><a href="/organizations">Business &amp; Enterprise</a></li><li><a href="/slack">Slack</a></li><li><a href="/security">Security</a></li><li><a href="mailto:kt@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
-      <div><h3 class="footer-heading">Company</h3><ul><li><a href="/">About Ephemerent</a></li><li><a href="/shelterix">Shelterix</a></li><li><a href="/arbiter">Arbiter 27B</a></li><li><a href="/sentinel">Sentinel</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:kt@ephemerent.com">Contact</a></li></ul></div>
+      <div><h3 class="footer-heading">Company</h3><ul><li><a href="/">About Ephemerent</a></li><li><a href="/shelterix">Shelterix</a></li><li><a href="/arbiter">Arbiter</a></li><li><a href="/sentinel">Sentinel</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:kt@ephemerent.com">Contact</a></li></ul></div>
     </div>
     <hr class="divider" style="margin:44px 0 24px;">
     <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">

@@ -52,11 +52,10 @@ window.ORRERY_CONFIG = {
       name: 'Pro',
       price: '$40',
       cadence: 'per month',
-      summary: 'Hosted Arbiter 27B and Doubleword credits, Nexus, and managed cloud features.',
+      summary: 'Hosted models (DeepSeek, GLM and others) with credits included, Nexus, and managed cloud features.',
       features: [
         'Google, GitHub, and email cloud sign-in',
-        'Arbiter 27B - 14M compute credits/month',
-        'Doubleword - 6M credits/month',
+        'Hosted models - 6M credits/month',
         'Nexus agent operations',
         'Managed Discord/mobile automation',
       ],

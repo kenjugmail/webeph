@@ -215,7 +215,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
           <li><b>MCP agents</b><span>Add the Sentinel MCP server to any agent that speaks the Model Context Protocol: Claude Code, OpenCode, Cursor, Codex CLI, Gemini CLI or VS Code. The agent gets three tools, <code>sentinel_decide</code>, <code>sentinel_rank</code> and <code>sentinel_status</code>, with descriptions that tell it when to ask.</span></li>
           <li><b>Function calling</b><span>For your own agent loop, register <code>sentinel_decide</code> as a tool in the OpenAI or Anthropic format and forward the call to the API.</span></li>
           <li><b>Shell</b><span>A small command-line client answers in its exit code, for scripts and shell-driven agents.</span></li>
-          <li><b>API</b><span>Two HTTP endpoints on <code>api.ephemerent.com</code>, with the same key as the <a href="/developers">Arbiter API</a>.</span></li>
+          <li><b>API</b><span>Two HTTP endpoints on <code>api.ephemerent.com</code>, with the same key as the <a href="/developers">Orrery API</a>.</span></li>
         </ul>
 
         <h2 class="rv" id="api">API quickstart</h2>
@@ -227,7 +227,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive
         </div>
 
         <pre class="ap-code rv"><code>curl https://api.ephemerent.com/v1/sentinel/decide \
-  -H "Authorization: Bearer $ARBITER_API_KEY" \
+  -H "Authorization: Bearer $ORRERY_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "state": "test_parse_date fails: ValueError on \"2026-09-26T10:00Z\". The patch adds a branch for a trailing Z in parse_date.",
@@ -241,7 +241,7 @@ import os, requests
 
 r = requests.post(
     "https://api.ephemerent.com/v1/sentinel/decide",
-    headers={"Authorization": f"Bearer {os.environ['ARBITER_API_KEY']}"},
+    headers={"Authorization": f"Bearer {os.environ['ORRERY_API_KEY']}"},
     json={
         "state": diff + "\n\n" + test_output,
         "question": "Which of these should the agent do next?",
@@ -265,7 +265,7 @@ else:
 const res = await fetch("https://api.ephemerent.com/v1/sentinel/rank", {
   method: "POST",
   headers: {
-    Authorization: `Bearer ${process.env.ARBITER_API_KEY}`,
+    Authorization: `Bearer ${process.env.ORRERY_API_KEY}`,
     "Content-Type": "application/json",
   },
   body: JSON.stringify({

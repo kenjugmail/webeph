@@ -1,6 +1,6 @@
 export const BASE = 'https://api.ephemerent.com/v1';
 export const EXAMPLES = {
-  chat: { path: '/chat/completions', body: { model: 'arbiter-flash-27b', messages: [{ role: 'user', content: 'Write a Python function that validates an ISO date.' }], max_tokens: 400 } },
+  chat: { path: '/chat/completions', body: { model: 'doubleword-deepseek-v4-flash', messages: [{ role: 'user', content: 'Write a Python function that validates an ISO date.' }], max_tokens: 400 } },
   decide: { path: '/sentinel/decide', body: { state: 'A parser patch is applied. No tests have run. Release policy requires passing tests.', question: 'What should the agent do next?', options: { test: 'Run the regression test and full suite.', deploy: 'Deploy immediately without testing.' } } },
   rank: { path: '/sentinel/rank', body: { context: 'An ISO date parser fails on timestamps ending in Z.', candidates: ['Inspect timezone handling in the parser.', 'Increase the network timeout.', 'Remove the failing regression test.'], question: 'Which next step is most useful?' } },
 };
@@ -8,14 +8,14 @@ export function snippet(task = 'chat', language = 'curl') {
   const e = EXAMPLES[task];
   if (!e) throw new Error('Unknown example');
   const json = JSON.stringify(e.body, null, 2);
-  if (language === 'curl') return `# Set ARBITER_API_KEY in your environment first.\ncurl --fail-with-body "${BASE}${e.path}" \\\n  -H "Authorization: Bearer $ARBITER_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '${json.replace(/'/g, "'\\''")}'`;
+  if (language === 'curl') return `# Set ORRERY_API_KEY in your environment first.\ncurl --fail-with-body "${BASE}${e.path}" \\\n  -H "Authorization: Bearer $ORRERY_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '${json.replace(/'/g, "'\\''")}'`;
   if (language === 'python') {
-    if (task === 'chat') return `# pip install openai\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url="${BASE}",\n    api_key=os.environ["ARBITER_API_KEY"],\n)\nreply = client.chat.completions.create(**${json})\nprint(reply.choices[0].message.content)`;
-    return `# pip install requests\nimport os\nimport requests\n\nresponse = requests.post(\n    "${BASE}${e.path}",\n    headers={"Authorization": "Bearer " + os.environ["ARBITER_API_KEY"]},\n    json=${json},\n    timeout=30,\n)\nresponse.raise_for_status()\nprint(response.json())`;
+    if (task === 'chat') return `# pip install openai\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    base_url="${BASE}",\n    api_key=os.environ["ORRERY_API_KEY"],\n)\nreply = client.chat.completions.create(**${json})\nprint(reply.choices[0].message.content)`;
+    return `# pip install requests\nimport os\nimport requests\n\nresponse = requests.post(\n    "${BASE}${e.path}",\n    headers={"Authorization": "Bearer " + os.environ["ORRERY_API_KEY"]},\n    json=${json},\n    timeout=30,\n)\nresponse.raise_for_status()\nprint(response.json())`;
   }
   if (language === 'javascript') {
-    if (task === 'chat') return `// Node.js 18+ · npm install openai · save as example.mjs\nimport OpenAI from "openai";\n\nconst client = new OpenAI({\n  baseURL: "${BASE}",\n  apiKey: process.env.ARBITER_API_KEY,\n});\nconst reply = await client.chat.completions.create(${json});\nconsole.log(reply.choices[0].message.content);`;
-    return `// Node.js 18+ · save as example.mjs and run on your server\nconst response = await fetch("${BASE}${e.path}", {\n  method: "POST",\n  headers: {\n    Authorization: \`Bearer \${process.env.ARBITER_API_KEY}\`,\n    "Content-Type": "application/json",\n  },\n  body: JSON.stringify(${json}),\n  signal: AbortSignal.timeout(30000),\n});\nif (!response.ok) throw new Error(await response.text());\nconsole.log(await response.json());`;
+    if (task === 'chat') return `// Node.js 18+ · npm install openai · save as example.mjs\nimport OpenAI from "openai";\n\nconst client = new OpenAI({\n  baseURL: "${BASE}",\n  apiKey: process.env.ORRERY_API_KEY,\n});\nconst reply = await client.chat.completions.create(${json});\nconsole.log(reply.choices[0].message.content);`;
+    return `// Node.js 18+ · save as example.mjs and run on your server\nconst response = await fetch("${BASE}${e.path}", {\n  method: "POST",\n  headers: {\n    Authorization: \`Bearer \${process.env.ORRERY_API_KEY}\`,\n    "Content-Type": "application/json",\n  },\n  body: JSON.stringify(${json}),\n  signal: AbortSignal.timeout(30000),\n});\nif (!response.ok) throw new Error(await response.text());\nconsole.log(await response.json());`;
   }
   throw new Error('Unknown language');
 }

@@ -89,7 +89,7 @@ Set default in `handle_new_user()` to `download_approved = false`, or flip indiv
 
 Any cloud auth identity starts with `profiles.plan = 'free'` and `cloud_credit_granted_cents = 0` until paid billing grants cloud access.
 
-There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, Orrery/Nexus paid features, and bundled Doubleword and Arbiter credit pools (see `docs/CLOUD.md`).
+There are three paid tiers — `pro` ($40/mo), `max` ($100/mo), `ultra` ($200/mo). All include cloud sign-in, Orrery/Nexus paid features, and a bundled hosted-model (Doubleword) credit pool (see `docs/CLOUD.md`). Arbiter is available on request only.
 
 **Migration for existing deployments** — projects created before the max/ultra tiers
 have a check constraint that only allows `'free'`/`'pro'`. Widen it once in the SQL editor

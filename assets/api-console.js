@@ -9,9 +9,9 @@
 import { formatTokens } from './accountPlan.js';
 
 export const API_BASE_URL = 'https://api.ephemerent.com/v1';
-export const API_MODEL = 'arbiter-flash-27b';
+export const API_MODEL = 'doubleword-deepseek-v4-flash';
 export const API_DOCS_URL = 'https://ephemerent.com/developers';
-export const API_KEY_ENV = 'ARBITER_API_KEY';
+export const API_KEY_ENV = 'ORRERY_API_KEY';
 const DAY_MS = 24 * 60 * 60 * 1000;
 const RECEIPT_LIMIT = 100; // relay-admin returns at most this many receipts
 
@@ -106,7 +106,7 @@ function shellSingleQuote(text) {
   return text.replace(/'/g, `'\\''`);
 }
 
-/** curl, TypeScript and Python for one example, reading the key from ARBITER_API_KEY. */
+/** curl, TypeScript and Python for one example, reading the key from ORRERY_API_KEY. */
 export function apiSnippets(exampleId = 'rule') {
   const { body } = exampleById(exampleId);
   const json = compactJson(body);
@@ -150,7 +150,7 @@ export function firstCallSnippet(key, exampleId = 'rule') {
 /** A ready prompt for a coding agent: where the API is, which model, the docs, and how to handle the key. */
 export function agentPrompt(key) {
   return [
-    'Use the Orrery Arbiter API in this project.',
+    'Use the Orrery API in this project.',
     '',
     `- Base URL: ${API_BASE_URL} (OpenAI-compatible: /chat/completions, streaming with stream: true, tool calls in the OpenAI schema)`,
     `- Model: ${API_MODEL} (or the routes orrery/fast, orrery/balanced, orrery/verified, which pick a model per request)`,
@@ -270,7 +270,7 @@ function renderTestResult(result) {
   const meta = [result.status ? `HTTP ${result.status}` : '', `${result.ms} ms`, result.model ?? '', result.provider ? `via ${result.provider}` : '', result.tokens ? `${result.tokens.input} in / ${result.tokens.output} out tokens` : ''].filter(Boolean).join(' · ');
   if (!result.ok) return `<p class="api-run-error">${esc(result.error ?? 'The request failed.')}</p>${result.status ? `<p class="api-run-meta">${esc(meta)}</p>` : ''}`;
   const output = result.toolCalls.length > 0 ? `Tool call: ${result.toolCalls.join('\n')}` : result.text || '(empty reply)';
-  return `<pre class="api-run-output">${esc(output)}</pre><p class="api-run-meta">${esc(meta)}${result.fallback ? ` · answered by the fallback model (${esc(result.fallback)}) while Arbiter wakes up` : ''}</p>`;
+  return `<pre class="api-run-output">${esc(output)}</pre><p class="api-run-meta">${esc(meta)}${result.fallback ? ` · answered by the fallback model (${esc(result.fallback)}) while the requested model was unavailable` : ''}</p>`;
 }
 
 function autoCreatedKey(userId) {
@@ -336,8 +336,9 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
   const render = () => {
     const stats = weekStats(requests);
     const rows = creditRows(usage);
-    const balanceCredits = rows.reduce((sum, row) => sum + (row.type.startsWith('Doubleword') ? 0 : row.remaining), 0);
-    const arbiterPool = rows.find((row) => row.type.startsWith('Arbiter'));
+    // Plans include hosted models (the Doubleword pool); Arbiter is available on request only.
+    const balanceCredits = rows.reduce((sum, row) => sum + (row.type.startsWith('Arbiter') ? 0 : row.remaining), 0);
+    const hostedPool = rows.find((row) => row.type.startsWith('Doubleword'));
     const purchased = rows.find((row) => row.type === 'Purchased credits');
     const snippets = apiSnippets(exampleId);
     const stepsDone = (activeKeys().length > 0 ? 1 : 0) + (hasRequest() ? 1 : 0);
@@ -387,7 +388,7 @@ export async function mountApiConsole(root, { session, relayFetch, usage }) {
         <div class="api-stat">
           <span class="api-stat-label">Credit balance</span>
           <b>${esc(formatUsd(creditsToUsd(balanceCredits)))}</b>
-          <small>${arbiterPool ? `${esc(formatTokens(arbiterPool.remaining))} credits left in this month's Arbiter pool` : 'No monthly Arbiter pool on this plan'}${purchased && purchased.remaining > 0 ? ` · ${esc(formatTokens(purchased.remaining))} purchased, never expire` : ''}</small>
+          <small>${hostedPool ? `${esc(formatTokens(hostedPool.remaining))} credits left in this month's hosted-model pool` : 'No monthly hosted-model pool on this plan'}${purchased && purchased.remaining > 0 ? ` · ${esc(formatTokens(purchased.remaining))} purchased, never expire` : ''}</small>
         </div>
         <div class="api-stat">
           <span class="api-stat-label">Spend, last 7 days</span>

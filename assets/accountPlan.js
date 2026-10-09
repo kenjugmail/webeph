@@ -22,14 +22,15 @@ export const PLAN_PRICES = {
 
 /**
  * Public monthly credit allotments. One credit is one millionth of a dollar of
- * provider cost: Doubleword credits buy tokens at list rate, Arbiter credits buy
- * looped inference compute (three prefill passes plus decode). These numbers are
+ * provider cost: hosted-model credits (DeepSeek, GLM and others, served via
+ * Doubleword through Orrery Relay) buy tokens at list rate. Arbiter is not
+ * included in plans (available on request). These numbers are
  * the same ones on /orrery#pricing; server settlement stays in cents internally.
  */
 export const BUNDLED_QUOTAS = {
-  pro: { 'Arbiter 27B': 14_000_000, 'Doubleword': 6_000_000 },
-  max: { 'Arbiter 27B': 35_000_000, 'Doubleword': 15_000_000 },
-  ultra: { 'Arbiter 27B': 70_000_000, 'Doubleword': 30_000_000 },
+  pro: { 'Hosted models': 6_000_000 },
+  max: { 'Hosted models': 15_000_000 },
+  ultra: { 'Hosted models': 30_000_000 },
 };
 
 /* No estimated-dollar allotment is published any more. A credit is defined as

@@ -5,7 +5,7 @@
 
   const STORY = [
     { phase: 'Scope', caption: 'Workspace · route · review boundary' },
-    { phase: 'Route', caption: 'Subscriber access · beta availability' },
+    { phase: 'Route', caption: 'Available on request · not in plans' },
     { phase: 'Evidence', caption: 'Summary · usage · proof · boundary' },
     { phase: 'Review', caption: 'Keep · revise · discard' }
   ];
