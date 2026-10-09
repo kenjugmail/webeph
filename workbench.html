@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- include: head-meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<!-- /include -->
+<title>Orrery Workbench · The verifiable AI workbench for science and engineering</title>
+<meta name="description" content="Orrery Workbench: agents do technical work and hand back a receipt you can reproduce. Sensitive data can stay on your machine with local models. Included in every Orrery plan, with no new subscription.">
+<link rel="canonical" href="https://ephemerent.com/orrery/workbench">
+<meta name="theme-color" content="#10233b">
+<link rel="preload" href="/assets/fonts/ibm-plex-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ephemerent">
+<meta property="og:title" content="Orrery Workbench: the verifiable AI workbench for science and engineering">
+<meta property="og:description" content="Agents do technical work and hand back a receipt you can reproduce. Sensitive data can stay on your machine with local models.">
+<meta property="og:url" content="https://ephemerent.com/orrery/workbench">
+<meta property="og:image" content="https://ephemerent.com/assets/og-orrery.png?v=20260924">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Orrery: AI that shows its work. Free with your own models.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Orrery Workbench: the verifiable AI workbench for science and engineering">
+<meta name="twitter:description" content="Agents do technical work and hand back a receipt you can reproduce. Sensitive data can stay on your machine with local models.">
+<meta name="twitter:image" content="https://ephemerent.com/assets/og-orrery.png?v=20260924">
+<!-- include: head-theme -->
+<!-- Blocking and inline on purpose: the stored face has to be on <html>
+     before the first stylesheet, or the page paints the wrong one first. -->
+<script>try{var d=document.documentElement,m=localStorage.getItem("eph-mode"),g=localStorage.getItem("eph-material");
+/* Dark glass is the default look, so the absence of a stored choice
+   means dark glass rather than "whatever the stylesheet says". The
+   material key is written as "flat" rather than removed when someone
+   turns glass off -- once glass is the default, an absent key cannot
+   mean both "never chose" and "chose flat". */
+d.dataset.mode=m||"dark";if((g||"glass")==="glass")d.dataset.material="glass";
+/* Set before the first paint so the hero never renders at rest and
+   then jumps back to animate. Gated on the motion preference here
+   rather than in CSS so that a reader who wants no motion never gets
+   the hidden start state at all. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" arrive"}catch(e){}</script>
+<link rel="stylesheet" href="/assets/tokens.css?v=20260822a">
+<!-- Deliberately AFTER tokens.css. Cascade layers take their order from
+     where a name FIRST appears, so a glass.css loaded ahead of
+     tokens.css would create @layer utilities before tokens.css declares
+     the full order -- and utilities would keep that first position,
+     which is the LOWEST priority, the exact opposite of what it is for.
+     Here, tokens.css establishes the order and glass.css joins its end.
+
+     A plain link now rather than a conditional script append: glass is
+     the default material, so this is the common path, and a real link
+     is visible to the preload scanner where an appended one is not.
+     Every rule inside is scoped to :root[data-material="glass"], so a
+     reader who switches it off pays for the file and nothing else. -->
+<link rel="stylesheet" href="/assets/glass.css?v=20260820">
+<script src="/assets/mode.js?v=20260822c" defer></script>
+<!-- /include -->
+<link rel="stylesheet" href="/assets/orrery.css?v=20260923a">
+<link rel="stylesheet" href="/assets/components.css?v=20260801">
+<link rel="stylesheet" href="/assets/auth.css?v=20260801">
+<link rel="stylesheet" href="/assets/base.css?v=20260801">
+<link rel="stylesheet" href="/assets/polish.css?v=20260924b">
+</head>
+<body class="orrery-page workbench-page">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="brand-wrap" style="display:flex;align-items:center;gap:10px;">
+      <a class="brand" href="/orrery">
+        <svg class="mark" viewBox="0 0 26 26" fill="none">
+          <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+          <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+          <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+          <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+          <circle cx="24" cy="16" r="1.7" fill="var(--violet-lt)"/>
+          <circle cx="4" cy="18" r="1.5" fill="var(--teal-lt)"/>
+        </svg>
+        <span>Orrery</span>
+      </a>
+      <a class="brand-by mono" href="/" style="font-size:11px;color:var(--muted);letter-spacing:var(--ls-xs);">by Ephemerent</a>
+    </div>
+    <div class="nav-links">
+      <a href="/orrery">Product</a>
+      <a href="/orrery#pricing">Pricing</a>
+      <a href="/orrery/agencies">For agencies</a>
+      <a href="/orrery/workbench" aria-current="page">Workbench</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="auth-nav-slot" id="auth-nav-slot"></div>
+  </div>
+</nav>
+
+<main id="main" class="wb">
+
+<!-- ============ HERO / DOCUMENT BAR ============ -->
+<header class="wb-hero">
+  <div class="wb-wrap wb-hero-grid">
+    <div class="wb-hero-copy">
+      <p class="wb-eyebrow">Orrery Workbench</p>
+      <h1 class="wb-h1">The verifiable AI workbench for science and engineering.</h1>
+      <p class="wb-lead">Agents do the technical work and hand back a receipt you can reproduce: what ran, on which inputs, which checks passed. Sensitive data can stay on your machine with local models.</p>
+      <div class="wb-cta">
+        <a class="wb-btn wb-btn-primary" href="mailto:kt@ephemerent.com?subject=Orrery%20Workbench%20early%20access">Request early access <span aria-hidden="true">→</span></a>
+        <a class="wb-btn" href="/download">Download Orrery</a>
+      </div>
+      <p class="wb-fine">Part of Orrery. Same plans, no new subscription: free on your own hardware.</p>
+    </div>
+
+    <section class="wb-panel wb-status" aria-labelledby="wb-status-title">
+      <div class="wb-panel-head">
+        <div>
+          <p class="wb-eyebrow">Capability status</p>
+          <h2 class="wb-panel-title" id="wb-status-title">What ships today, and what does not</h2>
+        </div>
+        <span class="wb-rev">as of Oct 2026</span>
+      </div>
+      <ul class="wb-status-list">
+        <li><a href="#coding">Coding with receipts</a><span class="wb-pill wb-pill-now">Available now</span></li>
+        <li><a href="#vision">Vision checks on previews</a><span class="wb-pill wb-pill-dev">In development</span></li>
+        <li><a href="#analysis">Reproducible analysis</a><span class="wb-pill wb-pill-early">Early</span></li>
+        <li><a href="#inspection">Engineering inspection</a><span class="wb-pill wb-pill-early">Early access</span></li>
+        <li><a href="#sensitive">Sensitive data, local models only</a><span class="wb-pill wb-pill-now">Local models available</span></li>
+      </ul>
+      <div class="wb-limit">
+        <strong>Inspection, not certification</strong>
+        <p>Receipts record what was run and what was measured. They do not certify a result, a product or a process, and outputs require qualified human review.</p>
+      </div>
+    </section>
+  </div>
+</header>
+
+<!-- ============ 1. CODING WITH RECEIPTS ============ -->
+<section class="wb-section" id="coding" aria-labelledby="coding-title">
+  <div class="wb-wrap wb-split">
+    <div class="wb-copy">
+      <p class="wb-eyebrow">01 · Coding with receipts <span class="wb-pill wb-pill-now">Available now</span></p>
+      <h2 class="wb-h2" id="coding-title">Every task ends with a receipt, not a promise.</h2>
+      <p>Orrery proposes each change as a diff you approve, runs your tests, and records the result. The receipt shows what changed, which tests passed, preview screenshots, the model used and what it cost.</p>
+      <ul class="wb-list">
+        <li><b>Tests, preview, cost, model</b> on every run</li>
+        <li><b>Client budgets</b>: a hard spend cap per client or project</li>
+        <li><b>AI-use log</b>: one log per client per month, for contracts that ask for AI disclosure</li>
+        <li><b>Tutor mode</b>: the agent explains and checks your work instead of writing it for you</li>
+      </ul>
+      <p class="wb-more"><a href="/orrery/agencies">Budgets, receipts and the AI-use log for client work →</a></p>
+    </div>
+
+    <figure class="wb-mock" aria-labelledby="mock-coding-cap">
+      <div class="wb-mock-bar"><span>Task receipt</span><span class="wb-mock-tag">Illustrative</span></div>
+      <div class="wb-mock-doc">
+        <div class="wb-docbar">
+          <div>
+            <p class="wb-eyebrow">Task receipt</p>
+            <p class="wb-doc-title">#142 · Add CSV export to results page</p>
+          </div>
+          <span class="wb-badge">Approved and applied</span>
+        </div>
+        <dl class="wb-metrics wb-metrics-4">
+          <div><dt>Tests</dt><dd>38 / 38</dd></div>
+          <div><dt>Files</dt><dd>4</dd></div>
+          <div><dt>Task cost</dt><dd>$0.84</dd></div>
+          <div><dt>Preview</dt><dd>2 shots</dd></div>
+        </dl>
+        <ul class="wb-checks">
+          <li><span class="wb-check" aria-hidden="true">✓</span><div><strong>Test suite passed</strong><p>38 passed · 0 failed · 0 skipped</p></div></li>
+          <li><span class="wb-check" aria-hidden="true">✓</span><div><strong>Diff approved</strong><p>+186 / −12 across 4 files</p></div></li>
+          <li><span class="wb-check wb-check-info" aria-hidden="true">i</span><div><strong>Model</strong><p>Recorded on the receipt, with where it ran</p></div></li>
+          <li><span class="wb-check wb-check-info" aria-hidden="true">i</span><div><strong>Client budget</strong><p>$12.40 of $50.00 used this month</p></div></li>
+        </ul>
+        <div class="wb-meter" aria-hidden="true"><span style="width:24.8%"></span></div>
+      </div>
+      <figcaption id="mock-coding-cap">Illustrative mock built for this page. The task and numbers are made up.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 2. VISION CHECKS ============ -->
+<section class="wb-section wb-alt" id="vision" aria-labelledby="vision-title">
+  <div class="wb-wrap wb-split">
+    <div class="wb-copy">
+      <p class="wb-eyebrow">02 · Vision checks on previews <span class="wb-pill wb-pill-dev">In development</span></p>
+      <h2 class="wb-h2" id="vision-title">A local vision model looks at the preview, so you do not have to squint.</h2>
+      <p>Orrery already captures preview screenshots on coding runs. We are building checks that hand those screenshots to a vision model running on your machine and record what it found: overlapping text, a missing element, a layout that breaks at phone width.</p>
+      <p>Findings go on the receipt next to the tests. They are a second pair of eyes, not a pass mark: a person still decides.</p>
+      <p class="wb-note">In development. Not in a released build yet, and the mock on the right is a design sketch, not a screenshot.</p>
+    </div>
+
+    <figure class="wb-mock" aria-labelledby="mock-vision-cap">
+      <div class="wb-mock-bar"><span>Preview check</span><span class="wb-mock-tag">Design sketch</span></div>
+      <div class="wb-mock-doc">
+        <div class="wb-viewport">
+          <div class="wb-vp-head"><span class="wb-dot" aria-hidden="true"></span>Preview · 390 px · local vision model</div>
+          <div class="wb-vp-page" aria-hidden="true">
+            <span class="wb-vp-nav"></span>
+            <span class="wb-vp-h"></span>
+            <span class="wb-vp-p"></span>
+            <span class="wb-vp-p wb-vp-p2"></span>
+            <span class="wb-vp-btn"></span>
+            <span class="wb-vp-box"><b>1</b></span>
+          </div>
+        </div>
+        <ul class="wb-checks">
+          <li><span class="wb-check wb-check-warn" aria-hidden="true">!</span><div><strong>Finding 1 · button overlaps text</strong><p>Region marked on the screenshot, for a person to confirm</p></div></li>
+          <li><span class="wb-check wb-check-info" aria-hidden="true">i</span><div><strong>Model ran on this device</strong><p>Screenshot not sent to a hosted model</p></div></li>
+        </ul>
+      </div>
+      <figcaption id="mock-vision-cap">Design sketch of a planned feature. Not available yet.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 3. REPRODUCIBLE ANALYSIS ============ -->
+<section class="wb-section" id="analysis" aria-labelledby="analysis-title">
+  <div class="wb-wrap wb-split">
+    <div class="wb-copy">
+      <p class="wb-eyebrow">03 · Reproducible analysis <span class="wb-pill wb-pill-early">Early</span></p>
+      <h2 class="wb-h2" id="analysis-title">Results pinned to the data, code, environment and seed that made them.</h2>
+      <p>An analysis is only as good as your ability to run it again. Each notebook cell records hashes of its input data, its code, its environment and its random seed. A rerun check executes the cell again and compares outputs, and the whole chain exports as a receipt you can hand to a reviewer.</p>
+      <p class="wb-note">Early. Orrery's research notebook exists today; provenance receipts, the rerun check and export are in development.</p>
+    </div>
+
+    <figure class="wb-mock" aria-labelledby="mock-analysis-cap">
+      <div class="wb-mock-bar"><span>Notebook cell · provenance</span><span class="wb-mock-tag">Illustrative</span></div>
+      <div class="wb-mock-doc">
+        <pre class="wb-code" aria-label="Example notebook cell"><span class="wb-code-n">[7]</span> fit = model.fit(df, seed=20261009)
+    summary(fit)</pre>
+        <div class="wb-scroll" tabindex="0" role="region" aria-label="Example provenance pins">
+          <table class="wb-table">
+            <caption class="wb-sr">Example provenance pins for cell 7</caption>
+            <thead><tr><th scope="col">Pinned input</th><th scope="col">Hash</th><th scope="col">Rerun</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Data · trial_export.csv</th><td class="wb-mono">sha256 9f2c…a41e</td><td><span class="wb-ok">match</span></td></tr>
+              <tr><th scope="row">Code · cell 7</th><td class="wb-mono">sha256 03be…77d0</td><td><span class="wb-ok">match</span></td></tr>
+              <tr><th scope="row">Environment · lockfile</th><td class="wb-mono">sha256 c1d8…2f93</td><td><span class="wb-ok">match</span></td></tr>
+              <tr><th scope="row">Seed</th><td class="wb-mono">20261009</td><td><span class="wb-ok">match</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wb-docfoot"><span>Outputs identical on rerun</span><span class="wb-fake-btn">Export receipt ↓</span></div>
+      </div>
+      <figcaption id="mock-analysis-cap">Illustrative mock of a feature in development. Hashes and file names are made up.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 4. ENGINEERING INSPECTION ============ -->
+<section class="wb-section wb-alt" id="inspection" aria-labelledby="inspection-title">
+  <div class="wb-wrap">
+    <div class="wb-copy wb-copy-wide">
+      <p class="wb-eyebrow">04 · Engineering inspection with Vellum Engineering <span class="wb-pill wb-pill-early">Early access</span></p>
+      <h2 class="wb-h2" id="inspection-title">Inspection checks the agent cannot grade for itself.</h2>
+      <p>Vellum Engineering runs manufacturing inspect and audit checks against your parts and assemblies, on your machine. Orrery calls those checks, then re-runs and verifies them itself before anything lands on the receipt, so an agent cannot report a pass it did not earn. From there it drafts a first-article inspection for a qualified inspector to review.</p>
+      <p class="wb-note">Early access. The Orrery side of the integration is built. AS9102 form export is planned, not shipped. <a href="/vellum">About Vellum →</a></p>
+    </div>
+
+    <figure class="wb-mock wb-mock-wide" aria-labelledby="mock-inspection-cap">
+      <div class="wb-mock-bar"><span>First-article inspection draft</span><span class="wb-mock-tag">Illustrative</span></div>
+      <div class="wb-mock-doc wb-fai">
+        <div class="wb-docbar">
+          <div>
+            <p class="wb-eyebrow">First-article inspection · draft</p>
+            <p class="wb-doc-title">BRK-204 Mounting bracket <span class="wb-rev">REV C · draft, not released</span></p>
+          </div>
+          <span class="wb-badge">5 checks re-run by Orrery</span>
+        </div>
+        <dl class="wb-metrics wb-metrics-5">
+          <div><dt>Characteristics</dt><dd>14</dd></div>
+          <div><dt>Within tolerance</dt><dd>13</dd></div>
+          <div><dt>Out of tolerance</dt><dd class="wb-bad">1</dd></div>
+          <div><dt>Mass</dt><dd>0.218 kg</dd></div>
+          <div><dt>Verified rerun</dt><dd>5 / 5</dd></div>
+        </dl>
+        <div class="wb-scroll" tabindex="0" role="region" aria-label="Example inspection characteristics">
+          <table class="wb-table">
+            <caption class="wb-sr">Example characteristics from a first-article inspection draft</caption>
+            <thead><tr><th scope="col">No.</th><th scope="col">Characteristic</th><th scope="col">Nominal</th><th scope="col">Tolerance</th><th scope="col">Measured</th><th scope="col">Result</th></tr></thead>
+            <tbody>
+              <tr><td class="wb-mono">1</td><th scope="row">Hole Ø A</th><td class="wb-mono">6.40 mm</td><td class="wb-mono">±0.05</td><td class="wb-mono">6.42 mm</td><td><span class="wb-ok">in tol</span></td></tr>
+              <tr><td class="wb-mono">2</td><th scope="row">Hole spacing</th><td class="wb-mono">48.00 mm</td><td class="wb-mono">±0.10</td><td class="wb-mono">47.96 mm</td><td><span class="wb-ok">in tol</span></td></tr>
+              <tr class="wb-row-flag"><td class="wb-mono">3</td><th scope="row">Flange thickness</th><td class="wb-mono">3.00 mm</td><td class="wb-mono">±0.05</td><td class="wb-mono">3.09 mm</td><td><span class="wb-fail">out of tol</span></td></tr>
+              <tr><td class="wb-mono">4</td><th scope="row">Bend angle</th><td class="wb-mono">90.0°</td><td class="wb-mono">±0.5</td><td class="wb-mono">90.2°</td><td><span class="wb-ok">in tol</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wb-limit wb-limit-inline">
+          <strong>Inspection, not certification</strong>
+          <p>A draft for a qualified inspector to review and sign. No structural, material or process approval is implied.</p>
+        </div>
+      </div>
+      <figcaption id="mock-inspection-cap">Illustrative mock styled after Vellum Engineering's review screen. The part and values are made up.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 5. SENSITIVE DATA ============ -->
+<section class="wb-section" id="sensitive" aria-labelledby="sensitive-title">
+  <div class="wb-wrap wb-split">
+    <div class="wb-copy">
+      <p class="wb-eyebrow">05 · Sensitive data: local models only <span class="wb-pill wb-pill-now">Local models available</span></p>
+      <h2 class="wb-h2" id="sensitive-title">For data that should never leave the room.</h2>
+      <p>Medical and clinical research data, controlled engineering data: some work cannot go to a hosted model. Point Orrery at models you run yourself (Ollama, LM Studio, vLLM) and keep hosted providers switched off.</p>
+      <p class="wb-claim">With local models, the model runs entirely on your machine: your prompts, code and files are not sent to any model provider. Supports research workflows; outputs require qualified human review.</p>
+      <p class="wb-note" style="margin-top:8px">Sign-in, update checks and opt-in crash reports still contact Ephemerent; they don't include your prompts, code or files.</p>
+      <p class="wb-note">Orrery is a research and engineering tool. It is not a medical device and does not make a regulated process compliant. Check your own obligations before using it with protected data.</p>
+    </div>
+
+    <figure class="wb-mock" aria-labelledby="mock-sensitive-cap">
+      <div class="wb-mock-bar"><span>Workspace data boundary</span><span class="wb-mock-tag">Illustrative</span></div>
+      <div class="wb-mock-doc">
+        <div class="wb-docbar">
+          <div>
+            <p class="wb-eyebrow">Workspace</p>
+            <p class="wb-doc-title">cohort-analysis</p>
+          </div>
+          <span class="wb-badge"><span class="wb-dot" aria-hidden="true"></span> Local only</span>
+        </div>
+        <dl class="wb-props">
+          <div><dt>Model</dt><dd class="wb-mono">local · on this device</dd></div>
+          <div><dt>Hosted providers</dt><dd class="wb-mono">off</dd></div>
+          <div><dt>Your provider keys</dt><dd class="wb-mono">not used</dd></div>
+          <div><dt>Files</dt><dd class="wb-mono">stay in the workspace</dd></div>
+        </dl>
+        <ul class="wb-checks">
+          <li><span class="wb-check" aria-hidden="true">✓</span><div><strong>Recorded on each receipt</strong><p>Which model ran, and where</p></div></li>
+          <li><span class="wb-check wb-check-info" aria-hidden="true">i</span><div><strong>Human review required</strong><p>Outputs are drafts for a qualified reviewer</p></div></li>
+        </ul>
+      </div>
+      <figcaption id="mock-sensitive-cap">Illustrative mock. The workspace name is made up.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="wb-section wb-alt" id="pricing" aria-labelledby="pricing-title">
+  <div class="wb-wrap">
+    <div class="wb-copy wb-copy-wide">
+      <p class="wb-eyebrow">Pricing</p>
+      <h2 class="wb-h2" id="pricing-title">Same Orrery plans. No new subscription.</h2>
+    </div>
+    <div class="wb-plans">
+      <article class="wb-panel wb-plan">
+        <p class="wb-eyebrow">Free</p>
+        <p class="wb-readout">$0 <small>your own hardware</small></p>
+        <ul class="wb-list">
+          <li>The full agent on models you run yourself</li>
+          <li>Receipts, budgets and the AI-use log</li>
+          <li>Sensitive data never has to leave your machine</li>
+        </ul>
+      </article>
+      <article class="wb-panel wb-plan wb-plan-lead">
+        <p class="wb-eyebrow">Pro · Max · Ultra</p>
+        <p class="wb-readout">20M / 50M / 100M <small>hosted credits a month</small></p>
+        <ul class="wb-list">
+          <li>Hosted models included, with a hard stop at the limit</li>
+          <li>Your own provider keys</li>
+          <li>Everything in Free</li>
+        </ul>
+      </article>
+    </div>
+    <p class="wb-fine">Plan prices and details on the <a href="/orrery#pricing">Orrery pricing page</a>.</p>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="wb-section wb-final" aria-labelledby="final-title">
+  <div class="wb-wrap">
+    <h2 class="wb-h2" id="final-title">Bring one real piece of technical work.</h2>
+    <p class="wb-lead">Tell us what you need to verify: an analysis, a part, a codebase. Early-access users help decide what ships next.</p>
+    <div class="wb-cta">
+      <a class="wb-btn wb-btn-primary" href="mailto:kt@ephemerent.com?subject=Orrery%20Workbench%20early%20access">Request early access <span aria-hidden="true">→</span></a>
+      <a class="wb-btn" href="/download">Download Orrery</a>
+    </div>
+    <p class="wb-fine">Orrery records and re-runs checks; it does not certify compliance with any law, regulation or standard, and agent output is not guaranteed. Product mocks on this page are illustrative. See <a href="/terms">Terms</a>, <a href="/privacy">Privacy</a> and <a href="/security">Security</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/orrery" style="margin-bottom:14px;">
+          <svg class="mark" viewBox="0 0 26 26" fill="none">
+            <circle cx="13" cy="13" r="11.5" stroke="var(--line-strong)"/>
+            <circle cx="13" cy="13" r="7" stroke="var(--line-strong)"/>
+            <circle cx="13" cy="13" r="2.6" fill="var(--brass)"/>
+            <circle cx="13" cy="1.5" r="1.7" fill="var(--teal)"/>
+          </svg>
+          <span>Orrery</span>
+        </a>
+        <p class="muted" style="font-size:14px;max-width:32ch;">AI that shows its work. Made by <a href="/" style="color:var(--teal-lt);">Ephemerent</a>.</p>
+      </div>
+      <div><h3 class="footer-heading">Product</h3><ul><li><a href="/orrery#nexus">How it works</a></li><li><a href="/orrery#research">Research</a></li><li><a href="/orrery/workbench">Workbench</a></li><li><a href="/orrery#pricing">Pricing</a></li><li><a href="/download">Download</a></li><li><a href="/developers">Developer API</a></li></ul></div>
+      <div><h3 class="footer-heading">Teams</h3><ul><li><a href="/organizations">Business &amp; Enterprise</a></li><li><a href="/orrery/agencies">For agencies</a></li><li><a href="/slack">Slack</a></li><li><a href="/security">Security</a></li><li><a href="mailto:kt@ephemerent.com?subject=Orrery%20Enterprise">Contact sales</a></li></ul></div>
+      <div><h3 class="footer-heading">Company</h3><ul><li><a href="/">About Ephemerent</a></li><li><a href="/vellum">Vellum</a></li><li><a href="/arbiter">Arbiter</a></li><li><a href="/sentinel">Sentinel</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:kt@ephemerent.com">Contact</a></li></ul></div>
+    </div>
+    <hr class="divider" style="margin:44px 0 24px;">
+    <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <span class="mono" style="font-size:12px;color:var(--faint);">© 2026 Ephemerent</span>
+      <a class="mono orrery-discord" href="https://discord.gg/CPPhk3GNjz" target="_blank" rel="noopener">Join the Discord →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site-config.js"></script>
+<script type="module">
+  import { mountNavAccount } from '/assets/account.js';
+  mountNavAccount();
+</script>
+
+<style>
+/* Workbench borrows Vellum Engineering's manufacturing review UI: paper
+   document, navy chrome, small uppercase labels, monospace readouts.
+   Unlayered on purpose: the page is a light document inside the dark
+   site chrome, and must not pick up the site's light/dark/glass faces.
+   Muted TEXT is #5f6d7f (not Vellum's #738193) to clear WCAG AA. */
+body.workbench-page {
+  --wb-ink: #223044; --wb-muted: #5f6d7f; --wb-line: #e2e7ec;
+  --wb-paper: #fff; --wb-panel: #f7f9fb; --wb-accent: #176caa;
+  --wb-accent-light: #e8f3fc; --wb-green: #08785b; --wb-red: #b63832;
+  --wb-navy: #10233b;
+  --wb-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --wb-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  background: var(--wb-navy);
+}
+/* Navy chrome in every face, with the dark token values it needs. */
+body.workbench-page .nav,
+body.workbench-page .nav.scrolled,
+:root[data-material="glass"] body.workbench-page .nav,
+body.workbench-page .footer {
+  --ink: #edf4fa; --ink-2: #c9d6e2; --muted: #a4bdcd; --faint: #a4bdcd;
+  --line: rgba(237, 244, 250, .12); --line-strong: rgba(237, 244, 250, .32);
+  --teal-lt: #8bcbe9;
+  background: var(--wb-navy); color: #edf4fa; color-scheme: dark;
+  border-bottom-color: #2a3f57; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none;
+}
+body.workbench-page .nav-links a[aria-current="page"] { color: #fff; }
+/* The site vignette and grain suit a night sky, not a white document. */
+body.workbench-page::before, body.workbench-page::after { content: none; display: none; }
+
+.wb { position: relative; z-index: 2; background: var(--wb-paper); color: var(--wb-ink); font: 16px/1.6 var(--wb-sans); color-scheme: light; }
+.wb *, .wb *::before, .wb *::after { box-sizing: border-box; }
+.wb a { color: var(--wb-accent); }
+.wb a:focus-visible, .wb .wb-scroll:focus-visible { outline: 2px solid var(--wb-accent); outline-offset: 2px; }
+.wb-wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.wb-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wb-mono { font-family: var(--wb-mono); }
+
+.wb-eyebrow { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: 1.35px; text-transform: uppercase; color: var(--wb-muted); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.wb-h1 { margin: 12px 0 18px; font-size: clamp(2rem, 4.4vw, 3.25rem); line-height: 1.08; letter-spacing: -0.02em; font-weight: 650; color: var(--wb-ink); }
+.wb-h2 { margin: 12px 0 16px; font-size: clamp(1.5rem, 2.6vw, 2.05rem); line-height: 1.18; letter-spacing: -0.015em; font-weight: 640; color: var(--wb-ink); }
+.wb-lead { margin: 0; font-size: 18px; line-height: 1.6; color: var(--wb-ink); max-width: 60ch; }
+.wb-copy p { margin: 0 0 14px; max-width: 62ch; }
+.wb-copy-wide { max-width: 820px; margin-bottom: 32px; }
+.wb-fine { margin: 18px 0 0; font-size: 14px; color: var(--wb-muted); max-width: 80ch; }
+.wb-note { font-size: 14px; color: var(--wb-muted); border-left: 2px solid var(--wb-line); padding-left: 12px; }
+.wb-more { font-size: 15px; font-weight: 600; }
+.wb-list { margin: 0 0 16px; padding: 0; list-style: none; display: grid; gap: 8px; }
+.wb-list li { position: relative; padding-left: 20px; }
+.wb-list li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--wb-accent); }
+.wb-claim { font-weight: 600; background: var(--wb-panel); border: 1px solid var(--wb-line); border-left: 3px solid var(--wb-green); border-radius: 5px; padding: 12px 14px; }
+
+/* Buttons: Vellum header buttons, at marketing size. */
+.wb-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.wb-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border: 1px solid #c9d3dc; border-radius: 6px; background: #fff; color: var(--wb-ink) !important; font: 600 15px/1.2 var(--wb-sans); text-decoration: none; }
+.wb-btn:hover { background: var(--wb-panel); border-color: #aebbc7; }
+.wb-btn-primary { background: var(--wb-accent); border-color: var(--wb-accent); color: #fff !important; }
+.wb-btn-primary:hover { background: #135c91; border-color: #135c91; }
+
+/* Pills: green = available, blue = early, grey = in development. */
+.wb-pill { display: inline-block; font: 600 11px/1.2 var(--wb-sans); letter-spacing: .15px; text-transform: none; border-radius: 5px; padding: 5px 8px; white-space: nowrap; }
+.wb-pill-now { background: #eaf6f1; color: var(--wb-green); }
+.wb-pill-early { background: var(--wb-accent-light); color: #155f96; }
+.wb-pill-dev { background: #eef1f4; color: #4c5a6b; }
+.wb-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; border-radius: 5px; padding: 5px 9px; background: #eaf6f1; color: var(--wb-green); white-space: nowrap; }
+.wb-rev { font: 11px var(--wb-mono); color: #4f667c; background: #f0f4f7; padding: 3px 7px; border-radius: 4px; white-space: nowrap; }
+.wb-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2f9a80; flex: none; }
+
+/* Hero */
+.wb-hero { padding: 116px 0 72px; border-bottom: 1px solid var(--wb-line); }
+.wb-hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.wb-panel { background: #fff; border: 1px solid var(--wb-line); border-radius: 8px; }
+.wb-panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 16px 18px 14px; border-bottom: 1px solid var(--wb-line); }
+.wb-panel-title { margin: 4px 0 0; font-size: 16px; font-weight: 640; line-height: 1.3; color: var(--wb-ink); }
+.wb-status-list { list-style: none; margin: 0; padding: 4px 18px; }
+.wb-status-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--wb-line); font-size: 15px; }
+.wb-status-list li:last-child { border-bottom: 0; }
+.wb-status-list a { color: var(--wb-ink); text-decoration: none; font-weight: 560; }
+.wb-status-list a:hover { color: var(--wb-accent); text-decoration: underline; }
+.wb-limit { margin: 0 18px 18px; background: var(--wb-panel); border-left: 3px solid #8fa3b7; padding: 11px 13px; border-radius: 0 5px 5px 0; }
+.wb-limit strong { display: block; font-size: 13px; color: var(--wb-ink); }
+.wb-limit p { margin: 4px 0 0; font-size: 13px; line-height: 1.5; color: var(--wb-muted); }
+.wb-limit-inline { margin: 14px 0 0; }
+
+/* Sections */
+.wb-section { padding: 88px 0; border-bottom: 1px solid var(--wb-line); scroll-margin-top: 70px; }
+.wb-alt { background: var(--wb-panel); }
+.wb-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+
+/* Mocks: a white document in a window frame, captioned as illustrative. */
+.wb-mock { margin: 0; min-width: 0; }
+.wb-mock-wide { max-width: 980px; }
+.wb-mock-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--wb-navy); color: #e6f1f8; font-size: 12px; font-weight: 600; padding: 9px 14px; border-radius: 8px 8px 0 0; }
+.wb-mock-tag { font: 600 10px/1 var(--wb-mono); letter-spacing: 1px; text-transform: uppercase; color: #d9edf9; border: 1px solid #527287; border-radius: 3px; padding: 4px 6px; }
+.wb-mock-doc { background: #fff; border: 1px solid var(--wb-line); border-top: 0; border-radius: 0 0 8px 8px; padding: 16px 18px 18px; box-shadow: 0 6px 24px rgba(32, 60, 80, .08); }
+.wb-mock figcaption { margin-top: 10px; font-size: 13px; color: var(--wb-muted); }
+.wb-docbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--wb-line); }
+.wb-doc-title { margin: 3px 0 0; font-size: 17px; font-weight: 630; letter-spacing: -0.3px; line-height: 1.35; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.wb-metrics { display: grid; gap: 10px; margin: 0; padding: 14px 0 10px; }
+.wb-metrics-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.wb-metrics-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.wb-metrics dt { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: var(--wb-muted); }
+.wb-metrics dd { margin: 3px 0 0; font: 500 22px/1.2 var(--wb-mono); letter-spacing: -0.5px; color: #285474; }
+.wb-metrics dd.wb-bad { color: var(--wb-red); }
+.wb-checks { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+.wb-checks li { display: flex; gap: 9px; align-items: flex-start; padding: 6px 0; }
+.wb-check { width: 18px; height: 18px; border-radius: 50%; background: #e5f3ed; color: #0c7656; display: grid; place-items: center; font-size: 11px; font-weight: 700; flex: none; margin-top: 1px; }
+.wb-check-info { background: #eaf0f8; color: #3f6890; font-family: Georgia, serif; font-style: italic; }
+.wb-check-warn { background: #fdecea; color: var(--wb-red); }
+.wb-checks strong { display: block; font-size: 13px; font-weight: 600; line-height: 1.35; }
+.wb-checks p { margin: 2px 0 0; font-size: 12px; line-height: 1.4; color: var(--wb-muted); }
+.wb-meter { height: 6px; background: #edf2f6; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+.wb-meter span { display: block; height: 100%; background: var(--wb-accent); }
+
+/* Vision mock */
+.wb-viewport { border: 1px solid var(--wb-line); border-radius: 6px; overflow: hidden; margin-bottom: 10px; }
+.wb-vp-head { display: flex; align-items: center; gap: 8px; font: 12px var(--wb-mono); color: var(--wb-muted); background: var(--wb-panel); padding: 7px 10px; border-bottom: 1px solid var(--wb-line); }
+.wb-vp-page { position: relative; height: 190px; padding: 14px; display: flex; flex-direction: column; gap: 9px; background-image: linear-gradient(#eef2f6 1px, transparent 1px), linear-gradient(90deg, #eef2f6 1px, transparent 1px); background-size: 16px 16px; }
+.wb-vp-page > span:not(.wb-vp-box) { display: block; border-radius: 3px; background: #d5dee6; }
+.wb-vp-nav { height: 12px; width: 100%; }
+.wb-vp-h { height: 18px; width: 62%; background: #9fb2c3 !important; }
+.wb-vp-p { height: 9px; width: 88%; }
+.wb-vp-p2 { width: 70%; }
+.wb-vp-btn { height: 24px; width: 120px; margin-top: -18px; margin-left: 38%; background: var(--wb-accent) !important; opacity: .85; }
+.wb-vp-box { position: absolute; left: calc(38% - 4px); top: 64px; width: 150px; height: 46px; border: 2px dashed var(--wb-red); border-radius: 4px; }
+.wb-vp-box b { position: absolute; top: -11px; right: -11px; width: 20px; height: 20px; border-radius: 50%; background: var(--wb-red); color: #fff; font: 700 11px/20px var(--wb-sans); text-align: center; }
+
+/* Notebook + tables */
+.wb-code { margin: 0 0 12px; padding: 12px 14px; background: #f4f7fa; border: 1px solid #e5ebf0; border-radius: 5px; font: 13px/1.6 var(--wb-mono); color: var(--wb-ink); overflow-x: auto; white-space: pre; }
+.wb-code-n { color: var(--wb-muted); margin-right: 6px; }
+.wb-scroll { overflow-x: auto; }
+.wb-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wb-table th, .wb-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--wb-line); white-space: nowrap; }
+.wb-table thead th { font-size: 11px; font-weight: 600; letter-spacing: .4px; color: var(--wb-muted); border-bottom: 1px solid #d3dbe2; }
+.wb-table tbody th { font-weight: 560; color: var(--wb-ink); }
+.wb-table td.wb-mono { color: var(--wb-ink); }
+.wb-row-flag { background: #fdf1ef; }
+.wb-ok { font-weight: 600; color: var(--wb-green); }
+.wb-fail { font-weight: 600; color: var(--wb-red); }
+.wb-docfoot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 12px; font-size: 13px; color: var(--wb-green); font-weight: 600; }
+.wb-fake-btn { font-size: 12px; font-weight: 600; color: var(--wb-ink); border: 1px solid var(--wb-line); border-radius: 5px; padding: 6px 10px; background: #fff; }
+.wb-props { margin: 0; padding: 8px 0; }
+.wb-props div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--wb-line); font-size: 14px; }
+.wb-props dt { color: var(--wb-muted); }
+.wb-props dd { margin: 0; text-align: right; }
+
+/* Pricing */
+.wb-plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 960px; }
+.wb-plan { padding: 22px 24px; }
+.wb-plan-lead { border-color: var(--wb-accent); box-shadow: inset 0 3px 0 var(--wb-accent); }
+.wb-readout { margin: 8px 0 16px; font: 500 30px/1.2 var(--wb-mono); letter-spacing: -0.5px; color: #285474; }
+.wb-readout small { display: block; margin-top: 4px; font: 14px var(--wb-sans); letter-spacing: 0; color: var(--wb-muted); }
+.wb-final { border-bottom: 0; }
+
+@media (max-width: 980px) {
+  .wb-hero-grid, .wb-split { grid-template-columns: 1fr; gap: 36px; }
+  .wb-metrics-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wb-plans { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .wb-wrap { padding: 0 16px; }
+  .wb-hero { padding: 104px 0 52px; }
+  .wb-section { padding: 60px 0; }
+  .wb-lead { font-size: 17px; }
+  .wb-metrics-4, .wb-metrics-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wb-checks { grid-template-columns: 1fr; }
+  .wb-docbar { flex-direction: column; }
+  .wb-status-list li { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .wb-mock-doc { padding: 14px; }
+  .wb-btn { width: 100%; justify-content: center; }
+  .wb-vp-btn { margin-left: 30%; }
+  .wb-vp-box { left: calc(30% - 4px); width: 130px; }
+}
+</style>
+</body>
+</html>
